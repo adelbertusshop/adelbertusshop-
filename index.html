@@ -1580,7 +1580,6 @@
     <p id="status" class="mt-4 text-white"></p>
 </section>
 </section>
-
 <!-- Studio projektowe - ZMODYFIKOWANE -->
 <section id="design">
     <div class="section-title">
@@ -1608,6 +1607,7 @@
             </button>
         </div>
         
+        <!-- MINIATURY PRODUKTÓW -->
         <div class="product-base">
             <div class="product-base-item active" data-base="tshirt">
                 <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka">
@@ -1623,12 +1623,14 @@
             </div>
         </div>
         
+        <!-- OPCJE STRONY PRODUKTU -->
         <div class="design-options">
             <div class="design-option active" data-area="front">Przód</div>
             <div class="design-option" data-area="back">Tył</div>
             <div class="design-option" data-area="sleeves">Rękawy</div>
         </div>
         
+        <!-- CANVAS DO PROJEKTOWANIA -->
         <div class="canvas-container">
             <canvas id="designCanvas" width="500" height="400"></canvas>
             <div class="canvas-controls">
@@ -1637,6 +1639,7 @@
             </div>
         </div>
         
+        <!-- NARZĘDZIA -->
         <div class="design-tools">
             <div class="tool-group">
                 <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
@@ -1709,12 +1712,48 @@
             </div>
         </div>
         
+        <!-- PODGLĄD -->
         <div class="design-preview">
             <h3>Podgląd Twojego projektu</h3>
             <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
         </div>
     </div>
 </section>
+
+<!-- SCRIPT DLA TEJ SEKCJI -->
+<script>
+const canvas = document.getElementById("designCanvas");
+const ctx = canvas.getContext("2d");
+
+const productImages = {
+    tshirt: "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg",
+    hoodie: "https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg",
+    cap: "https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png"
+};
+
+let currentBase = "tshirt";
+
+function loadBaseProduct(productKey) {
+    const img = new Image();
+    img.src = productImages[productKey];
+    img.onload = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+}
+
+document.querySelectorAll(".product-base-item").forEach(item => {
+    item.addEventListener("click", () => {
+        document.querySelectorAll(".product-base-item").forEach(el => el.classList.remove("active"));
+        item.classList.add("active");
+        currentBase = item.getAttribute("data-base");
+        loadBaseProduct(currentBase);
+    });
+});
+
+// Start z koszulką
+loadBaseProduct(currentBase);
+</script>
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
@@ -3090,5 +3129,38 @@ document.addEventListener("DOMContentLoaded", () => {
     window.sendOrderEmail = sendOrderEmail;
     window.sendOrderWhatsApp = sendOrderWhatsApp;
 </script>
+<script>
+const canvas = document.getElementById("designCanvas");
+const ctx = canvas.getContext("2d");
+
+// Obrazy produktów
+const productImages = {
+  koszulka: "https://i.ibb.co/C3sQZbzW/Screenshot-2025-09-03-21-34-27.png",
+  bluza: "https://i.ibb.co/cSDrRTQb/Screenshot-2025-09-03-21-47-31.png",
+  czapka: "https://i.ibb.co/4ZgGCLKF/Screenshot-2025-09-03-21-42-58.png"
+};
+
+let currentProduct = null;
+
+// Funkcja zmiany produktu
+function loadProduct(product) {
+  currentProduct = new Image();
+  currentProduct.src = productImages[product];
+  currentProduct.onload = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(currentProduct, 0, 0, canvas.width, canvas.height);
+  };
+}
+
+// Obsługa kliknięcia w miniaturę
+document.querySelectorAll(".product-base-item").forEach(item => {
+  item.addEventListener("click", () => {
+    document.querySelectorAll(".product-base-item").forEach(el => el.classList.remove("active"));
+    item.classList.add("active");
+    const product = item.getAttribute("data-product");
+    loadProduct(product);
+  });
+});
+</script>        
 </body>
 </html>
