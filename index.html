@@ -4237,48 +4237,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.sendOrderWhatsApp = sendOrderWhatsApp;
 </script>
 <script>
-// ===== OBSŁUGA OPCJI PRODUKTÓW =====
-function initProductOptions() {
-    // Inicjalizacja wyboru kolorów i rozmiarów
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('color-option')) {
-            const colorOptions = e.target.closest('.color-options').querySelectorAll('.color-option');
-            colorOptions.forEach(option => option.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
-        
-        if (e.target.classList.contains('size-option')) {
-            const sizeOptions = e.target.closest('.size-options').querySelectorAll('.size-option');
-            sizeOptions.forEach(option => option.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
-    });
-    
-    // Modyfikacja funkcji dodawania do koszyka
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            e.preventDefault();
-            const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
-            const image = e.target.getAttribute('data-image');
-            
-            // Pobierz wybrane opcje
-            const selectedColor = productCard.querySelector('.color-option.selected');
-            const selectedSize = productCard.querySelector('.size-option.selected');
-            
-            const color = selectedColor ? selectedColor.getAttribute('data-color') : 'Nie wybrano';
-            const size = selectedSize ? selectedSize.getAttribute('data-size') : 'Nie wybrano';
-            
-            // Dodaj do koszyka z opcjami
-            addToCart(name, price, image, size, color);
-        }
-    });
-}
 
-// Modyfikacja funkcji addToCart do obsługi opcji
+// ===== ZASTĄP FUNKCJĘ addToCart =====
+// Znajdź starą funkcję addToCart (około linia 2905) i ZASTĄP ją tą:
 function addToCart(name, price, image = null, size = null, color = null) {
-    // Sprawdź czy produkt już jest w koszyku
+    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje)
     const existingIndex = cart.findIndex(item => 
         item.name === name && item.size === size && item.color === color
     );
@@ -4301,7 +4264,8 @@ function addToCart(name, price, image = null, size = null, color = null) {
     showNotification('✅ Produkt dodany do koszyka');
 }
 
-// Modyfikacja funkcji updateCart do wyświetlania opcji
+// ===== ZASTĄP FUNKCJĘ updateCart =====
+// Znajdź starą funkcję updateCart (około linia 2918) i ZASTĄP ją tą:
 function updateCart() {
     const cartCount = document.getElementById('cartCount');
     const cartItems = document.getElementById('cartItems');
@@ -4349,10 +4313,22 @@ function updateCart() {
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
-// Inicjalizacja po załadowaniu strony
+// ===== ZMIEŃ INICJALIZACJĘ =====
+// W funkcji DOMContentLoaded (około linia 2869) ZMIEŃ:
 document.addEventListener('DOMContentLoaded', function() {
-    initProductOptions();
-    // ... reszta Twojej inicjalizacji
+    initNavigation();
+    initDesignStudio();
+    updateCart();
+    initProductOptions(); // TYLKO TA FUNKCJA OBSŁUGUJE PRZYCISKI
+    renderPayPalButton();
+    initContactForm();
+    initBlog();
+    // USUŃ: initAddToCartButtons() - bo powoduje konflikt
+    initProductBase();
+    initDesignOptions();
+    initOrderForm();
+    initAdTimers();
+    initCharityRotation();
 });
 </script>
 </body>
