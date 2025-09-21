@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdelbertusShop | Ekskluzywne Projekty</title>
+    <title>Sklep Internetowy | Płatności i Zamówienia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
         
         :root {
-            --color-gold: #d4af37;
-            --color-dark-gold: #b8941f;
-            --color-dark: #1a1a1a;
-            --color-light: #f8f5f0;
-            --color-cream: #fff8e7;
+            --color-primary: #4a6cf7;
+            --color-secondary: #6c757d;
+            --color-success: #28a745;
+            --color-danger: #dc3545;
+            --color-warning: #ffc107;
+            --color-light: #f8f9fa;
+            --color-dark: #212529;
         }
         
         * {
@@ -25,58 +27,37 @@
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: var(--color-light);
+            background: #f8f9fa;
             color: #333;
             line-height: 1.6;
-            padding-bottom: 80px;
         }
         
-        h1, h2, h3, h4, h5 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
         }
         
-        .gold-text {
-            color: var(--color-gold);
-        }
-        
-        .gold-border {
-            border: 2px solid var(--color-gold);
-        }
-        
-        .gold-bg {
-            background: var(--color-gold);
-        }
-        
-        /* Nagłówek i nawigacja */
+        /* Header styles */
         header {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(to right, #4a6cf7, #6f42c1);
             color: white;
-            padding: 2rem 0;
-            text-align: center;
-            position: relative;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
         
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .tagline {
-            font-style: italic;
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
+        /* Navigation */
         nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -84,61 +65,31 @@
         
         .nav-container {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: 0 auto;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
         }
         
-        .nav-btn {
-            background: transparent;
-            color: white;
-            border: 2px solid var(--color-gold);
-            padding: 0.8rem 1.5rem;
-            margin: 0.5rem;
-            border-radius: 30px;
-            cursor: pointer;
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--color-dark);
+            text-decoration: none;
             font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
         
-        .nav-btn:hover, .nav-btn.active {
-            background: var(--color-gold);
-            color: black;
+        .nav-link:hover, .nav-link.active {
+            background: var(--color-primary);
+            color: white;
         }
         
-        /* Sekcje */
-        section {
-            display: none;
-            padding: 3rem 1rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        section.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--color-gold);
-        }
-        
-        /* Karty produktów */
+        /* Product grid */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -152,264 +103,82 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .product-image-container {
-            height: 280px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--color-cream);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .product-image {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .product-info {
-            padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .product-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-        }
-        
-        .product-price {
-            color: var(--color-gold);
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Studio projektowe */
-        .design-studio {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-            position: relative;
-        }
-        
-        .canvas-container {
-            border: 3px solid var(--color-gold);
-            border-radius: 10px;
-            padding: 1rem;
-            background: white;
-            margin: 0 auto;
-            max-width: 600px;
-            position: relative;
-        }
-        
-        #designCanvas {
-            width: 100%;
-            background: white;
-            border: 1px solid #ddd;
-            cursor: move;
-        }
-        
-        .canvas-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .design-tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .tool-group {
-            background: var(--color-cream);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #eee;
-        }
-        
-        .tool-title {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--color-dark-gold);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .transform-controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.5rem;
-        }
-        
-        .transform-input {
-            display: flex;
-            flex-direction: column;
-            margin-bottom: 0.5rem;
-        }
-        
-        .transform-input label {
-            font-size: 0.8rem;
-            margin-bottom: 0.2rem;
-        }
-        
-        /* Sekcja zbiórki */
-        .charity-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1840&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 4rem 2rem;
-            border-radius: 15px;
-            text-align: center;
-            margin: 2rem 0;
-        }
-        
-        .donors-list {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin: 2rem 0;
-            text-align: left;
-        }
-        
-        /* Sekcja bloga */
-        .blog-posts {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .blog-post {
-            background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .blog-image {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
         
-        .blog-content {
+        .product-info {
             padding: 1.5rem;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
         
-        .blog-excerpt {
-            margin-bottom: 1rem;
-            flex-grow: 1;
-        }
-        
-        .blog-full {
-            display: none;
-            margin-bottom: 1rem;
-        }
-        
-        /* Opinie */
-        .reviews {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .review {
-            background: white;
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .review-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .review-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1rem;
-        }
-        
-        .review-stars {
-            color: var(--color-gold);
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
         
-        /* Stopka */
-        footer {
-            background: var(--color-dark);
-            color: white;
-            padding: 3rem 1rem;
-            text-align: center;
-            margin-top: 4rem;
+        .product-price {
+            color: var(--color-primary);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
         }
         
-        .contact-info {
-            margin: 1.5rem 0;
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
-        }
-        
-        .social-link {
+        /* Buttons */
+        .btn {
             display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: var(--color-gold);
-            color: black;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
             transition: all 0.3s ease;
+            border: none;
         }
         
-        .social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
         }
         
-        /* Koszyk */
+        .btn-primary:hover {
+            background: #3a5ad9;
+        }
+        
+        .btn-success {
+            background: var(--color-success);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #218838;
+        }
+        
+        .btn-warning {
+            background: var(--color-warning);
+            color: var(--color-dark);
+        }
+        
+        .btn-warning:hover {
+            background: #e0a800;
+        }
+        
+        /* Cart */
         #cartIcon {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            background: var(--color-gold);
-            color: black;
+            background: var(--color-primary);
+            color: white;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -426,7 +195,7 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: red;
+            background: var(--color-danger);
             color: white;
             width: 24px;
             height: 24px;
@@ -477,23 +246,128 @@
             margin-top: auto;
             padding-top: 1rem;
             border-top: 2px solid #eee;
+            font-weight: 700;
+            font-size: 1.2rem;
         }
         
-        /* PayPal container - USUNIĘTE */
-        
-        /* Animacje */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Payment options */
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
         }
         
-        .fade-in {
-            animation: fadeIn 0.5s ease;
+        .payment-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            border-radius: 5px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
         }
         
-        /* Responsywność */
+        .paypal-btn {
+            background: #0070ba;
+            color: white;
+        }
+        
+        .paypal-btn:hover {
+            background: #005ea6;
+        }
+        
+        .email-btn {
+            background: #ea4335;
+            color: white;
+        }
+        
+        .email-btn:hover {
+            background: #d33426;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        /* Sections */
+        section {
+            padding: 3rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--color-primary);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--color-dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--color-primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .products-grid, .blog-posts, .reviews {
+            .products-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -502,2272 +376,365 @@
                 right: -100%;
             }
             
-            .design-tools {
-                grid-template-columns: 1fr;
-            }
-            
             .nav-container {
                 flex-direction: column;
-                align-items: center;
+                gap: 1rem;
             }
             
-            .nav-btn {
-                width: 80%;
-                margin: 0.3rem;
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
             }
-            
-            .transform-controls {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .sticky-buttons {
-                bottom: 5rem;
-            }
-        }
-
-        /* Nowe style dla lepszego układu */
-        .sticky-buttons {
-            position: sticky;
-            bottom: 1rem;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            z-index: 98;
-            margin-top: 2rem;
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .design-preview {
-            margin-top: 2rem;
-            text-align: center;
-            padding: 1rem;
-            background: var(--color-cream);
-            border-radius: 10px;
-        }
-        
-        .product-base {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .product-base-item {
-            border: 2px solid #eee;
-            border-radius: 8px;
-            padding: 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .product-base-item:hover, .product-base-item.active {
-            border-color: var(--color-gold);
-            background: var(--color-cream);
-        }
-        
-        .product-base-item img {
-            max-width: 100%;
-            height: 120px;
-            object-fit: contain;
-        }
-        
-        .email-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-family: inherit;
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: var(--color-gold);
-            color: black;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 600;
-            margin: 0.5rem auto;
-            width: 80%;
-        }
-        
-        .design-area {
-            position: relative;
-            margin-bottom: 1rem;
-        }
-        
-        .design-options {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .design-option {
-            padding: 0.5rem 1rem;
-            border: 2px solid var(--color-gold);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .design-option.active {
-            background: var(--color-gold);
-            color: black;
-        }
-        
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-container {
-                display: none;
-                flex-direction: column;
-            }
-            
-            .nav-container.show {
-                display: flex;
-            }
-            
-            .design-options {
-                flex-direction: column;
-            }
-        }
-
-        /* Style dla wirtualnych produktów */
-        .virtual-product {
-            position: relative;
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        .product-layer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .design-area-front, .design-area-back, .design-area-sleeve {
-            border: 2px dashed #ccc;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 15px;
-            background: white;
-        }
-        
-        .design-area-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--color-dark-gold);
-        }
-        
-        /* PayPal darowizny */
-        .donate-button {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 1rem 2rem;
-            background: #0070ba;
-            color: white;
-            border-radius: 30px;
-            font-weight: bold;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .donate-button:hover {
-            background: #005ea6;
-            transform: translateY(-2px);
-        }
-        
-        /* Nowe style dla reklam */
-        .ad-container {
-            width: 100%;
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .ad-banner {
-            width: 100%;
-            max-width: 728px;
-            height: 90px;
-            background: #f0f0f0;
-            margin: 1rem auto;
-            border-radius: 8px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-style: italic;
-        }
-        
-        .ad-banner.large {
-            max-width: 970px;
-            height: 250px;
-        }
-        
-        .ad-banner.video {
-            position: relative;
-        }
-        
-        .ad-banner.video .timer {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-        }
-        
-        /* Style dla przycisków po bokach */
-        .side-buttons {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            z-index: 10;
-        }
-        
-        .side-buttons.left {
-            left: 10px;
-        }
-        
-        .side-buttons.right {
-            right: 10px;
-        }
-        
-        .side-button {
-            background: var(--color-gold);
-            color: black;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .side-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
-        /* Style dla formularza zamówienia */
-        .order-form {
-            background: black;
-            color: var(--color-gold);
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-        
-        .order-form input,
-        .order-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1rem;
-            border: 1px solid #444;
-            border-radius: 5px;
-            background: #333;
-            color: white;
-        }
-        
-        .order-form button {
-            background: var(--color-gold);
-            color: black;
-            border: none;
-            padding: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-            margin-top: 1rem;
-        }
-        
-        /* Style dla stopki z reklamami */
-        .footer-ads {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #444;
-        }
-        
-        .footer-ad {
-            background: #222;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            min-height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #888;
-            font-style: italic;
-        }
-        /* Style dla przycisków w koszyku - POPRAWIONE */
-.cart-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-top: 1rem;
-}
-
-.cart-buttons button {
-    padding: 12px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.cart-buttons button:hover {
-    opacity: 0.9;
-}
-
-.email-order-btn {
-    background: var(--color-gold);
-    color: black;
-}
-
-.whatsapp-order-btn {
-    background: #25D366;
-    color: white;
-}
-
-        /* Sekcja zamówienia */
-        .order-section {
-            background: black;
-            color: var(--color-gold);
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 600px;
-            margin: 2rem auto;
         }
     </style>
 </head>
 <body>
-    <!-- Nagłówek -->
+    <!-- Header -->
     <header>
-        <div class="logo">AdelbertusShop</div>
-        <div class="tagline">Tworzone z pasją, noszone z dumą</div>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-store"></i>
+                <span>SklepOnline</span>
+            </div>
+        </div>
     </header>
 
-    <!-- Nawigacja -->
+    <!-- Navigation -->
     <nav>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i> Menu</button>
-        <div class="nav-container" id="navContainer">
-            <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
-            <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
-            <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
-            <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
-            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
-            <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
+        <div class="container nav-container">
+            <div class="nav-links">
+                <a href="#" class="nav-link active">Strona Główna</a>
+                <a href="#" class="nav-link">Produkty</a>
+                <a href="#" class="nav-link">O Nas</a>
+                <a href="#" class="nav-link">Kontakt</a>
+            </div>
+            <div class="search-cart">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
     </nav>
 
-    <!-- Sekcja główna -->
-    <main>
-        <!-- Strona główna -->
-        <section id="home" class="active">
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section>
             <div class="section-title">
-                <h2>Witaj w AdelbertusShop</h2>
-                <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>            </div>
-            
-            <!-- Sekcja reklamowa - baner -->
-            <div class="ad-container">
-                <div class="ad-banner large">
-                    <p>Miejsce na baner reklamowy (728x90)</p>
-                    <div class="timer" id="bannerTimer">30s</div>
-                </div>
-            </div>
-            
-            <!-- Sekcja reklamowa - animacja -->
-            <div class="ad-container">
-                <div class="ad-banner large video">
-                    <p>Miejsce na animację (30s)</p>
-                    <div class="timer" id="animationTimer">30s</div>
-                </div>
-            </div>
-            
-            <!-- Sekcja reklamowa - wideo -->
-            <div class="ad-container">
-                <div class="ad-banner large video">
-                    <p>Miejsce na wideo (30s)</p>
-                    <div class="timer" id="videoTimer">30s</div>
-                </div>
-            </div>
-            
-            <div class="charity-section">
-                <h3 class="text-3xl font-bold mb-4">Razem możemy więcej</h3>
-                <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
-                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;" data-section="charity">Dowiedz się więcej</button>
-            </div>
-            
-            <div class="section-title">
-<h3>Nie patrz, jeśli boisz się zmian. Nie kupuj, jeśli nie rozumiesz. To nie jest dla wszystkich.</h3>
+                <h2>Nasze Produkty</h2>
+                <p>Odkryj naszą ekskluzywną kolekcję</p>
             </div>
             
             <div class="products-grid">
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
-                    </div>
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Koszulka" class="product-image">
                     <div class="product-info">
-                        <div class="product-title">Koszulka "Rebel"</div>
-                        <div class="product-price">120 zł</div>
-                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                        <div class="product-title">Koszulka Premium</div>
+                        <div class="product-price">79,99 zł</div>
+                        <button class="btn btn-primary add-to-cart" data-name="Koszulka Premium" data-price="79.99" data-image="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">Dodaj do koszyka</button>
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
-                    </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Bluza" class="product-image">
                     <div class="product-info">
-                        <div class="product-title">Koszulka "Vintage"</div>
-                        <div class="product-price">120 zł</div>
-                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                        <div class="product-title">Bluza z Kapturem</div>
+                        <div class="product-price">149,99 zł</div>
+                        <button class="btn btn-primary add-to-cart" data-name="Bluza z Kapturem" data-price="149.99" data-image="https://images.unsplash.com/photo-1556821840-3a63f95609a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">Dodaj do koszyka</button>
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
-                    </div>
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Czapka" class="product-image">
                     <div class="product-info">
-                        <div class="product-title">Bluza "Urban"</div>
-                        <div class="product-price">200 zł</div>
-                        <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                        <div class="product-title">Czapka Zimowa</div>
+                        <div class="product-price">49,99 zł</div>
+                        <button class="btn btn-primary add-to-cart" data-name="Czapka Zimowa" data-price="49.99" data-image="https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Torba" class="product-image">
+                    <div class="product-info">
+                        <div class="product-title">Torba Bawełniana</div>
+                        <div class="product-price">39,99 zł</div>
+                        <button class="btn btn-primary add-to-cart" data-name="Torba Bawełniana" data-price="39.99" data-image="https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80">Dodaj do koszyka</button>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Sklep - ZAKTUALIZOWANY -->
-<section id="shop">
-    <div class="section-title">
-        <h2>Nasze Produkty</h2>
-        <p>Odkryj naszą ekskluzywną kolekcję</p>
+    </main>
+
+    <!-- Cart Icon -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
     </div>
-    
-    <h3 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h3>
-    <div class="products-grid">
-        <!-- Oryginalne 8 koszulek -->
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Rebel"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+
+    <!-- Cart Panel -->
+    <div id="cartPanel">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Twój koszyk</h2>
+            <button onclick="toggleCart()" class="text-2xl">&times;</button>
+        </div>
+        
+        <div id="cartItems" class="mb-6">
+            <!-- Products in cart will be added here -->
+        </div>
+        
+        <div class="cart-total">
+            <div class="flex justify-between text-xl font-bold">
+                <span>Suma:</span>
+                <span id="cartTotal">0 zł</span>
             </div>
         </div>
         
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
+        <div class="payment-options">
+            <h3 class="text-lg font-bold mb-2">Wybierz metodę płatności:</h3>
+            
+            <!-- PayPal Payment Option -->
+            <div class="paypal-options">
+                <button class="payment-btn paypal-btn" onclick="payWithPayPal('LESNTAUF7V7YG')">
+                    <i class="fab fa-paypal"></i> Zapłać z PayPal (Opcja 1)
+                </button>
+                <button class="payment-btn paypal-btn mt-2" onclick="payWithPayPal('F8DZ3GAKJYZTS')">
+                    <i class="fab fa-paypal"></i> Zapłać z PayPal (Opcja 2)
+                </button>
             </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Vintage"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png" alt="Koszulka Abstract" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Abstract"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Abstract" data-price="120" data-image="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png">Dodaj do koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png" alt="Koszulka Geometry" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Geometry"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Geometry" data-price="120" data-image="https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png">Dodaj do koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg" alt="Koszulka Modern" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Modern"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Modern" data-price="120" data-image="https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg">Dodaj to koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg" alt="Koszulka Premium" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Premium"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Premium" data-price="120" data-image="https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg">Dodaj do koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg" alt="Koszulka Urban" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Urban"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Urban" data-price="120" data-image="https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg">Dodaj do koszyka</button>
-            </div>
-        </div>
-        
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png" alt="Koszulka Art" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Koszulka "Art"</div>
-                <div class="product-price">120 zł</div>
-                <button class="nav-btn add-to-cart-btn" data-name="Koszulka Art" data-price="120" data-image="https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png">Dodaj do koszyka</button>
-            </div>
-        </div>
-
-        <!-- Nowe koszulki - 26 sztuk -->
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png" alt="Puzel" class="product-image">
-            </div>
-            <div class="product-info">
-                <div class="product-title">Puzel</div>
-                <div class="product-price">120 zł</div>
-                <p class="product-description">Abstrakcyjny i intrygujący wzór, idealny dla miłośników kreatywnych projektów.</p>
-                <button class="nav-btn add-to-cart-btn" data-name="Puzel" data-price="120" data-image="https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png">Dodaj do koszyka</button>
-            </div>
-        </div>
-
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/JFMF5VFz/file-00000000465c620a87ec4dbf4bd0ce30
-            </div>
-        </div>
-    </div>
-          
-<h3 class="text-2xl font-bold my-6 text-center gold-text">Bluzy</h3>
-<div class="products-grid">
-    <!-- Bluzy -->
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Bluza "Urban"</div>
-            <div class="product-price">200 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-    
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg" alt="Bluza Street" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Bluza "Street"</div>
-            <div class="product-price">200 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Bluza Street" data-price="200" data-image="https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-    <div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Bluza Premium" class="product-image">
-    </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Premium"</div>
-        <div class="product-price">220 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Premium" data-price="220" data-image="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg">Dodaj do koszyka</button>
-    </div>
-</div>
-
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg" alt="Bluza Comfort" class="product-image">
-    </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Comfort"</div>
-        <div class="product-price">200 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Comfort" data-price="200" data-image="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg">Dodaj do koszyka</button>
-    </div>
-</div>
-
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png" alt="Bluza Style" class="product-image">
-    </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Style"</div>
-        <div class="product-price">200 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Style" data-price="200" data-image="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png">Dodaj do koszyka</button>
-    </div>
-</div>
-
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="
-        <div class="product-info">
-            <div class="product-title">Bluza "Fashion"</div>
-            <div class="product-price">200 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Bluza Fashion" data-price="200" data-image="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-</div>
-
-<h3 class="text-2xl font-bold my-6 text-center gold-text">Czapki</h3>
-<div class="products-grid">
-    <!-- Czapki -->
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapka Classic" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Czapka "Classic"</div>
-            <div class="product-price">99 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Czapka Classic" data-price="99" data-image="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png">Dodaj do koszyka</button>
-        </div>
-    </div>
-    
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg" alt="Czapka Sport" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Czapka "Sport"</div>
-            <div class="product-price">99 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Czapka Sport" data-price="99" data-image="https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-    
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg" alt="Czapka Street" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Czapka "Street"</div>
-            <div class="product-price">99 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Czapka Street" data-price="99" data-image="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-    
-    <div class="product-card fade-in">
-        <div class="product-image-container">
-            <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium" class="product-image">
-        </div>
-        <div class="product-info">
-            <div class="product-title">Czapka "Premium"</div>
-            <div class="product-price">99 zł</div>
-            <button class="nav-btn add-to-cart-btn" data-name="Czapka Premium" data-price="99" data-image="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg">Dodaj do koszyka</button>
-        </div>
-    </div>
-</div>
-
-<!-- Sekcja zamówienia -->
-<div class="section-title">
-    <h2>Złóż zamówienie</h2>
-    <p>Skorzystaj z naszych usług</p>
-</div>
-
-<section id="zamowienia" class="order-form">
-    <h2 class="text-3xl mb-4 text-gold font-bold">Złóż zamówienie</h2>
-    
-    <form id="orderForm" class="space-y-4">
-        <input type="text" name="name" placeholder="Imię i nazwisko" class="w-full p-2 rounded border border-gray-700 bg-gray-900 text-white" required>
-        <input type="email" name="email" placeholder="Email" class="w-full p-2 rounded border border-gray-700 bg-gray-900 text-white" required>
-        <input type="text" name="product" id="productInput" placeholder="Produkt" class="w-full p-2 rounded border border-gray-700 bg-gray-900 text-white" required>
-        <textarea name="address" placeholder="Adres dostawy" rows="3" class="w-full p-2 rounded border border-gray-700 bg-gray-900 text-white" required></textarea>
-
-        <div class="flex gap-4">
-            <button type="submit" class="flex-1 bg-gold text-black py-2 rounded font-bold hover:bg-yellow-400 transition">Wyślij mail</button>
-            <a href="#" id="whatsappBtn" target="_blank" class="flex-1 bg-black border border-gold text-gold py-2 rounded font-bold text-center hover:bg-gold hover:text-black transition">
-                Zamów przez WhatsApp
-            </a>
-        </div>
-    </form>
-
-    <p id="status" class="mt-4 text-white"></p>
-</section>
-</section>
-
-<!-- Studio projektowe - ZMODYFIKOWANE -->
-<section id="design">
-    <div class="section-title">
-        <h2>Studio Projektowe</h2>
-        <p>Stwórz swój unikalny produkt</p>
-    </div>
-    
-    <div class="design-studio">
-        <!-- Przyciski po bokach -->
-        <div class="side-buttons left">
-            <button class="side-button" onclick="updateDesign()" title="Podgląd">
-                <i class="fas fa-sync"></i>
+            
+            <!-- No Payment Options -->
+            <button class="payment-btn email-btn" onclick="sendOrderEmail()">
+                <i class="fas fa-envelope"></i> Zamów przez email
             </button>
-            <button class="side-button" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
-                <i class="fas fa-cart-plus"></i>
+            <button class="payment-btn whatsapp-btn" onclick="sendOrderWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
             </button>
         </div>
-        
-        <div class="side-buttons right">
-            <button class="side-button" onclick="sendDesignToEmail()" title="Wyślij projekt mailem">
-                <i class="fas fa-envelope"></i>
-            </button>
-            <button class="side-button" onclick="saveDesign()" title="Zapisz projekt">
-                <i class="fas fa-download"></i>
-            </button>
-        </div>
-        
-        <div class="product-base">
-            <div class="product-base-item active" data-base="tshirt">
-                <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka">
-                <p>Koszulka</p>
-            </div>
-            <div class="product-base-item" data-base="hoodie">
-                <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza">
-                <p>Bluza</p>
-            </div>
-            <div class="product-base-item" data-base="cap">
-                <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapka">
-                <p>Czapka</p>
-            </div>
-        </div>
-        
-        <div class="design-options">
-            <div class="design-option active" data-area="front">Przód</div>
-            <div class="design-option" data-area="back">Tył</div>
-            <div class="design-option" data-area="sleeves">Rękawy</div>
-        </div>
-        
-        <div class="canvas-container">
-            <canvas id="designCanvas" width="500" height="400"></canvas>
-            <div class="canvas-controls">
-                <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
-                <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
-            </div>
-        </div>
-        
-        <div class="design-tools">
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
-                <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border rounded mb-3" oninput="updateDesign()">
-                
-                <div class="flex gap-3 mb-3">
-                    <select id="fontFamily" class="flex-1 p-2 border rounded" onchange="updateDesign()">
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Impact">Impact</option>
-                        <option value="Comic Sans MS">Comic Sans</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Palatino">Palatino</option>
-                        <option value="Garamond">Garamond</option>
-                        <option value="Brush Script MT">Brush Script</option>
-                    </select>
-                    
-                    <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border rounded" oninput="updateDesign()">
-                </div>
-                
-                <input type="color" id="textColor" value="#000000" class="w-full h-10 mb-3" oninput="updateDesign()">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>O nas</h3>
+                <p>Jesteśmy sklepem internetowym oferującym wysokiej jakości produkty w atrakcyjnych cenach.</p>
             </div>
             
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
+            <div class="footer-section">
+                <h3>Kontakt</h3>
+                <p><i class="fas fa-envelope"></i> email@example.com</p>
+                <p><i class="fas fa-phone"></i> +48 123 456 789</p>
                 
-                <select id="productType" class="w-full p-3 border rounded mb-3">
-                    <option value="tshirt">Koszulka (120 zł)</option>
-                    <option value="hoodie">Bluza (200 zł)</option>
-                    <option value="cap">Czapka (99 zł)</option>
-                </select>
-                
-                <select id="productSize" class="w-full p-3 border rounded mb-3">
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
-                </select>
-                
-                <input type="file" id="designImage" accept="image/*" class="w-full mb-3" onchange="handleImageUpload()">
-                <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()"><i class="fas fa-upload"></i> Wybierz obraz</button>
-            </div>
-
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-edit"></i> Edycja elementów</div>
-                <div class="transform-controls">
-                    <div class="transform-input">
-                        <label for="posX">Pozycja X</label>
-                        <input type="range" id="posX" min="0" max="500" value="250" oninput="updateElementPosition()">
-                    </div>
-                    <div class="transform-input">
-                        <label for="posY">Pozycja Y</label>
-                        <input type="range" id="posY" min="0" max
-                    </div>
-                    <div class="transform-input">
-                        <label for="scale">Skala</label>
-                        <input type="range" id="scale" min="0.1" max="2" step="0.1" value="1" oninput="updateElementScale()">
-                    </div>
-                    <div class="transform-input">
-                        <label for="rotation">Obrót</label>
-                        <input type="range" id="rotation" min="0" max="360" value="0" oninput="updateElementRotation()">
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <button class="nav-btn gold-bg w-full" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
-        </div>
-        
-        <div class="design-preview">
-            <h3>Podgląd Twojego projektu</h3>
-            <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
-        </div>
-    </div>
-</section>
-        
-<!-- 🎁 Sekcja Zbiórki FINALNA -->
-<section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
-    
-    <!-- Nagłówek -->
-    <div class="section-title text-center mb-10">
-        <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
-            [ UPLOAD NADZIEI // PROMYK ]
-        </h2>
-        <p class="text-lg italic mt-2 text-gray-300">
-            Jesteś częścią czegoś większego, niż Ty sam.  
-            (a przy okazji możesz być lepszy niż sąsiad 😉)
-        </p>
-    </div>
-
-    <!-- Sekcja emocji -->
-    <div class="text-center max-w-2xl mx-auto mb-10">
-        <h3 class="text-3xl font-bold mb-4">Twoja decyzja zmienia czyjeś życie</h3>
-        <p class="text-xl text-gray-200">
-            Każda złotówka = kawałek światła w ciemnym świecie.  
-            Nie musisz być bohaterem, wystarczy że klikniesz.
-        </p>
-    </div>
-    
-    <!-- Metody wsparcia -->
-    <div class="grid md:grid-cols-3 gap-8 text-center">
-        <!-- BLIK -->
-        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-            <h4 class="text-2xl font-bold mb-2">📱 BLIK TRANSFER</h4>
-            <div class="text-3xl font-mono font-bold text-green-400">573-939-925</div>
-            <p class="mt-2 text-sm">dopisz kod: <span class="font-bold">POMOC</span></p>
-        </div>
-        
-        <!-- PayPal -->
-        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-            <h4 class="text-2xl font-bold mb-2">💳 PayPal</h4>
-            <a href="https://www.paypal.com/donate/?hosted_button_id=VG9UP4MTHHWYU" target="_blank" 
-               class="mt-4 inline-block bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
-                ➡️ Przekaż darowiznę
-            </a>
-        </div>
-        
-        <!-- Dary -->
-        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-            <h4 class="text-2xl font-bold mb-2">📦 Dary rzeczowe</h4>
-            <p>Tel: <span class="font-bold">604 296 360</span></p>
-            <p>Email: <span class="font-bold">mielniczukgrzegosz74@gmail.com</span></p>
-        </div>
-    </div>
-    
-    <!-- Lista darczyńców -->
-    <div class="donors-list mt-12 bg-black/30 p-6 rounded-xl border border-purple-800">
-        <h4 class="text-2xl font-bold mb-4">🔥 Ostatni, którzy dołączyli do gry:</h4>
-        <ul id="donorsList" class="space-y-2 text-green-300 font-mono"></ul>
-    </div>
-    
-    <!-- List od dzieci -->
-    <div class="bg-white/10 p-6 rounded-lg shadow-md mt-10 border-l-4 border-yellow-400">
-        <h4 class="text-2xl font-bold mb-4 text-yellow-300">✉️ List od dzieci z Domu Dziecka "Promyk"</h4>
-        <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
-    </div>
-</section>
-
-<style>
-/* Neon glow */
-.neon-glow {
-  color: #fff;
-  text-shadow:
-    0 0 5px #a855f7,
-    0 0 10px #a855f7,
-    0 0 20px #9333ea,
-    0 0 40px #9333ea;
-  animation: neonPulse 2s infinite alternate;
-}
-@keyframes neonPulse {
-  from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
-  to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
-}
-
-/* Typing efekt */
-.typing {
-  border-right: 2px solid #ffd700;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-/* Animacja donorów */
-.donor-entry {
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeInUp 1s forwards;
-}
-@keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-</style>
-
-<script>
-// 🔥 Donorzy rotacyjni
-const donors = [
-    {name: "Anna K.", amount: 50},
-    {name: "Marek Z.", amount: 100},
-    {name: "👑 Sekretny Darczyńca", amount: 250},
-    {name: "Natalia P.", amount: 75},
-    {name: "Bartek L.", amount: 30}
-];
-let donorIndex = 0;
-function addDonor() {
-    const list = document.getElementById("donorsList");
-    const li = document.createElement("li");
-    li.className = "donor-entry";
-    li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
-    list.prepend(li);
-    donorIndex = (donorIndex + 1) % donors.length;
-}
-setInterval(addDonor, 4000); // co 4s nowy donor
-
-// ✉️ Listy od dzieci (cykliczne)
-const letters = [
-    "Dziękujemy za każdą pomoc. Dzięki Tobie czujemy, że nie jesteśmy sami. ❤️",
-    "Każdy dar to dla nas promień światła w ciemności. ✨",
-    "Nie możemy oddać wszystkiego, co czujemy – ale dziękujemy z całego serca! 🙏",
-    "Twoja pomoc daje nam nadzieję na lepsze jutro. 🌍"
-];
-let letterIndex = 0;
-function typeLetter() {
-    const letterBox = document.getElementById("childrenLetter");
-    letterBox.textContent = ""; // reset
-    let i = 0;
-    function typeWriter() {
-        if (i < letters[letterIndex].length) {
-            letterBox.textContent += letters[letterIndex].charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-        }
-    }
-    typeWriter();
-    letterIndex = (letterIndex + 1) % letters.length;
-}
-typeLetter();
-setInterval(typeLetter, 15000); // co 15s nowy list
-</script>
-        
-<!-- Blog - WERSJA Z FORUM I CYKLICZNYMI CYTATAMI -->
-<section id="blog" class="bg-gray-950 py-12">
-    <div class="section-title text-center mb-12">
-        <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
-        <p class="text-gray-300">Miejsce, gdzie każdy może podzielić się swoją myślą</p>
-    </div>
-
-    <!-- Dynamiczny cytat -->
-    <div class="max-w-2xl mx-auto mb-12 text-center">
-        <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
-            „Twoje słowa mają większą moc, niż myślisz.”
-        </blockquote>
-    </div>
-
-    <div class="text-center mb-8">
-        <button class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition" onclick="showBlogForm()">
-            <i class="fas fa-pencil-alt"></i> Napisz nowy artykuł
-        </button>
-    </div>
-    
-    <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
-        <!-- Tutaj będą dodawane posty -->
-    </div>
-
-    <!-- Formularz dodawania artykułu -->
-    <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
-        <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
-        <form id="newBlogPostForm">
-            <div class="form-group mb-4">
-                <label class="text-gray-300">Tytuł</label>
-                <input type="text" id="blogTitle" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
-            </div>
             
-            <div class="form-group mb-4">
-                <label class="text-gray-300">Krótki opis</label>
-                <textarea id="blogExcerpt" rows="2" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
+            <div class="footer-section">
+                <h3>Informacje</h3>
+                <ul>
+                    <li><a href="#">Regulamin</a></li>
+                    <li><a href="#">Polityka prywatności</a></li>
+                    <li><a href="#">Zwroty i reklamacje</a></li>
+                    <li><a href="#">Dostawa</a></li>
+                </ul>
             </div>
+        </div>
+        
+        <div class="container text-center mt-8">
+            <p>&copy; 2023 SklepOnline. Wszystkie prawa zastrzeżone.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let cart = JSON.parse(localStorage.getItem('shop_cart')) || [];
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            initAddToCartButtons();
+            updateCart();
             
-            <div class="form-group mb-4">
-                <label class="text-gray-300">Pełna treść</label>
-                <textarea id="blogContent" rows="5" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
-            </div>
-            
-            <div class="form-group mb-4">
-                <label class="text-gray-300">URL obrazka</label>
-                <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
-            </div>
-            
-            <button type="submit" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg">Opublikuj artykuł</button>
-            <button type="button" class="nav-btn px-6 py-2 rounded-lg" onclick="hideBlogForm()">Anuluj</button>
-        </form>
-    </div>
-</section>
-
-<script>
-// ====================== CYTATY ======================
-const quotes = [
-    "„Twoje słowa mają większą moc, niż myślisz.”",
-    "„Ludzie słyszą, ale pamiętają to, co widzą.”",
-    "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
-    "„Styl to nie ubranie – to komunikat.”"
-];
-
-let quoteIndex = 0;
-function changeQuote() {
-    const quoteElement = document.getElementById("dynamic-quote");
-    quoteElement.classList.add("opacity-0");
-    setTimeout(() => {
-        quoteIndex = (quoteIndex + 1) % quotes.length;
-        quoteElement.innerText = quotes[quoteIndex];
-        quoteElement.classList.remove("opacity-0");
-    }, 1000);
-}
-setInterval(changeQuote, 10000); // co 10 sekund
-
-// ====================== KOMENTARZE z filtrem ======================
-const badWords = ["kurwa", "chuj", "debil", "idiota"]; // tu możesz dodać kolejne
-function filterBadWords(text) {
-    let filtered = text;
-    badWords.forEach(word => {
-        const regex = new RegExp(word, "gi");
-        filtered = filtered.replace(regex, "***");
-    });
-    return filtered;
-}
-
-function addComment(event, commentListId) {
-    event.preventDefault();
-    const input = event.target.querySelector("input");
-    let commentText = filterBadWords(input.value);
-    const commentList = document.getElementById(commentListId);
-    const newComment = document.createElement("li");
-    newComment.textContent = "💬 " + commentText;
-    commentList.appendChild(newComment);
-    input.value = "";
-}
-
-// ====================== NOWE ARTYKUŁY ======================
-document.getElementById("newBlogPostForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const title = document.getElementById("blogTitle").value;
-    const excerpt = document.getElementById("blogExcerpt").value;
-    const content = document.getElementById("blogContent").value;
-    const image = document.getElementById("blogImage").value || "https://via.placeholder.com/500";
-
-    const postId = "post-" + Date.now();
-    const commentListId = "comments-" + Date.now();
-
-    const newPost = `
-        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition">
-            <img src="${image}" alt="${title}" class="blog-image rounded-t-lg">
-            <div class="blog-content p-6">
-                <h3 class="text-xl font-bold text-gold-400 mb-2">${title}</h3>
-                <p class="text-sm text-gray-400">Opublikowano: ${new Date().toLocaleDateString()}</p>
-                <div class="blog-excerpt">
-                    <p class="mt-3 text-gray-200">${excerpt}</p>
-                </div>
-                <div class="blog-full hidden">
-                    <p class="mt-3 text-gray-300">${content}</p>
-                    <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">
-                        „Twój artykuł inspiruje innych!”
-                    </blockquote>
-                    <div class="comments mt-6">
-                        <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
-                        <ul id="${commentListId}" class="text-gray-200 space-y-2"></ul>
-                        <form class="mt-3" onsubmit="addComment(event, '${commentListId}')">
-                            <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
-                        </form>
-                    </div>
-                </div>
-                <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
-            </div>
-        </div>
-    `;
-
-    document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", newPost);
-    hideBlogForm();
-    this.reset();
-});
-
-// ====================== ROZWIJANIE POSTÓW ======================
-function toggleReadMore(button) {
-    const fullContent = button.parentElement.querySelector(".blog-full");
-    fullContent.classList.toggle("hidden");
-    button.textContent = fullContent.classList.contains("hidden") ? "Czytaj więcej"
-                <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
-            </div>
-        </div>
-    `;
-
-    document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", newPost);
-    hideBlogForm();
-    this.reset();
-});
-
-// ====================== ROZWIJANIE POSTÓW ======================
-function toggleReadMore(button) {
-    const fullContent = button.parentElement.querySelector(".blog-full");
-    fullContent.classList.toggle("hidden");
-    button.textContent = fullContent.classList.contains("hidden") ? "Czytaj więcej" : "Zwiń";
-}
-
-// ====================== FORMULARZ ======================
-function showBlogForm() {
-    document.getElementById("blogForm").classList.remove("hidden");
-}
-function hideBlogForm() {
-    document.getElementById("blogForm").classList.add("hidden");
-}
-</script>
+            // Initialize cart icon click
+            document.getElementById('cartIcon').addEventListener('click', toggleCart);
+        });
         
-<!-- Regulamin -->
-<section id="regulations">
-    <div class="section-title">
-        <h2>Regulamin</h2>
-        <p>Zasady korzystania z naszego sklepu</p>
-    </div>
-    
-    <div class="bg-white p-6 rounded-lg shadow-md">
-        <div class="mb-6">
-            <h3 class="text-xl font-bold mb-3">§1 Postanowienia ogólne</h3>
-            <p>Sklep internetowy AdelbertusShop prowadzony jest przez osobę fizyczną w ramach działalności nierejestrowanej na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
-        </div>
-        
-        <div class="mb-6">
-            <h3 class="text-xl font-bold mb-3">§2 Zamówienia i płatności</h3>
-            <p>1. Zamówienia można składać przez stronę internetową 24 godziny na dobę.</p>
-            <p>2. Akceptowane formy płatności: przelew bankowy, BLIK.</p>
-            <p>3. Realizacja zamówienia następuje po zaksięgowaniu płatności.</p>
-        </div>
-        
-        <div class="mb-6">
-            <h3 class="text-xl font-bold mb-3">§3 Polityka prywatności i RODO</h3>
-            <p>1. Administratorem danych osobowych jest AdelbertusShop.</p>
-            <p>2. Dane osobowe przetwarzane są w celu realizacji zamówień, świadczenia usług oraz marketingu bezpośredniego.</p>
-            <p>3. Podstawą przetwarzania danych jest niezbędność do wykonania umowy (art. 6 ust. 1 lit. b RODO) oraz prawnie uzasadniony interes administratora (art. 6 ust. 1 lit. f RODO).</p>
-            <p>4. Dane przechowywane są przez okres niezbędny do realizacji zamówienia, a następnie przez okres wymagany przepisami prawa.</p>
-            <p>5. Przysługuje Państwu prawo dostępu do danych, sprostowania, usunięcia, ograniczenia przetwarzania, wniesienia sprzeciwu oraz prawo do przenoszenia danych.</p>
-            <p>6. Dane mogą być udostępniane podmiotom przetwarzającym je na nasze zlecenie (np. firmy kurierskie).</p>
-            <p>7. Kontakt w sprawach ochrony danych: mielniczukgrzegosz74@gmail.com</p>
-        </div>
-                
-        <div class="mb-6">
-            <h3 class="text-xl font-bold mb-3">§4 Zwroty i reklamacje</h3>
-            <p>1. Konsument ma prawo do odstąpienia od umowy w ciągu 14 dni bez podawania przyczyny.</p>
-            <p>2. Zwrotów można dokonać na adres: AdelbertusShop, ul. Przykładowa 1, 00-000 Warszawa.</p>
-            <p>3. Reklamacje są rozpatrywane w ciągu 14 dni od otrzymania.</p>
-        </div>
-    </div>
-</section>
-
-<!-- Kontakt - FINALNA WERSJA -->
-<section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
-  <div class="section-title text-center mb-10">
-    <h2 class="text-4xl font-extrabold text-gray-900">Kontakt</h2>
-    <p class="text-lg text-gray-600 mt-2">To Twoje miejsce – masz wpływ na wszystko, co tu się dzieje.</p>
-  </div>
-
-  <!-- Formularz kontaktowy -->
-  <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
-    <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
-    <form id="contactForm">
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Imię i nazwisko</label>
-        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Email</label>
-        <input type="email" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Temat</label>
-        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Wiadomość</label>
-        <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
-      </div>
-      
-      <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-    </form>
-  </div>
-
-  <!-- Dane kontaktowe -->
-  <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-    <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
-    <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
-    <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
-    <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
-    
-    <h3 class="text-xl font-bold mt-6 mb-4">Social Media</h3>
-    <div class="social-links flex gap-4">
-      <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.tikt
-      <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- Forum dyskusyjne -->
-  <div class="bg-white p-6 rounded-2xl shadow-md">
-    <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
-    <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
-    
-    <form id="forumForm" class="mb-6">
-      <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
-      <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
-      <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
-    </form>
-    
-    <div id="forumPosts" class="space-y-4">
-      <!-- Wpisy forum będą dodawane tutaj -->
-    </div>
-  </div>
-</section>
-
-<script>
-  // Lista słów zakazanych
-  const forbiddenWords = ["idiota", "głupek", "kurwa", "chuj", "pedał", "debil"];
-  
-  // Obsługa forum
-  document.getElementById("forumForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    const user = document.getElementById("forumUser").value.trim();
-    const message = document.getElementById("forumMessage").value.trim();
-    
-    // Sprawdzenie wulgaryzmów
-    let containsBad = forbiddenWords.some(word => message.toLowerCase().includes(word));
-    
-    if (containsBad) {
-      alert("Twój wpis zawiera niedozwolone treści. Spróbuj napisać inaczej.");
-      return;
-    }
-    
-    if (user && message) {
-      const postDiv = document.createElement("div");
-      postDiv.classList.add("p-4", "bg-gray-50", "rounded-lg", "shadow-sm");
-      postDiv.innerHTML = `<p class="font-bold">${user}</p><p>${message}</p>`;
-      document.getElementById("forumPosts").prepend(postDiv);
-      
-      document.getElementById("forumForm").reset();
-    }
-  });
-</script>
-
-<!-- Koszyk - ZMODYFIKOWANY (USUNIĘTO PAYPAL) -->
-<div id="cartIcon">
-    <i class="fas fa-shopping-cart"></i>
-    <span id="cartCount">0</span>
-</div>
-
-<div id="cartPanel">
-    <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-bold">Twój koszyk</h2>
-        <button onclick="toggleCart()" class="text-2xl">&times;</button>
-    </div>
-    
-    <div id="cartItems" class="mb-6">
-        <!-- Produkty w koszyku -->
-    </div>
-    
-    <div class="cart-total">
-        <div class="flex justify-between text-xl font-bold">
-            <span>Suma:</span>
-            <span id="cartTotal">0 zł</span>
-        </div>
-    </div>
-    
-    <div class="cart-buttons">
-        <button onclick="sendOrderEmail()" class="email-order-btn">
-            <i class="fas fa-envelope"></i> Wyślij zamówienie mailem
-        </button>
-        <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn">
-            <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
-        </button>
-    </div>
-    
-    <p class="text-sm text-gray-600 text-center mt-4">Akceptujemy przelewy bankowe i BLIK</p>
-</div>
-
-<!-- Stopka -->
-<footer>
-    <div class="logo">AdelbertusShop</div>
-    <p class="tagline">Tworzone z pasją, noszone z dumą</p>
-    
-    <div class="contact-info">
-        <p><i class="fas fa-envelope"></i> mielniczukgrzegosz74@gmail.com</p>
-        <p><i class="fas fa-phone"></i> 604 296 360</p>
-    </div>
-    
-    <!-- Sekcja reklam w stopce -->
-<!-- Baner prostokątny -->
-<div class="ad-container" style="text-align:center; margin:20px 0;">
-  <div id="bannerLarge">
-    <a href="https://ibb.co/2xhgSK0" target="_blank">
-      <img src="https://i.ibb.co/SbyRcvD/Messenger-creation-00818231-9273-41-E1-8247-0342-F5054-BE3.jpg" 
-           alt="Baner prostokątny" 
-           style="max-width:728px; width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-    </a>
-  </div>
-</div>
-
-<!-- Baner kwadratowy -->
-<div class="ad-container" style="text-align:center; margin:20px 0;">
-  <div id="bannerSquare">
-    <a href="https://ibb.co/d46RkY29" target="_blank">
-      <img src="https://i.ibb.co/zVbzPvRc/Messenger-creation-9-C2-DF47-C-5660-4-D41-8652-E1-A259-B8-B09-C.jpg" 
-           alt="Baner kwadratowy" 
-           style="max-width:300px; width:100%; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-    </a>
-  </div>
-</div>
-
-<script>
-// Funkcja cyklu 10s widoczny, 3s ukryty
-function cycleBanner(bannerId) {
-  const banner = document.getElementById(bannerId);
-
-  function showBanner() {
-    banner.style.display = "block";
-    setTimeout(hideBanner, 10000); // 10s
-  }
-
-  function hideBanner() {
-    banner.style.display = "none";
-    setTimeout(showBanner, 3000); // 3s
-  }
-
-  showBanner();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  cycleBanner("bannerLarge");
-  cycleBanner("bannerSquare");
-});
-</script>    
-        <div class="footer-ad">
-            <p>Reklama 3</p>
-        </div>
-    </div>
-    
-    <div class="mt-6">
-        <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
-        <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
-    </div>
-</footer>
-
-<script>
-    // ===== GLOBALNE ZMIENNE =====
-    let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-    let currentDesign = {
-        text: '',
-        fontSize: 36,
-        fontFamily: 'Arial',
-        color: '#000000',
-        productType: 'tshirt',
-        productSize: 'M',
-        image: null,
-        imageX: 250,
-        imageY: 200,
-        imageScale: 1,
-        imageRotation: 0,
-        textX: 250,
-        textY: 200,
-        textScale: 1,
-        textRotation: 0,
-        activeElement: 'text',
-        baseProduct: 'tshirt',
-        designArea: 'front'
-    };
-
-    // Dane do rotacji dla zbiórki
-    const donorsData = [
-        {
-            donors: [
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Anna K.</strong> - paczka z artykułami szkolnymi</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Tomasz W.</strong> - 500 zł przekazane przez BLIK</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Fundacja "Przyszłość"</strong> - zestaw komputerowy</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Pracownicy firmy XYZ</strong> - zbiórka zimowych ubrań</li>'
-            ],
-            letter: `"Drodzy Przyjaciele,<br><br>
-            Chcielibyśmy podziękować Wam za wszystkie otrzymane dary i wsparcie. Każda paczka, każdy uśmiech i każde dobre słowo dodaje nam siły i wiary w lepsze jutro. Dzięki Wam wiemy, że nie jesteśmy sami.<br><br>
-            Wasze gesty dobroci sprawiają, że nasze dni stają się jaśniejsze, a marzenia - bardziej realne. Dziękujemy, że jesteście częścią naszej historii.<br><br>
-            Z nadzieją w sercach,<br>
-            Dzieci z Domu Dziecka 'Promyk'"`
-        },
-        {
-            donors: [
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Jan Nowak</strong> - gry planszowe i puzzle</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Maria S.</strong> - 300 zł na wycieczkę</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Firma ABC</strong> - artykuły plastyczne</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Wolontariusze z miasta</strong> - remont sali zabaw</li>'
-            ],
-            letter: `"Kochani Darczyńcy,<br><br>
-            Wasza hojność nas zadziwia! Dzięki Wam możemy rozwijać nasze pasje i talenty. Ostatnio dostaliśmy wspaniałe instrumenty muzyczne i już tworzymy zespół.<br><br>
-            Nie moglibyśmy robić tych wszystkich wspaniałych rzeczy bez Waszego wsparcia. Dziękujemy za każde okazane serce.<br><br>
-            Z wdzięcznością,<br>
-            Podopieczni 'Promyka'"`
-        },
-        {
-            donors: [
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Grupa przyjaciół</strong> - rowery i kaski</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Pizzeria "Smak"</strong> - cotygodniowe dostawy pizzy</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Klub sportowy</strong> - sprzęt sportowy i treningi</li>',
-                '<li><i class="fas fa-heart gold-text"></i> <strong>Anonimowy darczyńca</strong> - laptopy dla dzieci</li>'
-            ],
-            letter: `"Szanowni Państwo,<br><br>
-            Chcemy podzielić się naszą radością - dzięki Waszemu wsparciu mogliśmy zorganizować wspaniały wyjazd w góry. To były niezapomniane chwile!<br><br>
-            Widok szczęśliwych, uśmiechniętych dzieci jest bezcenny. Dziękujemy, że pomagacie nam tworzyć takie wspomnienia.<br><br>
-            Serdecznie,<br>
-            Wychowawcy i dzieci z 'Promyka'"`
-        }
-    ];
-
-    // ===== INICJALIZACJA =====
-    document.addEventListener('DOMContentLoaded', function() {
-        initNavigation();
-        initDesignStudio();
-        updateCart();
-        initContactForm();
-        initBlog();
-        initAddToCartButtons();
-        initProductBase();
-        initDesignOptions();
-        initOrderForm();
-        initAdTimers();
-        initCharityRotation();
-    });
-
-    // ===== NAWIGACJA =====
-    function initNavigation() {
-        const navButtons = document.querySelectorAll('.nav-btn');
-        
-        navButtons.forEach(button => {
-            button.addEventListener('click', function(e) {
-                if (this.hasAttribute('data-section')) {
+        // Add to cart functionality
+        function initAddToCartButtons() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart')) {
                     e.preventDefault();
+                    const name = e.target.getAttribute('data-name');
+                    const price = parseFloat(e.target.getAttribute('data-price'));
+                    const image = e.target.getAttribute('data-image');
                     
-                    // Usuń aktywną klasę ze wszystkich przycisków
-                    navButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Dodaj aktywną klasę do klikniętego przycisku
-                    this.classList.add('active');
-                    
-                    // Pokaż odpowiednią sekcję
-                    const sectionId = this.getAttribute('data-section');
-                    showSection(sectionId);
+                    addToCart(name, price, image);
                 }
             });
-        });
-        
-        // Obsługa ikony koszyka
-        document.getElementById('cartIcon').addEventListener('click', toggleCart);
-    }
-
-    function toggleMobileMenu() {
-        document.getElementById('navContainer').classList.toggle('show');
-    }
-
-    function showSection(sectionId) {
-        // Ukryj wszystkie sekcje
-        document.querySelectorAll('section').forEach(section => {
-            section.classList.remove('active');
-        });
-        
-        // Pokaż wybraną sekcję
-        document.getElementById(sectionId).classList.add('active');
-        
-        // Ukryj menu mobilne po wybraniu sekcji
-        if (window.innerWidth <= 768) {
-            document.getElementById('navContainer').classList.remove('show');
         }
         
-        // Przewiń do góry sekcji
-        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // ===== DODAWANIE DO KOSZYKA =====
-    function initAddToCartButtons() {
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart-btn')) {
-                e.preventDefault();
-                const name = e.target.getAttribute('data-name');
-                const price = parseFloat(e.target.getAttribute('data-price'));
-                const image = e.target.getAttribute('data-image');
+        // Update cart UI
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            // Update count
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            // Update items
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+                cartTotal.textContent = '0 zł';
+            } else {
+                let total = 0;
                 
-                addToCart(name, price, image);
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" class="cart-item-image">
+                        <div class="flex-1">
+                            <div class="font-bold">${item.name}</div>
+                            <div>${item.price} zł × ${item.quantity}</div>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                cartTotal.textContent = `${total.toFixed(2)} zł`;
             }
-        });
-    }
-
-    function updateCart() {
-        const cartCount = document.getElementById('cartCount');
-        const cartItems = document.getElementById('cartItems');
-        const cartTotal = document.getElementById('cartTotal');
+            
+            // Save to localStorage
+            localStorage.setItem('shop_cart', JSON.stringify(cart));
+        }
         
-        // Aktualizuj licznik
-        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        // Add item to cart
+        function addToCart(name, price, image) {
+            // Check if product already in cart
+            const existingIndex = cart.findIndex(item => item.name === name);
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].quantity++;
+            } else {
+                cart.push({
+                    name,
+                    price,
+                    quantity: 1,
+                    image
+                });
+            }
+            
+            updateCart();
+            showNotification('Produkt dodany do koszyka');
+        }
         
-        // Aktualizuj zawartość koszyka
-        cartItems.innerHTML = '';
+        // Remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
         
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-            cartTotal.textContent = '0 zł';
-        } else {
-            let total = 0;
+        // Toggle cart panel
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+        }
+        
+        // PayPal payment
+        function payWithPayPal(paymentCode) {
+            if (cart.length === 0) {
+                showNotification('Koszyk jest pusty', 'error');
+                return;
+            }
+            
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            // Redirect to PayPal with payment code
+            window.location.href = `https://www.paypal.com/ncp/payment/${paymentCode}?amount=${total}`;
+        }
+        
+        // Send order via email
+        function sendOrderEmail() {
+            if (cart.length === 0) {
+                showNotification('Koszyk jest pusty', 'error');
+                return;
+            }
+            
+            let emailBody = 'Zamówienie ze sklepu:\n\n';
             
             cart.forEach((item, index) => {
-                total += item.price * item.quantity;
-                
-                const cartItem = document.createElement('div');
-                cartItem.className = 'cart-item';
-                cartItem.innerHTML = `
-                    ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                    <div class="flex-1">
-                        <div class="font-bold">${item.name}</div>
-                        <div>${item.price} zł × ${item.quantity}</div>
-                        ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                    </div>
-                    <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-                `;
-                
-                cartItems.appendChild(cartItem);
+                emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}\n`;
             });
             
-            cartTotal.textContent = `${total.toFixed(2)} zł`;
-        }
-        
-        // Zapisz do localStorage
-        localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-    }
-
-    function addToCart(name, price, image = null, size = null) {
-        // Sprawdź czy produkt już jest w koszyku
-        const existingIndex = cart.findIndex(item => 
-            item.name === name && item.size === size
-        );
-        
-        if (existingIndex >= 0) {
-            cart[existingIndex].quantity++;
-        } else {
-            cart.push({
-                name,
-                price,
-                quantity: 1,
-                image,
-                size,
-                id: Date.now()
-            });
-        }
-        
-        updateCart();
-        showNotification('✅ Produkt dodany do koszyka');
-    }
-
-    function removeFromCart(index) {
-        cart.splice(index, 1);
-        updateCart();
-    }
-
-    function toggleCart() {
-        document.getElementById('cartPanel').classList.toggle('open');
-    }
-
-    // ===== STUDIO PROJEKTOWE =====
-    function initDesignStudio() {
-        const canvas = document.getElementById('designCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Ustawienia canvas
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Inicjalny render
-        updateDesign();
-    }
-
-    function initProductBase() {
-        const baseItems = document.querySelectorAll('.product-base-item');
-        baseItems.forEach(item => {
-            item.addEventListener('click', function() {
-                baseItems.forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-                currentDesign.baseProduct = this.getAttribute('data-base');
-                updateDesign();
-            });
-        });
-    }
-
-    function initDesignOptions() {
-        const designOptions = document.querySelectorAll('.design-option');
-        designOptions.forEach(option => {
-            option.addEventListener('click', function() {
-                designOptions.forEach(o => o.classList.remove('active'));
-                this.classList.add('active');
-                currentDesign.designArea = this.getAttribute('data-area');
-                updateDesign();
-            });
-        });
-    }
-
-    function updateDesign() {
-        const canvas = document.getElementById('designCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        // Aktualizuj stan projektu
-        currentDesign.text = document.getElementById('designText').value;
-        currentDesign.fontFamily = document.getElementById('fontFamily').value;
-        currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
-        currentDesign.color = document.getElementById('textColor').value;
-        
-        // Wyczyść canvas
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        // Narysuj tło - wirtualny produkt
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Narysuj obrazek jeśli istnieje
-        if (currentDesign.image) {
-            ctx.save();
-            ctx.translate(currentDesign.imageX, currentDesign.imageY);
-            ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
-            ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
-            ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
-            ctx.restore();
-        }
-        
-        // Narysuj tekst
-        if (currentDesign.text) {
-            ctx.save();
-            ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
-            ctx.fillStyle = currentDesign.color;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.translate(currentDesign.textX, currentDesign.textY);
-            ctx.rotate(currentDesign.textRotation * Math.PI / 180);
-            ctx.scale(currentDesign.textScale, currentDesign.textScale);
-            ctx.fillText(currentDesign.text, 0, 0);
-            ctx.restore();
-        }
-        
-        // Aktualizuj podgląd
-        const preview = document.querySelector('.design-preview');
-        if (currentDesign.text || currentDesign.image) {
-            preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
-            const img = document.createElement('img');
-            img.src = canvas.toDataURL();
-            img.style.maxWidth = '100%';
-            img.style.marginTop = '1rem';
-            img.style.border = '1px solid #ddd';
-            preview.appendChild(img);
-        }
-    }
-
-    function handleImageUpload(event) {
-        const file = document.getElementById('designImage').files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                currentDesign.image = new Image();
-                currentDesign.image.src = e.target.result;
-                currentDesign.image.onload = function() {
-                    currentDesign.activeElement = 'image';
-                    updateTransformControls();
-                    updateDesign();
-                };
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function updateElementPosition() {
-        if (currentDesign.activeElement === 'text') {
-            currentDesign.textX = parseInt(document.getElementById('posX').value);
-            currentDesign.textY = parseInt(document.getElementById('posY').value);
-        } else if (currentDesign.activeElement === 'image') {
-            currentDesign.imageX = parseInt(document.getElementById('posX').value);
-            currentDesign.imageY = parseInt(document.getElementById('posY').value);
-        }
-        updateDesign();
-    }
-
-    function updateElementScale() {
-        if (currentDesign.activeElement === 'text') {
-            currentDesign.textScale = parseFloat(document.getElementById('scale').value);
-        } else if (currentDesign.activeElement === 'image') {
-            currentDesign.imageScale = parseFloat(document.getElementById('scale').value);
-        }
-        updateDesign();
-    }
-
-    function updateElementRotation() {
-        if (currentDesign.activeElement === 'text') {
-            currentDesign.textRotation = parseInt(document.getElementById('rotation').value);
-        } else if (currentDesign.activeElement === 'image') {
-            currentDesign.imageRotation = parseInt(document.getElementById('rotation').value);
-        }
-        updateDesign();
-    }
-
-    function clearCanvas() {
-        const canvas = document.getElementById('designCanvas');
-        const ctx = canvas.getContext('2d');
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        currentDesign.text = '';
-        currentDesign.image = null;
-        document.getElementById('designText').value = '';
-        
-        document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
-        
-        showNotification('Canvas wyczyszczony');
-    }
-
-    function resetDesign() {
-        currentDesign.textX = 250;
-        currentDesign.textY = 200;
-        currentDesign.textScale = 1;
-        currentDesign.textRotation = 0;
-        currentDesign.imageX = 250;
-        currentDesign.imageY = 200;
-        currentDesign.imageScale = 1;
-        currentDesign.imageRotation = 0;
-        
-        updateTransformControls();
-        updateDesign();
-        showNotification('Transformacje zresetowane');
-    }
-
-    function updateTransformControls() {
-        if (currentDesign.activeElement === 'text') {
-            document.getElementById('posX').value = currentDesign.textX;
-            document.getElementById('posY').value = currentDesign.textY;
-            document.getElementById('scale').value = currentDesign.textScale;
-            document.getElementById('rotation').value = currentDesign.textRotation;
-        } else if (currentDesign.activeElement === 'image') {
-            document.getElementById('posX').value = currentDesign.imageX;
-            document.getElementById('posY').value = currentDesign.imageY;
-            document.getElementById('scale').value = currentDesign.imageScale;
-            document.getElementById('rotation').value = currentDesign.imageRotation;
-        }
-    }
-
-    function addToCartFromDesign() {
-        const productType = document.getElementById('productType');
-        const productSize = document.getElementById('productSize');
-        
-        const prices = {
-            'tshirt': 120,
-            'hoodie': 200,
-            'cap': 99
-        };
-        
-        const price = prices[productType.value] || 120;
-        const canvas = document.getElementById('designCanvas');
-        
-        addToCart(
-            `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
-            price,
-            canvas.toDataURL(),
-            productSize.value
-        );
-    }
-
-    function saveDesign() {
-        const canvas = document.getElementById('designCanvas');
-        const link = document.createElement('a');
-        link.download = 'adelbertus-design.png';
-        link.href = canvas.toDataURL();
-        link.click();
-        showNotification('✅ Projekt zapisany');
-    }
-
-    // ===== EMAIL =====
-    function sendDesignToEmail() {
-        const canvas = document.getElementById('designCanvas');
-        const imageData = canvas.toDataURL();
-        
-        const subject = 'Mój projekt z AdelbertusShop';
-        const body = `
-            Cześć! Oto mój projekt:\n
-            Tekst: ${currentDesign.text}\n
-            Rozmiar czcionki: ${currentDesign.fontSize}\n
-            Kolor: ${currentDesign.color}\n
-            Typ produktu: ${document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text}\n
-            Rozmiar: ${document.getElementById('productSize').value}\n
-            Obszar: ${currentDesign.designArea}\n\n
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
             
-            Obraz projektu (w załączniku):\n
-            Proszę o kontakt w sprawie realizacji zamówienia.
-        `;
+            window.open(`mailto:sklep@example.com?subject=Zamówienie ze sklepu&body=${encodeURIComponent(emailBody)}`);
+        }
         
-        window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-        
-        showNotification('📧 Otwieranie klienta pocztowego...');
-    }
-
-    function sendOrderEmail() {
-        let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-        
-        cart.forEach((item, index) => {
-            emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-            if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
-            emailBody += '\n';
-        });
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-        emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-        emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-        
-        window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
-    }
-
-    function sendOrderWhatsApp() {
-        let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-        
-        cart.forEach((item, index) => {
-            message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-            if (item.size) message += ` (Rozmiar: ${item.size})`;
-            message += '%0A';
-        });
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-        message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-        message += `Proszę o potwierdzenie zamówienia.`;
-        
-        window.open(`https://wa.me/48604296650?text=${message}`);
-    }
-
-    // ===== FORMULARZ ZAMÓWIENIA =====
-    function initOrderForm() {
-        const form = document.getElementById("orderForm");
-        const statusEl = document.getElementById("status");
-        const whatsappBtn = document.getElementById("whatsappBtn");
-        const productInput = document.getElementById("productInput");
-
-        if (!form) return;
-
-        // Aktualizuje link WhatsApp dynamicznie
-        productInput.addEventListener("input", () => {
-            const product = encodeURIComponent(productInput.value || "");
-            whatsappBtn.href = `https://wa.me/48604296650?text=Chcę%20zamówić:%20${product}`;
-        });
-
-        // Wysyłka maila
-        form.addEventListener("submit", async function(e){
-            e.preventDefault();
-            statusEl.textContent = "Wysyłam...";
-            statusEl.className = "";
-
-            const data = Object.fromEntries(new FormData(this));
-
-            try {
-                // Symulacja wysyłki - w rzeczywistości połączenie z backendem
-                await new Promise(resolve => setTimeout(resolve, 1500));
-                
-                statusEl.textContent = "✔ Zamówienie wysłane mailem!";
-                statusEl.className = "text-green-400";
-                this.reset();
-                whatsappBtn.href = `https://wa.me/48604296650?text=Chcę%20zamówić:%20`;
-            } catch(err){
-                statusEl.textContent = "✖ " + err.message;
-                statusEl.className = "text-red-500";
+        // Send order via WhatsApp
+        function sendOrderWhatsApp() {
+            if (cart.length === 0) {
+                showNotification('Koszyk jest pusty', 'error');
+                return;
             }
-        });
-    }
-
-    // ===== REKLAMY =====
-    function initAdTimers() {
-        // Timer dla baneru
-        startTimer('bannerTimer', 30);
-        
-        // Timer dla animacji
-        startTimer('animationTimer', 30);
-        
-        // Timer dla wideo
-        startTimer('videoTimer', 30);
-    }
-
-    function startTimer(elementId, seconds) {
-        const timerElement = document.getElementById(elementId);
-        if (!timerElement) return;
-        
-        let timeLeft = seconds;
-        
-        const timerInterval = setInterval(() => {
-            timeLeft--;
-            timerElement.textContent = `${timeLeft}s`;
             
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                timerElement.textContent = 'Koniec';
-                timerElement.style.backgroundColor = '#d4af37';
-                timerElement.style.color = 'black';
+            let message = 'Zamówienie ze sklepu:%0A%0A';
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}%0A`;
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+            message += `Proszę o potwierdzenie zamówienia.`;
+            
+            window.open(`https://wa.me/48500100200?text=${message}`);
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'success') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.padding = '12px 24px';
+            notification.style.borderRadius = '5px';
+            notification.style.zIndex = '1000';
+            notification.style.fontWeight = 'bold';
+            
+            if (type === 'success') {
+                notification.style.backgroundColor = '#28a745';
+                notification.style.color = 'white';
+            } else {
+                notification.style.backgroundColor = '#dc3545';
+                notification.style.color = 'white';
             }
-        }, 1000);
-    }
-
-    // ===== ZBIÓRKA - ROTACJA =====
-    function initCharityRotation() {
-        // Sprawdź, kiedy ostatnio zmieniano dane
-        const lastChange = localStorage.getItem('charityLastChange');
-        const currentIndex = localStorage.getItem('charityCurrentIndex') || 0;
-        const now = new Date().getTime();
-        const threeDays = 3 * 24 * 60 * 60 * 1000; // 3 dni w milisekundach
-        
-        let newIndex = parseInt(currentIndex);
-        
-        // Jeśli minęły 3 dni lub to pierwsza inicjalizacja, zmień dane
-        if (!lastChange || (now - lastChange) > threeDays) {
-            newIndex = (parseInt(currentIndex) + 1) % donorsData.length;
-            localStorage.setItem('charityLastChange', now);
-            localStorage.setItem('charityCurrentIndex', newIndex);
-        }
-        
-        // Aktualizuj dane na stronie
-        updateCharityContent(newIndex);
-    }
-
-    function updateCharityContent(index) {
-        const donorsList = document.getElementById('donorsList');
-        const childrenLetter = document.getElementById('childrenLetter');
-        
-        if (donorsList && donorsData[index]) {
-            donorsList.innerHTML = donorsData[index].donors.join('');
-        }
-        
-        if (childrenLetter && donorsData[index]) {
-            childrenLetter.innerHTML = donorsData[index].letter;
-        }
-    }
-
-    // ===== BLOG =====
-    function initBlog() {
-        // Wczytaj posty z localStorage
-        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-        
-        // Wyświetl posty
-        renderBlogPosts(blogPosts);
-        
-        // Inicjalizuj formularz
-        const blogForm = document.getElementById('newBlogPostForm');
-        if (blogForm) {
-            blogForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                addNewBlogPost();
-            });
-        }
-    }
-
-    function renderBlogPosts(posts) {
-        const container = document.getElementById('blogPostsContainer');
-        if (!container) return;
-        
-        container.innerHTML = '';
-        
-        if (posts.length === 0) {
-            // Dodaj przykładowe posty jeśli nie ma żadnych
-            const samplePosts = [
-                {
-                    title: "Sztuka jako forma ekspresji",
-                    excerpt: "Jak wyrażać siebie przez projektowanie ubrań i dlaczego warto...",
-                    content: "Pełna treść artykułu o sztuce jako formie ekspresji. Sztuka odgrywa kluczową rolę w naszym życiu, pozwala wyrażać emocje, opowiadać historie i komunikować się z innymi bez słów.",
-                    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    date: new Date().toISOString()
-                },
-                {
-                    title: "Trendy w streetwearze 2023",
-                    excerpt: "Odkryj najnowsze trendy w modzie ulicznej tego sezonu...",
-                    content: "Streetwear w 2023 roku ewoluuje w kierunku połączenia komfortu and style. Dominują oversize'owe fasony, earthy kolory oraz odważne nadruki.",
-                    image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
-                    date: new Date().toISOString()
-                }
-            ];
             
-            samplePosts.forEach((post, index) => {
-                const postElement = document.createElement('div');
-                postElement.className = 'blog-post';
-                postElement.innerHTML = `
-                    <img src="${post.image}" alt="${post.title}" class="blog-image">
-                    <div class="blog-content">
-                        <h3 class="text-xl font-bold mb-2">${post.title}</h3>
-                        <p class="text-sm text-gray-600">Opublikowano: ${new Date(post.date).toLocaleDateString('pl-PL')}</p>
-                        <div class="blog-excerpt">
-                            <p class="mt-3">${post.excerpt}</p>
-                        </div>
-                        <div class="blog-full" style="display: none;">
-                            <p class="mt-3">${post.content}</p>
-                        </div>
-                        <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
-                        <button class="nav-btn mt-2" onclick="shareArticle('${post.title}', '${post.image}')">
-                            <i class="fas fa-share"></i> Udostępnij
-                        </button>
-                    </div>
-                `;
-                
-                container.appendChild(postElement);
-            });
-            return;
-        }
-        
-        posts.forEach((post, index) => {
-            const postElement = document.createElement('div');
-            postElement.className = 'blog-post';
-            postElement.innerHTML = `
-                ${post.image ? `<img src="${post.image}" alt="${post.title}" class="blog-image">` : 
-                `<img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="${post.title}" class="blog-image">`}
-                <div class="blog-content">
-                    <h3 class="text-xl font-bold mb-2">${post.title}</h3>
-                    <p class="text-sm text-gray-600">Opublikowano: ${new Date(post.date).toLocaleDateString('pl-PL')}</p>
-                    <div class="blog-excerpt">
-                        <p class="mt-3">${post.excerpt}</p>
-                    </div>
-                    <div class="blog-full" style="display: none;">
-                        <p class="mt-3">${post.content}</p>
-                    </div>
-                    <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
-                    <button class="nav-btn mt-2" onclick="shareArticle('${post.title}', '${post.image || 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}')">
-                        <i class="fas fa-share"></i> Udostępnij
-                    </button>
-                </div>
-            `;
+            document.body.appendChild(notification);
             
-            container.appendChild(postElement);
-        });
-    }
-
-    function toggleReadMore(button) {
-        const post = button.closest('.blog-post');
-        const excerpt = post.querySelector('.blog-excerpt');
-        const full = post.querySelector('.blog-full');
-        
-        if (full.style.display === 'block') {
-            full.style.display = 'none';
-            excerpt.style.display = 'block';
-            button.textContent = 'Czytaj więcej';
-        } else {
-            full.style.display = 'block';
-            excerpt.style.display = 'none';
-            button.textContent = 'Czytaj mniej';
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
         }
-    }
-
-    function showBlogForm() {
-        document.getElementById('blogForm').style.display = 'block';
-        document.getElementById('blogForm').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function hideBlogForm() {
-        document.getElementById('blogForm').style.display = 'none';
-    }
-
-    function addNewBlogPost() {
-        const title = document.getElementById('blogTitle').value;
-        const excerpt = document.getElementById('blogExcerpt').value;
-        const content = document.getElementById('blogContent').value;
-        const image = document.getElementById('blogImage').value;
-        
-        const newPost = {
-            title,
-            excerpt,
-            content,
-            image,
-            date: new Date().toISOString()
-        };
-        
-        // Pobierz istniejące posty i dodaj nowy
-        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
-        blogPosts.unshift(newPost);
-        
-        // Zapisz z powrotem do localStorage
-        localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
-        
-        // Odśwież wyświetlanie
-        renderBlogPosts(blogPosts);
-        
-        // Wyczyść formularz i ukryj go
-        document.getElementById('newBlogPostForm').reset();
-        hideBlogForm();
-        
-        showNotification('Artykuł dodany pomyślnie!');
-    }
-
-    function shareArticle(title, image) {
-        const subject = `Polecam artykuł: ${title}`;
-        const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
-        
-        window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-    }
-
-    // ===== FORMULARZ KONTAKTOWY =====
-    function initContactForm() {
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const formData = new FormData(contactForm);
-                const name = contactForm.querySelector('input[type="text"]').value;
-                const email = contactForm.querySelector('input[type="email"]').value;
-                const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
-                const message = contactForm.querySelector('textarea').value;
-                
-                const mailto = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\n\nWiadomość:\n${message}`)}`;
-                window.open(mailto);
-                
-                showNotification('📧 Otwieranie klienta pocztowego...');
-                contactForm.reset();
-            });
-        }
-    }
-
-    // ===== POMOCNICZE =====
-    function showNotification(message) {
-        // Utwórz element powiadomienia
-        const notification = document.createElement('div');
-        notification.textContent = message;
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.left = '50%';
-        notification.style.transform = 'translateX(-50%)';
-        notification.style.backgroundColor = '#d4af37';
-        notification.style.color = 'black';
-        notification.style.padding = '12px 24px';
-        notification.style.borderRadius = '30px';
-        notification.style.zIndex = '1000';
-        notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-        notification.style.fontWeight = 'bold';
-        
-        document.body.appendChild(notification);
-        
-        // Usuń po 3 sekundach
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
-
-    // Globalne funkcje
-    window.addToCart = addToCart;
-    window.removeFromCart = removeFromCart;
-    window.toggleCart = toggleCart;
-    window.updateDesign = updateDesign;
-    window.clearCanvas = clearCanvas;
-    window.resetDesign = resetDesign;
-    window.addToCartFromDesign = addToCartFromDesign;
-    window.sendDesignToEmail = sendDesignToEmail;
-    window.saveDesign = saveDesign;
-    window.toggleReadMore = toggleReadMore;
-    window.showBlogForm = showBlogForm;
-    window.hideBlogForm = hideBlogForm;
-    window.shareArticle = shareArticle;
-    window.toggleMobileMenu = toggleMobileMenu;
-    window.sendOrderEmail = sendOrderEmail;
-    window.sendOrderWhatsApp = sendOrderWhatsApp;
-</script>
+    </script>
 </body>
-</html>      
+</html>
