@@ -4237,7 +4237,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.toggleMobileMenu = toggleMobileMenu;
     window.sendOrderEmail = sendOrderEmail;
     window.sendOrderWhatsApp = sendOrderWhatsApp;
-</script>
 <script>
 // ===== OBSŁUGA OPCJI PRODUKTÓW =====
 function initProductOptions() {
@@ -4269,18 +4268,23 @@ function initProductOptions() {
             const selectedColor = productCard.querySelector('.color-option.selected');
             const selectedSize = productCard.querySelector('.size-option.selected');
             
-            const color = selectedColor ? selectedColor.getAttribute('data-color') : 'Nie wybrano';
-            const size = selectedSize ? selectedSize.getAttribute('data-size') : 'Nie wybrano';
+            const color = selectedColor ? selectedColor.getAttribute('data-color') : null;
+            const size = selectedSize ? selectedSize.getAttribute('data-size') : null;
+            
+            // Stwórz pełną nazwę produktu z opcjami
+            let fullProductName = name;
+            if (color) fullProductName += ` (${color}`;
+            if (size) fullProductName += color ? `, ${size})` : ` (${size})`;
             
             // Dodaj do koszyka z opcjami
-            addToCart(name, price, image, size, color);
+            addToCart(fullProductName, price, image, size, color);
         }
     });
 }
 
 // Modyfikacja funkcji addToCart do obsługi opcji
 function addToCart(name, price, image = null, size = null, color = null) {
-    // Sprawdź czy produkt już jest w koszyku
+    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje)
     const existingIndex = cart.findIndex(item => 
         item.name === name && item.size === size && item.color === color
     );
@@ -4351,10 +4355,21 @@ function updateCart() {
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
-// Inicjalizacja po załadowaniu strony
+// Inicjalizacja po załadowaniu strony - DODAJ initProductOptions
 document.addEventListener('DOMContentLoaded', function() {
-    initProductOptions();
-    // ... reszta Twojej inicjalizacji
+    initNavigation();
+    initDesignStudio();
+    updateCart();
+    initProductOptions(); // DODANA LINIJKA
+    renderPayPalButton();
+    initContactForm();
+    initBlog();
+    initAddToCartButtons();
+    initProductBase();
+    initDesignOptions();
+    initOrderForm();
+    initAdTimers();
+    initCharityRotation();
 });
 </script>
 </body>
