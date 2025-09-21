@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -196,6 +195,63 @@
             font-weight: 700;
             font-size: 1.3rem;
             margin-bottom: 1rem;
+        }
+
+        /* NOWE STYLE DLA OPCJI PRODUKTÓW */
+        .product-options {
+            margin-bottom: 1rem;
+        }
+
+        .option-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .option-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: all 0.2s ease;
+        }
+
+        .color-option:hover, .color-option.selected {
+            border-color: var(--color-gold);
+            transform: scale(1.1);
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .size-option:hover, .size-option.selected {
+            border-color: var(--color-gold);
+            background-color: var(--color-gold);
+            color: white;
         }
         
         /* Studio projektowe */
@@ -909,6 +965,7 @@
     </style>
 </head>
 <body>
+    
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
@@ -1006,7 +1063,7 @@
                 </div>
             </div>
         </section>
-        <!-- Sklep - ZAKTUALIZOWANY -->
+         <!-- Sklep - ZAKTUALIZOWANY -->
 <section id="shop">
     <div class="section-title">
         <h2>Nasze Produkty</h2>
@@ -1023,6 +1080,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Rebel"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1034,6 +1117,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Vintage"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1045,6 +1154,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Abstract"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Abstract" data-price="120" data-image="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1056,6 +1191,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Geometry"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Geometry" data-price="120" data-image="https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1067,6 +1228,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Modern"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Modern" data-price="120" data-image="https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg">Dodaj to koszyka</button>
             </div>
         </div>
@@ -1078,6 +1265,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Premium"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Premium" data-price="120" data-image="https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1089,6 +1302,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Urban"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Urban" data-price="120" data-image="https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1100,6 +1339,32 @@
             <div class="product-info">
                 <div class="product-title">Koszulka "Art"</div>
                 <div class="product-price">120 zł</div>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Koszulka Art" data-price="120" data-image="https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1113,6 +1378,32 @@
                 <div class="product-title">Puzel</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Abstrakcyjny i intrygujący wzór, idealny dla miłośników kreatywnych projektów.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Puzel" data-price="120" data-image="https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1125,6 +1416,32 @@
                 <div class="product-title">Wybrany</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Design dla tych, którzy czują się wyjątkowo i nie boją się tego pokazać.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Wybrany" data-price="120" data-image="https://i.ibb.co/JFMF5VFz/file-00000000465c620a87ec4dbf4bd0ce30.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1137,6 +1454,32 @@
                 <div class="product-title">Step Outside</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Zachęta do wyjścia poza strefę komfortu i odkrywania nowych ścieżek.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Step Outside" data-price="120" data-image="https://i.ibb.co/NnG9gP30/file-0000000077a8624687fa35a1773c5ab3-2.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1149,6 +1492,32 @@
                 <div class="product-title">Break The Rules</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Dla buntowników, którzy nie lubią ograniczeń i sami piszą swoje zasady.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Break The Rules" data-price="120" data-image="https://i.ibb.co/mF8v7j0z/file-0000000054ec624686ad121279625eea.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1161,6 +1530,32 @@
                 <div class="product-title">Nie Mieszczę się</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Dosłownie i w przenośni. Dla osób, które są zbyt duże jak na ramy, które im narzuca świat.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Nie Mieszczę się" data-price="120" data-image="https://i.ibb.co/TDQchN28/file-000000000b9c620a918ad994200ec2d1-1.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1173,6 +1568,32 @@
                 <div class="product-title">Buntownik</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Klasyczny motyw dla niepokornych duchów, które kwestionują status quo.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Buntownik" data-price="120" data-image="https://i.ibb.co/4nVfMx7C/file-00000000aca062439c3a670e83612634-3.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1185,6 +1606,32 @@
                 <div class="product-title">Adelbertus</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Elegancki i tajemniczy design z nutą historycznej oryginalności.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Adelbertus" data-price="120" data-image="https://i.ibb.co/W4535SP6/file-0000000060286246be561a660f50e99e-2.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1197,6 +1644,32 @@
                 <div class="product-title">Live With</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Inspirujący napis zachęcający do pełnego i świadomego życia.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Live With" data-price="120" data-image="https://i.ibb.co/kVB4DdxF/file-000000007a18620aa7175173df81f11a-1.png">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1209,6 +1682,32 @@
                 <div class="product-title">You're Not</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Provokujące hasło dla tych, którzy są świadomi swojej wartości i wyjątkowości.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="You're Not" data-price="120" data-image="https://i.ibb.co/zW0QS2Pc/296536056-72317707-ads-media-915b495e-9c59-47a0-b6b8-7d954ecbd931.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1221,6 +1720,32 @@
                 <div class="product-title">Kolor Disco</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Tęczowe, energetyczne kolory ery disco przeniesione na koszulkę.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Kolor Disco" data-price="120" data-image="https://i.ibb.co/PvxhZvQt/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1233,6 +1758,32 @@
                 <div class="product-title">Uliczny Styl</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Prawdziwy, miejski vibe dla fanów autentycznego streetwearu.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Uliczny Styl" data-price="120" data-image="https://i.ibb.co/NdCVHtBQ/Messenger-creation-0236-E1-D6-46-AE-49-DA-BB00-8-B95-D27-D6-AAB.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1245,6 +1796,32 @@
                 <div class="product-title">Hip Hop Dance</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Poświęcona kulturze hip-hopu i wszystkim, którzy kochają jego rytm.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Hip Hop Dance" data-price="120" data-image="https://i.ibb.co/PGGsNg7Q/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1257,6 +1834,32 @@
                 <div class="product-title">Dj Kool</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Hołd dla pionierów muzyki, którzy napędzają każdą imprezę.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Dj Kool" data-price="120" data-image="https://i.ibb.co/5x9MHvt9/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1269,6 +1872,32 @@
                 <div class="product-title">Street Fashion</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Must-have dla każdego, kto podąża za modą wywodzącą się z ulic.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Street Fashion" data-price="120" data-image="https://i.ibb.co/gL5rMWbq/Messenger-creation-2-B5-A02-A5-C091-4917-A445-F5972-DAC4-EC3.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1281,6 +1910,32 @@
                 <div class="product-title">Moda Disco</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Lśniący i glamorowy styl, który przeniesie Cię w czasy świetności dyskotek.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Moda Disco" data-price="120" data-image="https://i.ibb.co/BJXsvPh/Messenger-creation-3-BB9-C15-D-C49-B-40-D8-A8-D9-D6-AE3-FA419-EE.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1293,6 +1948,32 @@
                 <div class="product-title">Pi (π)</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Dla matematycznych pasjonatów, miłośników nauki i nieskończoności.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Pi (π)" data-price="120" data-image="https://i.ibb.co/RkNZhJTS/Messenger-creation-D3-E63-CFC-1-E20-41-D9-8264-653-BF9318-DC6.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1305,6 +1986,32 @@
                 <div class="product-title">City at Night</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Nastrojowy design oddający magię rozświetlonego nocą miasta.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="City at Night" data-price="120" data-image="https://i.ibb.co/y3drK9v/Messenger-creation-4-F98-B179-12-CD-4-AA9-BB32-2-A0-FA290-F13-B.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1317,6 +2024,32 @@
                 <div class="product-title">Puppet King</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Symboliczny i nieco mroczny motyw kwestionujący prawdziwą władzę.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Puppet King" data-price="120" data-image="https://i.ibb.co/Myhf9jDw/Resizer-175015904589537.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1329,6 +2062,32 @@
                 <div class="product-title">King</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Prosty, ale mocny design dla tych, którzy rządzą swoim życiem.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="King" data-price="120" data-image="https://i.ibb.co/nJb6RwM/Resizer-175015896433527.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1341,6 +2100,32 @@
                 <div class="product-title">Child King</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Połączenie niewinności i władzy. Dla wewnętrznego dziecka, które wie, czego chce.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Child King" data-price="120" data-image="https://i.ibb.co/21hPS6j1/Resizer-175015897947529.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1353,6 +2138,32 @@
                 <div class="product-title">Królowa</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Elegancki i władczy design dla kobiet, które są królowymi własnego życia.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Królowa" data-price="120" data-image="https://i.ibb.co/Rpdpq6ck/Messenger-creation-F93-B9-D88-23-E0-4267-9-C9-B-6-D7554933-F08.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1365,6 +2176,32 @@
                 <div class="product-title">Widz</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Dla obserwatorów, tych którzy analizują świat z boku.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Widz" data-price="120" data-image="https://i.ibb.co/HLKK77xy/Messenger-creation-BB709-B3-C-0-C6-E-4-E38-91-B3-A0-B0-ADE828-E6.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1377,6 +2214,32 @@
                 <div class="product-title">Beautiful</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Delikatny i kobiecy design, który celebruje piękno.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Beautiful" data-price="120" data-image="https://i.ibb.co/mM8q22m/Messenger-creation-76-C2-FCF0-B34-A-4-B5-D-9161-5-F87-C438-C807.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1389,6 +2252,32 @@
                 <div class="product-title">Pretty</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Słodki i uroczy wzór, który doda outfitu delikatnego charakteru.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Pretty" data-price="120" data-image="https://i.ibb.co/Z6H87pMt/Messenger-creation-84-F5-BA86-6551-42-C5-86-F8-2-C5207-F7-F459.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1401,6 +2290,32 @@
                 <div class="product-title">Geometria</div>
                 <div class="product-price">120 zł</div>
                 <p class="product-description">Nowoczesny i abstrakcyjny design z precyzyjnymi, geometrycznymi kształtami.</p>
+                
+                <!-- OPCJE PRODUKTU -->
+                <div class="product-options">
+                    <div class="option-group">
+                        <div class="option-title">Kolor:</div>
+                        <div class="color-options">
+                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="option-group">
+                        <div class="option-title">Rozmiar:</div>
+                        <div class="size-options">
+                            <div class="size-option selected" data-size="S">S</div>
+                            <div class="size-option" data-size="M">M</div>
+                            <div class="size-option" data-size="L">L</div>
+                            <div class="size-option" data-size="XL">XL</div>
+                            <div class="size-option" data-size="XXL">XXL</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- KONIEC OPCJI PRODUKTU -->
+                
                 <button class="nav-btn add-to-cart-btn" data-name="Geometria" data-price="120" data-image="https://i.ibb.co/HfSnVW3K/Messenger-creation-0-E6-C207-C-C15-D-45-C7-AB33-E3-FC34-BBEF39.jpg">Dodaj do koszyka</button>
             </div>
         </div>
@@ -1416,6 +2331,32 @@
         <div class="product-info">
             <div class="product-title">Bluza "Urban"</div>
             <div class="product-price">200 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJI PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
         </div>
     </div>
@@ -1427,52 +2368,183 @@
         <div class="product-info">
             <div class="product-title">Bluza "Street"</div>
             <div class="product-price">200 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Bluza Street" data-price="200" data-image="https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg">Dodaj do koszyka</button>
         </div>
     </div>
+    
     <div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Bluza Premium" class="product-image">
+        <div class="product-image-container">
+            <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Bluza Premium" class="product-image">
+        </div>
+        <div class="product-info">
+            <div class="product-title">Bluza "Premium"</div>
+            <div class="product-price">220 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
+            <button class="nav-btn add-to-cart-btn" data-name="Bluza Premium" data-price="220" data-image="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg">Dodaj do koszyka</button>
+        </div>
     </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Premium"</div>
-        <div class="product-price">220 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Premium" data-price="220" data-image="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg">Dodaj do koszyka</button>
-    </div>
-</div>
 
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg" alt="Bluza Comfort" class="product-image">
+    <div class="product-card fade-in">
+        <div class="product-image-container">
+            <img src="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg" alt="Bluza Comfort" class="product-image">
+        </div>
+        <div class="product-info">
+            <div class="product-title">Bluza "Comfort"</div>
+            <div class="product-price">200 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
+            <button class="nav-btn add-to-cart-btn" data-name="Bluza Comfort" data-price="200" data-image="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg">Dodaj do koszyka</button>
+        </div>
     </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Comfort"</div>
-        <div class="product-price">200 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Comfort" data-price="200" data-image="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg">Dodaj do koszyka</button>
-    </div>
-</div>
 
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png" alt="Bluza Style" class="product-image">
+    <div class="product-card fade-in">
+        <div class="product-image-container">
+            <img src="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png" alt="Bluza Style" class="product-image">
+        </div>
+        <div class="product-info">
+            <div class="product-title">Bluza "Style"</div>
+            <div class="product-price">200 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
+            <button class="nav-btn add-to-cart-btn" data-name="Bluza Style" data-price="200" data-image="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png">Dodaj do koszyka</button>
+        </div>
     </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Style"</div>
-        <div class="product-price">200 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Style" data-price="200" data-image="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png">Dodaj do koszyka</button>
-    </div>
-</div>
 
-<div class="product-card fade-in">
-    <div class="product-image-container">
-        <img src="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg" alt="Bluza Fashion" class="product-image">
+    <div class="product-card fade-in">
+        <div class="product-image-container">
+            <img src="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg" alt="Bluza Fashion" class="product-image">
+        </div>
+        <div class="product-info">
+            <div class="product-title">Bluza "Fashion"</div>
+            <div class="product-price">200 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
+            <button class="nav-btn add-to-cart-btn" data-name="Bluza Fashion" data-price="200" data-image="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg">Dodaj do koszyka</button>
+        </div>
     </div>
-    <div class="product-info">
-        <div class="product-title">Bluza "Fashion"</div>
-        <div class="product-price">200 zł</div>
-        <button class="nav-btn add-to-cart-btn" data-name="Bluza Fashion" data-price="200" data-image="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg">Dodaj do koszyka</button>
-    </div>
-</div>
 </div>
 
 <h3 class="text-2xl font-bold my-6 text-center gold-text">Czapki</h3>
@@ -1485,17 +2557,68 @@
         <div class="product-info">
             <div class="product-title">Czapka "Classic"</div>
             <div class="product-price">99 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Czapka Classic" data-price="99" data-image="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png">Dodaj do koszyka</button>
         </div>
     </div>
-    
-    <div class="product-card fade-in">
+        <div class="product-card fade-in">
         <div class="product-image-container">
             <img src="https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg" alt="Czapka Sport" class="product-image">
         </div>
         <div class="product-info">
             <div class="product-title">Czapka "Sport"</div>
             <div class="product-price">99 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Czapka Sport" data-price="99" data-image="https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg">Dodaj do koszyka</button>
         </div>
     </div>
@@ -1507,6 +2630,32 @@
         <div class="product-info">
             <div class="product-title">Czapka "Street"</div>
             <div class="product-price">99 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Czapka Street" data-price="99" data-image="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg">Dodaj do koszyka</button>
         </div>
     </div>
@@ -1518,11 +2667,38 @@
         <div class="product-info">
             <div class="product-title">Czapka "Premium"</div>
             <div class="product-price">99 zł</div>
+            
+            <!-- OPCJE PRODUKTU -->
+            <div class="product-options">
+                <div class="option-group">
+                    <div class="option-title">Kolor:</div>
+                    <div class="color-options">
+                        <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                        <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                        <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                        <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                    </div>
+                </div>
+                
+                <div class="option-group">
+                    <div class="option-title">Rozmiar:</div>
+                    <div class="size-options">
+                        <div class="size-option selected" data-size="S">S</div>
+                        <div class="size-option" data-size="M">M</div>
+                        <div class="size-option" data-size="L">L</div>
+                        <div class="size-option" data-size="XL">XL</div>
+                        <div class="size-option" data-size="XXL">XXL</div>
+                    </div>
+                </div>
+            </div>
+            <!-- KONIEC OPCJE PRODUKTU -->
+            
             <button class="nav-btn add-to-cart-btn" data-name="Czapka Premium" data-price="99" data-image="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg">Dodaj do koszyka</button>
         </div>
     </div>
 </div>
-
+</section>
+        
 <!-- Sekcja zamówienia -->
 <div class="section-title">
     <h2>Złóż zamówienie</h2>
@@ -2310,7 +3486,8 @@ document.addEventListener("DOMContentLoaded", () => {
         initOrderForm();
         initAdTimers();
         initCharityRotation();
-    });
+    initProductOptions(); 
+});    
 
     // ===== NAWIGACJA =====
     function initNavigation() {
@@ -3058,6 +4235,125 @@ document.addEventListener("DOMContentLoaded", () => {
     window.toggleMobileMenu = toggleMobileMenu;
     window.sendOrderEmail = sendOrderEmail;
     window.sendOrderWhatsApp = sendOrderWhatsApp;
+</script>
+<script>
+// ===== OBSŁUGA OPCJI PRODUKTÓW =====
+function initProductOptions() {
+    // Inicjalizacja wyboru kolorów i rozmiarów
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('color-option')) {
+            const colorOptions = e.target.closest('.color-options').querySelectorAll('.color-option');
+            colorOptions.forEach(option => option.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+        
+        if (e.target.classList.contains('size-option')) {
+            const sizeOptions = e.target.closest('.size-options').querySelectorAll('.size-option');
+            sizeOptions.forEach(option => option.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+    });
+    
+    // Modyfikacja funkcji dodawania do koszyka
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            e.preventDefault();
+            const productCard = e.target.closest('.product-card');
+            const name = e.target.getAttribute('data-name');
+            const price = parseFloat(e.target.getAttribute('data-price'));
+            const image = e.target.getAttribute('data-image');
+            
+            // Pobierz wybrane opcje
+            const selectedColor = productCard.querySelector('.color-option.selected');
+            const selectedSize = productCard.querySelector('.size-option.selected');
+            
+            const color = selectedColor ? selectedColor.getAttribute('data-color') : 'Nie wybrano';
+            const size = selectedSize ? selectedSize.getAttribute('data-size') : 'Nie wybrano';
+            
+            // Dodaj do koszyka z opcjami
+            addToCart(name, price, image, size, color);
+        }
+    });
+}
+
+// Modyfikacja funkcji addToCart do obsługi opcji
+function addToCart(name, price, image = null, size = null, color = null) {
+    // Sprawdź czy produkt już jest w koszyku
+    const existingIndex = cart.findIndex(item => 
+        item.name === name && item.size === size && item.color === color
+    );
+    
+    if (existingIndex >= 0) {
+        cart[existingIndex].quantity++;
+    } else {
+        cart.push({
+            name,
+            price,
+            quantity: 1,
+            image,
+            size,
+            color,
+            id: Date.now()
+        });
+    }
+    
+    updateCart();
+    showNotification('✅ Produkt dodany do koszyka');
+}
+
+// Modyfikacja funkcji updateCart do wyświetlania opcji
+function updateCart() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    // Aktualizuj licznik
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Aktualizuj zawartość koszyka
+    cartItems.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+        cartTotal.textContent = '0 zł';
+        document.getElementById('paypal-container').innerHTML = '';
+    } else {
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                <div class="flex-1">
+                    <div class="font-bold">${item.name}</div>
+                    <div>${item.price} zł × ${item.quantity}</div>
+                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                </div>
+                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+            `;
+            
+            cartItems.appendChild(cartItem);
+        });
+        
+        cartTotal.textContent = `${total.toFixed(2)} zł`;
+        
+        // Renderuj przycisk PayPal
+        renderPayPalButton();
+    }
+    
+    // Zapisz do localStorage
+    localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+}
+
+// Inicjalizacja po załadowaniu strony
+document.addEventListener('DOMContentLoaded', function() {
+    initProductOptions();
+    // ... reszta Twojej inicjalizacji
+});
 </script>
 </body>
 </html>
