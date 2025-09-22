@@ -2,33 +2,12 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Test Hoplix API</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Adelbertus</title>
+  <meta name="description" content="To jest strona testowa sklepu Adelbertus – sprawdzamy jak działa widoczność w Google.">
 </head>
 <body>
-  <h1>Test Hoplix API</h1>
-  <button onclick="sendRequest()">Wyślij zapytanie</button>
-  <pre id="output"></pre>
-
-  <script>
-    async function sendRequest() {
-      try {
-        const response = await fetch('/api/hoplixHandler', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            test: true,
-            message: "Hello from test.html"
-          })
-        });
-
-        const data = await response.json();
-        document.getElementById('output').textContent = JSON.stringify(data, null, 2);
-      } catch (err) {
-        document.getElementById('output').textContent = "Błąd: " + err;
-      }
-    }
-  </script>
+  <h1>Strona testowa Adelbertus</h1>
+  <p>Witaj! To jest testowa podstrona sklepu Adelbertus. Jeśli to widzisz, wszystko działa poprawnie 🚀</p>
 </body>
 </html>
