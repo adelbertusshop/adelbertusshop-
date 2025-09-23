@@ -962,10 +962,22 @@
             max-width: 600px;
             margin: 2rem auto;
         }
-    </style>
+    </style>  
 </head>
 <body>
-    
+    <!-- Sekcja Hoplix -->
+<div id="hoplix-container"></div>
+
+<script type="module">
+  import { initHoplix } from './hoplix.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+      initHoplix({
+          apiKey: 'TU_WKLEJ_SWÓJ_HOPLIX_KEY', // Twój klucz z Vercel
+          containerId: 'hoplix-container'
+      });
+  });
+</script>    
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
