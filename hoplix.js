@@ -4,31 +4,26 @@ export async function initHoplix({ apiKey, containerId }) {
     if (!container) return console.error('Nie znaleziono kontenera');
 
     try {
+        // To samo co w testowym fetch
         const res = await fetch('https://api.hoplix.com/products', {
             headers: {
                 'Authorization': `Bearer ${apiKey}`
             }
         });
 
-        if (!res.ok) throw new Error('Błąd połączenia z Hoplix API');
-
         const products = await res.json();
+        console.log('Produkty Hoplix:', products); // tak jak w testowym
 
-        if (products.length === 0) {
-            container.innerHTML = '<p>Brak produktów do wyświetlenia</p>';
-            return;
-        }
-
-        // render produktów w HTML
+        // szybki podgląd na stronie
         container.innerHTML = products.map(p => `
-            <div style="border:1px solid #ccc;padding:1rem;margin:1rem 0;">
-                <h3>${p.name}</h3>
+            <div>
+                <h4>${p.name}</h4>
                 <p>${p.price} PLN</p>
             </div>
         `).join('');
 
     } catch (err) {
-        container.innerHTML = `<p>Nie udało się pobrać produktów z Hoplix</p>`;
-        console.error(err);
+        console.error('Błąd Hoplix:', err);
+        container.innerHTML = '<p>Nie udało się pobrać produktów z Hoplix</p>';
     }
 }
