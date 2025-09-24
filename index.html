@@ -965,37 +965,7 @@
 </style>  
 </head>
 <body>
- <!-- Sekcja Hoplix -->
-<div id="hoplix-container"></div>
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('hoplix-container');
-
-    fetch('https://api.hoplix.com/products', {
-        headers: { 
-            'Authorization': 'Bearer d1d96cecde75ed33a6a4fa3f7e00fb1e' 
-        }
-    })
-    .then(res => res.json())
-    .then(products => {
-        // podgląd produktów w konsoli
-        console.log('Produkty Hoplix:', products);
-
-        // wstawienie na stronę
-        container.innerHTML = products.map(p => `
-            <div style="border:1px solid #ccc; padding:10px; margin:10px;">
-                <h4>${p.name}</h4>
-                <p>${p.price} PLN</p>
-            </div>
-        `).join('');
-    })
-    .catch(err => {
-        console.error('Błąd pobierania produktów:', err);
-        container.innerHTML = '<p>Nie udało się pobrać produktów z Hoplix</p>';
-    });
-});
-</script>
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
