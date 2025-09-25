@@ -965,6 +965,19 @@
 </style>  
 </head>
 <body>
+<!-- Sekcja Prodigi -->
+<div id="prodigi-container"></div>
+
+<script type="module">
+  import { initProdigi } from './prodigi.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+      initProdigi({
+          apiKey: 'TU_WKLEJ_SWÓJ_PRODIGI_KEY', // Twój klucz Prodigi
+          containerId: 'prodigi-container'
+      });
+  });
+</script>
 
     <!-- Nagłówek -->
     <header>
