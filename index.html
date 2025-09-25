@@ -3405,7 +3405,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </footer>
 
 <script>
-    // ===== GLOBALNE ZMIENNE =====
+ // ===== GLOBALNE ZMIENNE =====
     let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
     let currentDesign = {
         text: '',
@@ -3414,6 +3414,8 @@ document.addEventListener("DOMContentLoaded", () => {
         color: '#000000',
         productType: 'tshirt',
         productSize: 'M',
+        // DODANA ZMIENNA DLA KOLORU PRODUKTU
+        productColor: '#ffffff', // Domyślny kolor produktu (np. biała koszulka)
         image: null,
         imageX: 250,
         imageY: 200,
@@ -3485,8 +3487,8 @@ document.addEventListener("DOMContentLoaded", () => {
         initOrderForm();
         initAdTimers();
         initCharityRotation();
-    initProductOptions(); 
-});    
+        initProductOptions(); // TA FUNKCJA ZOSTAŁA DODANA
+    });    
 
     // ===== NAWIGACJA =====
     function initNavigation() {
@@ -3579,6 +3581,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="font-bold">${item.name}</div>
                         <div>${item.price} zł × ${item.quantity}</div>
                         ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                        ${item.productColor ? `<div class="text-sm" style="color:${item.productColor}">Kolor produktu: <span style="background-color: ${item.productColor}; border: 1px solid #ccc; padding: 0 4px; display: inline-block;">&nbsp;</span></div>` : ''}
                     </div>
                     <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
                 `;
@@ -3596,10 +3599,10 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
     }
 
-    function addToCart(name, price, image = null, size = null) {
+    function addToCart(name, price, image = null, size = null, productColor = null) {
         // Sprawdź czy produkt już jest w koszyku
         const existingIndex = cart.findIndex(item => 
-            item.name === name && item.size === size
+            item.name === name && item.size === size && item.productColor === productColor
         );
         
         if (existingIndex >= 0) {
@@ -3611,6 +3614,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 quantity: 1,
                 image,
                 size,
+                productColor, // DODANE: Zapis koloru produktu
                 id: Date.now()
             });
         }
@@ -3639,6 +3643,24 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Inicjalny render
         updateDesign();
+
+        // **NAPRAWIONA/DODANA CZĘŚĆ: NASŁUCHIWACZE DLA WŁAŚCIWOŚCI TEKSTU I KOLORU TEKSTU**
+        document.getElementById('designText').addEventListener('input', updateDesign);
+        document.getElementById('fontFamily').addEventListener('change', updateDesign);
+        document.getElementById('fontSize').addEventListener('input', updateDesign);
+        document.getElementById('textColor').addEventListener('input', updateDesign); // NASŁUCHIWANIE NA ZMIANĘ KOLORU TEKSTU
+
+        // Obsługa obrazu
+        const designImageEl = document.getElementById('designImage');
+        if (designImageEl) {
+             designImageEl.addEventListener('change', handleImageUpload);
+        }
+        
+        // Obsługa transformacji - dodanie nasłuchiwaczy
+        document.getElementById('posX').addEventListener('input', updateElementPosition);
+        document.getElementById('posY').addEventListener('input', updateElementPosition);
+        document.getElementById('scale').addEventListener('input', updateElementScale);
+        document.getElementById('rotation').addEventListener('input', updateElementRotation);
     }
 
     function initProductBase() {
@@ -3665,6 +3687,41 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // NOWA FUNKCJA DO OBSŁUGI ZMIANY TYPU, ROZMIARU I KOLORU PRODUKTU
+    function initProductOptions() {
+        // Obsługa zmiany typu produktu (np. T-shirt, Bluza)
+        const productTypeEl = document.getElementById('productType');
+        if (productTypeEl) {
+            productTypeEl.addEventListener('change', function() {
+                currentDesign.productType = this.value;
+                updateDesign();
+            });
+            currentDesign.productType = productTypeEl.value;
+        }
+
+        // Obsługa zmiany rozmiaru produktu
+        const productSizeEl = document.getElementById('productSize');
+        if (productSizeEl) {
+            productSizeEl.addEventListener('change', function() {
+                currentDesign.productSize = this.value; // Rozmiar wpływa na koszyk, nie na podgląd canvas
+            });
+            currentDesign.productSize = productSizeEl.value;
+        }
+        
+        // Obsługa zmiany KOLORU PRODUKTU (np. koszulki)
+        const productColorEl = document.getElementById('productColor');
+        if (productColorEl) {
+            // Używamy 'input' dla ciągłej aktualizacji koloru
+            productColorEl.addEventListener('input', function() { 
+                currentDesign.productColor = this.value;
+                updateDesign(); // Rysujemy na nowo, aby zmienić kolor tła (produktu)
+            });
+            currentDesign.productColor = productColorEl.value;
+        }
+    }
+    // KONIEC NOWEJ FUNKCJI
+
+    // **POPRAWIONA FUNKCJA: OBSŁUGA KOLORU PRODUKTU W TLE CANVAS**
     function updateDesign() {
         const canvas = document.getElementById('designCanvas');
         const ctx = canvas.getContext('2d');
@@ -3675,11 +3732,17 @@ document.addEventListener("DOMContentLoaded", () => {
         currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
         currentDesign.color = document.getElementById('textColor').value;
         
+        // Zaktualizuj stan koloru produktu z elementu HTML
+        const productColorEl = document.getElementById('productColor');
+        if (productColorEl) {
+             currentDesign.productColor = productColorEl.value;
+        }
+
         // Wyczyść canvas
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
-        // Narysuj tło - wirtualny produkt
-        ctx.fillStyle = '#ffffff';
+        // Narysuj tło - wirtualny produkt, używając wybranego KOLORU PRODUKTU
+        ctx.fillStyle = currentDesign.productColor || '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         // Narysuj obrazek jeśli istnieje
@@ -3696,7 +3759,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentDesign.text) {
             ctx.save();
             ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
-            ctx.fillStyle = currentDesign.color;
+            ctx.fillStyle = currentDesign.color; // Użycie koloru TEKSTU
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.translate(currentDesign.textX, currentDesign.textY);
@@ -3716,6 +3779,8 @@ document.addEventListener("DOMContentLoaded", () => {
             img.style.marginTop = '1rem';
             img.style.border = '1px solid #ddd';
             preview.appendChild(img);
+        } else {
+             preview.innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
         }
     }
 
@@ -3769,7 +3834,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const canvas = document.getElementById('designCanvas');
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#ffffff';
+        ctx.fillStyle = currentDesign.productColor || '#ffffff';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
         currentDesign.text = '';
@@ -3813,6 +3878,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function addToCartFromDesign() {
         const productType = document.getElementById('productType');
         const productSize = document.getElementById('productSize');
+        const productColor = document.getElementById('productColor');
         
         const prices = {
             'tshirt': 120,
@@ -3827,7 +3893,8 @@ document.addEventListener("DOMContentLoaded", () => {
             `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
             price,
             canvas.toDataURL(),
-            productSize.value
+            productSize.value,
+            productColor.value // DODANY: Kolor produktu
         );
     }
 
@@ -3862,9 +3929,10 @@ document.addEventListener("DOMContentLoaded", () => {
             Cześć! Oto mój projekt:\n
             Tekst: ${currentDesign.text}\n
             Rozmiar czcionki: ${currentDesign.fontSize}\n
-            Kolor: ${currentDesign.color}\n
+            Kolor tekstu: ${currentDesign.color}\n
             Typ produktu: ${document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text}\n
-            Rozmiar: ${document.getElementById('productSize').value}\n
+            Rozmiar produktu: ${document.getElementById('productSize').value}\n
+            Kolor produktu: ${document.getElementById('productColor').value}\n
             Obszar: ${currentDesign.designArea}\n\n
             
             Obraz projektu (w załączniku):\n
@@ -3882,6 +3950,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cart.forEach((item, index) => {
             emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
             if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+            if (item.productColor) emailBody += ` (Kolor produktu: ${item.productColor})`;
             emailBody += '\n';
         });
         
@@ -3899,6 +3968,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cart.forEach((item, index) => {
             message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
             if (item.size) message += ` (Rozmiar: ${item.size})`;
+             if (item.productColor) message += ` (Kolor produktu: ${item.productColor})`;
             message += '%0A';
         });
         
@@ -4180,11 +4250,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 const formData = new FormData(contactForm);
                 const name = contactForm.querySelector('input[type="text"]').value;
                 const email = contactForm.querySelector('input[type="email"]').value;
-                const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
-                const message = contactForm.querySelector('textarea').value;
+                const subject = contactForm.querySelector('input[type="text"]').value; 
+
+                // Wysłanie maila (tutaj symulacja)
+                const mailtoLink = `mailto:mielniczukgrzegosz74@gmail.com?subject=Wiadomość od: ${encodeURIComponent(name)} (${encodeURIComponent(email)}) - ${encodeURIComponent(subject)}&body=${encodeURIComponent(formData.get('message'))}`;
                 
-                const mailto = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\n\nWiadomość:\n${message}`)}`;
-                window.open(mailto);
+                window.open(mailtoLink);
                 
                 showNotification('📧 Otwieranie klienta pocztowego...');
                 contactForm.reset();
@@ -4192,31 +4263,19 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // ===== POMOCNICZE =====
+    // ===== POWIADOMIENIA =====
     function showNotification(message) {
-        // Utwórz element powiadomienia
-        const notification = document.createElement('div');
+        const notification = document.getElementById('notification');
         notification.textContent = message;
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.left = '50%';
-        notification.style.transform = 'translateX(-50%)';
-        notification.style.backgroundColor = '#d4af37';
-        notification.style.color = 'black';
-        notification.style.padding = '12px 24px';
-        notification.style.borderRadius = '30px';
-        notification.style.zIndex = '1000';
-        notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-        notification.style.fontWeight = 'bold';
-        
-        document.body.appendChild(notification);
-        
-        // Usuń po 3 sekundach
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
+        notification.classList.add('show');
 
+        // Automatyczne ukrycie po 3 sekundach
+        setTimeout(() => {
+            notification.classList.remove('show');
+        }, 3000);
+    } 
+    </script>
+<script>
     // Globalne funkcje
     window.addToCart = addToCart;
     window.removeFromCart = removeFromCart;
@@ -4234,15 +4293,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.toggleMobileMenu = toggleMobileMenu;
     window.sendOrderEmail = sendOrderEmail;
     window.sendOrderWhatsApp = sendOrderWhatsApp;
-</script>
-<script>
 
-// ===== ZASTĄP FUNKCJĘ addToCart =====
-// Znajdź starą funkcję addToCart (około linia 2905) i ZASTĄP ją tą:
-function addToCart(name, price, image = null, size = null, color = null) {
-    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje)
+
+// ===== POPRAWIONA FUNKCJA addToCart (Używa 'productColor') =====
+function addToCart(name, price, image = null, size = null, productColor = null) {
+    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje: rozmiar i kolor PRODUKTU)
     const existingIndex = cart.findIndex(item => 
-        item.name === name && item.size === size && item.color === color
+        item.name === name && item.size === size && item.productColor === productColor // Używamy 'productColor'
     );
     
     if (existingIndex >= 0) {
@@ -4254,7 +4311,7 @@ function addToCart(name, price, image = null, size = null, color = null) {
             quantity: 1,
             image,
             size,
-            color,
+            productColor, // Zapisujemy jako 'productColor'
             id: Date.now()
         });
     }
@@ -4263,8 +4320,7 @@ function addToCart(name, price, image = null, size = null, color = null) {
     showNotification('✅ Produkt dodany do koszyka');
 }
 
-// ===== ZASTĄP FUNKCJĘ updateCart =====
-// Znajdź starą funkcję updateCart (około linia 2918) i ZASTĄP ją tą:
+// ===== POPRAWIONA FUNKCJA updateCart (Używa 'productColor') =====
 function updateCart() {
     const cartCount = document.getElementById('cartCount');
     const cartItems = document.getElementById('cartItems');
@@ -4288,13 +4344,19 @@ function updateCart() {
             
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
+            
+            // Poprawiony format wyświetlania koloru w koszyku
+            const colorDisplay = item.productColor 
+                ? `<div class="text-sm">Kolor produktu: <span style="background-color: ${item.productColor}; border: 1px solid #ccc; padding: 0 4px; display: inline-block; width: 10px; height: 10px; border-radius: 50%;"></span> ${item.productColor}</div>` 
+                : '';
+
             cartItem.innerHTML = `
                 ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
                 <div class="flex-1">
                     <div class="font-bold">${item.name}</div>
                     <div>${item.price} zł × ${item.quantity}</div>
                     ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                    ${colorDisplay} 
                 </div>
                 <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
             `;
@@ -4312,17 +4374,16 @@ function updateCart() {
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
-// ===== ZMIEŃ INICJALIZACJĘ =====
-// W funkcji DOMContentLoaded (około linia 2869) ZMIEŃ:
+// ===== ZMIENIONA INICJALIZACJA DOMContentLoaded =====
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initDesignStudio();
     updateCart();
-    initProductOptions(); // TYLKO TA FUNKCJA OBSŁUGUJE PRZYCISKI
+    initProductOptions(); // Obsługa kolorów, rozmiarów, etc.
     renderPayPalButton();
     initContactForm();
     initBlog();
-    // USUŃ: initAddToCartButtons() - bo powoduje konflikt
+    // initAddToCartButtons() - USUNIĘTE (Jak sam zauważyłeś, używamy tu dedykowanego przycisku ze studio)
     initProductBase();
     initDesignOptions();
     initOrderForm();
@@ -4332,4 +4393,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-      
+    
