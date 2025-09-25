@@ -3427,7 +3427,23 @@ document.addEventListener("DOMContentLoaded", () => {
         baseProduct: 'tshirt',
         designArea: 'front'
     };
-
+    // ===== OBSŁUGA OPCJI PRODUKTÓW =====
+function initProductOptions() {
+    document.addEventListener('click', function(e) {
+        // Wybór koloru
+        if (e.target.classList.contains('color-option')) {
+            const options = e.target.closest('.color-options');
+            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+        // Wybór rozmiaru
+        if (e.target.classList.contains('size-option')) {
+            const options = e.target.closest('.size-options');
+            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+    });
+}
     // Dane do rotacji dla zbiórki
     const donorsData = [
         {
@@ -4318,6 +4334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initDesignStudio();
     updateCart();
+    initProductOptions(); // DODAJ TĘ LINIJKĘ
     initProductOptions(); // TYLKO TA FUNKCJA OBSŁUGUJE PRZYCISKI
     renderPayPalButton();
     initContactForm();
