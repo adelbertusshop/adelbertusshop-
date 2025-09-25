@@ -965,29 +965,17 @@
 </style>  
 </head>
 <body>
+<!-- Sekcja produktów Prodigi -->
 <div id="prodigi-container"></div>
 
 <script type="module">
-import { fetchProdigiProducts } from './prodigi.js';
+    import { renderProdigiProducts } from './prodigi.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const container = document.getElementById('prodigi-container');
-    const products = await fetchProdigiProducts();
-
-    if (!products.length) {
-        container.innerHTML = '<p>Nie udało się pobrać produktów.</p>';
-        return;
-    }
-
-    container.innerHTML = products.map(p => `
-        <div class="product">
-            <h3>${p.name}</h3>
-            <img src="${p.images[0]}" alt="${p.name}" />
-            <p>Cena: ${p.price.amount} ${p.price.currency}</p>
-        </div>
-    `).join('');
-});
+    document.addEventListener('DOMContentLoaded', () => {
+        renderProdigiProducts('prodigi-container');
+    });
 </script>
+    
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
