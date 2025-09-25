@@ -3405,7 +3405,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </footer>
 
 <script>
-<script>
     // ===== GLOBALNE ZMIENNE =====
     let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
     let currentDesign = {
@@ -3477,82 +3476,101 @@ document.addEventListener("DOMContentLoaded", () => {
         initNavigation();
         initDesignStudio();
         updateCart();
-        initProductOptions(); // DODANA FUNKCJA
         renderPayPalButton();
         initContactForm();
         initBlog();
+        initAddToCartButtons();
         initProductBase();
         initDesignOptions();
         initOrderForm();
         initAdTimers();
         initCharityRotation();
-    });
+    initProductOptions(); 
+});    
 
-    // ===== INICJALIZACJA OPCJI PRODUKTÓW =====
-    function initProductOptions() {
+    // ===== NAWIGACJA =====
+    function initNavigation() {
+        const navButtons = document.querySelectorAll('.nav-btn');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.hasAttribute('data-section')) {
+                    e.preventDefault();
+                    
+                    // Usuń aktywną klasę ze wszystkich przycisków
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Dodaj aktywną klasę do klikniętego przycisku
+                    this.classList.add('active');
+                    
+                    // Pokaż odpowiednią sekcję
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                }
+            });
+        });
+        
+        // Obsługa ikony koszyka
+        document.getElementById('cartIcon').addEventListener('click', toggleCart);
+    }
+
+    function toggleMobileMenu() {
+        document.getElementById('navContainer').classList.toggle('show');
+    }
+
+    function showSection(sectionId) {
+        // Ukryj wszystkie sekcje
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // Pokaż wybraną sekcję
+        document.getElementById(sectionId).classList.add('active');
+        
+        // Ukryj menu mobilne po wybraniu sekcji
+        if (window.innerWidth <= 768) {
+            document.getElementById('navContainer').classList.remove('show');
+        }
+        
+        // Przewiń do góry sekcji
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ===== DODAWANIE DO KOSZYKA =====
+    function initAddToCartButtons() {
         document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('color-option')) {
-                const colorOptions = e.target.closest('.color-options');
-                colorOptions.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-                e.target.classList.add('selected');
-            }
-            
-            if (e.target.classList.contains('size-option')) {
-                const sizeOptions = e.target.closest('.size-options');
-                sizeOptions.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-                e.target.classList.add('selected');
-            }
-            
             if (e.target.classList.contains('add-to-cart-btn')) {
                 e.preventDefault();
-                const productCard = e.target.closest('.product-card');
                 const name = e.target.getAttribute('data-name');
                 const price = parseFloat(e.target.getAttribute('data-price'));
                 const image = e.target.getAttribute('data-image');
-                const selectedColorOption = productCard.querySelector('.color-option.selected');
-                const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : null;
-                const selectedSizeOption = productCard.querySelector('.size-option.selected');
-                const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : null;
-                addToCart(name, price, image, size, color);
+                
+                addToCart(name, price, image);
             }
         });
     }
 
-    // ===== ZASTĄP FUNKCJĘ addToCart =====
-    function addToCart(name, price, image = null, size = null, color = null) {
-        const existingIndex = cart.findIndex(item => item.name === name && item.size === size && item.color === color);
-        if (existingIndex >= 0) {
-            cart[existingIndex].quantity++;
-        } else {
-            cart.push({
-                name: `${name}${color ? ` - ${color}` : ''}${size ? ` (${size})` : ''}`,
-                price,
-                quantity: 1,
-                image,
-                size,
-                color,
-                id: Date.now()
-            });
-        }
-        updateCart();
-        showNotification('✅ Produkt dodany do koszyka');
-    }
-
-    // ===== ZASTĄP FUNKCJĘ updateCart =====
     function updateCart() {
         const cartCount = document.getElementById('cartCount');
         const cartItems = document.getElementById('cartItems');
         const cartTotal = document.getElementById('cartTotal');
+        
+        // Aktualizuj licznik
         cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        // Aktualizuj zawartość koszyka
         cartItems.innerHTML = '';
+        
         if (cart.length === 0) {
             cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
             cartTotal.textContent = '0 zł';
             document.getElementById('paypal-container').innerHTML = '';
         } else {
             let total = 0;
+            
             cart.forEach((item, index) => {
                 total += item.price * item.quantity;
+                
                 const cartItem = document.createElement('div');
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
@@ -3561,22 +3579,739 @@ document.addEventListener("DOMContentLoaded", () => {
                         <div class="font-bold">${item.name}</div>
                         <div>${item.price} zł × ${item.quantity}</div>
                         ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                        ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
                     </div>
                     <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
                 `;
+                
                 cartItems.appendChild(cartItem);
             });
+            
             cartTotal.textContent = `${total.toFixed(2)} zł`;
+            
+            // Renderuj przycisk PayPal
             renderPayPalButton();
         }
+        
+        // Zapisz do localStorage
         localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
     }
 
-    // RESZTA KODU POZOSTAJE BEZ ZMIAN (initNavigation, initDesignStudio, itd.)...
-    // ... [TUTAJ POZOSTAŁA CZĘŚĆ TWOJEGO ORYGINALNEGO KODU] ...
+    function addToCart(name, price, image = null, size = null) {
+        // Sprawdź czy produkt już jest w koszyku
+        const existingIndex = cart.findIndex(item => 
+            item.name === name && item.size === size
+        );
+        
+        if (existingIndex >= 0) {
+            cart[existingIndex].quantity++;
+        } else {
+            cart.push({
+                name,
+                price,
+                quantity: 1,
+                image,
+                size,
+                id: Date.now()
+            });
+        }
+        
+        updateCart();
+        showNotification('✅ Produkt dodany do koszyka');
+    }
 
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+    }
+
+    function toggleCart() {
+        document.getElementById('cartPanel').classList.toggle('open');
+    }
+
+    // ===== STUDIO PROJEKTOWE =====
+    function initDesignStudio() {
+        const canvas = document.getElementById('designCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Ustawienia canvas
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Inicjalny render
+        updateDesign();
+    }
+
+    function initProductBase() {
+        const baseItems = document.querySelectorAll('.product-base-item');
+        baseItems.forEach(item => {
+            item.addEventListener('click', function() {
+                baseItems.forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                currentDesign.baseProduct = this.getAttribute('data-base');
+                updateDesign();
+            });
+        });
+    }
+
+    function initDesignOptions() {
+        const designOptions = document.querySelectorAll('.design-option');
+        designOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                designOptions.forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                currentDesign.designArea = this.getAttribute('data-area');
+                updateDesign();
+            });
+        });
+    }
+
+    function updateDesign() {
+        const canvas = document.getElementById('designCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Aktualizuj stan projektu
+        currentDesign.text = document.getElementById('designText').value;
+        currentDesign.fontFamily = document.getElementById('fontFamily').value;
+        currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
+        currentDesign.color = document.getElementById('textColor').value;
+        
+        // Wyczyść canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Narysuj tło - wirtualny produkt
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Narysuj obrazek jeśli istnieje
+        if (currentDesign.image) {
+            ctx.save();
+            ctx.translate(currentDesign.imageX, currentDesign.imageY);
+            ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
+            ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
+            ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
+            ctx.restore();
+        }
+        
+        // Narysuj tekst
+        if (currentDesign.text) {
+            ctx.save();
+            ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
+            ctx.fillStyle = currentDesign.color;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.translate(currentDesign.textX, currentDesign.textY);
+            ctx.rotate(currentDesign.textRotation * Math.PI / 180);
+            ctx.scale(currentDesign.textScale, currentDesign.textScale);
+            ctx.fillText(currentDesign.text, 0, 0);
+            ctx.restore();
+        }
+        
+        // Aktualizuj podgląd
+        const preview = document.querySelector('.design-preview');
+        if (currentDesign.text || currentDesign.image) {
+            preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
+            const img = document.createElement('img');
+            img.src = canvas.toDataURL();
+            img.style.maxWidth = '100%';
+            img.style.marginTop = '1rem';
+            img.style.border = '1px solid #ddd';
+            preview.appendChild(img);
+        }
+    }
+
+    function handleImageUpload(event) {
+        const file = document.getElementById('designImage').files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                currentDesign.image = new Image();
+                currentDesign.image.src = e.target.result;
+                currentDesign.image.onload = function() {
+                    currentDesign.activeElement = 'image';
+                    updateTransformControls();
+                    updateDesign();
+                };
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function updateElementPosition() {
+        if (currentDesign.activeElement === 'text') {
+            currentDesign.textX = parseInt(document.getElementById('posX').value);
+            currentDesign.textY = parseInt(document.getElementById('posY').value);
+        } else if (currentDesign.activeElement === 'image') {
+            currentDesign.imageX = parseInt(document.getElementById('posX').value);
+            currentDesign.imageY = parseInt(document.getElementById('posY').value);
+        }
+        updateDesign();
+    }
+
+    function updateElementScale() {
+        if (currentDesign.activeElement === 'text') {
+            currentDesign.textScale = parseFloat(document.getElementById('scale').value);
+        } else if (currentDesign.activeElement === 'image') {
+            currentDesign.imageScale = parseFloat(document.getElementById('scale').value);
+        }
+        updateDesign();
+    }
+
+    function updateElementRotation() {
+        if (currentDesign.activeElement === 'text') {
+            currentDesign.textRotation = parseInt(document.getElementById('rotation').value);
+        } else if (currentDesign.activeElement === 'image') {
+            currentDesign.imageRotation = parseInt(document.getElementById('rotation').value);
+        }
+        updateDesign();
+    }
+
+    function clearCanvas() {
+        const canvas = document.getElementById('designCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        currentDesign.text = '';
+        currentDesign.image = null;
+        document.getElementById('designText').value = '';
+        
+        document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
+        
+        showNotification('Canvas wyczyszczony');
+    }
+
+    function resetDesign() {
+        currentDesign.textX = 250;
+        currentDesign.textY = 200;
+        currentDesign.textScale = 1;
+        currentDesign.textRotation = 0;
+        currentDesign.imageX = 250;
+        currentDesign.imageY = 200;
+        currentDesign.imageScale = 1;
+        currentDesign.imageRotation = 0;
+        
+        updateTransformControls();
+        updateDesign();
+        showNotification('Transformacje zresetowane');
+    }
+
+    function updateTransformControls() {
+        if (currentDesign.activeElement === 'text') {
+            document.getElementById('posX').value = currentDesign.textX;
+            document.getElementById('posY').value = currentDesign.textY;
+            document.getElementById('scale').value = currentDesign.textScale;
+            document.getElementById('rotation').value = currentDesign.textRotation;
+        } else if (currentDesign.activeElement === 'image') {
+            document.getElementById('posX').value = currentDesign.imageX;
+            document.getElementById('posY').value = currentDesign.imageY;
+            document.getElementById('scale').value = currentDesign.imageScale;
+            document.getElementById('rotation').value = currentDesign.imageRotation;
+        }
+    }
+
+    function addToCartFromDesign() {
+        const productType = document.getElementById('productType');
+        const productSize = document.getElementById('productSize');
+        
+        const prices = {
+            'tshirt': 120,
+            'hoodie': 200,
+            'cap': 99
+        };
+        
+        const price = prices[productType.value] || 120;
+        const canvas = document.getElementById('designCanvas');
+        
+        addToCart(
+            `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
+            price,
+            canvas.toDataURL(),
+            productSize.value
+        );
+    }
+
+    function saveDesign() {
+        const canvas = document.getElementById('designCanvas');
+        const link = document.createElement('a');
+        link.download = 'adelbertus-design.png';
+        link.href = canvas.toDataURL();
+        link.click();
+        showNotification('✅ Projekt zapisany');
+    }
+
+    // ===== PAYPAL =====
+    function renderPayPalButton() {
+        const container = document.getElementById('paypal-container');
+        container.innerHTML = '';
+        
+        if (cart.length === 0) return;
+        
+        paypal.HostedButtons({
+            hostedButtonId: "L4639S4363CZE",
+        }).render("#paypal-container");
+    }
+
+    // ===== EMAIL =====
+    function sendDesignToEmail() {
+        const canvas = document.getElementById('designCanvas');
+        const imageData = canvas.toDataURL();
+        
+        const subject = 'Mój projekt z AdelbertusShop';
+        const body = `
+            Cześć! Oto mój projekt:\n
+            Tekst: ${currentDesign.text}\n
+            Rozmiar czcionki: ${currentDesign.fontSize}\n
+            Kolor: ${currentDesign.color}\n
+            Typ produktu: ${document.getElementById('productType').options[document.getElementById('productType').selectedIndex].text}\n
+            Rozmiar: ${document.getElementById('productSize').value}\n
+            Obszar: ${currentDesign.designArea}\n\n
+            
+            Obraz projektu (w załączniku):\n
+            Proszę o kontakt w sprawie realizacji zamówienia.
+        `;
+        
+        window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+        
+        showNotification('📧 Otwieranie klienta pocztowego...');
+    }
+
+    function sendOrderEmail() {
+        let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+        
+        cart.forEach((item, index) => {
+            emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+            if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+            emailBody += '\n';
+        });
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+        emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+        emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+        
+        window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+    }
+
+    function sendOrderWhatsApp() {
+        let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+        
+        cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+            if (item.size) message += ` (Rozmiar: ${item.size})`;
+            message += '%0A';
+        });
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+        message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+        message += `Proszę o potwierdzenie zamówienia.`;
+        
+        window.open(`https://wa.me/48604296650?text=${message}`);
+    }
+
+    // ===== FORMULARZ ZAMÓWIENIA =====
+    function initOrderForm() {
+        const form = document.getElementById("orderForm");
+        const statusEl = document.getElementById("status");
+        const whatsappBtn = document.getElementById("whatsappBtn");
+        const productInput = document.getElementById("productInput");
+
+        if (!form) return;
+
+        // Aktualizuje link WhatsApp dynamicznie
+        productInput.addEventListener("input", () => {
+            const product = encodeURIComponent(productInput.value || "");
+            whatsappBtn.href = `https://wa.me/48604296650?text=Chcę%20zamówić:%20${product}`;
+        });
+
+        // Wysyłka maila
+        form.addEventListener("submit", async function(e){
+            e.preventDefault();
+            statusEl.textContent = "Wysyłam...";
+            statusEl.className = "";
+
+            const data = Object.fromEntries(new FormData(this));
+
+            try {
+                // Symulacja wysyłki - w rzeczywistości połączenie z backendem
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                statusEl.textContent = "✔ Zamówienie wysłane mailem!";
+                statusEl.className = "text-green-400";
+                this.reset();
+                whatsappBtn.href = `https://wa.me/48604296650?text=Chcę%20zamówić:%20`;
+            } catch(err){
+                statusEl.textContent = "✖ " + err.message;
+                statusEl.className = "text-red-500";
+            }
+        });
+    }
+
+    // ===== REKLAMY =====
+    function initAdTimers() {
+        // Timer dla baneru
+        startTimer('bannerTimer', 30);
+        
+        // Timer dla animacji
+        startTimer('animationTimer', 30);
+        
+        // Timer dla wideo
+        startTimer('videoTimer', 30);
+    }
+
+    function startTimer(elementId, seconds) {
+        const timerElement = document.getElementById(elementId);
+        if (!timerElement) return;
+        
+        let timeLeft = seconds;
+        
+        const timerInterval = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = `${timeLeft}s`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerElement.textContent = 'Koniec';
+                timerElement.style.backgroundColor = '#d4af37';
+                timerElement.style.color = 'black';
+            }
+        }, 1000);
+    }
+
+    // ===== ZBIÓRKA - ROTACJA =====
+    function initCharityRotation() {
+        // Sprawdź, kiedy ostatnio zmieniano dane
+        const lastChange = localStorage.getItem('charityLastChange');
+        const currentIndex = localStorage.getItem('charityCurrentIndex') || 0;
+        const now = new Date().getTime();
+        const threeDays = 3 * 24 * 60 * 60 * 1000; // 3 dni w milisekundach
+        
+        let newIndex = parseInt(currentIndex);
+        
+        // Jeśli minęły 3 dni lub to pierwsza inicjalizacja, zmień dane
+        if (!lastChange || (now - lastChange) > threeDays) {
+            newIndex = (parseInt(currentIndex) + 1) % donorsData.length;
+            localStorage.setItem('charityLastChange', now);
+            localStorage.setItem('charityCurrentIndex', newIndex);
+        }
+        
+        // Aktualizuj dane na stronie
+        updateCharityContent(newIndex);
+    }
+
+    function updateCharityContent(index) {
+        const donorsList = document.getElementById('donorsList');
+        const childrenLetter = document.getElementById('childrenLetter');
+        
+        if (donorsList && donorsData[index]) {
+            donorsList.innerHTML = donorsData[index].donors.join('');
+        }
+        
+        if (childrenLetter && donorsData[index]) {
+            childrenLetter.innerHTML = donorsData[index].letter;
+        }
+    }
+
+    // ===== BLOG =====
+    function initBlog() {
+        // Wczytaj posty z localStorage
+        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        
+        // Wyświetl posty
+        renderBlogPosts(blogPosts);
+        
+        // Inicjalizuj formularz
+        const blogForm = document.getElementById('newBlogPostForm');
+        if (blogForm) {
+            blogForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewBlogPost();
+            });
+        }
+    }
+
+    function renderBlogPosts(posts) {
+        const container = document.getElementById('blogPostsContainer');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        if (posts.length === 0) {
+            // Dodaj przykładowe posty jeśli nie ma żadnych
+            const samplePosts = [
+                {
+                    title: "Sztuka jako forma ekspresji",
+                    excerpt: "Jak wyrażać siebie przez projektowanie ubrań i dlaczego warto...",
+                    content: "Pełna treść artykułu o sztuce jako formie ekspresji. Sztuka odgrywa kluczową rolę w naszym życiu, pozwala wyrażać emocje, opowiadać historie i komunikować się z innymi bez słów.",
+                    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    date: new Date().toISOString()
+                },
+                {
+                    title: "Trendy w streetwearze 2023",
+                    excerpt: "Odkryj najnowsze trendy w modzie ulicznej tego sezonu...",
+                    content: "Streetwear w 2023 roku ewoluuje w kierunku połączenia komfortu and style. Dominują oversize'owe fasony, earthy kolory oraz odważne nadruki.",
+                    image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+                    date: new Date().toISOString()
+                }
+            ];
+            
+            samplePosts.forEach((post, index) => {
+                const postElement = document.createElement('div');
+                postElement.className = 'blog-post';
+                postElement.innerHTML = `
+                    <img src="${post.image}" alt="${post.title}" class="blog-image">
+                    <div class="blog-content">
+                        <h3 class="text-xl font-bold mb-2">${post.title}</h3>
+                        <p class="text-sm text-gray-600">Opublikowano: ${new Date(post.date).toLocaleDateString('pl-PL')}</p>
+                        <div class="blog-excerpt">
+                            <p class="mt-3">${post.excerpt}</p>
+                        </div>
+                        <div class="blog-full" style="display: none;">
+                            <p class="mt-3">${post.content}</p>
+                        </div>
+                        <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
+                        <button class="nav-btn mt-2" onclick="shareArticle('${post.title}', '${post.image}')">
+                            <i class="fas fa-share"></i> Udostępnij
+                        </button>
+                    </div>
+                `;
+                
+                container.appendChild(postElement);
+            });
+            return;
+        }
+        
+        posts.forEach((post, index) => {
+            const postElement = document.createElement('div');
+            postElement.className = 'blog-post';
+            postElement.innerHTML = `
+                ${post.image ? `<img src="${post.image}" alt="${post.title}" class="blog-image">` : 
+                `<img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="${post.title}" class="blog-image">`}
+                <div class="blog-content">
+                    <h3 class="text-xl font-bold mb-2">${post.title}</h3>
+                    <p class="text-sm text-gray-600">Opublikowano: ${new Date(post.date).toLocaleDateString('pl-PL')}</p>
+                    <div class="blog-excerpt">
+                        <p class="mt-3">${post.excerpt}</p>
+                    </div>
+                    <div class="blog-full" style="display: none;">
+                        <p class="mt-3">${post.content}</p>
+                    </div>
+                    <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
+                    <button class="nav-btn mt-2" onclick="shareArticle('${post.title}', '${post.image || 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'}')">
+                        <i class="fas fa-share"></i> Udostępnij
+                    </button>
+                </div>
+            `;
+            
+            container.appendChild(postElement);
+        });
+    }
+
+    function toggleReadMore(button) {
+        const post = button.closest('.blog-post');
+        const excerpt = post.querySelector('.blog-excerpt');
+        const full = post.querySelector('.blog-full');
+        
+        if (full.style.display === 'block') {
+            full.style.display = 'none';
+            excerpt.style.display = 'block';
+            button.textContent = 'Czytaj więcej';
+        } else {
+            full.style.display = 'block';
+            excerpt.style.display = 'none';
+            button.textContent = 'Czytaj mniej';
+        }
+    }
+
+    function showBlogForm() {
+        document.getElementById('blogForm').style.display = 'block';
+        document.getElementById('blogForm').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function hideBlogForm() {
+        document.getElementById('blogForm').style.display = 'none';
+    }
+
+    function addNewBlogPost() {
+        const title = document.getElementById('blogTitle').value;
+        const excerpt = document.getElementById('blogExcerpt').value;
+        const content = document.getElementById('blogContent').value;
+        const image = document.getElementById('blogImage').value;
+        
+        const newPost = {
+            title,
+            excerpt,
+            content,
+            image,
+            date: new Date().toISOString()
+        };
+        
+        // Pobierz istniejące posty i dodaj nowy
+        const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+        blogPosts.unshift(newPost);
+        
+        // Zapisz z powrotem do localStorage
+        localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+        
+        // Odśwież wyświetlanie
+        renderBlogPosts(blogPosts);
+        
+        // Wyczyść formularz i ukryj go
+        document.getElementById('newBlogPostForm').reset();
+        hideBlogForm();
+        
+        showNotification('Artykuł dodany pomyślnie!');
+    }
+
+    function shareArticle(title, image) {
+        const subject = `Polecam artykuł: ${title}`;
+        const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
+        
+        window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    }
+
+    // ===== FORMULARZ KONTAKTOWY =====
+    function initContactForm() {
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const formData = new FormData(contactForm);
+                const name = contactForm.querySelector('input[type="text"]').value;
+                const email = contactForm.querySelector('input[type="email"]').value;
+                const subject = contactForm.querySelectorAll('input[type="text"]')[1].value;
+                const message = contactForm.querySelector('textarea').value;
+                
+                const mailto = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Imię i nazwisko: ${name}\nEmail: ${email}\n\nWiadomość:\n${message}`)}`;
+                window.open(mailto);
+                
+                showNotification('📧 Otwieranie klienta pocztowego...');
+                contactForm.reset();
+            });
+        }
+    }
+
+    // ===== POMOCNICZE =====
+    function showNotification(message) {
+        // Utwórz element powiadomienia
+        const notification = document.createElement('div');
+        notification.textContent = message;
+        notification.style.position = 'fixed';
+        notification.style.bottom = '20px';
+        notification.style.left = '50%';
+        notification.style.transform = 'translateX(-50%)';
+        notification.style.backgroundColor = '#d4af37';
+        notification.style.color = 'black';
+        notification.style.padding = '12px 24px';
+        notification.style.borderRadius = '30px';
+        notification.style.zIndex = '1000';
+        notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+        notification.style.fontWeight = 'bold';
+        
+        document.body.appendChild(notification);
+        
+        // Usuń po 3 sekundach
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+
+    // Globalne funkcje
+    window.addToCart = addToCart;
+    window.removeFromCart = removeFromCart;
+    window.toggleCart = toggleCart;
+    window.updateDesign = updateDesign;
+    window.clearCanvas = clearCanvas;
+    window.resetDesign = resetDesign;
+    window.addToCartFromDesign = addToCartFromDesign;
+    window.sendDesignToEmail = sendDesignToEmail;
+    window.saveDesign = saveDesign;
+    window.toggleReadMore = toggleReadMore;
+    window.showBlogForm = showBlogForm;
+    window.hideBlogForm = hideBlogForm;
+    window.shareArticle = shareArticle;
+    window.toggleMobileMenu = toggleMobileMenu;
+    window.sendOrderEmail = sendOrderEmail;
+    window.sendOrderWhatsApp = sendOrderWhatsApp;
 </script>
+<script>
+
+// ===== ZASTĄP FUNKCJĘ addToCart =====
+// Znajdź starą funkcję addToCart (około linia 2905) i ZASTĄP ją tą:
+function addToCart(name, price, image = null, size = null, color = null) {
+    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje)
+    const existingIndex = cart.findIndex(item => 
+        item.name === name && item.size === size && item.color === color
+    );
+    
+    if (existingIndex >= 0) {
+        cart[existingIndex].quantity++;
+    } else {
+        cart.push({
+            name,
+            price,
+            quantity: 1,
+            image,
+            size,
+            color,
+            id: Date.now()
+        });
+    }
+    
+    updateCart();
+    showNotification('✅ Produkt dodany do koszyka');
+}
+
+// ===== ZASTĄP FUNKCJĘ updateCart =====
+// Znajdź starą funkcję updateCart (około linia 2918) i ZASTĄP ją tą:
+function updateCart() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    // Aktualizuj licznik
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    // Aktualizuj zawartość koszyka
+    cartItems.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+        cartTotal.textContent = '0 zł';
+        document.getElementById('paypal-container').innerHTML = '';
+    } else {
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
+            
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                <div class="flex-1">
+                    <div class="font-bold">${item.name}</div>
+                    <div>${item.price} zł × ${item.quantity}</div>
+                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                </div>
+                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+            `;
+            
+            cartItems.appendChild(cartItem);
+        });
+        
+        cartTotal.textContent = `${total.toFixed(2)} zł`;
+        
+        // Renderuj przycisk PayPal
+        renderPayPalButton();
+    }
+    
+    // Zapisz do localStorage
+    localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+}
+
 // ===== ZMIEŃ INICJALIZACJĘ =====
 // W funkcji DOMContentLoaded (około linia 2869) ZMIEŃ:
 document.addEventListener('DOMContentLoaded', function() {
