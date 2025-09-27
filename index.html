@@ -3425,7 +3425,7 @@ document.addEventListener("DOMContentLoaded", () => {
         baseProduct: 'tshirt',
         designArea: 'front'
     };
-// ===== OBSŁUGA OPCJI PRODUKTÓW =====
+    // ===== OBSŁUGA OPCJI PRODUKTÓW =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         // Wybór koloru
@@ -3433,13 +3433,17 @@ function initProductOptions() {
             const options = e.target.closest('.color-options');
             options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
             e.target.classList.add('selected');
+            return; // Wyjdź po zmianie koloru
         }
+        
         // Wybór rozmiaru
         if (e.target.classList.contains('size-option')) {
             const options = e.target.closest('.size-options');
             options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
             e.target.classList.add('selected');
+            return; // Wyjdź po zmianie rozmiaru
         }
+        
         // Dodawanie do koszyka z opcjami
         if (e.target.classList.contains('add-to-cart-btn')) {
             e.preventDefault();
@@ -3450,16 +3454,18 @@ function initProductOptions() {
             
             // Pobierz wybrany kolor
             const selectedColorOption = productCard.querySelector('.color-option.selected');
-            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : null;
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
             
             // Pobierz wybrany rozmiar
             const selectedSizeOption = productCard.querySelector('.size-option.selected');
-            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : null;
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+            
+            console.log('Dodaję do koszyka:', name, 'Kolor:', color, 'Rozmiar:', size); // Debug
             
             addToCart(name, price, image, size, color);
         }
     });
-}    
+}
     // Dane do rotacji dla zbiórki
     const donorsData = [
         {
@@ -4291,34 +4297,37 @@ function updateCart() {
     window.sendOrderWhatsApp = sendOrderWhatsApp;
 </script>
 <script>
-
-// ===== ZASTĄP FUNKCJĘ addToCart =====
-// Znajdź starą funkcję addToCart (około linia 2905) i ZASTĄP ją tą:
 function addToCart(name, price, image = null, size = null, color = null) {
-    // Sprawdź czy produkt już jest w koszyku (uwzględniając opcje)
+    // Sprawdź czy produkt już jest w koszyku (dokładne porównanie)
     const existingIndex = cart.findIndex(item => 
-        item.name === name && item.size === size && item.color === color
+        item.name === name && 
+        String(item.size) === String(size) && 
+        String(item.color) === String(color)
     );
     
+    console.log('Szukam produktu:', name, size, color, 'Znaleziono index:', existingIndex); // Debug
+    
     if (existingIndex >= 0) {
-        cart[existingIndex].quantity++;
+        // Produkt już istnieje - zwiększ ilość
+        cart[existingIndex].quantity += 1;
+        console.log('Zwiększam ilość istniejącego produktu');
     } else {
+        // Nowy produkt - dodaj do koszyka
         cart.push({
-            name,
-            price,
+            name: name,
+            price: price,
             quantity: 1,
-            image,
-            size,
-            color,
-            id: Date.now()
+            image: image,
+            size: size,
+            color: color,
+            id: Date.now() + Math.random() // Unikalne ID
         });
+        console.log('Dodaję nowy produkt do koszyka');
     }
     
     updateCart();
     showNotification('✅ Produkt dodany do koszyka');
 }
-
-// ===== ZASTĄP FUNKCJĘ updateCart =====
 // Znajdź starą funkcję updateCart (około linia 2918) i ZASTĄP ją tą:
 function updateCart() {
     const cartCount = document.getElementById('cartCount');
