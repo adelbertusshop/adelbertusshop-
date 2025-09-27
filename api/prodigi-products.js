@@ -1,20 +1,23 @@
 export default async function handler(req, res) {
-    try {
-        const response = await fetch('https://api.prodigi.com/products', {
-            headers: {
-                'Authorization': `Bearer ${process.env.PRODIGI_API_KEY}`
-            }
-        });
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
 
-        if (!response.ok) {
-            return res.status(response.status).json({ error: 'Błąd pobierania produktów' });
-        }
+  try {
+    const response = await fetch("https://api.sandbox.prodigi.com/v4.0/Orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Basic " + Buffer.from(process.env.PRODIGI_API_KEY + ":").toString("base64"),
+      },
+      body: JSON.stringify(req.body),
+    });
 
-        const data = await response.json();
-        res.status(200).json(data);
+    const data = await response.json();
+    return res.status(200).json(data);
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Nie udało się pobrać produktów' });
-    }
+  } catch (error) {
+    console.error("Błąd Prodigi:", error);
+    return res.status(500).json({ message: "Coś poszło nie tak", error });
+  }
 }
