@@ -2999,7 +2999,7 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- Blog - WERSJA Z FORUM, OPINIAMI, KATEGORIAMI I FILTREM -->
+<!-- Blog - WERSJA Z FORUM I CYKLICZNYMI CYTATAMI (z opiniami, kategoriami i tygodniową widocznością) -->
 <section id="blog" class="bg-gray-950 py-12">
     <div class="section-title text-center mb-12">
         <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
@@ -3013,14 +3013,13 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         </blockquote>
     </div>
 
-    <!-- Opinie użytkowników -->
-    <div class="max-w-3xl mx-auto mb-12 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center">
+    <!-- Opinie cykliczne -->
+    <div class="max-w-3xl mx-auto mb-6 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
         <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
-        <p id="dynamic-review" class="italic text-gray-300">„Świetne miejsce do dzielenia się myślami!”</p>
+        <p id="dynamic-review" class="italic text-gold-300">„Ładuję opinie…”</p>
     </div>
 
-    <!-- Kategorie z filtrem -->
-    <div class="flex justify-center space-x-6 mb-12 text-gold-400 text-2xl">
+    <div class="flex justify-center space-x-6 mb-8 text-gold-400 text-2xl">
         <button class="category" onclick="filterPosts('all')"><i class="fas fa-globe"></i> Wszystko</button>
         <button class="category" onclick="filterPosts('Moda')"><i class="fas fa-tshirt"></i> Moda</button>
         <button class="category" onclick="filterPosts('Ludzie')"><i class="fas fa-users"></i> Ludzie</button>
@@ -3057,17 +3056,18 @@ setInterval(typeLetter, 15000); // co 15s nowy list
             </div>
             
             <div class="form-group mb-4">
+                <label class="text-gray-300">URL obrazka</label>
+                <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
+            </div>
+
+            <!-- Nowa kategoria -->
+            <div class="form-group mb-4">
                 <label class="text-gray-300">Kategoria</label>
-                <select id="blogCategory" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
+                <select id="blogCategory" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
                     <option value="Moda">Moda</option>
                     <option value="Ludzie">Ludzie</option>
                     <option value="Marzenia">Marzenia</option>
                 </select>
-            </div>
-
-            <div class="form-group mb-4">
-                <label class="text-gray-300">URL obrazka</label>
-                <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
             </div>
             
             <button type="submit" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg">Opublikuj artykuł</button>
@@ -3084,35 +3084,41 @@ const quotes = [
     "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
     "„Styl to nie ubranie – to komunikat.”"
 ];
+
 let quoteIndex = 0;
 function changeQuote() {
     const quoteElement = document.getElementById("dynamic-quote");
+    if (!quoteElement) return;
     quoteElement.classList.add("opacity-0");
     setTimeout(() => {
         quoteIndex = (quoteIndex + 1) % quotes.length;
         quoteElement.innerText = quotes[quoteIndex];
         quoteElement.classList.remove("opacity-0");
-    }, 1000);
+    }, 350);
 }
-setInterval(changeQuote, 10000);
+setInterval(changeQuote, 10000); // co 10 sekund
 
-// ====================== OPINIE ======================
+// ====================== OPINIE (4 fikcyjne, cyklicznie co 2 dni) ======================
 const reviews = [
-    "„Świetne miejsce do dzielenia się myślami!” – Anna K.",
-    "„Artykuły są inspirujące i pełne pasji.” – Marek Z.",
-    "„Uwielbiam tę społeczność, czuję się jak w domu.” – Katarzyna L.",
-    "„W końcu znalazłem przestrzeń dla swoich refleksji.” – Paweł M."
+    "„Świetne artykuły, chętnie wracam!” – Anna K.",
+    "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
+    "„Fajny styl pisania, oby tak dalej!” – Julia",
+    "„Dzięki za wartościowe treści!” – Piotr"
 ];
 let reviewIndex = 0;
 function changeReview() {
     const reviewElement = document.getElementById("dynamic-review");
-    reviewElement.innerText = reviews[reviewIndex];
+    if (!reviewElement) return;
+    reviewElement.textContent = reviews[reviewIndex];
     reviewIndex = (reviewIndex + 1) % reviews.length;
 }
-setInterval(changeReview, 2 * 24 * 60 * 60 * 1000);
+// pokaż od razu pierwszą opinię
+changeReview();
+// co 2 dni = 172800000 ms
+setInterval(changeReview, 172800000);
 
-// ====================== KOMENTARZE ======================
-const badWords = ["kurwa", "chuj", "debil", "idiota"];
+// ====================== KOMENTARZE z filtrem ======================
+const badWords = ["kurwa", "chuj", "debil", "idiota"]; // tu możesz dodać kolejne
 function filterBadWords(text) {
     let filtered = text;
     badWords.forEach(word => {
@@ -3121,38 +3127,41 @@ function filterBadWords(text) {
     });
     return filtered;
 }
+
 function addComment(event, commentListId) {
     event.preventDefault();
     const input = event.target.querySelector("input");
+    if (!input) return;
     let commentText = filterBadWords(input.value);
     const commentList = document.getElementById(commentListId);
+    if (!commentList) return;
     const newComment = document.createElement("li");
     newComment.textContent = "💬 " + commentText;
     commentList.appendChild(newComment);
     input.value = "";
 }
 
-// ====================== NOWE ARTYKUŁY ======================
+// ====================== NOWE ARTYKUŁY (widoczne od razu + data-category + wygasanie po 7 dniach) ======================
 document.getElementById("newBlogPostForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
     const title = document.getElementById("blogTitle").value;
     const excerpt = document.getElementById("blogExcerpt").value;
     const content = document.getElementById("blogContent").value;
-    const category = document.getElementById("blogCategory").value;
     const image = document.getElementById("blogImage").value || "https://via.placeholder.com/500";
+    const category = document.getElementById("blogCategory") ? document.getElementById("blogCategory").value : "Wszystko";
 
     const postId = "post-" + Date.now();
     const commentListId = "comments-" + Date.now();
-    const expirationDate = Date.now() + 7 * 24 * 60 * 60 * 1000;
+    const expireDate = Date.now() + (7 * 24 * 60 * 60 * 1000); // ważny 7 dni
 
-    const newPost = `
-        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition"
-             data-expiration="${expirationDate}" data-category="${category}">
+    // budujemy element DOM (bez usuwania oryginalnej struktury)
+    const postHTML = `
+        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition" data-expire="${expireDate}" data-category="${category}" id="${postId}">
             <img src="${image}" alt="${title}" class="blog-image rounded-t-lg">
             <div class="blog-content p-6">
                 <h3 class="text-xl font-bold text-gold-400 mb-2">${title}</h3>
-                <p class="text-sm text-gray-400">Opublikowano: ${new Date().toLocaleDateString()} | Kategoria: ${category}</p>
+                <p class="text-sm text-gray-400">Opublikowano: ${new Date().toLocaleDateString()}</p>
                 <div class="blog-excerpt">
                     <p class="mt-3 text-gray-200">${excerpt}</p>
                 </div>
@@ -3173,27 +3182,39 @@ document.getElementById("newBlogPostForm").addEventListener("submit", function(e
             </div>
         </div>
     `;
-    document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", newPost);
+
+    // wstawiamy od razu na początek
+    document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", postHTML);
+
     hideBlogForm();
     this.reset();
 });
 
-// ====================== USUWANIE STARYCH POSTÓW ======================
-function removeExpiredPosts() {
+// ====================== USUWANIE POSTÓW PO 7 DNIACH ======================
+function checkExpiredPosts() {
     const posts = document.querySelectorAll(".blog-post");
     const now = Date.now();
     posts.forEach(post => {
-        const expiration = parseInt(post.getAttribute("data-expiration"));
-        if (now > expiration) post.remove();
+        const expire = parseInt(post.getAttribute("data-expire"));
+        if (expire && now > expire) {
+            post.remove();
+        }
     });
 }
-setInterval(removeExpiredPosts, 60 * 60 * 1000);
+setInterval(checkExpiredPosts, 60 * 60 * 1000); // sprawdza co godzinę
+// uruchom od razu, żeby posprzątać stare, jeśli są
+checkExpiredPosts();
 
-// ====================== FILTROWANIE POSTÓW ======================
+// ====================== FILTROWANIE PO KATEGORII ======================
 function filterPosts(category) {
     const posts = document.querySelectorAll(".blog-post");
     posts.forEach(post => {
-        if (category === "all" || post.getAttribute("data-category") === category) {
+        if (category === "all" || category === "Wszystko") {
+            post.style.display = "block";
+            return;
+        }
+        const cat = post.getAttribute("data-category") || "";
+        if (cat === category) {
             post.style.display = "block";
         } else {
             post.style.display = "none";
@@ -3204,6 +3225,7 @@ function filterPosts(category) {
 // ====================== ROZWIJANIE POSTÓW ======================
 function toggleReadMore(button) {
     const fullContent = button.parentElement.querySelector(".blog-full");
+    if (!fullContent) return;
     fullContent.classList.toggle("hidden");
     button.textContent = fullContent.classList.contains("hidden") ? "Czytaj więcej" : "Zwiń";
 }
@@ -3215,8 +3237,7 @@ function showBlogForm() {
 function hideBlogForm() {
     document.getElementById("blogForm").classList.add("hidden");
 }
-</script>
-        
+</script>        
 <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
