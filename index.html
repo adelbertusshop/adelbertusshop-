@@ -2999,8 +2999,7 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-        
-<!-- Blog - WERSJA Z FORUM I CYKLICZNYMI CYTATAMI -->
+<!-- Blog - WERSJA Z FORUM, OPINIAMI I KATEGORIAMI -->
 <section id="blog" class="bg-gray-950 py-12">
     <div class="section-title text-center mb-12">
         <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
@@ -3012,6 +3011,19 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
             „Twoje słowa mają większą moc, niż myślisz.”
         </blockquote>
+    </div>
+
+    <!-- Opinie użytkowników -->
+    <div class="max-w-3xl mx-auto mb-12 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center">
+        <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
+        <p id="dynamic-review" class="italic text-gray-300">„Świetne miejsce do dzielenia się myślami!”</p>
+    </div>
+
+    <!-- Kategorie -->
+    <div class="flex justify-center space-x-6 mb-12 text-gold-400 text-2xl">
+        <div class="category"><i class="fas fa-tshirt"></i> Moda</div>
+        <div class="category"><i class="fas fa-users"></i> Ludzie</div>
+        <div class="category"><i class="fas fa-star"></i> Marzenia</div>
     </div>
 
     <div class="text-center mb-8">
@@ -3062,7 +3074,6 @@ const quotes = [
     "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
     "„Styl to nie ubranie – to komunikat.”"
 ];
-
 let quoteIndex = 0;
 function changeQuote() {
     const quoteElement = document.getElementById("dynamic-quote");
@@ -3075,8 +3086,23 @@ function changeQuote() {
 }
 setInterval(changeQuote, 10000); // co 10 sekund
 
+// ====================== OPINIE ======================
+const reviews = [
+    "„Świetne miejsce do dzielenia się myślami!” – Anna K.",
+    "„Artykuły są inspirujące i pełne pasji.” – Marek Z.",
+    "„Uwielbiam tę społeczność, czuję się jak w domu.” – Katarzyna L.",
+    "„W końcu znalazłem przestrzeń dla swoich refleksji.” – Paweł M."
+];
+let reviewIndex = 0;
+function changeReview() {
+    const reviewElement = document.getElementById("dynamic-review");
+    reviewElement.innerText = reviews[reviewIndex];
+    reviewIndex = (reviewIndex + 1) % reviews.length;
+}
+setInterval(changeReview, 2 * 24 * 60 * 60 * 1000); // co 2 dni
+
 // ====================== KOMENTARZE z filtrem ======================
-const badWords = ["kurwa", "chuj", "debil", "idiota"]; // tu możesz dodać kolejne
+const badWords = ["kurwa", "chuj", "debil", "idiota"];
 function filterBadWords(text) {
     let filtered = text;
     badWords.forEach(word => {
@@ -3108,9 +3134,10 @@ document.getElementById("newBlogPostForm").addEventListener("submit", function(e
 
     const postId = "post-" + Date.now();
     const commentListId = "comments-" + Date.now();
+    const expirationDate = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 dni
 
     const newPost = `
-        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition">
+        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition" data-expiration="${expirationDate}">
             <img src="${image}" alt="${title}" class="blog-image rounded-t-lg">
             <div class="blog-content p-6">
                 <h3 class="text-xl font-bold text-gold-400 mb-2">${title}</h3>
@@ -3141,6 +3168,19 @@ document.getElementById("newBlogPostForm").addEventListener("submit", function(e
     this.reset();
 });
 
+// ====================== USUWANIE STARYCH POSTÓW ======================
+function removeExpiredPosts() {
+    const posts = document.querySelectorAll(".blog-post");
+    const now = Date.now();
+    posts.forEach(post => {
+        const expiration = parseInt(post.getAttribute("data-expiration"));
+        if (now > expiration) {
+            post.remove();
+        }
+    });
+}
+setInterval(removeExpiredPosts, 60 * 60 * 1000); // co godzinę
+
 // ====================== ROZWIJANIE POSTÓW ======================
 function toggleReadMore(button) {
     const fullContent = button.parentElement.querySelector(".blog-full");
@@ -3155,7 +3195,7 @@ function showBlogForm() {
 function hideBlogForm() {
     document.getElementById("blogForm").classList.add("hidden");
 }
-</script>
+</script>  
         
 <!-- Regulamin -->
 <section id="regulations">
