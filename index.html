@@ -3425,7 +3425,7 @@ document.addEventListener("DOMContentLoaded", () => {
         baseProduct: 'tshirt',
         designArea: 'front'
     };
-    // ===== OBSŁUGA OPCJI PRODUKTÓW =====
+// ===== OBSŁUGA OPCJI PRODUKTÓW =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         // Wybór koloru
@@ -3440,8 +3440,26 @@ function initProductOptions() {
             options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
             e.target.classList.add('selected');
         }
+        // Dodawanie do koszyka z opcjami
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            e.preventDefault();
+            const productCard = e.target.closest('.product-card');
+            const name = e.target.getAttribute('data-name');
+            const price = parseFloat(e.target.getAttribute('data-price'));
+            const image = e.target.getAttribute('data-image');
+            
+            // Pobierz wybrany kolor
+            const selectedColorOption = productCard.querySelector('.color-option.selected');
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : null;
+            
+            // Pobierz wybrany rozmiar
+            const selectedSizeOption = productCard.querySelector('.size-option.selected');
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : null;
+            
+            addToCart(name, price, image, size, color);
+        }
     });
-}
+}    
     // Dane do rotacji dla zbiórki
     const donorsData = [
         {
