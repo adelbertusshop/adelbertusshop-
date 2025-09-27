@@ -3450,8 +3450,8 @@ function initProductOptions() {
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
             const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
             
-            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : null;
-            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : null;
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
             
             addToCart(name, price, image, size, color);
         }
@@ -3508,14 +3508,13 @@ function initProductOptions() {
         renderPayPalButton();
         initContactForm();
         initBlog();
-        initAddToCartButtons();
+        initProductOptions(); 
         initProductBase();
         initDesignOptions();
         initOrderForm();
         initAdTimers();
         initCharityRotation();
-    initProductOptions(); 
-});    
+    });    
 
     // ===== NAWIGACJA =====
     function initNavigation() {
@@ -3566,17 +3565,30 @@ function initProductOptions() {
     }
 
     // ===== DODAWANIE DO KOSZYKA =====
-    function initAddToCartButtons() {
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('add-to-cart-btn')) {
-                e.preventDefault();
-                const name = e.target.getAttribute('data-name');
-                const price = parseFloat(e.target.getAttribute('data-price'));
-                const image = e.target.getAttribute('data-image');
-                
-                addToCart(name, price, image);
-            }
-        });
+    function addToCart(name, price, image = null, size = null, color = null) {
+        // Sprawdź czy produkt już jest w koszyku
+        const existingIndex = cart.findIndex(item => 
+            item.name === name && 
+            item.size === size && 
+            item.color === color
+        );
+        
+        if (existingIndex >= 0) {
+            cart[existingIndex].quantity++;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1,
+                image: image,
+                size: size,
+                color: color,
+                id: Date.now() + Math.random()
+            });
+        }
+        
+        updateCart();
+        showNotification('✅ Produkt dodany do koszyka');
     }
 
     function updateCart() {
@@ -3608,6 +3620,7 @@ function initProductOptions() {
                         <div class="font-bold">${item.name}</div>
                         <div>${item.price} zł × ${item.quantity}</div>
                         ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                        ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
                     </div>
                     <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
                 `;
@@ -3624,52 +3637,6 @@ function initProductOptions() {
         // Zapisz do localStorage
         localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
     }
-function updateCart() {
-    const cartCount = document.getElementById('cartCount');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    // Aktualizuj licznik
-    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-    
-    // Aktualizuj zawartość koszyka
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-        cartTotal.textContent = '0 zł';
-        document.getElementById('paypal-container').innerHTML = '';
-    } else {
-        let total = 0;
-        
-        cart.forEach((item, index) => {
-            total += item.price * item.quantity;
-            
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                <div class="flex-1">
-                    <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × ${item.quantity}</div>
-                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
-                </div>
-                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-            `;
-            
-            cartItems.appendChild(cartItem);
-        });
-        
-        cartTotal.textContent = `${total.toFixed(2)} zł`;
-        
-        // Renderuj przycisk PayPal
-        renderPayPalButton();
-    }
-    
-    // Zapisz do localStorage
-    localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-} 
 
     function removeFromCart(index) {
         cart.splice(index, 1);
@@ -4285,7 +4252,7 @@ function updateCart() {
     window.shareArticle = shareArticle;
     window.toggleMobileMenu = toggleMobileMenu;
     window.sendOrderEmail = sendOrderEmail;
-    window.sendOrderWhatsApp = sendOrderWhatsApp;
+    window.sendOrderWhatsApp = sendOrderWhatsApp;    
 </script>
 <script>
 function addToCart(name, price, image = null, size = null, color = null) {
