@@ -3090,7 +3090,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 /* ====== USTAWIENIA ====== */
 const BLOG_STORAGE_KEY = 'adelbertus_blog_posts_v1'; // lokalne przechowywanie postów
 const REVIEWS_ROTATION_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
-const POST_LIFETIME_MS = 7 * 24 * 60 * 60 * 1000; // 7 dni
+const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 dni (zmienione z 7 na 3)
 
 /* ====== Cytaty (co 10s) ====== */
 const quotes = [
@@ -3180,9 +3180,21 @@ function renderPosts(filterCategory = 'all') {
   const container = document.getElementById('blogPostsContainer');
   if (!container) return;
   container.innerHTML = '';
+  
   const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt); // newest first
+  
+  if (posts.length === 0) {
+    container.innerHTML = `
+      <div class="col-span-2 text-center py-12">
+        <p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p>
+      </div>
+    `;
+    return;
+  }
+  
   posts.forEach(post => {
     if (filterCategory !== 'all' && post.category !== filterCategory) return;
+    
     const postEl = document.createElement('div');
     postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
     postEl.setAttribute('data-expire', post.expire || '');
@@ -3193,26 +3205,30 @@ function renderPosts(filterCategory = 'all') {
       <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
       <div class="blog-content p-6">
         <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
-        <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString()}</p>
+        <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
         <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
         <div class="blog-full hidden">
-          <p class="mt-3 text-gray-300">${escapeHtml(post.content)}</p>
+          <p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
           <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
           <div class="comments mt-6">
             <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
             <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
             <form class="mt-3 comment-form" data-postid="${post.id}">
               <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
+              <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
             </form>
           </div>
         </div>
         <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+        <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
+          <i class="fas fa-share"></i> Udostępnij
+        </button>
       </div>
     `;
     container.appendChild(postEl);
   });
 
-  // przypisz eventy do przycisków "Czytaj więcej" i formularzy komentarzy
+  // przypisz eventy do przycisków "Czytaj więcej"
   document.querySelectorAll('.read-more-btn').forEach(btn => {
     btn.addEventListener('click', function(){
       const parent = this.closest('.blog-content');
@@ -3224,6 +3240,16 @@ function renderPosts(filterCategory = 'all') {
     });
   });
 
+  // przypisz eventy do przycisków "Udostępnij"
+  document.querySelectorAll('.share-article-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      const title = this.getAttribute('data-title');
+      const image = this.getAttribute('data-image');
+      shareArticle(title, image);
+    });
+  });
+
+  // przypisz eventy do formularzy komentarzy
   document.querySelectorAll('.comment-form').forEach(form => {
     form.addEventListener('submit', function(e){
       e.preventDefault();
@@ -3237,7 +3263,6 @@ function renderPosts(filterCategory = 'all') {
       li.textContent = '💬 ' + commentText;
       ul.appendChild(li);
       input.value = '';
-      // (opcjonalnie: można zapisać komentarze w localStorage per post)
     });
   });
 }
@@ -3249,7 +3274,7 @@ function createPostObject(title, excerpt, content, image, category) {
     id,
     title, excerpt, content,
     image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
-    category: category || 'Wszystko',
+    category: category || 'Moda',
     createdAt: Date.now(),
     expire: Date.now() + POST_LIFETIME_MS
   };
@@ -3260,6 +3285,7 @@ document.getElementById('openBlogFormBtn').addEventListener('click', () => {
   document.getElementById('blogForm').classList.remove('hidden');
   window.scrollTo({top: document.getElementById('blogForm').offsetTop - 20, behavior: 'smooth'});
 });
+
 document.getElementById('cancelBlogForm').addEventListener('click', () => {
   document.getElementById('newBlogPostForm').reset();
   document.getElementById('blogForm').classList.add('hidden');
@@ -3282,6 +3308,7 @@ document.getElementById('newBlogPostForm').addEventListener('submit', function(e
   renderPosts(currentFilter); // zachowaj aktualny filtr
   this.reset();
   document.getElementById('blogForm').classList.add('hidden');
+  showNotification('✅ Artykuł opublikowany!');
 });
 
 /* ====== Usuwanie przeterminowanych postów (co godzinę + przy starcie) ====== */
@@ -3290,15 +3317,20 @@ function removeExpiredOnLoad() {
   const now = Date.now();
   const beforeCount = posts.length;
   posts = posts.filter(p => !p.expire || now <= p.expire);
-  if (posts.length !== beforeCount) savePosts(posts);
+  if (posts.length !== beforeCount) {
+    savePosts(posts);
+    console.log(`Usunięto ${beforeCount - posts.length} przeterminowanych postów`);
+  }
 }
 removeExpiredOnLoad();
 setInterval(() => {
   let posts = loadPosts();
   const now = Date.now();
   const fresh = posts.filter(p => !p.expire || now <= p.expire);
-  if (fresh.length !== posts.length) savePosts(fresh);
-  renderPosts(currentFilter);
+  if (fresh.length !== posts.length) {
+    savePosts(fresh);
+    renderPosts(currentFilter);
+  }
 }, 60 * 60 * 1000);
 
 /* ====== Filtr kategorii ====== */
@@ -3311,6 +3343,13 @@ document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
   });
 });
 
+/* ====== Funkcja udostępniania artykułu ====== */
+function shareArticle(title, image) {
+  const subject = `Polecam artykuł: ${title}`;
+  const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
+  window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+}
+
 /* ====== Helpery ====== */
 function escapeHtml(str){
   if(!str) return '';
@@ -3320,6 +3359,28 @@ function escapeHtml(str){
     .replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;')
     .replace(/'/g,'&#039;');
+}
+
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.textContent = message;
+  notification.style.position = 'fixed';
+  notification.style.bottom = '20px';
+  notification.style.left = '50%';
+  notification.style.transform = 'translateX(-50%)';
+  notification.style.backgroundColor = '#d4af37';
+  notification.style.color = 'black';
+  notification.style.padding = '12px 24px';
+  notification.style.borderRadius = '30px';
+  notification.style.zIndex = '1000';
+  notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+  notification.style.fontWeight = 'bold';
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.remove();
+  }, 3000);
 }
 
 /* ====== Inicjalizacja: renderuj wszystko ====== */
