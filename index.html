@@ -2999,7 +2999,7 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- Blog - WERSJA Z FORUM I CYKLICZNYMI CYTATAMI (z opiniami, kategoriami i tygodniową widocznością) -->
+<!-- Blog - WERSJA Z FORUM, OPINIAMI i KATEGORIAMI -->
 <section id="blog" class="bg-gray-950 py-12">
     <div class="section-title text-center mb-12">
         <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
@@ -3013,12 +3013,13 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         </blockquote>
     </div>
 
-    <!-- Opinie cykliczne -->
+    <!-- Opinie cykliczne o blogu -->
     <div class="max-w-3xl mx-auto mb-6 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
         <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
         <p id="dynamic-review" class="italic text-gold-300">„Ładuję opinie…”</p>
     </div>
 
+    <!-- Kategorie -->
     <div class="flex justify-center space-x-6 mb-8 text-gold-400 text-2xl">
         <button class="category" onclick="filterPosts('all')"><i class="fas fa-globe"></i> Wszystko</button>
         <button class="category" onclick="filterPosts('Moda')"><i class="fas fa-tshirt"></i> Moda</button>
@@ -3026,6 +3027,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <button class="category" onclick="filterPosts('Marzenia')"><i class="fas fa-star"></i> Marzenia</button>
     </div>
 
+    <!-- Dodawanie artykułu -->
     <div class="text-center mb-8">
         <button class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition" onclick="showBlogForm()">
             <i class="fas fa-pencil-alt"></i> Napisz nowy artykuł
@@ -3036,7 +3038,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <!-- Tutaj będą dodawane posty -->
     </div>
 
-    <!-- Formularz dodawania artykułu -->
+    <!-- Formularz -->
     <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
         <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
         <form id="newBlogPostForm">
@@ -3074,6 +3076,14 @@ setInterval(typeLetter, 15000); // co 15s nowy list
             <button type="button" class="nav-btn px-6 py-2 rounded-lg" onclick="hideBlogForm()">Anuluj</button>
         </form>
     </div>
+
+    <!-- Opinie o sklepie -->
+    <div class="max-w-3xl mx-auto mt-12 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
+        <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie o sklepie</h3>
+        <blockquote id="shop-review" class="italic text-gold-300 text-lg">
+            „Ładuję opinie…”
+        </blockquote>
+    </div>
 </section>
 
 <script>
@@ -3084,7 +3094,6 @@ const quotes = [
     "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
     "„Styl to nie ubranie – to komunikat.”"
 ];
-
 let quoteIndex = 0;
 function changeQuote() {
     const quoteElement = document.getElementById("dynamic-quote");
@@ -3096,9 +3105,9 @@ function changeQuote() {
         quoteElement.classList.remove("opacity-0");
     }, 350);
 }
-setInterval(changeQuote, 10000); // co 10 sekund
+setInterval(changeQuote, 10000);
 
-// ====================== OPINIE (4 fikcyjne, cyklicznie co 2 dni) ======================
+// ====================== OPINIE O BLOGU ======================
 const reviews = [
     "„Świetne artykuły, chętnie wracam!” – Anna K.",
     "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
@@ -3112,39 +3121,29 @@ function changeReview() {
     reviewElement.textContent = reviews[reviewIndex];
     reviewIndex = (reviewIndex + 1) % reviews.length;
 }
-// pokaż od razu pierwszą opinię
 changeReview();
-// co 2 dni = 172800000 ms
-setInterval(changeReview, 172800000);
+setInterval(changeReview, 172800000); // co 2 dni
 
-// ====================== KOMENTARZE z filtrem ======================
-const badWords = ["kurwa", "chuj", "debil", "idiota"]; // tu możesz dodać kolejne
-function filterBadWords(text) {
-    let filtered = text;
-    badWords.forEach(word => {
-        const regex = new RegExp(word, "gi");
-        filtered = filtered.replace(regex, "***");
-    });
-    return filtered;
+// ====================== OPINIE O SKLEPIE ======================
+const shopReviews = [
+  "„Koszulka super jakości, po praniu wygląda jak nowa!” – Kasia",
+  "„Bluza mega wygodna i ciepła, noszę codziennie.” – Tomek",
+  "„Czapeczka sztos, pasuje do wszystkiego.” – Ola",
+  "„Dostawa szybka, a koszulki robią robotę.” – Bartek"
+];
+let shopReviewIndex = 0;
+function changeShopReview() {
+  const shopReviewElement = document.getElementById("shop-review");
+  if (!shopReviewElement) return;
+  shopReviewElement.textContent = shopReviews[shopReviewIndex];
+  shopReviewIndex = (shopReviewIndex + 1) % shopReviews.length;
 }
+changeShopReview();
+setInterval(changeShopReview, 172800000);
 
-function addComment(event, commentListId) {
-    event.preventDefault();
-    const input = event.target.querySelector("input");
-    if (!input) return;
-    let commentText = filterBadWords(input.value);
-    const commentList = document.getElementById(commentListId);
-    if (!commentList) return;
-    const newComment = document.createElement("li");
-    newComment.textContent = "💬 " + commentText;
-    commentList.appendChild(newComment);
-    input.value = "";
-}
-
-// ====================== NOWE ARTYKUŁY (widoczne od razu + data-category + wygasanie po 7 dniach) ======================
+// ====================== NOWE ARTYKUŁY (7 dni ważności) ======================
 document.getElementById("newBlogPostForm").addEventListener("submit", function(e) {
     e.preventDefault();
-
     const title = document.getElementById("blogTitle").value;
     const excerpt = document.getElementById("blogExcerpt").value;
     const content = document.getElementById("blogContent").value;
@@ -3153,9 +3152,8 @@ document.getElementById("newBlogPostForm").addEventListener("submit", function(e
 
     const postId = "post-" + Date.now();
     const commentListId = "comments-" + Date.now();
-    const expireDate = Date.now() + (7 * 24 * 60 * 60 * 1000); // ważny 7 dni
+    const expireDate = Date.now() + (7 * 24 * 60 * 60 * 1000);
 
-    // budujemy element DOM (bez usuwania oryginalnej struktury)
     const postHTML = `
         <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition" data-expire="${expireDate}" data-category="${category}" id="${postId}">
             <img src="${image}" alt="${title}" class="blog-image rounded-t-lg">
@@ -3182,10 +3180,7 @@ document.getElementById("newBlogPostForm").addEventListener("submit", function(e
             </div>
         </div>
     `;
-
-    // wstawiamy od razu na początek
     document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", postHTML);
-
     hideBlogForm();
     this.reset();
 });
@@ -3201,11 +3196,10 @@ function checkExpiredPosts() {
         }
     });
 }
-setInterval(checkExpiredPosts, 60 * 60 * 1000); // sprawdza co godzinę
-// uruchom od razu, żeby posprzątać stare, jeśli są
+setInterval(checkExpiredPosts, 60 * 60 * 1000);
 checkExpiredPosts();
 
-// ====================== FILTROWANIE PO KATEGORII ======================
+// ====================== FILTROWANIE KATEGORII ======================
 function filterPosts(category) {
     const posts = document.querySelectorAll(".blog-post");
     posts.forEach(post => {
@@ -3214,20 +3208,19 @@ function filterPosts(category) {
             return;
         }
         const cat = post.getAttribute("data-category") || "";
-        if (cat === category) {
-            post.style.display = "block";
-        } else {
-            post.style.display = "none";
-        }
+        post.style.display = (cat === category) ? "block" : "none";
     });
 }
 
-// ====================== ROZWIJANIE POSTÓW ======================
-function toggleReadMore(button) {
-    const fullContent = button.parentElement.querySelector(".blog-full");
-    if (!fullContent) return;
-    fullContent.classList.toggle("hidden");
-    button.textContent = fullContent.classList.contains("hidden") ? "Czytaj więcej" : "Zwiń";
+// ====================== KOMENTARZE ======================
+function addComment(event, commentListId) {
+    event.preventDefault();
+    const input = event.target.querySelector("input");
+    if (!input) return;
+    const newComment = document.createElement("li");
+    newComment.textContent = "💬 " + input.value;
+    document.getElementById(commentListId).appendChild(newComment);
+    input.value = "";
 }
 
 // ====================== FORMULARZ ======================
@@ -3237,7 +3230,8 @@ function showBlogForm() {
 function hideBlogForm() {
     document.getElementById("blogForm").classList.add("hidden");
 }
-</script>        
+</script>
+        
 <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
