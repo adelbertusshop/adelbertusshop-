@@ -3556,37 +3556,48 @@ document.addEventListener("DOMContentLoaded", () => {
         baseProduct: 'tshirt',
         designArea: 'front'
     };
-    // ===== OBSŁUGA OPCJI PRODUKTÓW =====
+// ===== OBSŁUGA OPCJI PRODUKTÓW =====
 function initProductOptions() {
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('color-option')) {
-            const options = e.target.closest('.color-options');
-            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
+    // Usuń wszystkie istniejące event listenery żeby uniknąć duplikacji
+    document.removeEventListener('click', handleProductOptionsClick);
+    
+    // Dodaj nowy event listener
+    document.addEventListener('click', handleProductOptionsClick);
+}
+
+function handleProductOptionsClick(e) {
+    if (e.target.classList.contains('color-option')) {
+        const options = e.target.closest('.color-options');
+        options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+        e.target.classList.add('selected');
+        return; // Zakończ po obsłużeniu koloru
+    }
+    
+    if (e.target.classList.contains('size-option')) {
+        const options = e.target.closest('.size-options');
+        options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+        e.target.classList.add('selected');
+        return; // Zakończ po obsłużeniu rozmiaru
+    }
+    
+    if (e.target.classList.contains('add-to-cart-btn')) {
+        e.preventDefault();
+        e.stopPropagation(); // Zatrzymaj propagację eventu
         
-        if (e.target.classList.contains('size-option')) {
-            const options = e.target.closest('.size-options');
-            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
+        const productCard = e.target.closest('.product-card');
+        const name = e.target.getAttribute('data-name');
+        const price = parseFloat(e.target.getAttribute('data-price'));
+        const image = e.target.getAttribute('data-image');
         
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            e.preventDefault();
-            const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
-            const image = e.target.getAttribute('data-image');
-            
-            const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
-            const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-            
-            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-            
-            addToCart(name, price, image, size, color);
-        }
-    });
+        const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+        const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
+        
+        const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+        const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+        
+        addToCart(name, price, image, size, color);
+        return; // Zakończ po dodaniu do koszyka
+    }
 }    
     // Dane do rotacji dla zbiórki
     const donorsData = [
