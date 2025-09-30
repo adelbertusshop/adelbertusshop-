@@ -3397,7 +3397,7 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- ====== BLOG: sekcja kompletna (wklej 1:1) ====== -->
+<!-- ====== BLOG: sekcja kompletna z Regulaminem ====== -->
 <section id="blog" class="bg-gray-950 py-12">
   <div class="section-title text-center mb-12">
     <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
@@ -3435,6 +3435,31 @@ setInterval(typeLetter, 15000); // co 15s nowy list
   <!-- Kontener postów -->
   <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
     <!-- renderowane posty -->
+
+    <!-- Regulamin jako wpis na blogu -->
+    <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition">
+      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin sklepu" class="blog-image rounded-t-lg w-full h-44 object-cover">
+      <div class="blog-content p-6">
+        <h3 class="text-xl font-bold text-gold-400 mb-2">📜 Regulamin sklepu AdelbertusShop</h3>
+        <p class="text-sm text-gray-400">Kategoria: Informacje | Opublikowano: <span id="regulaminDate"></span></p>
+        <div class="blog-excerpt">
+          <p class="mt-3 text-gray-200">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p>
+        </div>
+        <div class="blog-full hidden">
+          <p class="mt-3 text-gray-300 whitespace-pre-line">
+1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
+2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: 
+<a href="mailto:mielniczukgrzegosz74@gmail.com" class="text-gold-400">mielniczukgrzegosz74@gmail.com</a>.  
+3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).  
+4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.  
+5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.  
+6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.  
+7. Złożenie zamówienia jest równoznaczne z akceptacją niniejszego regulaminu.
+          </p>
+        </div>
+        <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+      </div>
+    </div>
   </div>
 
   <!-- Formularz dodawania artykułu (domyślnie ukryty) -->
@@ -3485,358 +3510,9 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 </section>
 
 <script>
-/* ====== USTAWIENIA ====== */
-const BLOG_STORAGE_KEY = 'adelbertus_blog_posts_v1'; // lokalne przechowywanie postów
-const REVIEWS_ROTATION_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
-const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 dni (zmienione z 7 na 3)
-
-/* ====== Cytaty (co 10s) ====== */
-const quotes = [
-  "„Twoje słowa mają większą moc, niż myślisz.”",
-  "„Ludzie słyszą, ale pamiętają to, co widzą.”",
-  "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
-  "„Styl to nie ubranie – to komunikat.”"
-];
-let quoteIndex = 0;
-function changeQuote() {
-  const el = document.getElementById('dynamic-quote');
-  if (!el) return;
-  el.classList.add('opacity-0');
-  setTimeout(() => {
-    quoteIndex = (quoteIndex + 1) % quotes.length;
-    el.innerText = quotes[quoteIndex];
-    el.classList.remove('opacity-0');
-  }, 250);
-}
-setInterval(changeQuote, 10000); // 10s
-changeQuote();
-
-/* ====== Opinie o blogu (rotujące co 2 dni) ====== */
-const blogReviews = [
-  "„Świetne artykuły, chętnie wracam!” – Anna K.",
-  "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
-  "„Fajny styl pisania, oby tak dalej!” – Julia",
-  "„Dzięki za wartościowe treści!” – Piotr"
-];
-let blogReviewIndex = parseInt(localStorage.getItem('blogReviewIndex') || '0', 10);
-function showBlogReview() {
-  const el = document.getElementById('dynamic-review');
-  if (!el) return;
-  el.innerText = blogReviews[blogReviewIndex];
-  blogReviewIndex = (blogReviewIndex + 1) % blogReviews.length;
-  localStorage.setItem('blogReviewIndex', blogReviewIndex);
-}
-showBlogReview();
-setInterval(showBlogReview, REVIEWS_ROTATION_MS);
-
-/* ====== Opinie o sklepie (rotujące co 2 dni) ====== */
-const shopReviews = [
-  "„Koszulka super jakości, po praniu wygląda jak nowa!” – Kasia",
-  "„Bluza mega wygodna i ciepła, noszę codziennie.” – Tomek",
-  "„Czapeczka sztos, pasuje do wszystkiego.” – Ola",
-  "„Dostawa szybka, a koszulki robią robotę.” – Bartek"
-];
-let shopReviewIndex = parseInt(localStorage.getItem('shopReviewIndex') || '0', 10);
-function showShopReview() {
-  const el = document.getElementById('shop-review');
-  if (!el) return;
-  el.innerText = shopReviews[shopReviewIndex];
-  shopReviewIndex = (shopReviewIndex + 1) % shopReviews.length;
-  localStorage.setItem('shopReviewIndex', shopReviewIndex);
-}
-showShopReview();
-setInterval(showShopReview, REVIEWS_ROTATION_MS);
-
-/* ====== Filtr wulgaryzmów w komentarzach ====== */
-const badWords = ["kurwa","chuj","debil","idiota"];
-function filterBadWords(text){
-  let out = text + '';
-  badWords.forEach(w => {
-    const r = new RegExp(w, 'gi');
-    out = out.replace(r, '***');
-  });
-  return out;
-}
-
-/* ====== Zarządzanie postami (localStorage) ====== */
-function loadPosts() {
-  try {
-    const raw = localStorage.getItem(BLOG_STORAGE_KEY);
-    if (!raw) return [];
-    const parsed = JSON.parse(raw);
-    // usuń przeterminowane wpisy przy ładowaniu
-    const now = Date.now();
-    return parsed.filter(p => !p.expire || now <= p.expire);
-  } catch(e) { console.error(e); return []; }
-}
-function savePosts(posts) {
-  localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
-}
-
-/* ====== Renderowanie postów ====== */
-function renderPosts(filterCategory = 'all') {
-  const container = document.getElementById('blogPostsContainer');
-  if (!container) return;
-  container.innerHTML = '';
-  
-  const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt); // newest first
-  
-  if (posts.length === 0) {
-    container.innerHTML = `
-      <div class="col-span-2 text-center py-12">
-        <p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p>
-      </div>
-    `;
-    return;
-  }
-  
-  posts.forEach(post => {
-    if (filterCategory !== 'all' && post.category !== filterCategory) return;
-    
-    const postEl = document.createElement('div');
-    postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
-    postEl.setAttribute('data-expire', post.expire || '');
-    postEl.setAttribute('data-category', post.category || '');
-    postEl.id = post.id;
-
-    postEl.innerHTML = `
-      <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
-      <div class="blog-content p-6">
-        <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
-        <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
-        <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
-        <div class="blog-full hidden">
-          <p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
-          <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
-          <div class="comments mt-6">
-            <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
-            <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
-            <form class="mt-3 comment-form" data-postid="${post.id}">
-              <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
-              <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
-            </form>
-          </div>
-        </div>
-        <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
-        <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
-          <i class="fas fa-share"></i> Udostępnij
-        </button>
-      </div>
-    `;
-    container.appendChild(postEl);
-  });
-
-  // przypisz eventy do przycisków "Czytaj więcej"
-  document.querySelectorAll('.read-more-btn').forEach(btn => {
-    btn.addEventListener('click', function(){
-      const parent = this.closest('.blog-content');
-      if(!parent) return;
-      const full = parent.querySelector('.blog-full');
-      if(!full) return;
-      full.classList.toggle('hidden');
-      this.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
-    });
-  });
-
-  // przypisz eventy do przycisków "Udostępnij"
-  document.querySelectorAll('.share-article-btn').forEach(btn => {
-    btn.addEventListener('click', function(){
-      const title = this.getAttribute('data-title');
-      const image = this.getAttribute('data-image');
-      shareArticle(title, image);
-    });
-  });
-
-  // przypisz eventy do formularzy komentarzy
-  document.querySelectorAll('.comment-form').forEach(form => {
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      const postId = this.dataset.postid;
-      const input = this.querySelector('input');
-      if(!input) return;
-      const commentText = filterBadWords(input.value.trim());
-      if(!commentText) return;
-      const ul = document.getElementById('comments-' + postId);
-      const li = document.createElement('li');
-      li.textContent = '💬 ' + commentText;
-      ul.appendChild(li);
-      input.value = '';
-    });
-  });
-}
-
-/* ====== Utwórz nowy post ====== */
-function createPostObject(title, excerpt, content, image, category) {
-  const id = 'post-' + Date.now();
-  return {
-    id,
-    title, excerpt, content,
-    image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
-    category: category || 'Moda',
-    createdAt: Date.now(),
-    expire: Date.now() + POST_LIFETIME_MS
-  };
-}
-
-/* ====== Zdarzenia formularza ====== */
-document.getElementById('openBlogFormBtn').addEventListener('click', () => {
-  document.getElementById('blogForm').classList.remove('hidden');
-  window.scrollTo({top: document.getElementById('blogForm').offsetTop - 20, behavior: 'smooth'});
-});
-
-document.getElementById('cancelBlogForm').addEventListener('click', () => {
-  document.getElementById('newBlogPostForm').reset();
-  document.getElementById('blogForm').classList.add('hidden');
-});
-
-document.getElementById('newBlogPostForm').addEventListener('submit', function(e){
-  e.preventDefault();
-  const title = document.getElementById('blogTitle').value.trim();
-  const excerpt = document.getElementById('blogExcerpt').value.trim();
-  const content = document.getElementById('blogContent').value.trim();
-  const image = document.getElementById('blogImage').value.trim();
-  const category = document.getElementById('blogCategory').value;
-
-  if(!title || !excerpt || !content) return;
-
-  const post = createPostObject(title, excerpt, content, image, category);
-  const posts = loadPosts();
-  posts.push(post);
-  savePosts(posts);
-  renderPosts(currentFilter); // zachowaj aktualny filtr
-  this.reset();
-  document.getElementById('blogForm').classList.add('hidden');
-  showNotification('✅ Artykuł opublikowany!');
-});
-
-/* ====== Usuwanie przeterminowanych postów (co godzinę + przy starcie) ====== */
-function removeExpiredOnLoad() {
-  let posts = loadPosts();
-  const now = Date.now();
-  const beforeCount = posts.length;
-  posts = posts.filter(p => !p.expire || now <= p.expire);
-  if (posts.length !== beforeCount) {
-    savePosts(posts);
-    console.log(`Usunięto ${beforeCount - posts.length} przeterminowanych postów`);
-  }
-}
-removeExpiredOnLoad();
-setInterval(() => {
-  let posts = loadPosts();
-  const now = Date.now();
-  const fresh = posts.filter(p => !p.expire || now <= p.expire);
-  if (fresh.length !== posts.length) {
-    savePosts(fresh);
-    renderPosts(currentFilter);
-  }
-}, 60 * 60 * 1000);
-
-/* ====== Filtr kategorii ====== */
-let currentFilter = 'all';
-document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cat = btn.dataset.cat || 'all';
-    currentFilter = (cat === 'all') ? 'all' : cat;
-    renderPosts(currentFilter);
-  });
-});
-
-/* ====== Funkcja udostępniania artykułu ====== */
-function shareArticle(title, image) {
-  const subject = `Polecam artykuł: ${title}`;
-  const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
-  window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-}
-
-/* ====== Helpery ====== */
-function escapeHtml(str){
-  if(!str) return '';
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;')
-    .replace(/'/g,'&#039;');
-}
-
-function showNotification(message) {
-  const notification = document.createElement('div');
-  notification.textContent = message;
-  notification.style.position = 'fixed';
-  notification.style.bottom = '20px';
-  notification.style.left = '50%';
-  notification.style.transform = 'translateX(-50%)';
-  notification.style.backgroundColor = '#d4af37';
-  notification.style.color = 'black';
-  notification.style.padding = '12px 24px';
-  notification.style.borderRadius = '30px';
-  notification.style.zIndex = '1000';
-  notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-  notification.style.fontWeight = 'bold';
-  
-  document.body.appendChild(notification);
-  
-  setTimeout(() => {
-    notification.remove();
-  }, 3000);
-}
-
-/* ====== Inicjalizacja: renderuj wszystko ====== */
-renderPosts('all');
-</script>
-        <!-- Regulamin -->
-<section id="regulamin" class="bg-gray-950 py-12">
-  <div class="section-title text-center mb-12">
-    <h2 class="text-4xl font-bold text-gold-400">Regulamin sklepu AdelbertusShop</h2>
-    <p class="text-gray-300">Zapoznaj się z zasadami zakupów w naszym sklepie</p>
-  </div>
-
-  <div class="max-w-4xl mx-auto bg-gray-900 border border-gold-500 rounded-lg shadow-lg p-8 text-gray-200 space-y-6">
-    
-    <h3 class="text-2xl font-bold text-gold-400">§1 Postanowienia ogólne</h3>
-    <p>1. Sklep internetowy <strong>AdelbertusShop</strong> działa na zasadzie działalności nierejestrowanej w rozumieniu art. 5 ust. 1 ustawy Prawo przedsiębiorców.</p>
-    <p>2. Właścicielem Sklepu jest osoba fizyczna: <strong>Grzegorz Mielniczuk</strong>, prowadzący działalność nierejestrowaną.</p>
-    <p>3. Kontakt: <a href="mailto:mielniczukgrzegosz74@gmail.com" class="text-gold-400 underline">mielniczukgrzegosz74@gmail.com</a></p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§2 Zasady sprzedaży</h3>
-    <p>1. Sklep prowadzi sprzedaż detaliczną produktów odzieżowych i akcesoriów.</p>
-    <p>2. Wszystkie ceny podane na stronie są cenami brutto (zawierają podatek VAT, jeśli dotyczy).</p>
-    <p>3. Zamówienia składane są poprzez stronę internetową Sklepu.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§3 Płatności</h3>
-    <p>1. Dostępne metody płatności:</p>
-    <ul class="list-disc list-inside ml-4">
-      <li>Płatność elektroniczna (PayPal, BLIK, przelew online)</li>
-      <li>Przelew tradycyjny na wskazany numer rachunku (przesyłany e-mailowo)</li>
-    </ul>
-    <p>2. Zamówienie zostaje przyjęte do realizacji po zaksięgowaniu wpłaty.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§4 Realizacja zamówień i dostawa</h3>
-    <p>1. Produkty są realizowane na zamówienie i drukowane według projektu klienta lub oferty dostępnej w sklepie.</p>
-    <p>2. Czas realizacji wynosi od 5 do 14 dni roboczych.</p>
-    <p>3. Dostawa odbywa się za pośrednictwem firm kurierskich lub paczkomatów. Koszty dostawy są wskazane przy składaniu zamówienia.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§5 Prawo odstąpienia od umowy</h3>
-    <p>1. Konsument ma prawo odstąpić od umowy w terminie 14 dni od dnia otrzymania towaru.</p>
-    <p>2. Prawo odstąpienia nie przysługuje w przypadku towarów personalizowanych (np. z własnym nadrukiem klienta).</p>
-    <p>3. Aby skorzystać z prawa odstąpienia, należy wysłać e-mail na adres: <a href="mailto:mielniczukgrzegosz74@gmail.com" class="text-gold-400 underline">mielniczukgrzegosz74@gmail.com</a>.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§6 Reklamacje</h3>
-    <p>1. W przypadku wad towaru klient ma prawo do złożenia reklamacji drogą mailową.</p>
-    <p>2. Reklamacja powinna zawierać: imię i nazwisko, numer zamówienia, opis wady oraz zdjęcie produktu.</p>
-    <p>3. Reklamacja zostanie rozpatrzona w ciągu 14 dni.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§7 Dane osobowe</h3>
-    <p>1. Administratorem danych osobowych klientów jest Sprzedawca.</p>
-    <p>2. Dane osobowe przetwarzane są wyłącznie w celu realizacji zamówienia i kontaktu.</p>
-    <p>3. Klient ma prawo do wglądu, poprawiania i usunięcia swoich danych.</p>
-
-    <h3 class="text-2xl font-bold text-gold-400">§8 Postanowienia końcowe</h3>
-    <p>1. Regulamin obowiązuje od dnia jego opublikowania.</p>
-    <p>2. Sprzedawca zastrzega sobie prawo do wprowadzania zmian.</p>
-    <p>3. W sprawach nieuregulowanych mają zastosowanie przepisy prawa polskiego.</p>
-  </div>
-</section>
+/* ====== Data Regulaminu ====== */
+document.getElementById("regulaminDate").textContent = new Date().toLocaleDateString('pl-PL');
+</script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
