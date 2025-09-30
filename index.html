@@ -3410,14 +3410,23 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       „Twoje słowa mają większą moc, niż myślisz.”
     </blockquote>
   </div>
+<section id="blog" class="bg-gray-950 py-12">
+  <div class="section-title text-center mb-12">
+    <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
+    <p class="text-gray-300">Miejsce, gdzie każdy może podzielić się swoją myślą</p>
+  </div>
 
-  <!-- Opinie o blogu -->
+  <div class="max-w-2xl mx-auto mb-12 text-center">
+    <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
+      „Twoje słowa mają większą moc, niż myślisz.”
+    </blockquote>
+  </div>
+
   <div class="max-w-3xl mx-auto mb-6 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
     <p id="dynamic-review" class="italic text-gold-300">Ładuję opinie…</p>
   </div>
 
-  <!-- Kategorie (filtr) -->
   <div class="flex justify-center space-x-6 mb-8 text-gold-400 text-2xl" id="category-bar">
     <button class="category-btn" data-cat="all">🌐 Wszystko</button>
     <button class="category-btn" data-cat="Moda">👕 Moda</button>
@@ -3425,19 +3434,15 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     <button class="category-btn" data-cat="Marzenia">🌙 Marzenia</button>
   </div>
 
-  <!-- Nowy artykuł -->
   <div class="text-center mb-8">
     <button id="openBlogFormBtn" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition">
       ✍️ Napisz nowy artykuł
     </button>
   </div>
 
-  <!-- Kontener postów -->
   <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
-    <!-- renderowane posty będą wstawiane dynamicznie -->
-  </div>
+    </div>
 
-  <!-- Formularz dodawania artykułu (domyślnie ukryty) -->
   <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
     <form id="newBlogPostForm">
@@ -3477,7 +3482,6 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </form>
   </div>
 
-  <!-- Opinie o sklepie (pokazywane pod blogiem) -->
   <div class="max-w-3xl mx-auto mt-12 mb-8 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie o sklepie</h3>
     <blockquote id="shop-review" class="italic text-gold-300 text-lg">Ładuję opinie sklepu…</blockquote>
@@ -3603,9 +3607,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --- Regulamin (dołączany na końcu) --- */
   function appendRegulamin(container) {
     if (!container) return;
-    if (container.querySelector('.regulamin-card')) return; // już dołączone
+    // Sprawdź, czy regulamin już istnieje w kontenerze
+    if (container.querySelector('.regulamin-card')) return; 
+
     const div = document.createElement('div');
-    div.className = 'blog-post regulamin-card bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-2';
+    div.className = 'blog-post regulamin-card bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-1 md:col-span-2'; // Ustawienie na całą szerokość na mobile i desktop
     div.innerHTML = `
       <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin sklepu" class="blog-image rounded-t-lg w-full h-44 object-cover">
       <div class="blog-content p-6">
@@ -3613,12 +3619,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <p class="text-sm text-gray-400">Kategoria: Informacje | Opublikowano: <span class="regulamin-date"></span></p>
         <div class="blog-excerpt"><p class="mt-3 text-gray-200">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p></div>
         <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">
-1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
-2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: mielniczukgrzegosz74@gmail.com.  
-3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).  
-4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.  
-5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.  
-6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.  
+1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.
+2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: mielniczukgrzegosz74@gmail.com.
+3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).
+4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.
+5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.
+6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.
 7. Złożenie zamówienia jest równoznaczne z akceptacją niniejszego regulaminu.
         </p></div>
         <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
@@ -3635,45 +3641,48 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!container) return;
     container.innerHTML = '';
     const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt);
-    if (posts.length === 0) {
-      container.innerHTML = `<div class="col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p></div>`;
-    } else {
-      posts.forEach(post => {
-        if (filterCategory !== 'all' && post.category !== filterCategory) return;
-        const postEl = document.createElement('div');
-        postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
-        postEl.setAttribute('data-expire', post.expire || '');
-        postEl.setAttribute('data-category', post.category || '');
-        postEl.id = post.id;
-        postEl.innerHTML = `
-          <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
-          <div class="blog-content p-6">
-            <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
-            <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
-            <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
-            <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
-              <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
-              <div class="comments mt-6">
-                <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
-                <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
-                <form class="mt-3 comment-form" data-postid="${post.id}">
-                  <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
-                  <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
-                </form>
-              </div>
-            </div>
-            <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
-            <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
-              <i class="fas fa-share"></i> Udostępnij
-            </button>
-          </div>
-        `;
-        container.appendChild(postEl);
-      });
-    }
+    if (posts.length === 0 && filterCategory === 'all') { // Pokaż komunikat tylko jeśli nie ma postów i filtr jest na 'wszystko'
+      container.innerHTML = `<div class="col-span-1 md:col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p></div>`;
+    } 
 
-    // dołącz regulamin zawsze na końcu
-    appendRegulamin(container);
+    posts.forEach(post => {
+      if (filterCategory !== 'all' && post.category !== filterCategory) return;
+      const postEl = document.createElement('div');
+      postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
+      postEl.setAttribute('data-expire', post.expire || '');
+      postEl.setAttribute('data-category', post.category || '');
+      postEl.id = post.id;
+      postEl.innerHTML = `
+        <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
+        <div class="blog-content p-6">
+          <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
+          <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
+          <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
+          <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
+            <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
+            <div class="comments mt-6">
+              <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
+              <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
+              <form class="mt-3 comment-form" data-postid="${post.id}">
+                <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
+                <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
+              </form>
+            </div>
+          </div>
+          <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+          <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
+            <i class="fas fa-share"></i> Udostępnij
+          </button>
+        </div>
+      `;
+      container.appendChild(postEl);
+    });
+
+    // dołącz regulamin zawsze na końcu, jeśli kategoria to 'all' lub 'Informacje' (jeśli taką dodasz)
+    // Zostawiam na 'all' dla prostoty, ale można to rozszerzyć
+    if (filterCategory === 'all' || filterCategory === 'Informacje') {
+      appendRegulamin(container);
+    }
   }
 
   /* --- Create post object --- */
@@ -3697,9 +3706,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (readBtn) {
         const blogContent = readBtn.closest('.blog-content');
         if (!blogContent) return;
+        const excerpt = blogContent.querySelector('.blog-excerpt');
         const full = blogContent.querySelector('.blog-full');
-        if (!full) return;
+        if (!full || !excerpt) return;
+
         full.classList.toggle('hidden');
+        excerpt.classList.toggle('hidden'); // Przełączanie widoczności krótkiego opisu
         readBtn.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
         return;
       }
@@ -3735,18 +3747,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const openBtn = document.getElementById('openBlogFormBtn');
   const cancelBtn = document.getElementById('cancelBlogForm');
   const formEl = document.getElementById('newBlogPostForm');
+  const blogFormDiv = document.getElementById('blogForm'); // Dodajemy referencję do kontenera formularza
 
   if (openBtn) openBtn.addEventListener('click', () => {
-    const form = document.getElementById('blogForm');
-    if (form) {
-      form.classList.remove('hidden');
-      window.scrollTo({top: form.offsetTop - 20, behavior: 'smooth'});
+    if (blogFormDiv) {
+      blogFormDiv.classList.remove('hidden');
+      window.scrollTo({top: blogFormDiv.offsetTop - 20, behavior: 'smooth'});
     }
   });
   if (cancelBtn) cancelBtn.addEventListener('click', () => {
     if (formEl) formEl.reset();
-    const form = document.getElementById('blogForm');
-    if (form) form.classList.add('hidden');
+    if (blogFormDiv) blogFormDiv.classList.add('hidden');
   });
 
   if (formEl) {
@@ -3757,15 +3768,17 @@ document.addEventListener('DOMContentLoaded', () => {
       const content = document.getElementById('blogContent').value.trim();
       const image = document.getElementById('blogImage').value.trim();
       const category = document.getElementById('blogCategory').value;
-      if (!title || !excerpt || !content) return;
+      if (!title || !excerpt || !content) {
+        showNotification('Wypełnij wszystkie wymagane pola!');
+        return;
+      }
       const post = createPostObject(title, excerpt, content, image, category);
       const posts = loadPosts();
       posts.push(post);
       savePosts(posts);
       renderPosts(currentFilter);
       formEl.reset();
-      const form = document.getElementById('blogForm');
-      if (form) form.classList.add('hidden');
+      if (blogFormDiv) blogFormDiv.classList.add('hidden');
       showNotification('✅ Artykuł opublikowany!');
     });
   }
@@ -3793,11 +3806,21 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentFilter = 'all';
   document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      // Usunięcie klasy 'active' ze wszystkich przycisków
+      document.querySelectorAll('#category-bar .category-btn').forEach(b => b.classList.remove('active-category'));
+      // Dodanie klasy 'active' do klikniętego przycisku
+      btn.classList.add('active-category');
+
       const cat = btn.dataset.cat || 'all';
       currentFilter = (cat === 'all') ? 'all' : cat;
       renderPosts(currentFilter);
     });
   });
+
+  // Dodaj początkową klasę 'active-category' dla przycisku 'Wszystko'
+  const allBtn = document.querySelector('#category-bar button[data-cat="all"]');
+  if (allBtn) allBtn.classList.add('active-category');
+
 
   /* --- Share function --- */
   function shareArticle(title, image) {
