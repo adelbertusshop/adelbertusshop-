@@ -3121,7 +3121,7 @@
         </div>
     </div>
 </section>
-<!-- Studio projektowe - POPRAWIONE -->
+<!-- Studio projektowe - ZMODYFIKOWANE -->
 <section id="design">
     <div class="section-title">
         <h2>Studio Projektowe</h2>
@@ -3170,10 +3170,7 @@
         </div>
         
         <div class="canvas-container">
-            <div class="product-preview">
-                <img id="productBaseImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Podstawa produktu">
-                <canvas id="designCanvas" width="500" height="400"></canvas>
-            </div>
+            <canvas id="designCanvas" width="500" height="400"></canvas>
             <div class="canvas-controls">
                 <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
                 <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
@@ -3208,7 +3205,7 @@
             <div class="tool-group">
                 <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
                 
-                <select id="productType" class="w-full p-3 border rounded mb-3" onchange="changeProductType()">
+                <select id="productType" class="w-full p-3 border rounded mb-3">
                     <option value="tshirt">Koszulka (120 zł)</option>
                     <option value="hoodie">Bluza (200 zł)</option>
                     <option value="cap">Czapka (99 zł)</option>
@@ -3222,7 +3219,7 @@
                     <option value="XXL">XXL</option>
                 </select>
                 
-                <input type="file" id="designImage" accept="image/*" class="w-full mb-3" onchange="handleImageUpload(event)">
+                <input type="file" id="designImage" accept="image/*" class="w-full mb-3" onchange="handleImageUpload()">
                 <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()"><i class="fas fa-upload"></i> Wybierz obraz</button>
             </div>
 
@@ -3254,618 +3251,10 @@
         
         <div class="design-preview">
             <h3>Podgląd Twojego projektu</h3>
-            <div id="previewContainer">
-                <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
-            </div>
+            <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
         </div>
     </div>
 </section>
-
-<style>
-/* Style dla sekcji Studio Projektowego */
-#design {
-    padding: 40px 20px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-title h2 {
-    font-size: 2.5rem;
-    color: #2c3e50;
-    margin-bottom: 10px;
-}
-
-.section-title p {
-    font-size: 1.2rem;
-    color: #7f8c8d;
-}
-
-.design-studio {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    padding: 30px;
-    position: relative;
-}
-
-.side-buttons {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 10;
-}
-
-.side-buttons.left {
-    left: 20px;
-}
-
-.side-buttons.right {
-    right: 20px;
-}
-
-.side-button {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: #3498db;
-    color: white;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.side-button:hover {
-    background: #2980b9;
-    transform: scale(1.1);
-}
-
-.product-base {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.product-base-item {
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.product-base-item.active {
-    background: #e3f2fd;
-    border: 2px solid #3498db;
-}
-
-.product-base-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
-    margin-bottom: 10px;
-}
-
-.product-base-item p {
-    font-weight: 600;
-    color: #2c3e50;
-}
-
-.design-options {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.design-option {
-    padding: 10px 20px;
-    border-radius: 25px;
-    background: #ecf0f1;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-}
-
-.design-option.active {
-    background: #3498db;
-    color: white;
-}
-
-.canvas-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-}
-
-.product-preview {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-#productBaseImg {
-    width: 500px;
-    height: 400px;
-    object-fit: contain;
-}
-
-#designCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    border: 1px dashed #ccc;
-}
-
-.canvas-controls {
-    display: flex;
-    gap: 15px;
-}
-
-.nav-btn {
-    padding: 10px 20px;
-    background: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-}
-
-.nav-btn:hover {
-    background: #2980b9;
-}
-
-.gold-bg {
-    background: #f39c12;
-}
-
-.gold-bg:hover {
-    background: #e67e22;
-}
-
-.design-tools {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.tool-group {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-}
-
-.tool-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 15px;
-    color: #2c3e50;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.w-full {
-    width: 100%;
-}
-
-.p-3 {
-    padding: 12px;
-}
-
-.border {
-    border: 1px solid #ddd;
-}
-
-.rounded {
-    border-radius: 5px;
-}
-
-.mb-3 {
-    margin-bottom: 15px;
-}
-
-.flex {
-    display: flex;
-}
-
-.gap-3 {
-    gap: 15px;
-}
-
-.flex-1 {
-    flex: 1;
-}
-
-.p-2 {
-    padding: 8px;
-}
-
-.w-20 {
-    width: 80px;
-}
-
-.h-10 {
-    height: 40px;
-}
-
-.transform-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.transform-input {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.transform-input label {
-    font-size: 0.9rem;
-    color: #7f8c8d;
-}
-
-.mt-3 {
-    margin-top: 15px;
-}
-
-.design-preview {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #e9ecef;
-}
-
-.design-preview h3 {
-    margin-bottom: 15px;
-    color: #2c3e50;
-}
-
-#previewContainer {
-    min-height: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    border-radius: 5px;
-    padding: 20px;
-    border: 1px dashed #ddd;
-}
-</style>
-
-<script>
-// Zmienne globalne
-let currentDesign = {
-    productType: 'tshirt',
-    designArea: 'front',
-    elements: []
-};
-let selectedElementIndex = -1;
-
-// Inicjalizacja po załadowaniu strony
-document.addEventListener('DOMContentLoaded', function() {
-    initializeDesignStudio();
-});
-
-// Inicjalizacja studia projektowego
-function initializeDesignStudio() {
-    // Obsługa kliknięcia na produkt bazowy
-    document.querySelectorAll('.product-base-item').forEach(item => {
-        item.addEventListener('click', function() {
-            document.querySelectorAll('.product-base-item').forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-            
-            const productType = this.getAttribute('data-base');
-            currentDesign.productType = productType;
-            changeProductBase(productType);
-        });
-    });
-    
-    // Obsługa kliknięcia na obszar projektu
-    document.querySelectorAll('.design-option').forEach(option => {
-        option.addEventListener('click', function() {
-            document.querySelectorAll('.design-option').forEach(o => o.classList.remove('active'));
-            this.classList.add('active');
-            
-            const designArea = this.getAttribute('data-area');
-            currentDesign.designArea = designArea;
-            updateDesign();
-        });
-    });
-    
-    // Inicjalizacja canvas
-    const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-// Zmiana typu produktu
-function changeProductType() {
-    const productType = document.getElementById('productType').value;
-    currentDesign.productType = productType;
-    changeProductBase(productType);
-}
-
-// Zmiana produktu bazowego
-function changeProductBase(productType) {
-    const productBaseImg = document.getElementById('productBaseImg');
-    
-    switch(productType) {
-        case 'tshirt':
-            productBaseImg.src = 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg';
-            break;
-        case 'hoodie':
-            productBaseImg.src = 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg';
-            break;
-        case 'cap':
-            productBaseImg.src = 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png';
-            break;
-    }
-    
-    updateDesign();
-}
-
-// Aktualizacja projektu
-function updateDesign() {
-    const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Czyszczenie canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Rysowanie tekstu
-    const text = document.getElementById('designText').value;
-    const fontFamily = document.getElementById('fontFamily').value;
-    const fontSize = parseInt(document.getElementById('fontSize').value);
-    const textColor = document.getElementById('textColor').value;
-    
-    if (text) {
-        ctx.font = `${fontSize}px ${fontFamily}`;
-        ctx.fillStyle = textColor;
-        ctx.textAlign = 'center';
-        ctx.fillText(text, canvas.width / 2, canvas.height / 2);
-        
-        // Dodanie elementu do projektu
-        if (selectedElementIndex === -1) {
-            currentDesign.elements.push({
-                type: 'text',
-                content: text,
-                font: fontFamily,
-                size: fontSize,
-                color: textColor,
-                x: canvas.width / 2,
-                y: canvas.height / 2,
-                scale: 1,
-                rotation: 0
-            });
-            selectedElementIndex = currentDesign.elements.length - 1;
-        } else {
-            // Aktualizacja istniejącego elementu
-            currentDesign.elements[selectedElementIndex] = {
-                type: 'text',
-                content: text,
-                font: fontFamily,
-                size: fontSize,
-                color: textColor,
-                x: canvas.width / 2,
-                y: canvas.height / 2,
-                scale: 1,
-                rotation: 0
-            };
-        }
-    }
-    
-    // Aktualizacja podglądu
-    updatePreview();
-}
-
-// Obsługa przesłania obrazu
-function handleImageUpload(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        const img = new Image();
-        img.onload = function() {
-            const canvas = document.getElementById('designCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Rysowanie obrazu na canvas
-            ctx.drawImage(img, 100, 100, 300, 200);
-            
-            // Dodanie elementu do projektu
-            currentDesign.elements.push({
-                type: 'image',
-                src: e.target.result,
-                x: 100,
-                y: 100,
-                width: 300,
-                height: 200,
-                scale: 1,
-                rotation: 0
-            });
-            selectedElementIndex = currentDesign.elements.length - 1;
-            
-            // Aktualizacja podglądu
-            updatePreview();
-        };
-        img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-// Aktualizacja podglądu
-function updatePreview() {
-    const previewContainer = document.getElementById('previewContainer');
-    const canvas = document.getElementById('designCanvas');
-    
-    // Tworzenie podglądu projektu
-    previewContainer.innerHTML = `
-        <div style="text-align: center;">
-            <h4>${getProductName(currentDesign.productType)} - ${getAreaName(currentDesign.designArea)}</h4>
-            <img src="${document.getElementById('productBaseImg').src}" style="max-width: 200px; margin: 10px 0;">
-            <canvas id="previewCanvas" width="200" height="160" style="border: 1px solid #ddd; margin-top: 10px;"></canvas>
-        </div>
-    `;
-    
-    // Rysowanie na podglądzie
-    const previewCanvas = document.getElementById('previewCanvas');
-    const previewCtx = previewCanvas.getContext('2d');
-    
-    // Kopiowanie zawartości z głównego canvas
-    const mainCanvas = document.getElementById('designCanvas');
-    previewCtx.drawImage(mainCanvas, 0, 0, previewCanvas.width, previewCanvas.height);
-}
-
-// Pobieranie nazwy produktu
-function getProductName(type) {
-    switch(type) {
-        case 'tshirt': return 'Koszulka';
-        case 'hoodie': return 'Bluza';
-        case 'cap': return 'Czapka';
-        default: return 'Produkt';
-    }
-}
-
-// Pobieranie nazwy obszaru
-function getAreaName(area) {
-    switch(area) {
-        case 'front': return 'Przód';
-        case 'back': return 'Tył';
-        case 'sleeves': return 'Rękawy';
-        default: return 'Obszar';
-    }
-}
-
-// Czyszczenie canvas
-function clearCanvas() {
-    const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    currentDesign.elements = [];
-    selectedElementIndex = -1;
-    updatePreview();
-}
-
-// Resetowanie projektu
-function resetDesign() {
-    clearCanvas();
-    document.getElementById('designText').value = '';
-    document.getElementById('fontFamily').value = 'Arial';
-    document.getElementById('fontSize').value = '36';
-    document.getElementById('textColor').value = '#000000';
-    document.getElementById('productType').value = 'tshirt';
-    document.getElementById('productSize').value = 'M';
-    document.getElementById('designImage').value = '';
-    
-    // Resetowanie przycisków produktu
-    document.querySelectorAll('.product-base-item').forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('data-base') === 'tshirt') {
-            item.classList.add('active');
-        }
-    });
-    
-    // Resetowanie przycisków obszaru
-    document.querySelectorAll('.design-option').forEach(option => {
-        option.classList.remove('active');
-        if (option.getAttribute('data-area') === 'front') {
-            option.classList.add('active');
-        }
-    });
-    
-    currentDesign = {
-        productType: 'tshirt',
-        designArea: 'front',
-        elements: []
-    };
-    
-    changeProductBase('tshirt');
-}
-
-// Aktualizacja pozycji elementu
-function updateElementPosition() {
-    if (selectedElementIndex === -1 || currentDesign.elements.length === 0) return;
-    
-    const posX = parseInt(document.getElementById('posX').value);
-    const posY = parseInt(document.getElementById('posY').value);
-    
-    currentDesign.elements[selectedElementIndex].x = posX;
-    currentDesign.elements[selectedElementIndex].y = posY;
-    
-    updateDesign();
-}
-
-// Aktualizacja skali elementu
-function updateElementScale() {
-    if (selectedElementIndex === -1 || currentDesign.elements.length === 0) return;
-    
-    const scale = parseFloat(document.getElementById('scale').value);
-    currentDesign.elements[selectedElementIndex].scale = scale;
-    
-    updateDesign();
-}
-
-// Aktualizacja obrotu elementu
-function updateElementRotation() {
-    if (selectedElementIndex === -1 || currentDesign.elements.length === 0) return;
-    
-    const rotation = parseInt(document.getElementById('rotation').value);
-    currentDesign.elements[selectedElementIndex].rotation = rotation;
-    
-    updateDesign();
-}
-
-// Przeniesienie elementu na wierzch
-function bringToFront() {
-    if (selectedElementIndex === -1 || currentDesign.elements.length === 0) return;
-    
-    const element = currentDesign.elements.splice(selectedElementIndex, 1)[0];
-    currentDesign.elements.push(element);
-    selectedElementIndex = currentDesign.elements.length - 1;
-    
-    updateDesign();
-}
-
-// Dodanie do koszyka
-function addToCartFromDesign() {
-    alert('Projekt został dodany do koszyka!');
-    // Tutaj można dodać logikę dodawania do koszyka
-}
-
-// Wysyłanie projektu mailem
-function sendDesignToEmail() {
-    const email = prompt('Podaj swój adres email:');
-    if (email) {
-        alert(`Projekt został wysłany na adres: ${email}`);
-        // Tutaj można dodać logikę wysyłania emaila
-    }
-}
-
-// Zapisywanie projektu
-function saveDesign() {
-    alert('Projekt został zapisany!');
-    // Tutaj można dodać logikę zapisywania projektu
-}
-</script>         
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
@@ -4395,6 +3784,59 @@ function showNotification(message) {
 /* ====== Inicjalizacja: renderuj wszystko ====== */
 renderPosts('all');
 </script>
+<!-- Regulamin -->
+<section id="regulamin" class="bg-gray-950 py-12">
+  <div class="section-title text-center mb-12">
+    <h2 class="text-4xl font-bold text-gold-400">Regulamin sklepu AdelbertusShop</h2>
+    <p class="text-gray-300">Zapoznaj się z zasadami zakupów w naszym sklepie</p>
+  </div>
+
+  <div class="max-w-4xl mx-auto bg-gray-900 border border-gold-500 rounded-lg shadow-lg p-8 text-gray-200 space-y-6">
+    
+    <h3 class="text-2xl font-bold text-gold-400">§1 Postanowienia ogólne</h3>
+    <p>1. Sklep internetowy <strong>AdelbertusShop</strong> działa na zasadzie działalności nierejestrowanej w rozumieniu art. 5 ust. 1 ustawy Prawo przedsiębiorców.</p>
+    <p>2. Właścicielem Sklepu jest osoba fizyczna: <strong>Grzegorz Mielniczuk</strong>, prowadzący działalność nierejestrowaną.</p>
+    <p>3. Kontakt: <a href="mailto:mielniczukgrzegosz74@gmail.com" class="text-gold-400 underline">mielniczukgrzegosz74@gmail.com</a></p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§2 Zasady sprzedaży</h3>
+    <p>1. Sklep prowadzi sprzedaż detaliczną produktów odzieżowych i akcesoriów.</p>
+    <p>2. Wszystkie ceny podane na stronie są cenami brutto (zawierają podatek VAT, jeśli dotyczy).</p>
+    <p>3. Zamówienia składane są poprzez stronę internetową Sklepu.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§3 Płatności</h3>
+    <p>1. Dostępne metody płatności:</p>
+    <ul class="list-disc list-inside ml-4">
+      <li>Płatność elektroniczna (PayPal, BLIK, przelew online)</li>
+      <li>Przelew tradycyjny na wskazany numer rachunku (przesyłany e-mailowo)</li>
+    </ul>
+    <p>2. Zamówienie zostaje przyjęte do realizacji po zaksięgowaniu wpłaty.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§4 Realizacja zamówień i dostawa</h3>
+    <p>1. Produkty są realizowane na zamówienie i drukowane według projektu klienta lub oferty dostępnej w sklepie.</p>
+    <p>2. Czas realizacji wynosi od 5 do 14 dni roboczych.</p>
+    <p>3. Dostawa odbywa się za pośrednictwem firm kurierskich lub paczkomatów. Koszty dostawy są wskazane przy składaniu zamówienia.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§5 Prawo odstąpienia od umowy</h3>
+    <p>1. Konsument ma prawo odstąpić od umowy w terminie 14 dni od dnia otrzymania towaru.</p>
+    <p>2. Prawo odstąpienia nie przysługuje w przypadku towarów personalizowanych (np. z własnym nadrukiem klienta).</p>
+    <p>3. Aby skorzystać z prawa odstąpienia, należy wysłać e-mail na adres: <a href="mailto:mielniczukgrzegosz74@gmail.com" class="text-gold-400 underline">mielniczukgrzegosz74@gmail.com</a>.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§6 Reklamacje</h3>
+    <p>1. W przypadku wad towaru klient ma prawo do złożenia reklamacji drogą mailową.</p>
+    <p>2. Reklamacja powinna zawierać: imię i nazwisko, numer zamówienia, opis wady oraz zdjęcie produktu.</p>
+    <p>3. Reklamacja zostanie rozpatrzona w ciągu 14 dni.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§7 Dane osobowe</h3>
+    <p>1. Administratorem danych osobowych klientów jest Sprzedawca.</p>
+    <p>2. Dane osobowe przetwarzane są wyłącznie w celu realizacji zamówienia i kontaktu.</p>
+    <p>3. Klient ma prawo do wglądu, poprawiania i usunięcia swoich danych.</p>
+
+    <h3 class="text-2xl font-bold text-gold-400">§8 Postanowienia końcowe</h3>
+    <p>1. Regulamin obowiązuje od dnia jego opublikowania.</p>
+    <p>2. Sprzedawca zastrzega sobie prawo do wprowadzania zmian.</p>
+    <p>3. W sprawach nieuregulowanych mają zastosowanie przepisy prawa polskiego.</p>
+  </div>
+</section>
         
 <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
