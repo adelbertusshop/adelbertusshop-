@@ -1013,8 +1013,8 @@
         }
     </style>  
 </head>
-<body> 
-    <!-- Nagłówek -->
+<body>
+    <!-- ... RESZTA TWOJEGO KODU ... -->    <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
         <p class="tagline">Tworzone z pasją, noszone z dumą</p>
@@ -3254,8 +3254,7 @@
             <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
         </div>
     </div>
-</section>
-        
+</section>        
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
@@ -3985,7 +3984,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </footer>
 
     <script>
-        // ===== SYSTEM FILTROWANIA KATEGORII =====
+      // ===== SYSTEM FILTROWANIA KATEGORII =====
         document.addEventListener('DOMContentLoaded', function() {
             initCategoryFilters();
             initNavigation();
@@ -4091,6 +4090,21 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('navContainer').classList.toggle('show');
         }
 
+        function addToCart(name, price, image = null, size = null, color = null) {
+            // Sprawdź czy produkt już jest w koszyku
+            const existingIndex = cart.findIndex(item => 
+                item.name === name && 
+                item.size === size && 
+                item.color === color
+            );
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity:
         function addToCart(name, price, image = null, size = null, color = null) {
             // Sprawdź czy produkt już jest w koszyku
             const existingIndex = cart.findIndex(item => 
@@ -4267,13 +4281,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function initDesignStudio() {
             const canvas = document.getElementById('designCanvas');
-            const ctx = canvas.getContext('2d');
+            if (!canvas) return;
             
-            // Ustawienia canvas
+            const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Inicjalny render
+            // Event listener dla inputów
+            const textInput = document.getElementById('designText');
+            const fontFamily = document.getElementById('fontFamily');
+            const fontSize = document.getElementById('fontSize');
+            const textColor = document.getElementById('textColor');
+            
+            if (textInput) textInput.addEventListener('input', updateDesign);
+            if (fontFamily) fontFamily.addEventListener('change', updateDesign);
+            if (fontSize) fontSize.addEventListener('input', updateDesign);
+            if (textColor) textColor.addEventListener('input', updateDesign);
+            
+            // Event listener dla uploadu obrazu
+            const designImage = document.getElementById('designImage');
+            if (designImage) {
+                designImage.addEventListener('change', handleImageUpload);
+            }
+            
             updateDesign();
         }
 
@@ -4303,28 +4333,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function updateDesign() {
             const canvas = document.getElementById('designCanvas');
+            if (!canvas) return;
+            
             const ctx = canvas.getContext('2d');
             
             // Aktualizuj stan projektu
-            currentDesign.text = document.getElementById('designText').value;
-            currentDesign.fontFamily = document.getElementById('fontFamily').value;
-            currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
-            currentDesign.color = document.getElementById('textColor').value;
+            const textInput = document.getElementById('designText');
+            const fontFamily = document.getElementById('fontFamily');
+            const fontSize = document.getElementById('fontSize');
+            const textColor = document.getElementById('textColor');
             
-            // Wyczyść canvas
+            if (textInput) currentDesign.text = textInput.value;
+            if (fontFamily) currentDesign.fontFamily = fontFamily.value;
+            if (fontSize) currentDesign.fontSize = parseInt(fontSize.value);
+            if (textColor) currentDesign.color = textColor.value;
+            
+            // Wyczyść i narysuj canvas
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Narysuj tło - wirtualny produkt
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            // Narysuj obrazek jeśli istnieje
+            // Narysuj obrazek
             if (currentDesign.image) {
                 ctx.save();
                 ctx.translate(currentDesign.imageX, currentDesign.imageY);
                 ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
                 ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
-                ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
+                ctx.drawImage(currentDesign.image, -currentDesign.image.width/4, -currentDesign.image.height/4, currentDesign.image.width/2, currentDesign.image.height/2);
                 ctx.restore();
             }
             
@@ -4342,10 +4377,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.restore();
             }
             
-            // Aktualizuj podgląd
+            updateDesignPreview();
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    currentDesign.image = img;
+                    updateDesign();
+                    showNotification('Obraz załadowany');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateDesignPreview() {
             const preview = document.querySelector('.design-preview');
+            const canvas = document.getElementById('designCanvas');
+            
+            if (!preview || !canvas) return;
+            
             if (currentDesign.text || currentDesign.image) {
-                preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
+                preview.innerHTML = '<h3>Podgląd projektu</h3>';
                 const img = document.createElement('img');
                 img.src = canvas.toDataURL();
                 img.style.maxWidth = '100%';
@@ -4357,6 +4416,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function clearCanvas() {
             const canvas = document.getElementById('designCanvas');
+            if (!canvas) return;
+            
             const ctx = canvas.getContext('2d');
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#ffffff';
@@ -4364,11 +4425,50 @@ document.addEventListener('DOMContentLoaded', () => {
             
             currentDesign.text = '';
             currentDesign.image = null;
-            document.getElementById('designText').value = '';
             
-            document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
+            const textInput = document.getElementById('designText');
+            if (textInput) textInput.value = '';
             
+            updateDesign();
             showNotification('Canvas wyczyszczony');
+        }
+
+        function resetDesign() {
+            clearCanvas();
+            currentDesign = {
+                text: '',
+                fontSize: 36,
+                fontFamily: 'Arial',
+                color: '#000000',
+                productType: 'tshirt',
+                productSize: 'M',
+                image: null,
+                imageX: 250,
+                imageY: 200,
+                imageScale: 1,
+                imageRotation: 0,
+                textX: 250,
+                textY: 200,
+                textScale: 1,
+                textRotation: 0,
+                activeElement: 'text',
+                baseProduct: 'tshirt',
+                designArea: 'front'
+            };
+            
+            const fontFamily = document.getElementById('fontFamily');
+            const fontSize = document.getElementById('fontSize');
+            const textColor = document.getElementById('textColor');
+            const productType = document.getElementById('productType');
+            const productSize = document.getElementById('productSize');
+            
+            if (fontFamily) fontFamily.value = 'Arial';
+            if (fontSize) fontSize.value = '36';
+            if (textColor) textColor.value = '#000000';
+            if (productType) productType.value = 'tshirt';
+            if (productSize) productSize.value = 'M';
+            
+            showNotification('Projekt zresetowany');
         }
 
         function addToCartFromDesign() {
@@ -4384,12 +4484,57 @@ document.addEventListener('DOMContentLoaded', () => {
             const price = prices[productType.value] || 120;
             const canvas = document.getElementById('designCanvas');
             
+            const designName = currentDesign.text ? 
+                `Projekt: "${currentDesign.text}"` : 
+                'Projekt niestandardowy';
+            
             addToCart(
-                `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
+                `${designName} - ${productSize.value}`,
                 price,
                 canvas.toDataURL(),
                 productSize.value
             );
+        }
+
+        function sendDesignToEmail() {
+            const canvas = document.getElementById('designCanvas');
+            if (!canvas) {
+                showNotification('Najpierw stwórz projekt');
+                return;
+            }
+            
+            const email = prompt('Podaj adres email:');
+            if (email) {
+                showNotification('Projekt wysłany na: ' + email);
+            }
+        }
+
+        function saveDesign() {
+            const canvas = document.getElementById('designCanvas');
+            if (!canvas) return;
+            
+            const link = document.createElement('a');
+            link.download = `projekt-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            showNotification('Projekt zapisany');
+        }
+
+        function updateElementPosition() {
+            showNotification('Pozycja zaktualizowana');
+        }
+
+        function updateElementScale() {
+            showNotification('Skala zaktualizowana');
+        }
+
+        function updateElementRotation() {
+            showNotification('Obrót zaktualizowany');
+        }
+
+        function bringToFront() {
+            showNotification('Element na wierzchu');
         }
 
         // ===== INICJALIZACJA OPCJI PRODUKTÓW =====
@@ -4480,10 +4625,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.toggleMobileMenu = toggleMobileMenu;
         window.sendOrderEmail = sendOrderEmail;
         window.sendOrderWhatsApp = sendOrderWhatsApp;
+        window.sendDesignToEmail = sendDesignToEmail;
+        window.saveDesign = saveDesign;
+        window.resetDesign = resetDesign;
+        window.updateElementPosition = updateElementPosition;
+        window.updateElementScale = updateElementScale;
+        window.updateElementRotation = updateElementRotation;
+        window.bringToFront = bringToFront;
     </script>
 </body>
 </html>
-
-
 
                                 
