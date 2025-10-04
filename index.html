@@ -3398,27 +3398,24 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- ====== BLOG: sekcja kompletna + poprawiony skrypt (wklej 1:1, usuń stary blok) ====== -->
+<!-- ====== BLOG: komplet (wklej 1:1, usuń starą sekcję i stare skrypty bloga) ====== -->
 <section id="blog" class="bg-gray-950 py-12">
   <div class="section-title text-center mb-12">
     <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
     <p class="text-gray-300">Miejsce, gdzie każdy może podzielić się swoją myślą</p>
   </div>
 
-  <!-- Cytat -->
   <div class="max-w-2xl mx-auto mb-12 text-center">
     <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
       „Twoje słowa mają większą moc, niż myślisz.”
     </blockquote>
   </div>
 
-  <!-- Opinie o blogu -->
   <div class="max-w-3xl mx-auto mb-6 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
     <p id="dynamic-review" class="italic text-gold-300">Ładuję opinie…</p>
   </div>
 
-  <!-- Kategorie (filtr) -->
   <div class="flex justify-center space-x-6 mb-8 text-gold-400 text-2xl" id="category-bar">
     <button class="category-btn" data-cat="all">🌐 Wszystko</button>
     <button class="category-btn" data-cat="Moda">👕 Moda</button>
@@ -3426,19 +3423,17 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     <button class="category-btn" data-cat="Marzenia">🌙 Marzenia</button>
   </div>
 
-  <!-- Nowy artykuł -->
   <div class="text-center mb-8">
     <button id="openBlogFormBtn" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition">
       ✍️ Napisz nowy artykuł
     </button>
   </div>
 
-  <!-- Kontener postów -->
-  <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
-    <!-- renderowane posty będą wstawiane dynamicznie -->
+  <div id="blogPostsContainer" class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6">
+    <!-- Posty będą dynamicznie tutaj -->
   </div>
 
-  <!-- Formularz dodawania artykułu (domyślnie ukryty) -->
+  <!-- FORM -->
   <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
     <form id="newBlogPostForm">
@@ -3446,22 +3441,18 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <label class="text-gray-300">Tytuł</label>
         <input type="text" id="blogTitle" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
       </div>
-
       <div class="form-group mb-4">
         <label class="text-gray-300">Krótki opis</label>
         <textarea id="blogExcerpt" rows="2" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
       </div>
-
       <div class="form-group mb-4">
         <label class="text-gray-300">Pełna treść</label>
         <textarea id="blogContent" rows="5" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
       </div>
-
       <div class="form-group mb-4">
         <label class="text-gray-300">URL obrazka</label>
         <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
       </div>
-
       <div class="form-group mb-4">
         <label class="text-gray-300">Kategoria</label>
         <select id="blogCategory" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
@@ -3470,7 +3461,6 @@ setInterval(typeLetter, 15000); // co 15s nowy list
           <option value="Marzenia">Marzenia</option>
         </select>
       </div>
-
       <div class="flex gap-3">
         <button type="submit" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg">Opublikuj artykuł</button>
         <button type="button" id="cancelBlogForm" class="nav-btn px-6 py-2 rounded-lg">Anuluj</button>
@@ -3478,7 +3468,6 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </form>
   </div>
 
-  <!-- Opinie o sklepie (pokazywane pod blogiem) -->
   <div class="max-w-3xl mx-auto mt-12 mb-8 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie o sklepie</h3>
     <blockquote id="shop-review" class="italic text-gold-300 text-lg">Ładuję opinie sklepu…</blockquote>
@@ -3486,33 +3475,29 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 </section>
 
 <script>
-/* ====== Poprawiony skrypt: działa pewnie dzięki DOMContentLoaded + delegacji ====== */
 document.addEventListener('DOMContentLoaded', () => {
-  const BLOG_STORAGE_KEY = 'adelbertus_blog_posts_v1';
-  const REVIEWS_ROTATION_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
-  const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 dni (jak w twoim fragmencie)
+  const BLOG_KEY = 'adelbertus_blog_posts_v1';
+  const REV_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
+  const POST_LIFE = 7 * 24 * 60 * 60 * 1000; // 7 dni — jak chciałeś
 
-  /* --- Cytaty --- */
+  // helpery
+  const qs = s => document.querySelector(s);
+  const qsa = s => Array.from(document.querySelectorAll(s));
+  const escapeHtml = s => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;') : '';
+
+  // cytaty
   const quotes = [
     "„Twoje słowa mają większą moc, niż myślisz.”",
     "„Ludzie słyszą, ale pamiętają to, co widzą.”",
     "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
     "„Styl to nie ubranie – to komunikat.”"
   ];
-  let quoteIndex = 0;
-  const quoteEl = document.getElementById('dynamic-quote');
-  function changeQuote() {
-    if (!quoteEl) return;
-    quoteEl.classList.add('opacity-0');
-    setTimeout(() => {
-      quoteIndex = (quoteIndex + 1) % quotes.length;
-      quoteEl.innerText = quotes[quoteIndex];
-      quoteEl.classList.remove('opacity-0');
-    }, 250);
-  }
-  if (quoteEl) { changeQuote(); setInterval(changeQuote, 10000); }
+  let qi = 0;
+  const qEl = qs('#dynamic-quote');
+  function changeQuote(){ if(!qEl) return; qEl.classList.add('opacity-0'); setTimeout(()=>{ qi=(qi+1)%quotes.length; qEl.innerText=quotes[qi]; qEl.classList.remove('opacity-0'); },200); }
+  changeQuote(); setInterval(changeQuote,10000);
 
-  /* --- Opinie blog / sklep --- */
+  // opinie
   const blogReviews = [
     "„Świetne artykuły, chętnie wracam!” – Anna K.",
     "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
@@ -3525,291 +3510,189 @@ document.addEventListener('DOMContentLoaded', () => {
     "„Czapeczka sztos, pasuje do wszystkiego.” – Ola",
     "„Dostawa szybka, a koszulki robią robotę.” – Bartek"
   ];
-  let blogReviewIndex = parseInt(localStorage.getItem('blogReviewIndex') || '0', 10);
-  let shopReviewIndex = parseInt(localStorage.getItem('shopReviewIndex') || '0', 10);
-  function showBlogReview() {
-    const el = document.getElementById('dynamic-review');
-    if (!el) return;
-    el.innerText = blogReviews[blogReviewIndex];
-    blogReviewIndex = (blogReviewIndex + 1) % blogReviews.length;
-    localStorage.setItem('blogReviewIndex', blogReviewIndex);
-  }
-  function showShopReview() {
-    const el = document.getElementById('shop-review');
-    if (!el) return;
-    el.innerText = shopReviews[shopReviewIndex];
-    shopReviewIndex = (shopReviewIndex + 1) % shopReviews.length;
-    localStorage.setItem('shopReviewIndex', shopReviewIndex);
-  }
-  showBlogReview();
-  showShopReview();
-  setInterval(showBlogReview, REVIEWS_ROTATION_MS);
-  setInterval(showShopReview, REVIEWS_ROTATION_MS);
+  let bri = parseInt(localStorage.getItem('blogReviewIndex')||'0',10) || 0;
+  let sri = parseInt(localStorage.getItem('shopReviewIndex')||'0',10) || 0;
+  const showBlogReview = ()=>{ const el=qs('#dynamic-review'); if(!el) return; el.innerText = blogReviews[bri]; bri=(bri+1)%blogReviews.length; localStorage.setItem('blogReviewIndex',bri); };
+  const showShopReview = ()=>{ const el=qs('#shop-review'); if(!el) return; el.innerText = shopReviews[sri]; sri=(sri+1)%shopReviews.length; localStorage.setItem('shopReviewIndex',sri); };
+  showBlogReview(); showShopReview(); setInterval(showBlogReview,REV_MS); setInterval(showShopReview,REV_MS);
 
-  /* --- Filtr wulgaryzmów --- */
-  const badWords = ["kurwa","chuj","debil","idiota"];
-  function filterBadWords(text){
-    let out = text + '';
-    badWords.forEach(w => {
-      const r = new RegExp(w, 'gi');
-      out = out.replace(r, '***');
-    });
-    return out;
+  // filtr słów
+  const bad = ["kurwa","chuj","debil","idiota"];
+  function filterBad(s){ let out = s+''; bad.forEach(w=>{ out = out.replace(new RegExp(w,'gi'),'***'); }); return out; }
+
+  // storage
+  function loadPosts(){ try{ const r = localStorage.getItem(BLOG_KEY); if(!r) return []; const arr = JSON.parse(r); const now=Date.now(); return arr.filter(p=>!p.expire || now<=p.expire); } catch(e){ console.error(e); return []; } }
+  function savePosts(posts){ localStorage.setItem(BLOG_KEY, JSON.stringify(posts)); }
+
+  // create object
+  function createPost(title,excerpt,content,image,category){
+    return {
+      id: 'post-'+Date.now(),
+      title, excerpt, content,
+      image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
+      category: category || 'Moda',
+      createdAt: Date.now(),
+      expire: Date.now() + POST_LIFE
+    };
   }
 
-  /* --- LocalStorage: load/save --- */
-  function loadPosts() {
-    try {
-      const raw = localStorage.getItem(BLOG_STORAGE_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      const now = Date.now();
-      return parsed.filter(p => !p.expire || now <= p.expire);
-    } catch(e) { console.error(e); return []; }
-  }
-  function savePosts(posts) {
-    localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
-  }
+  const container = qs('#blogPostsContainer');
+  let currentFilter = 'all';
 
-  /* --- Helper --- */
-  function escapeHtml(str){
-    if(!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;')
-      .replace(/'/g,'&#039;');
-  }
-  function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    Object.assign(notification.style, {
-      position: 'fixed',
-      bottom: '20px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      backgroundColor: '#d4af37',
-      color: 'black',
-      padding: '12px 24px',
-      borderRadius: '30px',
-      zIndex: '1000',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-      fontWeight: 'bold'
-    });
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 3000);
-  }
-
-  /* --- Regulamin (dołączany na końcu) --- */
-  function appendRegulamin(container) {
-    if (!container) return;
-    if (container.querySelector('.regulamin-card')) return; // już dołączone
+  // append regulamin (only once)
+  function appendRegulamin(){
+    if(!container) return;
+    if(container.querySelector('.regulamin-card')) return;
     const div = document.createElement('div');
     div.className = 'blog-post regulamin-card bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-2';
     div.innerHTML = `
-      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin sklepu" class="blog-image rounded-t-lg w-full h-44 object-cover">
+      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin" class="blog-image rounded-t-lg w-full h-44 object-cover">
       <div class="blog-content p-6">
         <h3 class="text-xl font-bold text-gold-400 mb-2">📜 Regulamin sklepu AdelbertusShop</h3>
         <p class="text-sm text-gray-400">Kategoria: Informacje | Opublikowano: <span class="regulamin-date"></span></p>
         <div class="blog-excerpt"><p class="mt-3 text-gray-200">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p></div>
         <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">
 1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
-2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: mielniczukgrzegosz74@gmail.com.  
-3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).  
-4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.  
-5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.  
-6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.  
-7. Złożenie zamówienia jest równoznaczne z akceptacją niniejszego regulaminu.
+2. Kontakt: mielniczukgrzegosz74@gmail.com.  
+3. Płatności: przelew/BLIK.  
+4. Prawo odstąpienia: 14 dni (chyba że personalizowane).  
+5. Reklamacje rozpatrujemy mailowo.  
+6. Dane osobowe są wykorzystywane tylko do realizacji zamówienia.  
+7. Złożenie zamówienia = akceptacja regulaminu.
         </p></div>
-        <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+        <button class="nav-btn mt-4 read-toggle">Czytaj więcej</button>
       </div>
     `;
     container.appendChild(div);
-    const dateEl = div.querySelector('.regulamin-date');
-    if (dateEl) dateEl.textContent = new Date().toLocaleDateString('pl-PL');
+    const d = div.querySelector('.regulamin-date'); if(d) d.textContent = new Date().toLocaleDateString('pl-PL');
   }
 
-  /* --- Render --- */
-  const container = document.getElementById('blogPostsContainer');
-  function renderPosts(filterCategory = 'all') {
-    if (!container) return;
+  // render
+  function renderPosts(filter='all'){
+    if(!container) return;
     container.innerHTML = '';
-    const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt);
-    if (posts.length === 0) {
-      container.innerHTML = `<div class="col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p></div>`;
+    const posts = loadPosts().sort((a,b)=>b.createdAt - a.createdAt);
+    if(posts.length === 0){
+      container.innerHTML = `<div class="col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów. Bądź pierwszy!</p></div>`;
     } else {
-      posts.forEach(post => {
-        if (filterCategory !== 'all' && post.category !== filterCategory) return;
-        const postEl = document.createElement('div');
-        postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
-        postEl.setAttribute('data-expire', post.expire || '');
-        postEl.setAttribute('data-category', post.category || '');
-        postEl.id = post.id;
-        postEl.innerHTML = `
-          <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
+      posts.forEach(p=>{
+        if(filter !== 'all' && p.category !== filter) return;
+        const card = document.createElement('div');
+        card.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
+        card.setAttribute('data-category', p.category || '');
+        card.id = p.id;
+        card.innerHTML = `
+          <img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
           <div class="blog-content p-6">
-            <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
-            <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
-            <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
-            <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
-              <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
+            <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(p.title)}</h3>
+            <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(p.category)} | Opublikowano: ${new Date(p.createdAt).toLocaleDateString('pl-PL')}</p>
+            <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(p.excerpt)}</p></div>
+            <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(p.content)}</p>
               <div class="comments mt-6">
                 <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
-                <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
-                <form class="mt-3 comment-form" data-postid="${post.id}">
+                <ul id="comments-${p.id}" class="text-gray-200 space-y-2"></ul>
+                <form class="mt-3 comment-form" data-postid="${p.id}">
                   <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
                   <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
                 </form>
               </div>
             </div>
-            <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
-            <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
-              <i class="fas fa-share"></i> Udostępnij
-            </button>
+            <button class="nav-btn mt-4 read-toggle">Czytaj więcej</button>
+            <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(p.title)}" data-image="${escapeHtml(p.image)}"><i class="fas fa-share"></i> Udostępnij</button>
           </div>
         `;
-        container.appendChild(postEl);
+        container.appendChild(card);
       });
     }
-
-    // dołącz regulamin zawsze na końcu
-    appendRegulamin(container);
+    appendRegulamin();
   }
 
-  /* --- Create post object --- */
-  function createPostObject(title, excerpt, content, image, category) {
-    const id = 'post-' + Date.now();
-    return {
-      id,
-      title, excerpt, content,
-      image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
-      category: category || 'Moda',
-      createdAt: Date.now(),
-      expire: Date.now() + POST_LIFETIME_MS
-    };
-  }
-
-  /* --- Events: delegation on container (read more, share, comments) --- */
-  if (container) {
-    // click delegation
-    container.addEventListener('click', (e) => {
-      const readBtn = e.target.closest('.read-more-btn');
-      if (readBtn) {
-        const blogContent = readBtn.closest('.blog-content');
-        if (!blogContent) return;
-        const full = blogContent.querySelector('.blog-full');
-        if (!full) return;
-        full.classList.toggle('hidden');
-        readBtn.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
-        return;
-      }
-      const shareBtn = e.target.closest('.share-article-btn');
-      if (shareBtn) {
-        const title = shareBtn.getAttribute('data-title') || '';
-        const image = shareBtn.getAttribute('data-image') || '';
-        shareArticle(title, image);
-        return;
-      }
-    });
-
-    // submit delegation for comment forms
-    container.addEventListener('submit', (e) => {
-      if (e.target && e.target.matches('.comment-form')) {
-        e.preventDefault();
-        const postId = e.target.dataset.postid;
-        const input = e.target.querySelector('input');
-        if (!input) return;
-        const text = filterBadWords(input.value.trim());
-        if (!text) return;
-        const ul = document.getElementById('comments-' + postId);
-        if (!ul) return;
-        const li = document.createElement('li');
-        li.textContent = '💬 ' + text;
-        ul.appendChild(li);
-        input.value = '';
-      }
-    });
-  }
-
-  /* --- Form controls (open/cancel/post) --- */
-  const openBtn = document.getElementById('openBlogFormBtn');
-  const cancelBtn = document.getElementById('cancelBlogForm');
-  const formEl = document.getElementById('newBlogPostForm');
-
-  if (openBtn) openBtn.addEventListener('click', () => {
-    const form = document.getElementById('blogForm');
-    if (form) {
-      form.classList.remove('hidden');
-      window.scrollTo({top: form.offsetTop - 20, behavior: 'smooth'});
+  // delegation: clicks & submit
+  container.addEventListener('click', (ev)=>{
+    const read = ev.target.closest('.read-toggle');
+    if(read){
+      const blogContent = read.closest('.blog-content');
+      if(!blogContent) return;
+      const full = blogContent.querySelector('.blog-full');
+      if(!full) return;
+      full.classList.toggle('hidden');
+      read.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
+      return;
+    }
+    const share = ev.target.closest('.share-article-btn');
+    if(share){
+      const title = share.dataset.title || '';
+      const body = `Polecam artykuł: ${title}`;
+      window.open(`mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}`);
+      return;
     }
   });
-  if (cancelBtn) cancelBtn.addEventListener('click', () => {
-    if (formEl) formEl.reset();
-    const form = document.getElementById('blogForm');
-    if (form) form.classList.add('hidden');
+
+  container.addEventListener('submit', (ev)=>{
+    if(ev.target && ev.target.matches('.comment-form')){
+      ev.preventDefault();
+      const postId = ev.target.dataset.postid;
+      const input = ev.target.querySelector('input');
+      if(!input) return;
+      const text = filterBad(input.value.trim());
+      if(!text) return;
+      const ul = qs('#comments-' + postId);
+      if(!ul) return;
+      const li = document.createElement('li'); li.textContent = '💬 ' + text; ul.appendChild(li);
+      input.value='';
+    }
   });
 
-  if (formEl) {
-    formEl.addEventListener('submit', (e) => {
+  // form handling
+  const openBtn = qs('#openBlogFormBtn'), cancelBtn = qs('#cancelBlogForm'), formEl = qs('#newBlogPostForm');
+  if(openBtn) openBtn.addEventListener('click', ()=>{ const f=qs('#blogForm'); if(f) { f.classList.remove('hidden'); f.scrollIntoView({behavior:'smooth', block:'center'}); } });
+  if(cancelBtn) cancelBtn.addEventListener('click', ()=>{ if(formEl) formEl.reset(); const f=qs('#blogForm'); if(f) f.classList.add('hidden'); });
+
+  if(formEl){
+    formEl.addEventListener('submit', (e)=>{
       e.preventDefault();
-      const title = document.getElementById('blogTitle').value.trim();
-      const excerpt = document.getElementById('blogExcerpt').value.trim();
-      const content = document.getElementById('blogContent').value.trim();
-      const image = document.getElementById('blogImage').value.trim();
-      const category = document.getElementById('blogCategory').value;
-      if (!title || !excerpt || !content) return;
-      const post = createPostObject(title, excerpt, content, image, category);
-      const posts = loadPosts();
-      posts.push(post);
-      savePosts(posts);
+      const title = qs('#blogTitle').value.trim();
+      const excerpt = qs('#blogExcerpt').value.trim();
+      const content = qs('#blogContent').value.trim();
+      const image = qs('#blogImage').value.trim();
+      const category = qs('#blogCategory').value;
+      if(!title || !excerpt || !content) return showFlash('Wypełnij wymagane pola');
+      const post = createPost(title,excerpt,content,image,category);
+      const all = loadPosts(); all.push(post); savePosts(all);
       renderPosts(currentFilter);
       formEl.reset();
-      const form = document.getElementById('blogForm');
-      if (form) form.classList.add('hidden');
-      showNotification('✅ Artykuł opublikowany!');
+      qs('#blogForm').classList.add('hidden');
+      showFlash('✅ Artykuł opublikowany!');
     });
   }
 
-  /* --- Remove expired on load + interval --- */
-  function removeExpiredOnLoad() {
-    let posts = loadPosts();
+  // remove expired on load and periodic clean
+  function cleanup() {
+    const posts = loadPosts();
     const now = Date.now();
-    const before = posts.length;
-    posts = posts.filter(p => !p.expire || now <= p.expire);
-    if (posts.length !== before) savePosts(posts);
+    const fresh = posts.filter(p=>!p.expire || now<=p.expire);
+    if(fresh.length !== posts.length) { savePosts(fresh); }
   }
-  removeExpiredOnLoad();
-  setInterval(() => {
-    let posts = loadPosts();
-    const now = Date.now();
-    const fresh = posts.filter(p => !p.expire || now <= p.expire);
-    if (fresh.length !== posts.length) {
-      savePosts(fresh);
-      renderPosts(currentFilter);
-    }
-  }, 60 * 60 * 1000);
+  cleanup();
+  setInterval(()=>{ cleanup(); renderPosts(currentFilter); }, 60*60*1000);
 
-  /* --- Category filter --- */
-  let currentFilter = 'all';
-  document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.cat || 'all';
-      currentFilter = (cat === 'all') ? 'all' : cat;
-      renderPosts(currentFilter);
-    });
+  // category buttons
+  qsa('#category-bar .category-btn').forEach(b=>{
+    b.addEventListener('click', ()=>{ currentFilter = b.dataset.cat || 'all'; renderPosts(currentFilter); });
   });
 
-  /* --- Share function --- */
-  function shareArticle(title, image) {
-    const subject = `Polecam artykuł: ${title}`;
-    const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
-    window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+  // small flash
+  function showFlash(msg){
+    const n = document.createElement('div');
+    n.textContent = msg;
+    Object.assign(n.style,{position:'fixed',bottom:'20px',left:'50%',transform:'translateX(-50%)',background:'#d4af37',color:'#000',padding:'10px 18px',borderRadius:'24px',zIndex:9999});
+    document.body.appendChild(n);
+    setTimeout(()=>n.remove(),2500);
   }
 
-  /* --- Final init --- */
+  // init
   renderPosts('all');
-});
+}); // DOMContentLoaded end
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
