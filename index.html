@@ -3122,353 +3122,140 @@
         </div>
     </div>
 </section>
-<!-- ====== ZAPROJEKTUJ: pełny moduł z uploadem, podglądem i dodaniem do koszyka ====== -->
-<section id="zaprojektuj" class="py-12 bg-gray-950 text-gray-100">
-  <div class="max-w-6xl mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-6 text-gold-400">Zaprojektuj swój produkt</h2>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Lewa: kontrolki -->
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm text-gray-300 mb-1">Typ produktu</label>
-          <select id="pz-product" class="w-full p-2 rounded bg-gray-800 border border-gray-700">
-            <option value="tshirt">Koszulka</option>
-            <option value="hoodie">Bluza</option>
-            <option value="cap">Czapka z daszkiem</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm text-gray-300 mb-1">Kolor produktu</label>
-          <input id="pz-color" type="color" value="#1f2937" class="w-16 h-10 p-0 border-0 bg-transparent">
-          <span class="ml-3 text-sm text-gray-300" id="pz-color-label">#1f2937</span>
-        </div>
-
-        <div>
-          <label class="block text-sm text-gray-300 mb-1">Rozmiar</label>
-          <select id="pz-size" class="w-full p-2 rounded bg-gray-800 border border-gray-700">
-            <option>S</option><option>M</option><option>L</option><option>XL</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block text-sm text-gray-300 mb-1">Wgraj grafikę (png/jpg) — przeciągnij, upuść lub wybierz</label>
-          <div id="pz-drop" class="w-full p-4 rounded bg-gray-900 border-2 border-dashed border-gray-700 text-center text-sm">
-            Przeciągnij grafikę tutaj albo kliknij
-            <input id="pz-file" type="file" accept="image/*" style="display:none">
-            <button id="pz-file-btn" class="ml-2 nav-btn px-3 py-1">Wybierz plik</button>
-          </div>
-          <div id="pz-file-name" class="mt-2 text-xs text-gray-400"></div>
-        </div>
-
-        <div>
-          <label class="block text-sm text-gray-300 mb-1">Tekst na produkcie</label>
-          <input id="pz-text" type="text" placeholder="Napisz swój tekst..." class="w-full p-2 rounded bg-gray-800 border border-gray-700">
-          <div class="flex gap-2 mt-2">
-            <input id="pz-text-color" type="color" value="#ffffff" class="w-10 h-10 p-0 border-0 bg-transparent">
-            <input id="pz-text-size" type="range" min="14" max="72" value="28" class="w-full">
-            <select id="pz-text-pos" class="p-2 rounded bg-gray-800 border border-gray-700">
-              <option value="center">Środek</option>
-              <option value="top">Góra</option>
-              <option value="bottom">Dół</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="flex gap-3 mt-4">
-          <button id="pz-reset" class="nav-btn px-4 py-2">Reset</button>
-          <button id="pz-add-cart" class="nav-btn gold-bg px-4 py-2">Dodaj do koszyka</button>
-        </div>
-
-        <div class="mt-4 text-sm text-gray-400">
-          <p><b>Uwaga:</b> Projekt jest zapisywany lokalnie w koszyku. Płatność i finalizacja zamówienia odbywają się poza tym modułem.</p>
-        </div>
-      </div>
-
-      <!-- Prawa: podgląd -->
-      <div>
-        <div id="pz-canvas-wrap" class="relative w-full max-w-md mx-auto bg-white rounded-xl p-6" style="aspect-ratio:1/1.25;">
-          <!-- produkt tła (kolor) -->
-          <div id="pz-product-bg" class="absolute inset-0 rounded-lg flex items-center justify-center overflow-hidden" style="background:#1f2937;">
-            <!-- mockup image for product shape -->
-            <img id="pz-mockup" src="" alt="" class="absolute w-full h-full object-contain opacity-0 pointer-events-none">
-            <!-- uploaded image (draggable) -->
-            <img id="pz-user-img" src="" alt="" class="absolute max-w-full max-h-full object-contain cursor-grab" style="transform:translate(0px,0px) scale(1); display:none;">
-            <!-- text overlay (draggable) -->
-            <div id="pz-text-overlay" class="absolute text-white font-bold text-center select-none cursor-grab" style="transform:translate(0px,0px); display:none;">
-              Tekst
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-4 text-center text-gray-300">
-          <div>Podgląd produktu: <span id="pz-preview-label" class="font-semibold">Koszulka • S</span></div>
-        </div>
-      </div>
+<!-- Studio projektowe - ZMODYFIKOWANE -->
+<section id="design">
+    <div class="section-title">
+        <h2>Studio Projektowe</h2>
+        <p>Stwórz swój unikalny produkt</p>
     </div>
-  </div>
+    
+    <div class="design-studio">
+        <!-- Przyciski po bokach -->
+        <div class="side-buttons left">
+            <button class="side-button" onclick="updateDesign()" title="Podgląd">
+                <i class="fas fa-sync"></i>
+            </button>
+            <button class="side-button" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
+                <i class="fas fa-cart-plus"></i>
+            </button>
+        </div>
+        
+        <div class="side-buttons right">
+            <button class="side-button" onclick="sendDesignToEmail()" title="Wyślij projekt mailem">
+                <i class="fas fa-envelope"></i>
+            </button>
+            <button class="side-button" onclick="saveDesign()" title="Zapisz projekt">
+                <i class="fas fa-download"></i>
+            </button>
+        </div>
+        
+        <div class="product-base">
+            <div class="product-base-item active" data-base="tshirt">
+                <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka">
+                <p>Koszulka</p>
+            </div>
+            <div class="product-base-item" data-base="hoodie">
+                <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza">
+                <p>Bluza</p>
+            </div>
+            <div class="product-base-item" data-base="cap">
+                <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapka">
+                <p>Czapka</p>
+            </div>
+        </div>
+        
+        <div class="design-options">
+            <div class="design-option active" data-area="front">Przód</div>
+            <div class="design-option" data-area="back">Tył</div>
+            <div class="design-option" data-area="sleeves">Rękawy</div>
+        </div>
+        
+        <div class="canvas-container">
+            <canvas id="designCanvas" width="500" height="400"></canvas>
+            <div class="canvas-controls">
+                <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
+                <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
+            </div>
+        </div>
+        
+        <div class="design-tools">
+            <div class="tool-group">
+                <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
+                <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border rounded mb-3" oninput="updateDesign()">
+                
+                <div class="flex gap-3 mb-3">
+                    <select id="fontFamily" class="flex-1 p-2 border rounded" onchange="updateDesign()">
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Comic Sans MS">Comic Sans</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Palatino">Palatino</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Brush Script MT">Brush Script</option>
+                    </select>
+                    
+                    <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border rounded" oninput="updateDesign()">
+                </div>
+                
+                <input type="color" id="textColor" value="#000000" class="w-full h-10 mb-3" oninput="updateDesign()">
+            </div>
+            
+            <div class="tool-group">
+                <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
+                
+                <select id="productType" class="w-full p-3 border rounded mb-3">
+                    <option value="tshirt">Koszulka (120 zł)</option>
+                    <option value="hoodie">Bluza (200 zł)</option>
+                    <option value="cap">Czapka (99 zł)</option>
+                </select>
+                
+                <select id="productSize" class="w-full p-3 border rounded mb-3">
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+                
+                <input type="file" id="designImage" accept="image/*" class="w-full mb-3" onchange="handleImageUpload()">
+                <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()"><i class="fas fa-upload"></i> Wybierz obraz</button>
+            </div>
+
+            <div class="tool-group">
+                <div class="tool-title"><i class="fas fa-edit"></i> Edycja elementów</div>
+                <div class="transform-controls">
+                    <div class="transform-input">
+                        <label for="posX">Pozycja X</label>
+                        <input type="range" id="posX" min="0" max="500" value="250" oninput="updateElementPosition()">
+                    </div>
+                    <div class="transform-input">
+                        <label for="posY">Pozycja Y</label>
+                        <input type="range" id="posY" min="0" max="400" value="200" oninput="updateElementPosition()">
+                    </div>
+                    <div class="transform-input">
+                        <label for="scale">Skala</label>
+                        <input type="range" id="scale" min="0.1" max="2" step="0.1" value="1" oninput="updateElementScale()">
+                    </div>
+                    <div class="transform-input">
+                        <label for="rotation">Obrót</label>
+                        <input type="range" id="rotation" min="0" max="360" value="0" oninput="updateElementRotation()">
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button class="nav-btn gold-bg w-full" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="design-preview">
+            <h3>Podgląd Twojego projektu</h3>
+            <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
+        </div>
+    </div>
 </section>
-
-<style>
-/* Minimalne dodatkowe style */
-#pz-canvas-wrap { min-height: 420px; }
-#pz-product-bg img#pz-mockup { pointer-events:none; }
-#pz-user-img.dragging, #pz-text-overlay.dragging { cursor:grabbing; opacity:0.9; }
-.nav-btn { background:#111827; color:#fff; border-radius:8px; border:1px solid #333; }
-.nav-btn.gold-bg { background:linear-gradient(90deg,#b88f2f,#d4af37); color:#000; border-color:#b88f2f; }
-</style>
-
-<script>
-(function(){
-  // Elementy
-  const productEl = document.getElementById('pz-product');
-  const colorEl = document.getElementById('pz-color');
-  const colorLabel = document.getElementById('pz-color-label');
-  const sizeEl = document.getElementById('pz-size');
-
-  const drop = document.getElementById('pz-drop');
-  const fileInput = document.getElementById('pz-file');
-  const fileBtn = document.getElementById('pz-file-btn');
-  const fileName = document.getElementById('pz-file-name');
-
-  const textInput = document.getElementById('pz-text');
-  const textColor = document.getElementById('pz-text-color');
-  const textSize = document.getElementById('pz-text-size');
-  const textPos = document.getElementById('pz-text-pos');
-
-  const mockup = document.getElementById('pz-mockup');
-  const userImg = document.getElementById('pz-user-img');
-  const textOverlay = document.getElementById('pz-text-overlay');
-  const productBg = document.getElementById('pz-product-bg');
-  const previewLabel = document.getElementById('pz-preview-label');
-
-  const resetBtn = document.getElementById('pz-reset');
-  const addCartBtn = document.getElementById('pz-add-cart');
-
-  // Koszyk w localStorage
-  const CART_KEY = 'adel_cart';
-  function loadCart(){ try { return JSON.parse(localStorage.getItem(CART_KEY) || '[]'); } catch(e){ return []; } }
-  function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); }
-
-  // Wstępne ustawienia (mockupy)
-  const mockups = {
-    tshirt: '',  // możesz podstawić URL mockupu jeśli masz
-    hoodie: '',
-    cap: ''
-  };
-
-  // stan projektu
-  let state = {
-    product: 'tshirt',
-    color: colorEl.value,
-    size: 'S',
-    file: null,
-    fileName: '',
-    text: '',
-    textColor: textColor.value,
-    textSize: parseInt(textSize.value,10),
-    textPos: 'center',
-    // pozycje przesunięć dla drag
-    imgOffset: {x:0,y:0, scale:1},
-    textOffset: {x:0,y:0}
-  };
-
-  // Aktualizuj podgląd z danych stanu
-  function updatePreview(){
-    productBg.style.background = state.color;
-    colorLabel.textContent = state.color;
-    previewLabel.textContent = `${capitalize(state.product)} • ${state.size}`;
-
-    // mockup src jeśli ustawione
-    if(mockups[state.product]) {
-      mockup.src = mockups[state.product];
-      mockup.style.opacity = '1';
-    } else {
-      mockup.style.opacity = '0';
-    }
-
-    // image
-    if(state.file){
-      userImg.src = state.file;
-      userImg.style.display = 'block';
-      userImg.style.transform = `translate(${state.imgOffset.x}px, ${state.imgOffset.y}px) scale(${state.imgOffset.scale})`;
-    } else {
-      userImg.style.display = 'none';
-    }
-
-    // text
-    if(state.text && state.text.trim()){
-      textOverlay.style.display = 'block';
-      textOverlay.textContent = state.text;
-      textOverlay.style.color = state.textColor;
-      textOverlay.style.fontSize = state.textSize + 'px';
-      // position quick presets
-      if(state.textPos === 'center') {
-        textOverlay.style.top = '50%';
-        textOverlay.style.left = '50%';
-        textOverlay.style.transform = `translate(-50%,-50%) translate(${state.textOffset.x}px,${state.textOffset.y}px)`;
-      } else if(state.textPos === 'top'){
-        textOverlay.style.top = '12%';
-        textOverlay.style.left = '50%';
-        textOverlay.style.transform = `translate(-50%,0) translate(${state.textOffset.x}px,${state.textOffset.y}px)`;
-      } else {
-        textOverlay.style.top = '80%';
-        textOverlay.style.left = '50%';
-        textOverlay.style.transform = `translate(-50%,0) translate(${state.textOffset.x}px,${state.textOffset.y}px)`;
-      }
-    } else {
-      textOverlay.style.display = 'none';
-    }
-  }
-
-  // helper
-  function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
-
-  // kontrolki -> stan
-  productEl.addEventListener('change', (e)=>{ state.product = e.target.value; updatePreview(); });
-  colorEl.addEventListener('input', (e)=>{ state.color = e.target.value; updatePreview(); });
-  sizeEl.addEventListener('change', (e)=>{ state.size = e.target.value; updatePreview(); });
-
-  textInput.addEventListener('input', (e)=>{ state.text = e.target.value; updatePreview(); });
-  textColor.addEventListener('input', (e)=>{ state.textColor = e.target.value; updatePreview(); });
-  textSize.addEventListener('input', (e)=>{ state.textSize = parseInt(e.target.value,10); updatePreview(); });
-  textPos.addEventListener('change', (e)=>{ state.textPos = e.target.value; updatePreview(); });
-
-  // file drop & select
-  fileBtn.addEventListener('click', ()=>fileInput.click());
-  fileInput.addEventListener('change', handleFile);
-  drop.addEventListener('dragover', (e)=>{ e.preventDefault(); drop.classList.add('border-gold-400'); });
-  drop.addEventListener('dragleave', ()=>{ drop.classList.remove('border-gold-400'); });
-  drop.addEventListener('drop', (e)=>{ e.preventDefault(); drop.classList.remove('border-gold-400'); const f = e.dataTransfer.files && e.dataTransfer.files[0]; if(f) handleFile({target:{files:[f]}}); });
-
-  function handleFile(e){
-    const f = e.target.files[0];
-    if(!f) return;
-    if(!f.type.startsWith('image/')) { alert('Tylko obrazki są obsługiwane'); return; }
-    const reader = new FileReader();
-    reader.onload = function(ev){
-      state.file = ev.target.result;
-      state.fileName = f.name;
-      fileName.textContent = f.name;
-      // reset pozycji
-      state.imgOffset = {x:0,y:0, scale:1};
-      updatePreview();
-    };
-    reader.readAsDataURL(f);
-  }
-
-  // Drag dla obrazu i tekstu (desktop + touch)
-  function makeDraggable(el, offsetObj){
-    let dragging = false, start = {x:0,y:0}, initial = {x:0,y:0};
-    el.addEventListener('pointerdown', (e)=>{
-      e.preventDefault();
-      dragging = true; el.classList.add('dragging');
-      start = {x: e.clientX, y: e.clientY};
-      initial = {x: offsetObj.x, y: offsetObj.y};
-      el.setPointerCapture(e.pointerId);
-    });
-    el.addEventListener('pointermove', (e)=>{
-      if(!dragging) return;
-      const dx = e.clientX - start.x;
-      const dy = e.clientY - start.y;
-      offsetObj.x = initial.x + dx;
-      offsetObj.y = initial.y + dy;
-      updatePreview();
-    });
-    el.addEventListener('pointerup', (e)=>{
-      dragging = false; el.classList.remove('dragging');
-      try{ el.releasePointerCapture(e.pointerId); }catch(err){}
-    });
-    el.addEventListener('pointercancel', ()=>{ dragging=false; el.classList.remove('dragging'); });
-  }
-
-  // implementacja: obraz i tekst
-  state.imgOffset = {x:0,y:0, scale:1};
-  state.textOffset = {x:0,y:0};
-  makeDraggable(userImg, state.imgOffset);
-  makeDraggable(textOverlay, state.textOffset);
-
-  // reset
-  resetBtn.addEventListener('click', ()=>{
-    state = {
-      product: 'tshirt',
-      color: '#1f2937',
-      size: 'S',
-      file: null,
-      fileName: '',
-      text: '',
-      textColor: '#ffffff',
-      textSize: 28,
-      textPos: 'center',
-      imgOffset: {x:0,y:0, scale:1},
-      textOffset: {x:0,y:0}
-    };
-    // sync inputs
-    productEl.value = state.product;
-    colorEl.value = state.color; colorLabel.textContent = state.color;
-    sizeEl.value = state.size;
-    fileInput.value = '';
-    fileName.textContent = '';
-    textInput.value = '';
-    textColor.value = state.textColor;
-    textSize.value = state.textSize;
-    textPos.value = state.textPos;
-    updatePreview();
-    showFlash('Zresetowano projekt');
-  });
-
-  // Dodaj do koszyka - tworzy obiekt projektu i zapisuje
-  addCartBtn.addEventListener('click', ()=>{
-    // basic validation
-    if(!state.file && (!state.text || state.text.trim().length < 1)){
-      if(!confirm('Brak grafiki i tekstu. Czy chcesz dodać pusty projekt?')) return;
-    }
-    const cart = loadCart();
-    const item = {
-      id: 'custom-' + Date.now(),
-      product: state.product,
-      color: state.color,
-      size: state.size,
-      imageData: state.file || null, // dataURL
-      fileName: state.fileName || '',
-      text: state.text || '',
-      textColor: state.textColor,
-      textSize: state.textSize,
-      textPos: state.textPos,
-      imgOffset: state.imgOffset,
-      textOffset: state.textOffset,
-      qty: 1,
-      price: priceFor(state.product) // simple pricing
-    };
-    cart.push(item);
-    saveCart(cart);
-    showFlash('Dodano do koszyka ✅');
-  });
-
-  function priceFor(product){
-    if(product === 'hoodie') return 200;
-    if(product === 'cap') return 80;
-    return 120; // tshirt
-  }
-
-  // flash message
-  function showFlash(msg){
-    const n = document.createElement('div');
-    n.textContent = msg;
-    Object.assign(n.style, {position:'fixed', bottom:'20px', left:'50%', transform:'translateX(-50%)', background:'#d4af37', color:'#000', padding:'10px 16px', borderRadius:'20px', zIndex:9999, fontWeight:'700'});
-    document.body.appendChild(n);
-    setTimeout(()=> n.remove(), 2500);
-  }
-
-  // initial render
-  updatePreview();
-
-  // expose simple helpers for debugging (opcjonalne)
-  window.adel_cart = { load: loadCart, save: saveCart };
-
-})();
-</script>        
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
@@ -3648,10 +3435,10 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 
   <!-- Kontener postów -->
   <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
-    <!-- Posty będą generowane dynamicznie -->
+    <!-- renderowane posty będą wstawiane dynamicznie -->
   </div>
 
-  <!-- Formularz dodawania artykułu -->
+  <!-- Formularz dodawania artykułu (domyślnie ukryty) -->
   <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
     <form id="newBlogPostForm">
@@ -3691,7 +3478,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </form>
   </div>
 
-  <!-- Opinie o sklepie -->
+  <!-- Opinie o sklepie (pokazywane pod blogiem) -->
   <div class="max-w-3xl mx-auto mt-12 mb-8 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
     <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie o sklepie</h3>
     <blockquote id="shop-review" class="italic text-gold-300 text-lg">Ładuję opinie sklepu…</blockquote>
@@ -3699,121 +3486,328 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 </section>
 
 <script>
+/* ====== Poprawiony skrypt: działa pewnie dzięki DOMContentLoaded + delegacji ====== */
 document.addEventListener('DOMContentLoaded', () => {
   const BLOG_STORAGE_KEY = 'adelbertus_blog_posts_v1';
-  const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000;
-  let currentFilter = 'all';
+  const REVIEWS_ROTATION_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
+  const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 dni (jak w twoim fragmencie)
 
+  /* --- Cytaty --- */
   const quotes = [
     "„Twoje słowa mają większą moc, niż myślisz.”",
-    "„Styl to nie ubranie – to komunikat.”",
-    "„To, co tworzysz, mówi więcej niż tysiąc słów.”"
+    "„Ludzie słyszą, ale pamiętają to, co widzą.”",
+    "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
+    "„Styl to nie ubranie – to komunikat.”"
   ];
   let quoteIndex = 0;
   const quoteEl = document.getElementById('dynamic-quote');
-  setInterval(() => {
-    quoteIndex = (quoteIndex + 1) % quotes.length;
-    quoteEl.textContent = quotes[quoteIndex];
-  }, 7000);
+  function changeQuote() {
+    if (!quoteEl) return;
+    quoteEl.classList.add('opacity-0');
+    setTimeout(() => {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      quoteEl.innerText = quotes[quoteIndex];
+      quoteEl.classList.remove('opacity-0');
+    }, 250);
+  }
+  if (quoteEl) { changeQuote(); setInterval(changeQuote, 10000); }
 
-  function loadPosts() {
-    const data = JSON.parse(localStorage.getItem(BLOG_STORAGE_KEY) || '[]');
-    const now = Date.now();
-    return data.filter(p => !p.expire || now < p.expire);
+  /* --- Opinie blog / sklep --- */
+  const blogReviews = [
+    "„Świetne artykuły, chętnie wracam!” – Anna K.",
+    "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
+    "„Fajny styl pisania, oby tak dalej!” – Julia",
+    "„Dzięki za wartościowe treści!” – Piotr"
+  ];
+  const shopReviews = [
+    "„Koszulka super jakości, po praniu wygląda jak nowa!” – Kasia",
+    "„Bluza mega wygodna i ciepła, noszę codziennie.” – Tomek",
+    "„Czapeczka sztos, pasuje do wszystkiego.” – Ola",
+    "„Dostawa szybka, a koszulki robią robotę.” – Bartek"
+  ];
+  let blogReviewIndex = parseInt(localStorage.getItem('blogReviewIndex') || '0', 10);
+  let shopReviewIndex = parseInt(localStorage.getItem('shopReviewIndex') || '0', 10);
+  function showBlogReview() {
+    const el = document.getElementById('dynamic-review');
+    if (!el) return;
+    el.innerText = blogReviews[blogReviewIndex];
+    blogReviewIndex = (blogReviewIndex + 1) % blogReviews.length;
+    localStorage.setItem('blogReviewIndex', blogReviewIndex);
+  }
+  function showShopReview() {
+    const el = document.getElementById('shop-review');
+    if (!el) return;
+    el.innerText = shopReviews[shopReviewIndex];
+    shopReviewIndex = (shopReviewIndex + 1) % shopReviews.length;
+    localStorage.setItem('shopReviewIndex', shopReviewIndex);
+  }
+  showBlogReview();
+  showShopReview();
+  setInterval(showBlogReview, REVIEWS_ROTATION_MS);
+  setInterval(showShopReview, REVIEWS_ROTATION_MS);
+
+  /* --- Filtr wulgaryzmów --- */
+  const badWords = ["kurwa","chuj","debil","idiota"];
+  function filterBadWords(text){
+    let out = text + '';
+    badWords.forEach(w => {
+      const r = new RegExp(w, 'gi');
+      out = out.replace(r, '***');
+    });
+    return out;
   }
 
+  /* --- LocalStorage: load/save --- */
+  function loadPosts() {
+    try {
+      const raw = localStorage.getItem(BLOG_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      const now = Date.now();
+      return parsed.filter(p => !p.expire || now <= p.expire);
+    } catch(e) { console.error(e); return []; }
+  }
   function savePosts(posts) {
     localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
   }
 
-  function createPost(title, excerpt, content, image, category) {
+  /* --- Helper --- */
+  function escapeHtml(str){
+    if(!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;')
+      .replace(/'/g,'&#039;');
+  }
+  function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    Object.assign(notification.style, {
+      position: 'fixed',
+      bottom: '20px',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      backgroundColor: '#d4af37',
+      color: 'black',
+      padding: '12px 24px',
+      borderRadius: '30px',
+      zIndex: '1000',
+      boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+      fontWeight: 'bold'
+    });
+    document.body.appendChild(notification);
+    setTimeout(() => notification.remove(), 3000);
+  }
+
+  /* --- Regulamin (dołączany na końcu) --- */
+  function appendRegulamin(container) {
+    if (!container) return;
+    if (container.querySelector('.regulamin-card')) return; // już dołączone
+    const div = document.createElement('div');
+    div.className = 'blog-post regulamin-card bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-2';
+    div.innerHTML = `
+      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin sklepu" class="blog-image rounded-t-lg w-full h-44 object-cover">
+      <div class="blog-content p-6">
+        <h3 class="text-xl font-bold text-gold-400 mb-2">📜 Regulamin sklepu AdelbertusShop</h3>
+        <p class="text-sm text-gray-400">Kategoria: Informacje | Opublikowano: <span class="regulamin-date"></span></p>
+        <div class="blog-excerpt"><p class="mt-3 text-gray-200">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p></div>
+        <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">
+1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
+2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: mielniczukgrzegosz74@gmail.com.  
+3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).  
+4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.  
+5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.  
+6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.  
+7. Złożenie zamówienia jest równoznaczne z akceptacją niniejszego regulaminu.
+        </p></div>
+        <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+      </div>
+    `;
+    container.appendChild(div);
+    const dateEl = div.querySelector('.regulamin-date');
+    if (dateEl) dateEl.textContent = new Date().toLocaleDateString('pl-PL');
+  }
+
+  /* --- Render --- */
+  const container = document.getElementById('blogPostsContainer');
+  function renderPosts(filterCategory = 'all') {
+    if (!container) return;
+    container.innerHTML = '';
+    const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt);
+    if (posts.length === 0) {
+      container.innerHTML = `<div class="col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p></div>`;
+    } else {
+      posts.forEach(post => {
+        if (filterCategory !== 'all' && post.category !== filterCategory) return;
+        const postEl = document.createElement('div');
+        postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
+        postEl.setAttribute('data-expire', post.expire || '');
+        postEl.setAttribute('data-category', post.category || '');
+        postEl.id = post.id;
+        postEl.innerHTML = `
+          <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
+          <div class="blog-content p-6">
+            <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
+            <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
+            <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
+            <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
+              <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
+              <div class="comments mt-6">
+                <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
+                <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
+                <form class="mt-3 comment-form" data-postid="${post.id}">
+                  <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
+                  <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
+                </form>
+              </div>
+            </div>
+            <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
+            <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
+              <i class="fas fa-share"></i> Udostępnij
+            </button>
+          </div>
+        `;
+        container.appendChild(postEl);
+      });
+    }
+
+    // dołącz regulamin zawsze na końcu
+    appendRegulamin(container);
+  }
+
+  /* --- Create post object --- */
+  function createPostObject(title, excerpt, content, image, category) {
+    const id = 'post-' + Date.now();
     return {
-      id: 'post-' + Date.now(),
-      title,
-      excerpt,
-      content,
-      image: image || 'https://via.placeholder.com/800x400?text=AdelbertusShop',
-      category,
+      id,
+      title, excerpt, content,
+      image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
+      category: category || 'Moda',
       createdAt: Date.now(),
       expire: Date.now() + POST_LIFETIME_MS
     };
   }
 
-  const container = document.getElementById('blogPostsContainer');
-  function renderPosts(filter = 'all') {
-    const posts = loadPosts().sort((a, b) => b.createdAt - a.createdAt);
-    container.innerHTML = '';
-    posts.forEach(post => {
-      if (filter !== 'all' && post.category !== filter) return;
-      const el = document.createElement('div');
-      el.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
-      el.innerHTML = `
-        <img src="${post.image}" alt="${post.title}" class="rounded-t-lg w-full h-44 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-bold text-gold-400 mb-2">${post.title}</h3>
-          <p class="text-sm text-gray-400 mb-3">Kategoria: ${post.category}</p>
-          <p class="text-gray-300 excerpt">${post.excerpt}</p>
-          <div class="full-content hidden mt-3 text-gray-200 whitespace-pre-line">${post.content}</div>
-          <button class="read-more-btn nav-btn mt-3">Czytaj więcej</button>
-        </div>`;
-      container.appendChild(el);
+  /* --- Events: delegation on container (read more, share, comments) --- */
+  if (container) {
+    // click delegation
+    container.addEventListener('click', (e) => {
+      const readBtn = e.target.closest('.read-more-btn');
+      if (readBtn) {
+        const blogContent = readBtn.closest('.blog-content');
+        if (!blogContent) return;
+        const full = blogContent.querySelector('.blog-full');
+        if (!full) return;
+        full.classList.toggle('hidden');
+        readBtn.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
+        return;
+      }
+      const shareBtn = e.target.closest('.share-article-btn');
+      if (shareBtn) {
+        const title = shareBtn.getAttribute('data-title') || '';
+        const image = shareBtn.getAttribute('data-image') || '';
+        shareArticle(title, image);
+        return;
+      }
     });
-    appendRegulamin();
+
+    // submit delegation for comment forms
+    container.addEventListener('submit', (e) => {
+      if (e.target && e.target.matches('.comment-form')) {
+        e.preventDefault();
+        const postId = e.target.dataset.postid;
+        const input = e.target.querySelector('input');
+        if (!input) return;
+        const text = filterBadWords(input.value.trim());
+        if (!text) return;
+        const ul = document.getElementById('comments-' + postId);
+        if (!ul) return;
+        const li = document.createElement('li');
+        li.textContent = '💬 ' + text;
+        ul.appendChild(li);
+        input.value = '';
+      }
+    });
   }
 
-  function appendRegulamin() {
-    const reg = document.createElement('div');
-    reg.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-2';
-    reg.innerHTML = `
-      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" class="rounded-t-lg w-full h-44 object-cover">
-      <div class="p-6">
-        <h3 class="text-xl font-bold text-gold-400 mb-2">📜 Regulamin sklepu AdelbertusShop</h3>
-        <p class="text-gray-300 excerpt">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p>
-        <div class="full-content hidden mt-3 text-gray-200 whitespace-pre-line">
-1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
-2. Zamówienia realizowane są przez e-mail: mielniczukgrzegosz74@gmail.com.  
-3. Płatność: przelew tradycyjny lub BLIK – dane po potwierdzeniu zamówienia.  
-4. Zwrot towaru: do 14 dni od otrzymania.  
-5. Sklep nie odpowiada za opóźnienia dostaw wynikające z winy przewoźnika.  
-6. Dane osobowe są przetwarzane wyłącznie w celu realizacji zamówienia.  
-7. Złożenie zamówienia oznacza akceptację niniejszego regulaminu.
-        </div>
-        <button class="read-more-btn nav-btn mt-3">Czytaj więcej</button>
-      </div>`;
-    container.appendChild(reg);
+  /* --- Form controls (open/cancel/post) --- */
+  const openBtn = document.getElementById('openBlogFormBtn');
+  const cancelBtn = document.getElementById('cancelBlogForm');
+  const formEl = document.getElementById('newBlogPostForm');
+
+  if (openBtn) openBtn.addEventListener('click', () => {
+    const form = document.getElementById('blogForm');
+    if (form) {
+      form.classList.remove('hidden');
+      window.scrollTo({top: form.offsetTop - 20, behavior: 'smooth'});
+    }
+  });
+  if (cancelBtn) cancelBtn.addEventListener('click', () => {
+    if (formEl) formEl.reset();
+    const form = document.getElementById('blogForm');
+    if (form) form.classList.add('hidden');
+  });
+
+  if (formEl) {
+    formEl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('blogTitle').value.trim();
+      const excerpt = document.getElementById('blogExcerpt').value.trim();
+      const content = document.getElementById('blogContent').value.trim();
+      const image = document.getElementById('blogImage').value.trim();
+      const category = document.getElementById('blogCategory').value;
+      if (!title || !excerpt || !content) return;
+      const post = createPostObject(title, excerpt, content, image, category);
+      const posts = loadPosts();
+      posts.push(post);
+      savePosts(posts);
+      renderPosts(currentFilter);
+      formEl.reset();
+      const form = document.getElementById('blogForm');
+      if (form) form.classList.add('hidden');
+      showNotification('✅ Artykuł opublikowany!');
+    });
   }
 
-  container.addEventListener('click', e => {
-    const btn = e.target.closest('.read-more-btn');
-    if (!btn) return;
-    const full = btn.parentElement.querySelector('.full-content');
-    full.classList.toggle('hidden');
-    btn.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
+  /* --- Remove expired on load + interval --- */
+  function removeExpiredOnLoad() {
+    let posts = loadPosts();
+    const now = Date.now();
+    const before = posts.length;
+    posts = posts.filter(p => !p.expire || now <= p.expire);
+    if (posts.length !== before) savePosts(posts);
+  }
+  removeExpiredOnLoad();
+  setInterval(() => {
+    let posts = loadPosts();
+    const now = Date.now();
+    const fresh = posts.filter(p => !p.expire || now <= p.expire);
+    if (fresh.length !== posts.length) {
+      savePosts(fresh);
+      renderPosts(currentFilter);
+    }
+  }, 60 * 60 * 1000);
+
+  /* --- Category filter --- */
+  let currentFilter = 'all';
+  document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat || 'all';
+      currentFilter = (cat === 'all') ? 'all' : cat;
+      renderPosts(currentFilter);
+    });
   });
 
-  // Form
-  document.getElementById('openBlogFormBtn').addEventListener('click', () => {
-    document.getElementById('blogForm').classList.remove('hidden');
-  });
-  document.getElementById('cancelBlogForm').addEventListener('click', () => {
-    document.getElementById('blogForm').classList.add('hidden');
-  });
-  document.getElementById('newBlogPostForm').addEventListener('submit', e => {
-    e.preventDefault();
-    const title = blogTitle.value.trim();
-    const excerpt = blogExcerpt.value.trim();
-    const content = blogContent.value.trim();
-    const image = blogImage.value.trim();
-    const category = blogCategory.value;
-    if (!title || !excerpt || !content) return;
-    const posts = loadPosts();
-    posts.push(createPost(title, excerpt, content, image, category));
-    savePosts(posts);
-    e.target.reset();
-    document.getElementById('blogForm').classList.add('hidden');
-    renderPosts(currentFilter);
-  });
+  /* --- Share function --- */
+  function shareArticle(title, image) {
+    const subject = `Polecam artykuł: ${title}`;
+    const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
+    window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+  }
 
+  /* --- Final init --- */
   renderPosts('all');
 });
 </script>        
