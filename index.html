@@ -3149,7 +3149,6 @@
             </button>
         </div>
         
-        <!-- MINIATURY PRODUKTÓW -->
         <div class="product-base">
             <div class="product-base-item active" data-base="tshirt">
                 <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka">
@@ -3165,14 +3164,12 @@
             </div>
         </div>
         
-        <!-- OPCJE STRONY PRODUKTU -->
         <div class="design-options">
             <div class="design-option active" data-area="front">Przód</div>
             <div class="design-option" data-area="back">Tył</div>
             <div class="design-option" data-area="sleeves">Rękawy</div>
         </div>
         
-        <!-- CANVAS DO PROJEKTOWANIA -->
         <div class="canvas-container">
             <canvas id="designCanvas" width="500" height="400"></canvas>
             <div class="canvas-controls">
@@ -3181,7 +3178,6 @@
             </div>
         </div>
         
-        <!-- NARZĘDZIA -->
         <div class="design-tools">
             <div class="tool-group">
                 <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
@@ -3254,48 +3250,12 @@
             </div>
         </div>
         
-        <!-- PODGLĄD -->
         <div class="design-preview">
             <h3>Podgląd Twojego projektu</h3>
             <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
         </div>
     </div>
 </section>
-
-<!-- SCRIPT DLA TEJ SEKCJI -->
-<script>
-const canvas = document.getElementById("designCanvas");
-const ctx = canvas.getContext("2d");
-
-const productImages = {
-    tshirt: "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg",
-    hoodie: "https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg",
-    cap: "https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png"
-};
-
-let currentBase = "tshirt";
-
-function loadBaseProduct(productKey) {
-    const img = new Image();
-    img.src = productImages[productKey];
-    img.onload = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    };
-}
-
-document.querySelectorAll(".product-base-item").forEach(item => {
-    item.addEventListener("click", () => {
-        document.querySelectorAll(".product-base-item").forEach(el => el.classList.remove("active"));
-        item.classList.add("active");
-        currentBase = item.getAttribute("data-base");
-        loadBaseProduct(currentBase);
-    });
-});
-
-// Start z koszulką
-loadBaseProduct(currentBase);
-</script>
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
@@ -4522,112 +4482,5 @@ document.addEventListener('DOMContentLoaded', () => {
         window.sendOrderEmail = sendOrderEmail;
         window.sendOrderWhatsApp = sendOrderWhatsApp;
     </script>
-<script>
-const canvas = document.getElementById('designCanvas');
-const ctx = canvas.getContext('2d');
-
-let currentImage = null;
-let designText = '';
-let textColor = '#000000';
-let fontFamily = 'Arial';
-let fontSize = 36;
-let posX = 250;
-let posY = 200;
-let scale = 1;
-let rotation = 0;
-
-// 🔹 Rysowanie całości
-function updateDesign() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.save();
-    ctx.translate(posX, posY);
-    ctx.rotate((rotation * Math.PI) / 180);
-    ctx.scale(scale, scale);
-
-    // Rysuj obrazek
-    if (currentImage) {
-        ctx.drawImage(currentImage, -currentImage.width / 4, -currentImage.height / 4, currentImage.width / 2, currentImage.height / 2);
-    }
-
-    // Rysuj tekst
-    designText = document.getElementById('designText').value;
-    textColor = document.getElementById('textColor').value;
-    fontFamily = document.getElementById('fontFamily').value;
-    fontSize = document.getElementById('fontSize').value;
-
-    ctx.fillStyle = textColor;
-    ctx.font = `${fontSize}px ${fontFamily}`;
-    ctx.textAlign = 'center';
-    ctx.fillText(designText, 0, 0);
-
-    ctx.restore();
-}
-
-// 🔹 Wczytanie obrazka
-function handleImageUpload() {
-    const file = document.getElementById('designImage').files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            currentImage = new Image();
-            currentImage.onload = updateDesign;
-            currentImage.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-    }
-}
-
-// 🔹 Pozycja / skala / obrót
-function updateElementPosition() {
-    posX = parseInt(document.getElementById('posX').value);
-    posY = parseInt(document.getElementById('posY').value);
-    updateDesign();
-}
-function updateElementScale() {
-    scale = parseFloat(document.getElementById('scale').value);
-    updateDesign();
-}
-function updateElementRotation() {
-    rotation = parseInt(document.getElementById('rotation').value);
-    updateDesign();
-}
-
-// 🔹 Reset i czyszczenie
-function clearCanvas() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    currentImage = null;
-    designText = '';
-}
-function resetDesign() {
-    posX = 250;
-    posY = 200;
-    scale = 1;
-    rotation = 0;
-    document.getElementById('designText').value = '';
-    updateDesign();
-}
-
-// 🔹 Zapis i wysyłka
-function saveDesign() {
-    const link = document.createElement('a');
-    link.download = 'moj_projekt.png';
-    link.href = canvas.toDataURL();
-    link.click();
-}
-
-function sendDesignToEmail() {
-    alert('Opcja wysyłki projektu e-mailem zostanie dodana później.');
-}
-
-function addToCartFromDesign() {
-    alert('Projekt dodany do koszyka (symulacja)');
-}
-
-function bringToFront() {
-    alert('Element przesunięty na wierzch (symulacja)');
-}
-
-updateDesign();
-</script>        
 </body>
 </html>
