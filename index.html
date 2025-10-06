@@ -3398,23 +3398,31 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 SEK CJA BLOG + REGULAMIN + OPINIE (rozszerzona wersja) -->
+<!-- 🔥 SEK CJA BLOG + REGULAMIN (pełny, z animacją i strzałkami) -->
 <section id="blog" class="py-16 bg-gray-100 text-gray-900">
   <div class="container mx-auto px-4">
     <h2 class="text-4xl font-bold text-center mb-10">Blog Adelbertus</h2>
 
     <!-- Lista artykułów -->
     <div class="space-y-8">
+
       <!-- Artykuł 1 -->
       <article class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
         <h3 class="text-2xl font-semibold mb-3">Moda uliczna lat 90.</h3>
         <p class="text-gray-700">
           Lata 90. to czas, gdy moda była manifestem wolności. Oversize, hip-hop, jeans i bunt przeciwko zasadom...
         </p>
-        <div class="hidden mt-3 text-gray-600 hidden-text">
-          <p>To był czas, gdy każdy mógł być sobą – a ubranie było jego manifestem. Dziś wracamy do tej energii, tworząc kolekcję, która mówi więcej niż tysiąc słów.</p>
+        <div class="collapsible mt-3 text-gray-600 article-content">
+          <p>
+            To był czas, gdy każdy mógł być sobą – a ubranie było jego manifestem. 
+            Dziś wracamy do tej energii, tworząc kolekcję, która mówi więcej niż tysiąc słów.
+            Nasze projekty łączą duszę dawnych ulic z nowoczesną symboliką.
+          </p>
         </div>
-        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Czytaj więcej</button>
+        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
+          <span>Czytaj więcej</span>
+          <span class="arrow">▼</span>
+        </button>
       </article>
 
       <!-- Artykuł 2 -->
@@ -3423,42 +3431,42 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <p class="text-gray-700">
           Symbole mówią więcej niż słowa. Każdy wzór ma znaczenie – Pi, bunt, prawda, wybór...
         </p>
-        <div class="hidden mt-3 text-gray-600 hidden-text">
-          <p>Każdy nadruk to manifest. W świecie pozorów stawiamy na autentyczność – bo moda ma moc zmiany myślenia.</p>
+        <div class="collapsible mt-3 text-gray-600 article-content">
+          <p>
+            Każdy nadruk to manifest. W świecie pozorów stawiamy na autentyczność – 
+            bo moda ma moc zmiany myślenia. 
+            Symbol <b>π</b> to nieskończoność, tajemnica i równowaga – serce marki Adelbertus.
+          </p>
         </div>
-        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Czytaj więcej</button>
+        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
+          <span>Czytaj więcej</span>
+          <span class="arrow">▼</span>
+        </button>
       </article>
+
+      <!-- Opinie -->
+      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
+        <h3 class="text-2xl font-semibold mb-3">Opinie klientów</h3>
+        <p class="italic text-gray-700">"Koszulki Adelbertus to coś więcej niż ubrania. To styl życia." – <b>Marek</b></p>
+        <p class="italic text-gray-700">"Nosząc je, czuję się jak część większej idei." – <b>Agnieszka</b></p>
+      </div>
     </div>
 
-    <!-- 🔹 Opinie klientów -->
-    <section id="opinie" class="mt-16 bg-white p-6 rounded-2xl shadow-md">
-      <h3 class="text-3xl font-semibold mb-3">Opinie klientów</h3>
-      <ul id="opinieLista" class="space-y-3 text-gray-700"></ul>
-
-      <!-- Formularz dodawania opinii -->
-      <form id="opinieForm" class="mt-6 space-y-3">
-        <input type="text" id="opiniaImie" placeholder="Twoje imię" required
-               class="w-full p-2 border rounded-md border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        <textarea id="opiniaTekst" rows="2" placeholder="Twoja opinia..." required
-                  class="w-full p-2 border rounded-md border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-        <button type="submit"
-                class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
-          Dodaj opinię
-        </button>
-      </form>
-      <p id="opiniaStatus" class="mt-3 text-green-600 font-semibold hidden"></p>
-    </section>
-
     <!-- 🔹 Sekcja Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md">
+    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
       <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, prowadzonego w ramach działalności nierejestrowanej.</p>
+      <p class="text-gray-700">
+        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
+        prowadzonego w ramach działalności nierejestrowanej.
+      </p>
 
-      <div class="hidden mt-3 text-gray-600 hidden-text">
+      <div class="collapsible mt-3 text-gray-600 article-content">
         <ol class="list-decimal list-inside space-y-2">
           <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
           <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania, uwagi i reklamacje prosimy kierować na adres e-mail: <b>mielniczukgrzegosz74@gmail.com</b>.</li>
+          <li>Wszelkie pytania, uwagi i reklamacje prosimy kierować na adres e-mail: 
+            <b>mielniczukgrzegosz74@gmail.com</b>.
+          </li>
           <li>Produkty oferowane w sklepie mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
           <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po indywidualnym ustaleniu mailowym.</li>
           <li>Dane klientów są wykorzystywane wyłącznie w celu realizacji zamówienia – zgodnie z zasadami RODO.</li>
@@ -3467,94 +3475,71 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         </ol>
       </div>
 
-      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
+      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
+        <span>Zobacz pełny regulamin</span>
+        <span class="arrow">▼</span>
+      </button>
     </div>
   </div>
 </section>
 
-<!-- 🔧 Skrypty -->
+<!-- 🔧 Skrypt rozwijania treści z fade + przewijaniem + strzałką -->
 <script>
-// 🔹 Czytaj więcej / Zwiń z animacją
-document.querySelectorAll(".read-more").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const hiddenText = btn.previousElementSibling;
-    hiddenText.classList.toggle("show");
-    btn.textContent = hiddenText.classList.contains("show") ? "Zwiń" : "Czytaj więcej";
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".collapsible").forEach(el => {
+    el.style.maxHeight = "0px";
+    el.style.overflow = "hidden";
+    el.style.opacity = "0";
+    el.style.transition = "max-height 0.5s ease, opacity 0.5s ease";
+  });
+
+  document.querySelectorAll(".read-more").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.parentElement.querySelector(".collapsible");
+      const arrow = btn.querySelector(".arrow");
+      if (!content) return;
+
+      const isClosed = content.style.maxHeight === "0px" || content.style.maxHeight === "";
+
+      if (isClosed) {
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.style.opacity = "1";
+        btn.querySelector("span:first-child").textContent = "Zwiń";
+        arrow.textContent = "▲";
+      } else {
+        content.style.maxHeight = "0px";
+        content.style.opacity = "0";
+        arrow.textContent = "▼";
+        // Dopasuj tekst przycisku do kontekstu
+        const defaultText = btn.closest("#regulamin") ? "Zobacz pełny regulamin" : "Czytaj więcej";
+        btn.querySelector("span:first-child").textContent = defaultText;
+        // Po zwinięciu przewiń delikatnie z powrotem do nagłówka artykułu
+        btn.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
   });
 });
-
-// 🔹 System opinii z walidacją i 2-dniowym wygaszaniem
-const opinieKey = "opinieAdelbertus";
-const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
-const lista = document.getElementById("opinieLista");
-const statusMsg = document.getElementById("opiniaStatus");
-
-function sanitizeInput(str) {
-  return str.replace(/[<>]/g, "").trim();
-}
-
-function loadOpinie() {
-  const saved = JSON.parse(localStorage.getItem(opinieKey)) || [];
-  const now = Date.now();
-  const fresh = saved.filter(o => now - o.timestamp < TWO_DAYS_MS);
-  localStorage.setItem(opinieKey, JSON.stringify(fresh));
-  lista.innerHTML = "";
-
-  if (fresh.length === 0) {
-    lista.innerHTML = "<li class='text-gray-500 italic'>Brak opinii — bądź pierwszy!</li>";
-  }
-
-  fresh.forEach((opinia, index) => {
-    const li = document.createElement("li");
-    const hoursAgo = Math.floor((now - opinia.timestamp) / (1000 * 60 * 60));
-    li.innerHTML = `"${opinia.text}" – <b>${opinia.author}</b> <span class="text-sm text-gray-500">(dodano ${hoursAgo}h temu)</span>
-                    <button class="text-red-500 hover:underline ml-2 usuń-opinię" data-index="${index}">Usuń</button>`;
-    lista.appendChild(li);
-  });
-}
-
-// 🔹 Obsługa dodawania opinii
-document.getElementById("opinieForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const author = sanitizeInput(document.getElementById("opiniaImie").value);
-  const text = sanitizeInput(document.getElementById("opiniaTekst").value);
-  if (!author || !text) return alert("Wypełnij oba pola.");
-  if (text.length > 300) return alert("Opinia jest za długa (max 300 znaków).");
-
-  const opinie = JSON.parse(localStorage.getItem(opinieKey)) || [];
-  opinie.push({ author, text, timestamp: Date.now() });
-  localStorage.setItem(opinieKey, JSON.stringify(opinie));
-
-  statusMsg.textContent = "Dziękujemy za opinię! Widoczna przez 2 dni.";
-  statusMsg.classList.remove("hidden");
-  setTimeout(() => statusMsg.classList.add("hidden"), 4000);
-
-  e.target.reset();
-  loadOpinie();
-});
-
-// 🔹 Usuwanie opinii
-lista.addEventListener("click", e => {
-  if (e.target.classList.contains("usuń-opinię")) {
-    const index = e.target.dataset.index;
-    const opinie = JSON.parse(localStorage.getItem(opinieKey)) || [];
-    opinie.splice(index, 1);
-    localStorage.setItem(opinieKey, JSON.stringify(opinie));
-    loadOpinie();
-  }
-});
-
-loadOpinie();
 </script>
 
-<!-- ✨ Minimalny CSS z animacjami -->
+<!-- ✨ Styl fade-in/out + strzałki -->
 <style>
-.hidden { display: none; }
-.hidden-text { opacity: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease; }
-.show { opacity: 1; max-height: 500px; }
-.read-more { cursor: pointer; transition: color 0.2s ease; }
-.read-more:hover { color: #2563eb; }
-.usuń-opinię { font-size: 0.85rem; cursor: pointer; }
+  .read-more {
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+  .read-more:hover {
+    color: #2563eb;
+  }
+  .arrow {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+  }
+  .article-content {
+    transition: all 0.5s ease;
+  }
+  article, #regulamin {
+    transition: all 0.3s ease;
+  }
 </style>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
