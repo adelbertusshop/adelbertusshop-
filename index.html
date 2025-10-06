@@ -3398,128 +3398,424 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 SEK CJA BLOG + REGULAMIN (pełny, z animacją i strzałkami) -->
-<section id="blog" class="py-16 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-10">Blog Adelbertus</h2>
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Adelbertus — Blog (edytowalny) & Opinie</title>
+  <style>
+    :root{--bg:#f3f4f6;--card:#fff;--muted:#6b7280;--accent:#2563eb;}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:var(--bg);color:#111827;}
+    .container{max-width:1100px;margin:0 auto;padding:2rem;}
+    h1,h2{margin:0 0 1rem}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:1.25rem;}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+    .card{background:var(--card);padding:1rem;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.06);}
+    .muted{color:var(--muted)}
+    .form-row{display:flex;gap:.6rem}
+    input,textarea,select{width:100%;padding:.6rem;border:1px solid #e5e7eb;border-radius:8px;font-size:0.95rem}
+    textarea{min-height:100px;resize:vertical}
+    .btn{background:var(--accent);color:#fff;padding:.55rem .8rem;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    .btn-ghost{background:transparent;border:1px solid #e5e7eb;padding:.45rem .7rem;border-radius:8px;cursor:pointer}
+    .small{font-size:0.85rem;color:var(--muted)}
+    .post{border-radius:10px;padding:.9rem;margin-bottom:.9rem;border:1px solid #f1f5f9}
+    .post h3{margin:.1rem 0 .35rem}
+    .meta{font-size:0.85rem;color:#374151}
+    .actions{display:flex;gap:.5rem;margin-top:.6rem}
+    .link{color:var(--accent);cursor:pointer}
+    .danger{color:#dc2626;cursor:pointer;border:0;background:transparent}
+    .collapsible{overflow:hidden;max-height:0;opacity:0;transition:max-height .45s ease,opacity .3s ease}
+    .status{color:#16a34a;font-weight:600;display:none;margin-top:.5rem}
+    .tiny{font-size:.8rem;color:var(--muted)}
+    .flex{display:flex;align-items:center;gap:.6rem}
+    .pill{padding:.25rem .5rem;border-radius:999px;background:#f8fafc;font-size:.8rem;color:#334155}
+    .controls{display:flex;gap:.5rem;flex-wrap:wrap}
+    .divider{height:1px;background:#eef2f7;margin:1rem 0;border-radius:2px}
+    .note{font-size:.9rem;color:var(--muted);margin-top:.5rem}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <h1>Adelbertus — Edytowalny Blog & Opinie</h1>
+    <p class="muted">Dodaj artykuł lub opinię, zobacz je od razu. Dane zapisywane lokalnie w przeglądarce.</p>
 
-    <!-- Lista artykułów -->
-    <div class="space-y-8">
+    <div class="grid" style="margin-top:1.2rem">
+      <!-- LEWA KOLUMNA: lista wpisów + opinie -->
+      <div>
+        <section class="card" id="postsSection">
+          <h2>Artykuły</h2>
+          <div id="postsList" style="margin-top:.8rem">
+            <!-- posty wczytywane dynamicznie -->
+          </div>
+          <div class="divider"></div>
 
-      <!-- Artykuł 1 -->
-      <article class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <h3 class="text-2xl font-semibold mb-3">Moda uliczna lat 90.</h3>
-        <p class="text-gray-700">
-          Lata 90. to czas, gdy moda była manifestem wolności. Oversize, hip-hop, jeans i bunt przeciwko zasadom...
-        </p>
-        <div class="collapsible mt-3 text-gray-600 article-content">
-          <p>
-            To był czas, gdy każdy mógł być sobą – a ubranie było jego manifestem. 
-            Dziś wracamy do tej energii, tworząc kolekcję, która mówi więcej niż tysiąc słów.
-            Nasze projekty łączą duszę dawnych ulic z nowoczesną symboliką.
-          </p>
-        </div>
-        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
-          <span>Czytaj więcej</span>
-          <span class="arrow">▼</span>
-        </button>
-      </article>
-
-      <!-- Artykuł 2 -->
-      <article class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-        <h3 class="text-2xl font-semibold mb-3">Symbole w modzie Adelbertus</h3>
-        <p class="text-gray-700">
-          Symbole mówią więcej niż słowa. Każdy wzór ma znaczenie – Pi, bunt, prawda, wybór...
-        </p>
-        <div class="collapsible mt-3 text-gray-600 article-content">
-          <p>
-            Każdy nadruk to manifest. W świecie pozorów stawiamy na autentyczność – 
-            bo moda ma moc zmiany myślenia. 
-            Symbol <b>π</b> to nieskończoność, tajemnica i równowaga – serce marki Adelbertus.
-          </p>
-        </div>
-        <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
-          <span>Czytaj więcej</span>
-          <span class="arrow">▼</span>
-        </button>
-      </article>
-
-      <!-- Opinie -->
-      <div class="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300">
-        <h3 class="text-2xl font-semibold mb-3">Opinie klientów</h3>
-        <p class="italic text-gray-700">"Koszulki Adelbertus to coś więcej niż ubrania. To styl życia." – <b>Marek</b></p>
-        <p class="italic text-gray-700">"Nosząc je, czuję się jak część większej idei." – <b>Agnieszka</b></p>
-      </div>
-    </div>
-
-    <!-- 🔹 Sekcja Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
-      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">
-        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
-        prowadzonego w ramach działalności nierejestrowanej.
-      </p>
-
-      <div class="collapsible mt-3 text-gray-600 article-content">
-        <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
-          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania, uwagi i reklamacje prosimy kierować na adres e-mail: 
-            <b>mielniczukgrzegosz74@gmail.com</b>.
-          </li>
-          <li>Produkty oferowane w sklepie mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
-          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po indywidualnym ustaleniu mailowym.</li>
-          <li>Dane klientów są wykorzystywane wyłącznie w celu realizacji zamówienia – zgodnie z zasadami RODO.</li>
-          <li>Sklep zastrzega sobie prawo do zmiany oferty i cen w dowolnym momencie.</li>
-          <li>W przypadku wątpliwości, obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
-        </ol>
+          <h3 style="margin-top:.6rem">Opinie</h3>
+          <div id="opinionsList" style="margin-top:.6rem">
+            <!-- opinie -->
+          </div>
+        </section>
       </div>
 
-      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more flex items-center gap-1">
-        <span>Zobacz pełny regulamin</span>
-        <span class="arrow">▼</span>
-      </button>
-    </div>
-  </div>
-</section>
+      <!-- PRAWA KOLUMNA: formularze -->
+      <aside>
+        <section class="card" id="addPostCard">
+          <h2>Dodaj / Edytuj artykuł</h2>
+          <form id="postForm" style="margin-top:.6rem">
+            <input type="hidden" id="postId" value="" />
+            <div style="margin-bottom:.6rem">
+              <input id="postTitle" placeholder="Tytuł (np. Moda uliczna lat 90.)" required />
+            </div>
+            <div style="margin-bottom:.6rem">
+              <input id="postLead" placeholder="Lead / krótki opis" />
+            </div>
+            <div style="margin-bottom:.6rem">
+              <textarea id="postContent" placeholder="Treść artykułu... (może być HTML, ale polecam zwykły tekst)"></textarea>
+            </div>
+            <div class="form-row" style="margin-bottom:.6rem">
+              <button class="btn" type="submit" id="savePostBtn">Dodaj artykuł</button>
+              <button type="button" class="btn-ghost" id="clearPostForm">Wyczyść</button>
+            </div>
+            <div id="postStatus" class="status">Zapisano.</div>
+            <div class="note tiny">Artykuły zapisane w tej przeglądarce, na tym urządzeniu. Chcesz synchronizację? Napisz, zrobię backend.</div>
+          </form>
+        </section>
 
-<!-- 🔧 Skrypt rozwijania treści z fade + przewijaniem + strzałką -->
+        <section class="card" style="margin-top:1rem" id="addOpinionCard">
+          <h2>Dodaj opinię</h2>
+          <form id="opinionForm" style="margin-top:.6rem">
+            <input id="opAuthor" placeholder="Twoje imię" required maxlength="60" />
+            <div style="margin-top:.5rem">
+              <textarea id="opText" placeholder="Twoja opinia..." required maxlength="300"></textarea>
+            </div>
+            <div style="margin-top:.5rem" class="small">
+              Czas widoczności:
+              <select id="opDuration" style="width:100%;margin-top:.4rem">
+                <option value="48">48 godzin (domyślnie)</option>
+                <option value="24">24 godziny</option>
+                <option value="168">7 dni</option>
+                <option value="0">Na stałe</option>
+              </select>
+            </div>
+
+            <div class="form-row" style="margin-top:.6rem">
+              <button class="btn" type="submit">Dodaj opinię</button>
+              <button type="button" class="btn-ghost" id="clearOpinionForm">Wyczyść</button>
+            </div>
+            <div id="opStatus" class="status">Dodano opinię.</div>
+            <div class="tiny note">Opinie z czasem wygaśnięcia zostaną usunięte automatycznie po upływie czasu. "Na stałe" oznacza bez usuwania.</div>
+          </form>
+        </section>
+
+      </aside>
+    </div>
+  </main>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".collapsible").forEach(el => {
-    el.style.maxHeight = "0px";
-    el.style.overflow = "hidden";
-    el.style.opacity = "0";
-    el.style.transition = "max-height 0.5s ease, opacity 0.5s ease";
-  });
+(() => {
+  'use strict';
 
-  document.querySelectorAll(".read-more").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const content = btn.parentElement.querySelector(".collapsible");
-      const arrow = btn.querySelector(".arrow");
-      if (!content) return;
+  // Klucze storage
+  const POSTS_KEY = 'adelbertus_posts_v2';
+  const OPS_KEY   = 'adelbertus_ops_v2';
 
-      const isClosed = content.style.maxHeight === "0px" || content.style.maxHeight === "";
+  // --- narzędzia storage z try/catch ---
+  function safeGet(key){ try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch(e){ console.error('storage read', e); return []; } }
+  function safeSet(key, val){ try { localStorage.setItem(key, JSON.stringify(val)); return true; } catch(e){ console.error('storage write', e); return false; } }
 
-      if (isClosed) {
-        content.style.maxHeight = content.scrollHeight + "px";
-        content.style.opacity = "1";
-        btn.querySelector("span:first-child").textContent = "Zwiń";
-        arrow.textContent = "▲";
-      } else {
-        content.style.maxHeight = "0px";
-        content.style.opacity = "0";
-        arrow.textContent = "▼";
-        // Dopasuj tekst przycisku do kontekstu
-        const defaultText = btn.closest("#regulamin") ? "Zobacz pełny regulamin" : "Czytaj więcej";
-        btn.querySelector("span:first-child").textContent = defaultText;
-        // Po zwinięciu przewiń delikatnie z powrotem do nagłówka artykułu
-        btn.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
+  // prosta sanitizacja - escape HTML
+  function escapeHtml(str){
+    if(str == null) return '';
+    return String(str)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  // unikalne id
+  function uid(prefix='id'){ return prefix + '_' + Date.now() + '_' + Math.floor(Math.random()*9999); }
+
+  // --- POSTS ---
+  const postsListEl = document.getElementById('postsList');
+  const postForm = document.getElementById('postForm');
+  const postIdEl = document.getElementById('postId');
+  const postTitleEl = document.getElementById('postTitle');
+  const postLeadEl = document.getElementById('postLead');
+  const postContentEl = document.getElementById('postContent');
+  const postStatusEl = document.getElementById('postStatus');
+  const savePostBtn = document.getElementById('savePostBtn');
+  const clearPostFormBtn = document.getElementById('clearPostForm');
+
+  function loadPosts(){
+    const arr = safeGet(POSTS_KEY);
+    // sort najnowsze first
+    arr.sort((a,b) => b.timestamp - a.timestamp);
+    renderPosts(arr);
+  }
+
+  function renderPosts(arr){
+    postsListEl.innerHTML = '';
+    if(!arr.length){
+      postsListEl.innerHTML = '<div class="small muted">Brak artykułów — dodaj swój pierwszy po prawej.</div>';
+      return;
+    }
+    arr.forEach(post => {
+      const card = document.createElement('div');
+      card.className = 'post';
+      card.dataset.id = post.id;
+
+      const title = escapeHtml(post.title || '(bez tytułu)');
+      const lead  = escapeHtml(post.lead || '');
+      const contentEsc = escapeHtml(post.content || '');
+
+      card.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:.6rem">
+          <div style="flex:1">
+            <h3>${title}</h3>
+            ${lead ? `<div class="meta">${lead}</div>` : ''}
+            <div class="collapsible" id="post-${post.id}-content" style="margin-top:.6rem">
+              <div class="tiny">${contentEsc.replaceAll('\\n','<br>')}</div>
+            </div>
+            <div class="meta tiny" style="margin-top:.6rem">Dodano: ${new Date(post.timestamp).toLocaleString()}</div>
+            <div class="actions" style="margin-top:.4rem">
+              <button class="link btn-open">Czytaj więcej</button>
+              <button class="link btn-edit">Edytuj</button>
+              <button class="danger btn-delete">Usuń</button>
+            </div>
+          </div>
+        </div>
+        `;
+      postsListEl.appendChild(card);
     });
+    initPostControls();
+  }
+
+  function initPostControls(){
+    // read more (collapsible) dla postów
+    document.querySelectorAll('.post').forEach(card => {
+      const id = card.dataset.id;
+      const content = document.getElementById(`post-${id}-content`);
+      const btnOpen = card.querySelector('.btn-open');
+      const btnEdit = card.querySelector('.btn-edit');
+      const btnDelete= card.querySelector('.btn-delete');
+
+      // ensure collapsed
+      if(content){ content.style.maxHeight = '0px'; content.style.opacity='0'; content.style.overflow='hidden'; }
+
+      btnOpen && btnOpen.addEventListener('click', () => {
+        if(!content) return;
+        const isClosed = content.style.maxHeight === '0px' || content.style.maxHeight === '';
+        if(isClosed){
+          content.style.maxHeight = content.scrollHeight + 'px';
+          content.style.opacity = '1';
+          btnOpen.textContent = 'Zwiń';
+          // po animacji zdejmiemy maxHeight żeby adaptowało się do zmian
+          content.addEventListener('transitionend', function handler(){
+            if(content.style.maxHeight !== '0px') content.style.maxHeight = 'none';
+            content.removeEventListener('transitionend', handler);
+          });
+        } else {
+          // jeśli było 'none', najpierw ustaw realną wysokość
+          if(getComputedStyle(content).maxHeight === 'none'){
+            content.style.maxHeight = content.scrollHeight + 'px';
+            // wymuś reflow
+            content.offsetHeight;
+          }
+          content.style.maxHeight = '0px';
+          content.style.opacity = '0';
+          btnOpen.textContent = 'Czytaj więcej';
+          btnOpen.scrollIntoView({behavior:'smooth',block:'center'});
+        }
+      });
+
+      btnEdit && btnEdit.addEventListener('click', () => {
+        const posts = safeGet(POSTS_KEY);
+        const found = posts.find(p => p.id === id);
+        if(!found) return alert('Nie znaleziono artykułu.');
+        // wypełnij formę po prawej
+        postIdEl.value = found.id;
+        postTitleEl.value = found.title || '';
+        postLeadEl.value  = found.lead || '';
+        postContentEl.value = found.content || '';
+        savePostBtn.textContent = 'Zapisz zmiany';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      btnDelete && btnDelete.addEventListener('click', () => {
+        if(!confirm('Usunąć artykuł?')) return;
+        const arr = safeGet(POSTS_KEY);
+        const filtered = arr.filter(p => p.id !== id);
+        safeSet(POSTS_KEY, filtered);
+        loadPosts();
+      });
+    });
+  }
+
+  postForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const id = postIdEl.value || uid('post');
+    const title = postTitleEl.value.trim();
+    const lead  = postLeadEl.value.trim();
+    const content = postContentEl.value.trim();
+    if(!title && !lead && !content){ alert('Wpisz przynajmniej tytuł, lead lub treść.'); return; }
+
+    const arr = safeGet(POSTS_KEY);
+    const existingIdx = arr.findIndex(p => p.id === id);
+    const now = Date.now();
+    const postObj = { id, title, lead, content, timestamp: existingIdx === -1 ? now : (arr[existingIdx].timestamp || now) };
+
+    if(existingIdx === -1){
+      arr.unshift(postObj);
+    } else {
+      arr[existingIdx] = postObj;
+    }
+    safeSet(POSTS_KEY, arr);
+    postStatusEl.style.display = 'block';
+    setTimeout(()=> postStatusEl.style.display = 'none', 2000);
+    postForm.reset();
+    postIdEl.value = '';
+    savePostBtn.textContent = 'Dodaj artykuł';
+    loadPosts();
   });
-});
+
+  clearPostFormBtn.addEventListener('click', () => {
+    postForm.reset();
+    postIdEl.value = '';
+    savePostBtn.textContent = 'Dodaj artykuł';
+  });
+
+  // --- OPINIONS ---
+  const opinionsListEl = document.getElementById('opinionsList');
+  const opinionForm = document.getElementById('opinionForm');
+  const opAuthor = document.getElementById('opAuthor');
+  const opText = document.getElementById('opText');
+  const opDuration = document.getElementById('opDuration');
+  const opStatus = document.getElementById('opStatus');
+  const clearOpinionFormBtn = document.getElementById('clearOpinionForm');
+
+  // load opinions and remove expired
+  function loadOpinions(){
+    let arr = safeGet(OPS_KEY);
+    const now = Date.now();
+    // filter out expired (expiresAt !== null && now > expiresAt)
+    arr = arr.filter(o => {
+      if(o.expiresAt == null) return true;
+      return now <= o.expiresAt;
+    });
+    safeSet(OPS_KEY, arr);
+    renderOpinions(arr);
+  }
+
+  function renderOpinions(arr){
+    opinionsListEl.innerHTML = '';
+    if(!arr.length){
+      opinionsListEl.innerHTML = '<div class="tiny muted">Brak opinii — bądź pierwszy.</div>';
+      return;
+    }
+    const now = Date.now();
+    arr.forEach(op => {
+      const li = document.createElement('div');
+      li.className = 'post';
+      const timeLeft = op.expiresAt ? Math.max(0, op.expiresAt - now) : null;
+      const hours = timeLeft ? Math.ceil(timeLeft / (1000*60*60)) : null;
+      li.innerHTML = `
+        <div style="display:flex;justify-content:space-between;gap:.6rem">
+          <div style="flex:1">
+            <div class="muted">"${escapeHtml(op.text)}"</div>
+            <div class="meta tiny" style="margin-top:.4rem">— <b>${escapeHtml(op.author)}</b> · ${new Date(op.timestamp).toLocaleString()}</div>
+            <div class="tiny" style="margin-top:.25rem">${op.expiresAt ? 'Wygasa za ~' + hours + 'h' : '<span class="pill">Na stałe</span>'}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:.3rem;align-items:flex-end">
+            <button class="btn-ghost btn-make-perm" data-id="${op.id}">Na stałe</button>
+            <button class="btn-ghost btn-extend" data-id="${op.id}">+48h</button>
+            <button class="danger btn-delete-op" data-id="${op.id}">Usuń</button>
+          </div>
+        </div>
+      `;
+      opinionsListEl.appendChild(li);
+    });
+
+    // attach handlers
+    document.querySelectorAll('.btn-delete-op').forEach(b=> b.addEventListener('click', onDeleteOp));
+    document.querySelectorAll('.btn-extend').forEach(b=> b.addEventListener('click', onExtendOp));
+    document.querySelectorAll('.btn-make-perm').forEach(b=> b.addEventListener('click', onMakePerm));
+  }
+
+  function onDeleteOp(e){
+    const id = e.currentTarget.dataset.id;
+    let arr = safeGet(OPS_KEY);
+    arr = arr.filter(o => o.id !== id);
+    safeSet(OPS_KEY, arr);
+    loadOpinions();
+  }
+  function onExtendOp(e){
+    const id = e.currentTarget.dataset.id;
+    const arr = safeGet(OPS_KEY);
+    const found = arr.find(o=> o.id === id);
+    if(!found) return;
+    const extra = 48 * 60 * 60 * 1000;
+    found.expiresAt = (found.expiresAt && found.expiresAt > Date.now()) ? found.expiresAt + extra : Date.now() + extra;
+    safeSet(OPS_KEY, arr);
+    loadOpinions();
+  }
+  function onMakePerm(e){
+    const id = e.currentTarget.dataset.id;
+    const arr = safeGet(OPS_KEY);
+    const found = arr.find(o=> o.id === id);
+    if(!found) return;
+    found.expiresAt = null;
+    safeSet(OPS_KEY, arr);
+    loadOpinions();
+  }
+
+  opinionForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const author = opAuthor.value.trim();
+    const text = opText.value.trim();
+    if(!author || !text){ alert('Wypełnij pola.'); return; }
+    const d = Number(opDuration.value); // hours or 0 for permanent
+    const now = Date.now();
+    const expiresAt = d === 0 ? null : now + d * 60 * 60 * 1000;
+    const op = { id: uid('op'), author, text, timestamp: now, expiresAt };
+    const arr = safeGet(OPS_KEY);
+    arr.unshift(op);
+    safeSet(OPS_KEY, arr);
+    opStatus.style.display = 'block';
+    setTimeout(()=> opStatus.style.display = 'none', 2000);
+    opinionForm.reset();
+    loadOpinions();
+  });
+
+  clearOpinionFormBtn.addEventListener('click', () => { opinionForm.reset(); });
+
+  // periodic cleanup co 10 minut
+  setInterval(() => { loadOpinions(); }, 10 * 60 * 1000);
+
+  // --- inicjalizacja ---
+  function init(){
+    loadPosts();
+    loadOpinions();
+  }
+  // jeśli już załadowane
+  if(document.readyState === 'complete' || document.readyState === 'interactive'){
+    setTimeout(init, 10);
+  } else {
+    document.addEventListener('DOMContentLoaded', init);
+  }
+
+  // expose small debug w konsoli
+  window._adelbertus_debug = {
+    getPosts: () => safeGet(POSTS_KEY),
+    getOpinions: () => safeGet(OPS_KEY),
+    clearAll: () => { localStorage.removeItem(POSTS_KEY); localStorage.removeItem(OPS_KEY); location.reload(); }
+  };
+
+})();
 </script>
+</body>
+</html>        
 
 <!-- ✨ Styl fade-in/out + strzałki -->
 <style>
