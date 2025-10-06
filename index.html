@@ -3398,155 +3398,162 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 SEK CJA BLOG + REGULAMIN + OPINIE (z 2-dniową trwałością + złote napisy) -->
-<section id="blog" class="py-16 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-10 text-gold">Blog Adelbertus</h2>
+<!-- Blog - WERSJA Z FORUM I CYKLICZNYMI CYTATAMI -->
+<section id="blog" class="bg-gray-950 py-12">
+    <div class="section-title text-center mb-12">
+        <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
+        <p class="text-gray-300">Miejsce, gdzie każdy może podzielić się swoją myślą</p>
+    </div>
 
-    <!-- Lista artykułów -->
-    <div class="space-y-8">
-      <!-- Artykuł 1 -->
-      <article class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-        <h3 class="text-2xl font-semibold mb-3 text-gold">Moda uliczna lat 90.</h3>
-        <p class="text-gold">
-          Lata 90. to czas, gdy moda była manifestem wolności. Oversize, hip-hop, jeans i bunt przeciwko zasadom...
-        </p>
-        <div class="hidden mt-3 text-gold">
-          <p>To był czas, gdy każdy mógł być sobą – a ubranie było jego manifestem. Dziś wracamy do tej energii, tworząc kolekcję, która mówi więcej niż tysiąc słów.</p>
-        </div>
-        <button class="mt-3 font-semibold read-more text-gold hover:text-yellow-500">Czytaj więcej</button>
-      </article>
+    <!-- Dynamiczny cytat -->
+    <div class="max-w-2xl mx-auto mb-12 text-center">
+        <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
+            „Twoje słowa mają większą moc, niż myślisz.”
+        </blockquote>
+    </div>
 
-      <!-- Artykuł 2 -->
-      <article class="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-        <h3 class="text-2xl font-semibold mb-3 text-gold">Symbole w modzie Adelbertus</h3>
-        <p class="text-gold">
-          Symbole mówią więcej niż słowa. Każdy wzór ma znaczenie – Pi, bunt, prawda, wybór...
-        </p>
-        <div class="hidden mt-3 text-gold">
-          <p>Każdy nadruk to manifest. W świecie pozorów stawiamy na autentyczność – bo moda ma moc zmiany myślenia.</p>
-        </div>
-        <button class="mt-3 font-semibold read-more text-gold hover:text-yellow-500">Czytaj więcej</button>
-      </article>
+    <div class="text-center mb-8">
+        <button class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition" onclick="showBlogForm()">
+            <i class="fas fa-pencil-alt"></i> Napisz nowy artykuł
+        </button>
+    </div>
+    
+    <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
+        <!-- Tutaj będą dodawane posty -->
+    </div>
 
-      <!-- 🔹 Opinie klientów -->
-      <div class="bg-white p-6 rounded-2xl shadow-md" id="opinieSekcja">
-        <h3 class="text-2xl font-semibold mb-3 text-gold">Opinie klientów</h3>
-        <ul id="opinieLista" class="space-y-2 text-gold">
-          <li>"Koszulki Adelbertus to coś więcej niż ubrania. To styl życia." – <b>Marek</b></li>
-          <li>"Nosząc je, czuję się jak część większej idei." – <b>Agnieszka</b></li>
-        </ul>
-
-        <!-- Formularz dodawania opinii -->
-        <form id="opinieForm" class="mt-6 space-y-3">
-          <input type="text" id="opiniaImie" placeholder="Twoje imię" required
-                 class="w-full p-2 border rounded-md border-yellow-500 placeholder-gold text-gold bg-white">
-          <textarea id="opiniaTekst" rows="2" placeholder="Twoja opinia..." required
-                    class="w-full p-2 border rounded-md border-yellow-500 placeholder-gold text-gold bg-white"></textarea>
-          <button type="submit"
-                  class="bg-yellow-600 text-white px-4 py-2 rounded-md hover:bg-yellow-700 transition">
-            Dodaj opinię
-          </button>
+    <!-- Formularz dodawania artykułu -->
+    <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
+        <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
+        <form id="newBlogPostForm">
+            <div class="form-group mb-4">
+                <label class="text-gray-300">Tytuł</label>
+                <input type="text" id="blogTitle" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
+            </div>
+            
+            <div class="form-group mb-4">
+                <label class="text-gray-300">Krótki opis</label>
+                <textarea id="blogExcerpt" rows="2" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
+            </div>
+            
+            <div class="form-group mb-4">
+                <label class="text-gray-300">Pełna treść</label>
+                <textarea id="blogContent" rows="5" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
+            </div>
+            
+            <div class="form-group mb-4">
+                <label class="text-gray-300">URL obrazka</label>
+                <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
+            </div>
+            
+            <button type="submit" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg">Opublikuj artykuł</button>
+            <button type="button" class="nav-btn px-6 py-2 rounded-lg" onclick="hideBlogForm()">Anuluj</button>
         </form>
-      </div>
     </div>
-
-    <!-- 🔹 Sekcja Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md">
-      <h3 class="text-3xl font-semibold mb-3 text-gold">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gold">Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, prowadzonego w ramach działalności nierejestrowanej.</p>
-
-      <div class="hidden mt-3 text-gold">
-        <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
-          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania, uwagi i reklamacje prosimy kierować na adres e-mail: <b>mielniczukgrzegosz74@gmail.com</b>.</li>
-          <li>Produkty oferowane w sklepie mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
-          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po indywidualnym ustaleniu mailowym.</li>
-          <li>Dane klientów są wykorzystywane wyłącznie w celu realizacji zamówienia – zgodnie z zasadami RODO.</li>
-          <li>Sklep zastrzega sobie prawo do zmiany oferty i cen w dowolnym momencie.</li>
-          <li>W przypadku wątpliwości, obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
-        </ol>
-      </div>
-
-      <button class="mt-3 font-semibold read-more text-gold hover:text-yellow-500">Zobacz pełny regulamin</button>
-    </div>
-  </div>
 </section>
 
-<!-- 🔧 Skrypty -->
 <script>
-// 🔹 Czytaj więcej / Zwiń
-document.querySelectorAll(".read-more").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const hiddenText = btn.previousElementSibling;
-    if (hiddenText.classList.contains("hidden")) {
-      hiddenText.classList.remove("hidden");
-      btn.textContent = "Zwiń";
-    } else {
-      hiddenText.classList.add("hidden");
-      btn.textContent = "Czytaj więcej";
-    }
-  });
-});
+// ====================== CYTATY ======================
+const quotes = [
+    "„Twoje słowa mają większą moc, niż myślisz.”",
+    "„Ludzie słyszą, ale pamiętają to, co widzą.”",
+    "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
+    "„Styl to nie ubranie – to komunikat.”"
+];
 
-// 🔹 Opinie – prosty system z 2-dniowym wygaszaniem
-const opinieKey = "opinieAdelbertus";
-const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+let quoteIndex = 0;
+function changeQuote() {
+    const quoteElement = document.getElementById("dynamic-quote");
+    quoteElement.classList.add("opacity-0");
+    setTimeout(() => {
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+        quoteElement.innerText = quotes[quoteIndex];
+        quoteElement.classList.remove("opacity-0");
+    }, 1000);
+}
+setInterval(changeQuote, 10000); // co 10 sekund
 
-function loadOpinie() {
-  const lista = document.getElementById("opinieLista");
-  const saved = JSON.parse(localStorage.getItem(opinieKey)) || [];
-  const now = Date.now();
-
-  lista.innerHTML = "";
-  saved.forEach(opinia => {
-    if (now - opinia.timestamp < TWO_DAYS_MS) {
-      const li = document.createElement("li");
-      li.textContent = `"${opinia.text}" – ${opinia.author}`;
-      lista.appendChild(li);
-    }
-  });
-
-  // usuń stare opinie
-  const fresh = saved.filter(o => now - o.timestamp < TWO_DAYS_MS);
-  localStorage.setItem(opinieKey, JSON.stringify(fresh));
+// ====================== KOMENTARZE z filtrem ======================
+const badWords = ["kurwa", "chuj", "debil", "idiota"]; // tu możesz dodać kolejne
+function filterBadWords(text) {
+    let filtered = text;
+    badWords.forEach(word => {
+        const regex = new RegExp(word, "gi");
+        filtered = filtered.replace(regex, "***");
+    });
+    return filtered;
 }
 
-document.getElementById("opinieForm").addEventListener("submit", e => {
-  e.preventDefault();
-  const author = document.getElementById("opiniaImie").value.trim();
-  const text = document.getElementById("opiniaTekst").value.trim();
-  if (!author || !text) return;
+function addComment(event, commentListId) {
+    event.preventDefault();
+    const input = event.target.querySelector("input");
+    let commentText = filterBadWords(input.value);
+    const commentList = document.getElementById(commentListId);
+    const newComment = document.createElement("li");
+    newComment.textContent = "💬 " + commentText;
+    commentList.appendChild(newComment);
+    input.value = "";
+}
 
-  const opinie = JSON.parse(localStorage.getItem(opinieKey)) || [];
-  opinie.push({ author, text, timestamp: Date.now() });
-  localStorage.setItem(opinieKey, JSON.stringify(opinie));
-  loadOpinie();
+// ====================== NOWE ARTYKUŁY ======================
+document.getElementById("newBlogPostForm").addEventListener("submit", function(e) {
+    e.preventDefault();
 
-  e.target.reset();
+    const title = document.getElementById("blogTitle").value;
+    const excerpt = document.getElementById("blogExcerpt").value;
+    const content = document.getElementById("blogContent").value;
+    const image = document.getElementById("blogImage").value || "https://via.placeholder.com/500";
+
+    const postId = "post-" + Date.now();
+    const commentListId = "comments-" + Date.now();
+
+    const newPost = `
+        <div class="blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition">
+            <img src="${image}" alt="${title}" class="blog-image rounded-t-lg">
+            <div class="blog-content p-6">
+                <h3 class="text-xl font-bold text-gold-400 mb-2">${title}</h3>
+                <p class="text-sm text-gray-400">Opublikowano: ${new Date().toLocaleDateString()}</p>
+                <div class="blog-excerpt">
+                    <p class="mt-3 text-gray-200">${excerpt}</p>
+                </div>
+                <div class="blog-full hidden">
+                    <p class="mt-3 text-gray-300">${content}</p>
+                    <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">
+                        „Twój artykuł inspiruje innych!”
+                    </blockquote>
+                    <div class="comments mt-6">
+                        <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
+                        <ul id="${commentListId}" class="text-gray-200 space-y-2"></ul>
+                        <form class="mt-3" onsubmit="addComment(event, '${commentListId}')">
+                            <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
+                        </form>
+                    </div>
+                </div>
+                <button class="nav-btn mt-4 read-more-btn" onclick="toggleReadMore(this)">Czytaj więcej</button>
+            </div>
+        </div>
+    `;
+
+    document.getElementById("blogPostsContainer").insertAdjacentHTML("afterbegin", newPost);
+    hideBlogForm();
+    this.reset();
 });
 
-loadOpinie();
-</script>
+// ====================== ROZWIJANIE POSTÓW ======================
+function toggleReadMore(button) {
+    const fullContent = button.parentElement.querySelector(".blog-full");
+    fullContent.classList.toggle("hidden");
+    button.textContent = fullContent.classList.contains("hidden") ? "Czytaj więcej" : "Zwiń";
+}
 
-<!-- ✨ Styl złotych napisów -->
-<style>
-  .hidden { display: none; }
-  .read-more { cursor: pointer; transition: color 0.2s ease; }
-
-  .text-gold, .placeholder-gold::placeholder {
-    color: #d4af37 !important;
-  }
-
-  .read-more:hover {
-    color: #f5c518;
-  }
-
-  b {
-    color: #d4af37;
-  }
-</style>        
+// ====================== FORMULARZ ======================
+function showBlogForm() {
+    document.getElementById("blogForm").classList.remove("hidden");
+}
+function hideBlogForm() {
+    document.getElementById("blogForm").classList.add("hidden");
+}
+</script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
