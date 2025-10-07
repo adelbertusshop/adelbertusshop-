@@ -3399,417 +3399,154 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- ====== BLOG: sekcja kompletna + poprawiony skrypt (wklej 1:1, usuń stary blok) ====== -->
-<section id="blog" class="bg-gray-950 py-12">
-  <div class="section-title text-center mb-12">
-    <h2 class="text-4xl font-bold text-gold-400">Blog</h2>
-    <p class="text-gray-300">Miejsce, gdzie każdy może podzielić się swoją myślą</p>
-  </div>
+<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
+<section id="blog" class="py-16 bg-gray-100 text-gray-900">
+  <div class="container mx-auto px-4">
+    <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
 
-  <!-- Cytat -->
-  <div class="max-w-2xl mx-auto mb-12 text-center">
-    <blockquote id="dynamic-quote" class="italic text-gold-300 text-xl border-l-4 border-gold-500 pl-4 opacity-100 transition-opacity duration-1000">
-      „Twoje słowa mają większą moc, niż myślisz.”
-    </blockquote>
-  </div>
+    <!-- 🧠 Panel dodawania artykułów -->
+    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+      <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
+      <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
+      <textarea id="articleText" rows="4" placeholder="Treść artykułu..." class="w-full border p-2 rounded mb-3"></textarea>
+      <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
+    </div>
 
-  <!-- Opinie o blogu -->
-  <div class="max-w-3xl mx-auto mb-6 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
-    <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie czytelników</h3>
-    <p id="dynamic-review" class="italic text-gold-300">Ładuję opinie…</p>
-  </div>
+    <!-- 📚 Lista artykułów -->
+    <div id="articlesList" class="space-y-8"></div>
 
-  <!-- Kategorie (filtr) -->
-  <div class="flex justify-center space-x-6 mb-8 text-gold-400 text-2xl" id="category-bar">
-    <button class="category-btn" data-cat="all">🌐 Wszystko</button>
-    <button class="category-btn" data-cat="Moda">👕 Moda</button>
-    <button class="category-btn" data-cat="Ludzie">👥 Ludzie</button>
-    <button class="category-btn" data-cat="Marzenia">🌙 Marzenia</button>
-  </div>
+    <!-- 💬 Panel dodawania opinii -->
+    <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
+      <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
+      <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
+      <textarea id="opinionText" rows="3" placeholder="Twoja opinia..." class="w-full border p-2 rounded mb-3"></textarea>
+      <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
+    </div>
 
-  <!-- Nowy artykuł -->
-  <div class="text-center mb-8">
-    <button id="openBlogFormBtn" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg hover:scale-105 transition">
-      ✍️ Napisz nowy artykuł
-    </button>
-  </div>
+    <!-- 🧾 Opinie klientów -->
+    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
 
-  <!-- Kontener postów -->
-  <div class="blog-posts grid grid-cols-1 md:grid-cols-2 gap-8 px-6" id="blogPostsContainer">
-    <!-- renderowane posty będą wstawiane dynamicznie -->
-  </div>
-
-  <!-- Formularz dodawania artykułu (domyślnie ukryty) -->
-  <div id="blogForm" class="email-form max-w-xl mx-auto mt-12 bg-gray-900 p-6 rounded-lg shadow-lg border border-gold-500 hidden">
-    <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy artykuł</h3>
-    <form id="newBlogPostForm">
-      <div class="form-group mb-4">
-        <label class="text-gray-300">Tytuł</label>
-        <input type="text" id="blogTitle" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
+    <!-- 🔹 Sekcja Regulamin -->
+    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
+      <p class="text-gray-700">
+        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
+        prowadzonego w ramach działalności nierejestrowanej.
+      </p>
+      <div class="collapsible mt-3 text-gray-600 article-content">
+        <ol class="list-decimal list-inside space-y-2">
+          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
+          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
+          <li>Wszelkie pytania i reklamacje prosimy kierować na adres: 
+            <b>mielniczukgrzegosz74@gmail.com</b>.
+          </li>
+          <li>Produkty mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
+          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po ustaleniu mailowym.</li>
+          <li>Dane klientów używane są wyłącznie do realizacji zamówień (zgodnie z RODO).</li>
+          <li>Sklep zastrzega sobie prawo do zmian oferty i cen.</li>
+          <li>Obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
+        </ol>
       </div>
-
-      <div class="form-group mb-4">
-        <label class="text-gray-300">Krótki opis</label>
-        <textarea id="blogExcerpt" rows="2" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
-      </div>
-
-      <div class="form-group mb-4">
-        <label class="text-gray-300">Pełna treść</label>
-        <textarea id="blogContent" rows="5" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600"></textarea>
-      </div>
-
-      <div class="form-group mb-4">
-        <label class="text-gray-300">URL obrazka</label>
-        <input type="url" id="blogImage" placeholder="https://..." class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
-      </div>
-
-      <div class="form-group mb-4">
-        <label class="text-gray-300">Kategoria</label>
-        <select id="blogCategory" required class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600">
-          <option value="Moda">Moda</option>
-          <option value="Ludzie">Ludzie</option>
-          <option value="Marzenia">Marzenia</option>
-        </select>
-      </div>
-
-      <div class="flex gap-3">
-        <button type="submit" class="nav-btn gold-bg px-6 py-2 rounded-lg shadow-lg">Opublikuj artykuł</button>
-        <button type="button" id="cancelBlogForm" class="nav-btn px-6 py-2 rounded-lg">Anuluj</button>
-      </div>
-    </form>
-  </div>
-
-  <!-- Opinie o sklepie (pokazywane pod blogiem) -->
-  <div class="max-w-3xl mx-auto mt-12 mb-8 bg-gray-900 border border-gold-500 rounded-lg p-6 text-center shadow-lg">
-    <h3 class="text-2xl font-bold text-gold-400 mb-4">Opinie o sklepie</h3>
-    <blockquote id="shop-review" class="italic text-gold-300 text-lg">Ładuję opinie sklepu…</blockquote>
+      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
+    </div>
   </div>
 </section>
 
+<!-- 🔧 Skrypt -->
 <script>
-/* ====== Poprawiony skrypt: działa pewnie dzięki DOMContentLoaded + delegacji ====== */
-document.addEventListener('DOMContentLoaded', () => {
-  const BLOG_STORAGE_KEY = 'adelbertus_blog_posts_v1';
-  const REVIEWS_ROTATION_MS = 2 * 24 * 60 * 60 * 1000; // 2 dni
-  const POST_LIFETIME_MS = 3 * 24 * 60 * 60 * 1000; // 3 dni (jak w twoim fragmencie)
+document.addEventListener("DOMContentLoaded", () => {
+  const articlesList = document.getElementById("articlesList");
+  const opinionsList = document.getElementById("opinionsList");
 
-  /* --- Cytaty --- */
-  const quotes = [
-    "„Twoje słowa mają większą moc, niż myślisz.”",
-    "„Ludzie słyszą, ale pamiętają to, co widzą.”",
-    "„To, co tworzysz, mówi więcej niż tysiąc słów.”",
-    "„Styl to nie ubranie – to komunikat.”"
-  ];
-  let quoteIndex = 0;
-  const quoteEl = document.getElementById('dynamic-quote');
-  function changeQuote() {
-    if (!quoteEl) return;
-    quoteEl.classList.add('opacity-0');
-    setTimeout(() => {
-      quoteIndex = (quoteIndex + 1) % quotes.length;
-      quoteEl.innerText = quotes[quoteIndex];
-      quoteEl.classList.remove('opacity-0');
-    }, 250);
-  }
-  if (quoteEl) { changeQuote(); setInterval(changeQuote, 10000); }
+  // --- Pobierz z localStorage ---
+  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
 
-  /* --- Opinie blog / sklep --- */
-  const blogReviews = [
-    "„Świetne artykuły, chętnie wracam!” – Anna K.",
-    "„Czuję, że ten blog inspiruje mnie do działania.” – Marek Z.",
-    "„Fajny styl pisania, oby tak dalej!” – Julia",
-    "„Dzięki za wartościowe treści!” – Piotr"
-  ];
-  const shopReviews = [
-    "„Koszulka super jakości, po praniu wygląda jak nowa!” – Kasia",
-    "„Bluza mega wygodna i ciepła, noszę codziennie.” – Tomek",
-    "„Czapeczka sztos, pasuje do wszystkiego.” – Ola",
-    "„Dostawa szybka, a koszulki robią robotę.” – Bartek"
-  ];
-  let blogReviewIndex = parseInt(localStorage.getItem('blogReviewIndex') || '0', 10);
-  let shopReviewIndex = parseInt(localStorage.getItem('shopReviewIndex') || '0', 10);
-  function showBlogReview() {
-    const el = document.getElementById('dynamic-review');
-    if (!el) return;
-    el.innerText = blogReviews[blogReviewIndex];
-    blogReviewIndex = (blogReviewIndex + 1) % blogReviews.length;
-    localStorage.setItem('blogReviewIndex', blogReviewIndex);
-  }
-  function showShopReview() {
-    const el = document.getElementById('shop-review');
-    if (!el) return;
-    el.innerText = shopReviews[shopReviewIndex];
-    shopReviewIndex = (shopReviewIndex + 1) % shopReviews.length;
-    localStorage.setItem('shopReviewIndex', shopReviewIndex);
-  }
-  showBlogReview();
-  showShopReview();
-  setInterval(showBlogReview, REVIEWS_ROTATION_MS);
-  setInterval(showShopReview, REVIEWS_ROTATION_MS);
-
-  /* --- Filtr wulgaryzmów --- */
-  const badWords = ["kurwa","chuj","debil","idiota"];
-  function filterBadWords(text){
-    let out = text + '';
-    badWords.forEach(w => {
-      const r = new RegExp(w, 'gi');
-      out = out.replace(r, '***');
-    });
-    return out;
-  }
-
-  /* --- LocalStorage: load/save --- */
-  function loadPosts() {
-    try {
-      const raw = localStorage.getItem(BLOG_STORAGE_KEY);
-      if (!raw) return [];
-      const parsed = JSON.parse(raw);
-      const now = Date.now();
-      return parsed.filter(p => !p.expire || now <= p.expire);
-    } catch(e) { console.error(e); return []; }
-  }
-  function savePosts(posts) {
-    localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
-  }
-
-  /* --- Helper --- */
-  function escapeHtml(str){
-    if(!str) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;')
-      .replace(/'/g,'&#039;');
-  }
-  function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    Object.assign(notification.style, {
-      position: 'fixed',
-      bottom: '20px',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      backgroundColor: '#d4af37',
-      color: 'black',
-      padding: '12px 24px',
-      borderRadius: '30px',
-      zIndex: '1000',
-      boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
-      fontWeight: 'bold'
-    });
-    document.body.appendChild(notification);
-    setTimeout(() => notification.remove(), 3000);
-  }
-
-  /* --- Regulamin (dołączany na końcu) --- */
-  function appendRegulamin(container) {
-    if (!container) return;
-    if (container.querySelector('.regulamin-card')) return; // już dołączone
-    const div = document.createElement('div');
-    div.className = 'blog-post regulamin-card bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition col-span-2';
-    div.innerHTML = `
-      <img src="https://via.placeholder.com/800x400?text=Regulamin+AdelbertusShop" alt="Regulamin sklepu" class="blog-image rounded-t-lg w-full h-44 object-cover">
-      <div class="blog-content p-6">
-        <h3 class="text-xl font-bold text-gold-400 mb-2">📜 Regulamin sklepu AdelbertusShop</h3>
-        <p class="text-sm text-gray-400">Kategoria: Informacje | Opublikowano: <span class="regulamin-date"></span></p>
-        <div class="blog-excerpt"><p class="mt-3 text-gray-200">Zapoznaj się z zasadami działania sklepu – prawa, obowiązki i warunki zakupów.</p></div>
-        <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">
-1. Sklep AdelbertusShop działa w formie działalności nierejestrowanej.  
-2. Wszystkie zamówienia są obsługiwane indywidualnie – kontakt mailowy: mielniczukgrzegosz74@gmail.com.  
-3. Płatności: przelew tradycyjny lub BLIK (szczegóły ustalane po zamówieniu).  
-4. Zwroty i reklamacje – 14 dni kalendarzowych od dnia otrzymania towaru.  
-5. Sklep nie ponosi odpowiedzialności za opóźnienia wynikające z winy przewoźnika.  
-6. Dane osobowe są wykorzystywane wyłącznie do realizacji zamówienia.  
-7. Złożenie zamówienia jest równoznaczne z akceptacją niniejszego regulaminu.
-        </p></div>
-        <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
-      </div>
-    `;
-    container.appendChild(div);
-    const dateEl = div.querySelector('.regulamin-date');
-    if (dateEl) dateEl.textContent = new Date().toLocaleDateString('pl-PL');
-  }
-
-  /* --- Render --- */
-  const container = document.getElementById('blogPostsContainer');
-  function renderPosts(filterCategory = 'all') {
-    if (!container) return;
-    container.innerHTML = '';
-    const posts = loadPosts().sort((a,b) => b.createdAt - a.createdAt);
-    if (posts.length === 0) {
-      container.innerHTML = `<div class="col-span-2 text-center py-12"><p class="text-gray-400 text-xl">Brak artykułów na blogu. Bądź pierwszy i napisz coś!</p></div>`;
-    } else {
-      posts.forEach(post => {
-        if (filterCategory !== 'all' && post.category !== filterCategory) return;
-        const postEl = document.createElement('div');
-        postEl.className = 'blog-post bg-gray-900 border border-gold-500 rounded-lg shadow-lg hover:bg-gray-800 transition';
-        postEl.setAttribute('data-expire', post.expire || '');
-        postEl.setAttribute('data-category', post.category || '');
-        postEl.id = post.id;
-        postEl.innerHTML = `
-          <img src="${post.image}" alt="${escapeHtml(post.title)}" class="blog-image rounded-t-lg w-full h-44 object-cover">
-          <div class="blog-content p-6">
-            <h3 class="text-xl font-bold text-gold-400 mb-2">${escapeHtml(post.title)}</h3>
-            <p class="text-sm text-gray-400">Kategoria: ${escapeHtml(post.category)} | Opublikowano: ${new Date(post.createdAt).toLocaleDateString('pl-PL')}</p>
-            <div class="blog-excerpt"><p class="mt-3 text-gray-200">${escapeHtml(post.excerpt)}</p></div>
-            <div class="blog-full hidden"><p class="mt-3 text-gray-300 whitespace-pre-line">${escapeHtml(post.content)}</p>
-              <blockquote class="italic text-gold-300 mt-4 border-l-4 border-gold-500 pl-4">„Twój artykuł inspiruje innych!”</blockquote>
-              <div class="comments mt-6">
-                <h4 class="text-lg font-bold text-gold-400 mb-2">Komentarze:</h4>
-                <ul id="comments-${post.id}" class="text-gray-200 space-y-2"></ul>
-                <form class="mt-3 comment-form" data-postid="${post.id}">
-                  <input type="text" class="w-full p-2 rounded bg-gray-800 text-gray-200 border border-gray-600" placeholder="Dodaj komentarz..." required>
-                  <button type="submit" class="nav-btn mt-2 px-4 py-1 text-sm">Dodaj komentarz</button>
-                </form>
-              </div>
-            </div>
-            <button class="nav-btn mt-4 read-more-btn">Czytaj więcej</button>
-            <button class="nav-btn mt-2 share-article-btn" data-title="${escapeHtml(post.title)}" data-image="${post.image}">
-              <i class="fas fa-share"></i> Udostępnij
-            </button>
-          </div>
-        `;
-        container.appendChild(postEl);
-      });
-    }
-
-    // dołącz regulamin zawsze na końcu
-    appendRegulamin(container);
-  }
-
-  /* --- Create post object --- */
-  function createPostObject(title, excerpt, content, image, category) {
-    const id = 'post-' + Date.now();
-    return {
-      id,
-      title, excerpt, content,
-      image: image || 'https://via.placeholder.com/800x400?text=Adelbertusshop',
-      category: category || 'Moda',
-      createdAt: Date.now(),
-      expire: Date.now() + POST_LIFETIME_MS
-    };
-  }
-
-  /* --- Events: delegation on container (read more, share, comments) --- */
-  if (container) {
-    // click delegation
-    container.addEventListener('click', (e) => {
-      const readBtn = e.target.closest('.read-more-btn');
-      if (readBtn) {
-        const blogContent = readBtn.closest('.blog-content');
-        if (!blogContent) return;
-        const full = blogContent.querySelector('.blog-full');
-        if (!full) return;
-        full.classList.toggle('hidden');
-        readBtn.textContent = full.classList.contains('hidden') ? 'Czytaj więcej' : 'Zwiń';
-        return;
-      }
-      const shareBtn = e.target.closest('.share-article-btn');
-      if (shareBtn) {
-        const title = shareBtn.getAttribute('data-title') || '';
-        const image = shareBtn.getAttribute('data-image') || '';
-        shareArticle(title, image);
-        return;
-      }
-    });
-
-    // submit delegation for comment forms
-    container.addEventListener('submit', (e) => {
-      if (e.target && e.target.matches('.comment-form')) {
-        e.preventDefault();
-        const postId = e.target.dataset.postid;
-        const input = e.target.querySelector('input');
-        if (!input) return;
-        const text = filterBadWords(input.value.trim());
-        if (!text) return;
-        const ul = document.getElementById('comments-' + postId);
-        if (!ul) return;
-        const li = document.createElement('li');
-        li.textContent = '💬 ' + text;
-        ul.appendChild(li);
-        input.value = '';
-      }
+  // --- Render artykułów ---
+  function renderArticles() {
+    articlesList.innerHTML = "";
+    savedArticles.forEach((a, i) => {
+      const article = document.createElement("article");
+      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
+      article.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
+        <p class="text-gray-700">${a.text}</p>
+        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
+      `;
+      articlesList.appendChild(article);
     });
   }
 
-  /* --- Form controls (open/cancel/post) --- */
-  const openBtn = document.getElementById('openBlogFormBtn');
-  const cancelBtn = document.getElementById('cancelBlogForm');
-  const formEl = document.getElementById('newBlogPostForm');
+  // --- Render opinii ---
+  function renderOpinions() {
+    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
+    savedOpinions.forEach((o, i) => {
+      const p = document.createElement("p");
+      p.className = "italic text-gray-700";
+      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
+      opinionsList.appendChild(p);
+    });
+  }
 
-  if (openBtn) openBtn.addEventListener('click', () => {
-    const form = document.getElementById('blogForm');
-    if (form) {
-      form.classList.remove('hidden');
-      window.scrollTo({top: form.offsetTop - 20, behavior: 'smooth'});
-    }
-  });
-  if (cancelBtn) cancelBtn.addEventListener('click', () => {
-    if (formEl) formEl.reset();
-    const form = document.getElementById('blogForm');
-    if (form) form.classList.add('hidden');
+  // --- Dodaj artykuł ---
+  document.getElementById("addArticleBtn").addEventListener("click", () => {
+    const title = document.getElementById("articleTitle").value.trim();
+    const text = document.getElementById("articleText").value.trim();
+    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+    savedArticles.push({ title, text });
+    localStorage.setItem("articles", JSON.stringify(savedArticles));
+    document.getElementById("articleTitle").value = "";
+    document.getElementById("articleText").value = "";
+    renderArticles();
   });
 
-  if (formEl) {
-    formEl.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('blogTitle').value.trim();
-      const excerpt = document.getElementById('blogExcerpt').value.trim();
-      const content = document.getElementById('blogContent').value.trim();
-      const image = document.getElementById('blogImage').value.trim();
-      const category = document.getElementById('blogCategory').value;
-      if (!title || !excerpt || !content) return;
-      const post = createPostObject(title, excerpt, content, image, category);
-      const posts = loadPosts();
-      posts.push(post);
-      savePosts(posts);
-      renderPosts(currentFilter);
-      formEl.reset();
-      const form = document.getElementById('blogForm');
-      if (form) form.classList.add('hidden');
-      showNotification('✅ Artykuł opublikowany!');
-    });
-  }
+  // --- Dodaj opinię ---
+  document.getElementById("addOpinionBtn").addEventListener("click", () => {
+    const author = document.getElementById("opinionAuthor").value.trim();
+    const text = document.getElementById("opinionText").value.trim();
+    if (!author || !text) return alert("Wpisz imię i treść opinii!");
+    savedOpinions.push({ author, text });
+    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+    document.getElementById("opinionAuthor").value = "";
+    document.getElementById("opinionText").value = "";
+    renderOpinions();
+  });
 
-  /* --- Remove expired on load + interval --- */
-  function removeExpiredOnLoad() {
-    let posts = loadPosts();
-    const now = Date.now();
-    const before = posts.length;
-    posts = posts.filter(p => !p.expire || now <= p.expire);
-    if (posts.length !== before) savePosts(posts);
-  }
-  removeExpiredOnLoad();
-  setInterval(() => {
-    let posts = loadPosts();
-    const now = Date.now();
-    const fresh = posts.filter(p => !p.expire || now <= p.expire);
-    if (fresh.length !== posts.length) {
-      savePosts(fresh);
-      renderPosts(currentFilter);
-    }
-  }, 60 * 60 * 1000);
+  // --- Usuń wpisy (globalne funkcje) ---
+  window.deleteArticle = (i) => {
+    savedArticles.splice(i, 1);
+    localStorage.setItem("articles", JSON.stringify(savedArticles));
+    renderArticles();
+  };
+  window.deleteOpinion = (i) => {
+    savedOpinions.splice(i, 1);
+    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+    renderOpinions();
+  };
 
-  /* --- Category filter --- */
-  let currentFilter = 'all';
-  document.querySelectorAll('#category-bar .category-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const cat = btn.dataset.cat || 'all';
-      currentFilter = (cat === 'all') ? 'all' : cat;
-      renderPosts(currentFilter);
+  // --- Płynne rozwijanie regulaminu ---
+  document.querySelectorAll(".collapsible").forEach(el => {
+    el.style.maxHeight = "0px";
+    el.style.overflow = "hidden";
+    el.style.transition = "max-height 0.5s ease";
+  });
+  document.querySelectorAll(".read-more").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.parentElement.querySelector(".collapsible");
+      if (!content) return;
+      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
+        content.style.maxHeight = content.scrollHeight + "px";
+        btn.textContent = "Zwiń";
+      } else {
+        content.style.maxHeight = "0px";
+        btn.textContent = "Zobacz pełny regulamin";
+      }
     });
   });
 
-  /* --- Share function --- */
-  function shareArticle(title, image) {
-    const subject = `Polecam artykuł: ${title}`;
-    const body = `Cześć! Polecam Ci ten artykuł z AdelbertusShop: ${title}\n\nZobacz więcej na naszej stronie!`;
-    window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-  }
-
-  /* --- Final init --- */
-  renderPosts('all');
+  // --- Start ---
+  renderArticles();
+  renderOpinions();
 });
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
