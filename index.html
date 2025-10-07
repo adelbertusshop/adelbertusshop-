@@ -3451,18 +3451,22 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </div>
   </div>
 </section>
-
-<!-- 🔧 Skrypt -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const articlesList = document.getElementById("articlesList");
   const opinionsList = document.getElementById("opinionsList");
 
-  // --- Pobierz z localStorage ---
+  const bannedWords = ["chuj", "kurwa", "jebany", "pierdol", "skurwysyn", "idiota", "debil", "spierdalaj", "szmata", "frajer"];
+  const adminPassword = "Wojownik.03"; // tylko porównanie, nic nie jest zapisywane
+
   const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
   const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
 
-  // --- Render artykułów ---
+  function containsBannedWords(text) {
+    const lower = text.toLowerCase();
+    return bannedWords.some(w => lower.includes(w));
+  }
+
   function renderArticles() {
     articlesList.innerHTML = "";
     savedArticles.forEach((a, i) => {
@@ -3471,28 +3475,39 @@ document.addEventListener("DOMContentLoaded", () => {
       article.innerHTML = `
         <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
         <p class="text-gray-700">${a.text}</p>
-        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
+        <button class="mt-3 text-red-600 font-semibold hover:underline">Usuń</button>
       `;
+      article.querySelector("button").addEventListener("click", () => {
+        const pass = prompt("Podaj hasło, aby usunąć wpis:");
+        if (pass === adminPassword) {
+          savedArticles.splice(i, 1);
+          localStorage.setItem("articles", JSON.stringify(savedArticles));
+          renderArticles();
+        } else {
+          alert("Błędne hasło lub brak uprawnień.");
+        }
+      });
       articlesList.appendChild(article);
     });
   }
 
-  // --- Render opinii ---
   function renderOpinions() {
     opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach((o, i) => {
+    savedOpinions.forEach(o => {
       const p = document.createElement("p");
       p.className = "italic text-gray-700";
-      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
+      p.innerHTML = `"${o.text}" – <b>${o.author}</b>`;
       opinionsList.appendChild(p);
     });
   }
 
-  // --- Dodaj artykuł ---
   document.getElementById("addArticleBtn").addEventListener("click", () => {
     const title = document.getElementById("articleTitle").value.trim();
     const text = document.getElementById("articleText").value.trim();
     if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+    if (containsBannedWords(title) || containsBannedWords(text))
+      return alert("Tekst zawiera zakazane słowa. Spróbuj inaczej.");
+
     savedArticles.push({ title, text });
     localStorage.setItem("articles", JSON.stringify(savedArticles));
     document.getElementById("articleTitle").value = "";
@@ -3500,11 +3515,13 @@ document.addEventListener("DOMContentLoaded", () => {
     renderArticles();
   });
 
-  // --- Dodaj opinię ---
   document.getElementById("addOpinionBtn").addEventListener("click", () => {
     const author = document.getElementById("opinionAuthor").value.trim();
     const text = document.getElementById("opinionText").value.trim();
     if (!author || !text) return alert("Wpisz imię i treść opinii!");
+    if (containsBannedWords(author) || containsBannedWords(text))
+      return alert("Tekst zawiera zakazane słowa. Spróbuj inaczej.");
+
     savedOpinions.push({ author, text });
     localStorage.setItem("opinions", JSON.stringify(savedOpinions));
     document.getElementById("opinionAuthor").value = "";
@@ -3512,19 +3529,7 @@ document.addEventListener("DOMContentLoaded", () => {
     renderOpinions();
   });
 
-  // --- Usuń wpisy (globalne funkcje) ---
-  window.deleteArticle = (i) => {
-    savedArticles.splice(i, 1);
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    renderArticles();
-  };
-  window.deleteOpinion = (i) => {
-    savedOpinions.splice(i, 1);
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    renderOpinions();
-  };
-
-  // --- Płynne rozwijanie regulaminu ---
+  // rozwijanie regulaminu
   document.querySelectorAll(".collapsible").forEach(el => {
     el.style.maxHeight = "0px";
     el.style.overflow = "hidden";
@@ -3544,11 +3549,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Start ---
   renderArticles();
   renderOpinions();
 });
-</script>        
+</script>       
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
