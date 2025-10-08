@@ -3399,151 +3399,151 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<section id="blog" class="py-16 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-center mb-10">Blog Adelbertus</h2>
+<!-- Sekcja Blog -->
+<section id="blog" class="py-16 bg-gray-950">
+    <div class="container mx-auto px-4">
+        <!-- Nagłówek sekcji -->
+        <div class="text-center mb-16">
+            <h2 class="text-5xl font-bold text-gold-400 mb-4">Nasz Blog</h2>
+            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Odkryj najnowsze trendy, porady stylistyczne i inspiracje z świata mody</p>
+        </div>
 
-    <!-- Panel dodawania artykułów -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-      <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
-      <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
-      <textarea id="articleText" rows="4" placeholder="Treść artykułu..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
+        <!-- Karty blogowe -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Artykuł 1 -->
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Trendy modowe 2024" 
+                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-gold-500 text-black px-3 py-1 rounded-full text-sm font-bold">TRENDY</span>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center text-gray-400 text-sm mb-3">
+                        <span>15 Listopada 2024</span>
+                        <span class="mx-2">•</span>
+                        <span>5 min czytania</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-3">Największe trendy modowe 2024: Co nosić tej jesieni?</h3>
+                    <p class="text-gray-400 mb-4 line-clamp-3">
+                        Odkryj najnowsze trendy, które zdominują ulice tej jesieni. Od oversize'owych bluz po klasyczne kroje...
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                            Czytaj więcej
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <div class="flex items-center text-gray-400">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span>142</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artykuł 2 -->
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Porady stylistyczne" 
+                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">STYLIZACJA</span>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center text-gray-400 text-sm mb-3">
+                        <span>12 Listopada 2024</span>
+                        <span class="mx-2">•</span>
+                        <span>7 min czytania</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-3">Jak stworzyć unikalny styl? 5 porad od ekspertów</h3>
+                    <p class="text-gray-400 mb-4 line-clamp-3">
+                        Dowiedz się, jak budować spójną garderobę, która odzwierciedla Twoją osobowość. Proste triki...
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                            Czytaj więcej
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <div class="flex items-center text-gray-400">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span>89</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Artykuł 3 -->
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb25
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558769132-cb25c5c5c9c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="Zrównoważona moda" 
+                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">ECO</span>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="flex items-center text-gray-400 text-sm mb-3">
+                        <span>8 Listopada 2024</span>
+                        <span class="mx-2">•</span>
+                        <span>6 min czytania</span>
+                    </div>
+                    
+                    <h3 class="text-xl font-bold text-white mb-3">Zrównoważona moda: Jak wybierać odpowiedzialnie?</h3>
+                    <p class="text-gray-400 mb-4 line-clamp-3">
+                        Poznaj marki, które stawiają na ekologię i etyczną produkcję. Twój wybór ma znaczenie...
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                            Czytaj więcej
+                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <div class="flex items-center text-gray-400">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                            <span>203</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Przycisk "Zobacz więcej" -->
+        <div class="text-center mt-12">
+            <button class="bg-gold-500 hover:bg-gold-600 text-black font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold/30">
+                Zobacz wszystkie artykuły
+            </button>
+        </div>
     </div>
-
-    <!-- Lista artykułów -->
-    <div id="articlesList" class="space-y-8"></div>
-
-    <!-- Panel dodawania opinii -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
-      <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
-      <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
-      <textarea id="opinionText" rows="3" placeholder="Twoja opinia..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
-    </div>
-
-    <!-- Opinie klientów -->
-    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
-
-    <!-- Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop.</p>
-      <div class="collapsible mt-3 text-gray-600 article-content">
-        <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej.</li>
-          <li>Zakup oznacza akceptację regulaminu.</li>
-          <li>Wszelkie pytania kierować na: <b>mielniczukgrzegosz74@gmail.com</b>.</li>
-          <li>Produkty mają charakter artystyczny i wykonywane są indywidualnie.</li>
-          <li>Zwroty i wymiany po indywidualnym ustaleniu.</li>
-          <li>Dane klientów używane są wyłącznie do realizacji zamówień.</li>
-          <li>Sklep może zmieniać ofertę i ceny.</li>
-          <li>Obowiązuje zdrowy rozsądek i wzajemny szacunek.</li>
-        </ol>
-      </div>
-      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
-    </div>
-  </div>
 </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const articlesList = document.getElementById("articlesList");
-  const opinionsList = document.getElementById("opinionsList");
-
-  const bannedWords = ["chuj","kurwa","jebany","pierdol","skurwysyn","idiota","debil","spierdalaj","szmata","frajer"];
-  const adminPassword = "Wojownik.03";
-
-  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
-
-  function containsBannedWords(text) {
-    const lower = text.toLowerCase();
-    return bannedWords.some(w => lower.includes(w));
-  }
-
-  function renderArticles() {
-    articlesList.innerHTML = "";
-    savedArticles.forEach((a,i) => {
-      const article = document.createElement("article");
-      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
-      article.innerHTML = `
-        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
-        <p class="text-gray-700">${a.text}</p>
-        <button class="mt-3 text-red-600 font-semibold hover:underline">Usuń</button>
-      `;
-      article.querySelector("button").addEventListener("click", () => {
-        const pass = prompt("Podaj hasło, aby usunąć wpis:");
-        if(pass === adminPassword){
-          savedArticles.splice(i,1);
-          localStorage.setItem("articles",JSON.stringify(savedArticles));
-          renderArticles();
-        } else {
-          alert("Błędne hasło lub brak uprawnień.");
-        }
-      });
-      articlesList.appendChild(article);
-    });
-  }
-
-  function renderOpinions() {
-    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach((o) => {
-      const p = document.createElement("p");
-      p.className = "italic text-gray-700";
-      p.innerHTML = `"${o.text}" – <b>${o.author}</b>`;
-      opinionsList.appendChild(p);
-    });
-  }
-
-  document.getElementById("addArticleBtn").addEventListener("click",()=>{
-    const title = document.getElementById("articleTitle").value.trim();
-    const text = document.getElementById("articleText").value.trim();
-    if(!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
-    if(containsBannedWords(title) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
-    savedArticles.push({title,text});
-    localStorage.setItem("articles",JSON.stringify(savedArticles));
-    document.getElementById("articleTitle").value = "";
-    document.getElementById("articleText").value = "";
-    renderArticles();
-  });
-
-  document.getElementById("addOpinionBtn").addEventListener("click",()=>{
-    const author = document.getElementById("opinionAuthor").value.trim();
-    const text = document.getElementById("opinionText").value.trim();
-    if(!author || !text) return alert("Wpisz imię i treść opinii!");
-    if(containsBannedWords(author) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
-    savedOpinions.push({author,text});
-    localStorage.setItem("opinions",JSON.stringify(savedOpinions));
-    document.getElementById("opinionAuthor").value = "";
-    document.getElementById("opinionText").value = "";
-    renderOpinions();
-  });
-
-  // rozwijanie regulaminu
-  document.querySelectorAll(".collapsible").forEach(el=>{
-    el.style.maxHeight = "0px";
-    el.style.overflow = "hidden";
-    el.style.transition = "max-height 0.5s ease";
-  });
-  document.querySelectorAll(".read-more").forEach(btn=>{
-    btn.addEventListener("click",()=>{
-      const content = btn.parentElement.querySelector(".collapsible");
-      if(!content) return;
-      if(content.style.maxHeight==="0px" || content.style.maxHeight===""){
-        content.style.maxHeight = content.scrollHeight+"px";
-        btn.textContent = "Zwiń";
-      } else {
-        content.style.maxHeight = "0px";
-        btn.textContent = "Zobacz pełny regulamin";
-      }
-    });
-  });
-
-  renderArticles();
-  renderOpinions();
-});
-</script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
