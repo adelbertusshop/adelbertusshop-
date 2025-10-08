@@ -3399,12 +3399,11 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
 <section id="blog" class="py-16 bg-gray-100 text-gray-900">
   <div class="container mx-auto px-4">
-    <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
+    <h2 class="text-4xl font-bold text-center mb-10">Blog Adelbertus</h2>
 
-    <!-- 🧠 Panel dodawania artykułów -->
+    <!-- Panel dodawania artykułów -->
     <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
       <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
       <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
@@ -3412,10 +3411,10 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
     </div>
 
-    <!-- 📚 Lista artykułów -->
+    <!-- Lista artykułów -->
     <div id="articlesList" class="space-y-8"></div>
 
-    <!-- 💬 Panel dodawania opinii -->
+    <!-- Panel dodawania opinii -->
     <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
       <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
       <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
@@ -3423,41 +3422,37 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
     </div>
 
-    <!-- 🧾 Opinie klientów -->
+    <!-- Opinie klientów -->
     <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
 
-    <!-- 🔹 Sekcja Regulamin -->
+    <!-- Regulamin -->
     <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
       <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">
-        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
-        prowadzonego w ramach działalności nierejestrowanej.
-      </p>
+      <p class="text-gray-700">Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop.</p>
       <div class="collapsible mt-3 text-gray-600 article-content">
         <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
-          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania i reklamacje prosimy kierować na adres: 
-            <b>mielniczukgrzegosz74@gmail.com</b>.
-          </li>
-          <li>Produkty mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
-          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po ustaleniu mailowym.</li>
-          <li>Dane klientów używane są wyłącznie do realizacji zamówień (zgodnie z RODO).</li>
-          <li>Sklep zastrzega sobie prawo do zmian oferty i cen.</li>
-          <li>Obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
+          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej.</li>
+          <li>Zakup oznacza akceptację regulaminu.</li>
+          <li>Wszelkie pytania kierować na: <b>mielniczukgrzegosz74@gmail.com</b>.</li>
+          <li>Produkty mają charakter artystyczny i wykonywane są indywidualnie.</li>
+          <li>Zwroty i wymiany po indywidualnym ustaleniu.</li>
+          <li>Dane klientów używane są wyłącznie do realizacji zamówień.</li>
+          <li>Sklep może zmieniać ofertę i ceny.</li>
+          <li>Obowiązuje zdrowy rozsądek i wzajemny szacunek.</li>
         </ol>
       </div>
       <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
     </div>
   </div>
 </section>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const articlesList = document.getElementById("articlesList");
   const opinionsList = document.getElementById("opinionsList");
 
-  const bannedWords = ["chuj", "kurwa", "jebany", "pierdol", "skurwysyn", "idiota", "debil", "spierdalaj", "szmata", "frajer"];
-  const adminPassword = "Wojownik.03"; // tylko porównanie, nic nie jest zapisywane
+  const bannedWords = ["chuj","kurwa","jebany","pierdol","skurwysyn","idiota","debil","spierdalaj","szmata","frajer"];
+  const adminPassword = "Wojownik.03";
 
   const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
   const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
@@ -3469,7 +3464,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderArticles() {
     articlesList.innerHTML = "";
-    savedArticles.forEach((a, i) => {
+    savedArticles.forEach((a,i) => {
       const article = document.createElement("article");
       article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
       article.innerHTML = `
@@ -3479,9 +3474,9 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       article.querySelector("button").addEventListener("click", () => {
         const pass = prompt("Podaj hasło, aby usunąć wpis:");
-        if (pass === adminPassword) {
-          savedArticles.splice(i, 1);
-          localStorage.setItem("articles", JSON.stringify(savedArticles));
+        if(pass === adminPassword){
+          savedArticles.splice(i,1);
+          localStorage.setItem("articles",JSON.stringify(savedArticles));
           renderArticles();
         } else {
           alert("Błędne hasło lub brak uprawnień.");
@@ -3493,7 +3488,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderOpinions() {
     opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach(o => {
+    savedOpinions.forEach((o) => {
       const p = document.createElement("p");
       p.className = "italic text-gray-700";
       p.innerHTML = `"${o.text}" – <b>${o.author}</b>`;
@@ -3501,46 +3496,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.getElementById("addArticleBtn").addEventListener("click", () => {
+  document.getElementById("addArticleBtn").addEventListener("click",()=>{
     const title = document.getElementById("articleTitle").value.trim();
     const text = document.getElementById("articleText").value.trim();
-    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
-    if (containsBannedWords(title) || containsBannedWords(text))
-      return alert("Tekst zawiera zakazane słowa. Spróbuj inaczej.");
-
-    savedArticles.push({ title, text });
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
+    if(!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+    if(containsBannedWords(title) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
+    savedArticles.push({title,text});
+    localStorage.setItem("articles",JSON.stringify(savedArticles));
     document.getElementById("articleTitle").value = "";
     document.getElementById("articleText").value = "";
     renderArticles();
   });
 
-  document.getElementById("addOpinionBtn").addEventListener("click", () => {
+  document.getElementById("addOpinionBtn").addEventListener("click",()=>{
     const author = document.getElementById("opinionAuthor").value.trim();
     const text = document.getElementById("opinionText").value.trim();
-    if (!author || !text) return alert("Wpisz imię i treść opinii!");
-    if (containsBannedWords(author) || containsBannedWords(text))
-      return alert("Tekst zawiera zakazane słowa. Spróbuj inaczej.");
-
-    savedOpinions.push({ author, text });
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+    if(!author || !text) return alert("Wpisz imię i treść opinii!");
+    if(containsBannedWords(author) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
+    savedOpinions.push({author,text});
+    localStorage.setItem("opinions",JSON.stringify(savedOpinions));
     document.getElementById("opinionAuthor").value = "";
     document.getElementById("opinionText").value = "";
     renderOpinions();
   });
 
   // rozwijanie regulaminu
-  document.querySelectorAll(".collapsible").forEach(el => {
+  document.querySelectorAll(".collapsible").forEach(el=>{
     el.style.maxHeight = "0px";
     el.style.overflow = "hidden";
     el.style.transition = "max-height 0.5s ease";
   });
-  document.querySelectorAll(".read-more").forEach(btn => {
-    btn.addEventListener("click", () => {
+  document.querySelectorAll(".read-more").forEach(btn=>{
+    btn.addEventListener("click",()=>{
       const content = btn.parentElement.querySelector(".collapsible");
-      if (!content) return;
-      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
-        content.style.maxHeight = content.scrollHeight + "px";
+      if(!content) return;
+      if(content.style.maxHeight==="0px" || content.style.maxHeight===""){
+        content.style.maxHeight = content.scrollHeight+"px";
         btn.textContent = "Zwiń";
       } else {
         content.style.maxHeight = "0px";
@@ -3552,7 +3543,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderArticles();
   renderOpinions();
 });
-</script>       
+</script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
