@@ -4278,241 +4278,99 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         window.sendOrderWhatsApp = sendOrderWhatsApp;
     </script>
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  try {
-    const bannedWords = ["chuj","kurwa","jebany","pierdol","skurwysyn","idiota","debil","spierdalaj","szmata","frajer"];
-    const adminPassword = "Wojownik.03";
-    const blogGrid = document.querySelector("#blog .grid");
-    const opinionsContainer = document.getElementById("opinionsList");
+document.addEventListener("DOMContentLoaded", function () {
+    // Obsługa "Czytaj więcej"
+    const readMoreButtons = document.querySelectorAll(".read-more-btn");
+    const modal = document.getElementById("post-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const modalContent = document.getElementById("modal-content");
+    const closeModal = document.getElementById("close-modal");
 
-    if(!blogGrid){
-      console.error("Nie znaleziono kontenera #blog .grid — upewnij się, że HTML jest taki, jak podałeś.");
-      return;
-    }
-
-    // dane przechowywane lokalnie
-    let savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-    let savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
-
-    // helpery
-    const containsBannedWords = (text) => {
-      if(!text) return false;
-      const lower = text.toLowerCase();
-      return bannedWords.some(w => lower.includes(w));
-    };
-    const escapeHtml = (unsafe) => {
-      if(!unsafe) return "";
-      return String(unsafe).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;").replace(/'/g,"&#039;");
-    };
-    const estimateReadTime = (text) => {
-      const words = text.trim().split(/\s+/).filter(Boolean).length || 0;
-      return `${Math.max(1, Math.round(words/200))} min czytania`;
-    };
-
-    // --- READ MORE dla wszystkich paragrafów w grid (statyczne + dynamiczne) ---
-    function initReadMoreForGrid(){
-      const paragraphs = blogGrid.querySelectorAll("p");
-      paragraphs.forEach(p => {
-        // heurystyka: krótki opis artykułu / dłuższy tekst -> jeśli długość > 80 znaków
-        if(p.dataset.readmoreInit === "1") return;
-        if(p.textContent.trim().length < 80) {
-          // krótkie opisy zostawimy bez skracania
-          return;
-        }
-        p.dataset.readmoreInit = "1";
-        p.style.transition = "max-height 0.25s ease";
-        p.style.maxHeight = "3.6em"; // ~2 linie
-        p.style.overflow = "hidden";
-
-        // spróbuj znaleźć miejsce by dodać przycisk - preferujemy .p-6 wewnątrz artykułu
-        const card = p.closest("article");
-        let btn = null;
-        if(card){
-          btn = card.querySelector(".__read_more_btn");
-          if(!btn){
-            btn = document.createElement("button");
-            btn.type = "button";
-            btn.className = "__read_more_btn text-gold-400 font-semibold mt-2";
-            btn.style.background = "transparent";
-            btn.style.border = "none";
-            btn.style.cursor = "pointer";
-            btn.textContent = "Czytaj więcej";
-            // próbujemy dodać do .p-6, a jeśli nie ma, to do końca karty
-            const p6 = card.querySelector(".p-6");
-            if(p6) p6.appendChild(btn); else card.appendChild(btn);
-          }
-        } else {
-          // jeśli brak karty, dodajemy klik na sam paragraf
-          p.style.cursor = "pointer";
-          p.addEventListener("click", () => toggleParagraph(p, null));
-        }
-
-        if(btn){
-          btn.addEventListener("click", (e) => { e.preventDefault(); toggleParagraph(p, btn); });
-        }
-      });
-    }
-
-    function toggleParagraph(pEl, btn){
-      if(!pEl) return;
-      if(pEl.style.maxHeight && pEl.style.maxHeight !== "3.6em"){
-        // jest rozwinięty -> zwiń
-        pEl.style.maxHeight = "3.6em";
-        pEl.style.overflow = "hidden";
-        if(btn) btn.textContent = "Czytaj więcej";
-      } else {
-        // rozwijamy
-        pEl.style.maxHeight = pEl.scrollHeight + "px";
-        pEl.style.overflow = "visible";
-        if(btn) btn.textContent = "Zwiń";
-      }
-    }
-
-    // --- render dynamicznych artykułów (dodane przez użytkowników) ---
-    function renderSavedArticles(){
-      // usuń tylko te generowane wcześniej (oznaczone data-generated)
-      const prev = blogGrid.querySelectorAll('article[data-generated="1"]');
-      prev.forEach(el => el.remove());
-
-      savedArticles.forEach((a, idx) => {
-        const art = document.createElement("article");
-        art.setAttribute("data-generated","1");
-        art.className = "bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden";
-        art.innerHTML = `
-          <div class="p-6">
-            <div class="flex items-center text-gray-400 text-sm mb-3">
-              <span>${escapeHtml(a.date || "")}</span><span class="mx-2">•</span><span>${escapeHtml(a.readTime || "")}</span>
-            </div>
-            <h3 class="text-xl font-bold text-white mb-3">${escapeHtml(a.title)}</h3>
-            <p class="text-gray-400 mb-4 article-text">${escapeHtml(a.text)}</p>
-            <div class="flex items-center justify-between">
-              <button class="text-gold-400 font-semibold __read_more_dynamic">Czytaj więcej</button>
-              <button class="text-red-600 font-semibold __delete_dynamic">Usuń</button>
-            </div>
-          </div>
-        `;
-        // delete
-        art.querySelector(".__delete_dynamic").addEventListener("click", () => {
-          const pass = prompt("Podaj hasło, aby usunąć wpis:");
-          if(pass === adminPassword){
-            savedArticles.splice(idx,1);
-            localStorage.setItem("articles", JSON.stringify(savedArticles));
-            renderSavedArticles();
-            initReadMoreForGrid();
-          } else {
-            alert("Błędne hasło lub brak uprawnień.");
-          }
+    readMoreButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const article = this.closest("article");
+            const title = article.querySelector("h3").textContent;
+            const content = article.querySelector("p").textContent;
+            modalTitle.textContent = title;
+            modalContent.textContent = content + " (pełny artykuł w przygotowaniu...)";
+            modal.classList.remove("hidden");
         });
-        // read more
-        const p = art.querySelector(".article-text");
-        art.querySelector(".__read_more_dynamic").addEventListener("click", (e) => { e.preventDefault(); toggleParagraph(p, art.querySelector(".__read_more_dynamic")); });
-        blogGrid.appendChild(art);
-      });
+    });
 
-      // after append, ensure read-more for all
-      initReadMoreForGrid();
+    closeModal.addEventListener("click", () => modal.classList.add("hidden"));
+    modal.addEventListener("click", e => {
+        if (e.target === modal) modal.classList.add("hidden");
+    });
+
+    // Obsługa lajków
+    const likeButtons = document.querySelectorAll(".like-btn");
+    likeButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const countSpan = this.querySelector(".like-count");
+            let count = parseInt(countSpan.textContent);
+            countSpan.textContent = count + 1;
+        });
+    });
+
+    // Licznik znaków w formularzu
+    const textarea = document.getElementById("post-content");
+    const charCount = document.getElementById("char-count");
+    if (textarea && charCount) {
+        textarea.addEventListener("input", () => {
+            charCount.textContent = textarea.value.length;
+        });
     }
 
-    // --- render opinii ---
-    function renderSavedOpinions(){
-      if(!opinionsContainer) return;
-      opinionsContainer.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-      savedOpinions.forEach(o => {
-        const p = document.createElement("p");
-        p.className = "italic text-gray-700";
-        p.innerHTML = `"${escapeHtml(o.text)}" – <b>${escapeHtml(o.author)}</b>`;
-        opinionsContainer.appendChild(p);
-      });
-    }
+    // Dodawanie nowego wpisu
+    const form = document.getElementById("new-post-form");
+    const blogPosts = document.getElementById("blog-posts");
 
-    // --- dodawanie artykułu/opinii ---
-    function addArticle(title, text){
-      if(!title || !text){ alert("Uzupełnij tytuł i treść artykułu!"); return; }
-      if(containsBannedWords(title) || containsBannedWords(text)){ alert("Tekst zawiera zakazane słowa."); return; }
-      const meta = { date: new Date().toLocaleDateString("pl-PL"), readTime: estimateReadTime(text) };
-      savedArticles.push(Object.assign({title, text}, meta));
-      localStorage.setItem("articles", JSON.stringify(savedArticles));
-      renderSavedArticles();
-    }
-    function addOpinion(author, text){
-      if(!author || !text){ alert("Wpisz imię i treść opinii!"); return; }
-      if(containsBannedWords(author) || containsBannedWords(text)){ alert("Tekst zawiera zakazane słowa."); return; }
-      savedOpinions.push({author, text});
-      localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-      renderSavedOpinions();
-    }
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const title = document.getElementById("post-title").value;
+        const category = document.getElementById("post-category").value;
+        const image = document.getElementById("post-image").value;
+        const content = document.getElementById("post-content").value;
+        const readTime = document.getElementById("post-read-time").value;
+        const date = document.getElementById("post-date").value;
 
-    // --- podpięcie formularzy jeśli je masz na stronie ---
-    const addArticleBtn = document.getElementById("addArticleBtn");
-    if(addArticleBtn){
-      addArticleBtn.addEventListener("click", () => {
-        const title = (document.getElementById("articleTitle")||{value:""}).value.trim();
-        const text = (document.getElementById("articleText")||{value:""}).value.trim();
-        addArticle(title, text);
-        if(document.getElementById("articleTitle")) document.getElementById("articleTitle").value = "";
-        if(document.getElementById("articleText")) document.getElementById("articleText").value = "";
-      });
-    } else {
-      // jeśli nie masz, dodajemy pływający + (nieinwazyjny)
-      const quick = document.createElement("button");
-      quick.innerHTML = "+";
-      quick.title = "Dodaj artykuł";
-      Object.assign(quick.style, {
-        position: "fixed", right: "18px", bottom: "18px", width: "48px", height: "48px",
-        borderRadius: "999px", background: "#b8860b", color: "#000", fontSize: "26px", zIndex: "9999",
-        boxShadow: "0 6px 20px rgba(0,0,0,0.3)", border: "none", cursor: "pointer"
-      });
-      document.body.appendChild(quick);
-      quick.addEventListener("click", () => {
-        const title = prompt("Tytuł artykułu:");
-        if(title === null) return;
-        const text = prompt("Treść artykułu:");
-        if(text === null) return;
-        addArticle(title.trim(), text.trim());
-      });
-    }
-
-    // opinie: jeśli masz formularz, podpinamy; jeśli nie, dodajemy prosty prompt przez przycisk
-    const addOpinionBtn = document.getElementById("addOpinionBtn");
-    if(addOpinionBtn){
-      addOpinionBtn.addEventListener("click", () => {
-        const author = (document.getElementById("opinionAuthor")||{value:""}).value.trim();
-        const text = (document.getElementById("opinionText")||{value:""}).value.trim();
-        addOpinion(author, text);
-        if(document.getElementById("opinionAuthor")) document.getElementById("opinionAuthor").value = "";
-        if(document.getElementById("opinionText")) document.getElementById("opinionText").value = "";
-      });
-    } else {
-      // dodajemy mały przycisk obok + do promptów (opcjonalne)
-      const quickOpp = document.createElement("button");
-      quickOpp.innerHTML = "💬";
-      quickOpp.title = "Dodaj opinię";
-      Object.assign(quickOpp.style, {
-        position: "fixed", right: "18px", bottom: "78px", width: "44px", height: "44px",
-        borderRadius: "999px", background: "#2f855a", color: "#fff", fontSize: "18px", zIndex: "9999",
-        boxShadow: "0 6px 20px rgba(0,0,0,0.3)", border: "none", cursor: "pointer"
-      });
-      document.body.appendChild(quickOpp);
-      quickOpp.addEventListener("click", () => {
-        const author = prompt("Twoje imię:");
-        if(author === null) return;
-        const text = prompt("Twoja opinia:");
-        if(text === null) return;
-        addOpinion(author.trim(), text.trim());
-      });
-    }
-
-    // inicjalne renderowanie
-    renderSavedArticles();
-    renderSavedOpinions();
-    initReadMoreForGrid();
-
-    console.log("Skrypt bloga załadowany, artykuły zapisane:", savedArticles.length, "opinie:", savedOpinions.length);
-  } catch (err){
-    console.error("Błąd w skrypcie bloga:", err);
-    alert("Wystąpił błąd w skrypcie bloga. Sprawdź konsolę (F12) i podaj mi treść błędu jeśli chcesz, żebym naprawił.");
-  }
+        const article = document.createElement("article");
+        article.className = "bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden";
+        article.innerHTML = `
+            <div class="relative overflow-hidden">
+                <img src="${image}" alt="${title}" class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
+                <div class="absolute top-4 left-4">
+                    <span class="bg-gold-500 text-black px-3 py-1 rounded-full text-sm font-bold">${category}</span>
+                </div>
+            </div>
+            <div class="p-6">
+                <div class="flex items-center text-gray-400 text-sm mb-3">
+                    <span>${date}</span><span class="mx-2">•</span><span>${readTime} min czytania</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">${title}</h3>
+                <p class="text-gray-400 mb-4 line-clamp-3">${content}</p>
+                <div class="flex items-center justify-between">
+                    <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                        Czytaj więcej
+                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                    <div class="flex items-center text-gray-400">
+                        <button class="like-btn flex items-center">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                            <span class="like-count">0</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        blogPosts.prepend(article);
+        form.reset();
+        charCount.textContent = "0";
+    });
 });
 </script>        
 </body>
