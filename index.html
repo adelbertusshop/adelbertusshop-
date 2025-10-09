@@ -3400,154 +3400,130 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
-<section id="blog" class="py-16 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
-
-    <!-- 🧠 Panel dodawania artykułów -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-      <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
-      <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
-      <textarea id="articleText" rows="4" placeholder="Treść artykułu..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
-    </div>
-
-    <!-- 📚 Lista artykułów -->
-    <div id="articlesList" class="space-y-8"></div>
-
-    <!-- 💬 Panel dodawania opinii -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
-      <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
-      <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
-      <textarea id="opinionText" rows="3" placeholder="Twoja opinia..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
-    </div>
-
-    <!-- 🧾 Opinie klientów -->
-    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
-
-    <!-- 🔹 Sekcja Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">
-        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
-        prowadzonego w ramach działalności nierejestrowanej.
-      </p>
-      <div class="collapsible mt-3 text-gray-600 article-content">
-        <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
-          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania i reklamacje prosimy kierować na adres: 
-            <b>mielniczukgrzegosz74@gmail.com</b>.
-          </li>
-          <li>Produkty mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
-          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po ustaleniu mailowym.</li>
-          <li>Dane klientów używane są wyłącznie do realizacji zamówień (zgodnie z RODO).</li>
-          <li>Sklep zastrzega sobie prawo do zmian oferty i cen.</li>
-          <li>Obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
-        </ol>
-      </div>
-      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
-    </div>
-  </div>
-</section>
-
-<!-- 🔧 Skrypt -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const articlesList = document.getElementById("articlesList");
-  const opinionsList = document.getElementById("opinionsList");
+  const bannedWords = ["chuj","kurwa","jebany","pierdol","skurwysyn","idiota","debil","spierdalaj","szmata","frajer"];
+  const adminPassword = "Wojownik.03";
 
-  // --- Pobierz z localStorage ---
-  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
+  // Przechowywanie artykułów i opinii w localStorage
+  let savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+  let savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
 
-  // --- Render artykułów ---
-  function renderArticles() {
-    articlesList.innerHTML = "";
-    savedArticles.forEach((a, i) => {
+  // Funkcja sprawdzająca wulgaryzmy
+  function containsBannedWords(text){
+    const lower = text.toLowerCase();
+    return bannedWords.some(w => lower.includes(w));
+  }
+
+  // Render artykułów z możliwością "Czytaj więcej"
+  function renderArticles(){
+    const grid = document.querySelector("#blog .grid");
+    grid.innerHTML = "";
+
+    savedArticles.forEach((a,i)=>{
       const article = document.createElement("article");
-      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
+      article.className = "bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden";
       article.innerHTML = `
-        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
-        <p class="text-gray-700">${a.text}</p>
-        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
+        <div class="p-6">
+          <h3 class="text-xl font-bold text-white mb-3">${a.title}</h3>
+          <p class="text-gray-400 mb-4 line-clamp-3 article-text">${a.text}</p>
+          <div class="flex items-center justify-between">
+            <button class="text-gold-400 font-semibold read-more-btn">Czytaj więcej</button>
+            <button class="text-red-600 font-semibold delete-btn">Usuń</button>
+          </div>
+        </div>
       `;
-      articlesList.appendChild(article);
+
+      // Czytaj więcej
+      const readBtn = article.querySelector(".read-more-btn");
+      const p = article.querySelector(".article-text");
+      readBtn.addEventListener("click", () => {
+        if(p.style.maxHeight && p.style.maxHeight !== "none"){
+          p.style.maxHeight = "none";
+          p.style.display = "block";
+          readBtn.textContent = "Zwiń";
+        } else {
+          p.style.maxHeight = "3.6em";
+          p.style.overflow = "hidden";
+          readBtn.textContent = "Czytaj więcej";
+        }
+      });
+      p.style.maxHeight = "3.6em";
+      p.style.overflow = "hidden";
+
+      // Usuń wpis po haśle
+      const delBtn = article.querySelector(".delete-btn");
+      delBtn.addEventListener("click", ()=>{
+        const pass = prompt("Podaj hasło, aby usunąć wpis:");
+        if(pass === adminPassword){
+          savedArticles.splice(i,1);
+          localStorage.setItem("articles",JSON.stringify(savedArticles));
+          renderArticles();
+        } else {
+          alert("Błędne hasło lub brak uprawnień.");
+        }
+      });
+
+      grid.appendChild(article);
     });
   }
 
-  // --- Render opinii ---
-  function renderOpinions() {
-    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach((o, i) => {
+  // Render opinii
+  function renderOpinions(){
+    const opinionsContainer = document.getElementById("opinionsList");
+    if(!opinionsContainer) return;
+    opinionsContainer.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
+    savedOpinions.forEach(o=>{
       const p = document.createElement("p");
       p.className = "italic text-gray-700";
-      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
-      opinionsList.appendChild(p);
+      p.innerHTML = `"${o.text}" – <b>${o.author}</b>`;
+      opinionsContainer.appendChild(p);
     });
   }
 
-  // --- Dodaj artykuł ---
-  document.getElementById("addArticleBtn").addEventListener("click", () => {
-    const title = document.getElementById("articleTitle").value.trim();
-    const text = document.getElementById("articleText").value.trim();
-    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
-    savedArticles.push({ title, text });
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    document.getElementById("articleTitle").value = "";
-    document.getElementById("articleText").value = "";
+  // Funkcje dodawania nowych artykułów i opinii
+  function addArticle(title,text){
+    if(!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+    if(containsBannedWords(title) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
+    savedArticles.push({title,text});
+    localStorage.setItem("articles",JSON.stringify(savedArticles));
     renderArticles();
-  });
+  }
 
-  // --- Dodaj opinię ---
-  document.getElementById("addOpinionBtn").addEventListener("click", () => {
-    const author = document.getElementById("opinionAuthor").value.trim();
-    const text = document.getElementById("opinionText").value.trim();
-    if (!author || !text) return alert("Wpisz imię i treść opinii!");
-    savedOpinions.push({ author, text });
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    document.getElementById("opinionAuthor").value = "";
-    document.getElementById("opinionText").value = "";
+  function addOpinion(author,text){
+    if(!author || !text) return alert("Wpisz imię i treść opinii!");
+    if(containsBannedWords(author) || containsBannedWords(text)) return alert("Tekst zawiera zakazane słowa.");
+    savedOpinions.push({author,text});
+    localStorage.setItem("opinions",JSON.stringify(savedOpinions));
     renderOpinions();
-  });
+  }
 
-  // --- Usuń wpisy (globalne funkcje) ---
-  window.deleteArticle = (i) => {
-    savedArticles.splice(i, 1);
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    renderArticles();
-  };
-  window.deleteOpinion = (i) => {
-    savedOpinions.splice(i, 1);
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    renderOpinions();
-  };
-
-  // --- Płynne rozwijanie regulaminu ---
-  document.querySelectorAll(".collapsible").forEach(el => {
-    el.style.maxHeight = "0px";
-    el.style.overflow = "hidden";
-    el.style.transition = "max-height 0.5s ease";
-  });
-  document.querySelectorAll(".read-more").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const content = btn.parentElement.querySelector(".collapsible");
-      if (!content) return;
-      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
-        content.style.maxHeight = content.scrollHeight + "px";
-        btn.textContent = "Zwiń";
-      } else {
-        content.style.maxHeight = "0px";
-        btn.textContent = "Zobacz pełny regulamin";
-      }
-    });
-  });
-
-  // --- Start ---
+  // Inicjalne renderowanie
   renderArticles();
   renderOpinions();
+
+  // Opcjonalnie: podpiąć eventy do formularzy jeśli masz inputy
+  const addArticleBtn = document.getElementById("addArticleBtn");
+  if(addArticleBtn){
+    addArticleBtn.addEventListener("click", ()=>{
+      const title = document.getElementById("articleTitle").value.trim();
+      const text = document.getElementById("articleText").value.trim();
+      addArticle(title,text);
+      document.getElementById("articleTitle").value = "";
+      document.getElementById("articleText").value = "";
+    });
+  }
+
+  const addOpinionBtn = document.getElementById("addOpinionBtn");
+  if(addOpinionBtn){
+    addOpinionBtn.addEventListener("click", ()=>{
+      const author = document.getElementById("opinionAuthor").value.trim();
+      const text = document.getElementById("opinionText").value.trim();
+      addOpinion(author,text);
+      document.getElementById("opinionAuthor").value = "";
+      document.getElementById("opinionText").value = "";
+    });
+  }
 });
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
