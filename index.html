@@ -3408,11 +3408,55 @@ setInterval(typeLetter, 15000); // co 15s nowy list
             <p class="text-xl text-gray-300 max-w-2xl mx-auto">Odkryj najnowsze trendy, porady stylistyczne i inspiracje z świata mody</p>
         </div>
 
+        <!-- Formularz dodawania nowego wpisu (dla administratora) -->
+        <div id="blog-admin" class="mb-12 bg-gray-800 p-6 rounded-2xl border border-gold-500">
+            <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy wpis na bloga</h3>
+            <form id="new-post-form" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Tytuł</label>
+                        <input type="text" id="post-title" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Kategoria</label>
+                        <select id="post-category" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                            <option value="TRENDY">TRENDY</option>
+                            <option value="STYLIZACJA">STYLIZACJA</option>
+                            <option value="ECO">ECO</option>
+                            <option value="PORADY">PORADY</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">URL obrazka</label>
+                    <input type="url" id="post-image" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
+                </div>
+                <div>
+                    <label class="block text-gray-300 mb-2">Treść (pierwsze 150 znaków)</label>
+                    <textarea id="post-content" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white h-24" maxlength="150" required></textarea>
+                    <div class="text-gray-400 text-sm mt-1"><span id="char-count">0</span>/150 znaków</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-gray-300 mb-2">Czas czytania (min)</label>
+                        <input type="number" id="post-read-time" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" min="1" value="5">
+                    </div>
+                    <div>
+                        <label class="block text-gray-300 mb-2">Data publikacji</label>
+                        <input type="date" id="post-date" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
+                    </div>
+                </div>
+                <button type="submit" class="bg-gold-500 hover:bg-gold-600 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300">
+                    Opublikuj wpis
+                </button>
+            </form>
+        </div>
+
         <!-- Karty blogowe -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="blog-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
             <!-- Artykuł 1 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="1">
                 <div class="relative overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
                          alt="Trendy modowe 2024" 
@@ -3435,24 +3479,26 @@ setInterval(typeLetter, 15000); // co 15s nowy list
                     </p>
                     
                     <div class="flex items-center justify-between">
-                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="1">
                             Czytaj więcej
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </button>
                         <div class="flex items-center text-gray-400">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                            <span>142</span>
+                            <button class="like-btn flex items-center" data-post="1">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                                <span class="like-count">142</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- Artykuł 2 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="2">
                 <div class="relative overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
                          alt="Porady stylistyczne" 
@@ -3475,27 +3521,26 @@ setInterval(typeLetter, 15000); // co 15s nowy list
                     </p>
                     
                     <div class="flex items-center justify-between">
-                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="2">
                             Czytaj więcej
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </button>
                         <div class="flex items-center text-gray-400">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                            <span>89</span>
+                            <button class="like-btn flex items-center" data-post="2">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                                <span class="like-count">89</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </article>
 
             <!-- Artykuł 3 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1558769132-cb25
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden">
+            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="3">
                 <div class="relative overflow-hidden">
                     <img src="https://images.unsplash.com/photo-1558769132-cb25c5c5c9c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
                          alt="Zrównoważona moda" 
@@ -3518,21 +3563,38 @@ setInterval(typeLetter, 15000); // co 15s nowy list
                     </p>
                     
                     <div class="flex items-center justify-between">
-                        <a href="#" class="text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
+                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="3">
                             Czytaj więcej
                             <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
-                        </a>
+                        </button>
                         <div class="flex items-center text-gray-400">
-                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                            </svg>
-                            <span>203</span>
+                            <button class="like-btn flex items-center" data-post="3">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                                <span class="like-count">203</span>
+                            </button>
                         </div>
                     </div>
                 </div>
             </article>
+        </div>
+
+        <!-- Modal do czytania artykułu -->
+        <div id="post-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
+                        <button id="close-modal" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                    </div>
+                    <div id="modal-content" class="text-gray-300 prose prose-invert max-w-none">
+                        <!-- Treść artykułu będzie wstawiana tutaj -->
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Przycisk "Zobacz więcej" -->
@@ -3543,7 +3605,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         </div>
     </div>
 </section>
-
+        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
