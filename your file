@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "Największe trendy modowe 2024",
+    "category": "TRENDY",
+    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8",
+    "date": "2024-11-15",
+    "readTime": "5 min czytania",
+    "content": "Odkryj najnowsze trendy, które zdominują ulice tej jesieni..."
+  },
+  {
+    "id": 2,
+    "title": "Jak stworzyć unikalny styl",
+    "category": "STYLIZACJA",
+    "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b",
+    "date": "2024-11-12",
+    "readTime": "7 min czytania",
+    "content": "Dowiedz się, jak budować spójną garderobę, która odzwierciedla Twoją osobowość..."
+  }
+]
