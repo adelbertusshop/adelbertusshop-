@@ -1157,7 +1157,7 @@
         }
     </style>  
 </head>
-<body>  
+<body> 
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
@@ -1256,7 +1256,7 @@
                 </div>
             </div>
         </section>
-        <!-- Sklep - ZAKTUALIZOWANY -->
+           <!-- Sklep - ZAKTUALIZOWANY -->
 <section id="shop">
     <div class="section-title">
         <h2>Nasze Produkty</h2>
@@ -3265,191 +3265,191 @@
         </div>
     </div>
 </section>
-<!-- Sekcja Studio Projektowe -->
-<section id="design">
-    <div class="section-title">
-        <h2>Studio Projektowe</h2>
-        <p>Stwórz swój unikalny produkt z systemem warstw</p>
-    </div>
-    
-    <div class="design-studio">
-        <!-- Przyciski po bokach -->
-        <div class="side-buttons left">
-            <button class="side-button" onclick="updateDesign()" title="Podgląd">
-                <i class="fas fa-sync"></i>
-            </button>
-            <button class="side-button" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
-                <i class="fas fa-cart-plus"></i>
-            </button>
-        </div>
-        
-        <div class="side-buttons right">
-            <button class="side-button" onclick="sendDesignToEmail()" title="Wyślij projekt mailem">
-                <i class="fas fa-envelope"></i>
-            </button>
-            <button class="side-button" onclick="saveDesign()" title="Zapisz projekt">
-                <i class="fas fa-download"></i>
-            </button>
-        </div>
-        
-        <!-- Główny kontener kreatora -->
-        <div class="designer-container">
-            <!-- Lewa kolumna - Produkt i narzędzia -->
-            <div class="designer-sidebar">
-                <!-- Wybór produktu -->
-                <div class="product-base">
-                    <div class="product-base-item active" data-base="tshirt">
-                        <img src="https://i.ibb.co/5gTYJYRV/Screenshot-2025-09-03-21-34-27.png" alt="Koszulka">
-                        <p>Koszulka</p>
-                    </div>
-                    <div class="product-base-item" data-base="hoodie">
-                        <img src="https://i.ibb.co/hFndsQcF/Screenshot-2025-09-03-21-47-31.png" alt="Bluza">
-                        <p>Bluza</p>
-                    </div>
-                    <div class="product-base-item" data-base="cap">
-                        <img src="https://i.ibb.co/ksksbx9C/Screenshot-2025-09-03-21-41-23.png" alt="Czapka">
-                        <p>Czapka</p>
-                    </div>
-                    <div class="product-base-item" data-base="hoodie-with-cap">
-                        <img src="https://i.ibb.co/hxXv1Mk0/Screenshot-2025-09-03-21-49-47.png" alt="Bluza z kapturem">
-                        <p>Bluza z kapturem</p>
-                    </div>
+        <!-- NOWA SEKCJA PROJEKTOWANIA Z SYSTEMEM WARSTW -->
+        <section id="design">
+            <div class="section-title">
+                <h2>Studio Projektowe</h2>
+                <p>Stwórz swój unikalny produkt z systemem warstw</p>
+            </div>
+            
+            <div class="design-studio">
+                <!-- Przyciski po bokach -->
+                <div class="side-buttons left">
+                    <button class="side-button" onclick="updateDesign()" title="Podgląd">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                    <button class="side-button" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
+                        <i class="fas fa-cart-plus"></i>
+                    </button>
                 </div>
-
-                <!-- Opcje produktu -->
-                <div class="tool-group">
-                    <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
-                    
-                    <select id="productType" class="w-full p-3 border rounded mb-3" onchange="changeProductType()">
-                        <option value="tshirt">Koszulka (120 zł)</option>
-                        <option value="hoodie">Bluza (180 zł)</option>
-                        <option value="hoodie-with-cap">Bluza z kapturem (200 zł)</option>
-                        <option value="cap">Czapka (99 zł)</option>
-                    </select>
-                    
-                    <select id="productSize" class="w-full p-3 border rounded mb-3">
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-
-                    <div class="color-picker mb-3">
-                        <label>Kolor produktu:</label>
-                        <input type="color" id="productColor" value="#ffffff" onchange="updateProductColor()">
-                    </div>
+                
+                <div class="side-buttons right">
+                    <button class="side-button" onclick="sendDesignToEmail()" title="Wyślij projekt mailem">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                    <button class="side-button" onclick="saveDesign()" title="Zapisz projekt">
+                        <i class="fas fa-download"></i>
+                    </button>
                 </div>
+                
+                <!-- Główny kontener kreatora -->
+                <div class="designer-container">
+                    <!-- Lewa kolumna - Produkt i narzędzia -->
+                    <div class="designer-sidebar">
+                        <!-- Wybór produktu -->
+                        <div class="product-base">
+                            <div class="product-base-item active" data-base="tshirt">
+                                <img src="https://i.ibb.co/5gTYJYRV/Screenshot-2025-09-03-21-34-27.png" alt="Koszulka">
+                                <p>Koszulka</p>
+                            </div>
+                            <div class="product-base-item" data-base="hoodie">
+                                <img src="https://i.ibb.co/hFndsQcF/Screenshot-2025-09-03-21-47-31.png" alt="Bluza">
+                                <p>Bluza</p>
+                            </div>
+                            <div class="product-base-item" data-base="cap">
+                                <img src="https://i.ibb.co/ksksbx9C/Screenshot-2025-09-03-21-41-23.png" alt="Czapka">
+                                <p>Czapka</p>
+                            </div>
+                            <div class="product-base-item" data-base="hoodie-with-cap">
+                                <img src="https://i.ibb.co/hxXv1Mk0/Screenshot-2025-09-03-21-49-47.png" alt="Bluza z kapturem">
+                                <p>Bluza z kapturem</p>
+                            </div>
+                        </div>
 
-                <!-- Narzędzia tekstowe -->
-                <div class="tool-group">
-                    <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
-                    <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border rounded mb-3">
-                    
-                    <div class="flex gap-3 mb-3">
-                        <select id="fontFamily" class="flex-1 p-2 border rounded">
-                            <option value="Arial">Arial</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Impact">Impact</option>
-                            <option value="Comic Sans MS">Comic Sans</option>
-                        </select>
+                        <!-- Opcje produktu -->
+                        <div class="tool-group">
+                            <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
+                            
+                            <select id="productType" class="w-full p-3 border rounded mb-3" onchange="changeProductType()">
+                                <option value="tshirt">Koszulka (120 zł)</option>
+                                <option value="hoodie">Bluza (180 zł)</option>
+                                <option value="hoodie-with-cap">Bluza z kapturem (200 zł)</option>
+                                <option value="cap">Czapka (99 zł)</option>
+                            </select>
+                            
+                            <select id="productSize" class="w-full p-3 border rounded mb-3">
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+
+                            <div class="color-picker mb-3">
+                                <label>Kolor produktu:</label>
+                                <input type="color" id="productColor" value="#ffffff" onchange="updateProductColor()">
+                            </div>
+                        </div>
+
+                        <!-- Narzędzia tekstowe -->
+                        <div class="tool-group">
+                            <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
+                            <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border rounded mb-3">
+                            
+                            <div class="flex gap-3 mb-3">
+                                <select id="fontFamily" class="flex-1 p-2 border rounded">
+                                    <option value="Arial">Arial</option>
+                                    <option value="Times New Roman">Times New Roman</option>
+                                    <option value="Courier New">Courier New</option>
+                                    <option value="Impact">Impact</option>
+                                    <option value="Comic Sans MS">Comic Sans</option>
+                                </select>
+                                
+                                <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border rounded">
+                            </div>
+                            
+                            <input type="color" id="textColor" value="#000000" class="w-full h-10 mb-3">
+                            
+                            <button class="nav-btn gold-bg w-full" onclick="addTextLayer()">
+                                <i class="fas fa-plus"></i> Dodaj tekst
+                            </button>
+                        </div>
+
+                        <!-- Narzędzia graficzne -->
+                        <div class="tool-group">
+                            <div class="tool-title"><i class="fas fa-image"></i> Grafika</div>
+                            <input type="file" id="designImage" accept="image/*" class="w-full mb-3">
+                            <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()">
+                                <i class="fas fa-upload"></i> Wybierz obraz
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Środkowa kolumna - Canvas -->
+                    <div class="designer-canvas-area">
+                        <div class="design-options">
+                            <div class="design-option active" data-area="front">Przód</div>
+                            <div class="design-option" data-area="back">Tył</div>
+                            <div class="design-option" data-area="sleeves">Rękawy</div>
+                        </div>
                         
-                        <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border rounded">
-                    </div>
-                    
-                    <input type="color" id="textColor" value="#000000" class="w-full h-10 mb-3">
-                    
-                    <button class="nav-btn gold-bg w-full" onclick="addTextLayer()">
-                        <i class="fas fa-plus"></i> Dodaj tekst
-                    </button>
-                </div>
-
-                <!-- Narzędzia graficzne -->
-                <div class="tool-group">
-                    <div class="tool-title"><i class="fas fa-image"></i> Grafika</div>
-                    <input type="file" id="designImage" accept="image/*" class="w-full mb-3">
-                    <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()">
-                        <i class="fas fa-upload"></i> Wybierz obraz
-                    </button>
-                </div>
-            </div>
-
-            <!-- Środkowa kolumna - Canvas -->
-            <div class="designer-canvas-area">
-                <div class="design-options">
-                    <div class="design-option active" data-area="front">Przód</div>
-                    <div class="design-option" data-area="back">Tył</div>
-                    <div class="design-option" data-area="sleeves">Rękawy</div>
-                </div>
-                
-                <div class="canvas-container">
-                    <canvas id="designCanvas" width="600" height="500"></canvas>
-                </div>
-                
-                <div class="canvas-controls">
-                    <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
-                    <button class="nav-btn" onclick="undoAction()"><i class="fas fa-undo"></i> Cofnij</button>
-                    <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
-                </div>
-            </div>
-
-            <!-- Prawa kolumna - Warstwy i transformacje -->
-            <div class="designer-layers">
-                <!-- Panel warstw -->
-                <div class="tool-group">
-                    <div class="tool-title"><i class="fas fa-layer-group"></i> Warstwy</div>
-                    <div id="layersList" class="layers-list">
-                        <!-- Warstwy będą dodawane dynamicznie -->
-                    </div>
-                    <div class="layers-controls">
-                        <button class="nav-btn" onclick="bringToFront()" title="Na wierzch">
-                            <i class="fas fa-arrow-up"></i>
-                        </button>
-                        <button class="nav-btn" onclick="sendToBack()" title="Na spód">
-                            <i class="fas fa-arrow-down"></i>
-                        </button>
-                        <button class="nav-btn" onclick="deleteSelectedLayer()" title="Usuń">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Transformacje -->
-                <div class="tool-group">
-                    <div class="tool-title"><i class="fas fa-edit"></i> Edycja elementów</div>
-                    <div class="transform-controls">
-                        <div class="transform-input">
-                            <label for="posX">Pozycja X</label>
-                            <input type="range" id="posX" min="0" max="600" value="300" oninput="updateElementPosition()">
+                        <div class="canvas-container">
+                            <canvas id="designCanvas" width="600" height="500"></canvas>
                         </div>
-                        <div class="transform-input">
-                            <label for="posY">Pozycja Y</label>
-                            <input type="range" id="posY" min="0" max="500" value="250" oninput="updateElementPosition()">
-                        </div>
-                        <div class="transform-input">
-                            <label for="scale">Skala</label>
-                            <input type="range" id="scale" min="0.1" max="2" step="0.1" value="1" oninput="updateElementScale()">
-                        </div>
-                        <div class="transform-input">
-                            <label for="rotation">Obrót</label>
-                            <input type="range" id="rotation" min="0" max="360" value="0" oninput="updateElementRotation()">
+                        
+                        <div class="canvas-controls">
+                            <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
+                            <button class="nav-btn" onclick="undoAction()"><i class="fas fa-undo"></i> Cofnij</button>
+                            <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
                         </div>
                     </div>
-                </div>
 
-                <!-- Podgląd projektu -->
-                <div class="design-preview">
-                    <h3>Podgląd projektu</h3>
-                    <div id="projectPreview" class="preview-content">
-                        <!-- Podgląd będzie generowany dynamicznie -->
+                    <!-- Prawa kolumna - Warstwy i transformacje -->
+                    <div class="designer-layers">
+                        <!-- Panel warstw -->
+                        <div class="tool-group">
+                            <div class="tool-title"><i class="fas fa-layer-group"></i> Warstwy</div>
+                            <div id="layersList" class="layers-list">
+                                <!-- Warstwy będą dodawane dynamicznie -->
+                            </div>
+                            <div class="layers-controls">
+                                <button class="nav-btn" onclick="bringToFront()" title="Na wierzch">
+                                    <i class="fas fa-arrow-up"></i>
+                                </button>
+                                <button class="nav-btn" onclick="sendToBack()" title="Na spód">
+                                    <i class="fas fa-arrow-down"></i>
+                                </button>
+                                <button class="nav-btn" onclick="deleteSelectedLayer()" title="Usuń">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Transformacje -->
+                        <div class="tool-group">
+                            <div class="tool-title"><i class="fas fa-edit"></i> Edycja elementów</div>
+                            <div class="transform-controls">
+                                <div class="transform-input">
+                                    <label for="posX">Pozycja X</label>
+                                    <input type="range" id="posX" min="0" max="600" value="300" oninput="updateElementPosition()">
+                                </div>
+                                <div class="transform-input">
+                                    <label for="posY">Pozycja Y</label>
+                                    <input type="range" id="posY" min="0" max="500" value="250" oninput="updateElementPosition()">
+                                </div>
+                                <div class="transform-input">
+                                    <label for="scale">Skala</label>
+                                    <input type="range" id="scale" min="0.1" max="2" step="0.1" value="1" oninput="updateElementScale()">
+                                </div>
+                                <div class="transform-input">
+                                    <label for="rotation">Obrót</label>
+                                    <input type="range" id="rotation" min="0" max="360" value="0" oninput="updateElementRotation()">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Podgląd projektu -->
+                        <div class="design-preview">
+                            <h3>Podgląd projektu</h3>
+                            <div id="projectPreview" class="preview-content">
+                                <!-- Podgląd będzie generowany dynamicznie -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>        
-<!-- 🎁 Sekcja Zbiórki FINALNA -->
+        </section>
+        <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
     <!-- Nagłówek -->
@@ -3590,212 +3590,156 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- Sekcja Blog -->
-<section id="blog" class="py-16 bg-gray-950">
-    <div class="container mx-auto px-4">
-        <!-- Nagłówek sekcji -->
-        <div class="text-center mb-16">
-            <h2 class="text-5xl font-bold text-gold-400 mb-4">Nasz Blog</h2>
-            <p class="text-xl text-gray-300 max-w-2xl mx-auto">Odkryj najnowsze trendy, porady stylistyczne i inspiracje z świata mody</p>
-        </div>
+<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
+<section id="blog" class="py-16 bg-gray-100 text-gray-900">
+  <div class="container mx-auto px-4">
+    <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
 
-        <!-- Formularz dodawania nowego wpisu (dla administratora) -->
-        <div id="blog-admin" class="mb-12 bg-gray-800 p-6 rounded-2xl border border-gold-500">
-            <h3 class="text-2xl font-bold text-gold-400 mb-4">Dodaj nowy wpis na bloga</h3>
-            <form id="new-post-form" class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Tytuł</label>
-                        <input type="text" id="post-title" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Kategoria</label>
-                        <select id="post-category" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
-                            <option value="TRENDY">TRENDY</option>
-                            <option value="STYLIZACJA">STYLIZACJA</option>
-                            <option value="ECO">ECO</option>
-                            <option value="PORADY">PORADY</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-gray-300 mb-2">URL obrazka</label>
-                    <input type="url" id="post-image" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" required>
-                </div>
-                <div>
-                    <label class="block text-gray-300 mb-2">Treść (pierwsze 150 znaków)</label>
-                    <textarea id="post-content" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white h-24" maxlength="150" required></textarea>
-                    <div class="text-gray-400 text-sm mt-1"><span id="char-count">0</span>/150 znaków</div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-gray-300 mb-2">Czas czytania (min)</label>
-                        <input type="number" id="post-read-time" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white" min="1" value="5">
-                    </div>
-                    <div>
-                        <label class="block text-gray-300 mb-2">Data publikacji</label>
-                        <input type="date" id="post-date" class="w-full p-3 bg-gray-700 border border-gray-600 rounded-lg text-white">
-                    </div>
-                </div>
-                <button type="submit" class="bg-gold-500 hover:bg-gold-600 text-black font-bold py-3 px-6 rounded-lg transition-all duration-300">
-                    Opublikuj wpis
-                </button>
-            </form>
-        </div>
-
-        <!-- Karty blogowe -->
-        <div id="blog-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Artykuł 1 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="1">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Trendy modowe 2024" 
-                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-gold-500 text-black px-3 py-1 rounded-full text-sm font-bold">TRENDY</span>
-                    </div>
-                </div>
-                
-                <div class="p-6">
-                    <div class="flex items-center text-gray-400 text-sm mb-3">
-                        <span>15 Listopada 2024</span>
-                        <span class="mx-2">•</span>
-                        <span>5 min czytania</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-white mb-3">Największe trendy modowe 2024: Co nosić tej jesieni?</h3>
-                    <p class="text-gray-400 mb-4 line-clamp-3">
-                        Odkryj najnowsze trendy, które zdominują ulice tej jesieni. Od oversize'owych bluz po klasyczne kroje...
-                    </p>
-                    
-                    <div class="flex items-center justify-between">
-                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="1">
-                            Czytaj więcej
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                        <div class="flex items-center text-gray-400">
-                            <button class="like-btn flex items-center" data-post="1">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                                <span class="like-count">142</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Artykuł 2 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="2">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Porady stylistyczne" 
-                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">STYLIZACJA</span>
-                    </div>
-                </div>
-                
-                <div class="p-6">
-                    <div class="flex items-center text-gray-400 text-sm mb-3">
-                        <span>12 Listopada 2024</span>
-                        <span class="mx-2">•</span>
-                        <span>7 min czytania</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-white mb-3">Jak stworzyć unikalny styl? 5 porad od ekspertów</h3>
-                    <p class="text-gray-400 mb-4 line-clamp-3">
-                        Dowiedz się, jak budować spójną garderobę, która odzwierciedla Twoją osobowość. Proste triki...
-                    </p>
-                    
-                    <div class="flex items-center justify-between">
-                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="2">
-                            Czytaj więcej
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                        <div class="flex items-center text-gray-400">
-                            <button class="like-btn flex items-center" data-post="2">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                                <span class="like-count">89</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Artykuł 3 -->
-            <article class="bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden" data-post-id="3">
-                <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1558769132-cb25c5c5c9c9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Zrównoważona moda" 
-                         class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
-                    <div class="absolute top-4 left-4">
-                        <span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">ECO</span>
-                    </div>
-                </div>
-                
-                <div class="p-6">
-                    <div class="flex items-center text-gray-400 text-sm mb-3">
-                        <span>8 Listopada 2024</span>
-                        <span class="mx-2">•</span>
-                        <span>6 min czytania</span>
-                    </div>
-                    
-                    <h3 class="text-xl font-bold text-white mb-3">Zrównoważona moda: Jak wybierać odpowiedzialnie?</h3>
-                    <p class="text-gray-400 mb-4 line-clamp-3">
-                        Poznaj marki, które stawiają na ekologię i etyczną produkcję. Twój wybór ma znaczenie...
-                    </p>
-                    
-                    <div class="flex items-center justify-between">
-                        <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group" data-post="3">
-                            Czytaj więcej
-                            <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                        <div class="flex items-center text-gray-400">
-                            <button class="like-btn flex items-center" data-post="3">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                                </svg>
-                                <span class="like-count">203</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-
-        <!-- Modal do czytania artykułu -->
-        <div id="post-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 flex items-center justify-center p-4">
-            <div class="bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 id="modal-title" class="text-2xl font-bold text-white"></h3>
-                        <button id="close-modal" class="text-gray-400 hover:text-white text-2xl">&times;</button>
-                    </div>
-                    <div id="modal-content" class="text-gray-300 prose prose-invert max-w-none">
-                        <!-- Treść artykułu będzie wstawiana tutaj -->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Przycisk "Zobacz więcej" -->
-        <div class="text-center mt-12">
-            <button class="bg-gold-500 hover:bg-gold-600 text-black font-bold py-3 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-gold/30">
-                Zobacz wszystkie artykuły
-            </button>
-        </div>
+    <!-- 🧠 Panel dodawania artykułów -->
+    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+      <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
+      <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
+      <textarea id="articleText" rows="4" placeholder="Treść artykułu..." class="w-full border p-2 rounded mb-3"></textarea>
+      <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
     </div>
+
+    <!-- 📚 Lista artykułów -->
+    <div id="articlesList" class="space-y-8"></div>
+
+    <!-- 💬 Panel dodawania opinii -->
+    <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
+      <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
+      <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
+      <textarea id="opinionText" rows="3" placeholder="Twoja opinia..." class="w-full border p-2 rounded mb-3"></textarea>
+      <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
+    </div>
+
+    <!-- 🧾 Opinie klientów -->
+    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
+
+    <!-- 🔹 Sekcja Regulamin -->
+    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
+      <p class="text-gray-700">
+        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
+        prowadzonego w ramach działalności nierejestrowanej.
+      </p>
+      <div class="collapsible mt-3 text-gray-600 article-content">
+        <ol class="list-decimal list-inside space-y-2">
+          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
+          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
+          <li>Wszelkie pytania i reklamacje prosimy kierować na adres: 
+            <b>mielniczukgrzegosz74@gmail.com</b>.
+          </li>
+          <li>Produkty mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
+          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po ustaleniu mailowym.</li>
+          <li>Dane klientów używane są wyłącznie do realizacji zamówień (zgodnie z RODO).</li>
+          <li>Sklep zastrzega sobie prawo do zmian oferty i cen.</li>
+          <li>Obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
+        </ol>
+      </div>
+      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
+    </div>
+  </div>
 </section>
+
+<!-- 🔧 Skrypt -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const articlesList = document.getElementById("articlesList");
+  const opinionsList = document.getElementById("opinionsList");
+
+  // --- Pobierz z localStorage ---
+  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
+
+  // --- Render artykułów ---
+  function renderArticles() {
+    articlesList.innerHTML = "";
+    savedArticles.forEach((a, i) => {
+      const article = document.createElement("article");
+      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
+      article.innerHTML = `
+        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
+        <p class="text-gray-700">${a.text}</p>
+        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
+      `;
+      articlesList.appendChild(article);
+    });
+  }
+
+  // --- Render opinii ---
+  function renderOpinions() {
+    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
+    savedOpinions.forEach((o, i) => {
+      const p = document.createElement("p");
+      p.className = "italic text-gray-700";
+      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
+      opinionsList.appendChild(p);
+    });
+  }
+
+  // --- Dodaj artykuł ---
+  document.getElementById("addArticleBtn").addEventListener("click", () => {
+    const title = document.getElementById("articleTitle").value.trim();
+    const text = document.getElementById("articleText").value.trim();
+    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+    savedArticles.push({ title, text });
+    localStorage.setItem("articles", JSON.stringify(savedArticles));
+    document.getElementById("articleTitle").value = "";
+    document.getElementById("articleText").value = "";
+    renderArticles();
+  });
+
+  // --- Dodaj opinię ---
+  document.getElementById("addOpinionBtn").addEventListener("click", () => {
+    const author = document.getElementById("opinionAuthor").value.trim();
+    const text = document.getElementById("opinionText").value.trim();
+    if (!author || !text) return alert("Wpisz imię i treść opinii!");
+    savedOpinions.push({ author, text });
+    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+    document.getElementById("opinionAuthor").value = "";
+    document.getElementById("opinionText").value = "";
+    renderOpinions();
+  });
+
+  // --- Usuń wpisy (globalne funkcje) ---
+  window.deleteArticle = (i) => {
+    savedArticles.splice(i, 1);
+    localStorage.setItem("articles", JSON.stringify(savedArticles));
+    renderArticles();
+  };
+  window.deleteOpinion = (i) => {
+    savedOpinions.splice(i, 1);
+    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+    renderOpinions();
+  };
+
+  // --- Płynne rozwijanie regulaminu ---
+  document.querySelectorAll(".collapsible").forEach(el => {
+    el.style.maxHeight = "0px";
+    el.style.overflow = "hidden";
+    el.style.transition = "max-height 0.5s ease";
+  });
+  document.querySelectorAll(".read-more").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.parentElement.querySelector(".collapsible");
+      if (!content) return;
+      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
+        content.style.maxHeight = content.scrollHeight + "px";
+        btn.textContent = "Zwiń";
+      } else {
+        content.style.maxHeight = "0px";
+        btn.textContent = "Zobacz pełny regulamin";
+      }
+    });
+  });
+
+  // --- Start ---
+  renderArticles();
+  renderOpinions();
+});
+</script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
@@ -3898,644 +3842,1196 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     }
   });
 </script>
-       
     <!-- Koszyk -->
     <div id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
-        <span id="cartCount">0</span>
+        <div id="cartCount">0</div>
     </div>
 
     <div id="cartPanel">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-2xl font-bold">Twój koszyk</h2>
-            <button onclick="toggleCart()" class="text-2xl">&times;</button>
-        </div>
-        
-        <div id="cartItems" class="mb-6">
-            <!-- Produkty w koszyku -->
-        </div>
-        
+        <h2 class="text-2xl font-bold mb-4">Twój koszyk</h2>
+        <div id="cartItems"></div>
         <div class="cart-total">
-            <div class="flex justify-between text-xl font-bold">
-                <span>Suma:</span>
-                <span id="cartTotal">0 zł</span>
+            <div class="flex justify-between items-center mb-4">
+                <span class="font-bold">Razem:</span>
+                <span id="cartTotal" class="font-bold text-xl">0 zł</span>
+            </div>
+            <div id="paypal-container"></div>
+            <div class="cart-buttons">
+                <button class="email-order-btn" onclick="sendOrderEmail()">
+                    <i class="fas fa-envelope"></i> Zamów przez Email
+                </button>
+                <button class="whatsapp-order-btn" onclick="sendOrderWhatsApp()">
+                    <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
+                </button>
             </div>
         </div>
-        
-        <div id="paypal-container" class="mt-4"></div>
-        
-        <div class="cart-buttons">
-            <button onclick="sendOrderEmail()" class="email-order-btn">
-                <i class="fas fa-envelope"></i> Wyślij zamówienie mailem
-            </button>
-            <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn">
-                <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
-            </button>
-        </div>
-        
-        <p class="text-sm text-gray-600 text-center mt-4">Akceptujemy również przelewy bankowe i BLIK</p>
     </div>
 
     <!-- Stopka -->
     <footer>
-        <div class="logo">AdelbertusShop</div>
-        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
-        
         <div class="contact-info">
+            <h3 class="text-xl font-bold mb-4">Kontakt</h3>
+            <p><i class="fas fa-phone"></i> +48 604 296 360</p>
             <p><i class="fas fa-envelope"></i> mielniczukgrzegosz74@gmail.com</p>
-            <p><i class="fas fa-phone"></i> 604 296 360</p>
         </div>
         
         <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
         </div>
         
-        <div class="footer-ads">
-            <div class="footer-ad">
-                <p>Reklama 1</p>
-            </div>
-            <div class="footer-ad">
-                <p>Reklama 2</p>
-            </div>
-            <div class="footer-ad">
-                <p>Reklama 3</p>
-            </div>
-        </div>
-        
-        <div class="mt-6">
-            <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
-            <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
-        </div>
+        <p>&copy; 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
     </footer>
 
+    <!-- JavaScript -->
     <script>
-<script>
-// ===== NOWY SYSTEM KREATORA WARSTW - ZASTĘPUJE STARĄ WERSJĘ =====
-let designLayers = [];
-let selectedLayerIndex = -1;
-let currentProductType = 'tshirt';
-let currentProductColor = '#ffffff';
-let currentDesignArea = 'front';
-let isDragging = false;
-let dragStartX = 0;
-let dragStartY = 0;
-let canvasHistory = [];
+    // ===== NOWY SYSTEM KREATORA WARSTW =====
+    let designLayers = [];
+    let selectedLayerIndex = -1;
+    let currentProductType = 'tshirt';
+    let currentProductColor = '#ffffff';
+    let currentDesignArea = 'front';
+    let isDragging = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+    let canvasHistory = [];
 
-function initDesignStudio() {
-    const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Setup event listeners
-    setupCanvasInteractions(canvas);
-    
-    // Event listener dla uploadu obrazów
-    const designImageInput = document.getElementById('designImage');
-    if (designImageInput) {
-        designImageInput.addEventListener('change', handleImageUpload);
+    function initDesignStudio() {
+        const canvas = document.getElementById('designCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Setup event listeners
+        setupCanvasInteractions(canvas);
+        
+        // Event listener dla uploadu obrazów
+        const designImageInput = document.getElementById('designImage');
+        if (designImageInput) {
+            designImageInput.addEventListener('change', handleImageUpload);
+        }
+        
+        // Inicjalizacja renderowania
+        updateDesign();
     }
-    
-    // Inicjalizacja renderowania
-    updateDesign();
-}
 
-function setupCanvasInteractions(canvas) {
-    canvas.addEventListener('mousedown', startDrag);
-    canvas.addEventListener('mousemove', drag);
-    canvas.addEventListener('mouseup', endDrag);
-    canvas.addEventListener('mouseleave', endDrag);
-}
+    function setupCanvasInteractions(canvas) {
+        canvas.addEventListener('mousedown', startDrag);
+        canvas.addEventListener('mousemove', drag);
+        canvas.addEventListener('mouseup', endDrag);
+        canvas.addEventListener('mouseleave', endDrag);
+    }
 
-function startDrag(e) {
-    e.preventDefault();
-    const canvas = document.getElementById('designCanvas');
-    const rect = canvas.getBoundingClientRect();
-    
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    // Sprawdź kliknięcie na element
-    for (let i = designLayers.length - 1; i >= 0; i--) {
-        const layer = designLayers[i];
-        if (layer.visible && isPointInLayer(x, y, layer)) {
-            selectedLayerIndex = i;
-            isDragging = true;
-            dragStartX = x - layer.x;
-            dragStartY = y - layer.y;
-            updateLayersPanel();
-            updateTransformControls();
-            updateDesign();
+    function startDrag(e) {
+        e.preventDefault();
+        const canvas = document.getElementById('designCanvas');
+        const rect = canvas.getBoundingClientRect();
+        
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        // Sprawdź kliknięcie na element
+        for (let i = designLayers.length - 1; i >= 0; i--) {
+            const layer = designLayers[i];
+            if (layer.visible && isPointInLayer(x, y, layer)) {
+                selectedLayerIndex = i;
+                isDragging = true;
+                dragStartX = x - layer.x;
+                dragStartY = y - layer.y;
+                updateLayersPanel();
+                updateTransformControls();
+                updateDesign();
+                return;
+            }
+        }
+        
+        selectedLayerIndex = -1;
+        updateLayersPanel();
+        updateTransformControls();
+    }
+
+    function drag(e) {
+        if (!isDragging || selectedLayerIndex === -1) return;
+        
+        e.preventDefault();
+        const canvas = document.getElementById('designCanvas');
+        const rect = canvas.getBoundingClientRect();
+        
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const layer = designLayers[selectedLayerIndex];
+        layer.x = x - dragStartX;
+        layer.y = y - dragStartY;
+        
+        // Ograniczenia obszaru
+        layer.x = Math.max(0, Math.min(canvas.width - layer.width * layer.scale, layer.x));
+        layer.y = Math.max(0, Math.min(canvas.height - layer.height * layer.scale, layer.y));
+        
+        updateTransformControls();
+        updateDesign();
+    }
+
+    function endDrag() {
+        isDragging = false;
+        saveToHistory();
+    }
+
+    function isPointInLayer(x, y, layer) {
+        return x >= layer.x && 
+               x <= layer.x + layer.width * layer.scale && 
+               y >= layer.y && 
+               y <= layer.y + layer.height * layer.scale;
+    }
+
+    // SYSTEM WARSTW
+    function addTextLayer() {
+        const text = document.getElementById('designText').value;
+        const fontFamily = document.getElementById('fontFamily').value;
+        const fontSize = parseInt(document.getElementById('fontSize').value);
+        const color = document.getElementById('textColor').value;
+        
+        if (!text.trim()) {
+            alert('Proszę wpisać tekst');
             return;
         }
-    }
-    
-    selectedLayerIndex = -1;
-    updateLayersPanel();
-    updateTransformControls();
-}
-
-function drag(e) {
-    if (!isDragging || selectedLayerIndex === -1) return;
-    
-    e.preventDefault();
-    const canvas = document.getElementById('designCanvas');
-    const rect = canvas.getBoundingClientRect();
-    
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const layer = designLayers[selectedLayerIndex];
-    layer.x = x - dragStartX;
-    layer.y = y - dragStartY;
-    
-    // Ograniczenia obszaru
-    layer.x = Math.max(0, Math.min(canvas.width - layer.width * layer.scale, layer.x));
-    layer.y = Math.max(0, Math.min(canvas.height - layer.height * layer.scale, layer.y));
-    
-    updateTransformControls();
-    updateDesign();
-}
-
-function endDrag() {
-    isDragging = false;
-    saveToHistory();
-}
-
-function isPointInLayer(x, y, layer) {
-    return x >= layer.x && 
-           x <= layer.x + layer.width * layer.scale && 
-           y >= layer.y && 
-           y <= layer.y + layer.height * layer.scale;
-}
-
-// SYSTEM WARSTW
-function addTextLayer() {
-    const text = document.getElementById('designText').value;
-    const fontFamily = document.getElementById('fontFamily').value;
-    const fontSize = parseInt(document.getElementById('fontSize').value);
-    const color = document.getElementById('textColor').value;
-    
-    if (!text.trim()) {
-        alert('Proszę wpisać tekst');
-        return;
-    }
-    
-    const newLayer = {
-        type: 'text',
-        content: text,
-        x: 250,
-        y: 200,
-        fontFamily: fontFamily,
-        fontSize: fontSize,
-        color: color,
-        scale: 1,
-        rotation: 0,
-        visible: true,
-        width: text.length * fontSize * 0.6,
-        height: fontSize
-    };
-    
-    designLayers.push(newLayer);
-    selectedLayerIndex = designLayers.length - 1;
-    updateLayersPanel();
-    updateTransformControls();
-    updateDesign();
-    saveToHistory();
-}
-
-function handleImageUpload(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            const newLayer = {
-                type: 'image',
-                content: img,
-                x: 200,
-                y: 150,
-                width: img.width,
-                height: img.height,
-                scale: 0.5,
-                rotation: 0,
-                visible: true
-            };
-            
-            designLayers.push(newLayer);
-            selectedLayerIndex = designLayers.length - 1;
-            updateLayersPanel();
-            updateTransformControls();
-            updateDesign();
-            saveToHistory();
+        
+        const newLayer = {
+            type: 'text',
+            content: text,
+            x: 250,
+            y: 200,
+            fontFamily: fontFamily,
+            fontSize: fontSize,
+            color: color,
+            scale: 1,
+            rotation: 0,
+            visible: true,
+            width: text.length * fontSize * 0.6,
+            height: fontSize
         };
-        img.src = event.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-function updateLayersPanel() {
-    const layersList = document.getElementById('layersList');
-    if (!layersList) return;
-    
-    layersList.innerHTML = '';
-    
-    designLayers.forEach((layer, index) => {
-        const layerItem = document.createElement('div');
-        layerItem.className = `layer-item ${index === selectedLayerIndex ? 'active' : ''}`;
-        layerItem.innerHTML = `
-            <span>${layer.type === 'text' ? '📝 ' + layer.content : '🖼️ Obraz'}</span>
-            <div class="layer-controls">
-                <button onclick="toggleLayerVisibility(${index})" title="${layer.visible ? 'Ukryj' : 'Pokaż'}">
-                    ${layer.visible ? '👁️' : '👁️‍🗨️'}
-                </button>
-                <button onclick="selectLayer(${index})" title="Wybierz">✏️</button>
-                <button onclick="deleteLayer(${index})" title="Usuń">🗑️</button>
-            </div>
-        `;
-        layersList.appendChild(layerItem);
-    });
-}
-
-function selectLayer(index) {
-    selectedLayerIndex = index;
-    updateLayersPanel();
-    updateTransformControls();
-    updateDesign();
-}
-
-function toggleLayerVisibility(index) {
-    designLayers[index].visible = !designLayers[index].visible;
-    updateLayersPanel();
-    updateDesign();
-    saveToHistory();
-}
-
-function deleteLayer(index) {
-    designLayers.splice(index, 1);
-    if (selectedLayerIndex === index) {
-        selectedLayerIndex = -1;
-    } else if (selectedLayerIndex > index) {
-        selectedLayerIndex--;
-    }
-    updateLayersPanel();
-    updateTransformControls();
-    updateDesign();
-    saveToHistory();
-}
-
-function deleteSelectedLayer() {
-    if (selectedLayerIndex !== -1) {
-        deleteLayer(selectedLayerIndex);
-    }
-}
-
-function bringToFront() {
-    if (selectedLayerIndex === -1 || selectedLayerIndex === designLayers.length - 1) return;
-    
-    const layer = designLayers.splice(selectedLayerIndex, 1)[0];
-    designLayers.push(layer);
-    selectedLayerIndex = designLayers.length - 1;
-    updateLayersPanel();
-    updateDesign();
-    saveToHistory();
-}
-
-function sendToBack() {
-    if (selectedLayerIndex === -1 || selectedLayerIndex === 0) return;
-    
-    const layer = designLayers.splice(selectedLayerIndex, 1)[0];
-    designLayers.unshift(layer);
-    selectedLayerIndex = 0;
-    updateLayersPanel();
-    updateDesign();
-    saveToHistory();
-}
-
-// TRANSFORMACJE
-function updateTransformControls() {
-    if (selectedLayerIndex === -1) {
-        document.getElementById('posX').value = 300;
-        document.getElementById('posY').value = 250;
-        document.getElementById('scale').value = 1;
-        document.getElementById('rotation').value = 0;
-        return;
-    }
-    
-    const layer = designLayers[selectedLayerIndex];
-    document.getElementById('posX').value = layer.x;
-    document.getElementById('posY').value = layer.y;
-    document.getElementById('scale').value = layer.scale;
-    document.getElementById('rotation').value = layer.rotation;
-}
-
-function updateElementPosition() {
-    if (selectedLayerIndex === -1) return;
-    
-    const layer = designLayers[selectedLayerIndex];
-    layer.x = parseInt(document.getElementById('posX').value);
-    layer.y = parseInt(document.getElementById('posY').value);
-    updateDesign();
-}
-
-function updateElementScale() {
-    if (selectedLayerIndex === -1) return;
-    
-    const layer = designLayers[selectedLayerIndex];
-    layer.scale = parseFloat(document.getElementById('scale').value);
-    updateDesign();
-}
-
-function updateElementRotation() {
-    if (selectedLayerIndex === -1) return;
-    
-    const layer = designLayers[selectedLayerIndex];
-    layer.rotation = parseInt(document.getElementById('rotation').value);
-    updateDesign();
-}
-
-// RENDEROWANIE
-function updateDesign() {
-    const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Czyszczenie canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Rysowanie produktu
-    ctx.fillStyle = currentProductColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    // Rysowanie wszystkich warstw
-    designLayers.forEach(layer => {
-        if (!layer.visible) return;
         
-        ctx.save();
-        ctx.translate(layer.x + (layer.width * layer.scale) / 2, layer.y + (layer.height * layer.scale) / 2);
-        ctx.rotate(layer.rotation * Math.PI / 180);
-        ctx.translate(-(layer.x + (layer.width * layer.scale) / 2), -(layer.y + (layer.height * layer.scale) / 2));
-        
-        if (layer.type === 'text') {
-            ctx.font = `${layer.fontSize}px ${layer.fontFamily}`;
-            ctx.fillStyle = layer.color;
-            ctx.fillText(layer.content, layer.x, layer.y + layer.fontSize);
-        } else if (layer.type === 'image') {
-            ctx.drawImage(
-                layer.content, 
-                layer.x, 
-                layer.y, 
-                layer.width * layer.scale, 
-                layer.height * layer.scale
-            );
-        }
-        
-        ctx.restore();
-    });
-    
-    // Zaznaczenie aktywnej warstwy
-    if (selectedLayerIndex !== -1) {
-        const layer = designLayers[selectedLayerIndex];
-        if (layer.visible) {
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([5, 5]);
-            ctx.strokeRect(
-                layer.x - 2, 
-                layer.y - 2, 
-                layer.width * layer.scale + 4, 
-                layer.height * layer.scale + 4
-            );
-            ctx.setLineDash([]);
-        }
+        designLayers.push(newLayer);
+        selectedLayerIndex = designLayers.length - 1;
+        updateLayersPanel();
+        updateTransformControls();
+        updateDesign();
+        saveToHistory();
     }
-    
-    updateProjectPreview();
-}
 
-function updateProjectPreview() {
-    const preview = document.getElementById('projectPreview');
-    if (!preview) return;
-    
-    const canvas = document.getElementById('designCanvas');
-    
-    const tempCanvas = document.createElement('canvas');
-    const tempCtx = tempCanvas.getContext('2d');
-    tempCanvas.width = 150;
-    tempCanvas.height = 150;
-    
-    tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 150, 150);
-    
-    preview.innerHTML = '';
-    preview.appendChild(tempCanvas);
-}
-
-// HISTORIA
-function saveToHistory() {
-    canvasHistory.push(JSON.parse(JSON.stringify(designLayers)));
-    if (canvasHistory.length > 10) {
-        canvasHistory.shift();
+    function handleImageUpload(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const img = new Image();
+            img.onload = function() {
+                const newLayer = {
+                    type: 'image',
+                    content: img,
+                    x: 200,
+                    y: 150,
+                    width: img.width,
+                    height: img.height,
+                    scale: 0.5,
+                    rotation: 0,
+                    visible: true
+                };
+                
+                designLayers.push(newLayer);
+                selectedLayerIndex = designLayers.length - 1;
+                updateLayersPanel();
+                updateTransformControls();
+                updateDesign();
+                saveToHistory();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
     }
-}
 
-function undoAction() {
-    if (canvasHistory.length > 0) {
-        designLayers = canvasHistory.pop();
-        selectedLayerIndex = -1;
+    function updateLayersPanel() {
+        const layersList = document.getElementById('layersList');
+        if (!layersList) return;
+        
+        layersList.innerHTML = '';
+        
+        designLayers.forEach((layer, index) => {
+            const layerItem = document.createElement('div');
+            layerItem.className = `layer-item ${index === selectedLayerIndex ? 'active' : ''}`;
+            layerItem.innerHTML = `
+                <span>${layer.type === 'text' ? '📝 ' + layer.content : '🖼️ Obraz'}</span>
+                <div class="layer-controls">
+                    <button onclick="toggleLayerVisibility(${index})" title="${layer.visible ? 'Ukryj' : 'Pokaż'}">
+                        ${layer.visible ? '👁️' : '👁️‍🗨️'}
+                    </button>
+                    <button onclick="selectLayer(${index})" title="Wybierz">✏️</button>
+                    <button onclick="deleteLayer(${index})" title="Usuń">🗑️</button>
+                </div>
+            `;
+            layersList.appendChild(layerItem);
+        });
+    }
+
+    function selectLayer(index) {
+        selectedLayerIndex = index;
         updateLayersPanel();
         updateTransformControls();
         updateDesign();
     }
-}
 
-// ZACHOWANE FUNKCJE (kompatybilność)
-function clearCanvas() {
-    designLayers = [];
-    selectedLayerIndex = -1;
-    updateLayersPanel();
-    updateTransformControls();
-    updateDesign();
-    saveToHistory();
-    showNotification('Canvas wyczyszczony');
-}
-// ... istniejący kod ...
-window.addToCartFromDesign = addToCartFromDesign;
-window.updateDesign = updateDesign;
-
-// === TUTAJ WKLEJ FUNKCJE POMOCNICZE ===
-
-function changeProductType() {
-    currentProductType = document.getElementById('productType').value;
-    updateDesign();
-}
-
-function updateProductColor() {
-    currentProductColor = document.getElementById('productColor').value;
-    updateDesign();
-}
-
-function resetDesign() {
-    designLayers = [];
-    selectedLayerIndex = -1;
-    document.getElementById('designText').value = '';
-    document.getElementById('fontSize').value = 36;
-    document.getElementById('textColor').value = '#000000';
-    document.getElementById('productColor').value = '#ffffff';
-    updateLayersPanel();
-    updateTransformControls();
-    updateDesign();
-    saveToHistory();
-}
-
-function sendDesignToEmail() {
-    if (designLayers.length === 0) {
-        alert('Proszę stworzyć projekt przed wysłaniem');
-        return;
+    function toggleLayerVisibility(index) {
+        designLayers[index].visible = !designLayers[index].visible;
+        updateLayersPanel();
+        updateDesign();
+        saveToHistory();
     }
-    
-    const email = prompt('Podaj adres email do wysłania projektu:');
-    if (email) {
-        const canvas = document.getElementById('designCanvas');
-        const projectData = canvas.toDataURL();
-        alert(`Projekt został wysłany na adres: ${email}`);
-    }
-}
 
-function saveDesign() {
-    if (designLayers.length === 0) {
-        alert('Proszę stworzyć projekt przed zapisaniem');
-        return;
+    function deleteLayer(index) {
+        designLayers.splice(index, 1);
+        if (selectedLayerIndex === index) {
+            selectedLayerIndex = -1;
+        } else if (selectedLayerIndex > index) {
+            selectedLayerIndex--;
+        }
+        updateLayersPanel();
+        updateTransformControls();
+        updateDesign();
+        saveToHistory();
     }
-    
-    const canvas = document.getElementById('designCanvas');
-    const link = document.createElement('a');
-    link.download = 'moj-projekt.png';
-    link.href = canvas.toDataURL();
-    link.click();
-}
 
-// ... dalszy istniejący kod ...
-function initProductOptions() {
-// ...
-// Globalne funkcje
-window.addTextLayer = addTextLayer;
-window.handleImageUpload = handleImageUpload;
-window.selectLayer = selectLayer;
-window.toggleLayerVisibility = toggleLayerVisibility;
-window.deleteLayer = deleteLayer;
-window.deleteSelectedLayer = deleteSelectedLayer;
-window.bringToFront = bringToFront;
-window.sendToBack = sendToBack;
-window.updateElementPosition = updateElementPosition;
-window.updateElementScale = updateElementScale;
-window.updateElementRotation = updateElementRotation;
-window.undoAction = undoAction;
-window.clearCanvas = clearCanvas;
-window.addToCartFromDesign = addToCartFromDesign;
-window.updateDesign = updateDesign;
-window.changeProductType = changeProductType;
-window.updateProductColor = updateProductColor;
-window.resetDesign = resetDesign;
-window.sendDesignToEmail = sendDesignToEmail;
-window.saveDesign = saveDesign;
-</script>  
+    function deleteSelectedLayer() {
+        if (selectedLayerIndex !== -1) {
+            deleteLayer(selectedLayerIndex);
+        }
+    }
+
+    function bringToFront() {
+        if (selectedLayerIndex === -1 || selectedLayerIndex === designLayers.length - 1) return;
         
-document.addEventListener("DOMContentLoaded", function () {
-    // Obsługa "Czytaj więcej"
-    const readMoreButtons = document.querySelectorAll(".read-more-btn");
-    const modal = document.getElementById("post-modal");
-    const modalTitle = document.getElementById("modal-title");
-    const modalContent = document.getElementById("modal-content");
-    const closeModal = document.getElementById("close-modal");
+        const layer = designLayers.splice(selectedLayerIndex, 1)[0];
+        designLayers.push(layer);
+        selectedLayerIndex = designLayers.length - 1;
+        updateLayersPanel();
+        updateDesign();
+        saveToHistory();
+    }
 
-    readMoreButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const article = this.closest("article");
-            const title = article.querySelector("h3").textContent;
-            const content = article.querySelector("p").textContent;
-            modalTitle.textContent = title;
-            modalContent.textContent = content + " (pełny artykuł w przygotowaniu...)";
-            modal.classList.remove("hidden");
+    function sendToBack() {
+        if (selectedLayerIndex === -1 || selectedLayerIndex === 0) return;
+        
+        const layer = designLayers.splice(selectedLayerIndex, 1)[0];
+        designLayers.unshift(layer);
+        selectedLayerIndex = 0;
+        updateLayersPanel();
+        updateDesign();
+        saveToHistory();
+    }
+
+    // TRANSFORMACJE
+    function updateTransformControls() {
+        if (selectedLayerIndex === -1) {
+            document.getElementById('posX').value = 300;
+            document.getElementById('posY').value = 250;
+            document.getElementById('scale').value = 1;
+            document.getElementById('rotation').value = 0;
+            return;
+        }
+        
+        const layer = designLayers[selectedLayerIndex];
+        document.getElementById('posX').value = layer.x;
+        document.getElementById('posY').value = layer.y;
+        document.getElementById('scale').value = layer.scale;
+        document.getElementById('rotation').value = layer.rotation;
+    }
+
+    function updateElementPosition() {
+        if (selectedLayerIndex === -1) return;
+        
+        const layer = designLayers[selectedLayerIndex];
+        layer.x = parseInt(document.getElementById('posX').value);
+        layer.y = parseInt(document.getElementById('posY').value);
+        updateDesign();
+    }
+
+    function updateElementScale() {
+        if (selectedLayerIndex === -1) return;
+        
+        const layer = designLayers[selectedLayerIndex];
+        layer.scale = parseFloat(document.getElementById('scale').value);
+        updateDesign();
+    }
+
+    function updateElementRotation() {
+        if (selectedLayerIndex === -1) return;
+        
+        const layer = designLayers[selectedLayerIndex];
+        layer.rotation = parseInt(document.getElementById('rotation').value);
+        updateDesign();
+    }
+
+    // RENDEROWANIE
+    function updateDesign() {
+        const canvas = document.getElementById('designCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Czyszczenie canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Rysowanie produktu
+        ctx.fillStyle = currentProductColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Rysowanie wszystkich warstw
+        designLayers.forEach(layer => {
+            if (!layer.visible) return;
+            
+            ctx.save();
+            ctx.translate(layer.x + (layer.width * layer.scale) / 2, layer.y + (layer.height * layer.scale) / 2);
+            ctx.rotate(layer.rotation * Math.PI / 180);
+            ctx.translate(-(layer.x + (layer.width * layer.scale) / 2), -(layer.y + (layer.height * layer.scale) / 2));
+            
+            if (layer.type === 'text') {
+                ctx.font = `${layer.fontSize}px ${layer.fontFamily}`;
+                ctx.fillStyle = layer.color;
+                ctx.fillText(layer.content, layer.x, layer.y + layer.fontSize);
+            } else if (layer.type === 'image') {
+                ctx.drawImage(
+                    layer.content, 
+                    layer.x, 
+                    layer.y, 
+                    layer.width * layer.scale, 
+                    layer.height * layer.scale
+                );
+            }
+            
+            ctx.restore();
+        });
+        
+        // Zaznaczenie aktywnej warstwy
+        if (selectedLayerIndex !== -1) {
+            const layer = designLayers[selectedLayerIndex];
+            if (layer.visible) {
+                ctx.strokeStyle = '#d4af37';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([5, 5]);
+                ctx.strokeRect(
+                    layer.x - 2, 
+                    layer.y - 2, 
+                    layer.width * layer.scale + 4, 
+                    layer.height * layer.scale + 4
+                );
+                ctx.setLineDash([]);
+            }
+        }
+        
+        updateProjectPreview();
+    }
+
+    function updateProjectPreview() {
+        const preview = document.getElementById('projectPreview');
+        if (!preview) return;
+        
+        const canvas = document.getElementById('designCanvas');
+        
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = 150;
+        tempCanvas.height = 150;
+        
+        tempCtx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, 150, 150);
+        
+        preview.innerHTML = '';
+        preview.appendChild(tempCanvas);
+    }
+
+    // HISTORIA
+    function saveToHistory() {
+        canvasHistory.push(JSON.parse(JSON.stringify(designLayers)));
+        if (canvasHistory.length > 10) {
+            canvasHistory.shift();
+        }
+    }
+
+    function undoAction() {
+        if (canvasHistory.length > 0) {
+            designLayers = canvasHistory.pop();
+            selectedLayerIndex = -1;
+            updateLayersPanel();
+            updateTransformControls();
+            updateDesign();
+        }
+    }
+
+    // FUNKCJE POMOCNICZE
+    function changeProductType() {
+        currentProductType = document.getElementById('productType').value;
+        updateDesign();
+    }
+
+    function updateProductColor() {
+        currentProductColor = document.getElementById('productColor').value;
+        updateDesign();
+    }
+
+    function resetDesign() {
+        designLayers = [];
+        selectedLayerIndex = -1;
+        document.getElementById('designText').value = '';
+        document.getElementById('fontSize').value = 36;
+        document.getElementById('textColor').value = '#000000';
+        document.getElementById('productColor').value = '#ffffff';
+        updateLayersPanel();
+        updateTransformControls();
+        updateDesign();
+        saveToHistory();
+    }
+
+    function sendDesignToEmail() {
+        if (designLayers.length === 0) {
+            alert('Proszę stworzyć projekt przed wysłaniem');
+            return;
+        }
+        
+        const email = prompt('Podaj adres email do wysłania projektu:');
+        if (email) {
+            const canvas = document.getElementById('designCanvas');
+            const projectData = canvas.toDataURL();
+            alert(`Projekt został wysłany na adres: ${email}`);
+        }
+    }
+
+    function saveDesign() {
+        if (designLayers.length === 0) {
+            alert('Proszę stworzyć projekt przed zapisaniem');
+            return;
+        }
+        
+        const canvas = document.getElementById('designCanvas');
+        const link = document.createElement('a');
+        link.download = 'moj-projekt.png';
+        link.href = canvas.toDataURL();
+        link.click();
+    }
+
+    // ZACHOWANE FUNKCJE (kompatybilność)
+    function clearCanvas() {
+        designLayers = [];
+        selectedLayerIndex = -1;
+        updateLayersPanel();
+        updateTransformControls();
+        updateDesign();
+        saveToHistory();
+        showNotification('Canvas wyczyszczony');
+    }
+
+    function addToCartFromDesign() {
+        if (designLayers.length === 0) {
+            alert('Proszę dodać przynajmniej jeden element do projektu');
+            return;
+        }
+        
+        const productType = document.getElementById('productType').value;
+        const productSize = document.getElementById('productSize').value;
+        
+        const prices = {
+            'tshirt': 120,
+            'hoodie': 200,
+            'hoodie-with-cap': 220,
+            'cap': 99
+        };
+        
+        const price = prices[productType] || 120;
+        const canvas = document.getElementById('designCanvas');
+        
+        addToCart(
+            `Projekt spersonalizowany (${productType}, ${productSize})`,
+            price,
+            canvas.toDataURL(),
+            productSize
+        );
+    }
+
+    // ===== SYSTEM FILTROWANIA KATEGORII =====
+    document.addEventListener('DOMContentLoaded', function() {
+        initCategoryFilters();
+        initNavigation();
+        initDesignStudio();
+        updateCart();
+        renderPayPalButton();
+        initContactForm();
+        initBlog();
+        initProductOptions();
+        initProductBase();
+        initDesignOptions();
+        initOrderForm();
+        initAdTimers();
+        initCharityRotation();
+        
+        // Event listeners dla nowego kreatora
+        document.querySelectorAll('.product-base-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.product-base-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                currentProductType = this.dataset.base;
+                updateDesign();
+            });
+        });
+
+        document.querySelectorAll('.design-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.design-option').forEach(o => o.classList.remove('active'));
+                this.classList.add('active');
+                currentDesignArea = this.dataset.area;
+                updateDesign();
+            });
         });
     });
 
-    closeModal.addEventListener("click", () => modal.classList.add("hidden"));
-    modal.addEventListener("click", e => {
-        if (e.target === modal) modal.classList.add("hidden");
-    });
-
-    // Obsługa lajków
-    const likeButtons = document.querySelectorAll(".like-btn");
-    likeButtons.forEach(button => {
-        button.addEventListener("click", function () {
-            const countSpan = this.querySelector(".like-count");
-            let count = parseInt(countSpan.textContent);
-            countSpan.textContent = count + 1;
-        });
-    });
-
-    // Licznik znaków w formularzu
-    const textarea = document.getElementById("post-content");
-    const charCount = document.getElementById("char-count");
-    if (textarea && charCount) {
-        textarea.addEventListener("input", () => {
-            charCount.textContent = textarea.value.length;
+    function initCategoryFilters() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const categorySections = document.querySelectorAll('.category-section');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const selectedCategory = this.getAttribute('data-category');
+                
+                categorySections.forEach(section => {
+                    if (selectedCategory === 'all' || section.getAttribute('data-category') === selectedCategory) {
+                        section.style.display = 'block';
+                        section.style.opacity = '1';
+                    } else {
+                        section.style.display = 'none';
+                        section.style.opacity = '0';
+                    }
+                });
+                
+                document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+            });
         });
     }
 
-    // Dodawanie nowego wpisu
-    const form = document.getElementById("new-post-form");
-    const blogPosts = document.getElementById("blog-posts");
+    // ===== INNE FUNKCJE =====
+    let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+    
+    function initNavigation() {
+        const navButtons = document.querySelectorAll('.nav-btn');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                if (this.hasAttribute('data-section')) {
+                    e.preventDefault();
+                    
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const sectionId = this.getAttribute('data-section');
+                    showSection(sectionId);
+                }
+            });
+        });
+        
+        document.getElementById('cartIcon').addEventListener('click', toggleCart);
+    }
 
-    form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const title = document.getElementById("post-title").value;
-        const category = document.getElementById("post-category").value;
-        const image = document.getElementById("post-image").value;
-        const content = document.getElementById("post-content").value;
-        const readTime = document.getElementById("post-read-time").value;
-        const date = document.getElementById("post-date").value;
+    function showSection(sectionId) {
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        document.getElementById(sectionId).classList.add('active');
+        
+        if (window.innerWidth <= 768) {
+            document.getElementById('navContainer').classList.remove('show');
+        }
+    }
 
-        const article = document.createElement("article");
-        article.className = "bg-gray-900 border border-gray-800 rounded-2xl shadow-2xl hover:shadow-gold/20 transition-all duration-500 hover:-translate-y-2 overflow-hidden";
-        article.innerHTML = `
-            <div class="relative overflow-hidden">
-                <img src="${image}" alt="${title}" class="w-full h-48 object-cover transition-transform duration-700 hover:scale-110">
-                <div class="absolute top-4 left-4">
-                    <span class="bg-gold-500 text-black px-3 py-1 rounded-full text-sm font-bold">${category}</span>
-                </div>
-            </div>
-            <div class="p-6">
-                <div class="flex items-center text-gray-400 text-sm mb-3">
-                    <span>${date}</span><span class="mx-2">•</span><span>${readTime} min czytania</span>
-                </div>
-                <h3 class="text-xl font-bold text-white mb-3">${title}</h3>
-                <p class="text-gray-400 mb-4 line-clamp-3">${content}</p>
-                <div class="flex items-center justify-between">
-                    <button class="read-more-btn text-gold-400 hover:text-gold-300 font-semibold flex items-center group">
-                        Czytaj więcej
-                        <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                    <div class="flex items-center text-gray-400">
-                        <button class="like-btn flex items-center">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-                            </svg>
-                            <span class="like-count">0</span>
-                        </button>
+    function toggleMobileMenu() {
+        document.getElementById('navContainer').classList.toggle('show');
+    }
+
+    function addToCart(name, price, image = null, size = null, color = null) {
+        const existingIndex = cart.findIndex(item => 
+            item.name === name && 
+            item.size === size && 
+            item.color === color
+        );
+        
+        if (existingIndex >= 0) {
+            cart[existingIndex].quantity++;
+        } else {
+            cart.push({
+                name: name,
+                price: price,
+                quantity: 1,
+                image: image,
+                size: size,
+                color: color,
+                id: Date.now() + Math.random()
+            });
+        }
+        
+        updateCart();
+        showNotification('✅ Produkt dodany do koszyka');
+    }
+
+    function updateCart() {
+        const cartCount = document.getElementById('cartCount');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotal = document.getElementById('cartTotal');
+        
+        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+        
+        cartItems.innerHTML = '';
+        
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+            cartTotal.textContent = '0 zł';
+            document.getElementById('paypal-container').innerHTML = '';
+        } else {
+            let total = 0;
+            
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                    <div class="flex-
+cartItem.innerHTML = `
+                    ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                    <div class="flex-1">
+                        <div class="font-bold">${item.name}</div>
+                        ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                        ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                        <div class="text-gold font-bold">${item.price} zł</div>
+                        <div class="flex items-center mt-2">
+                            <button class="text-sm bg-gray-200 px-2 rounded" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="text-sm bg-gray-200 px-2 rounded" onclick="updateQuantity(${index}, 1)">+</button>
+                            <button class="text-red-500 ml-4 text-sm" onclick="removeFromCart(${index})">Usuń</button>
+                        </div>
                     </div>
-                </div>
-            </div>
-        `;
-        blogPosts.prepend(article);
-        form.reset();
-        charCount.textContent = "0";
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            cartTotal.textContent = `${total} zł`;
+            renderPayPalButton();
+        }
+        
+        localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+    }
+
+    function updateQuantity(index, change) {
+        cart[index].quantity += change;
+        
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+        
+        updateCart();
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        updateCart();
+        showNotification('🗑️ Produkt usunięty z koszyka');
+    }
+
+    function toggleCart() {
+        document.getElementById('cartPanel').classList.toggle('open');
+    }
+
+    function renderPayPalButton() {
+        const paypalContainer = document.getElementById('paypal-container');
+        
+        if (cart.length === 0) {
+            paypalContainer.innerHTML = '';
+            return;
+        }
+        
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        
+        paypalContainer.innerHTML = '';
+        
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
+            },
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: (total / 100).toFixed(2),
+                            currency_code: 'PLN'
+                        },
+                        description: 'Zakupy w AdelbertusShop'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    showNotification('✅ Płatność zakończona pomyślnie!');
+                    cart = [];
+                    updateCart();
+                    toggleCart();
+                });
+            },
+            onError: function(err) {
+                showNotification('❌ Wystąpił błąd podczas płatności');
+                console.error('PayPal error:', err);
+            }
+        }).render('#paypal-container');
+    }
+
+    function sendOrderEmail() {
+        if (cart.length === 0) {
+            alert('Koszyk jest pusty');
+            return;
+        }
+        
+        const email = prompt('Podaj swój adres email:');
+        if (!email) return;
+        
+        let orderDetails = 'Zamówienie z AdelbertusShop:\n\n';
+        let total = 0;
+        
+        cart.forEach(item => {
+            orderDetails += `${item.name} - ${item.price} zł x ${item.quantity} = ${item.price * item.quantity} zł\n`;
+            if (item.size) orderDetails += `  Rozmiar: ${item.size}\n`;
+            if (item.color) orderDetails += `  Kolor: ${item.color}\n`;
+            orderDetails += '\n';
+            total += item.price * item.quantity;
+        });
+        
+        orderDetails += `RAZEM: ${total} zł`;
+        
+        const subject = 'Zamówienie z AdelbertusShop';
+        const body = encodeURIComponent(orderDetails);
+        
+        window.location.href = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        
+        showNotification('📧 Otwieranie klienta poczty...');
+    }
+
+    function sendOrderWhatsApp() {
+        if (cart.length === 0) {
+            alert('Koszyk jest pusty');
+            return;
+        }
+        
+        let orderDetails = 'Zamówienie z AdelbertusShop:%0A%0A';
+        let total = 0;
+        
+        cart.forEach(item => {
+            orderDetails += `${item.name} - ${item.price} zł x ${item.quantity} = ${item.price * item.quantity} zł%0A`;
+            if (item.size) orderDetails += `Rozmiar: ${item.size}%0A`;
+            if (item.color) orderDetails += `Kolor: ${item.color}%0A`;
+            orderDetails += '%0A';
+            total += item.price * item.quantity;
+        });
+        
+        orderDetails += `RAZEM: ${total} zł`;
+        
+        const phoneNumber = '48604296360';
+        const url = `https://wa.me/${phoneNumber}?text=${orderDetails}`;
+        
+        window.open(url, '_blank');
+        showNotification('📱 Otwieranie WhatsApp...');
+    }
+
+    function initContactForm() {
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('contactName').value;
+                const email = document.getElementById('contactEmail').value;
+                const message = document.getElementById('contactMessage').value;
+                
+                if (!name || !email || !message) {
+                    showNotification('❌ Proszę wypełnić wszystkie pola');
+                    return;
+                }
+                
+                const subject = `Wiadomość od ${name} (${email})`;
+                const body = encodeURIComponent(message);
+                
+                window.location.href = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+                
+                showNotification('📧 Otwieranie klienta poczty...');
+                contactForm.reset();
+            });
+        }
+    }
+
+    function initBlog() {
+        const readMoreButtons = document.querySelectorAll('.read-more-btn');
+        
+        readMoreButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const excerpt = this.previousElementSibling;
+                const fullContent = excerpt.nextElementSibling;
+                
+                excerpt.style.display = 'none';
+                fullContent.style.display = 'block';
+                this.style.display = 'none';
+            });
+        });
+    }
+
+    function initProductOptions() {
+        // Inicjalizacja opcji kolorów
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const parent = this.closest('.color-options');
+                parent.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // Inicjalizacja opcji rozmiarów
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const parent = this.closest('.size-options');
+                parent.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+        
+        // Event listener dla przycisków dodawania do koszyka
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('add-to-cart-btn')) {
+                const button = e.target;
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                const image = button.getAttribute('data-image');
+                
+                // Pobierz wybrane opcje
+                const productCard = button.closest('.product-card');
+                const selectedColor = productCard.querySelector('.color-option.selected')?.getAttribute('data-color');
+                const selectedSize = productCard.querySelector('.size-option.selected')?.getAttribute('data-size');
+                
+                addToCart(name, price, image, selectedSize, selectedColor);
+            }
+        });
+    }
+
+    function initProductBase() {
+        document.querySelectorAll('.product-base-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.product-base-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+                
+                const productType = this.getAttribute('data-base');
+                document.getElementById('productType').value = productType;
+                changeProductType();
+            });
+        });
+    }
+
+    function initDesignOptions() {
+        document.querySelectorAll('.design-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.design-option').forEach(opt => opt.classList.remove('active'));
+                this.classList.add('active');
+                currentDesignArea = this.getAttribute('data-area');
+                updateDesign();
+            });
+        });
+    }
+
+    function initOrderForm() {
+        const orderForm = document.getElementById('orderForm');
+        if (orderForm) {
+            orderForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('orderName').value;
+                const email = document.getElementById('orderEmail').value;
+                const address = document.getElementById('orderAddress').value;
+                
+                if (!name || !email || !address) {
+                    showNotification('❌ Proszę wypełnić wszystkie pola');
+                    return;
+                }
+                
+                showNotification('✅ Zamówienie zostało złożone! Skontaktujemy się wkrótce.');
+                orderForm.reset();
+            });
+        }
+    }
+
+    function initAdTimers() {
+        // Timer dla banera
+        startTimer('bannerTimer', 30);
+        startTimer('animationTimer', 30);
+        startTimer('videoTimer', 30);
+    }
+
+    function startTimer(elementId, seconds) {
+        const timerElement = document.getElementById(elementId);
+        if (!timerElement) return;
+        
+        let timeLeft = seconds;
+        
+        const timer = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = timeLeft + 's';
+            
+            if (timeLeft <= 0) {
+                clearInterval(timer);
+                timerElement.textContent = 'Koniec';
+            }
+        }, 1000);
+    }
+
+    function initCharityRotation() {
+        const donors = [
+            "Jan Kowalski - 200 zł",
+            "Anna Nowak - 150 zł",
+            "Firma XYZ - 500 zł",
+            "Piotr Wiśniewski - 100 zł",
+            "Fundacja ABC - 300 zł"
+        ];
+        
+        const donorsList = document.getElementById('donorsList');
+        if (!donorsList) return;
+        
+        let currentIndex = 0;
+        
+        setInterval(() => {
+            donorsList.innerHTML = `<h4 class="text-lg font-bold mb-2">Ostatni darczyńcy:</h4><p>${donors[currentIndex]}</p>`;
+            currentIndex = (currentIndex + 1) % donors.length;
+        }, 3000);
+    }
+
+    function showNotification(message) {
+        // Sprawdź czy już istnieje notyfikacja
+        let notification = document.getElementById('customNotification');
+        
+        if (!notification) {
+            notification = document.createElement('div');
+            notification.id = 'customNotification';
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #d4af37;
+                color: black;
+                padding: 15px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                font-weight: bold;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                transform: translateX(150%);
+                transition: transform 0.3s ease;
+                max-width: 300px;
+            `;
+            document.body.appendChild(notification);
+        }
+        
+        notification.textContent = message;
+        notification.style.transform = 'translateX(0)';
+        
+        setTimeout(() => {
+            notification.style.transform = 'translateX(150%)';
+        }, 3000);
+    }
+
+    // Obsługa przeciągania i upuszczania dla kreatora
+    function handleDrop(e) {
+        e.preventDefault();
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const file = files[0];
+            if (file.type.startsWith('image/')) {
+                const tempInput = document.getElementById('designImage');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                tempInput.files = dataTransfer.files;
+                
+                // Wywołaj event change
+                const event = new Event('change', { bubbles: true });
+                tempInput.dispatchEvent(event);
+            }
+        }
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+    }
+
+    // Dodaj event listeners dla przeciągania i upuszczania
+    const canvas = document.getElementById('designCanvas');
+    if (canvas) {
+        canvas.addEventListener('dragover', handleDragOver);
+        canvas.addEventListener('drop', handleDrop);
+    }
+
+    // Inicjalizacja po załadowaniu DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        // Upewnij się, że kreator jest zainicjalizowany
+        setTimeout(initDesignStudio, 100);
     });
-});
-</script>        
+
+    // ===== DODATKOWE FUNKCJE DLA KREATORA =====
+    function exportDesign() {
+        if (designLayers.length === 0) {
+            alert('Brak elementów do eksportu');
+            return;
+        }
+        
+        const designData = {
+            layers: designLayers,
+            productType: currentProductType,
+            productColor: currentProductColor,
+            timestamp: new Date().toISOString()
+        };
+        
+        const dataStr = JSON.stringify(designData);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        
+        const exportLink = document.createElement('a');
+        exportLink.setAttribute('href', dataUri);
+        exportLink.setAttribute('download', 'adelbertus-design.json');
+        document.body.appendChild(exportLink);
+        exportLink.click();
+        document.body.removeChild(exportLink);
+        
+        showNotification('💾 Projekt wyeksportowany');
+    }
+
+    function importDesign() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.json';
+        
+        input.onchange = e => {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = event => {
+                try {
+                    const designData = JSON.parse(event.target.result);
+                    
+                    designLayers = designData.layers || [];
+                    currentProductType = designData.productType || 'tshirt';
+                    currentProductColor = designData.productColor || '#ffffff';
+                    
+                    // Aktualizuj UI
+                    document.getElementById('productType').value = currentProductType;
+                    document.getElementById('productColor').value = currentProductColor;
+                    
+                    selectedLayerIndex = -1;
+                    updateLayersPanel();
+                    updateTransformControls();
+                    updateDesign();
+                    
+                    showNotification('📁 Projekt zaimportowany');
+                } catch (error) {
+                    alert('Błąd podczas importowania projektu');
+                    console.error(error);
+                }
+            };
+            
+            reader.readAsText(file);
+        };
+        
+        input.click();
+    }
+
+    // ===== OPTYMALIZACJA DLA MOBILNYCH =====
+    function handleTouchEvents() {
+        const canvas = document.getElementById('designCanvas');
+        if (!canvas) return;
+        
+        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+        canvas.addEventListener('touchend', handleTouchEnd);
+    }
+
+    function handleTouchStart(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        startDrag({
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+            preventDefault: () => {}
+        });
+    }
+
+    function handleTouchMove(e) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        drag({
+            clientX: touch.clientX,
+            clientY: touch.clientY,
+            preventDefault: () => {}
+        });
+    }
+
+    function handleTouchEnd() {
+        endDrag();
+    }
+
+    // Inicjalizacja eventów dotykowych
+    if ('ontouchstart' in window) {
+        handleTouchEvents();
+    }
+
+    // ===== ZAPISYWANIE PROJEKTU W LOCALSTORAGE =====
+    function autoSaveDesign() {
+        const designData = {
+            layers: designLayers,
+            productType: currentProductType,
+            productColor: currentProductColor
+        };
+        
+        localStorage.setItem('adelbertus_current_design', JSON.stringify(designData));
+    }
+
+    function loadAutoSave() {
+        const saved = localStorage.getItem('adelbertus_current_design');
+        if (saved) {
+            try {
+                const designData = JSON.parse(saved);
+                designLayers = designData.layers || [];
+                currentProductType = designData.productType || 'tshirt';
+                currentProductColor = designData.productColor || '#ffffff';
+                
+                document.getElementById('productType').value = currentProductType;
+                document.getElementById('productColor').value = currentProductColor;
+                
+                updateLayersPanel();
+                updateTransformControls();
+                updateDesign();
+                
+                showNotification('🔁 Przywrócono ostatni projekt');
+            } catch (error) {
+                console.error('Błąd przywracania projektu:', error);
+            }
+        }
+    }
+
+    // Autozapis co 30 sekund
+    setInterval(autoSaveDesign, 30000);
+
+    // Przywróć projekt przy starcie
+    setTimeout(loadAutoSave, 500);
+</script>
 </body>
 </html>
-
