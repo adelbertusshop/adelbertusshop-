@@ -3400,7 +3400,7 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
+<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (POPRAWIONY) -->
 <section id="blog" class="py-16 bg-gray-100 text-gray-900">
   <div class="container mx-auto px-4">
     <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
@@ -3425,7 +3425,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </div>
 
     <!-- 🧾 Opinie klientów -->
-    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
+    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md"></div>
 
     <!-- 🔹 Sekcja Regulamin -->
     <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
@@ -3452,103 +3452,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </div>
   </div>
 </section>
-
-<!-- 🔧 Skrypt -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const articlesList = document.getElementById("articlesList");
-  const opinionsList = document.getElementById("opinionsList");
-
-  // --- Pobierz z localStorage ---
-  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
-
-  // --- Render artykułów ---
-  function renderArticles() {
-    articlesList.innerHTML = "";
-    savedArticles.forEach((a, i) => {
-      const article = document.createElement("article");
-      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
-      article.innerHTML = `
-        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
-        <p class="text-gray-700">${a.text}</p>
-        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
-      `;
-      articlesList.appendChild(article);
-    });
-  }
-
-  // --- Render opinii ---
-  function renderOpinions() {
-    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach((o, i) => {
-      const p = document.createElement("p");
-      p.className = "italic text-gray-700";
-      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
-      opinionsList.appendChild(p);
-    });
-  }
-
-  // --- Dodaj artykuł ---
-  document.getElementById("addArticleBtn").addEventListener("click", () => {
-    const title = document.getElementById("articleTitle").value.trim();
-    const text = document.getElementById("articleText").value.trim();
-    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
-    savedArticles.push({ title, text });
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    document.getElementById("articleTitle").value = "";
-    document.getElementById("articleText").value = "";
-    renderArticles();
-  });
-
-  // --- Dodaj opinię ---
-  document.getElementById("addOpinionBtn").addEventListener("click", () => {
-    const author = document.getElementById("opinionAuthor").value.trim();
-    const text = document.getElementById("opinionText").value.trim();
-    if (!author || !text) return alert("Wpisz imię i treść opinii!");
-    savedOpinions.push({ author, text });
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    document.getElementById("opinionAuthor").value = "";
-    document.getElementById("opinionText").value = "";
-    renderOpinions();
-  });
-
-  // --- Usuń wpisy (globalne funkcje) ---
-  window.deleteArticle = (i) => {
-    savedArticles.splice(i, 1);
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    renderArticles();
-  };
-  window.deleteOpinion = (i) => {
-    savedOpinions.splice(i, 1);
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    renderOpinions();
-  };
-
-  // --- Płynne rozwijanie regulaminu ---
-  document.querySelectorAll(".collapsible").forEach(el => {
-    el.style.maxHeight = "0px";
-    el.style.overflow = "hidden";
-    el.style.transition = "max-height 0.5s ease";
-  });
-  document.querySelectorAll(".read-more").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const content = btn.parentElement.querySelector(".collapsible");
-      if (!content) return;
-      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
-        content.style.maxHeight = content.scrollHeight + "px";
-        btn.textContent = "Zwiń";
-      } else {
-        content.style.maxHeight = "0px";
-        btn.textContent = "Zobacz pełny regulamin";
-      }
-    });
-  });
-
-  // --- Start ---
-  renderArticles();
-  renderOpinions();
-});
+       
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
@@ -3725,7 +3629,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
     <script>
-        // ===== SYSTEM FILTROWANIA KATEGORII =====
+      // ===== SYSTEM FILTROWANIA KATEGORII =====
         document.addEventListener('DOMContentLoaded', function() {
             initCategoryFilters();
             initNavigation();
@@ -4178,8 +4082,159 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         function initBlog() {
-            // Inicjalizacja bloga
+    // ===== POPRAWIONY SYSTEM BLOGA =====
+    const articlesList = document.getElementById("articlesList");
+    const opinionsList = document.getElementById("opinionsList");
+
+    // --- Pobierz z localStorage ---
+    const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
+    const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
+
+    // --- BEZPIECZNE renderowanie artykułów ---
+    function renderArticles() {
+        if (!articlesList) return;
+        articlesList.innerHTML = "";
+        savedArticles.forEach((a, i) => {
+            const article = document.createElement("article");
+            article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
+            article.innerHTML = "";
+            
+            const title = document.createElement("h3");
+            title.className = "text-2xl font-semibold mb-3";
+            title.textContent = a.title;
+            
+            const text = document.createElement("p");
+            text.className = "text-gray-700";
+            text.textContent = a.text;
+            
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "mt-3 text-red-600 font-semibold hover:underline";
+            deleteBtn.textContent = "Usuń";
+            deleteBtn.addEventListener("click", () => {
+                if(confirm("Czy na pewno chcesz usunąć ten artykuł?")) {
+                    deleteArticle(i);
+                }
+            });
+            
+            article.appendChild(title);
+            article.appendChild(text);
+            article.appendChild(deleteBtn);
+            articlesList.appendChild(article);
+        });
+    }
+
+    // --- BEZPIECZNE renderowanie opinii ---
+    function renderOpinions() {
+        if (!opinionsList) return;
+        opinionsList.innerHTML = "";
+        
+        if(savedOpinions.length > 0) {
+            const header = document.createElement("h3");
+            header.className = "text-2xl font-semibold mb-3";
+            header.textContent = "Opinie klientów";
+            opinionsList.appendChild(header);
         }
+        
+        savedOpinions.forEach((o, i) => {
+            const container = document.createElement("div");
+            container.className = "mb-4 last:mb-0";
+            
+            const text = document.createElement("p");
+            text.className = "italic text-gray-700 mb-1";
+            text.textContent = `"${o.text}"`;
+            
+            const author = document.createElement("div");
+            author.className = "flex justify-between items-center";
+            
+            const authorName = document.createElement("b");
+            authorName.textContent = o.author;
+            
+            const deleteBtn = document.createElement("button");
+            deleteBtn.className = "text-red-600 hover:underline text-sm";
+            deleteBtn.textContent = "Usuń";
+            deleteBtn.addEventListener("click", () => {
+                if(confirm("Czy na pewno chcesz usunąć tę opinię?")) {
+                    deleteOpinion(i);
+                }
+            });
+            
+            author.appendChild(authorName);
+            author.appendChild(deleteBtn);
+            
+            container.appendChild(text);
+            container.appendChild(author);
+            opinionsList.appendChild(container);
+        });
+    }
+
+    // --- Dodaj artykuł ---
+    const addArticleBtn = document.getElementById("addArticleBtn");
+    if (addArticleBtn) {
+        addArticleBtn.addEventListener("click", () => {
+            const title = document.getElementById("articleTitle").value.trim();
+            const text = document.getElementById("articleText").value.trim();
+            if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
+            savedArticles.push({ title, text });
+            localStorage.setItem("articles", JSON.stringify(savedArticles));
+            document.getElementById("articleTitle").value = "";
+            document.getElementById("articleText").value = "";
+            renderArticles();
+        });
+    }
+
+    // --- Dodaj opinię ---
+    const addOpinionBtn = document.getElementById("addOpinionBtn");
+    if (addOpinionBtn) {
+        addOpinionBtn.addEventListener("click", () => {
+            const author = document.getElementById("opinionAuthor").value.trim();
+            const text = document.getElementById("opinionText").value.trim();
+            if (!author || !text) return alert("Wpisz imię i treść opinii!");
+            savedOpinions.push({ author, text });
+            localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+            document.getElementById("opinionAuthor").value = "";
+            document.getElementById("opinionText").value = "";
+            renderOpinions();
+        });
+    }
+
+    // --- BEZPIECZNE usuwanie ---
+    function deleteArticle(i) {
+        savedArticles.splice(i, 1);
+        localStorage.setItem("articles", JSON.stringify(savedArticles));
+        renderArticles();
+    }
+
+    function deleteOpinion(i) {
+        savedOpinions.splice(i, 1);
+        localStorage.setItem("opinions", JSON.stringify(savedOpinions));
+        renderOpinions();
+    }
+
+    // --- Płynne rozwijanie regulaminu ---
+    document.querySelectorAll(".collapsible").forEach(el => {
+        el.style.maxHeight = "0px";
+        el.style.overflow = "hidden";
+        el.style.transition = "max-height 0.5s ease";
+    });
+    
+    document.querySelectorAll(".read-more").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const content = btn.parentElement.querySelector(".collapsible");
+            if (!content) return;
+            if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
+                content.style.maxHeight = content.scrollHeight + "px";
+                btn.textContent = "Zwiń";
+            } else {
+                content.style.maxHeight = "0px";
+                btn.textContent = "Zobacz pełny regulamin";
+            }
+        });
+    });
+
+    // --- Start ---
+    renderArticles();
+    renderOpinions();
+}
 
         function initOrderForm() {
             // Inicjalizacja formularza zamówienia
