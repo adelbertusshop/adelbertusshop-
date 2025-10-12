@@ -3526,13 +3526,18 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       <div class="space-y-4">
         <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
         <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
-        <button id="addOpinionBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+        <button onclick="addBlogOpinion()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
           🎤 Zostaw shoutout
         </button>
       </div>
       
       <!-- LISTA OPINII -->
-      <div id="opinionsList" class="mt-8 space-y-4"></div>
+      <div id="opinionsList" class="mt-8 space-y-4">
+        <div class="text-center text-gray-500 py-8">
+          <p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p>
+          <p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>
+        </div>
+      </div>
     </div>
 
     <!-- STOPKA BLOGA -->
@@ -3550,7 +3555,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
 </section>
 
 <script>
-      
+    
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
   <div class="section-title text-center mb-10">
