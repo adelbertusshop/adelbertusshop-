@@ -4349,6 +4349,61 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(err => console.error("Błąd wczytywania postów:", err));
 </script>
+<section id="blog" style="padding: 60px 20px; background: #fdfbf7;">
+  <h2 style="text-align:center; font-size: 2.2em; margin-bottom: 40px; font-weight:700;">
+    ✍️ Nasz Blog – Nowości i Inspiracje
+  </h2>
+
+  <div id="blogContainer" style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;">
+    <p style='grid-column: 1 / -1; text-align:center;'>Wczytywanie postów...</p>
+  </div>
+</section>
+
+<script>
+fetch("post.json")
+  .then(res => res.json())
+  .then(posts => {
+    const container = document.getElementById("blogContainer");
+    container.innerHTML = "";
+    posts.forEach(post => {
+      const card = document.createElement("article");
+      card.style = `
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      `;
+      card.innerHTML = `
+        <img src="${post.image}" alt="${post.title}" style="width:100%; height:200px; object-fit:cover;">
+        <div style="padding: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 1.3em;">${post.title}</h3>
+          <p style="color: #999; font-size: 0.9em;">${post.category} • ${post.date} • ${post.readTime}</p>
+          <p style="margin-top: 12px; color:#333;">${post.content}</p>
+        </div>
+      `;
+      card.addEventListener("mouseover", () => {
+        card.style.transform = "translateY(-5px)";
+        card.style.boxShadow = "0 8px 16px rgba(0,0,0,0.15)";
+      });
+      card.addEventListener("mouseout", () => {
+        card.style.transform = "translateY(0)";
+        card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+      });
+      container.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.error("Błąd:", err);
+    document.getElementById("blogContainer").innerHTML =
+      "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
+  });
+</script>
 </body>
 </html>
 
