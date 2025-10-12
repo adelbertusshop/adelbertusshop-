@@ -4328,7 +4328,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // load existing
   loadFromStorage();
 });
-</script>        
+</script> 
+<script>
+  fetch("post.json")
+    .then(response => response.json())
+    .then(posts => {
+      const container = document.getElementById("blogContainer");
+      container.innerHTML = "";
+      posts.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "blog-card";
+        card.innerHTML = `
+          <img src="${post.image}" alt="${post.title}">
+          <h3>${post.title}</h3>
+          <p><strong>${post.category}</strong> • ${post.date} • ${post.readTime}</p>
+          <p>${post.content}</p>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(err => console.error("Błąd wczytywania postów:", err));
+</script>
 </body>
 </html>
 
