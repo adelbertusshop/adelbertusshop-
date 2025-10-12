@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "title": "Przykładowy tytuł",
+    "category": "TRENDY",
+    "image": "https://images.unsplash.com/...",
+    "date": "2025-10-11",
+    "readTime": "4 min",
+    "content": "Krótki lead artykułu..."
+  }
+]
