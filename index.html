@@ -3516,9 +3516,10 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       <div class="space-y-4">
         <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
         <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
-        <button onclick="addBlogOpinion()" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
-          🎤 Zostaw shoutout
-        </button>
+        <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+  🎤 Zostaw shoutout
+</button>
+      </button>
       </div>
       
       <!-- LISTA OPINII -->
@@ -4246,6 +4247,88 @@ function addBlogOpinion() {
         window.sendOrderEmail = sendOrderEmail;
         window.sendOrderWhatsApp = sendOrderWhatsApp;        
     </script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const authorInput = document.getElementById('opinionAuthor');
+  const textInput = document.getElementById('opinionText');
+  const btn = document.getElementById('opinionSubmit'); // przypnij przycisk do id
+  const opinionsList = document.getElementById('opinionsList');
+  const NO_KEY = 'adelbertus_opinions_v1';
+
+  // helper: render list from storage
+  function loadFromStorage() {
+    const raw = localStorage.getItem(NO_KEY);
+    if (!raw) return;
+    try {
+      const arr = JSON.parse(raw);
+      arr.reverse().forEach(item => prependOpinion(item.author, item.text));
+      const no = document.getElementById('noOpinions');
+      if (no) no.remove();
+    } catch(e) {
+      console.warn('Parsing opinions failed', e);
+    }
+  }
+
+  // helper: save to storage (append)
+  function saveToStorage(author, text) {
+    const raw = localStorage.getItem(NO_KEY);
+    let arr = [];
+    try { arr = raw ? JSON.parse(raw) : []; } catch(_) { arr = []; }
+    arr.push({author, text, ts: Date.now()});
+    localStorage.setItem(NO_KEY, JSON.stringify(arr.slice(-200))); // limit do 200
+  }
+
+  // create DOM node and prepend
+  function prependOpinion(author, text) {
+    const el = document.createElement('div');
+    el.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
+    el.innerHTML = `
+      <p class="text-green-400 font-bold mb-2">👤 ${escapeHtml(author)}</p>
+      <p class="text-gray-300">${escapeHtml(text)}</p>
+    `;
+    opinionsList.prepend(el);
+  }
+
+  // basic XSS protection
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  // on submit
+  function handleSubmit(e) {
+    e?.preventDefault();
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+    if (!author || !text) {
+      alert('Wpisz ksywę i treść shoutoutu.');
+      return;
+    }
+    const no = document.getElementById('noOpinions');
+    if (no) no.remove();
+    prependOpinion(author, text);
+    saveToStorage(author, text);
+    authorInput.value = '';
+    textInput.value = '';
+  }
+
+  // attach events
+  if (btn) btn.addEventListener('click', handleSubmit);
+  // also handle Enter in textarea (Ctrl+Enter to submit)
+  textInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) {
+      handleSubmit(ev);
+    }
+  });
+
+  // load existing
+  loadFromStorage();
+});
+</script>        
 </body>
 </html>
 
