@@ -3399,7 +3399,6 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- ===== ADELBERTUS VINTAGE - BLOG (HTML + JS) ===== -->
 <section id="blog" class="py-16 bg-gradient-to-br from-purple-900 via-black to-red-900 text-white relative overflow-hidden">
   <div class="absolute inset-0 opacity-10 z-0">
     <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
@@ -3422,14 +3421,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
       </div>
     </div>
-    
-    <div id="styleDescription" class="mt-10 mb-16 p-8 rounded-xl border-2 border-dashed border-gray-600 bg-black bg-opacity-50 text-center hidden transition-all duration-500">
-        <h3 id="descriptionTitle" class="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-400"></h3>
-        <p id="descriptionText" class="text-gray-300 text-lg"></p>
-        <div id="relatedIcons" class="flex justify-center space-x-6 mt-4 text-3xl"></div>
-    </div>
 
-    <!-- Przykładowe posty - zachowaj atrybut data-tag -->
     <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
       <div class="flex flex-col md:flex-row gap-8">
         <div class="md:w-1/3">
@@ -3534,216 +3526,16 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     <div class="text-center mt-12 pt-8 border-t border-gray-700">
       <p class="text-gray-400">ADELBERTUS VINTAGE © 2024 - Przywracamy duszę ulicy</p>
       <div class="flex justify-center space-x-4 mt-4">
-        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">🕺</a>
-        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">💿</a>
-        <a href="#" data-style="hiphop" class="style-icon text-2xl hover:text-yellow-400 transition">🎤</a>
-        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-yellow-400 transition">👖</a>
-        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-yellow-400 transition">👟</a>
+        <a href="#" target="_blank" class="text-2xl hover:text-yellow-400 transition">🕺</a>
+        <a href="#" target="_blank" class="text-2xl hover:text-yellow-400 transition">💿</a>
+        <a href="#" target="_blank" class="text-2xl hover:text-yellow-400 transition">🎤</a>
+        <a href="#" target="_blank" class="text-2xl hover:text-yellow-400 transition">👖</a>
+        <a href="#" target="_blank" class="text-2xl hover:text-yellow-400 transition">👟</a>
       </div>
     </div>
   </div>
 </section>
 
-<script>
-/* =========================
-   ADELBERTUS BLOG - JS
-   - filtrowanie .blog-post (data-tag)
-   - dynamiczne opisy styleDescription
-   - opinie (localStorage)
-   ========================= */
-
-(function(){
-  // ----- dane stylów -----
-  const styleData = {
-    disco: {
-      title: "REWOLUCJA DISCO 80s: Blask Parkietu",
-      text: "Era jaskrawych kolorów, cekinów, szerokich ramion i błyszczących dresów. To muzyka funk, new wave i szaleństwo w Studio 54. Kluczowe elementy to: metaliczne tkaniny, bluzy oversize i sneakersy.",
-      icons: ["🕺","💿","🎤"]
-    },
-    hiphop: {
-      title: "ZŁOTA ERA HIP HOPU 90s: Kultura Ulicy",
-      text: "Baggy jeansy, koszulki flanelowe, czapki z daszkiem noszone tyłem, złote łańcuchy i legendarne sneakersy. Styl zrodzony na ulicach Nowego Jorku, który podbił świat i definiuje streetwear.",
-      icons: ["👟","👖","🎤"]
-    },
-    streetwear: {
-      title: "STREETWEAR: Od Ulicy do Wybiegu",
-      text: "Połączenie wygody, sportowego stylu i luksusu. Ewolucja z hip hopu i kultury deskorolki. To bluzy z kapturem, T-shirty z grafikami, limitowane edycje butów i oryginalne kurtki.",
-      icons: ["👖","👟","🕺"]
-    }
-  };
-
-  // ----- opinions storage key -----
-  const OP_KEY = 'adelbertus_opinions_v1';
-
-  // ----- helper: escape HTML -----
-  function escapeHtml(s) {
-    return String(s || '')
-      .replaceAll('&','&amp;')
-      .replaceAll('<','&lt;')
-      .replaceAll('>','&gt;')
-      .replaceAll('"','&quot;')
-      .replaceAll("'", '&#39;');
-  }
-
-  // ----- render stored opinions -----
-  function loadOpinions() {
-    const raw = localStorage.getItem(OP_KEY);
-    const list = document.getElementById('opinionsList');
-    if(!list) return;
-    list.innerHTML = '';
-    if (!raw) {
-      const no = document.createElement('div');
-      no.className = 'text-center text-gray-500 py-8';
-      no.id = 'noOpinions';
-      no.innerHTML = '<p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p><p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>';
-      list.appendChild(no);
-      return;
-    }
-    let arr = [];
-    try { arr = JSON.parse(raw); } catch(e){ arr = []; }
-    if(arr.length === 0) {
-      const no = document.createElement('div');
-      no.className = 'text-center text-gray-500 py-8';
-      no.id = 'noOpinions';
-      no.innerHTML = '<p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p><p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>';
-      list.appendChild(no);
-      return;
-    }
-    // newest first
-    arr.slice().reverse().forEach(item => {
-      const el = document.createElement('div');
-      el.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
-      el.innerHTML = `
-        <p class="text-green-400 font-bold mb-2">👤 ${escapeHtml(item.author)}</p>
-        <p class="text-gray-300">${escapeHtml(item.text)}</p>
-      `;
-      list.appendChild(el);
-    });
-  }
-
-  // ----- save opinion -----
-  function saveOpinion(author, text) {
-    let arr = [];
-    try { arr = JSON.parse(localStorage.getItem(OP_KEY) || '[]'); } catch(e){ arr = []; }
-    arr.push({author, text, ts: Date.now()});
-    // keep last 200
-    localStorage.setItem(OP_KEY, JSON.stringify(arr.slice(-200)));
-  }
-
-  // ----- add opinion from inputs -----
-  function addOpinionFromForm() {
-    const authorInput = document.getElementById('opinionAuthor');
-    const textInput = document.getElementById('opinionText');
-    if(!authorInput || !textInput) return;
-    const author = authorInput.value.trim();
-    const text = textInput.value.trim();
-    if(!author || !text) {
-      alert('Wpisz ksywę i treść shoutoutu.');
-      return;
-    }
-    saveOpinion(author, text);
-    authorInput.value = '';
-    textInput.value = '';
-    loadOpinions();
-    // smooth feedback
-    const btn = document.getElementById('opinionSubmit');
-    if(btn) {
-      btn.textContent = '✔️ Dodano!';
-      setTimeout(()=> btn.textContent = '🎤 Zostaw shoutout', 1500);
-    }
-  }
-
-  // ----- update style description -----
-  function updateStyleDescription(filterKey) {
-    const desc = document.getElementById('styleDescription');
-    const titleEl = document.getElementById('descriptionTitle');
-    const textEl = document.getElementById('descriptionText');
-    const iconsEl = document.getElementById('relatedIcons');
-    if(!desc || !titleEl || !textEl || !iconsEl) return;
-
-    if(filterKey === 'all' || !styleData[filterKey]) {
-      desc.classList.add('hidden');
-      return;
-    }
-    const d = styleData[filterKey];
-    titleEl.textContent = d.title;
-    textEl.textContent = d.text;
-    iconsEl.innerHTML = d.icons.map(ic => `<span class="mx-2">${ic}</span>`).join('');
-    desc.classList.remove('hidden');
-  }
-
-  // ----- filter posts -----
-  function filterPosts(filter) {
-    const posts = document.querySelectorAll('.blog-post');
-    posts.forEach(p => {
-      const tag = p.getAttribute('data-tag');
-      if(filter === 'all' || tag === filter) {
-        p.style.display = ''; // let CSS handle layout (flex/block depending on template)
-      } else {
-        p.style.display = 'none';
-      }
-    });
-  }
-
-  // ----- attach events -----
-  function attachEvents() {
-    // filter buttons
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        const f = this.getAttribute('data-filter') || 'all';
-        // active style switch
-        filterButtons.forEach(x => x.classList.remove('ring-4','ring-yellow-300','opacity-90'));
-        this.classList.add('ring-4','ring-yellow-300','opacity-90');
-        filterPosts(f);
-        updateStyleDescription(f);
-        // scroll to posts section
-        const blogSection = document.getElementById('blog');
-        if(blogSection) blogSection.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // style icons
-    const styleIcons = document.querySelectorAll('.style-icon');
-    styleIcons.forEach(ic => {
-      ic.addEventListener('click', function(e){
-        e.preventDefault();
-        const style = this.getAttribute('data-style');
-        updateStyleDescription(style);
-        const desc = document.getElementById('styleDescription');
-        if(desc) desc.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // opinion submit
-    const opinionBtn = document.getElementById('opinionSubmit');
-    if(opinionBtn) opinionBtn.addEventListener('click', function(e){
-      e.preventDefault();
-      addOpinionFromForm();
-    });
-
-    // allow ctrl/cmd+enter to submit from textarea
-    const textArea = document.getElementById('opinionText');
-    if(textArea) {
-      textArea.addEventListener('keydown', function(ev){
-        if(ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) {
-          ev.preventDefault();
-          addOpinionFromForm();
-        }
-      });
-    }
-  }
-
-  // ----- init -----
-  document.addEventListener('DOMContentLoaded', function(){
-    loadOpinions();
-    attachEvents();
-    // initial: show all
-    filterPosts('all');
-  });
-
-})(); // EOF IIFE
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
