@@ -1032,7 +1032,6 @@
             <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
-            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
             <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
     </nav>
@@ -3541,108 +3540,136 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </div>
   </div>
 </section>        
-        <!-- Kontakt - FINALNA WERSJA -->
-<section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
-  <div class="section-title text-center mb-10">
-    <h2 class="text-4xl font-extrabold text-gray-900">Kontakt</h2>
-    <p class="text-lg text-gray-600 mt-2">To Twoje miejsce – masz wpływ na wszystko, co tu się dzieje.</p>
-  </div>
+<section id="contact-and-rules" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
+    <div class="max-w-4xl mx-auto">
 
-  <!-- Formularz kontaktowy -->
-  <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
-    <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
-    <form id="contactForm">
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Imię i nazwisko</label>
-        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Email</label>
-        <input type="email" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Temat</label>
-        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-      </div>
-      
-      <div class="form-group mb-4">
-        <label class="block font-semibold mb-1">Wiadomość</label>
-        <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
-      </div>
-      
-      <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-    </form>
-  </div>
+        <div class="section-title text-center mb-10">
+            <h2 class="text-4xl font-extrabold text-gray-900">Kontakt i Informacje Prawne</h2>
+            <p class="text-lg text-gray-600 mt-2">Masz pytania? Chcesz złożyć zamówienie? Zobacz również nasz regulamin.</p>
+        </div>
 
-  <!-- Dane kontaktowe -->
-  <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-    <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
-    <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
-    <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
-    <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
-    
-    <h3 class="text-xl font-bold mt-6 mb-4">Social Media</h3>
-    <div class="social-links flex gap-4">
-      <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank">
-        <i class="fab fa-tiktok"></i>
-      </a>
-      <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank">
-        <i class="fab fa-facebook-f"></i>
-      </a>
+        <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
+            <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
+            <form id="contactForm">
+                <div class="form-group mb-4">
+                    <label class="block font-semibold mb-1">Imię i nazwisko</label>
+                    <input type="text" required class="w-full border rounded-lg px-3 py-2">
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label class="block font-semibold mb-1">Email</label>
+                    <input type="email" required class="w-full border rounded-lg px-3 py-2">
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label class="block font-semibold mb-1">Temat</label>
+                    <input type="text" required class="w-full border rounded-lg px-3 py-2">
+                </div>
+                
+                <div class="form-group mb-4">
+                    <label class="block font-semibold mb-1">Wiadomość</label>
+                    <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
+                </div>
+                
+                <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+            </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+            <h3 class="text-xl font-bold mb-4">Dane Kontaktowe Sprzedawcy i Social Media</h3>
+            <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
+            <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
+            <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
+            
+            <div class="social-links flex gap-4">
+                <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank" aria-label="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.youtube.com/@Adelbertusshop" class="social-link text-red-600 text-2xl" target="_blank" aria-label="YouTube - @Adelbertusshop">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+            <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
+            <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
+            
+            <form id="forumForm" class="mb-6">
+                <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
+                <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
+                <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
+            </form>
+            
+            <div id="forumPosts" class="space-y-4">
+                </div>
+        </div>
+
+        <div class="bg-white p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-gray-200">
+            <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
+            <p class="text-center text-sm text-red-500 mb-6 font-bold">PAMIĘTAJ: Uzupełnij wszystkie pola oznaczone: [UZUPEŁNIJ]</p>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-6 mb-4 border-b pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>**Sprzedawca:** Grzegosz Mielniczuk</li>
+                <li>**Forma działalności:** Działalność nierejestrowana (zgodnie z art. 5 ust. 1 Ustawy Prawo przedsiębiorców).</li>
+                <li>**Adres do korespondencji/zwrotów:** <b class="text-red-500">[UZUPEŁNIJ: Pełny adres Sprzedawcy]</b></li>
+                <li>**E-mail kontaktowy:** mielniczukgrzegosz74@gmail.com</li>
+                <li>**Telefon kontaktowy:** 604 296 360</li>
+                <li>Regulamin określa zasady sprzedaży towarów używanych (vintage) w ramach umowy zawieranej na odległość.</li>
+                <li>Sprzedawca jest zobowiązany do dostarczenia Towaru bez wad.</li>
+                <li>Ceny podane w Sklepie są cenami brutto. Sprzedawca jest zwolniony z VAT na podstawie limitu przychodów.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-8 mb-4 border-b pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>Do zawarcia Umowy Sprzedaży dochodzi po złożeniu zamówienia przez Klienta i przesłaniu przez Sprzedawcę wiadomości e-mail z potwierdzeniem przyjęcia zamówienia do realizacji.</li>
+                <li>**Główne cechy świadczenia:** Sprzedaż odzieży i akcesoriów typu Vintage (używanych), których stan i ewentualne wady są szczegółowo opisane w opisie produktu.</li>
+                <li>Minimalne wymagania techniczne do korzystania ze Sklepu: dostęp do Internetu, standardowa przeglądarka internetowa oraz aktywne konto e-mail.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-8 mb-4 border-b pb-2">§ 3. Dostawa Towaru i Płatności</h3>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>**Metody płatności:** <b class="text-red-500">[UZUPEŁNIJ: np. Przelew tradycyjny, Płatności online (np. Przelewy24/BLIK), Płatność przy odbiorze (jeśli dotyczy)]</b>.</li>
+                <li>**Koszty dostawy:** Wskazane w procesie składania zamówienia. <b class="text-red-500">[UZUPEŁNIJ: Podaj stałą kwotę/cennik]</b>.</li>
+                <li>**Termin dostawy:** Wynosi standardowo <b class="text-red-500">[UZUPEŁNIJ: np. 3-7 dni roboczych]</b> liczone od dnia zaksięgowania płatności.</li>
+                <li>Dostawa odbywa się za pośrednictwem <b class="text-red-500">[UZUPEŁNIJ: np. InPost, Kurier DPD, Poczta Polska]</b>.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-8 mb-4 border-b pb-2">§ 4. Odstąpienie od Umowy</h3>
+            <p class="text-gray-600 mb-3">Klient, będący Konsumentem, ma prawo odstąpić od Umowy Sprzedaży w terminie **14 dni** bez podawania przyczyny.</p>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>Termin odstąpienia wygasa po upływie 14 dni od dnia, w którym Klient wszedł w posiadanie rzeczy.</li>
+                <li>Oświadczenie o odstąpieniu można złożyć: <b class="text-red-500">[UZUPEŁNIJ: Np. mailowo, pisemnie na adres Sprzedawcy]</b>.</li>
+                <li>Klient ma obowiązek zwrócić Towar Sprzedawcy niezwłocznie, nie później niż 14 dni od dnia odstąpienia.</li>
+                <li>Koszty odesłania zwracanego Towaru ponosi <b class="text-red-500">[UZUPEŁNIJ: Klient/Sprzedawca, najczęściej Klient]</b>.</li>
+                <li>Zwrot płatności zostanie dokonany w terminie **14 dni** od otrzymania oświadczenia Klienta, pod warunkiem otrzymania Towaru.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-8 mb-4 border-b pb-2">§ 5. Reklamacje Towaru</h3>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>Sprzedawca ponosi odpowiedzialność za brak zgodności Towaru z umową (rękojmia).</li>
+                <li>Reklamacje należy składać drogą elektroniczną lub pisemnie na adres Sprzedawcy, opisując wadę i swoje żądanie.</li>
+                <li>Klient może żądać: **naprawy**, **wymiany** (jeśli możliwe), **obniżenia ceny** lub **odstąpienia od umowy** (jeśli wada jest istotna).</li>
+                <li>Sprzedawca ustosunkuje się do żądania Klienta w terminie **14 dni** kalendarzowych.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-gray-700 mt-8 mb-4 border-b pb-2">§ 6. Postanowienia Końcowe</h3>
+            <ul class="list-disc list-inside space-y-3 text-gray-600">
+                <li>W sprawach nieuregulowanych Regulaminem zastosowanie mają przepisy prawa polskiego, w szczególności przepisy Kodeksu Cywilnego oraz Ustawy o prawach konsumenta.</li>
+                <li>Sprzedawca zastrzega sobie prawo do zmiany Regulaminu. Zmiany wchodzą w życie <b class="text-red-500">[UZUPEŁNIJ: np. 7 dni od opublikowania na stronie]</b>. Zamówienia złożone przed zmianą są realizowane na zasadach dotychczasowych.</li>
+            </ul>
+            <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: <b class="text-red-500">[UZUPEŁNIJ DATĘ]</b></p>
+        </div>
+
     </div>
-  </div>
-
-  <!-- Forum dyskusyjne -->
-  <div class="bg-white p-6 rounded-2xl shadow-md">
-    <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
-    <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
-    
-    <form id="forumForm" class="mb-6">
-      <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
-      <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
-      <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
-    </form>
-    
-    <div id="forumPosts" class="space-y-4">
-      <!-- Wpisy forum będą dodawane tutaj -->
-    </div>
-  </div>
 </section>
-
-<script>
-  // Lista słów zakazanych
-  const forbiddenWords = ["idiota", "głupek", "kurwa", "chuj", "pedał", "debil"];
-  
-  // Obsługa forum
-  document.getElementById("forumForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    const user = document.getElementById("forumUser").value.trim();
-    const message = document.getElementById("forumMessage").value.trim();
-    
-    // Sprawdzenie wulgaryzmów
-    let containsBad = forbiddenWords.some(word => message.toLowerCase().includes(word));
-    
-    if (containsBad) {
-      alert("Twój wpis zawiera niedozwolone treści. Spróbuj napisać inaczej.");
-      return;
-    }
-    
-    if (user && message) {
-      const postDiv = document.createElement("div");
-      postDiv.classList.add("p-4", "bg-gray-50", "rounded-lg", "shadow-sm");
-      postDiv.innerHTML = `<p class="font-bold">${user}</p><p>${message}</p>`;
-      document.getElementById("forumPosts").prepend(postDiv);
-      
-      document.getElementById("forumForm").reset();
-    }
-  });
-</script>
        
     <!-- Koszyk -->
     <div id="cartIcon">
