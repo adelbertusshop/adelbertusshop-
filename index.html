@@ -3512,7 +3512,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </div>
 
     <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
-      <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI</h3>
+      <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI I OPINIAMI KLIENTÓW</h3>
       <div class="space-y-4">
         <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
         <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
@@ -3522,10 +3522,27 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       </div>
       
       <div id="opinionsList" class="mt-8 space-y-4">
-        <div class="text-center text-gray-500 py-8" id="noOpinions">
-          <p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p>
-          <p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-yellow-400">
+            <p class="font-bold text-yellow-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 🕺 **DiscoKing84** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiony dres Adidas z lat 80. jest po prostu OG! Stan idealny, jak prosto z Nowego Jorku. Szybka wysyłka i ekstra kontakt. Polecam każdemu fanowi vintage!</p>
         </div>
+        
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-blue-500">
+            <p class="font-bold text-blue-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👑 **HiphopQueen92** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">W końcu znalazłam kurtkę Phat Farm, o której marzyłam od lat 90! Wysoka jakość, super cena. To jest prawdziwy oldschool, a nie jakieś podróbki!</p>
+        </div>
+
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-pink-500">
+            <p class="font-bold text-pink-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👟 **SkaterBoy01** <span class="text-xs text-gray-500 ml-3"> (Ocena: 4/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiłem koszulkę Fila. Rzecz jest używana, więc ma małą wadę, ale wszystko było opisane w aukcji. Szczerość sprzedawcy na plus, towar dotarł ekspresowo. </p>
+        </div>
+
       </div>
     </div>
     
@@ -3591,9 +3608,9 @@ setInterval(typeLetter, 15000); // co 15s nowy list
       <div class="flex justify-center space-x-4 mt-4">
         <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">🕺</a>
         <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">💿</a>
-        <a href="#" data-style="hiphop" class="style-icon text-2xl hover:text-yellow-400 transition">🎤</a>
-        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-yellow-400 transition">👖</a>
-        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-yellow-400 transition">👟</a>
+        <a href="#" data-style="hiphop" class="style-icon text-2xl hover:text-blue-400 transition">🎤</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👖</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👟</a>
       </div>
     </div>
   </div>
