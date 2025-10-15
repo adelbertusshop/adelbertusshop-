@@ -1,18 +1,23 @@
  
 
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelbertusShop | Ekskluzywne Projekty</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
-        
+    /* Tutaj zaczyna się Twój kod CSS */
+    </style>
+</head>
         :root {
             --color-gold: #d4af37;
             --color-dark-gold: #b8941f;
@@ -3124,141 +3129,96 @@
         </div>
     </div>
 </section>
-<!-- Studio projektowe - ZMODYFIKOWANE -->
-<section id="design">
-    <div class="section-title">
-        <h2>Studio Projektowe</h2>
-        <p>Stwórz swój unikalny produkt</p>
-    </div>
-    
-    <div class="design-studio">
-        <!-- Przyciski po bokach -->
-        <div class="side-buttons left">
-            <button class="side-button" onclick="updateDesign()" title="Podgląd">
-                <i class="fas fa-sync"></i>
-            </button>
-            <button class="side-button" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
-                <i class="fas fa-cart-plus"></i>
-            </button>
+<section id="design" class="py-16 bg-black text-white relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
+            <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
         </div>
         
-        <div class="side-buttons right">
-            <button class="side-button" onclick="sendDesignToEmail()" title="Wyślij projekt mailem">
-                <i class="fas fa-envelope"></i>
-            </button>
-            <button class="side-button" onclick="saveDesign()" title="Zapisz projekt">
-                <i class="fas fa-download"></i>
-            </button>
-        </div>
-        
-        <div class="product-base">
-            <div class="product-base-item active" data-base="tshirt">
-                <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka">
-                <p>Koszulka</p>
-            </div>
-            <div class="product-base-item" data-base="hoodie">
-                <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza">
-                <p>Bluza</p>
-            </div>
-            <div class="product-base-item" data-base="cap">
-                <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapka">
-                <p>Czapka</p>
-            </div>
-        </div>
-        
-        <div class="design-options">
-            <div class="design-option active" data-area="front">Przód</div>
-            <div class="design-option" data-area="back">Tył</div>
-            <div class="design-option" data-area="sleeves">Rękawy</div>
-        </div>
-        
-        <div class="canvas-container">
-            <canvas id="designCanvas" width="500" height="400"></canvas>
-            <div class="canvas-controls">
-                <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-trash"></i> Wyczyść</button>
-                <button class="nav-btn" onclick="resetDesign()"><i class="fas fa-redo"></i> Resetuj</button>
-            </div>
-        </div>
-        
-        <div class="design-tools">
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-font"></i> Tekst</div>
-                <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border rounded mb-3" oninput="updateDesign()">
+        <div class="flex flex-col lg:flex-row gap-8 relative">
+            
+            <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit sticky top-4">
                 
-                <div class="flex gap-3 mb-3">
-                    <select id="fontFamily" class="flex-1 p-2 border rounded" onchange="updateDesign()">
-                        <option value="Arial">Arial</option>
-                        <option value="Times New Roman">Times New Roman</option>
-                        <option value="Courier New">Courier New</option>
-                        <option value="Impact">Impact</option>
-                        <option value="Comic Sans MS">Comic Sans</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Palatino">Palatino</option>
-                        <option value="Garamond">Garamond</option>
-                        <option value="Brush Script MT">Brush Script</option>
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
+                    
+                    <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="tshirt" data-price="120">Koszulka (120 zł)</option>
+                        <option value="hoodie" data-price="200">Bluza (200 zł)</option>
+                        <option value="cap" data-price="99">Czapka (99 zł)</option>
                     </select>
                     
-                    <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border rounded" oninput="updateDesign()">
+                    <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+
+                    <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
+                    <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
                 </div>
-                
-                <input type="color" id="textColor" value="#000000" class="w-full h-10 mb-3" oninput="updateDesign()">
+
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
+                    <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                    <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
+                    
+                    <div class="flex gap-3 mb-3">
+                        <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
+                            <option value="Impact">Impact (80s/90s)</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Monoton">Monoton (Wymaga CSS)</option>
+                        </select>
+                        <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
+                    </div>
+                    
+                    <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
+                    <input type="color" id="textColor" value="#ffffff" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
+                </div>
+
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
+                    <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                    <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full" onclick="document.getElementById('designImage').click()">
+                        <i class="fas fa-upload"></i> Wybierz własny obraz
+                    </button>
+                </div>
+
             </div>
             
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-palette"></i> Opcje produktu</div>
+            <div class="canvas-area lg:w-2/3 flex flex-col items-center">
                 
-                <select id="productType" class="w-full p-3 border rounded mb-3">
-                    <option value="tshirt">Koszulka (120 zł)</option>
-                    <option value="hoodie">Bluza (200 zł)</option>
-                    <option value="cap">Czapka (99 zł)</option>
-                </select>
-                
-                <select id="productSize" class="w-full p-3 border rounded mb-3">
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                    <option value="XL">XL</option>
-                    <option value="XXL">XXL</option>
-                </select>
-                
-                <input type="file" id="designImage" accept="image/*" class="w-full mb-3" onchange="handleImageUpload()">
-                <button class="nav-btn gold-bg w-full" onclick="document.getElementById('designImage').click()"><i class="fas fa-upload"></i> Wybierz obraz</button>
-            </div>
+                <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+                    <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
+                    <canvas id="designCanvas" width="400" height="400" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></canvas>
+                </div>
 
-            <div class="tool-group">
-                <div class="tool-title"><i class="fas fa-edit"></i> Edycja elementów</div>
-                <div class="transform-controls">
-                    <div class="transform-input">
-                        <label for="posX">Pozycja X</label>
-                        <input type="range" id="posX" min="0" max="500" value="250" oninput="updateElementPosition()">
-                    </div>
-                    <div class="transform-input">
-                        <label for="posY">Pozycja Y</label>
-                        <input type="range" id="posY" min="0" max="400" value="200" oninput="updateElementPosition()">
-                    </div>
-                    <div class="transform-input">
-                        <label for="scale">Skala</label>
-                        <input type="range" id="scale" min="0.1" max="2" step="0.1" value="1" oninput="updateElementScale()">
-                    </div>
-                    <div class="transform-input">
-                        <label for="rotation">Obrót</label>
-                        <input type="range" id="rotation" min="0" max="360" value="0" oninput="updateElementRotation()">
-                    </div>
+                <div class="canvas-controls flex justify-center space-x-4 mb-8">
+                    <button class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
+                    <button class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="clearCanvas()"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
+                    <button class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
                 </div>
-                <div class="mt-3">
-                    <button class="nav-btn gold-bg w-full" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
+
+                <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+                    <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
+                    
+                    <button class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="exportDesign()" title="Zapisz projekt jako obraz">
+                        <i class="fas fa-download"></i> Pobierz Projekt
+                    </button>
+                    <button class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
+                        <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
+                    </button>
                 </div>
             </div>
-        </div>
-        
-        <div class="design-preview">
-            <h3>Podgląd Twojego projektu</h3>
-            <p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>
         </div>
     </div>
-</section>
-        
+</section>        
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
@@ -3929,6 +3889,194 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// ===== SYSTEM FABRIC.JS DO PROJEKTOWANIA =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inicjalizacja Canvasa
+    const canvas = new fabric.Canvas('designCanvas', {
+        backgroundColor: 'transparent',
+        selection: true,
+        preserveObjectStacking: true // Ważne dla warstw
+    });
+
+    const productImg = document.getElementById('currentProductImg');
+    const productTypeSelect = document.getElementById('productType');
+    const productColorInput = document.getElementById('productColor');
+    const addTextBtn = document.getElementById('addTextBtn');
+
+    // Domyślne URL-e dla produktów (Muszą być to statyczne tła, bez nadruku)
+    const productImages = {
+        'tshirt': 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+        'hoodie': 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+        'cap': 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
+    };
+
+    // 2. FUNKCJE ZARZĄDZANIA PRODUKTEM
+    
+    function updateProductDisplay() {
+        const type = productTypeSelect.value;
+        const color = productColorInput.value;
+        const price = productTypeSelect.options[productTypeSelect.selectedIndex].dataset.price;
+
+        productImg.src = productImages[type];
+        productImg.style.backgroundColor = color; // Zmiana koloru tła produktu
+        document.getElementById('currentPrice').textContent = `${price} zł`;
+        
+        // Zmiana rozmiaru canvasa w zależności od produktu (dla czapki mniejszy obszar roboczy)
+        const displayContainer = document.getElementById('productBaseDisplay');
+        if (type === 'cap') {
+            displayContainer.style.width = '400px';
+            displayContainer.style.height = '300px';
+            canvas.setWidth(300);
+            canvas.setHeight(150);
+        } else {
+            displayContainer.style.width = '500px';
+            displayContainer.style.height = '500px';
+            canvas.setWidth(400);
+            canvas.setHeight(400);
+        }
+        canvas.renderAll();
+    }
+    
+    // 3. FUNKCJE ZARZĄDZANIA TEKSTEM I GRAFIKĄ
+
+    // Dodawanie tekstu do Canvasa
+    addTextBtn.addEventListener('click', function() {
+        const textInput = document.getElementById('designText');
+        const text = textInput.value;
+        const font = document.getElementById('fontFamily').value;
+        const size = parseInt(document.getElementById('fontSize').value);
+        const color = document.getElementById('textColor').value;
+
+        if (text) {
+            const fabricText = new fabric.IText(text, {
+                left: canvas.getWidth() / 2,
+                top: canvas.getHeight() / 2,
+                fill: color,
+                fontFamily: font,
+                fontSize: size,
+                originX: 'center',
+                originY: 'center',
+                shadow: 'rgba(0,0,0,0.5) 5px 5px 5px'
+            });
+            canvas.add(fabricText);
+            canvas.setActiveObject(fabricText);
+            textInput.value = ''; // Wyczyść pole po dodaniu
+            canvas.renderAll();
+        }
+    });
+
+    // Wgranie obrazu
+    window.handleImageUpload = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(f) {
+            const data = f.target.result;
+            fabric.Image.fromURL(data, function(img) {
+                // Skalowanie obrazu, aby zmieścił się na canvasie
+                img.scaleToWidth(canvas.getWidth() / 2);
+                img.set({
+                    left: canvas.getWidth() / 2,
+                    top: canvas.getHeight() / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                canvas.add(img);
+                canvas.setActiveObject(img);
+                canvas.renderAll();
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 4. FUNKCJE ZARZĄDZANIA OBIEKTAMI (KONTROLKI NA DOLE)
+    
+    // Usuń zaznaczony obiekt
+    window.deleteSelectedObject = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+            canvas.renderAll();
+        }
+    };
+
+    // Wyczyść cały canvas
+    window.clearCanvas = function() {
+        if (confirm("Czy na pewno chcesz usunąć wszystkie elementy projektu?")) {
+            canvas.clear();
+            canvas.renderAll();
+        }
+    };
+    
+    // Przenieś zaznaczony obiekt na wierzch
+    window.bringToFront = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.bringToFront(activeObject);
+            canvas.renderAll();
+        }
+    };
+
+    // 5. FUNKCJE ZARZĄDZANIA ZAPISYWANIEM I WYSYŁKĄ
+
+    // Pobieranie projektu jako PNG
+    window.exportDesign = function() {
+        canvas.discardActiveObject().renderAll(); // Usuń ramki zaznaczenia
+
+        const dataURL = canvas.toDataURL({
+            format: 'png',
+            quality: 1
+        });
+
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = `projekt_adelbertus_${productTypeSelect.value}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        alert("Projekt został pobrany jako obraz PNG!");
+    };
+
+    // Dodawanie projektu do "Koszyka" (tylko symulacja)
+    window.addToCartFromDesign = function() {
+        // Zapisanie danych do przekazania do koszyka (lub do serwera)
+        const designData = canvas.toDataURL({ format: 'png', quality: 0.8 });
+        
+        const productName = productTypeSelect.options[productTypeSelect.selectedIndex].text;
+        const productSize = document.getElementById('productSize').value;
+        const finalPrice = document.getElementById('currentPrice').textContent;
+
+        alert(`Dodano do Koszyka (Symulacja): \n\nProdukt: ${productName} \nRozmiar: ${productSize} \nCena: ${finalPrice} \n\nProjekt jest gotowy do druku!`);
+    };
+
+    // 6. OBSŁUGA ZDARZEŃ ZMIENIAJĄCYCH WŁAŚCIWOŚCI
+    
+    productTypeSelect.addEventListener('change', updateProductDisplay);
+    productColorInput.addEventListener('input', updateProductDisplay);
+    
+    // Ustawienia początkowe
+    updateProductDisplay();
+    
+    // Zmiana właściwości aktywnego tekstu/elementu
+    function updateActiveObjectProps() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'i-text') {
+            activeObject.set({
+                fontFamily: document.getElementById('fontFamily').value,
+                fontSize: parseInt(document.getElementById('fontSize').value),
+                fill: document.getElementById('textColor').value
+            });
+            canvas.renderAll();
+        }
+    }
+
+    document.getElementById('fontFamily').addEventListener('change', updateActiveObjectProps);
+    document.getElementById('fontSize').addEventListener('input', updateActiveObjectProps);
+    document.getElementById('textColor').addEventListener('input', updateActiveObjectProps);
+});
+
 function initCategoryFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const categorySections = document.querySelectorAll('.category-section');
@@ -4538,4 +4686,4 @@ fetch("post.json")
   });
 </script>
 </body>
-</html>     
+</html>
