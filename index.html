@@ -3423,113 +3423,53 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
       </div>
     </div>
-    
+
+    <!-- Twój nowy kod bloga i opinii klientów -->
+    <div class="bg-black bg-opacity-50 p-8 rounded-2xl border border-gray-700 mb-12">
+      <h2 style="text-align: center; margin-bottom: 30px;">Blog i Opinie Klientów</h2>
+
+      <div class="blog-posts" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+        <article style="background: #1f1f1f; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <h3>Nowa kolekcja jesienna</h3>
+          <p>Nasze bluzy i koszulki z nowej serii zdobywają serca klientów! Sprawdź, co nowego przygotowaliśmy.</p>
+          <small>Data: 10.10.2025</small>
+        </article>
+
+        <article style="background: #1f1f1f; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <h3>Dlaczego warto kupować u nas?</h3>
+          <p>Wszystkie produkty są projektowane z pasją i dbałością o szczegóły – bez masówki, bez pośpiechu.</p>
+          <small>Data: 05.10.2025</small>
+        </article>
+      </div>
+
+      <h3 style="text-align: center; margin-top: 50px;">Opinie Klientów</h3>
+      <div class="opinie" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
+        <div style="background: #1f1f1f; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <p>"Świetna jakość i szybka wysyłka! Bluza wygląda jeszcze lepiej na żywo."</p>
+          <strong>- Kasia, Poznań</strong>
+        </div>
+        <div style="background: #1f1f1f; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <p>"Uwielbiam ten sklep! Czuć, że robią to z sercem."</p>
+          <strong>- Tomek, Kraków</strong>
+        </div>
+        <div style="background: #1f1f1f; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.3);">
+          <p>"Wszystko przebiegło sprawnie, produkt zgodny z opisem. Polecam!"</p>
+          <strong>- Marta, Gdańsk</strong>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <button id="showRegulamin" style="background-color: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+          Zobacz Regulamin Sklepu
+        </button>
+      </div>
+    </div>
+    <!-- Koniec nowego kodu -->
+
     <div id="styleDescription" class="mt-10 mb-16 p-8 rounded-xl border-2 border-dashed border-gray-600 bg-black bg-opacity-50 text-center hidden transition-all duration-500">
         <h3 id="descriptionTitle" class="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-400"></h3>
         <p id="descriptionText" class="text-gray-300 text-lg"></p>
         <div id="relatedIcons" class="flex justify-center space-x-6 mt-4 text-3xl"></div>
-    </div>
-
-    <!-- Przykładowe posty - zachowaj atrybut data-tag -->
-    <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
-      <div class="flex flex-col md:flex-row gap-8">
-        <div class="md:w-1/3">
-          <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
-              alt="Disco Fashion 80s" 
-              class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
-          <div class="mt-4 text-center">
-            <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
-          </div>
-        </div>
-        
-        <div class="md:w-2/3">
-          <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
-          <div class="text-gray-300 space-y-4">
-            <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
-            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
-              <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
-              <ul class="list-disc list-inside space-y-1">
-                <li>Jaskrawe, fluorescencyjne kolory</li>
-                <li>Spodnie dresowe z białymi paskami</li>
-                <li>Bluzy z logo wielkich marek</li>
-                <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
-              </ul>
-            </div>
-            <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
-            <div class="flex items-center space-x-4 mt-6">
-              <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
-              <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <article data-tag="hiphop" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
-      <div class="flex flex-col md:flex-row gap-8">
-        <div class="md:w-1/3">
-          <img src="https://i.ibb.co/HT3YHsmS/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg" 
-              alt="Hip Hop Fashion 90s" 
-              class="w-full h-64 object-cover rounded-xl border-4 border-blue-500 shadow-2xl">
-          <div class="mt-4 text-center">
-            <span class="inline-block px-3 py-1 bg-blue-500 text-white text-sm font-bold rounded-full">💎 CULTURAL HIP HOP</span>
-          </div>
-        </div>
-        
-        <div class="md:w-2/3">
-          <h3 class="text-3xl font-bold mb-4 text-blue-400">👑 LATA 90s: ZŁOTA ERA HIP HOPU I STREETWEARU</h3>
-          <div class="text-gray-300 space-y-4">
-            <p class="text-lg">Gdy <strong class="text-blue-400">baggy jeansy</strong> opadające poniżej pasa i koszulki flanelowe stały się uniformem pokolenia. To czasy FUBU, Karl Kani i kultowych Nike Air Force 1.</p>
-            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
-              <h4 class="font-bold text-blue-400 mb-2">🎤 STYL GANGSTA RAP vs SKATER:</h4>
-              <ul class="list-disc list-inside space-y-1">
-                <li>Jeansy baggy - im szersze, tym lepsze</li>
-                <li>Koszulki oversize z logo zespołów</li>
-                <li>Bluzy z kapturem - must have każdego fana</li>
-                <li>Buty: Timberland lub Air Force 1</li>
-              </ul>
-            </div>
-            <p><strong class="text-red-400">Polski streetwear</strong> lat 90s to kultowe targowiska: Stadion Dziesięciolecia, Jarmark Europa. "Abidasy", "Panasonice" - każdy chciał mieć oryginał, ale nosił podróbkę.</p>
-            <div class="flex items-center space-x-4 mt-6">
-              <span class="text-sm text-gray-400">📅 Epoka: 1990-1999</span>
-              <span class="text-sm text-gray-400">🎵 Muzyka: Hip Hop, Gangsta Rap, G-Funk</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </article>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
-        <img src="https://i.ibb.co/b58Nxn0D/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg" 
-            alt="Street Art 1" 
-            class="w-full h-48 object-cover rounded-lg mb-4">
-        <p class="text-center text-gray-300 text-sm">🎨 Street Art - dusza ulicy lat 90s</p>
-      </div>
-      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
-        <img src="https://i.ibb.co/gMxPjFmR/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg" 
-            alt="Street Art 2" 
-            class="w-full h-48 object-cover rounded-lg mb-4">
-        <p class="text-center text-gray-300 text-sm">✌️ Graffiti - głos pokolenia</p>
-      </div>
-    </div>
-
-    <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
-      <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI</h3>
-      <div class="space-y-4">
-        <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
-        <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
-        <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
-          🎤 Zostaw shoutout
-        </button>
-      </div>
-      
-      <div id="opinionsList" class="mt-8 space-y-4">
-        <div class="text-center text-gray-500 py-8" id="noOpinions">
-          <p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p>
-          <p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>
-        </div>
-      </div>
     </div>
 
     <div class="text-center mt-12 pt-8 border-t border-gray-700">
@@ -3545,206 +3485,41 @@ setInterval(typeLetter, 15000); // co 15s nowy list
   </div>
 </section>
 
+<!-- Modal z regulaminem -->
+<div id="regulaminModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center;">
+  <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; text-align: left; position: relative;">
+    <h2>Regulamin Sklepu</h2>
+    <p>
+      1. Sklep działa w ramach działalności nierejestrowanej zgodnie z przepisami prawa polskiego.<br>
+      2. Wszystkie ceny są cenami brutto (zawierają podatek VAT, jeśli dotyczy).<br>
+      3. Klient składając zamówienie, akceptuje niniejszy regulamin.<br>
+      4. Czas realizacji zamówienia wynosi od 1 do 7 dni roboczych.<br>
+      5. Zwroty i reklamacje są rozpatrywane indywidualnie – napisz na kontakt@adelbertusshop.com<br>
+      6. Dane klientów są przetwarzane wyłącznie w celu realizacji zamówień.
+    </p>
+    <button id="closeRegulamin" style="background-color: #333; color: white; padding: 8px 15px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer;">Zamknij</button>
+  </div>
+</div>
+
 <script>
-/* =========================
-   ADELBERTUS BLOG - JS
-   - filtrowanie .blog-post (data-tag)
-   - dynamiczne opisy styleDescription
-   - opinie (localStorage)
-   ========================= */
+  /* Regulamin modal */
+  const showRegulamin = document.getElementById("showRegulamin");
+  const closeRegulamin = document.getElementById("closeRegulamin");
+  const regulaminModal = document.getElementById("regulaminModal");
 
-(function(){
-  // ----- dane stylów -----
-  const styleData = {
-    disco: {
-      title: "REWOLUCJA DISCO 80s: Blask Parkietu",
-      text: "Era jaskrawych kolorów, cekinów, szerokich ramion i błyszczących dresów. To muzyka funk, new wave i szaleństwo w Studio 54. Kluczowe elementy to: metaliczne tkaniny, bluzy oversize i sneakersy.",
-      icons: ["🕺","💿","🎤"]
-    },
-    hiphop: {
-      title: "ZŁOTA ERA HIP HOPU 90s: Kultura Ulicy",
-      text: "Baggy jeansy, koszulki flanelowe, czapki z daszkiem noszone tyłem, złote łańcuchy i legendarne sneakersy. Styl zrodzony na ulicach Nowego Jorku, który podbił świat i definiuje streetwear.",
-      icons: ["👟","👖","🎤"]
-    },
-    streetwear: {
-      title: "STREETWEAR: Od Ulicy do Wybiegu",
-      text: "Połączenie wygody, sportowego stylu i luksusu. Ewolucja z hip hopu i kultury deskorolki. To bluzy z kapturem, T-shirty z grafikami, limitowane edycje butów i oryginalne kurtki.",
-      icons: ["👖","👟","🕺"]
-    }
-  };
-
-  // ----- opinions storage key -----
-  const OP_KEY = 'adelbertus_opinions_v1';
-
-  // ----- helper: escape HTML -----
-  function escapeHtml(s) {
-    return String(s || '')
-      .replaceAll('&','&amp;')
-      .replaceAll('<','&lt;')
-      .replaceAll('>','&gt;')
-      .replaceAll('"','&quot;')
-      .replaceAll("'", '&#39;');
-  }
-
-  // ----- render stored opinions -----
-  function loadOpinions() {
-    const raw = localStorage.getItem(OP_KEY);
-    const list = document.getElementById('opinionsList');
-    if(!list) return;
-    list.innerHTML = '';
-    if (!raw) {
-      const no = document.createElement('div');
-      no.className = 'text-center text-gray-500 py-8';
-      no.id = 'noOpinions';
-      no.innerHTML = '<p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p><p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>';
-      list.appendChild(no);
-      return;
-    }
-    let arr = [];
-    try { arr = JSON.parse(raw); } catch(e){ arr = []; }
-    if(arr.length === 0) {
-      const no = document.createElement('div');
-      no.className = 'text-center text-gray-500 py-8';
-      no.id = 'noOpinions';
-      no.innerHTML = '<p class="text-lg">🎤 Bądź pierwszy który zostawi shoutout!</p><p class="text-sm mt-2">Podziel się wspomnieniami z ery disco i hip hop</p>';
-      list.appendChild(no);
-      return;
-    }
-    // newest first
-    arr.slice().reverse().forEach(item => {
-      const el = document.createElement('div');
-      el.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
-      el.innerHTML = `
-        <p class="text-green-400 font-bold mb-2">👤 ${escapeHtml(item.author)}</p>
-        <p class="text-gray-300">${escapeHtml(item.text)}</p>
-      `;
-      list.appendChild(el);
-    });
-  }
-
-  // ----- save opinion -----
-  function saveOpinion(author, text) {
-    let arr = [];
-    try { arr = JSON.parse(localStorage.getItem(OP_KEY) || '[]'); } catch(e){ arr = []; }
-    arr.push({author, text, ts: Date.now()});
-    // keep last 200
-    localStorage.setItem(OP_KEY, JSON.stringify(arr.slice(-200)));
-  }
-
-  // ----- add opinion from inputs -----
-  function addOpinionFromForm() {
-    const authorInput = document.getElementById('opinionAuthor');
-    const textInput = document.getElementById('opinionText');
-    if(!authorInput || !textInput) return;
-    const author = authorInput.value.trim();
-    const text = textInput.value.trim();
-    if(!author || !text) {
-      alert('Wpisz ksywę i treść shoutoutu.');
-      return;
-    }
-    saveOpinion(author, text);
-    authorInput.value = '';
-    textInput.value = '';
-    loadOpinions();
-    // smooth feedback
-    const btn = document.getElementById('opinionSubmit');
-    if(btn) {
-      btn.textContent = '✔️ Dodano!';
-      setTimeout(()=> btn.textContent = '🎤 Zostaw shoutout', 1500);
-    }
-  }
-
-  // ----- update style description -----
-  function updateStyleDescription(filterKey) {
-    const desc = document.getElementById('styleDescription');
-    const titleEl = document.getElementById('descriptionTitle');
-    const textEl = document.getElementById('descriptionText');
-    const iconsEl = document.getElementById('relatedIcons');
-    if(!desc || !titleEl || !textEl || !iconsEl) return;
-
-    if(filterKey === 'all' || !styleData[filterKey]) {
-      desc.classList.add('hidden');
-      return;
-    }
-    const d = styleData[filterKey];
-    titleEl.textContent = d.title;
-    textEl.textContent = d.text;
-    iconsEl.innerHTML = d.icons.map(ic => `<span class="mx-2">${ic}</span>`).join('');
-    desc.classList.remove('hidden');
-  }
-
-  // ----- filter posts -----
-  function filterPosts(filter) {
-    const posts = document.querySelectorAll('.blog-post');
-    posts.forEach(p => {
-      const tag = p.getAttribute('data-tag');
-      if(filter === 'all' || tag === filter) {
-        p.style.display = ''; // let CSS handle layout (flex/block depending on template)
-      } else {
-        p.style.display = 'none';
-      }
-    });
-  }
-
-  // ----- attach events -----
-  function attachEvents() {
-    // filter buttons
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        const f = this.getAttribute('data-filter') || 'all';
-        // active style switch
-        filterButtons.forEach(x => x.classList.remove('ring-4','ring-yellow-300','opacity-90'));
-        this.classList.add('ring-4','ring-yellow-300','opacity-90');
-        filterPosts(f);
-        updateStyleDescription(f);
-        // scroll to posts section
-        const blogSection = document.getElementById('blog');
-        if(blogSection) blogSection.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // style icons
-    const styleIcons = document.querySelectorAll('.style-icon');
-    styleIcons.forEach(ic => {
-      ic.addEventListener('click', function(e){
-        e.preventDefault();
-        const style = this.getAttribute('data-style');
-        updateStyleDescription(style);
-        const desc = document.getElementById('styleDescription');
-        if(desc) desc.scrollIntoView({behavior:'smooth'});
-      });
-    });
-
-    // opinion submit
-    const opinionBtn = document.getElementById('opinionSubmit');
-    if(opinionBtn) opinionBtn.addEventListener('click', function(e){
-      e.preventDefault();
-      addOpinionFromForm();
-    });
-
-    // allow ctrl/cmd+enter to submit from textarea
-    const textArea = document.getElementById('opinionText');
-    if(textArea) {
-      textArea.addEventListener('keydown', function(ev){
-        if(ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) {
-          ev.preventDefault();
-          addOpinionFromForm();
-        }
-      });
-    }
-  }
-
-  // ----- init -----
-  document.addEventListener('DOMContentLoaded', function(){
-    loadOpinions();
-    attachEvents();
-    // initial: show all
-    filterPosts('all');
+  showRegulamin.addEventListener("click", () => {
+    regulaminModal.style.display = "flex";
   });
 
-})(); // EOF IIFE
+  closeRegulamin.addEventListener("click", () => {
+    regulaminModal.style.display = "none";
+  });
+
+  regulaminModal.addEventListener("click", (e) => {
+    if (e.target === regulaminModal) {
+      regulaminModal.style.display = "none";
+    }
+  });
 </script>     
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
