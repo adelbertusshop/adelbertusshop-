@@ -3400,155 +3400,93 @@ function typeLetter() {
 typeLetter();
 setInterval(typeLetter, 15000); // co 15s nowy list
 </script>
-<!-- 🔥 BLOG + PANEL DODAWANIA WPISÓW I OPINII (pełny, działający) -->
-<section id="blog" class="py-16 bg-gray-100 text-gray-900">
-  <div class="container mx-auto px-4">
-    <h2 class="text-44 font-bold text-center mb-10">Blog Adelbertus</h2>
+<!-- SEKCA BLOGA Z OPINIAMI KLIENTÓW I REGULAMINEM -->
+<section id="blog" class="blog-section" style="padding: 50px; background-color: #f9f9f9;">
+  <h2 style="text-align: center; margin-bottom: 30px;">Blog i Opinie Klientów</h2>
 
-    <!-- 🧠 Panel dodawania artykułów -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-      <h3 class="text-2xl font-semibold mb-4">✍️ Dodaj nowy artykuł</h3>
-      <input id="articleTitle" type="text" placeholder="Tytuł artykułu" class="w-full border p-2 rounded mb-3">
-      <textarea id="articleText" rows="4" placeholder="Treść artykułu..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addArticleBtn" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Dodaj artykuł</button>
+  <!-- Twoje wpisy blogowe z grafikami -->
+  <div class="blog-posts" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <article style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <img src="img/jesienna_kolekcja.jpg" alt="Nowa kolekcja jesienna" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+      <h3>Nowa kolekcja jesienna</h3>
+      <p>Nasze bluzy i koszulki z nowej serii zdobywają serca klientów! Sprawdź, co nowego przygotowaliśmy.</p>
+      <small>Data: 10.10.2025</small>
+    </article>
+
+    <article style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <img src="img/pasja.jpg" alt="Dlaczego warto kupować u nas" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+      <h3>Dlaczego warto kupować u nas?</h3>
+      <p>Wszystkie produkty są projektowane z pasją i dbałością o szczegóły – bez masówki, bez pośpiechu.</p>
+      <small>Data: 05.10.2025</small>
+    </article>
+
+    <article style="background: white; padding: 20px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <img src="img/projektowanie.jpg" alt="Zaprojektuj własny styl" style="width: 100%; border-radius: 10px; margin-bottom: 10px;">
+      <h3>Zaprojektuj własny styl</h3>
+      <p>Stwórz unikalny projekt bluzy lub koszulki – my zajmiemy się resztą. Twoja wizja, nasza realizacja.</p>
+      <small>Data: 01.10.2025</small>
+    </article>
+  </div>
+
+  <!-- Opinie klientów -->
+  <h3 style="text-align: center; margin-top: 50px;">Opinie Klientów</h3>
+  <div class="opinie" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 20px;">
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <p>"Świetna jakość i szybka wysyłka! Bluza wygląda jeszcze lepiej na żywo."</p>
+      <strong>- Kasia, Poznań</strong>
     </div>
-
-    <!-- 📚 Lista artykułów -->
-    <div id="articlesList" class="space-y-8"></div>
-
-    <!-- 💬 Panel dodawania opinii -->
-    <div class="bg-white p-6 rounded-2xl shadow-md mt-12">
-      <h3 class="text-2xl font-semibold mb-4">💭 Dodaj opinię</h3>
-      <input id="opinionAuthor" type="text" placeholder="Twoje imię" class="w-full border p-2 rounded mb-3">
-      <textarea id="opinionText" rows="3" placeholder="Twoja opinia..." class="w-full border p-2 rounded mb-3"></textarea>
-      <button id="addOpinionBtn" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Dodaj opinię</button>
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <p>"Uwielbiam ten sklep! Czuć, że robią to z sercem."</p>
+      <strong>- Tomek, Kraków</strong>
     </div>
-
-    <!-- 🧾 Opinie klientów -->
-    <div id="opinionsList" class="mt-8 bg-white p-6 rounded-2xl shadow-md space-y-2"></div>
-
-    <!-- 🔹 Sekcja Regulamin -->
-    <div id="regulamin" class="mt-16 bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
-      <h3 class="text-3xl font-semibold mb-3">Regulamin sklepu AdelbertusShop</h3>
-      <p class="text-gray-700">
-        Ten regulamin określa zasady korzystania ze sklepu internetowego AdelbertusShop, 
-        prowadzonego w ramach działalności nierejestrowanej.
-      </p>
-      <div class="collapsible mt-3 text-gray-600 article-content">
-        <ol class="list-decimal list-inside space-y-2">
-          <li>Sklep działa w oparciu o zasady działalności nierejestrowanej – zgodnie z przepisami prawa polskiego.</li>
-          <li>Zakup w sklepie oznacza akceptację niniejszego regulaminu.</li>
-          <li>Wszelkie pytania i reklamacje prosimy kierować na adres: 
-            <b>mielniczukgrzegosz74@gmail.com</b>.
-          </li>
-          <li>Produkty mają charakter artystyczny i są wykonywane na indywidualne zamówienie.</li>
-          <li>Zwroty i wymiany możliwe są w wyjątkowych sytuacjach po ustaleniu mailowym.</li>
-          <li>Dane klientów używane są wyłącznie do realizacji zamówień (zgodnie z RODO).</li>
-          <li>Sklep zastrzega sobie prawo do zmian oferty i cen.</li>
-          <li>Obowiązuje zasada zdrowego rozsądku i wzajemnego szacunku.</li>
-        </ol>
-      </div>
-      <button class="mt-3 text-blue-600 font-semibold hover:underline read-more">Zobacz pełny regulamin</button>
+    <div style="background: white; padding: 20px; border-radius: 10px; width: 250px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+      <p>"Wszystko przebiegło sprawnie, produkt zgodny z opisem. Polecam!"</p>
+      <strong>- Marta, Gdańsk</strong>
     </div>
+  </div>
+
+  <!-- Przycisk do regulaminu -->
+  <div style="text-align: center; margin-top: 40px;">
+    <button id="showRegulamin" style="background-color: #333; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+      Zobacz Regulamin Sklepu
+    </button>
   </div>
 </section>
 
-<!-- 🔧 Skrypt -->
+<!-- Modal z regulaminem -->
+<div id="regulaminModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center;">
+  <div style="background: white; padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; text-align: left; position: relative;">
+    <h2>Regulamin Sklepu</h2>
+    <p>
+      1. Sklep działa w ramach działalności nierejestrowanej zgodnie z przepisami prawa polskiego.<br>
+      2. Wszystkie ceny są cenami brutto (zawierają podatek VAT, jeśli dotyczy).<br>
+      3. Klient składając zamówienie, akceptuje niniejszy regulamin.<br>
+      4. Czas realizacji zamówienia wynosi od 1 do 7 dni roboczych.<br>
+      5. Zwroty i reklamacje są rozpatrywane indywidualnie – napisz na kontakt@adelbertusshop.com<br>
+      6. Dane klientów są przetwarzane wyłącznie w celu realizacji zamówień.
+    </p>
+    <button id="closeRegulamin" style="background-color: #333; color: white; padding: 8px 15px; border: none; border-radius: 5px; margin-top: 20px; cursor: pointer;">Zamknij</button>
+  </div>
+</div>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const articlesList = document.getElementById("articlesList");
-  const opinionsList = document.getElementById("opinionsList");
+  const showRegulamin = document.getElementById("showRegulamin");
+  const closeRegulamin = document.getElementById("closeRegulamin");
+  const regulaminModal = document.getElementById("regulaminModal");
 
-  // --- Pobierz z localStorage ---
-  const savedArticles = JSON.parse(localStorage.getItem("articles")) || [];
-  const savedOpinions = JSON.parse(localStorage.getItem("opinions")) || [];
-
-  // --- Render artykułów ---
-  function renderArticles() {
-    articlesList.innerHTML = "";
-    savedArticles.forEach((a, i) => {
-      const article = document.createElement("article");
-      article.className = "bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition duration-300";
-      article.innerHTML = `
-        <h3 class="text-2xl font-semibold mb-3">${a.title}</h3>
-        <p class="text-gray-700">${a.text}</p>
-        <button class="mt-3 text-red-600 font-semibold hover:underline" onclick="deleteArticle(${i})">Usuń</button>
-      `;
-      articlesList.appendChild(article);
-    });
-  }
-
-  // --- Render opinii ---
-  function renderOpinions() {
-    opinionsList.innerHTML = "<h3 class='text-2xl font-semibold mb-3'>Opinie klientów</h3>";
-    savedOpinions.forEach((o, i) => {
-      const p = document.createElement("p");
-      p.className = "italic text-gray-700";
-      p.innerHTML = `"${o.text}" – <b>${o.author}</b> <button class='text-red-600 hover:underline ml-2' onclick='deleteOpinion(${i})'>Usuń</button>`;
-      opinionsList.appendChild(p);
-    });
-  }
-
-  // --- Dodaj artykuł ---
-  document.getElementById("addArticleBtn").addEventListener("click", () => {
-    const title = document.getElementById("articleTitle").value.trim();
-    const text = document.getElementById("articleText").value.trim();
-    if (!title || !text) return alert("Uzupełnij tytuł i treść artykułu!");
-    savedArticles.push({ title, text });
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    document.getElementById("articleTitle").value = "";
-    document.getElementById("articleText").value = "";
-    renderArticles();
+  showRegulamin.addEventListener("click", () => {
+    regulaminModal.style.display = "flex";
   });
 
-  // --- Dodaj opinię ---
-  document.getElementById("addOpinionBtn").addEventListener("click", () => {
-    const author = document.getElementById("opinionAuthor").value.trim();
-    const text = document.getElementById("opinionText").value.trim();
-    if (!author || !text) return alert("Wpisz imię i treść opinii!");
-    savedOpinions.push({ author, text });
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    document.getElementById("opinionAuthor").value = "";
-    document.getElementById("opinionText").value = "";
-    renderOpinions();
+  closeRegulamin.addEventListener("click", () => {
+    regulaminModal.style.display = "none";
   });
 
-  // --- Usuń wpisy (globalne funkcje) ---
-  window.deleteArticle = (i) => {
-    savedArticles.splice(i, 1);
-    localStorage.setItem("articles", JSON.stringify(savedArticles));
-    renderArticles();
-  };
-  window.deleteOpinion = (i) => {
-    savedOpinions.splice(i, 1);
-    localStorage.setItem("opinions", JSON.stringify(savedOpinions));
-    renderOpinions();
-  };
-
-  // --- Płynne rozwijanie regulaminu ---
-  document.querySelectorAll(".collapsible").forEach(el => {
-    el.style.maxHeight = "0px";
-    el.style.overflow = "hidden";
-    el.style.transition = "max-height 0.5s ease";
+  regulaminModal.addEventListener("click", (e) => {
+    if (e.target === regulaminModal) {
+      regulaminModal.style.display = "none";
+    }
   });
-  document.querySelectorAll(".read-more").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const content = btn.parentElement.querySelector(".collapsible");
-      if (!content) return;
-      if (content.style.maxHeight === "0px" || content.style.maxHeight === "") {
-        content.style.maxHeight = content.scrollHeight + "px";
-        btn.textContent = "Zwiń";
-      } else {
-        content.style.maxHeight = "0px";
-        btn.textContent = "Zobacz pełny regulamin";
-      }
-    });
-  });
-
-  // --- Start ---
-  renderArticles();
-  renderOpinions();
-});
 </script>        
         <!-- Kontakt - FINALNA WERSJA -->
 <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
@@ -3725,7 +3663,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
     <script>
-     // ===== SYSTEM FILTROWANIA KATEGORII =====
+// ===== SYSTEM FILTROWANIA KATEGORII =====
 document.addEventListener('DOMContentLoaded', function() {
     initCategoryFilters();
     initNavigation();
@@ -3768,288 +3706,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     // ===== KONIEC WKLEJONEGO KODU =====
-});
-
-// ===== SYSTEM DYNAMICZNYCH OPISÓW STYLÓW =====
-const styleData = {
-    disco: {
-        title: "REWOLUCJA DISCO 80s: Blask Parkietu",
-        text: "Era jaskrawych kolorów, cekinów, szerokich ramion i błyszczących dresów. To muzyka funk, new wave i szaleństwo w Studio 54. Kluczowe elementy to: metaliczne tkaniny, bluzy oversize i sneakersy.",
-        icons: ["🕺", "💿", "🎤"] 
-    },
-    hiphop: {
-        title: "ZŁOTA ERA HIP HOPU 90s: Kultura Ulicy",
-        text: "Baggy jeansy, koszulki flanelowe, czapki z daszkiem noszone tyłem, złote łańcuchy i legendarne sneakersy. Styl zrodzony na ulicach Nowego Jorku, który podbił świat i definiuje streetwear.",
-        icons: ["👟", "👖", "🎤"] 
-    },
-    streetwear: {
-        title: "STREETWEAR: Od Ulicy do Wybiegu",
-        text: "Połączenie wygody, sportowego stylu i luksusu. Ewolucja z hip hopu i kultury deskorolki. To bluzy z kapturem, T-shirty z grafikami, limitowane edycje butów i oryginalne kurtki.",
-        icons: ["👖", "👟", "🕺"] 
-    }
-};
-
-function updateStyleDescription(filterKey) {
-    const descriptionSection = document.getElementById('styleDescription');
-    const titleElement = document.getElementById('descriptionTitle');
-    const textElement = document.getElementById('descriptionText');
-    const iconsElement = document.getElementById('relatedIcons');
-    
-    if (filterKey === 'all' || !styleData[filterKey]) {
-        descriptionSection.classList.add('hidden');
-        return;
-    }
-
-    const data = styleData[filterKey];
-
-    titleElement.textContent = data.title;
-    textElement.textContent = data.text;
-    
-    iconsElement.innerHTML = data.icons.map(icon => 
-        `<span class="hover:scale-125 transition duration-300 cursor-pointer" data-style-icon="${filterKey}">${icon}</span>`
-    ).join('');
-    
-    descriptionSection.classList.remove('hidden');
-}
-
-// Rozszerzenie istniejącej funkcji addBlogOpinion
-function addBlogOpinion() {
-    const authorInput = document.getElementById('opinionAuthor');
-    const textInput = document.getElementById('opinionText');
-    const opinionsList = document.getElementById('opinionsList');
-    const noOpinions = document.getElementById('noOpinions');
-
-    const author = authorInput.value.trim();
-    const text = textInput.value.trim();
-
-    if (!author || !text) {
-        alert("Hej! Wpisz swoją ksywę i wspomnienie zanim zostawisz shoutout 🎤");
-        return;
-    }
-
-    if (noOpinions) noOpinions.remove();
-
-    const opinion = document.createElement('div');
-    opinion.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
-    opinion.innerHTML = `
-        <p class="text-green-400 font-bold mb-2">👤 ${author}</p>
-        <p class="text-gray-300">${text}</p>
-    `;
-
-    opinionsList.prepend(opinion);
-
-    authorInput.value = '';
-    textInput.value = '';
-}
-
-// Rozszerzenie event listenera o dynamiczne opisy
-document.addEventListener('DOMContentLoaded', () => {
-    const styleIcons = document.querySelectorAll('.style-icon');
-    styleIcons.forEach(icon => {
-        icon.addEventListener('click', function(e) {
-            e.preventDefault();
-            const style = this.getAttribute('data-style');
-            updateStyleDescription(style);
-            document.getElementById('styleDescription').scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-
-    // Rozszerzenie filtrowania o aktualizację opisów
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            const filter = this.getAttribute('data-filter');
-            updateStyleDescription(filter);
-        });
-    });
-});
-
-// ===== SYSTEM FABRIC.JS DO PROJEKTOWANIA =====
-document.addEventListener('DOMContentLoaded', function() {
-    // 1. Inicjalizacja Canvasa
-    const canvas = new fabric.Canvas('designCanvas', {
-        backgroundColor: 'transparent',
-        selection: true,
-        preserveObjectStacking: true // Ważne dla warstw
-    });
-
-    const productImg = document.getElementById('currentProductImg');
-    const productTypeSelect = document.getElementById('productType');
-    const productColorInput = document.getElementById('productColor');
-    const addTextBtn = document.getElementById('addTextBtn');
-
-    // Domyślne URL-e dla produktów (Muszą być to statyczne tła, bez nadruku)
-    const productImages = {
-        'tshirt': 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
-        'hoodie': 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
-        'cap': 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
-    };
-
-    // 2. FUNKCJE ZARZĄDZANIA PRODUKTEM
-    
-    function updateProductDisplay() {
-        const type = productTypeSelect.value;
-        const color = productColorInput.value;
-        const price = productTypeSelect.options[productTypeSelect.selectedIndex].dataset.price;
-
-        productImg.src = productImages[type];
-        productImg.style.backgroundColor = color; // Zmiana koloru tła produktu
-        document.getElementById('currentPrice').textContent = `${price} zł`;
-        
-        // Zmiana rozmiaru canvasa w zależności od produktu (dla czapki mniejszy obszar roboczy)
-        const displayContainer = document.getElementById('productBaseDisplay');
-        if (type === 'cap') {
-            displayContainer.style.width = '400px';
-            displayContainer.style.height = '300px';
-            canvas.setWidth(300);
-            canvas.setHeight(150);
-        } else {
-            displayContainer.style.width = '500px';
-            displayContainer.style.height = '500px';
-            canvas.setWidth(400);
-            canvas.setHeight(400);
-        }
-        canvas.renderAll();
-    }
-    
-    // 3. FUNKCJE ZARZĄDZANIA TEKSTEM I GRAFIKĄ
-
-    // Dodawanie tekstu do Canvasa
-    addTextBtn.addEventListener('click', function() {
-        const textInput = document.getElementById('designText');
-        const text = textInput.value;
-        const font = document.getElementById('fontFamily').value;
-        const size = parseInt(document.getElementById('fontSize').value);
-        const color = document.getElementById('textColor').value;
-
-        if (text) {
-            const fabricText = new fabric.IText(text, {
-                left: canvas.getWidth() / 2,
-                top: canvas.getHeight() / 2,
-                fill: color,
-                fontFamily: font,
-                fontSize: size,
-                originX: 'center',
-                originY: 'center',
-                shadow: 'rgba(0,0,0,0.5) 5px 5px 5px'
-            });
-            canvas.add(fabricText);
-            canvas.setActiveObject(fabricText);
-            textInput.value = ''; // Wyczyść pole po dodaniu
-            canvas.renderAll();
-        }
-    });
-
-    // Wgranie obrazu
-    window.handleImageUpload = function(e) {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(f) {
-            const data = f.target.result;
-            fabric.Image.fromURL(data, function(img) {
-                // Skalowanie obrazu, aby zmieścił się na canvasie
-                img.scaleToWidth(canvas.getWidth() / 2);
-                img.set({
-                    left: canvas.getWidth() / 2,
-                    top: canvas.getHeight() / 2,
-                    originX: 'center',
-                    originY: 'center'
-                });
-                canvas.add(img);
-                canvas.setActiveObject(img);
-                canvas.renderAll();
-            });
-        };
-        reader.readAsDataURL(file);
-    };
-
-    // 4. FUNKCJE ZARZĄDZANIA OBIEKTAMI (KONTROLKI NA DOLE)
-    
-    // Usuń zaznaczony obiekt
-    window.deleteSelectedObject = function() {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject) {
-            canvas.remove(activeObject);
-            canvas.renderAll();
-        }
-    };
-
-    // Wyczyść cały canvas
-    window.clearCanvas = function() {
-        if (confirm("Czy na pewno chcesz usunąć wszystkie elementy projektu?")) {
-            canvas.clear();
-            canvas.renderAll();
-        }
-    };
-    
-    // Przenieś zaznaczony obiekt na wierzch
-    window.bringToFront = function() {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject) {
-            canvas.bringToFront(activeObject);
-            canvas.renderAll();
-        }
-    };
-
-    // 5. FUNKCJE ZARZĄDZANIA ZAPISYWANIEM I WYSYŁKĄ
-
-    // Pobieranie projektu jako PNG
-    window.exportDesign = function() {
-        canvas.discardActiveObject().renderAll(); // Usuń ramki zaznaczenia
-
-        const dataURL = canvas.toDataURL({
-            format: 'png',
-            quality: 1
-        });
-
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = `projekt_adelbertus_${productTypeSelect.value}.png`;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        alert("Projekt został pobrany jako obraz PNG!");
-    };
-
-    // Dodawanie projektu do "Koszyka" (tylko symulacja)
-    window.addToCartFromDesign = function() {
-        // Zapisanie danych do przekazania do koszyka (lub do serwera)
-        const designData = canvas.toDataURL({ format: 'png', quality: 0.8 });
-        
-        const productName = productTypeSelect.options[productTypeSelect.selectedIndex].text;
-        const productSize = document.getElementById('productSize').value;
-        const finalPrice = document.getElementById('currentPrice').textContent;
-
-        alert(`Dodano do Koszyka (Symulacja): \n\nProdukt: ${productName} \nRozmiar: ${productSize} \nCena: ${finalPrice} \n\nProjekt jest gotowy do druku!`);
-    };
-
-    // 6. OBSŁUGA ZDARZEŃ ZMIENIAJĄCYCH WŁAŚCIWOŚCI
-    
-    productTypeSelect.addEventListener('change', updateProductDisplay);
-    productColorInput.addEventListener('input', updateProductDisplay);
-    
-    // Ustawienia początkowe
-    updateProductDisplay();
-    
-    // Zmiana właściwości aktywnego tekstu/elementu
-    function updateActiveObjectProps() {
-        const activeObject = canvas.getActiveObject();
-        if (activeObject && activeObject.type === 'i-text') {
-            activeObject.set({
-                fontFamily: document.getElementById('fontFamily').value,
-                fontSize: parseInt(document.getElementById('fontSize').value),
-                fill: document.getElementById('textColor').value
-            });
-            canvas.renderAll();
-        }
-    }
-
-    document.getElementById('fontFamily').addEventListener('change', updateActiveObjectProps);
-    document.getElementById('fontSize').addEventListener('input', updateActiveObjectProps);
-    document.getElementById('textColor').addEventListener('input', updateActiveObjectProps);
 });
 
 function initCategoryFilters() {
@@ -4188,9 +3844,12 @@ function updateCart() {
         });
         
         cartTotal.textContent = `${total.toFixed(2)} zł`;
+        
+        // Renderuj przycisk PayPal
         renderPayPalButton();
     }
     
+    // Zapisz do localStorage
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
@@ -4209,6 +3868,7 @@ function renderPayPalButton() {
     
     if (cart.length === 0) return;
     
+    // PayPal button implementation
     paypal.HostedButtons({
         hostedButtonId: "L4639S4363CZE",
     }).render("#paypal-container");
@@ -4296,9 +3956,11 @@ function initDesignStudio() {
     const canvas = document.getElementById('designCanvas');
     const ctx = canvas.getContext('2d');
     
+    // Ustawienia canvas
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
+    // Inicjalny render
     updateDesign();
 }
 
@@ -4330,16 +3992,20 @@ function updateDesign() {
     const canvas = document.getElementById('designCanvas');
     const ctx = canvas.getContext('2d');
     
+    // Aktualizuj stan projektu
     currentDesign.text = document.getElementById('designText').value;
     currentDesign.fontFamily = document.getElementById('fontFamily').value;
     currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
     currentDesign.color = document.getElementById('textColor').value;
     
+    // Wyczyść canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
+    // Narysuj tło - wirtualny produkt
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
+    // Narysuj obrazek jeśli istnieje
     if (currentDesign.image) {
         ctx.save();
         ctx.translate(currentDesign.imageX, currentDesign.imageY);
@@ -4349,6 +4015,7 @@ function updateDesign() {
         ctx.restore();
     }
     
+    // Narysuj tekst
     if (currentDesign.text) {
         ctx.save();
         ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
@@ -4362,6 +4029,7 @@ function updateDesign() {
         ctx.restore();
     }
     
+    // Aktualizuj podgląd
     const preview = document.querySelector('.design-preview');
     if (currentDesign.text || currentDesign.image) {
         preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
@@ -4507,7 +4175,7 @@ function addBlogOpinion() {
 }
 </script>
 
-<!-- RESZTA KODU HTML I SKRYPTÓW -->
+<!-- RESZTA KODU -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const authorInput = document.getElementById('opinionAuthor');
@@ -4583,7 +4251,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadFromStorage();
 });
 </script>
-
+<!-- DALSZE SKRYPTY I HTML -->
 <script>
   fetch("post.json")
     .then(response => response.json())
