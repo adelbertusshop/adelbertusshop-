@@ -3848,7 +3848,10 @@ function initNavigation() {
         });
     });
     
-    document.getElementById('cartIcon').addEventListener('click', toggleCart);
+    const cartIcon = document.getElementById('cartIcon');
+    if (cartIcon) {
+        cartIcon.addEventListener('click', toggleCart);
+    }
 }
 
 function showSection(sectionId) {
@@ -3856,15 +3859,24 @@ function showSection(sectionId) {
         section.classList.remove('active');
     });
     
-    document.getElementById(sectionId).classList.add('active');
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.add('active');
+    }
     
     if (window.innerWidth <= 768) {
-        document.getElementById('navContainer').classList.remove('show');
+        const navContainer = document.getElementById('navContainer');
+        if (navContainer) {
+            navContainer.classList.remove('show');
+        }
     }
 }
 
 function toggleMobileMenu() {
-    document.getElementById('navContainer').classList.toggle('show');
+    const navContainer = document.getElementById('navContainer');
+    if (navContainer) {
+        navContainer.classList.toggle('show');
+    }
 }
 
 function addToCart(name, price, image = null, size = null, color = null) {
@@ -3897,40 +3909,45 @@ function updateCart() {
     const cartItems = document.getElementById('cartItems');
     const cartTotal = document.getElementById('cartTotal');
     
-    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    if (cartCount) {
+        cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    }
     
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-        cartTotal.textContent = '0 zł';
-        document.getElementById('paypal-container').innerHTML = '';
-    } else {
-        let total = 0;
+    if (cartItems) {
+        cartItems.innerHTML = '';
         
-        cart.forEach((item, index) => {
-            total += item.price * item.quantity;
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+            if (cartTotal) cartTotal.textContent = '0 zł';
+            const paypalContainer = document.getElementById('paypal-container');
+            if (paypalContainer) paypalContainer.innerHTML = '';
+        } else {
+            let total = 0;
             
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                <div class="flex-1">
-                    <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × ${item.quantity}</div>
-                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
-                </div>
-                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-            `;
+            cart.forEach((item, index) => {
+                total += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                    <div class="flex-1">
+                        <div class="font-bold">${item.name}</div>
+                        <div>${item.price} zł × ${item.quantity}</div>
+                        ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                        ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
             
-            cartItems.appendChild(cartItem);
-        });
-        
-        cartTotal.textContent = `${total.toFixed(2)} zł`;
-        
-        // Renderuj przycisk PayPal
-        renderPayPalButton();
+            if (cartTotal) cartTotal.textContent = `${total.toFixed(2)} zł`;
+            
+            // Renderuj przycisk PayPal
+            renderPayPalButton();
+        }
     }
     
     // Zapisz do localStorage
@@ -3943,19 +3960,26 @@ function removeFromCart(index) {
 }
 
 function toggleCart() {
-    document.getElementById('cartPanel').classList.toggle('open');
+    const cartPanel = document.getElementById('cartPanel');
+    if (cartPanel) {
+        cartPanel.classList.toggle('open');
+    }
 }
 
 function renderPayPalButton() {
     const container = document.getElementById('paypal-container');
+    if (!container) return;
+    
     container.innerHTML = '';
     
     if (cart.length === 0) return;
     
     // PayPal button implementation
-    paypal.HostedButtons({
-        hostedButtonId: "L4639S4363CZE",
-    }).render("#paypal-container");
+    if (typeof paypal !== 'undefined') {
+        paypal.HostedButtons({
+            hostedButtonId: "L4639S4363CZE",
+        }).render("#paypal-container");
+    }
 }
 
 function sendOrderEmail() {
@@ -4014,7 +4038,7 @@ function showNotification(message) {
     }, 3000);
 }
 
-// ===== STUDIO PROJEKTOWE =====
+// ===== STUDIO PROJEKTOWE - POPRAWIONE =====
 let currentDesign = {
     text: '',
     fontSize: 36,
@@ -4038,14 +4062,60 @@ let currentDesign = {
 
 function initDesignStudio() {
     const canvas = document.getElementById('designCanvas');
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     
     // Ustawienia canvas
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
+    // Inicjalizacja przycisku dodawania tekstu
+    const addTextBtn = document.getElementById('addTextBtn');
+    if (addTextBtn) {
+        addTextBtn.addEventListener('click', function() {
+            const textInput = document.getElementById('designText');
+            if (textInput && textInput.value.trim()) {
+                currentDesign.text = textInput.value.trim();
+                updateDesign();
+                textInput.value = '';
+            }
+        });
+    }
+    
+    // Inicjalizacja uploadu obrazu
+    const imageUpload = document.getElementById('imageUpload');
+    if (imageUpload) {
+        imageUpload.addEventListener('change', function(e) {
+            handleImageUpload(e);
+        });
+    }
+    
     // Inicjalny render
     updateDesign();
+}
+
+function handleImageUpload(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    // Sprawdź czy to obraz
+    if (!file.type.match('image.*')) {
+        showNotification('❌ Proszę wybrać plik obrazu');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const img = new Image();
+        img.onload = function() {
+            currentDesign.image = img;
+            updateDesign();
+            showNotification('✅ Grafika dodana pomyślnie');
+        };
+        img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
 }
 
 function initProductBase() {
@@ -4074,13 +4144,20 @@ function initDesignOptions() {
 
 function updateDesign() {
     const canvas = document.getElementById('designCanvas');
+    if (!canvas) return;
+    
     const ctx = canvas.getContext('2d');
     
-    // Aktualizuj stan projektu
-    currentDesign.text = document.getElementById('designText').value;
-    currentDesign.fontFamily = document.getElementById('fontFamily').value;
-    currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
-    currentDesign.color = document.getElementById('textColor').value;
+    // Aktualizuj stan projektu z formularza
+    const designText = document.getElementById('designText');
+    const fontFamily = document.getElementById('fontFamily');
+    const fontSize = document.getElementById('fontSize');
+    const textColor = document.getElementById('textColor');
+    
+    if (designText) currentDesign.text = designText.value;
+    if (fontFamily) currentDesign.fontFamily = fontFamily.value;
+    if (fontSize) currentDesign.fontSize = parseInt(fontSize.value) || 36;
+    if (textColor) currentDesign.color = textColor.value;
     
     // Wyczyść canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -4095,7 +4172,12 @@ function updateDesign() {
         ctx.translate(currentDesign.imageX, currentDesign.imageY);
         ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
         ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
-        ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
+        
+        // Oblicz pozycję dla centrowania obrazu
+        const x = -currentDesign.image.width / 2;
+        const y = -currentDesign.image.height / 2;
+        
+        ctx.drawImage(currentDesign.image, x, y);
         ctx.restore();
     }
     
@@ -4114,7 +4196,15 @@ function updateDesign() {
     }
     
     // Aktualizuj podgląd
+    updateDesignPreview();
+}
+
+function updateDesignPreview() {
     const preview = document.querySelector('.design-preview');
+    const canvas = document.getElementById('designCanvas');
+    
+    if (!preview || !canvas) return;
+    
     if (currentDesign.text || currentDesign.image) {
         preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
         const img = document.createElement('img');
@@ -4123,28 +4213,41 @@ function updateDesign() {
         img.style.marginTop = '1rem';
         img.style.border = '1px solid #ddd';
         preview.appendChild(img);
+    } else {
+        preview.innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian</p>';
     }
 }
 
 function clearCanvas() {
     const canvas = document.getElementById('designCanvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
     
     currentDesign.text = '';
     currentDesign.image = null;
-    document.getElementById('designText').value = '';
     
-    document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
+    const designText = document.getElementById('designText');
+    if (designText) designText.value = '';
     
+    const imageUpload = document.getElementById('imageUpload');
+    if (imageUpload) imageUpload.value = '';
+    
+    updateDesignPreview();
     showNotification('Canvas wyczyszczony');
 }
 
 function addToCartFromDesign() {
     const productType = document.getElementById('productType');
     const productSize = document.getElementById('productSize');
+    
+    if (!productType || !productSize) {
+        showNotification('❌ Wybierz produkt i rozmiar');
+        return;
+    }
     
     const prices = {
         'tshirt': 120,
@@ -4155,6 +4258,11 @@ function addToCartFromDesign() {
     const price = prices[productType.value] || 120;
     const canvas = document.getElementById('designCanvas');
     
+    if (!canvas) {
+        showNotification('❌ Błąd ładowania projektu');
+        return;
+    }
+    
     addToCart(
         `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
         price,
@@ -4163,33 +4271,47 @@ function addToCartFromDesign() {
     );
 }
 
-// ===== INICJALIZACJA OPCJI PRODUKTÓW =====
+// ===== INICJALIZACJA OPCJI PRODUKTÓW - POPRAWIONE =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
+        // Obsługa opcji kolorów
         if (e.target.classList.contains('color-option')) {
             const options = e.target.closest('.color-options');
-            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
+            if (options) {
+                options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                e.target.classList.add('selected');
+            }
         }
         
+        // Obsługa opcji rozmiarów
         if (e.target.classList.contains('size-option')) {
             const options = e.target.closest('.size-options');
-            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
+            if (options) {
+                options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                e.target.classList.add('selected');
+            }
         }
         
+        // Obsługa przycisku dodania do koszyka
         if (e.target.classList.contains('add-to-cart-btn')) {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
+            if (!productCard) return;
+            
             const name = e.target.getAttribute('data-name');
             const price = parseFloat(e.target.getAttribute('data-price'));
             const image = e.target.getAttribute('data-image');
             
+            if (!name || isNaN(price)) {
+                showNotification('❌ Błąd danych produktu');
+                return;
+            }
+            
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
             const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
             
-            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Standardowy';
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'M';
             
             addToCart(name, price, image, size, color);
         }
@@ -4226,8 +4348,12 @@ function initCharityRotation() {
 
 function toggleReadMore(button) {
     const post = button.closest('.blog-post');
+    if (!post) return;
+    
     const excerpt = post.querySelector('.blog-excerpt');
     const full = post.querySelector('.blog-full');
+    
+    if (!excerpt || !full) return;
     
     if (full.style.display === 'block') {
         full.style.display = 'none';
@@ -4251,15 +4377,48 @@ window.toggleReadMore = toggleReadMore;
 window.toggleMobileMenu = toggleMobileMenu;
 window.sendOrderEmail = sendOrderEmail;
 window.sendOrderWhatsApp = sendOrderWhatsApp;
+window.handleImageUpload = handleImageUpload;
 
 // Funkcja addBlogOpinion dla wklejonego kodu
 function addBlogOpinion() {
-    // Tutaj logika dodawania opinii do bloga
-    console.log('Dodawanie opinii do bloga...');
+    const authorInput = document.getElementById('opinionAuthor');
+    const textInput = document.getElementById('opinionText');
+    const opinionsList = document.getElementById('opinionsList');
+    
+    if (!authorInput || !textInput || !opinionsList) {
+        alert('Błąd ładowania formularza opinii');
+        return;
+    }
+    
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+
+    if (!author || !text) {
+        alert("Wpisz swoją ksywę i treść opinii!");
+        return;
+    }
+
+    const noOpinions = document.getElementById('noOpinions');
+    if (noOpinions) noOpinions.remove();
+
+    const opinion = document.createElement('div');
+    opinion.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
+    opinion.innerHTML = `
+        <p class="text-green-400 font-bold mb-2">👤 ${author}</p>
+        <p class="text-gray-300">${text}</p>
+    `;
+
+    opinionsList.prepend(opinion);
+
+    authorInput.value = '';
+    textInput.value = '';
+    
+    showNotification('✅ Opinia dodana!');
 }
+// ... (tutaj jest cały poprzedni kod który już wysłałem) ...
+
 </script>
 
-<!-- RESZTA KODU -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const authorInput = document.getElementById('opinionAuthor');
@@ -4335,12 +4494,14 @@ document.addEventListener('DOMContentLoaded', () => {
   loadFromStorage();
 });
 </script>
-<!-- DALSZE SKRYPTY I HTML -->
+
 <script>
   fetch("post.json")
     .then(response => response.json())
     .then(posts => {
       const container = document.getElementById("blogContainer");
+      if (!container) return;
+      
       container.innerHTML = "";
       posts.forEach(post => {
         const card = document.createElement("div");
@@ -4357,26 +4518,205 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(err => console.error("Błąd wczytywania postów:", err));
 </script>
 
-<section id="blog" style="padding: 60px 20px; background: #fdfbf7;">
-  <h2 style="text-align:center; font-size: 2.2em; margin-bottom: 40px; font-weight:700;">
-    ✍️ Nasz Blog – Nowości i Inspiracje
-  </h2>
+<!-- SYSTEM FABRIC.JS DO PROJEKTOWANIA -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Sprawdź czy Fabric.js jest załadowany
+    if (typeof fabric === 'undefined') {
+        console.error('Fabric.js nie został załadowany');
+        return;
+    }
 
-  <div id="blogContainer" style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;">
-    <p style='grid-column: 1 / -1; text-align:center;'>Wczytywanie postów...</p>
-  </div>
-</section>
+    const canvasElement = document.getElementById('designCanvas');
+    if (!canvasElement) return;
 
+    // 1. Inicjalizacja Canvasa
+    const canvas = new fabric.Canvas('designCanvas', {
+        backgroundColor: 'transparent',
+        selection: true,
+        preserveObjectStacking: true
+    });
+
+    const productImg = document.getElementById('currentProductImg');
+    const productTypeSelect = document.getElementById('productType');
+    const productColorInput = document.getElementById('productColor');
+    const addTextBtn = document.getElementById('addTextBtn');
+
+    // Domyślne URL-e dla produktów
+    const productImages = {
+        'tshirt': 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+        'hoodie': 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+        'cap': 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
+    };
+
+    // 2. FUNKCJE ZARZĄDZANIA PRODUKTEM
+    
+    function updateProductDisplay() {
+        if (!productTypeSelect || !productImg) return;
+        
+        const type = productTypeSelect.value;
+        const color = productColorInput ? productColorInput.value : '#ffffff';
+        const price = productTypeSelect.options[productTypeSelect.selectedIndex].dataset.price;
+
+        productImg.src = productImages[type] || '';
+        productImg.style.backgroundColor = color;
+        
+        const currentPrice = document.getElementById('currentPrice');
+        if (currentPrice) {
+            currentPrice.textContent = `${price} zł`;
+        }
+        
+        // Zmiana rozmiaru canvasa w zależności od produktu
+        const displayContainer = document.getElementById('productBaseDisplay');
+        if (type === 'cap') {
+            if (displayContainer) {
+                displayContainer.style.width = '400px';
+                displayContainer.style.height = '300px';
+            }
+            canvas.setWidth(300);
+            canvas.setHeight(150);
+        } else {
+            if (displayContainer) {
+                displayContainer.style.width = '500px';
+                displayContainer.style.height = '500px';
+            }
+            canvas.setWidth(400);
+            canvas.setHeight(400);
+        }
+        canvas.renderAll();
+    }
+    
+    // 3. FUNKCJE ZARZĄDZANIA TEKSTEM I GRAFIKĄ
+
+    // Dodawanie tekstu do Canvasa
+    if (addTextBtn) {
+        addTextBtn.addEventListener('click', function() {
+            const textInput = document.getElementById('designText');
+            if (!textInput) return;
+            
+            const text = textInput.value;
+            const font = document.getElementById('fontFamily')?.value || 'Arial';
+            const size = parseInt(document.getElementById('fontSize')?.value) || 36;
+            const color = document.getElementById('textColor')?.value || '#000000';
+
+            if (text) {
+                const fabricText = new fabric.IText(text, {
+                    left: canvas.getWidth() / 2,
+                    top: canvas.getHeight() / 2,
+                    fill: color,
+                    fontFamily: font,
+                    fontSize: size,
+                    originX: 'center',
+                    originY: 'center',
+                    shadow: 'rgba(0,0,0,0.5) 5px 5px 5px'
+                });
+                canvas.add(fabricText);
+                canvas.setActiveObject(fabricText);
+                textInput.value = '';
+                canvas.renderAll();
+                showNotification('✅ Tekst dodany do projektu');
+            }
+        });
+    }
+
+    // Wgranie obrazu
+    window.handleImageUpload = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(f) {
+            const data = f.target.result;
+            fabric.Image.fromURL(data, function(img) {
+                img.scaleToWidth(canvas.getWidth() / 2);
+                img.set({
+                    left: canvas.getWidth() / 2,
+                    top: canvas.getHeight() / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                canvas.add(img);
+                canvas.setActiveObject(img);
+                canvas.renderAll();
+                showNotification('✅ Grafika dodana do projektu');
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 4. FUNKCJE ZARZĄDZANIA OBIEKTAMI
+    
+    // Usuń zaznaczony obiekt
+    window.deleteSelectedObject = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+            canvas.renderAll();
+            showNotification('🗑️ Obiekt usunięty');
+        }
+    };
+
+    // Wyczyść cały canvas
+    window.clearCanvas = function() {
+        if (confirm("Czy na pewno chcesz usunąć wszystkie elementy projektu?")) {
+            canvas.clear();
+            canvas.renderAll();
+            showNotification('🧹 Canvas wyczyszczony');
+        }
+    };
+    
+    // Przenieś zaznaczony obiekt na wierzch
+    window.bringToFront = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.bringToFront(activeObject);
+            canvas.renderAll();
+        }
+    };
+
+    // 5. FUNKCJE ZARZĄDZANIA ZAPISYWANIEM I WYSYŁKĄ
+
+    // Pobieranie projektu jako PNG
+    window.exportDesign = function() {
+        canvas.discardActiveObject().renderAll();
+
+        const dataURL = canvas.toDataURL({
+            format: 'png',
+            quality: 1
+        });
+
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = `projekt_adelbertus_${productTypeSelect?.value || 'custom'}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showNotification('💾 Projekt pobrany jako PNG');
+    };
+
+    // 6. OBSŁUGA ZDARZEŃ
+    
+    if (productTypeSelect) {
+        productTypeSelect.addEventListener('change', updateProductDisplay);
+    }
+    if (productColorInput) {
+        productColorInput.addEventListener('input', updateProductDisplay);
+    }
+    
+    // Ustawienia początkowe
+    updateProductDisplay();
+});
+</script>
+
+<!-- DODATKOWE SKRYPTY -->
 <script>
 fetch("post.json")
   .then(res => res.json())
   .then(posts => {
     const container = document.getElementById("blogContainer");
+    if (!container) return;
+    
     container.innerHTML = "";
     posts.forEach(post => {
       const card = document.createElement("article");
@@ -4408,10 +4748,14 @@ fetch("post.json")
   })
   .catch(err => {
     console.error("Błąd:", err);
-    document.getElementById("blogContainer").innerHTML =
-      "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
+    const blogContainer = document.getElementById("blogContainer");
+    if (blogContainer) {
+        blogContainer.innerHTML =
+          "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
+    }
   });
 </script>
+
 </body>
 </html>
      
