@@ -3725,502 +3725,941 @@ document.addEventListener("DOMContentLoaded", () => {
     </footer>
 
     <script>
-        // ===== SYSTEM FILTROWANIA KATEGORII =====
-        document.addEventListener('DOMContentLoaded', function() {
-            initCategoryFilters();
-            initNavigation();
-            initDesignStudio();
-            updateCart();
-            renderPayPalButton();
-            initContactForm();
-            initBlog();
-            initProductOptions();
-            initProductBase();
-            initDesignOptions();
-            initOrderForm();
-            initAdTimers();
-            initCharityRotation();
+     // ===== SYSTEM FILTROWANIA KATEGORII =====
+document.addEventListener('DOMContentLoaded', function() {
+    initCategoryFilters();
+    initNavigation();
+    initDesignStudio();
+    updateCart();
+    renderPayPalButton();
+    initContactForm();
+    initBlog();
+    initProductOptions();
+    initProductBase();
+    initDesignOptions();
+    initOrderForm();
+    initAdTimers();
+    initCharityRotation();
+    
+    // ===== WKLEJONY KOD - FILTROWANIE POSTÓW BLOGA =====
+    const submitButton = document.getElementById('opinionSubmit');
+    if (submitButton) {
+        submitButton.addEventListener('click', addBlogOpinion);
+    }
+
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const blogPosts = document.querySelectorAll('.blog-post');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const filter = this.getAttribute('data-filter');
+
+            blogPosts.forEach(post => {
+                const postTag = post.getAttribute('data-tag');
+
+                if (filter === 'all' || postTag === filter) {
+                    post.style.display = 'flex';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    });
+    // ===== KONIEC WKLEJONEGO KODU =====
+});
+
+// ===== SYSTEM DYNAMICZNYCH OPISÓW STYLÓW =====
+const styleData = {
+    disco: {
+        title: "REWOLUCJA DISCO 80s: Blask Parkietu",
+        text: "Era jaskrawych kolorów, cekinów, szerokich ramion i błyszczących dresów. To muzyka funk, new wave i szaleństwo w Studio 54. Kluczowe elementy to: metaliczne tkaniny, bluzy oversize i sneakersy.",
+        icons: ["🕺", "💿", "🎤"] 
+    },
+    hiphop: {
+        title: "ZŁOTA ERA HIP HOPU 90s: Kultura Ulicy",
+        text: "Baggy jeansy, koszulki flanelowe, czapki z daszkiem noszone tyłem, złote łańcuchy i legendarne sneakersy. Styl zrodzony na ulicach Nowego Jorku, który podbił świat i definiuje streetwear.",
+        icons: ["👟", "👖", "🎤"] 
+    },
+    streetwear: {
+        title: "STREETWEAR: Od Ulicy do Wybiegu",
+        text: "Połączenie wygody, sportowego stylu i luksusu. Ewolucja z hip hopu i kultury deskorolki. To bluzy z kapturem, T-shirty z grafikami, limitowane edycje butów i oryginalne kurtki.",
+        icons: ["👖", "👟", "🕺"] 
+    }
+};
+
+function updateStyleDescription(filterKey) {
+    const descriptionSection = document.getElementById('styleDescription');
+    const titleElement = document.getElementById('descriptionTitle');
+    const textElement = document.getElementById('descriptionText');
+    const iconsElement = document.getElementById('relatedIcons');
+    
+    if (filterKey === 'all' || !styleData[filterKey]) {
+        descriptionSection.classList.add('hidden');
+        return;
+    }
+
+    const data = styleData[filterKey];
+
+    titleElement.textContent = data.title;
+    textElement.textContent = data.text;
+    
+    iconsElement.innerHTML = data.icons.map(icon => 
+        `<span class="hover:scale-125 transition duration-300 cursor-pointer" data-style-icon="${filterKey}">${icon}</span>`
+    ).join('');
+    
+    descriptionSection.classList.remove('hidden');
+}
+
+// Rozszerzenie istniejącej funkcji addBlogOpinion
+function addBlogOpinion() {
+    const authorInput = document.getElementById('opinionAuthor');
+    const textInput = document.getElementById('opinionText');
+    const opinionsList = document.getElementById('opinionsList');
+    const noOpinions = document.getElementById('noOpinions');
+
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+
+    if (!author || !text) {
+        alert("Hej! Wpisz swoją ksywę i wspomnienie zanim zostawisz shoutout 🎤");
+        return;
+    }
+
+    if (noOpinions) noOpinions.remove();
+
+    const opinion = document.createElement('div');
+    opinion.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
+    opinion.innerHTML = `
+        <p class="text-green-400 font-bold mb-2">👤 ${author}</p>
+        <p class="text-gray-300">${text}</p>
+    `;
+
+    opinionsList.prepend(opinion);
+
+    authorInput.value = '';
+    textInput.value = '';
+}
+
+// Rozszerzenie event listenera o dynamiczne opisy
+document.addEventListener('DOMContentLoaded', () => {
+    const styleIcons = document.querySelectorAll('.style-icon');
+    styleIcons.forEach(icon => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            const style = this.getAttribute('data-style');
+            updateStyleDescription(style);
+            document.getElementById('styleDescription').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // Rozszerzenie filtrowania o aktualizację opisów
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            const filter = this.getAttribute('data-filter');
+            updateStyleDescription(filter);
+        });
+    });
+});
+
+// ===== SYSTEM FABRIC.JS DO PROJEKTOWANIA =====
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Inicjalizacja Canvasa
+    const canvas = new fabric.Canvas('designCanvas', {
+        backgroundColor: 'transparent',
+        selection: true,
+        preserveObjectStacking: true // Ważne dla warstw
+    });
+
+    const productImg = document.getElementById('currentProductImg');
+    const productTypeSelect = document.getElementById('productType');
+    const productColorInput = document.getElementById('productColor');
+    const addTextBtn = document.getElementById('addTextBtn');
+
+    // Domyślne URL-e dla produktów (Muszą być to statyczne tła, bez nadruku)
+    const productImages = {
+        'tshirt': 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+        'hoodie': 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+        'cap': 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
+    };
+
+    // 2. FUNKCJE ZARZĄDZANIA PRODUKTEM
+    
+    function updateProductDisplay() {
+        const type = productTypeSelect.value;
+        const color = productColorInput.value;
+        const price = productTypeSelect.options[productTypeSelect.selectedIndex].dataset.price;
+
+        productImg.src = productImages[type];
+        productImg.style.backgroundColor = color; // Zmiana koloru tła produktu
+        document.getElementById('currentPrice').textContent = `${price} zł`;
+        
+        // Zmiana rozmiaru canvasa w zależności od produktu (dla czapki mniejszy obszar roboczy)
+        const displayContainer = document.getElementById('productBaseDisplay');
+        if (type === 'cap') {
+            displayContainer.style.width = '400px';
+            displayContainer.style.height = '300px';
+            canvas.setWidth(300);
+            canvas.setHeight(150);
+        } else {
+            displayContainer.style.width = '500px';
+            displayContainer.style.height = '500px';
+            canvas.setWidth(400);
+            canvas.setHeight(400);
+        }
+        canvas.renderAll();
+    }
+    
+    // 3. FUNKCJE ZARZĄDZANIA TEKSTEM I GRAFIKĄ
+
+    // Dodawanie tekstu do Canvasa
+    addTextBtn.addEventListener('click', function() {
+        const textInput = document.getElementById('designText');
+        const text = textInput.value;
+        const font = document.getElementById('fontFamily').value;
+        const size = parseInt(document.getElementById('fontSize').value);
+        const color = document.getElementById('textColor').value;
+
+        if (text) {
+            const fabricText = new fabric.IText(text, {
+                left: canvas.getWidth() / 2,
+                top: canvas.getHeight() / 2,
+                fill: color,
+                fontFamily: font,
+                fontSize: size,
+                originX: 'center',
+                originY: 'center',
+                shadow: 'rgba(0,0,0,0.5) 5px 5px 5px'
+            });
+            canvas.add(fabricText);
+            canvas.setActiveObject(fabricText);
+            textInput.value = ''; // Wyczyść pole po dodaniu
+            canvas.renderAll();
+        }
+    });
+
+    // Wgranie obrazu
+    window.handleImageUpload = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(f) {
+            const data = f.target.result;
+            fabric.Image.fromURL(data, function(img) {
+                // Skalowanie obrazu, aby zmieścił się na canvasie
+                img.scaleToWidth(canvas.getWidth() / 2);
+                img.set({
+                    left: canvas.getWidth() / 2,
+                    top: canvas.getHeight() / 2,
+                    originX: 'center',
+                    originY: 'center'
+                });
+                canvas.add(img);
+                canvas.setActiveObject(img);
+                canvas.renderAll();
+            });
+        };
+        reader.readAsDataURL(file);
+    };
+
+    // 4. FUNKCJE ZARZĄDZANIA OBIEKTAMI (KONTROLKI NA DOLE)
+    
+    // Usuń zaznaczony obiekt
+    window.deleteSelectedObject = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.remove(activeObject);
+            canvas.renderAll();
+        }
+    };
+
+    // Wyczyść cały canvas
+    window.clearCanvas = function() {
+        if (confirm("Czy na pewno chcesz usunąć wszystkie elementy projektu?")) {
+            canvas.clear();
+            canvas.renderAll();
+        }
+    };
+    
+    // Przenieś zaznaczony obiekt na wierzch
+    window.bringToFront = function() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            canvas.bringToFront(activeObject);
+            canvas.renderAll();
+        }
+    };
+
+    // 5. FUNKCJE ZARZĄDZANIA ZAPISYWANIEM I WYSYŁKĄ
+
+    // Pobieranie projektu jako PNG
+    window.exportDesign = function() {
+        canvas.discardActiveObject().renderAll(); // Usuń ramki zaznaczenia
+
+        const dataURL = canvas.toDataURL({
+            format: 'png',
+            quality: 1
         });
 
-        function initCategoryFilters() {
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const categorySections = document.querySelectorAll('.category-section');
-            
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Usuń aktywną klasę ze wszystkich przycisków
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    
-                    // Dodaj aktywną klasę do klikniętego przycisku
-                    this.classList.add('active');
-                    
-                    // Pokaż/ukryj odpowiednie kategorie
-                    const selectedCategory = this.getAttribute('data-category');
-                    
-                    categorySections.forEach(section => {
-                        if (selectedCategory === 'all' || section.getAttribute('data-category') === selectedCategory) {
-                            section.style.display = 'block';
-                            section.style.opacity = '1';
-                        } else {
-                            section.style.display = 'none';
-                            section.style.opacity = '0';
-                        }
-                    });
-                    
-                    // Płynne przewinięcie do sekcji sklepu
-                    document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-            
-            // Na starcie pokaż tylko aktywną kategorię
-            const activeFilter = document.querySelector('.filter-btn.active');
-            if (activeFilter) {
-                const selectedCategory = activeFilter.getAttribute('data-category');
-                categorySections.forEach(section => {
-                    if (selectedCategory !== 'all' && section.getAttribute('data-category') !== selectedCategory) {
-                        section.style.display = 'none';
-                    }
-                });
-            }
-        }
-
-        // ===== INNE FUNKCJE =====
-        let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = `projekt_adelbertus_${productTypeSelect.value}.png`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
         
-        function initNavigation() {
-            const navButtons = document.querySelectorAll('.nav-btn');
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.hasAttribute('data-section')) {
-                        e.preventDefault();
-                        
-                        // Usuń aktywną klasę ze wszystkich przycisków
-                        navButtons.forEach(btn => btn.classList.remove('active'));
-                        
-                        // Dodaj aktywną klasę do klikniętego przycisku
-                        this.classList.add('active');
-                        
-                        // Pokaż odpowiednią sekcję
-                        const sectionId = this.getAttribute('data-section');
-                        showSection(sectionId);
-                    }
-                });
-            });
-            
-            // Obsługa ikony koszyka
-            document.getElementById('cartIcon').addEventListener('click', toggleCart);
-        }
+        alert("Projekt został pobrany jako obraz PNG!");
+    };
 
-        function showSection(sectionId) {
-            // Ukryj wszystkie sekcje
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
+    // Dodawanie projektu do "Koszyka" (tylko symulacja)
+    window.addToCartFromDesign = function() {
+        // Zapisanie danych do przekazania do koszyka (lub do serwera)
+        const designData = canvas.toDataURL({ format: 'png', quality: 0.8 });
+        
+        const productName = productTypeSelect.options[productTypeSelect.selectedIndex].text;
+        const productSize = document.getElementById('productSize').value;
+        const finalPrice = document.getElementById('currentPrice').textContent;
+
+        alert(`Dodano do Koszyka (Symulacja): \n\nProdukt: ${productName} \nRozmiar: ${productSize} \nCena: ${finalPrice} \n\nProjekt jest gotowy do druku!`);
+    };
+
+    // 6. OBSŁUGA ZDARZEŃ ZMIENIAJĄCYCH WŁAŚCIWOŚCI
+    
+    productTypeSelect.addEventListener('change', updateProductDisplay);
+    productColorInput.addEventListener('input', updateProductDisplay);
+    
+    // Ustawienia początkowe
+    updateProductDisplay();
+    
+    // Zmiana właściwości aktywnego tekstu/elementu
+    function updateActiveObjectProps() {
+        const activeObject = canvas.getActiveObject();
+        if (activeObject && activeObject.type === 'i-text') {
+            activeObject.set({
+                fontFamily: document.getElementById('fontFamily').value,
+                fontSize: parseInt(document.getElementById('fontSize').value),
+                fill: document.getElementById('textColor').value
+            });
+            canvas.renderAll();
+        }
+    }
+
+    document.getElementById('fontFamily').addEventListener('change', updateActiveObjectProps);
+    document.getElementById('fontSize').addEventListener('input', updateActiveObjectProps);
+    document.getElementById('textColor').addEventListener('input', updateActiveObjectProps);
+});
+
+function initCategoryFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const categorySections = document.querySelectorAll('.category-section');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            const selectedCategory = this.getAttribute('data-category');
+            
+            categorySections.forEach(section => {
+                if (selectedCategory === 'all' || section.getAttribute('data-category') === selectedCategory) {
+                    section.style.display = 'block';
+                    section.style.opacity = '1';
+                } else {
+                    section.style.display = 'none';
+                    section.style.opacity = '0';
+                }
             });
             
-            // Pokaż wybraną sekcję
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Ukryj menu mobilne po wybraniu sekcji
-            if (window.innerWidth <= 768) {
-                document.getElementById('navContainer').classList.remove('show');
+            document.getElementById('shop').scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+    
+    const activeFilter = document.querySelector('.filter-btn.active');
+    if (activeFilter) {
+        const selectedCategory = activeFilter.getAttribute('data-category');
+        categorySections.forEach(section => {
+            if (selectedCategory !== 'all' && section.getAttribute('data-category') !== selectedCategory) {
+                section.style.display = 'none';
             }
-        }
+        });
+    }
+}
 
-        function toggleMobileMenu() {
-            document.getElementById('navContainer').classList.toggle('show');
-        }
+// ===== INNE FUNKCJE =====
+let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 
-        function addToCart(name, price, image = null, size = null, color = null) {
-            // Sprawdź czy produkt już jest w koszyku
-            const existingIndex = cart.findIndex(item => 
-                item.name === name && 
-                item.size === size && 
-                item.color === color
-            );
-            
-            if (existingIndex >= 0) {
-                cart[existingIndex].quantity++;
-            } else {
-                cart.push({
-                    name: name,
-                    price: price,
-                    quantity: 1,
-                    image: image,
-                    size: size,
-                    color: color,
-                    id: Date.now() + Math.random()
-                });
+function initNavigation() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (this.hasAttribute('data-section')) {
+                e.preventDefault();
+                
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
             }
-            
-            updateCart();
-            showNotification('✅ Produkt dodany do koszyka');
-        }
+        });
+    });
+    
+    document.getElementById('cartIcon').addEventListener('click', toggleCart);
+}
 
-        function updateCart() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            // Aktualizuj licznik
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
-            // Aktualizuj zawartość koszyka
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-                cartTotal.textContent = '0 zł';
-                document.getElementById('paypal-container').innerHTML = '';
-            } else {
-                let total = 0;
-                
-                cart.forEach((item, index) => {
-                    total += item.price * item.quantity;
-                    
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.innerHTML = `
-                        ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                        <div class="flex-1">
-                            <div class="font-bold">${item.name}</div>
-                            <div>${item.price} zł × ${item.quantity}</div>
-                            ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                            ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-                    `;
-                    
-                    cartItems.appendChild(cartItem);
-                });
-                
-                cartTotal.textContent = `${total.toFixed(2)} zł`;
-                
-                // Renderuj przycisk PayPal
-                renderPayPalButton();
-            }
-            
-            // Zapisz do localStorage
-            localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-        }
+function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    document.getElementById(sectionId).classList.add('active');
+    
+    if (window.innerWidth <= 768) {
+        document.getElementById('navContainer').classList.remove('show');
+    }
+}
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
+function toggleMobileMenu() {
+    document.getElementById('navContainer').classList.toggle('show');
+}
 
-        function toggleCart() {
-            document.getElementById('cartPanel').classList.toggle('open');
-        }
+function addToCart(name, price, image = null, size = null, color = null) {
+    const existingIndex = cart.findIndex(item => 
+        item.name === name && 
+        item.size === size && 
+        item.color === color
+    );
+    
+    if (existingIndex >= 0) {
+        cart[existingIndex].quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1,
+            image: image,
+            size: size,
+            color: color,
+            id: Date.now() + Math.random()
+        });
+    }
+    
+    updateCart();
+    showNotification('✅ Produkt dodany do koszyka');
+}
 
-        function renderPayPalButton() {
-            const container = document.getElementById('paypal-container');
-            container.innerHTML = '';
+function updateCart() {
+    const cartCount = document.getElementById('cartCount');
+    const cartItems = document.getElementById('cartItems');
+    const cartTotal = document.getElementById('cartTotal');
+    
+    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+    
+    cartItems.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+        cartTotal.textContent = '0 zł';
+        document.getElementById('paypal-container').innerHTML = '';
+    } else {
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+            total += item.price * item.quantity;
             
-            if (cart.length === 0) return;
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+            cartItem.innerHTML = `
+                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                <div class="flex-1">
+                    <div class="font-bold">${item.name}</div>
+                    <div>${item.price} zł × ${item.quantity}</div>
+                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                </div>
+                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+            `;
             
-            // PayPal button implementation
-            paypal.HostedButtons({
-                hostedButtonId: "L4639S4363CZE",
-            }).render("#paypal-container");
-        }
+            cartItems.appendChild(cartItem);
+        });
+        
+        cartTotal.textContent = `${total.toFixed(2)} zł`;
+        renderPayPalButton();
+    }
+    
+    localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+}
 
-        function sendOrderEmail() {
-            let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-            
-            cart.forEach((item, index) => {
-                emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-                if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
-                emailBody += '\n';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-            
-            window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
-        }
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
 
-        function sendOrderWhatsApp() {
-            let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-            
-            cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-                if (item.size) message += ` (Rozmiar: ${item.size})`;
-                message += '%0A';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-            message += `Proszę o potwierdzenie zamówienia.`;
-            
-            window.open(`https://wa.me/48604296360?text=${message}`);
-        }
+function toggleCart() {
+    document.getElementById('cartPanel').classList.toggle('open');
+}
 
-        function showNotification(message) {
-            // Utwórz element powiadomienia
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = '#d4af37';
-            notification.style.color = 'black';
-            notification.style.padding = '12px 24px';
-            notification.style.borderRadius = '30px';
-            notification.style.zIndex = '1000';
-            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-            notification.style.fontWeight = 'bold';
-            
-            document.body.appendChild(notification);
-            
-            // Usuń po 3 sekundach
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
+function renderPayPalButton() {
+    const container = document.getElementById('paypal-container');
+    container.innerHTML = '';
+    
+    if (cart.length === 0) return;
+    
+    paypal.HostedButtons({
+        hostedButtonId: "L4639S4363CZE",
+    }).render("#paypal-container");
+}
 
-        // ===== STUDIO PROJEKTOWE =====
-        let currentDesign = {
-            text: '',
-            fontSize: 36,
-            fontFamily: 'Arial',
-            color: '#000000',
-            productType: 'tshirt',
-            productSize: 'M',
-            image: null,
-            imageX: 250,
-            imageY: 200,
-            imageScale: 1,
-            imageRotation: 0,
-            textX: 250,
-            textY: 200,
-            textScale: 1,
-            textRotation: 0,
-            activeElement: 'text',
-            baseProduct: 'tshirt',
-            designArea: 'front'
-        };
+function sendOrderEmail() {
+    let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+    
+    cart.forEach((item, index) => {
+        emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+        emailBody += '\n';
+    });
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+    emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+    emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+    
+    window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+}
 
-        function initDesignStudio() {
-            const canvas = document.getElementById('designCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Ustawienia canvas
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Inicjalny render
+function sendOrderWhatsApp() {
+    let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+    
+    cart.forEach((item, index) => {
+        message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        if (item.size) message += ` (Rozmiar: ${item.size})`;
+        message += '%0A';
+    });
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+    message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+    message += `Proszę o potwierdzenie zamówienia.`;
+    
+    window.open(`https://wa.me/48604296360?text=${message}`);
+}
+
+function showNotification(message) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.style.position = 'fixed';
+    notification.style.bottom = '20px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.backgroundColor = '#d4af37';
+    notification.style.color = 'black';
+    notification.style.padding = '12px 24px';
+    notification.style.borderRadius = '30px';
+    notification.style.zIndex = '1000';
+    notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+    notification.style.fontWeight = 'bold';
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// ===== STUDIO PROJEKTOWE =====
+let currentDesign = {
+    text: '',
+    fontSize: 36,
+    fontFamily: 'Arial',
+    color: '#000000',
+    productType: 'tshirt',
+    productSize: 'M',
+    image: null,
+    imageX: 250,
+    imageY: 200,
+    imageScale: 1,
+    imageRotation: 0,
+    textX: 250,
+    textY: 200,
+    textScale: 1,
+    textRotation: 0,
+    activeElement: 'text',
+    baseProduct: 'tshirt',
+    designArea: 'front'
+};
+
+function initDesignStudio() {
+    const canvas = document.getElementById('designCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    updateDesign();
+}
+
+function initProductBase() {
+    const baseItems = document.querySelectorAll('.product-base-item');
+    baseItems.forEach(item => {
+        item.addEventListener('click', function() {
+            baseItems.forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            currentDesign.baseProduct = this.getAttribute('data-base');
             updateDesign();
-        }
+        });
+    });
+}
 
-        function initProductBase() {
-            const baseItems = document.querySelectorAll('.product-base-item');
-            baseItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    baseItems.forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                    currentDesign.baseProduct = this.getAttribute('data-base');
-                    updateDesign();
-                });
-            });
-        }
+function initDesignOptions() {
+    const designOptions = document.querySelectorAll('.design-option');
+    designOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            designOptions.forEach(o => o.classList.remove('active'));
+            this.classList.add('active');
+            currentDesign.designArea = this.getAttribute('data-area');
+            updateDesign();
+        });
+    });
+}
 
-        function initDesignOptions() {
-            const designOptions = document.querySelectorAll('.design-option');
-            designOptions.forEach(option => {
-                option.addEventListener('click', function() {
-                    designOptions.forEach(o => o.classList.remove('active'));
-                    this.classList.add('active');
-                    currentDesign.designArea = this.getAttribute('data-area');
-                    updateDesign();
-                });
-            });
-        }
+function updateDesign() {
+    const canvas = document.getElementById('designCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    currentDesign.text = document.getElementById('designText').value;
+    currentDesign.fontFamily = document.getElementById('fontFamily').value;
+    currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
+    currentDesign.color = document.getElementById('textColor').value;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    if (currentDesign.image) {
+        ctx.save();
+        ctx.translate(currentDesign.imageX, currentDesign.imageY);
+        ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
+        ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
+        ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
+        ctx.restore();
+    }
+    
+    if (currentDesign.text) {
+        ctx.save();
+        ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
+        ctx.fillStyle = currentDesign.color;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.translate(currentDesign.textX, currentDesign.textY);
+        ctx.rotate(currentDesign.textRotation * Math.PI / 180);
+        ctx.scale(currentDesign.textScale, currentDesign.textScale);
+        ctx.fillText(currentDesign.text, 0, 0);
+        ctx.restore();
+    }
+    
+    const preview = document.querySelector('.design-preview');
+    if (currentDesign.text || currentDesign.image) {
+        preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
+        const img = document.createElement('img');
+        img.src = canvas.toDataURL();
+        img.style.maxWidth = '100%';
+        img.style.marginTop = '1rem';
+        img.style.border = '1px solid #ddd';
+        preview.appendChild(img);
+    }
+}
 
-        function updateDesign() {
-            const canvas = document.getElementById('designCanvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Aktualizuj stan projektu
-            currentDesign.text = document.getElementById('designText').value;
-            currentDesign.fontFamily = document.getElementById('fontFamily').value;
-            currentDesign.fontSize = parseInt(document.getElementById('fontSize').value);
-            currentDesign.color = document.getElementById('textColor').value;
-            
-            // Wyczyść canvas
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Narysuj tło - wirtualny produkt
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            // Narysuj obrazek jeśli istnieje
-            if (currentDesign.image) {
-                ctx.save();
-                ctx.translate(currentDesign.imageX, currentDesign.imageY);
-                ctx.rotate(currentDesign.imageRotation * Math.PI / 180);
-                ctx.scale(currentDesign.imageScale, currentDesign.imageScale);
-                ctx.drawImage(currentDesign.image, -currentDesign.image.width/2, -currentDesign.image.height/2);
-                ctx.restore();
-            }
-            
-            // Narysuj tekst
-            if (currentDesign.text) {
-                ctx.save();
-                ctx.font = `${currentDesign.fontSize}px ${currentDesign.fontFamily}`;
-                ctx.fillStyle = currentDesign.color;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.translate(currentDesign.textX, currentDesign.textY);
-                ctx.rotate(currentDesign.textRotation * Math.PI / 180);
-                ctx.scale(currentDesign.textScale, currentDesign.textScale);
-                ctx.fillText(currentDesign.text, 0, 0);
-                ctx.restore();
-            }
-            
-            // Aktualizuj podgląd
-            const preview = document.querySelector('.design-preview');
-            if (currentDesign.text || currentDesign.image) {
-                preview.innerHTML = '<h3>Podgląd Twojego projektu</h3>';
-                const img = document.createElement('img');
-                img.src = canvas.toDataURL();
-                img.style.maxWidth = '100%';
-                img.style.marginTop = '1rem';
-                img.style.border = '1px solid #ddd';
-                preview.appendChild(img);
-            }
-        }
+function clearCanvas() {
+    const canvas = document.getElementById('designCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    currentDesign.text = '';
+    currentDesign.image = null;
+    document.getElementById('designText').value = '';
+    
+    document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
+    
+    showNotification('Canvas wyczyszczony');
+}
 
-        function clearCanvas() {
-            const canvas = document.getElementById('designCanvas');
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#ffffff';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+function addToCartFromDesign() {
+    const productType = document.getElementById('productType');
+    const productSize = document.getElementById('productSize');
+    
+    const prices = {
+        'tshirt': 120,
+        'hoodie': 200,
+        'cap': 99
+    };
+    
+    const price = prices[productType.value] || 120;
+    const canvas = document.getElementById('designCanvas');
+    
+    addToCart(
+        `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
+        price,
+        canvas.toDataURL(),
+        productSize.value
+    );
+}
+
+// ===== INICJALIZACJA OPCJI PRODUKTÓW =====
+function initProductOptions() {
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('color-option')) {
+            const options = e.target.closest('.color-options');
+            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+        
+        if (e.target.classList.contains('size-option')) {
+            const options = e.target.closest('.size-options');
+            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+        
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            e.preventDefault();
+            const productCard = e.target.closest('.product-card');
+            const name = e.target.getAttribute('data-name');
+            const price = parseFloat(e.target.getAttribute('data-price'));
+            const image = e.target.getAttribute('data-image');
             
-            currentDesign.text = '';
-            currentDesign.image = null;
-            document.getElementById('designText').value = '';
+            const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+            const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
             
-            document.querySelector('.design-preview').innerHTML = '<h3>Podgląd Twojego projektu</h3><p>Tekst i grafika pojawią się tutaj po wprowadzeniu zmian i kliknięciu przycisku "Podgląd"</p>';
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
             
-            showNotification('Canvas wyczyszczony');
+            addToCart(name, price, image, size, color);
         }
+    });
+}
 
-        function addToCartFromDesign() {
-            const productType = document.getElementById('productType');
-            const productSize = document.getElementById('productSize');
-            
-            const prices = {
-                'tshirt': 120,
-                'hoodie': 200,
-                'cap': 99
-            };
-            
-            const price = prices[productType.value] || 120;
-            const canvas = document.getElementById('designCanvas');
-            
-            addToCart(
-                `Projekt: ${currentDesign.text || 'Niestandardowy'} (${productSize.value})`,
-                price,
-                canvas.toDataURL(),
-                productSize.value
-            );
-        }
+// ===== INNE FUNKCJE POMOCNICZE =====
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            showNotification('📧 Wiadomość wysłana!');
+            contactForm.reset();
+        });
+    }
+}
 
-        // ===== INICJALIZACJA OPCJI PRODUKTÓW =====
-        function initProductOptions() {
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('color-option')) {
-                    const options = e.target.closest('.color-options');
-                    options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-                
-                if (e.target.classList.contains('size-option')) {
-                    const options = e.target.closest('.size-options');
-                    options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-                
-                if (e.target.classList.contains('add-to-cart-btn')) {
-                    e.preventDefault();
-                    const productCard = e.target.closest('.product-card');
-                    const name = e.target.getAttribute('data-name');
-                    const price = parseFloat(e.target.getAttribute('data-price'));
-                    const image = e.target.getAttribute('data-image');
-                    
-                    const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
-                    const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-                    
-                    const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-                    const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-                    
-                    addToCart(name, price, image, size, color);
-                }
-            });
-        }
+function initBlog() {
+    // Inicjalizacja bloga
+}
 
-        // ===== INNE FUNKCJE POMOCNICZE =====
-        function initContactForm() {
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    showNotification('📧 Wiadomość wysłana!');
-                    contactForm.reset();
-                });
-            }
-        }
+function initOrderForm() {
+    // Inicjalizacja formularza zamówienia
+}
 
-        function initBlog() {
-            // Inicjalizacja bloga
-        }
+function initAdTimers() {
+    // Inicjalizacja timerów reklam
+}
 
-        function initOrderForm() {
-            // Inicjalizacja formularza zamówienia
-        }
+function initCharityRotation() {
+    // Inicjalizacja rotacji zbiórki
+}
 
-        function initAdTimers() {
-            // Inicjalizacja timerów reklam
-        }
+function toggleReadMore(button) {
+    const post = button.closest('.blog-post');
+    const excerpt = post.querySelector('.blog-excerpt');
+    const full = post.querySelector('.blog-full');
+    
+    if (full.style.display === 'block') {
+        full.style.display = 'none';
+        excerpt.style.display = 'block';
+        button.textContent = 'Czytaj więcej';
+    } else {
+        full.style.display = 'block';
+        excerpt.style.display = 'none';
+        button.textContent = 'Czytaj mniej';
+    }
+}
 
-        function initCharityRotation() {
-            // Inicjalizacja rotacji zbiórki
-        }
+// Globalne funkcje
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.toggleCart = toggleCart;
+window.updateDesign = updateDesign;
+window.clearCanvas = clearCanvas;
+window.addToCartFromDesign = addToCartFromDesign;
+window.toggleReadMore = toggleReadMore;
+window.toggleMobileMenu = toggleMobileMenu;
+window.sendOrderEmail = sendOrderEmail;
+window.sendOrderWhatsApp = sendOrderWhatsApp;
 
-        function toggleReadMore(button) {
-            const post = button.closest('.blog-post');
-            const excerpt = post.querySelector('.blog-excerpt');
-            const full = post.querySelector('.blog-full');
-            
-            if (full.style.display === 'block') {
-                full.style.display = 'none';
-                excerpt.style.display = 'block';
-                button.textContent = 'Czytaj więcej';
-            } else {
-                full.style.display = 'block';
-                excerpt.style.display = 'none';
-                button.textContent = 'Czytaj mniej';
-            }
-        }
+// Funkcja addBlogOpinion dla wklejonego kodu
+function addBlogOpinion() {
+    // Tutaj logika dodawania opinii do bloga
+    console.log('Dodawanie opinii do bloga...');
+}
+</script>
 
-        // Globalne funkcje
-        window.addToCart = addToCart;
-        window.removeFromCart = removeFromCart;
-        window.toggleCart = toggleCart;
-        window.updateDesign = updateDesign;
-        window.clearCanvas = clearCanvas;
-        window.addToCartFromDesign = addToCartFromDesign;
-        window.toggleReadMore = toggleReadMore;
-        window.toggleMobileMenu = toggleMobileMenu;
-        window.sendOrderEmail = sendOrderEmail;
-        window.sendOrderWhatsApp = sendOrderWhatsApp;
-    </script>
+<!-- RESZTA KODU HTML I SKRYPTÓW -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const authorInput = document.getElementById('opinionAuthor');
+  const textInput = document.getElementById('opinionText');
+  const btn = document.getElementById('opinionSubmit');
+  const opinionsList = document.getElementById('opinionsList');
+  const NO_KEY = 'adelbertus_opinions_v1';
+
+  function loadFromStorage() {
+    const raw = localStorage.getItem(NO_KEY);
+    if (!raw) return;
+    try {
+      const arr = JSON.parse(raw);
+      arr.reverse().forEach(item => prependOpinion(item.author, item.text));
+      const no = document.getElementById('noOpinions');
+      if (no) no.remove();
+    } catch(e) {
+      console.warn('Parsing opinions failed', e);
+    }
+  }
+
+  function saveToStorage(author, text) {
+    const raw = localStorage.getItem(NO_KEY);
+    let arr = [];
+    try { arr = raw ? JSON.parse(raw) : []; } catch(_) { arr = []; }
+    arr.push({author, text, ts: Date.now()});
+    localStorage.setItem(NO_KEY, JSON.stringify(arr.slice(-200)));
+  }
+
+  function prependOpinion(author, text) {
+    const el = document.createElement('div');
+    el.className = "bg-gray-800 p-4 rounded-xl border border-green-600";
+    el.innerHTML = `
+      <p class="text-green-400 font-bold mb-2">👤 ${escapeHtml(author)}</p>
+      <p class="text-gray-300">${escapeHtml(text)}</p>
+    `;
+    opinionsList.prepend(el);
+  }
+
+  function escapeHtml(s) {
+    return String(s)
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'", '&#39;');
+  }
+
+  function handleSubmit(e) {
+    e?.preventDefault();
+    const author = authorInput.value.trim();
+    const text = textInput.value.trim();
+    if (!author || !text) {
+      alert('Wpisz ksywę i treść shoutoutu.');
+      return;
+    }
+    const no = document.getElementById('noOpinions');
+    if (no) no.remove();
+    prependOpinion(author, text);
+    saveToStorage(author, text);
+    authorInput.value = '';
+    textInput.value = '';
+  }
+
+  if (btn) btn.addEventListener('click', handleSubmit);
+  
+  textInput.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) {
+      handleSubmit(ev);
+    }
+  });
+
+  loadFromStorage();
+});
+</script>
+
+<script>
+  fetch("post.json")
+    .then(response => response.json())
+    .then(posts => {
+      const container = document.getElementById("blogContainer");
+      container.innerHTML = "";
+      posts.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "blog-card";
+        card.innerHTML = `
+          <img src="${post.image}" alt="${post.title}">
+          <h3>${post.title}</h3>
+          <p><strong>${post.category}</strong> • ${post.date} • ${post.readTime}</p>
+          <p>${post.content}</p>
+        `;
+        container.appendChild(card);
+      });
+    })
+    .catch(err => console.error("Błąd wczytywania postów:", err));
+</script>
+
+<section id="blog" style="padding: 60px 20px; background: #fdfbf7;">
+  <h2 style="text-align:center; font-size: 2.2em; margin-bottom: 40px; font-weight:700;">
+    ✍️ Nasz Blog – Nowości i Inspiracje
+  </h2>
+
+  <div id="blogContainer" style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;">
+    <p style='grid-column: 1 / -1; text-align:center;'>Wczytywanie postów...</p>
+  </div>
+</section>
+
+<script>
+fetch("post.json")
+  .then(res => res.json())
+  .then(posts => {
+    const container = document.getElementById("blogContainer");
+    container.innerHTML = "";
+    posts.forEach(post => {
+      const card = document.createElement("article");
+      card.style = `
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      `;
+      card.innerHTML = `
+        <img src="${post.image}" alt="${post.title}" style="width:100%; height:200px; object-fit:cover;">
+        <div style="padding: 20px;">
+          <h3 style="margin: 0 0 10px; font-size: 1.3em;">${post.title}</h3>
+          <p style="color: #999; font-size: 0.9em;">${post.category} • ${post.date} • ${post.readTime}</p>
+          <p style="margin-top: 12px; color:#333;">${post.content}</p>
+        </div>
+      `;
+      card.addEventListener("mouseover", () => {
+        card.style.transform = "translateY(-5px)";
+        card.style.boxShadow = "0 8px 16px rgba(0,0,0,0.15)";
+      });
+      card.addEventListener("mouseout", () => {
+        card.style.transform = "translateY(0)";
+        card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
+      });
+      container.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.error("Błąd:", err);
+    document.getElementById("blogContainer").innerHTML =
+      "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
+  });
+</script>
 </body>
 </html>
-
+     
