@@ -1,106 +1,160 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 
-// Typ wersji
-type EditorVersion = 'basic' | 'premium' | 'gold';
+const MarkdownBlogEditor: React.FC = () => {
+  const [content, setContent] = useState(`# Welcome to Markdown Editor
 
-interface Props {
-  version: EditorVersion;
-}
+Start writing your blog post here...
 
-const MarkdownBlogEditor: React.FC<Props> = ({ version }) => {
-  const [content, setContent] = useState(`# ✨ Welcome to Markdown Editor
-Start writing your blog post here...`);
+## Features
+- Live preview
+- Formatting toolbar
+- Auto-save functionality
+- Word count
+
+**Bold text**, *italic text*, and \`inline code\`
+
+\`\`\`javascript
+const hello = "Hello, World!";
+console.log(hello);
+\`\`\`
+
+> Blockquote example
+
+- List item 1
+- List item 2
+- List item 3
+
+[Link example](https://example.com)
+`);
+
   const [wordCount, setWordCount] = useState(0);
   const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Kolory motywów
-  const themes = {
-    basic: {
-      bg: 'bg-yellow-50',
-      text: 'text-gray-900',
-      toolbar: 'bg-yellow-100 text-gray-800 hover:bg-yellow-200',
-      preview: 'prose text-gray-800',
-    },
-    premium: {
-      bg: 'bg-yellow-100',
-      text: 'text-gray-900',
-      toolbar: 'bg-yellow-200 text-yellow-900 hover:bg-yellow-300',
-      preview: 'prose text-gray-800',
-    },
-    gold: {
-      bg: 'bg-gradient-to-br from-yellow-200 via-yellow-300 to-yellow-400',
-      text: 'text-gray-900',
-      toolbar: 'bg-yellow-300 text-yellow-800 hover:bg-yellow-400',
-      preview: 'prose text-gray-900',
-    },
-  };
-
-  // Liczenie słów
+  // Calculate word count
   useEffect(() => {
-    const words = content.trim().split(/\s+/).filter(w => w.length > 0);
+    const words = content.trim().split(/\s+/).filter(word => word.length > 0);
     setWordCount(words.length);
   }, [content]);
 
-  // Auto-save localStorage (tylko Basic i Premium)
+  // Auto-save to localStorage
   useEffect(() => {
-    if (version !== 'gold') {
-      const timer = setTimeout(() => {
-        localStorage.setItem(`markdown-editor-content-${version}`, content);
-      }, 1000);
-      return () => clearTimeout(timer);
+    const timer = setTimeout(() => {
+      localStorage.setItem('markdown-editor-content', content);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [content]);
+
+  // Load saved content on mount
+  useEffect(() => {
+    const savedContent = localStorage.getItem('markdown-editor-content');
+    if (savedContent) {
+      setContent(savedContent);
     }
-  }, [content, version]);
+  }, []);
 
-  // Load saved content
-  useEffect(() => {
-    const saved = localStorage.getItem(`markdown-editor-content-${version}`);
-    if (saved) setContent(saved);
-  }, [version]);
-
-  // Wstawianie tekstu z toolbaru
   const insertText = (before: string, after: string = '') => {
     if (textareaRef.current) {
       const textarea = textareaRef.current;
       const start = textarea.selectionStart;
       const end = textarea.selectionEnd;
       const selectedText = content.substring(start, end);
-      const newContent =
-        content.substring(0, start) +
-        before +
-        selectedText +
-        after +
+      const newContent = 
+        content.substring(0, start) + 
+        before + selectedText + after + 
         content.substring(end);
+      
       setContent(newContent);
+      
+      // Restore cursor position
       setTimeout(() => {
         textarea.focus();
         textarea.setSelectionRange(
-          start + before.length,
+          start + before.length, 
           start + before.length + selectedText.length
         );
       }, 0);
     }
   };
 
-  // Toolbar z emotikonami
   const toolbarButtons = [
-    { icon: 'H1 ✨', title: 'Heading 1', action: () => insertText('# ', '\n\n') },
-    { icon: 'H2 🌟', title: 'Heading 2', action: () => insertText('## ', '\n\n') },
-    { icon: 'H3 🌈', title: 'Heading 3', action: () => insertText('### ', '\n\n') },
-    { icon: 'B 🖤', title: 'Bold', action: () => insertText('**', '**') },
-    { icon: 'I 💛', title: 'Italic', action: () => insertText('*', '*') },
-    { icon: '</> 💻', title: 'Inline Code', action: () => insertText('`', '`') },
-    { icon: '``` 📝', title: 'Code Block', action: () => insertText('```\n', '\n```') },
-    { icon: '> 🗨️', title: 'Blockquote', action: () => insertText('> ', '\n\n') },
-    { icon: '• 🔹', title: 'Bullet List', action: () => insertText('- ', '\n') },
-    { icon: '1. 🔢', title: 'Numbered List', action: () => insertText('1. ', '\n') },
-    { icon: '🔗', title: 'Link', action: () => insertText('[', '](url)') },
-    { icon: '🖼️', title: 'Image', action: () => insertText('![alt text](', ')') },
+    {
+      icon: 'H1',
+      title: 'Heading 1',
+      action: () => insertText('# ', '\n\n'),
+      isActive: false
+    },
+    {
+      icon: 'H2',
+      title: 'Heading 2',
+      action: () => insertText('## ', '\n\n'),
+      isActive: false
+    },
+    {
+      icon: 'H3',
+      title: 'Heading 3',
+      action: () => insertText('### ', '\n\n'),
+      isActive: false
+    },
+    {
+      icon: 'B',
+      title: 'Bold',
+      action: () => insertText('**', '**'),
+      isActive: false
+    },
+    {
+      icon: 'I',
+      title: 'Italic',
+      action: () => insertText('*', '*'),
+      isActive: false
+    },
+    {
+      icon: '</>',
+      title: 'Inline Code',
+      action: () => insertText('`', '`'),
+      isActive: false
+    },
+    {
+      icon: '```',
+      title: 'Code Block',
+      action: () => insertText('```\n', '\n```'),
+      isActive: false
+    },
+    {
+      icon: '>”',
+      title: 'Blockquote',
+      action: () => insertText('> ', '\n\n'),
+      isActive: false
+    },
+    {
+      icon: '•',
+      title: 'Bullet List',
+      action: () => insertText('- ', '\n'),
+      isActive: false
+    },
+    {
+      icon: '1.',
+      title: 'Numbered List',
+      action: () => insertText('1. ', '\n'),
+      isActive: false
+    },
+    {
+      icon: '🔗',
+      title: 'Link',
+      action: () => insertText('[', '](url)'),
+      isActive: false
+    },
+    {
+      icon: '🖼',
+      title: 'Image',
+      action: () => insertText('![alt text](', ')'),
+      isActive: false
+    }
   ];
 
-  // Download Markdown (wszystkie wersje)
   const downloadMarkdown = () => {
     const blob = new Blob([content], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
@@ -114,17 +168,23 @@ Start writing your blog post here...`);
   };
 
   const clearContent = () => {
-    if (window.confirm('Are you sure you want to clear all content?')) setContent('');
+    if (window.confirm('Are you sure you want to clear all content?')) {
+      setContent('');
+    }
   };
 
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${themes[version].bg} ${themes[version].text}`}>
+    <div className={`min-h-screen transition-colors duration-200 ${
+      isDarkMode ? 'bg-gray-900 text-white' : 'bg-gray-50 text-gray-900'
+    }`}>
       {/* Header */}
-      <div className={`border-b ${isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+      <div className={`border-b transition-colors duration-200 ${
+        isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-4">
-              <h1 className="text-xl font-semibold">Markdown Blog Editor {version.toUpperCase()}</h1>
+              <h1 className="text-xl font-semibold">Markdown Blog Editor</h1>
               <div className="text-sm text-gray-500 dark:text-gray-400">
                 {wordCount} words
               </div>
@@ -132,26 +192,30 @@ Start writing your blog post here...`);
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsPreviewMode(!isPreviewMode)}
-                className="px-3 py-2 rounded-md text-sm font-medium bg-blue-100 hover:bg-blue-200"
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isPreviewMode
+                    ? 'bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
+                }`}
               >
                 {isPreviewMode ? '📝 Edit' : '👁 Preview'}
               </button>
               <button
                 onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 rounded-md text-gray-500 hover:text-gray-700"
+                className="p-2 rounded-md text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
                 title="Toggle dark mode"
               >
                 {isDarkMode ? '☀️' : '🌙'}
               </button>
               <button
                 onClick={downloadMarkdown}
-                className="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700"
+                className="px-3 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-colors"
               >
                 💾 Download
               </button>
               <button
                 onClick={clearContent}
-                className="px-3 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700"
+                className="px-3 py-2 bg-red-600 text-white rounded-md text-sm font-medium hover:bg-red-700 transition-colors"
               >
                 🗑 Clear
               </button>
@@ -161,17 +225,23 @@ Start writing your blog post here...`);
       </div>
 
       {/* Toolbar */}
-      <div className={`border-b ${themes[version].toolbar}`}>
+      <div className={`border-b transition-colors duration-200 ${
+        isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center space-x-1 py-3 overflow-x-auto">
-            {toolbarButtons.map((btn, i) => (
+            {toolbarButtons.map((button, index) => (
               <button
-                key={i}
-                onClick={btn.action}
-                className="flex-shrink-0 p-2 rounded-md text-sm font-medium transition-colors"
-                title={btn.title}
+                key={index}
+                onClick={button.action}
+                className={`flex-shrink-0 p-2 rounded-md text-sm font-medium transition-colors ${
+                  isDarkMode
+                    ? 'text-gray-300 hover:text-white hover:bg-gray-700'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+                title={button.title}
               >
-                {btn.icon}
+                {button.icon}
               </button>
             ))}
           </div>
@@ -180,25 +250,45 @@ Start writing your blog post here...`);
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div className="border rounded-lg overflow-hidden">
+        <div className={`border rounded-lg overflow-hidden transition-colors duration-200 ${
+          isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+        }`}>
           {isPreviewMode ? (
+            /* Preview Mode */
             <div className="p-6">
-              <div className={`${themes[version].preview} max-w-none`}>
+              <div className={`prose max-w-none ${
+                isDarkMode ? 'prose-invert' : ''
+              }`}>
                 <ReactMarkdown>{content}</ReactMarkdown>
               </div>
             </div>
           ) : (
-            <div className="flex flex-col lg:flex-row">
-              <textarea
-                ref={textareaRef}
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                className={`flex-1 h-96 lg:h-[600px] p-6 resize-none font-mono text-sm ${isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'}`}
-                placeholder="Start writing your markdown content here..."
-              />
-              <div className="w-px bg-gray-200" />
-              <div className="w-full lg:w-1/2 p-6 overflow-y-auto">
-                <div className={`${themes[version].preview} max-w-none`}>
+            /* Edit Mode */
+            <div className="flex">
+              {/* Editor */}
+              <div className="flex-1">
+                <textarea
+                  ref={textareaRef}
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
+                  className={`w-full h-96 lg:h-[600px] p-6 resize-none focus:outline-none font-mono text-sm transition-colors ${
+                    isDarkMode 
+                      ? 'bg-gray-800 text-gray-100 placeholder-gray-500' 
+                      : 'bg-white text-gray-900 placeholder-gray-400'
+                  }`}
+                  placeholder="Start writing your markdown content here..."
+                />
+              </div>
+              
+              {/* Live Preview */}
+              <div className={`w-px transition-colors duration-200 ${
+                isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+              }`} />
+              
+              <div className="w-1/2 p-6 overflow-y-auto">
+                <div className={`prose max-w-none ${
+                  isDarkMode ? 'prose-invert' : ''
+                }`}>
                   <ReactMarkdown>{content}</ReactMarkdown>
                 </div>
               </div>
@@ -208,7 +298,9 @@ Start writing your blog post here...`);
       </div>
 
       {/* Status Bar */}
-      <div className={`border-t ${isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'}`}>
+      <div className={`border-t transition-colors duration-200 ${
+        isDarkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-white'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-12 text-sm text-gray-500 dark:text-gray-400">
             <div className="flex items-center space-x-4">
