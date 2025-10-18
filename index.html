@@ -3,168 +3,220 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Markdown Editor — Premium</title>
+<title>Markdown Editor — Gold</title>
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<!-- highlight.js -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-<!-- mermaid -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<!-- html2pdf for PDF export -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 
 <style>
-  :root{--gold:#D4AF37;--honey:#FFDAB3;--text:#4B3832}
-  body{font-family:Inter, system-ui, -apple-system;}
-  .toolbar-btn{transition:all .12s}
-  .editor-area{font-family: "Fira Code", monospace;}
+  :root{
+    --gold:#D4AF37;
+    --honey:#FFDAB3;
+    --paper:#F6F1E1;
+    --ink:#3B2F2F;
+  }
+  body{font-family:Inter,system-ui, -apple-system;}
+  .editor-area{font-family:"Fira Code", monospace}
+  .theme-gold{background:linear-gradient(180deg,#fff8e1,#fff3d7)}
+  .theme-honey{background:linear-gradient(180deg,#fffaf0,#fff0d9)}
+  .theme-paper{background:var(--paper)}
 </style>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-yellow-50 via-yellow-100 to-white text-[var(--text)]">
-  <header class="max-w-7xl mx-auto p-4 flex justify-between items-center">
+<body class="min-h-screen text-[var(--ink)] theme-gold">
+  <header class="max-w-7xl mx-auto p-4 flex items-center justify-between">
     <div>
-      <h1 class="text-2xl font-semibold">✦ Markdown Editor — Premium</h1>
-      <div class="text-sm text-gray-600">Dodano: highlight, mermaid, upload obrazów i eksport PDF</div>
+      <h1 class="text-2xl font-semibold">✦ Markdown Editor — GOLD</h1>
+      <div class="text-sm text-gray-600">Pełny zestaw: history, themes, brand export, demo login</div>
     </div>
-    <div class="flex gap-2">
-      <button id="exportHtml" class="px-3 py-1 rounded bg-[var(--gold)] text-white">📄 Export HTML</button>
-      <button id="exportPdf" class="px-3 py-1 rounded bg-gray-800 text-white">📥 Export PDF</button>
+    <div class="flex items-center gap-3">
+      <select id="themeSelect" class="px-2 py-1 border rounded"><option value="gold">Gold</option><option value="honey">Miód</option><option value="paper">Paper</option></select>
+      <button id="loginBtn" class="px-3 py-1 rounded bg-[var(--gold)] text-white">🔐 Login</button>
+      <button id="exportBrand" class="px-3 py-1 rounded bg-gray-800 text-white">📦 Brand Export</button>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto p-4">
-    <div class="mb-3 flex gap-2 overflow-auto">
-      <button class="toolbar-btn px-3 py-1 rounded bg-white border" data-insert="# ">H1 ✨</button>
-      <button class="toolbar-btn px-3 py-1 rounded bg-white border" data-wrap="**">B 🖤</button>
-      <button class="toolbar-btn px-3 py-1 rounded bg-white border" data-wrap="`">`code` 💻</button>
-      <button id="uploadImageBtn" class="toolbar-btn px-3 py-1 rounded bg-white border">🖼 Upload Image</button>
-      <div class="ml-2 text-sm text-gray-500">Tip: użyj bloku ```mermaid ... ``` aby wygenerować diagram</div>
+    <div class="mb-3 flex gap-2">
+      <button class="px-3 py-1 rounded bg-white border" data-insert="# ">H1 ✨</button>
+      <button class="px-3 py-1 rounded bg-white border" data-wrap="**">B 🖤</button>
+      <button id="snapshotBtn" class="px-3 py-1 rounded bg-yellow-200 border">📸 Snapshot</button>
+      <button id="showHistory" class="px-3 py-1 rounded bg-white border">🕘 History</button>
     </div>
 
-    <div class="grid lg:grid-cols-2 gap-4">
-      <div>
-        <textarea id="editor" class="editor-area p-4 rounded shadow h-96 resize-none w-full" placeholder="Start..."># Premium Demo
-
-Przykład diagramu:
-
-\`\`\`mermaid
-graph LR
-  A[Start] --> B{Is it ok?}
-  B -- Yes --> C[Go]
-  B -- No --> D[Fix]
-\`\`\`
-</textarea>
-
-        <div class="mt-2 text-sm text-gray-600">Drag & drop image into editor area to embed as base64 (works offline)</div>
+    <div class="grid lg:grid-cols-3 gap-4">
+      <div class="lg:col-span-2">
+        <textarea id="editor" class="editor-area p-4 rounded shadow h-96 w-full" placeholder="Piszesz tutaj..."># Gold demo
+Wersja Gold - snapshoty, tematy, brand export.</textarea>
+        <div class="mt-2 text-sm text-gray-600">Drag&drop obrazów działa jak w Premium</div>
       </div>
 
-      <div id="preview" class="prose p-4 rounded shadow bg-white overflow-auto h-96"></div>
+      <aside class="p-4 bg-white rounded shadow h-96 overflow-auto">
+        <div class="mb-3"><strong>Użytkownik:</strong> <span id="userBadge">anon</span></div>
+        <div class="mb-3"><strong>Snapshots</strong><div id="snapList" class="mt-2 text-sm"></div></div>
+        <div class="mb-3"><strong>Actions</strong>
+          <div class="mt-2 flex flex-col gap-2">
+            <button id="exportHtml" class="px-3 py-1 rounded bg-[var(--gold)] text-white">Export HTML</button>
+            <button id="exportPdf" class="px-3 py-1 rounded bg-gray-800 text-white">Export PDF</button>
+            <button id="clearAll" class="px-3 py-1 rounded bg-red-600 text-white">Clear</button>
+          </div>
+        </div>
+      </aside>
+
+      <div id="preview" class="prose p-4 rounded shadow bg-white lg:col-span-3 overflow-auto h-80 mt-4"></div>
     </div>
   </main>
 
+<!-- simple login modal -->
+<div id="loginModal" class="fixed inset-0 bg-black/40 hidden items-center justify-center">
+  <div class="bg-white p-6 rounded shadow max-w-sm w-full">
+    <h3 class="font-semibold mb-2">Login (demo)</h3>
+    <input id="userInput" class="w-full p-2 border rounded mb-3" placeholder="Wpisz nazwę użytkownika" />
+    <div class="flex justify-end gap-2">
+      <button id="cancelLogin" class="px-3 py-1 rounded border">Cancel</button>
+      <button id="confirmLogin" class="px-3 py-1 rounded bg-[var(--gold)] text-white">Login</button>
+    </div>
+  </div>
+</div>
+
 <script>
-  // init mermaid
-  mermaid.initialize({startOnLoad:false, theme:'neutral'});
+  mermaid.initialize({startOnLoad:false});
+  marked.setOptions({highlight: (code,lang)=>{ try{return hljs.highlightAuto(code,[lang]).value;}catch(e){return code;} }});
 
   const editor = document.getElementById('editor');
   const preview = document.getElementById('preview');
-  const STORAGE_KEY = 'md_premium_content_v1';
+  const STORAGE_KEY = 'md_gold_content_v1';
+  const HISTORY_KEY = 'md_gold_history_v1';
+  const USER_KEY = 'md_gold_user_v1';
+  // load
   if(localStorage.getItem(STORAGE_KEY)) editor.value = localStorage.getItem(STORAGE_KEY);
-
-  // marked with highlight
-  marked.setOptions({
-    highlight: function(code, lang) {
-      try { return hljs.highlightAuto(code, lang ? [lang] : undefined).value; } catch(e){ return code; }
-    }
-  });
+  let history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+  let user = localStorage.getItem(USER_KEY) || 'anon';
+  document.getElementById('userBadge').textContent = user;
 
   function render(){
-    const md = editor.value;
-    preview.innerHTML = marked.parse(md);
-    // init mermaid diagrams after render
-    preview.querySelectorAll('code.language-mermaid, code.mermaid').forEach((block, i)=>{
-      const parent = block.parentElement;
+    preview.innerHTML = marked.parse(editor.value);
+    // mermaid
+    preview.querySelectorAll('code.language-mermaid, code.mermaid').forEach((block,i)=>{
       const code = block.textContent;
       const id = 'mmd'+i+Date.now();
-      const cont = document.createElement('div');
-      cont.className = 'mermaid';
-      cont.id = id;
-      cont.textContent = code;
-      parent.replaceWith(cont);
-      try{ mermaid.init(undefined, '#'+id); }catch(e){ console.warn(e); }
+      const div = document.createElement('div'); div.className='mermaid'; div.id=id; div.textContent = code;
+      block.parentElement.replaceWith(div);
+      try{ mermaid.init(undefined, '#'+id); }catch(e){}
     });
   }
   render();
   let t;
-  editor.addEventListener('input', ()=>{ render(); clearTimeout(t); t=setTimeout(()=>localStorage.setItem(STORAGE_KEY, editor.value),800); });
+  editor.addEventListener('input', ()=>{ render(); clearTimeout(t); t=setTimeout(()=>localStorage.setItem(STORAGE_KEY, editor.value),700); });
 
-  // drag & drop images into textarea (embed base64)
+  // drag & drop images (same technique)
   editor.addEventListener('dragover', e=>e.preventDefault());
-  editor.addEventListener('drop', async e=>{
+  editor.addEventListener('drop', e=>{
     e.preventDefault();
-    const file = e.dataTransfer.files[0];
-    if(!file) return;
-    if(!file.type.startsWith('image/')) return alert('To nie jest obraz');
-    const reader = new FileReader();
-    reader.onload = ()=> {
-      const start = editor.selectionStart;
-      editor.setRangeText(`![img](${reader.result})\n`, start, start, 'end');
-      render();
+    const f = e.dataTransfer.files[0];
+    if(!f) return;
+    if(!f.type.startsWith('image/')) return alert('To nie jest obraz');
+    const r = new FileReader();
+    r.onload = ()=> {
+      const pos = editor.selectionStart;
+      editor.setRangeText(`![img](${r.result})\n`, pos, pos, 'end'); render();
     };
-    reader.readAsDataURL(file);
-  });
-
-  // upload image button
-  document.getElementById('uploadImageBtn').addEventListener('click', ()=>{
-    const inp = document.createElement('input');
-    inp.type='file';
-    inp.accept='image/*';
-    inp.onchange = ()=> {
-      const f = inp.files[0];
-      const r = new FileReader();
-      r.onload = ()=> {
-        const start = editor.selectionStart;
-        editor.setRangeText(`![img](${r.result})\n`, start, start, 'end');
-        render();
-      };
-      r.readAsDataURL(f);
-    };
-    inp.click();
+    r.readAsDataURL(f);
   });
 
   // toolbar
-  document.querySelectorAll('.toolbar-btn').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      const insert = btn.dataset.insert;
-      const wrap = btn.dataset.wrap;
-      const start = editor.selectionStart; const end = editor.selectionEnd;
-      const sel = editor.value.substring(start,end);
-      if(wrap) editor.setRangeText(wrap+sel+wrap,start,end,'end');
-      else if(insert) editor.setRangeText(insert,start,end,'end');
+  document.querySelectorAll('button[data-insert],button[data-wrap]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const insert = b.dataset.insert; const wrap = b.dataset.wrap;
+      const s = editor.selectionStart; const e = editor.selectionEnd; const sel = editor.value.substring(s,e);
+      if(wrap) editor.setRangeText(wrap+sel+wrap,s,e,'end'); else if(insert) editor.setRangeText(insert,s,e,'end');
       editor.focus(); render();
     });
   });
 
+  // snapshot
+  document.getElementById('snapshotBtn').addEventListener('click', ()=>{
+    const snap = {id:Date.now(), user: (localStorage.getItem(USER_KEY)||'anon'), content: editor.value, date: new Date().toISOString()};
+    history.unshift(snap);
+    if(history.length>30) history.pop();
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    refreshSnapshots();
+    alert('Snapshot saved');
+  });
+
+  function refreshSnapshots(){
+    const list = document.getElementById('snapList'); list.innerHTML='';
+    history.forEach(h=>{
+      const el = document.createElement('div'); el.className='mb-2 p-2 border rounded';
+      el.innerHTML = `<div class="text-xs text-gray-500">${new Date(h.date).toLocaleString()} • ${h.user}</div>
+        <div class="mt-1 flex gap-2"><button class="restore" data-id="${h.id}">🔁 Restore</button>
+        <button class="delete" data-id="${h.id}">🗑 Delete</button></div>`;
+      list.appendChild(el);
+    });
+    list.querySelectorAll('.restore').forEach(btn=>{
+      btn.addEventListener('click', ()=> {
+        const id = parseInt(btn.dataset.id,10);
+        const snap = history.find(x=>x.id===id);
+        if(snap && confirm('Przywrócić snapshot?')) { editor.value = snap.content; render(); localStorage.setItem(STORAGE_KEY, editor.value); }
+      });
+    });
+    list.querySelectorAll('.delete').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = parseInt(btn.dataset.id,10);
+        history = history.filter(x=>x.id!==id); localStorage.setItem(HISTORY_KEY, JSON.stringify(history)); refreshSnapshots();
+      });
+    });
+  }
+  refreshSnapshots();
+
+  // show history
+  document.getElementById('showHistory').addEventListener('click', ()=>{ refreshSnapshots(); alert('Sprawdź panel po prawej z snapshotami'); });
+
+  // theme picker
+  const themeSelect = document.getElementById('themeSelect');
+  themeSelect.addEventListener('change', ()=> {
+    const v = themeSelect.value;
+    document.body.classList.remove('theme-gold','theme-honey','theme-paper');
+    if(v==='gold') document.body.classList.add('theme-gold');
+    if(v==='honey') document.body.classList.add('theme-honey');
+    if(v==='paper') document.body.classList.add('theme-paper');
+  });
+
+  // login modal
+  const loginModal = document.getElementById('loginModal');
+  document.getElementById('loginBtn').addEventListener('click', ()=> loginModal.classList.remove('hidden'));
+  document.getElementById('cancelLogin').addEventListener('click', ()=> loginModal.classList.add('hidden'));
+  document.getElementById('confirmLogin').addEventListener('click', ()=>{
+    const name = document.getElementById('userInput').value.trim() || 'anon';
+    localStorage.setItem(USER_KEY, name); document.getElementById('userBadge').textContent = name; loginModal.classList.add('hidden');
+  });
+
+  // clear
+  document.getElementById('clearAll').addEventListener('click', ()=> { if(confirm('Clear content?')) { editor.value=''; render(); localStorage.removeItem(STORAGE_KEY); } });
+
   // exports
   document.getElementById('exportHtml').addEventListener('click', ()=>{
-    const html = `<!doctype html><meta charset="utf-8"><title>Export</title><style>body{font-family:Arial;padding:30px;}</style>`+marked.parse(editor.value);
+    const html = `<!doctype html><meta charset="utf-8"><title>Brand Export</title>
+    <style>body{font-family:Georgia,serif;padding:30px;color:var(--ink)}</style><header><h1>Brand Export</h1><p>by ${localStorage.getItem(USER_KEY)||'anon'}</p><hr></header>`+marked.parse(editor.value);
     const w = window.open(); w.document.write(html); w.document.close();
   });
 
   document.getElementById('exportPdf').addEventListener('click', ()=>{
-    const element = document.createElement('div');
-    element.innerHTML = marked.parse(editor.value);
-    // small brand header
+    const wrapper = document.createElement('div'); wrapper.innerHTML = marked.parse(editor.value);
     const header = document.createElement('div');
-    header.innerHTML = `<h1 style="font-family:Arial;">Premium Export</h1><hr/>`;
-    const wrapper = document.createElement('div');
-    wrapper.appendChild(header); wrapper.appendChild(element);
-    html2pdf().set({margin:10, filename:`export-${Date.now()}.pdf`, html2canvas:{scale:1}}).from(wrapper).save();
+    header.innerHTML = `<h1>Brand Export</h1><div>by ${localStorage.getItem(USER_KEY)||'anon'}</div><hr/>`;
+    const out = document.createElement('div'); out.appendChild(header); out.appendChild(wrapper);
+    html2pdf().set({margin:10, filename:`gold-export-${Date.now()}.pdf`}).from(out).save();
   });
 
   // initial render
   render();
+
+  // initial UI contains snapshots list (if any)
+  refreshSnapshots();
 </script>
 </body>
 </html>
