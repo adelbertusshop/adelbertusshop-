@@ -54,6 +54,48 @@
             background: var(--color-gold);
         }
         
+        /* TWOJE STYLE PRODUCT-GRID - DODANE */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 2px solid #d4af37;
+            border-radius: 16px;
+            text-align: center;
+            padding: 16px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: scale(1.03);
+        }
+
+        .product-card img {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .product-card button {
+            background-color: #d4af37;
+            color: black;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .product-card button:hover {
+            background-color: #b9982e;
+        }
+        
         /* Nagłówek i nawigacja */
         header {
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
@@ -181,7 +223,7 @@
             transition: opacity 0.3s ease;
         }
 
-        /* Karty produktów */
+        /* Karty produktów - ORYGINALNE */
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -190,7 +232,7 @@
             transition: opacity 0.3s ease;
         }
         
-        .product-card {
+        .product-card-original {
             background: white;
             border-radius: 10px;
             overflow: hidden;
@@ -200,7 +242,7 @@
             flex-direction: column;
         }
         
-        .product-card:hover {
+        .product-card-original:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
@@ -1016,50 +1058,9 @@
             max-width: 600px;
             margin: 2rem auto;
         }
-    </style>  
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-  padding: 20px;
-}
-
-.product-card {
-  background: #fff;
-  border: 2px solid #d4af37;
-  border-radius: 16px;
-  text-align: center;
-  padding: 16px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.product-card:hover {
-  transform: scale(1.03);
-}
-
-.product-card img {
-  width: 100%;
-  border-radius: 12px;
-  margin-bottom: 12px;
-}
-
-.product-card button {
-  background-color: #d4af37;
-  color: black;
-  padding: 8px 16px;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.product-card button:hover {
-  background-color: #b9982e;
-}
-    
+    </style>      
 </head>
-<body> 
+<body>
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
