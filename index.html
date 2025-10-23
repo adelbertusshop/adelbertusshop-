@@ -4411,5 +4411,206 @@ fetch("post.json")
       "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
   });
 </script>
+<script>
+(function(){
+  // --- Elementy DOM ---
+  const canvasEl = document.getElementById('designCanvas');
+  const productImg = document.getElementById('currentProductImg');
+  const priceEl = document.getElementById('currentPrice');
+  const productType = document.getElementById('productType');
+  const productColor = document.getElementById('productColor');
+  const addTextBtn = document.getElementById('addTextBtn');
+  const designTextInput = document.getElementById('designText');
+  const fontFamilySelect = document.getElementById('fontFamily');
+  const fontSizeInput = document.getElementById('fontSize');
+  const textColorInput = document.getElementById('textColor');
+  const designImageInput = document.getElementById('designImage');
+
+  // --- Mapowanie typów produktu na obraz (możesz dopasować URL-e) ---
+  const productImages = {
+    tshirt: "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg",
+    hoodie: "https://i.ibb.co/placeholder-hoodie.jpg", // zamień na rzeczywisty URL
+    cap: "https://i.ibb.co/placeholder-cap.jpg" // zamień na rzeczywisty URL
+  };
+
+  // --- Inicjalizacja fabric canvas ---
+  const fabricCanvas = new fabric.Canvas('designCanvas', {
+    preserveObjectStacking: true,
+    selection: true
+  });
+
+  // Dopasowanie rozmiaru canvas do kontenera #productBaseDisplay
+  function resizeCanvasToContainer() {
+    const container = document.getElementById('productBaseDisplay');
+    if(!container) return;
+    const rect = container.getBoundingClientRect();
+    // ustawimy proporcje kwadratowe bazując na mniejszym wymiarze
+    const size = Math.min(rect.width, rect.height);
+    canvasEl.width = size;
+    canvasEl.height = size;
+    fabricCanvas.setWidth(size);
+    fabricCanvas.setHeight(size);
+    // skalowanie istniejących obiektów (opcjonalne), tu zostawiamy prosto
+    fabricCanvas.renderAll();
+  }
+  window.addEventListener('resize', resizeCanvasToContainer);
+  // pierwotne ustawienie
+  setTimeout(resizeCanvasToContainer, 100);
+
+  // Ustawienie początkowego obrazu produktu
+  function setProductImageByType(type) {
+    const src = productImages[type] || productImages.tshirt;
+    productImg.src = src;
+  }
+  setProductImageByType(productType.value);
+
+  // --- Aktualizacja ceny z data-price ---
+  function updatePriceFromSelect() {
+    const opt = productType.selectedOptions[0];
+    const price = opt ? opt.getAttribute('data-price') : null;
+    priceEl.textContent = price ? `${price} zł` : priceEl.textContent;
+  }
+  productType.addEventListener('change', () => {
+    updatePriceFromSelect();
+    setProductImageByType(productType.value);
+  });
+  updatePriceFromSelect();
+
+  // --- Kolor podstawowy wpływa na tło kontenera produktu ---
+  productColor.addEventListener('input', (e) => {
+    const val = e.target.value;
+    const container = document.getElementById('productBaseDisplay');
+    if(container) {
+      // ustaw kolor jako background (można zmienić by modyfikować sam obraz)
+      container.style.backgroundColor = val;
+    }
+  });
+
+  // --- Dodawanie tekstu na canvas ---
+  addTextBtn.addEventListener('click', () => {
+    const txt = (designTextInput.value || '').trim();
+    if(!txt) {
+      alert('Wpisz tekst najpierw.');
+      return;
+    }
+    const font = fontFamilySelect.value || 'Impact';
+    const size = parseInt(fontSizeInput.value, 10) || 36;
+    const color = textColorInput.value || '#ffffff';
+
+    const textObj = new fabric.Textbox(txt, {
+      left: fabricCanvas.getWidth() / 2,
+      top: fabricCanvas.getHeight() / 2,
+      originX: 'center',
+      originY: 'center',
+      fontFamily: font,
+      fontSize: size,
+      fill: color,
+      editable: true,
+      objectCaching: false
+    });
+
+    // jeśli font Monoton (Google font) — przetestuj w przeglądarce
+    fabricCanvas.add(textObj);
+    fabricCanvas.setActiveObject(textObj);
+    fabricCanvas.requestRenderAll();
+  });
+
+  // --- Obsługa upload obrazu (własny obraz na projekt) ---
+  window.handleImageUpload = function(e) {
+    const file = e.target.files && e.target.files[0];
+    if(!file) return;
+    if(!file.type.startsWith('image/')) {
+      alert('Wybierz plik graficzny.');
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      fabric.Image.fromURL(ev.target.result, function(img) {
+        // skaluj żeby zmieścić w canvasie
+        const scale = Math.min(fabricCanvas.getWidth() / img.width, fabricCanvas.getHeight() / img.height, 1);
+        img.set({
+          left: fabricCanvas.getWidth() / 2,
+          top: fabricCanvas.getHeight() / 2,
+          originX: 'center',
+          originY: 'center',
+          scaleX: scale,
+          scaleY: scale,
+          selectable: true
+        });
+        fabricCanvas.add(img);
+        fabricCanvas.setActiveObject(img);
+        fabricCanvas.requestRenderAll();
+      }, { crossOrigin: 'anonymous' });
+    };
+    reader.readAsDataURL(file);
+    // reset input
+    e.target.value = '';
+  };
+
+  // --- Funkcje pomocnicze (przyciski) ---
+  window.deleteSelectedObject = function() {
+    const active = fabricCanvas.getActiveObject();
+    if(active) {
+      fabricCanvas.remove(active);
+    } else {
+      alert('Zaznacz obiekt do usunięcia.');
+    }
+  };
+
+  window.clearCanvas = function() {
+    if(confirm('Wyczyszczono wszystkie elementy projektu. Kontynuować?')) {
+      fabricCanvas.clear();
+    }
+  };
+
+  window.bringToFront = function() {
+    const active = fabricCanvas.getActiveObject();
+    if(active) active.bringToFront();
+    fabricCanvas.requestRenderAll();
+  };
+
+  // --- Eksport projektu do PNG i pobranie ---
+  window.exportDesign = function() {
+    // tymczasowo ukryj elementy, które nie chcesz eksportować (jeśli trzeba)
+    const dataURL = fabricCanvas.toDataURL({ format: 'png', multiplier: 2 });
+    const a = document.createElement('a');
+    a.href = dataURL;
+    a.download = `adelbertus_design_${Date.now()}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  // --- Proste dodanie do koszyka (stub) ---
+  window.addToCartFromDesign = function() {
+    // Przygotuj payload (możesz tu dodać fetch do Twojego API)
+    const payload = {
+      productType: productType.value,
+      size: document.getElementById('productSize') ? document.getElementById('productSize').value : null,
+      color: productColor.value,
+      price: (productType.selectedOptions[0] && productType.selectedOptions[0].getAttribute('data-price')) || null,
+      designImage: fabricCanvas.toDataURL({ format: 'png', multiplier: 1 })
+    };
+    // Na początek pokażemy podgląd (w przyszłości – wysyłaj do backendu)
+    console.log('DODAJ DO KOSZYKA - payload:', payload);
+    alert('Projekt przygotowany i skopiowany do konsoli, w przyszłości tu wyślesz zamówienie do backendu.');
+    // fetch('/api/add-to-cart', { method:'POST', body: JSON.stringify(payload) })...
+  };
+
+  // --- Dodatkowe usprawnienia: klawisz Delete usuwa wybrany obiekt ---
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Delete' || e.key === 'Backspace') {
+      const active = fabricCanvas.getActiveObject();
+      if(active) fabricCanvas.remove(active);
+    }
+  });
+
+  // --- Ustawienia początkowe ---
+  fabricCanvas.setBackgroundColor('transparent', fabricCanvas.renderAll.bind(fabricCanvas));
+
+  // jeśli chcesz, by canvas miał białe tło przy eksporcie -> możesz dynamicznie ustawić backgroundColor przed eksportem
+
+})();
+</script>        
 </body>
 </html>
