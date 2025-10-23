@@ -1017,6 +1017,47 @@
             margin: 2rem auto;
         }
     </style>  
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  padding: 20px;
+}
+
+.product-card {
+  background: #fff;
+  border: 2px solid #d4af37;
+  border-radius: 16px;
+  text-align: center;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.product-card button {
+  background-color: #d4af37;
+  color: black;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.product-card button:hover {
+  background-color: #b9982e;
+}
+    
 </head>
 <body> 
     <!-- Nagłówek -->
@@ -1122,7 +1163,38 @@
         <h2>Nasze Produkty</h2>
         <p>Odkryj naszą ekskluzywną kolekcję</p>
     </div>
-    
+  <div class="product-grid">
+    <!-- Produkt 1 -->
+    <div class="product-card">
+      <img src="img/koszulka_adelbertus.jpg" alt="Koszulka Adelbertus">
+      <h3>Koszulka Adelbertus</h3>
+      <p class="price">120 zł</p>
+      <button onclick="addToCart('Koszulka Adelbertus', 99.99, 'img/koszulka_adelbertus.jpg')">
+        Dodaj do koszyka
+      </button>
+    </div>
+
+    <!-- Produkt 2 -->
+    <div class="product-card">
+      <img src="img/bluza_adelbertus.jpg" alt="Bluza Adelbertus">
+      <h3>Bluza Adelbertus</h3>
+      <p class="price">200 zł</p>
+      <button onclick="addToCart('Bluza Adelbertus', 149.99, 'img/bluza_adelbertus.jpg')">
+        Dodaj do koszyka
+      </button>
+    </div>
+
+    <!-- Produkt 3 -->
+    <div class="product-card">
+      <img src="img/czapka_adelbertus.jpg" alt="Czapka Adelbertus">
+      <h3>Czapka Adelbertus</h3>
+      <p class="price">90 zł</p>
+      <button onclick="addToCart('Czapka Adelbertus', 59.99, 'img/czapka_adelbertus.jpg')">
+        Dodaj do koszyka
+      </button>
+    </div>
+  </div>
+</section>    
     <h3 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h3>
     <div class="products-grid">
         <!-- Oryginalne 8 koszulek -->
