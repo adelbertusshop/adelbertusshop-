@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -52,6 +51,29 @@
         
         .gold-bg {
             background: var(--color-gold);
+        }
+        
+        /* Style krytyczne dla funkcjonowania i zaznaczania */
+        .designer-element {
+            position: absolute;
+            cursor: pointer;
+            user-select: none;
+            transform-origin: top left; /* Kluczowe do transformacji */
+        }
+
+        .designer-element.selected {
+            outline: 2px dashed #ffd700;
+            outline-offset: 2px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+
+        /* Opcjonalne style dla lepszej widoczności suwaków */
+        input[type=range]::-webkit-slider-thumb {
+            background: #fcd34d; /* yellow-400 */
+        }
+        input[type=range]::-moz-range-thumb {
+            background: #fcd34d;
         }
         
         /* Nagłówek i nawigacja */
@@ -1018,7 +1040,7 @@
         }
     </style>  
 </head>
-<body> 
+<body>
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
@@ -3125,417 +3147,118 @@
         </div>
     </div>
 </section>
-<!-- Studio projektowe - ZMODYFIKOWANE -->
-<section id="design" class="py-16 bg-black text-white relative">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-            <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
-        </div>
+<div id="designer-root" class="flex flex-col lg:flex-row gap-8 relative p-4">
+    <div id="design-tools" class="lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
         
-        <!-- REACT DESIGNER ROOT -->
-        <div id="react-design-root"></div>
-    </div>
-</section>
-
-<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-
-<script type="text/babel">
-const { useState, useRef } = React;
-
-const ClothingDesigner = () => {
-  const [product, setProduct] = useState({
-    type: 'tshirt',
-    color: '#ffffff',
-    size: 'M',
-    price: 120
-  });
-
-  const [designElements, setDesignElements] = useState([]);
-  const [selectedElement, setSelectedElement] = useState(null);
-  const [textInput, setTextInput] = useState('');
-  const [textColor, setTextColor] = useState('#ffffff');
-  const [fontSize, setFontSize] = useState(24);
-  const [fontFamily, setFontFamily] = useState('Impact');
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const fileInputRef = useRef(null);
-
-  const productColors = {
-    tshirt: ['#ffffff', '#000000', '#ff0000', '#0066cc', '#4CAF50', '#FFC107', '#9C27B0', '#FF5722'],
-    hoodie: ['#ffffff', '#000000', '#808080', '#4CAF50', '#2196F3', '#FF9800', '#795548', '#607D8B'],
-    cap: ['#000000', '#ffffff', '#ff0000', '#0066cc', '#4CAF50', '#FFC107', '#9C27B0', '#FF5722']
-  };
-
-  const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-  const fonts = ['Impact', 'Arial', 'Times New Roman', 'Courier New', 'Georgia', 'Verdana', 'Monoton'];
-
-  const productPrices = {
-    tshirt: 120,
-    hoodie: 200,
-    cap: 99
-  };
-
-  const productImages = {
-    tshirt: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
-    hoodie: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
-    cap: 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
-  };
-
-  const handleProductChange = (newType) => {
-    setProduct(prev => ({
-      ...prev,
-      type: newType,
-      color: productColors[newType][0],
-      price: productPrices[newType]
-    }));
-    setDesignElements([]);
-    setSelectedElement(null);
-  };
-
-  const addTextElement = () => {
-    if (!textInput.trim()) return;
-
-    const newElement = {
-      id: Date.now().toString(),
-      type: 'text',
-      content: textInput,
-      x: 150,
-      y: 150,
-      fontSize,
-      color: textColor,
-      fontFamily
-    };
-
-    setDesignElements(prev => [...prev, newElement]);
-    setTextInput('');
-  };
-
-  const handleImageUpload = (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const newElement = {
-        id: Date.now().toString(),
-        type: 'image',
-        content: e.target?.result,
-        x: 100,
-        y: 100,
-        width: 100,
-        height: 100
-      };
-      setDesignElements(prev => [...prev, newElement]);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const deleteElement = (id) => {
-    setDesignElements(prev => prev.filter(el => el.id !== id));
-    setSelectedElement(null);
-  };
-
-  const handleMouseDown = (e, elementId) => {
-    e.preventDefault();
-    setSelectedElement(elementId);
-    setIsDragging(true);
-
-    const element = designElements.find(el => el.id === elementId);
-    if (element) {
-      setDragOffset({
-        x: e.clientX - element.x,
-        y: e.clientY - element.y
-      });
-    }
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging || !selectedElement) return;
-
-    const newX = e.clientX - dragOffset.x;
-    const newY = e.clientY - dragOffset.y;
-
-    setDesignElements(prev => prev.map(el =>
-      el.id === selectedElement
-        ? { ...el, x: Math.max(0, Math.min(280, newX)), y: Math.max(0, Math.min(320, newY)) }
-        : el
-    ));
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const clearCanvas = () => {
-    setDesignElements([]);
-    setSelectedElement(null);
-  };
-
-  const addToCartFromDesign = () => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = 400;
-    canvas.height = 400;
-
-    // Rysuj produkt
-    ctx.fillStyle = product.color;
-    ctx.fillRect(0, 0, 400, 400);
-
-    // Rysuj elementy projektu
-    designElements.forEach(el => {
-      if (el.type === 'text') {
-        ctx.font = `${el.fontSize}px ${el.fontFamily}`;
-        ctx.fillStyle = el.color;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(el.content, el.x, el.y);
-      } else if (el.type === 'image') {
-        const img = new Image();
-        img.src = el.content;
-        ctx.drawImage(img, el.x, el.y, el.width, el.height);
-      }
-    });
-
-    const designImage = canvas.toDataURL();
-    
-    // Dodaj do koszyka
-    if (window.addToCart) {
-      window.addToCart(
-        `Projekt: ${product.type} (${product.size})`,
-        product.price,
-        designImage,
-        product.size,
-        product.color
-      );
-    } else {
-      alert('Projekt gotowy! Funkcja koszyka będzie dostępna w pełnej wersji sklepu.');
-    }
-  };
-
-  return (
-    <div className="flex flex-col lg:flex-row gap-8 relative">
-      {/* Panel narzędzi */}
-      <div className="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
-        
-        <div className="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div className="tool-title text-xl font-semibold mb-3 text-pink-400">
-            <i className="fas fa-palette"></i> Opcje Produktu
-          </div>
-          
-          <div className="flex gap-2 mb-3">
-            <button
-              className={`flex-1 py-2 rounded ${product.type === 'tshirt' ? 'bg-yellow-600 text-white' : 'bg-gray-700'}`}
-              onClick={() => handleProductChange('tshirt')}
-            >Koszulka</button>
-            <button
-              className={`flex-1 py-2 rounded ${product.type === 'hoodie' ? 'bg-yellow-600 text-white' : 'bg-gray-700'}`}
-              onClick={() => handleProductChange('hoodie')}
-            >Bluza</button>
-            <button
-              className={`flex-1 py-2 rounded ${product.type === 'cap' ? 'bg-yellow-600 text-white' : 'bg-gray-700'}`}
-              onClick={() => handleProductChange('cap')}
-            >Czapka</button>
-          </div>
-          
-          <select
-            className="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white"
-            value={product.size}
-            onChange={e => setProduct(prev => ({ ...prev, size: e.target.value }))}
-          >
-            {sizes.map(size => (
-              <option key={size} value={size}>{size}</option>
-            ))}
-          </select>
-
-          <label className="text-gray-400 block mb-2">Kolor Podstawowy:</label>
-          <div className="flex flex-wrap gap-2 mb-3">
-            {productColors[product.type].map(color => (
-              <button
-                key={color}
-                className={`w-8 h-8 rounded-full border-2 ${product.color === color ? 'border-yellow-400' : 'border-transparent'}`}
-                style={{ backgroundColor: color }}
-                onClick={() => setProduct(prev => ({ ...prev, color }))}
-              />
-            ))}
-          </div>
-        </div>
-
-        <div className="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div className="tool-title text-xl font-semibold mb-3 text-yellow-400">
-            <i className="fas fa-font"></i> Dodaj Tekst
-          </div>
-          <input
-            type="text"
-            className="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white"
-            value={textInput}
-            onChange={e => setTextInput(e.target.value)}
-            placeholder="Wpisz swój tekst"
-          />
-          <button
-            className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3"
-            onClick={addTextElement}
-          >Dodaj Tekst</button>
-          
-          <div className="flex gap-3 mb-3">
-            <select 
-              className="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white"
-              value={fontFamily}
-              onChange={e => setFontFamily(e.target.value)}
-            >
-              {fonts.map(font => (
-                <option key={font} value={font}>{font}</option>
-              ))}
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+            <div class="tool-title text-xl font-semibold mb-3 text-pink-400">
+                <i class="fas fa-palette"></i> Opcje Produktu
+            </div>
+            
+            <div class="flex gap-2 mb-3">
+                <button data-type="tshirt" class="product-selector flex-1 py-2 rounded bg-yellow-600 text-white">Koszulka</button>
+                <button data-type="hoodie" class="product-selector flex-1 py-2 rounded bg-gray-700">Bluza</button>
+                <button data-type="cap" class="product-selector flex-1 py-2 rounded bg-gray-700">Czapka</button>
+            </div>
+            
+            <select id="size-selector" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+                <option value="XXL">XXL</option>
             </select>
-            <input
-              type="number"
-              className="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center"
-              value={fontSize}
-              min="10"
-              max="100"
-              onChange={e => setFontSize(Number(e.target.value))}
-            />
-          </div>
-          
-          <label className="text-gray-400 block mb-2">Kolor Tekstu:</label>
-          <input
-            type="color"
-            className="w-full h-10 border border-gray-700 rounded-lg cursor-pointer"
-            value={textColor}
-            onChange={e => setTextColor(e.target.value)}
-          />
+
+            <label class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
+            <div id="color-selector" class="flex flex-wrap gap-2 mb-3">
+                </div>
         </div>
 
-        <div className="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div className="tool-title text-xl font-semibold mb-3 text-blue-400">
-            <i className="fas fa-image"></i> Dodaj Grafikę
-          </div>
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            onChange={handleImageUpload}
-            className="hidden"
-          />
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 w-full"
-            onClick={() => fileInputRef.current?.click()}
-          >
-            <i className="fas fa-upload"></i> Wybierz własny obraz
-          </button>
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+            <div class="tool-title text-xl font-semibold mb-3 text-yellow-400">
+                <i class="fas fa-font"></i> Dodaj Tekst
+            </div>
+            <input type="text" id="text-input" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white" placeholder="Wpisz swój tekst">
+            
+            <button id="add-text-btn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
+            
+            <div class="flex gap-3 mb-3">
+                <select id="font-family-selector" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
+                    <option value="Impact">Impact</option>
+                    <option value="Arial">Arial</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Courier New">Courier New</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Verdana">Verdana</option>
+                    <option value="Monoton">Monoton</option>
+                </select>
+                <input type="number" id="font-size-input" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center" value="24" min="10" max="100">
+            </div>
+            
+            <label class="text-gray-400 block mb-2">Kolor Tekstu:</label>
+            <input type="color" id="text-color-input" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer" value="#ffffff">
         </div>
 
-        {selectedElement && (
-          <button
-            className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 w-full mb-3"
-            onClick={() => deleteElement(selectedElement)}
-          >
-            <i className="fas fa-trash"></i> Usuń Zaznaczone
-          </button>
-        )}
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+            <div class="tool-title text-xl font-semibold mb-3 text-blue-400">
+                <i class="fas fa-image"></i> Dodaj Grafikę
+            </div>
+            <input type="file" id="image-upload" accept="image/*" class="hidden">
+            <button id="upload-image-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition duration-300 w-full">
+                <i class="fas fa-upload"></i> Wybierz własny obraz
+            </button>
+        </div>
 
-        <button
-          className="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-300 w-full mb-3"
-          onClick={clearCanvas}
-        >
-          <i className="fas fa-eraser"></i> Wyczyść Całość
+        <div id="element-editor" class="tool-group mb-6 p-4 bg-gray-800 rounded-lg border border-yellow-500 hidden">
+            <div class="tool-title text-xl font-semibold mb-3 text-red-400">
+                <i class="fas fa-magic"></i> Edycja Zaznaczonego Elementu
+            </div>
+
+            <label class="text-gray-400 block mb-2">Powiększenie (Skala):</label>
+            <input type="range" id="scale-range" min="0.5" max="3" step="0.1" value="1" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg">
+            <p class="text-xs text-right text-gray-500">Aktualna skala: <span id="current-scale-display">1.0x</span></p>
+                
+            <label class="text-gray-400 block mb-2 mt-4">Obracanie (Rotacja):</label>
+            <input type="range" id="rotation-range" min="0" max="360" step="1" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer range-lg">
+            <p class="text-xs text-right text-gray-500">Aktualny kąt: <span id="current-rotation-display">0°</span></p>
+
+            <button id="delete-element-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300 w-full mt-4">
+                <i class="fas fa-trash"></i> Usuń Zaznaczone
+            </button>
+        </div>
+
+
+        <button id="clear-canvas-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">
+            <i class="fas fa-eraser"></i> Wyczyść Całość
         </button>
 
-        <div className="font-bold text-xl text-center mt-4">
-          Cena: <span className="text-yellow-400">{product.price} zł</span>
+        <div class="font-bold text-xl text-center mt-4">
+            Cena: <span id="product-price" class="text-yellow-400">120 zł</span>
         </div>
-      </div>
-
-      {/* Obszar projektu */}
-      <div className="canvas-area lg:w-2/3 flex flex-col items-center">
-        
-        <div className="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-          <img 
-            src={productImages[product.type]} 
-            alt={product.type}
-            className="w-full h-full object-contain absolute z-10"
-            style={{ backgroundColor: product.color }}
-          />
-          
-          {/* Dynamiczny obszar projektu */}
-          <div
-            className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-            style={{ width: 400, height: 400 }}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-          >
-            {designElements.map(el => {
-              if (el.type === 'text') {
-                return (
-                  <div
-                    key={el.id}
-                    onMouseDown={e => handleMouseDown(e, el.id)}
-                    style={{
-                      position: 'absolute',
-                      top: el.y,
-                      left: el.x,
-                      cursor: 'move',
-                      fontSize: el.fontSize,
-                      color: el.color,
-                      fontFamily: el.fontFamily,
-                      userSelect: 'none',
-                      whiteSpace: 'nowrap',
-                      padding: '2px 4px',
-                      backgroundColor: selectedElement === el.id ? 'rgba(255,255,255,0.2)' : 'transparent',
-                      border: selectedElement === el.id ? '2px dashed #ffd700' : 'none',
-                      borderRadius: 4
-                    }}
-                  >
-                    {el.content}
-                  </div>
-                );
-              } else if (el.type === 'image') {
-                return (
-                  <img
-                    key={el.id}
-                    src={el.content}
-                    alt="Projektowana grafika"
-                    onMouseDown={e => handleMouseDown(e, el.id)}
-                    style={{
-                      position: 'absolute',
-                      top: el.y,
-                      left: el.x,
-                      width: el.width,
-                      height: el.height,
-                      cursor: 'move',
-                      userSelect: 'none',
-                      border: selectedElement === el.id ? '2px dashed #ffd700' : 'none',
-                      borderRadius: 4
-                    }}
-                    draggable={false}
-                  />
-                );
-              }
-              return null;
-            })}
-          </div>
-        </div>
-
-        <div className="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
-          <button 
-            className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
-            onClick={addToCartFromDesign}
-          >
-            <i className="fas fa-cart-plus"></i> Dodaj do Koszyka
-          </button>
-        </div>
-      </div>
     </div>
-  );
-};
 
-// Renderowanie komponentu React
-ReactDOM.render(<ClothingDesigner />, document.getElementById('react-design-root'));
-</script>
-     
+    <div class="canvas-area lg:w-2/3 flex flex-col items-center">
+        <div id="design-view-container" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+            <img id="product-image" 
+                src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" 
+                alt="tshirt"
+                class="w-full h-full object-contain absolute z-10"
+                style="background-color: #ffffff;"
+            />
+            
+            <div id="design-canvas" class="absolute z-20" style="width: 400px; height: 400px; top: 50px; left: 50px;">
+                </div>
+        </div>
+
+        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+            <button id="add-to-cart-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
+            </button>
+        </div>
+    </div>
+</div>
+      
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
@@ -4065,6 +3788,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </footer>
 
     <script>
+
 // ===== SYSTEM FILTROWANIA KATEGORII =====
 document.addEventListener('DOMContentLoaded', function() {
     initCategoryFilters();
@@ -4575,10 +4299,8 @@ function addBlogOpinion() {
     // Tutaj logika dodawania opinii do bloga
     console.log('Dodawanie opinii do bloga...');
 }
-</script>
 
-<!-- RESZTA KODU -->
-<script>
+// ===== DODATKOWY KOD Z DRUGIEGO FRAGMENTU =====
 document.addEventListener('DOMContentLoaded', () => {
   const authorInput = document.getElementById('opinionAuthor');
   const textInput = document.getElementById('opinionText');
@@ -4652,83 +4374,405 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadFromStorage();
 });
-</script>
-<!-- DALSZE SKRYPTY I HTML -->
-<script>
-  fetch("post.json")
-    .then(response => response.json())
-    .then(posts => {
-      const container = document.getElementById("blogContainer");
-      container.innerHTML = "";
-      posts.forEach(post => {
-        const card = document.createElement("div");
-        card.className = "blog-card";
-        card.innerHTML = `
-          <img src="${post.image}" alt="${post.title}">
-          <h3>${post.title}</h3>
-          <p><strong>${post.category}</strong> • ${post.date} • ${post.readTime}</p>
-          <p>${post.content}</p>
-        `;
-        container.appendChild(card);
-      });
-    })
-    .catch(err => console.error("Błąd wczytywania postów:", err));
-</script>
 
-<section id="blog" style="padding: 60px 20px; background: #fdfbf7;">
-  <h2 style="text-align:center; font-size: 2.2em; margin-bottom: 40px; font-weight:700;">
-    ✍️ Nasz Blog – Nowości i Inspiracje
-  </h2>
-
-  <div id="blogContainer" style="
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    max-width: 1100px;
-    margin: 0 auto;">
-    <p style='grid-column: 1 / -1; text-align:center;'>Wczytywanie postów...</p>
-  </div>
-</section>
-
-<script>
+// ===== KOD ŁADOWANIA POSTÓW BLOGA =====
 fetch("post.json")
-  .then(res => res.json())
+  .then(response => response.json())
   .then(posts => {
     const container = document.getElementById("blogContainer");
     container.innerHTML = "";
     posts.forEach(post => {
-      const card = document.createElement("article");
-      card.style = `
-        background: #fff;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      `;
+      const card = document.createElement("div");
+      card.className = "blog-card";
       card.innerHTML = `
-        <img src="${post.image}" alt="${post.title}" style="width:100%; height:200px; object-fit:cover;">
-        <div style="padding: 20px;">
-          <h3 style="margin: 0 0 10px; font-size: 1.3em;">${post.title}</h3>
-          <p style="color: #999; font-size: 0.9em;">${post.category} • ${post.date} • ${post.readTime}</p>
-          <p style="margin-top: 12px; color:#333;">${post.content}</p>
-        </div>
+        <img src="${post.image}" alt="${post.title}">
+        <h3>${post.title}</h3>
+        <p><strong>${post.category}</strong> • ${post.date} • ${post.readTime}</p>
+        <p>${post.content}</p>
       `;
-      card.addEventListener("mouseover", () => {
-        card.style.transform = "translateY(-5px)";
-        card.style.boxShadow = "0 8px 16px rgba(0,0,0,0.15)";
-      });
-      card.addEventListener("mouseout", () => {
-        card.style.transform = "translateY(0)";
-        card.style.boxShadow = "0 4px 12px rgba(0,0,0,0.1)";
-      });
       container.appendChild(card);
     });
   })
-  .catch(err => {
-    console.error("Błąd:", err);
-    document.getElementById("blogContainer").innerHTML =
-      "<p style='text-align:center; color:red;'>Nie udało się załadować postów 😞</p>";
-  });
+  .catch(err => console.error("Błąd wczytywania postów:", err));
+
+// ===== ZAAWANSOWANE STUDIO PROJEKTOWE =====
+document.addEventListener('DOMContentLoaded', () => {
+    // === DEKLARACJA STAŁYCH I ZMIENNYCH ===
+    const D = {
+        // Obiekty mapujące
+        productColors: {
+            tshirt: ['#ffffff', '#000000', '#ff0000', '#0066cc', '#4CAF50', '#FFC107', '#9C27B0', '#FF5722'],
+            hoodie: ['#ffffff', '#000000', '#808080', '#4CAF50', '#2196F3', '#FF9800', '#795548', '#607D8B'],
+            cap: ['#000000', '#ffffff', '#ff0000', '#0066cc', '#4CAF50', '#FFC107', '#9C27B0', '#FF5722']
+        },
+        productPrices: { tshirt: 120, hoodie: 200, cap: 99 },
+        productImages: {
+            tshirt: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+            hoodie: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+            cap: 'https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'
+        },
+
+        // Stan aplikacji
+        state: {
+            product: { type: 'tshirt', color: '#ffffff', size: 'M', price: 120 },
+            designElements: [], // [ {id, type, content, x, y, scale, rotation, ...} ]
+            selectedElementId: null,
+            isDragging: false,
+            dragOffset: { x: 0, y: 0 }
+        },
+
+        // Elementy DOM
+        el: {
+            // Kontrolki produktu
+            productSelectors: document.querySelectorAll('.product-selector'),
+            sizeSelector: document.getElementById('size-selector'),
+            colorSelector: document.getElementById('color-selector'),
+            productImage: document.getElementById('product-image'),
+            productPrice: document.getElementById('product-price'),
+
+            // Kontrolki tekstu
+            textInput: document.getElementById('text-input'),
+            addTextBtn: document.getElementById('add-text-btn'),
+            fontSizeInput: document.getElementById('font-size-input'),
+            fontFamilySelector: document.getElementById('font-family-selector'),
+            textColorInput: document.getElementById('text-color-input'),
+
+            // Kontrolki grafiki
+            uploadImageBtn: document.getElementById('upload-image-btn'),
+            imageUpload: document.getElementById('image-upload'),
+            
+            // Kontrolki edycji elementu
+            elementEditor: document.getElementById('element-editor'),
+            scaleRange: document.getElementById('scale-range'),
+            rotationRange: document.getElementById('rotation-range'),
+            currentScaleDisplay: document.getElementById('current-scale-display'),
+            currentRotationDisplay: document.getElementById('current-rotation-display'),
+            deleteElementBtn: document.getElementById('delete-element-btn'),
+            clearCanvasBtn: document.getElementById('clear-canvas-btn'),
+            addToCartBtn: document.getElementById('add-to-cart-btn'),
+
+            // Obszar roboczy
+            designCanvas: document.getElementById('design-canvas')
+        }
+    };
+
+    // === FUNKCJE POMOCNICZE / WIZUALIZACJA ===
+
+    /** Aktualizuje stan produktu i kolorów w UI */
+    const updateProductUI = () => {
+        const { product } = D.state;
+        
+        // Zmień zdjęcie i kolor tła
+        D.el.productImage.src = D.productImages[product.type];
+        D.el.productImage.style.backgroundColor = product.color;
+        D.el.productPrice.textContent = `${product.price} zł`;
+
+        // Zaznacz aktywny przycisk typu produktu
+        D.el.productSelectors.forEach(btn => {
+            if (btn.dataset.type === product.type) {
+                btn.className = 'product-selector flex-1 py-2 rounded bg-yellow-600 text-white';
+            } else {
+                btn.className = 'product-selector flex-1 py-2 rounded bg-gray-700';
+            }
+        });
+
+        // Wyczyść i wygeneruj przyciski koloru
+        D.el.colorSelector.innerHTML = '';
+        D.productColors[product.type].forEach(color => {
+            const btn = document.createElement('button');
+            btn.className = `w-8 h-8 rounded-full border-2 ${product.color === color ? 'border-yellow-400' : 'border-transparent'}`;
+            btn.style.backgroundColor = color;
+            btn.addEventListener('click', () => {
+                D.state.product.color = color;
+                updateProductUI();
+            });
+            D.el.colorSelector.appendChild(btn);
+        });
+    };
+    
+    /** Renderuje wszystkie elementy z designElements na płótnie */
+    const renderDesignElements = () => {
+        D.el.designCanvas.innerHTML = '';
+
+        D.state.designElements.forEach(el => {
+            const elementDiv = document.createElement(el.type === 'text' ? 'div' : 'img');
+            elementDiv.className = 'designer-element';
+            elementDiv.dataset.id = el.id;
+
+            if (el.id === D.state.selectedElementId) {
+                elementDiv.classList.add('selected');
+            }
+
+            // Ustawienia wizualne
+            elementDiv.style.position = 'absolute';
+            elementDiv.style.left = `${el.x}px`;
+            elementDiv.style.top = `${el.y}px`;
+            elementDiv.style.transform = `rotate(${el.rotation || 0}deg) scale(${el.scale || 1})`;
+            elementDiv.style.transformOrigin = 'top left'; 
+
+            if (el.type === 'text') {
+                elementDiv.textContent = el.content;
+                elementDiv.style.fontSize = `${el.fontSize}px`;
+                elementDiv.style.color = el.color;
+                elementDiv.style.fontFamily = el.fontFamily;
+                elementDiv.style.whiteSpace = 'nowrap';
+                elementDiv.style.padding = '2px 4px';
+            } else if (el.type === 'image') {
+                elementDiv.src = el.content;
+                elementDiv.style.width = `${el.width}px`;
+                elementDiv.style.height = `${el.height}px`;
+                elementDiv.style.pointerEvents = 'none'; // Aby łatwiej złapać element
+            }
+
+            // Obsługa interakcji (przeciąganie, zaznaczanie)
+            elementDiv.addEventListener('mousedown', (e) => handleMouseDown(e, el.id));
+            
+            D.el.designCanvas.appendChild(elementDiv);
+        });
+
+        updateElementEditorUI();
+    };
+
+    /** Aktualizuje UI panelu skalowania/rotacji */
+    const updateElementEditorUI = () => {
+        const selectedId = D.state.selectedElementId;
+        const editor = D.el.elementEditor;
+
+        if (!selectedId) {
+            editor.classList.add('hidden');
+            return;
+        }
+
+        const el = D.state.designElements.find(e => e.id === selectedId);
+        if (!el) return;
+
+        editor.classList.remove('hidden');
+        
+        // Ustawienie wartości suwaków i wyświetlaczy
+        const scale = el.scale || 1;
+        const rotation = el.rotation || 0;
+        
+        D.el.scaleRange.value = scale;
+        D.el.rotationRange.value = rotation;
+        D.el.currentScaleDisplay.textContent = `${scale.toFixed(1)}x`;
+        D.el.currentRotationDisplay.textContent = `${rotation}°`;
+    };
+
+    /** Aktualizuje atrybut zaznaczonego elementu w stanie */
+    const updateSelectedElement = (updates) => {
+        const id = D.state.selectedElementId;
+        if (!id) return;
+
+        D.state.designElements = D.state.designElements.map(el => 
+            el.id === id ? { ...el, ...updates } : el
+        );
+        renderDesignElements();
+    };
+
+    // === OBSŁUGA PRODUKTU ===
+
+    D.el.productSelectors.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const newType = btn.dataset.type;
+            D.state.product.type = newType;
+            D.state.product.color = D.productColors[newType][0];
+            D.state.product.price = D.productPrices[newType];
+            D.state.designElements = []; // Czyść projekt przy zmianie produktu
+            D.state.selectedElementId = null;
+            updateProductUI();
+            renderDesignElements();
+        });
+    });
+
+    D.el.sizeSelector.addEventListener('change', (e) => {
+        D.state.product.size = e.target.value;
+    });
+
+    // === OBSŁUGA ELEMENTÓW (TEKST/GRAFIKA) ===
+
+    D.el.addTextBtn.addEventListener('click', () => {
+        const text = D.el.textInput.value.trim();
+        if (!text) return;
+
+        const newElement = {
+            id: Date.now().toString(),
+            type: 'text',
+            content: text,
+            x: 50, 
+            y: 50, 
+            fontSize: parseInt(D.el.fontSizeInput.value),
+            color: D.el.textColorInput.value,
+            fontFamily: D.el.fontFamilySelector.value,
+            scale: 1, 
+            rotation: 0 
+        };
+        D.state.designElements.push(newElement);
+        D.el.textInput.value = '';
+        renderDesignElements();
+    });
+
+    D.el.uploadImageBtn.addEventListener('click', () => {
+        D.el.imageUpload.click();
+    });
+
+    D.el.imageUpload.addEventListener('change', (event) => {
+        const file = event.target.files?.[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newElement = {
+                id: Date.now().toString(),
+                type: 'image',
+                content: e.target.result,
+                x: 100, 
+                y: 100, 
+                width: 100, // Domyślny rozmiar
+                height: 100,
+                scale: 1, 
+                rotation: 0 
+            };
+            D.state.designElements.push(newElement);
+            renderDesignElements();
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // === OBSŁUGA INTERAKCJI (PRZECIĄGANIE) ===
+
+    const handleMouseDown = (e, elementId) => {
+        e.preventDefault();
+        
+        // Ustawienie zaznaczonego elementu
+        D.state.selectedElementId = elementId;
+        D.state.isDragging = true;
+        renderDesignElements();
+
+        const element = D.state.designElements.find(el => el.id === elementId);
+        if (element) {
+            // Obliczanie offsetu na podstawie pozycji myszy względem elementu
+            D.state.dragOffset = {
+                x: e.clientX - element.x, 
+                y: e.clientY - element.y
+            };
+        }
+    };
+    
+    const handleMouseMove = (e) => {
+        if (!D.state.isDragging || !D.state.selectedElementId) return;
+
+        const newX = e.clientX - D.state.dragOffset.x;
+        const newY = e.clientY - D.state.dragOffset.y;
+
+        // Ograniczenia dla płótna (400x400)
+        const clampedX = Math.max(-50, Math.min(450, newX)); 
+        const clampedY = Math.max(-50, Math.min(450, newY)); 
+
+        updateSelectedElement({ x: clampedX, y: clampedY });
+    };
+
+    const handleMouseUp = () => {
+        D.state.isDragging = false;
+    };
+
+    // Globalne nasłuchiwanie na ruch i zwolnienie myszy (poza płótnem)
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    D.el.designCanvas.addEventListener('mouseleave', handleMouseUp);
+    
+
+    // === OBSŁUGA ROTACJI I SKALOWANIA ===
+    
+    D.el.scaleRange.addEventListener('input', (e) => {
+        const newScale = parseFloat(e.target.value);
+        updateSelectedElement({ scale: newScale });
+    });
+
+    D.el.rotationRange.addEventListener('input', (e) => {
+        const newRotation = parseInt(e.target.value);
+        updateSelectedElement({ rotation: newRotation });
+    });
+
+    // Usuń element
+    D.el.deleteElementBtn.addEventListener('click', () => {
+        const id = D.state.selectedElementId;
+        if (!id) return;
+        D.state.designElements = D.state.designElements.filter(el => el.id !== id);
+        D.state.selectedElementId = null;
+        renderDesignElements();
+    });
+
+    // Wyczyść całość
+    D.el.clearCanvasBtn.addEventListener('click', () => {
+        D.state.designElements = [];
+        D.state.selectedElementId = null;
+        renderDesignElements();
+    });
+
+    // === FINALIZACJA I KOSZYK (Canvas) ===
+
+    D.el.addToCartBtn.addEventListener('click', () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 400;
+        canvas.height = 400;
+
+        // 1. Rysuj produkt (tło)
+        ctx.fillStyle = D.state.product.color;
+        ctx.fillRect(0, 0, 400, 400);
+
+        // 2. Rysuj elementy projektu z transformacjami (rotacja/skalowanie)
+        D.state.designElements.forEach(el => {
+            ctx.save(); // Zapisz stan kontekstu
+
+            // Ustaw punkt transformacji (x, y) na górny lewy róg elementu 
+            ctx.translate(el.x, el.y); 
+            
+            // Ustaw rotację (z radianów)
+            ctx.rotate((el.rotation || 0) * Math.PI / 180); 
+            
+            // Ustaw skalowanie
+            ctx.scale(el.scale || 1, el.scale || 1); 
+
+            if (el.type === 'text') {
+                ctx.font = `${el.fontSize}px ${el.fontFamily}`;
+                ctx.fillStyle = el.color;
+                ctx.textAlign = 'left'; 
+                ctx.textBaseline = 'top'; 
+                ctx.fillText(el.content, 0, 0); // Rysuj w (0,0) nowego kontekstu
+            } else if (el.type === 'image') {
+                const img = new Image();
+                img.crossOrigin = 'Anonymous'; // Opcjonalnie, jeśli obrazy są z innych domen
+                img.src = el.content;
+                // Rysuj obraz w (0,0) nowego kontekstu
+                ctx.drawImage(img, 0, 0, el.width, el.height);
+            }
+
+            ctx.restore(); // Przywróć stan kontekstu
+        });
+
+        const designImage = canvas.toDataURL();
+        
+        // Dodaj do koszyka (zakładając istnienie globalnej funkcji)
+        if (window.addToCart) {
+            window.addToCart(
+                `Projekt: ${D.state.product.type} (${D.state.product.size})`,
+                D.state.product.price,
+                designImage,
+                D.state.product.size,
+                D.state.product.color
+            );
+        } else {
+            alert('Projekt gotowy! Funkcja koszyka jest zaimplementowana w kodzie JS.');
+            // Opcjonalnie: Pokaż podgląd wygenerowanego obrazu
+            // window.open(designImage, '_blank');
+        }
+    });
+
+    // === INICJALIZACJA ===
+    updateProductUI();
+    renderDesignElements();
+});
 </script>
 </body>
-</html>
+</html>        
