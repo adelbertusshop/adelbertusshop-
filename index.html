@@ -1376,74 +1376,220 @@
             <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
         </div>
     </section>
-
-    <!-- Sekcja Blog -->
     <section id="blog" class="py-16 bg-gradient-to-br from-purple-900 via-black to-red-900 text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 z-0">
-            <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
-            <div class="absolute top-20 right-10 text-5xl font-bold opacity-20">💿</div>
-            <div class="absolute bottom-20 left-15 text-7xl font-bold opacity-20">🎤</div>
-            <div class="absolute bottom-10 right-5 text-6xl font-bold opacity-20">👖</div>
+  <div class="absolute inset-0 opacity-10 z-0">
+    <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
+    <div class="absolute top-20 right-10 text-5xl font-bold opacity-20">💿</div>
+    <div class="absolute bottom-20 left-15 text-7xl font-bold opacity-20">🎤</div>
+    <div class="absolute bottom-10 right-5 text-6xl font-bold opacity-20">👖</div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
+        ADELBERTUS VINTAGE
+      </h2>
+      <p class="text-xl text-gray-300">Powrót do złotej ery mody: Disco 80s & Hip Hop 90s</p>
+      
+      <div class="flex justify-center space-x-4 mt-6">
+        <a href="#" data-filter="disco" class="filter-btn px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-bold transition duration-300 hover:bg-yellow-400">🎧 DISCO</a>
+        <a href="#" data-filter="hiphop" class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-blue-400">👟 HIP HOP</a>
+        <a href="#" data-filter="streetwear" class="filter-btn px-4 py-2 bg-pink-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-pink-400">🕺 STREETWEAR</a>
+        <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
+      </div>
+    </div>
+    
+    <div id="styleDescription" class="mt-10 mb-16 p-8 rounded-xl border-2 border-dashed border-gray-600 bg-black bg-opacity-50 text-center hidden transition-all duration-500">
+      <h3 id="descriptionTitle" class="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-400"></h3>
+      <p id="descriptionText" class="text-gray-300 text-lg"></p>
+      <div id="relatedIcons" class="flex justify-center space-x-6 mt-4 text-3xl"></div>
+    </div>
+    <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/3">
+          <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
+              alt="Disco Fashion 80s" 
+              class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
+          <div class="mt-4 text-center">
+            <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
+          </div>
+        </div>
+        
+        <div class="md:w-2/3">
+          <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
+          <div class="text-gray-300 space-y-4">
+            <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
+            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
+              <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Jaskrawe, fluorescencyjne kolory</li>
+                <li>Spodnie dresowe z białymi paskami</li>
+                <li>Bluzy z logo wielkich marek</li>
+                <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
+              </ul>
+            </div>
+            <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
+            <div class="flex items-center space-x-4 mt-6">
+              <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
+              <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article data-tag="hiphop" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/3">
+          <img src="https://i.ibb.co/HT3YHsmS/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg" 
+              alt="Hip Hop Fashion 90s" 
+              class="w-full h-64 object-cover rounded-xl border-4 border-blue-500 shadow-2xl">
+          <div class="mt-4 text-center">
+            <span class="inline-block px-3 py-1 bg-blue-500 text-white text-sm font-bold rounded-full">💎 CULTURAL HIP HOP</span>
+          </div>
+        </div>
+        
+        <div class="md:w-2/3">
+          <h3 class="text-3xl font-bold mb-4 text-blue-400">👑 LATA 90s: ZŁOTA ERA HIP HOPU I STREETWEARU</h3>
+          <div class="text-gray-300 space-y-4">
+            <p class="text-lg">Gdy <strong class="text-blue-400">baggy jeansy</strong> opadające poniżej pasa i koszulki flanelowe stały się uniformem pokolenia. To czasy FUBU, Karl Kani i kultowych Nike Air Force 1.</p>
+            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
+              <h4 class="font-bold text-blue-400 mb-2">🎤 STYL GANGSTA RAP vs SKATER:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Jeansy baggy - im szersze, tym lepsze</li>
+                <li>Koszulki oversize z logo zespołów</li>
+                <li>Bluzy z kapturem - must have każdego fana</li>
+                <li>Buty: Timberland lub Air Force 1</li>
+              </ul>
+            </div>
+            <p><strong class="text-red-400">Polski streetwear</strong> lat 90s to kultowe targowiska: Stadion Dziesięciolecia, Jarmark Europa. "Abidasy", "Panasonice" - każdy chciał mieć oryginał, ale nosił podróbkę.</p>
+            <div class="flex items-center space-x-4 mt-6">
+              <span class="text-sm text-gray-400">📅 Epoka: 1990-1999</span>
+              <span class="text-sm text-gray-400">🎵 Muzyka: Hip Hop, Gangsta Rap, G-Funk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+        <img src="https://i.ibb.co/b58Nxn0D/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg" 
+            alt="Street Art 1" 
+            class="w-full h-48 object-cover rounded-lg mb-4">
+        <p class="text-center text-gray-300 text-sm">🎨 Street Art - dusza ulicy lat 90s</p>
+      </div>
+      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+        <img src="https://i.ibb.co/gMxPjFmR/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg" 
+            alt="Street Art 2" 
+            class="w-full h-48 object-cover rounded-lg mb-4">
+        <p class="text-center text-gray-300 text-sm">✌️ Graffiti - głos pokolenia</p>
+      </div>
+    </div>
+
+    <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
+      <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI I OPINIAMI KLIENTÓW</h3>
+      <div class="space-y-4">
+        <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
+        <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
+        <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+          🎤 Zostaw shoutout
+        </button>
+      </div>
+      
+      <div id="opinionsList" class="mt-8 space-y-4">
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-yellow-400">
+            <p class="font-bold text-yellow-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 🕺 **DiscoKing84** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiony dres Adidas z lat 80. jest po prostu OG! Stan idealny, jak prosto z Nowego Jorku. Szybka wysyłka i ekstra kontakt. Polecam każdemu fanowi vintage!</p>
+        </div>
+        
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-blue-500">
+            <p class="font-bold text-blue-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👑 **HiphopQueen92** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">W końcu znalazłam kurtkę Phat Farm, o której marzyłam od lat 90! Wysoka jakość, super cena. To jest prawdziwy oldschool, a nie jakieś podróbki!</p>
         </div>
 
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
-                    ADELBERTUS VINTAGE
-                </h2>
-                <p class="text-xl text-gray-300">Powrót do złotej ery mody: Disco 80s & Hip Hop 90s</p>
-                
-                <div class="flex justify-center space-x-4 mt-6">
-                    <a href="#" data-filter="disco" class="filter-btn px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-bold transition duration-300 hover:bg-yellow-400">🎧 DISCO</a>
-                    <a href="#" data-filter="hiphop" class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-blue-400">👟 HIP HOP</a>
-                    <a href="#" data-filter="streetwear" class="filter-btn px-4 py-2 bg-pink-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-pink-400">🕺 STREETWEAR</a>
-                    <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
-                </div>
-            </div>
-
-            <div class="blog-content">
-                <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
-                                alt="Disco Fashion 80s" 
-                                class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
-                            <div class="mt-4 text-center">
-                                <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-2/3">
-                            <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
-                            <div class="text-gray-300 space-y-4">
-                                <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
-                                <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
-                                    <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
-                                    <ul class="list-disc list-inside space-y-1">
-                                        <li>Jaskrawe, fluorescencyjne kolory</li>
-                                        <li>Spodnie dresowe z białymi paskami</li>
-                                        <li>Bluzy z logo wielkich marek</li>
-                                        <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
-                                    </ul>
-                                </div>
-                                <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
-                                <div class="flex items-center space-x-4 mt-6">
-                                    <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
-                                    <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Więcej artykułów blogowych -->
-                <div class="text-center mt-12 pt-8 border-t border-gray-700">
-                    <p class="text-gray-400">ADELBERTUS VINTAGE © 2024 - Przywracamy duszę ulicy</p>
-                </div>
-            </div>
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-pink-500">
+            <p class="font-bold text-pink-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👟 **SkaterBoy01** <span class="text-xs text-gray-500 ml-3"> (Ocena: 4/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiłem koszulkę Fila. Rzecz jest używana, więc ma małą wadę, ale wszystko było opisane w aukcji. Szczerość sprzedawcy na plus, towar dotarł ekspresowo. </p>
         </div>
-    </section>
+      </div>
+    </div>
+    
+    <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
+        <h2 class="text-4xl font-extrabold text-center text-yellow-400 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
+        <p class="text-center text-sm text-red-500 mb-6 font-bold">PAMIĘTAJ: Uzupełnij wszystkie pola oznaczone: [UZUPEŁNIJ]</p>
 
+        <h3 class="text-2xl font-bold text-gray-300 mt-6 mb-4 border-b border-gray-700 pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>**Sprzedawca:** Grzegosz Mielniczuk</li>
+            <li>**Forma działalności:** Działalność nierejestrowana (zgodnie z art. 5 ust. 1 Ustawy Prawo przedsiębiorców).</li>
+            <li>**Adres do korespondencji/zwrotów:** <b class="text-red-500">[UZUPEŁNIJ: Pełny adres Sprzedawcy]</b></li>
+            <li>**E-mail kontaktowy:** mielniczukgrzegosz74@gmail.com</li>
+            <li>**Telefon kontaktowy:** 604 296 360</li>
+            <li>Regulamin określa zasady sprzedaży towarów używanych (vintage) w ramach umowy zawieranej na odległość.</li>
+            <li>Sprzedawca jest zobowiązany do dostarczenia Towaru bez wad.</li>
+            <li>Ceny podane w Sklepie są cenami brutto. Sprzedawca jest zwolniony z VAT na podstawie limitu przychodów.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Do zawarcia Umowy Sprzedaży dochodzi po złożeniu zamówienia przez Klienta i przesłaniu przez Sprzedawcę wiadomości e-mail z potwierdzeniem przyjęcia zamówienia do realizacji.</li>
+            <li>**Główne cechy świadczenia:** Sprzedaż odzieży i akcesoriów typu Vintage (używanych), których stan i ewentualne wady są szczegółowo opisane w opisie produktu.</li>
+            <li>Minimalne wymagania techniczne do korzystania ze Sklepu: dostęp do Internetu, standardowa przeglądarka internetowa oraz aktywne konto e-mail.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 3. Dostawa Towaru i Płatności</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>**Metody płatności:** <b class="text-red-500">[UZUPEŁNIJ: np. Przelew tradycyjny, Płatności online (np. Przelewy24/BLIK), Płatność przy odbiorze (jeśli dotyczy)]</b>.</li>
+            <li>**Koszty dostawy:** Wskazane w procesie składania zamówienia. <b class="text-red-500">[UZUPEŁNIJ: Podaj stałą kwotę/cennik]</b>.</li>
+            <li>**Termin dostawy:** Wynosi standardowo <b class="text-red-500">[UZUPEŁNIJ: np. 3-7 dni roboczych]</b> liczone od dnia zaksięgowania płatności.</li>
+            <li>Dostawa odbywa się za pośrednictwem <b class="text-red-500">[UZUPEŁNIJ: np. InPost, Kurier DPD, Poczta Polska]</b>.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 4. Odstąpienie od Umowy</h3>
+        <p class="text-gray-400 mb-3">Klient, będący Konsumentem, ma prawo odstąpić od Umowy Sprzedaży w terminie **14 dni** bez podawania przyczyny.</p>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Termin odstąpienia wygasa po upływie 14 dni od dnia, w którym Klient wszedł w posiadanie rzeczy.</li>
+            <li>Oświadczenie o odstąpieniu można złożyć: <b class="text-red-500">[UZUPEŁNIJ: Np. mailowo, pisemnie na adres Sprzedawcy]</b>.</li>
+            <li>Klient ma obowiązek zwrócić Towar Sprzedawcy niezwłocznie, nie później niż 14 dni od dnia odstąpienia.</li>
+            <li>Koszty odesłania zwracanego Towaru ponosi <b class="text-red-500">[UZUPEŁNIJ: Klient/Sprzedawca, najczęściej Klient]</b>.</li>
+            <li>Zwrot płatności zostanie dokonany w terminie **14 dni** od otrzymania oświadczenia Klienta, pod warunkiem otrzymania Towaru.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 5. Reklamacje Towaru</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Sprzedawca ponosi odpowiedzialność za brak zgodności Towaru z umową (rękojmia).</li>
+            <li>Reklamacje należy składać drogą elektroniczną lub pisemnie na adres Sprzedawcy, opisując wadę i swoje żądanie.</li>
+            <li>Klient może żądać: **naprawy**, **wymiany** (jeśli możliwe), **obniżenia ceny** lub **odstąpienia od umowy** (jeśli wada jest istotna).</li>
+            <li>Sprzedawca ustosunkuje się do żądania Klienta w terminie **14 dni** kalendarzowych.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 6. Postanowienia Końcowe</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>W sprawach nieuregulowanych Regulaminem zastosowanie mają przepisy prawa polskiego, w szczególności przepisy Kodeksu Cywilnego oraz Ustawy o prawach konsumenta.</li>
+            <li>Sprzedawca zastrzega sobie prawo do zmiany Regulaminu. Zmiany wchodzą w życie <b class="text-red-500">[UZUPEŁNIJ: np. 7 dni od opublikowania na stronie]</b>. Zamówienia złożone przed zmianą są realizowane na zasadach dotychczasowych.</li>
+        </ul>
+        <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: <b class="text-red-500">[UZUPEŁNIJ DATĘ]</b></p>
+    </div>
+
+    <div class="text-center mt-12 pt-8 border-t border-gray-700">
+      <p class="text-gray-400">ADELBERTUS VINTAGE © 2024 - Przywracamy duszę ulicy</p>
+      <div class="flex justify-center space-x-4 mt-4">
+        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">🕺</a>
+        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">💿</a>
+        <a href="#" data-style="hiphop" class="style-icon text-2xl hover:text-blue-400 transition">🎤</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👖</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👟</a>
+      </div>
+    </div>
+  </div>
+</section>     
     <!-- Sekcja Regulamin -->
     <section id="regulations">
         <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
