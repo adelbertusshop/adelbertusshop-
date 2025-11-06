@@ -176,6 +176,54 @@
             font-style: italic;
             color: #666;
         }
+
+        /* Szybkie odpowiedzi */
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-reply-btn {
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-reply-btn:hover {
+            background: var(--color-gold);
+            color: black;
+        }
+
+        /* Rekomendacje produktów w chatbotie */
+        .product-suggestion {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 10px;
+            background: white;
+        }
+
+        .product-suggestion img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+
+        .product-suggestion button {
+            background: var(--color-gold);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 5px;
+        }
         
         /* Nagłówek i nawigacja */
         header {
@@ -1220,6 +1268,7 @@
 // ===== SYSTEM SKLEPU =====
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
+let chatHistory = [];
 
 // Inicjalizacja
 document.addEventListener('DOMContentLoaded', function() {
@@ -1228,12 +1277,23 @@ document.addEventListener('DOMContentLoaded', function() {
     initDesignStudio();
     updateCart();
     initCookieConsent();
+    initChatbot();
 });
 
 // ===== CHATBOT =====
+function initChatbot() {
+    // Dodaj szybkie odpowiedzi przy pierwszym uruchomieniu
+    addQuickReplies();
+}
+
 function toggleChatbot() {
     const chatbotWindow = document.getElementById('chatbotWindow');
     chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+    
+    // Dodaj szybkie odpowiedzi przy otwarciu chatu
+    if (chatbotWindow.style.display === 'flex') {
+        addQuickReplies();
+    }
 }
 
 function handleChatbotInput(event) {
@@ -1251,14 +1311,23 @@ function sendChatbotMessage() {
         addMessageToChat(message, 'user');
         input.value = '';
         
+        // Zapisz w historii
+        chatHistory.push({ role: 'user', message: message });
+        
         // Pokazujemy, że bot pisze
         showTypingIndicator();
         
         // Symulujemy opóźnienie odpowiedzi
         setTimeout(() => {
             hideTypingIndicator();
-            const botResponse = getChatbotResponse(message);
+            const botResponse = getEnhancedChatbotResponse(message);
             addMessageToChat(botResponse, 'bot');
+            
+            // Zapisz odpowiedź w historii
+            chatHistory.push({ role: 'bot', message: botResponse });
+            
+            // Dodaj szybkie odpowiedzi po odpowiedzi bota
+            addQuickReplies();
         }, 1000 + Math.random() * 1000);
     }
 }
@@ -1281,8 +1350,69 @@ function hideTypingIndicator() {
     document.getElementById('chatbotTyping').style.display = 'none';
 }
 
-function getChatbotResponse(userMessage) {
+function addQuickReplies() {
+    const quickReplies = [
+        "Jakie macie rozmiary?",
+        "Jaki jest skład materiału?",
+        "Ile trwa dostawa?",
+        "Pokażcie koszulki",
+        "Jak dodać do koszyka?"
+    ];
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    
+    // Usuń istniejące szybkie odpowiedzi
+    const existingReplies = messagesContainer.querySelector('.quick-replies');
+    if (existingReplies) {
+        existingReplies.remove();
+    }
+    
+    const quickRepliesContainer = document.createElement('div');
+    quickRepliesContainer.className = 'quick-replies';
+    
+    quickReplies.forEach(reply => {
+        const button = document.createElement('button');
+        button.textContent = reply;
+        button.className = 'quick-reply-btn';
+        button.onclick = () => {
+            document.getElementById('chatbotInput').value = reply;
+            sendChatbotMessage();
+        };
+        quickRepliesContainer.appendChild(button);
+    });
+    
+    messagesContainer.appendChild(quickRepliesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function getEnhancedChatbotResponse(userMessage) {
     const message = userMessage.toLowerCase();
+    
+    // Pytania o konkretne produkty
+    if (message.includes("koszulka") || message.includes("bluza") || message.includes("czapka")) {
+        if (message.includes("rebel") || message.includes("bunt")) {
+            return "Koszulka 'Rebel' to nasz bestseller! 💥 Dostępna w czerni, bieli i bordowym. Cena: 120zł. Chcesz dodać do koszyka?";
+        }
+        if (message.includes("vintage")) {
+            return "Koszulka 'Vintage' to klasyk w stylu retro! 🕺 Dostępna w 3 kolorach. Cena: 120zł. Który kolor Cię interesuje?";
+        }
+        if (message.includes("urban") || message.includes("bluza")) {
+            return "Bluza 'Urban' to idealny wybór na chłodniejsze dni! 🧥 Cena: 200zł. Mamy rozmiary S-XXL.";
+        }
+        if (message.includes("pokaż") || message.includes("produkty") || message.includes("asortyment")) {
+            return "Oto nasze produkty: \n\n👕 Koszulki: \n• Rebel - 120zł\n• Vintage - 120zł\n\n🧥 Bluzy:\n• Urban - 200zł\n\nKtóry produkt Cię interesuje?";
+        }
+    }
+    
+    // Pomoc w wyborze rozmiaru
+    if (message.includes("rozmiar") && (message.includes("s") || message.includes("m") || message.includes("l"))) {
+        return "Polecam zmierzyć swoją ulubioną koszulkę i porównać z naszą tabelą rozmiarów! 📏 W razie wątpliwości - zawsze możemy wymienić na inny rozmiar!";
+    }
+    
+    // Dodawanie do koszyka
+    if (message.includes("dodaj") && message.includes("koszyk")) {
+        return "Aby dodać produkt do koszyka, kliknij przycisk 'Dodaj do koszyka' pod produktem. 🛒 Możesz też powiedzieć mi, który produkt Cię interesuje, a ja pomogę!";
+    }
     
     // ROZMIARY KOSZULEK/BLUZ
     if (message.includes("rozmiar") || message.includes("rozmiaru") || message.includes("size")) {
@@ -1291,7 +1421,7 @@ function getChatbotResponse(userMessage) {
     
     // MATERIAŁY I JAKOŚĆ
     if (message.includes("materiał") || message.includes("bawełna") || message.includes("skład") || message.includes("jakość")) {
-        return "👕 **Koszulki:** 100% bawełna, gramatura 180g (idealna na nadruki!)\n🧥 **Bluzy:** bawełna z domieszką poliestru, gramatura 300g\n🧢 **Czapki:** akryl/bawełna z utwardzanym daszkiem\n\nWszystkie produkty najwyższej jakości! ✨";
+        return "👕 **Koszulki:** 100% bawełna, gramatura 180g (idealna na nadruki!)\n🧥 **Bluzy:** bawełna z domieszką poliestru, gramatura 300g\n\nWszystkie produkty najwyższej jakości! ✨";
     }
     
     // DRUK I NADRUKI
@@ -1325,8 +1455,13 @@ function getChatbotResponse(userMessage) {
     }
     
     // WITANIE
-    if (message.includes("witaj") || message.includes("hej") || message.includes("cześć") || message.includes("hello")) {
-        return "👋 Witaj w **Adelbertus Shop**! 🎨\nJestem tu, żeby pomóc Ci wybrać idealną koszulkę, bluzę lub czapkę! \n\nPytaj o rozmiary, materiały, dostawę lub konkretne produkty! ✨";
+    if (message.includes("witaj") || message.includes("hej") || message.includes("cześć") || message.includes("hello") || message.includes("siema")) {
+        return "👋 Witaj w **Adelbertus Shop**! 🎨\nJestem tu, żeby pomóc Ci wybrać idealną koszulkę lub bluzę! \n\nPytaj o rozmiary, materiały, dostawę lub konkretne produkty! ✨";
+    }
+    
+    // PODZIĘKOWANIA
+    if (message.includes("dziękuję") || message.includes("dzięki") || message.includes("thx")) {
+        return "🤗 Dziękuję za rozmowę! Mam nadzieję, że pomogłem. \nJeśli masz jeszcze pytania, śmiało pytaj! \n\nMiłych zakupów w Adelbertus Shop! 🛍️";
     }
     
     // DOMYŚLNA ODPOWIEDŹ
@@ -1497,6 +1632,7 @@ function sendOrderEmail() {
     cart.forEach((item, index) => {
         emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
         if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+        if (item.color) emailBody += ` (Kolor: ${item.color})`;
         emailBody += '\n';
     });
     
@@ -1514,6 +1650,7 @@ function sendOrderWhatsApp() {
     cart.forEach((item, index) => {
         message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
         if (item.size) message += ` (Rozmiar: ${item.size})`;
+        if (item.color) message += ` (Kolor: ${item.color})`;
         message += '%0A';
     });
     
