@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -5,42 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
-    
-    <!-- Schema Markup SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "WebSite",
-          "name": "AdelbertusShop",
-          "url": "https://adelbertusshop.pl",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://adelbertusshop.pl/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "Organization",
-          "name": "AdelbertusShop",
-          "url": "https://adelbertusshop.pl",
-          "logo": "https://adelbertusshop.pl/logo.png",
-          "description": "Ekskluzywna odzież vintage w stylu lat 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "PL"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+48-604-296-360",
-            "contactType": "customer service",
-            "email": "mielniczukgrzegosz74@gmail.com"
-          }
-        }
-      ]
-    }
-    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -496,16 +461,6 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            transition: opacity 0.3s ease;
-            background: #f8f5f0;
-        }
-        
-        .product-image[loading] {
-            opacity: 0.7;
-        }
-        
-        .product-image:not([loading]) {
-            opacity: 1;
         }
         
         .product-info {
@@ -583,26 +538,6 @@
             border-color: var(--color-gold);
             background-color: var(--color-gold);
             color: white;
-        }
-        
-        /* WYSZUKIWARKA I FILTRY */
-        .search-container {
-            animation: slideDown 0.5s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .filters-container {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        .pagination-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         /* Studio projektowe */
@@ -864,6 +799,78 @@
             animation: fadeIn 0.5s ease;
         }
         
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 80%;
+                margin: 0.3rem;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .chatbot-container {
+                bottom: 80px;
+                left: 10px;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
+        }
+
+        /* Style dla przycisków w koszyku */
+        .cart-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .cart-buttons button {
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .cart-buttons button:hover {
+            opacity: 0.9;
+        }
+
+        .email-order-btn {
+            background: var(--color-gold);
+            color: black;
+        }
+
+        .whatsapp-order-btn {
+            background: #25D366;
+            color: white;
+        }
+
         /* Cookie consent */
         .cookie-consent {
             position: fixed;
@@ -969,114 +976,6 @@
             color: #666;
             line-height: 1.6;
         }
-
-        /* Neon glow dla zbiórki */
-        .neon-glow {
-          color: #fff;
-          text-shadow:
-            0 0 5px #a855f7,
-            0 0 10px #a855f7,
-            0 0 20px #9333ea,
-            0 0 40px #9333ea;
-          animation: neonPulse 2s infinite alternate;
-        }
-        @keyframes neonPulse {
-          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
-          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
-        }
-
-        /* Typing efekt */
-        .typing {
-          border-right: 2px solid #ffd700;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-
-        /* Animacja donorów */
-        .donor-entry {
-          opacity: 0;
-          transform: translateY(10px);
-          animation: fadeInUp 1s forwards;
-        }
-        @keyframes fadeInUp {
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Responsywność */
-        @media (max-width: 768px) {
-            .products-grid, .blog-posts, .reviews {
-                grid-template-columns: 1fr;
-            }
-            
-            #cartPanel {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .design-tools {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-btn {
-                width: 80%;
-                margin: 0.3rem;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-
-            .chatbot-container {
-                bottom: 80px;
-                left: 10px;
-            }
-
-            .chatbot-window {
-                width: 300px;
-                height: 400px;
-            }
-
-            .filters-container .grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Style dla przycisków w koszyku */
-        .cart-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 1rem;
-        }
-
-        .cart-buttons button {
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .cart-buttons button:hover {
-            opacity: 0.9;
-        }
-
-        .email-order-btn {
-            background: var(--color-gold);
-            color: black;
-        }
-
-        .whatsapp-order-btn {
-            background: #25D366;
-            color: white;
-        }
     </style>  
 </head>
 <body> 
@@ -1120,45 +1019,6 @@
         </p>
     </div>
 
-    <!-- Newsletter Modal -->
-    <div id="newsletterModal" class="fixed inset-0 bg-black bg-opacity-70 z-[9999] flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform scale-95 transition-transform duration-300">
-            <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 p-6 rounded-t-2xl text-center">
-                <span class="text-4xl">🎁</span>
-                <h3 class="text-2xl font-bold text-white mt-2">SPECJALNY RABAT!</h3>
-                <p class="text-yellow-100 mt-1">10% zniżki na pierwsze zakupy</p>
-            </div>
-            
-            <div class="p-6">
-                <p class="text-gray-600 text-center mb-4">
-                    Zapisz się do newslettera i odbierz <strong>kod rabatowy 10%</strong> na pierwsze zakupy!
-                </p>
-                
-                <form id="newsletterForm" class="space-y-4">
-                    <input type="email" 
-                           placeholder="✉️ Twój adres email" 
-                           required
-                           class="w-full p-3 border border-gray-300 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200">
-                    
-                    <label class="flex items-start space-x-2 text-sm text-gray-600">
-                        <input type="checkbox" required class="mt-1">
-                        <span>Akceptuję <a href="#" class="text-yellow-600 hover:underline">politykę prywatności</a> i chcę otrzymywać oferty</span>
-                    </label>
-                    
-                    <button type="submit" 
-                            class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-4 px-6 rounded-lg transition duration-300 transform hover:scale-105">
-                        🎉 ODBIERZ 10% RABATU!
-                    </button>
-                </form>
-                
-                <button onclick="closeNewsletter()" 
-                        class="w-full mt-3 text-gray-500 hover:text-gray-700 text-sm transition">
-                    Nie teraz, dziękuję
-                </button>
-            </div>
-        </div>
-    </div>
-
     <!-- Nagłówek -->
     <header>
         <div class="logo">AdelbertusShop</div>
@@ -1187,7 +1047,7 @@
         <!-- Strona główna -->
         <section id="home" class="active">
             <div class="section-title">
-                <h1>Witaj w AdelbertusShop</h1>
+                <h2>Witaj w AdelbertusShop</h2>
                 <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
             </div>
             
@@ -1204,12 +1064,7 @@
             <div class="products-grid">
                 <div class="product-card fade-in">
                     <div class="product-image-container">
-                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" 
-                             alt="Koszulka Rebel - vintage style 80s" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
                     </div>
                     <div class="product-info">
                         <div class="product-title">Koszulka "Rebel"</div>
@@ -1241,12 +1096,7 @@
                 
                 <div class="product-card fade-in">
                     <div class="product-image-container">
-                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" 
-                             alt="Koszulka Vintage - retro design 90s" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
                     </div>
                     <div class="product-info">
                         <div class="product-title">Koszulka "Vintage"</div>
@@ -1278,12 +1128,7 @@
                 
                 <div class="product-card fade-in">
                     <div class="product-image-container">
-                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" 
-                             alt="Bluza Urban - streetwear style" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
                     </div>
                     <div class="product-info">
                         <div class="product-title">Bluza "Urban"</div>
@@ -1313,239 +1158,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- Sklep z wyszukiwarką i filtrami -->
-        <section id="shop">
-            <div class="section-title">
-                <h1>Sklep Adelbertus - Kolekcja Vintage 80s/90s</h1>
-                <p>Odkryj naszą ekskluzywną kolekcję odzieży retro</p>
-            </div>
-            
-            <!-- WYSZUKIWARKA -->
-            <div class="search-container mb-8 max-w-2xl mx-auto px-4">
-                <div class="relative">
-                    <input type="text" id="productSearch" placeholder="🔍 Szukaj produktów, wzorów, kolorów..." 
-                           class="w-full p-4 border-2 border-gray-300 rounded-xl text-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all">
-                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                        <span class="text-gray-400 text-sm" id="searchResultsCount"></span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- FILTRY -->
-            <div class="filters-container mb-8 bg-white p-6 rounded-2xl shadow-lg max-w-6xl mx-auto">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold mb-2 gold-text">Kategoria</label>
-                        <select id="categoryFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:border-yellow-500">
-                            <option value="all">🛍️ Wszystkie produkty</option>
-                            <option value="tshirt">👕 Koszulki</option>
-                            <option value="hoodie">🧥 Bluzy</option>
-                            <option value="cap">🧢 Czapki</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-bold mb-2 gold-text">Cena</label>
-                        <select id="priceFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:border-yellow-500">
-                            <option value="all">💰 Wszystkie ceny</option>
-                            <option value="0-100">💸 Do 100 zł</option>
-                            <option value="100-120">💵 100-120 zł</option>
-                            <option value="120-150">💳 120-150 zł</option>
-                            <option value="150-200">🏷️ 150-200 zł</option>
-                            <option value="200+">💎 Powyżej 200 zł</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-bold mb-2 gold-text">Rozmiar</label>
-                        <select id="sizeFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:border-yellow-500">
-                            <option value="all">📏 Wszystkie rozmiary</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                            <option value="XXL">XXL</option>
-                        </select>
-                    </div>
-                    
-                    <div>
-                        <label class="block text-sm font-bold mb-2 gold-text">Kolor</label>
-                        <select id="colorFilter" class="w-full p-3 border border-gray-300 rounded-lg focus:border-yellow-500">
-                            <option value="all">🎨 Wszystkie kolory</option>
-                            <option value="czarny">⚫ Czarny</option>
-                            <option value="biały">⚪ Biały</option>
-                            <option value="bordowy">🔴 Bordowy</option>
-                            <option value="grafitowy">🔵 Grafitowy</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="flex justify-between items-center mt-4">
-                    <div class="text-sm text-gray-600">
-                        Znaleziono: <span id="productsCount" class="font-bold">34</span> produktów
-                    </div>
-                    <div class="flex gap-2">
-                        <button id="resetFilters" class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
-                            🔄 Wyczyść filtry
-                        </button>
-                        <button id="sortProducts" class="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition">
-                            📊 Sortuj
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <h2 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h2>
-            <div class="products-grid">
-                <!-- Produkty koszulek - tylko 3 przykładowe dla czytelności -->
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" 
-                             alt="Koszulka Rebel - vintage style 80s" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-title">Koszulka "Rebel"</div>
-                        <div class="product-price">120 zł</div>
-                        <p class="product-description">Bestseller! Unikalny wzór w stylu vintage</p>
-                        
-                        <div class="product-options">
-                            <div class="option-group">
-                                <div class="option-title">Kolor:</div>
-                                <div class="color-options">
-                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                                    <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="option-group">
-                                <div class="option-title">Rozmiar:</div>
-                                <div class="size-options">
-                                    <div class="size-option selected" data-size="S">S</div>
-                                    <div class="size-option" data-size="M">M</div>
-                                    <div class="size-option" data-size="L">L</div>
-                                    <div class="size-option" data-size="XL">XL</div>
-                                    <div class="size-option" data-size="XXL">XXL</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" 
-                             alt="Koszulka Vintage - retro design 90s" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-title">Koszulka "Vintage"</div>
-                        <div class="product-price">120 zł</div>
-                        <p class="product-description">Klasyczny design inspirowany latami 90s</p>
-                        
-                        <div class="product-options">
-                            <div class="option-group">
-                                <div class="option-title">Kolor:</div>
-                                <div class="color-options">
-                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                                    <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="option-group">
-                                <div class="option-title">Rozmiar:</div>
-                                <div class="size-options">
-                                    <div class="size-option selected" data-size="S">S</div>
-                                    <div class="size-option" data-size="M">M</div>
-                                    <div class="size-option" data-size="L">L</div>
-                                    <div class="size-option" data-size="XL">XL</div>
-                                    <div class="size-option" data-size="XXL">XXL</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in">
-                    <div class="product-image-container">
-                        <img src="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png" 
-                             alt="Koszulka Abstract - nowoczesny design" 
-                             class="product-image"
-                             loading="lazy"
-                             width="280" 
-                             height="280">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-title">Koszulka "Abstract"</div>
-                        <div class="product-price">120 zł</div>
-                        <p class="product-description">Nowoczesny wzór abstrakcyjny dla indywidualistów</p>
-                        
-                        <div class="product-options">
-                            <div class="option-group">
-                                <div class="option-title">Kolor:</div>
-                                <div class="color-options">
-                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                                    <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
-                                </div>
-                            </div>
-                            
-                            <div class="option-group">
-                                <div class="option-title">Rozmiar:</div>
-                                <div class="size-options">
-                                    <div class="size-option selected" data-size="S">S</div>
-                                    <div class="size-option" data-size="M">M</div>
-                                    <div class="size-option" data-size="L">L</div>
-                                    <div class="size-option" data-size="XL">XL</div>
-                                    <div class="size-option" data-size="XXL">XXL</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Abstract" data-price="120" data-image="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png">Dodaj do koszyka</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- PAGINACJA -->
-            <div class="pagination-container mt-12 flex justify-center items-center space-x-2">
-                <button class="pagination-btn pagination-prev px-4 py-2 border rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
-                    ← Poprzednia
-                </button>
-                
-                <div class="pagination-numbers flex space-x-1">
-                    <button class="pagination-number px-3 py-2 border rounded-lg bg-yellow-500 text-white">1</button>
-                    <button class="pagination-number px-3 py-2 border rounded-lg hover:bg-gray-50">2</button>
-                    <button class="pagination-number px-3 py-2 border rounded-lg hover:bg-gray-50">3</button>
-                </div>
-                
-                <button class="pagination-btn pagination-next px-4 py-2 border rounded-lg hover:bg-gray-50">
-                    Następna →
-                </button>
-            </div>
-
-            <div class="products-info text-center mt-4 text-gray-600">
-                <p>Wyświetlanie <span id="productsShowing">1-12</span> z <span id="productsTotal">34</span> produktów</p>
-            </div>
-        </section>
-        <!-- Sklep - ZAKTUALIZOWANY -->
+        </section>        
+  <!-- Sklep - ZAKTUALIZOWANY -->
 <section id="shop">
     <div class="section-title">
         <h2>Nasze Produkty</h2>
@@ -4195,6 +3809,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     }
   });
 </script>
+       
     <!-- Koszyk -->
     <div id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
@@ -4243,314 +3858,64 @@ setInterval(typeLetter, 15000); // co 15s nowy list
         </div>
         
         <div class="social-links">
-            <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="footer-ads">
+            <div class="footer-ad">
+                <p>Reklama 1</p>
+            </div>
+            <div class="footer-ad">
+                <p>Reklama 2</p>
+            </div>
+            <div class="footer-ad">
+                <p>Reklama 3</p>
+            </div>
         </div>
         
         <div class="mt-6">
-            <p>© 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
+            <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
             <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
         </div>
     </footer>
 
     <script>
-        // ===== SYSTEM SKLEPU =====
+// ===== SYSTEM SKLEPU =====
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
 let chatHistory = [];
 let currentProductContext = null;
 
-// ===== SYSTEM WYSZUKIWANIA I FILTROWANIA =====
-class ProductSearch {
-    constructor() {
-        this.products = [];
-        this.filteredProducts = [];
-        this.currentPage = 1;
-        this.productsPerPage = 12;
-        this.init();
-    }
-    
-    init() {
-        this.loadProducts();
-        this.bindEvents();
-        this.updateProductsCount();
-    }
-    
-    loadProducts() {
-        const productCards = document.querySelectorAll('.product-card');
-        this.products = Array.from(productCards).map((card, index) => {
-            return {
-                element: card,
-                name: card.querySelector('.product-title')?.textContent || '',
-                price: parseInt(card.querySelector('.product-price')?.textContent) || 0,
-                category: card.closest('.products-grid')?.previousElementSibling?.textContent.includes('Koszulki') ? 'tshirt' : 
-                         card.closest('.products-grid')?.previousElementSibling?.textContent.includes('Bluzy') ? 'hoodie' : 'cap',
-                size: Array.from(card.querySelectorAll('.size-option')).map(opt => opt.textContent.trim()),
-                color: Array.from(card.querySelectorAll('.color-option')).map(opt => opt.getAttribute('data-color')),
-                description: card.querySelector('.product-description')?.textContent || '',
-                visible: true
-            };
-        });
-        
-        this.filteredProducts = [...this.products];
-    }
-    
-    bindEvents() {
-        document.getElementById('productSearch').addEventListener('input', (e) => {
-            this.searchProducts(e.target.value);
-        });
-        
-        document.getElementById('categoryFilter').addEventListener('change', () => this.applyFilters());
-        document.getElementById('priceFilter').addEventListener('change', () => this.applyFilters());
-        document.getElementById('sizeFilter').addEventListener('change', () => this.applyFilters());
-        document.getElementById('colorFilter').addEventListener('change', () => this.applyFilters());
-        
-        document.getElementById('resetFilters').addEventListener('click', () => this.resetFilters());
-        
-        document.querySelector('.pagination-prev').addEventListener('click', () => this.prevPage());
-        document.querySelector('.pagination-next').addEventListener('click', () => this.nextPage());
-    }
-    
-    searchProducts(query) {
-        const searchTerm = query.toLowerCase().trim();
-        
-        this.filteredProducts = this.products.filter(product => {
-            if (!searchTerm) return true;
-            
-            const searchableText = [
-                product.name,
-                product.description,
-                product.category,
-                ...product.size,
-                ...product.color
-            ].join(' ').toLowerCase();
-            
-            return searchableText.includes(searchTerm);
-        });
-        
-        this.applyFilters();
-        this.updateSearchResultsCount(searchTerm);
-    }
-    
-    applyFilters() {
-        const category = document.getElementById('categoryFilter').value;
-        const priceRange = document.getElementById('priceFilter').value;
-        const size = document.getElementById('sizeFilter').value;
-        const color = document.getElementById('colorFilter').value;
-        
-        let filtered = this.filteredProducts;
-        
-        if (category !== 'all') {
-            filtered = filtered.filter(product => product.category === category);
-        }
-        
-        if (priceRange !== 'all') {
-            filtered = filtered.filter(product => {
-                const price = product.price;
-                switch(priceRange) {
-                    case '0-100': return price <= 100;
-                    case '100-120': return price >= 100 && price <= 120;
-                    case '120-150': return price >= 120 && price <= 150;
-                    case '150-200': return price >= 150 && price <= 200;
-                    case '200+': return price > 200;
-                    default: return true;
-                }
-            });
-        }
-        
-        if (size !== 'all') {
-            filtered = filtered.filter(product => product.size.includes(size));
-        }
-        
-        if (color !== 'all') {
-            filtered = filtered.filter(product => product.color.includes(color));
-        }
-        
-        this.updateProductsDisplay(filtered);
-        this.updateProductsCount(filtered.length);
-    }
-    
-    updateProductsDisplay(filteredProducts) {
-        this.products.forEach(product => {
-            product.element.style.display = 'none';
-        });
-        
-        const startIndex = (this.currentPage - 1) * this.productsPerPage;
-        const endIndex = startIndex + this.productsPerPage;
-        const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-        
-        paginatedProducts.forEach(product => {
-            product.element.style.display = 'block';
-        });
-        
-        this.updatePagination(filteredProducts.length);
-    }
-    
-    updatePagination(totalProducts) {
-        const totalPages = Math.ceil(totalProducts / this.productsPerPage);
-        const paginationNumbers = document.querySelector('.pagination-numbers');
-        const prevBtn = document.querySelector('.pagination-prev');
-        const nextBtn = document.querySelector('.pagination-next');
-        
-        prevBtn.disabled = this.currentPage === 1;
-        nextBtn.disabled = this.currentPage === totalPages;
-        
-        const startProduct = ((this.currentPage - 1) * this.productsPerPage) + 1;
-        const endProduct = Math.min(this.currentPage * this.productsPerPage, totalProducts);
-        document.getElementById('productsShowing').textContent = `${startProduct}-${endProduct}`;
-        document.getElementById('productsTotal').textContent = totalProducts;
-    }
-    
-    nextPage() {
-        const totalPages = Math.ceil(this.filteredProducts.length / this.productsPerPage);
-        if (this.currentPage < totalPages) {
-            this.currentPage++;
-            this.applyFilters();
-        }
-    }
-    
-    prevPage() {
-        if (this.currentPage > 1) {
-            this.currentPage--;
-            this.applyFilters();
-        }
-    }
-    
-    resetFilters() {
-        document.getElementById('productSearch').value = '';
-        document.getElementById('categoryFilter').value = 'all';
-        document.getElementById('priceFilter').value = 'all';
-        document.getElementById('sizeFilter').value = 'all';
-        document.getElementById('colorFilter').value = 'all';
-        
-        this.filteredProducts = [...this.products];
-        this.currentPage = 1;
-        this.applyFilters();
-        this.updateSearchResultsCount('');
-    }
-    
-    updateProductsCount(count = null) {
-        const total = count !== null ? count : this.products.length;
-        document.getElementById('productsCount').textContent = total;
-    }
-    
-    updateSearchResultsCount(searchTerm) {
-        const count = this.filteredProducts.length;
-        const resultsElement = document.getElementById('searchResultsCount');
-        
-        if (searchTerm) {
-            resultsElement.textContent = `${count} wyników`;
-            resultsElement.className = 'text-yellow-600 font-semibold';
-        } else {
-            resultsElement.textContent = '';
-        }
-    }
-}
+// Inicjalizacja
+document.addEventListener('DOMContentLoaded', function() {
+    initNavigation();
+    initProductOptions();
+    initDesignStudio();
+    updateCart();
+    initCookieConsent();
+    initChatbot();
+    initFAQ();
+});
 
-// ===== SYSTEM NEWSLETTERA =====
-class NewsletterSystem {
-    constructor() {
-        this.shown = localStorage.getItem('newsletter_shown') === 'true';
-        this.init();
-    }
-    
-    init() {
-        if (!this.shown) {
-            setTimeout(() => this.showNewsletter(), 3000);
-        }
-        
-        document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.subscribeNewsletter();
-        });
-    }
-    
-    showNewsletter() {
-        const modal = document.getElementById('newsletterModal');
-        modal.classList.remove('hidden');
-        setTimeout(() => {
-            modal.querySelector('.modal-content').style.transform = 'scale(1)';
-        }, 100);
-        
-        localStorage.setItem('newsletter_shown', 'true');
-        this.shown = true;
-    }
-    
-    closeNewsletter() {
-        const modal = document.getElementById('newsletterModal');
-        modal.classList.add('hidden');
-    }
-    
-    subscribeNewsletter() {
-        const email = document.getElementById('newsletterForm').querySelector('input[type="email"]').value;
-        
-        localStorage.setItem('newsletter_subscribed', 'true');
-        localStorage.setItem('discount_code', 'ADELBERTUS10');
-        
-        this.showSuccessMessage();
-    }
-    
-    showSuccessMessage() {
-        const modalContent = document.getElementById('newsletterModal').querySelector('.modal-content');
-        modalContent.innerHTML = `
-            <div class="text-center p-8">
-                <span class="text-6xl">🎉</span>
-                <h3 class="text-2xl font-bold text-green-600 mt-4">SUKCES!</h3>
-                <p class="text-gray-600 mt-2">Zapisano do newslettera</p>
-                <div class="bg-yellow-100 border border-yellow-400 rounded-lg p-4 mt-4">
-                    <p class="font-bold text-lg">Twój kod rabatowy:</p>
-                    <p class="text-2xl font-bold text-green-600">ADELBERTUS10</p>
-                    <p class="text-sm text-gray-600 mt-1">10% zniżki na pierwsze zakupy</p>
-                </div>
-                <button onclick="newsletterSystem.closeNewsletter()" 
-                        class="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition">
-                    Super! Zamknij
-                </button>
-            </div>
-        `;
-    }
-}
-
-// ===== SYSTEM CZATBOTA =====
+// ===== ULEPSZONY CHATBOT =====
 function initChatbot() {
-    chatHistory = JSON.parse(localStorage.getItem('adelbertus_chat_history')) || [];
-    
-    if (chatHistory.length > 0) {
-        const messagesContainer = document.getElementById('chatbotMessages');
-        messagesContainer.innerHTML = '';
-        chatHistory.forEach(msg => {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${msg.type}-message`;
-            messageDiv.innerHTML = msg.content;
-            messagesContainer.appendChild(messageDiv);
-        });
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
-    }
-    
-    addQuickReplies();
+    setTimeout(() => {
+        addQuickReplies();
+    }, 500);
 }
 
-function addQuickReplies() {
-    const quickReplies = document.createElement('div');
-    quickReplies.className = 'quick-replies';
-    quickReplies.innerHTML = `
-        <button class="quick-reply-btn" onclick="handleQuickReply('Pokaż koszulki')">👕 Koszulki</button>
-        <button class="quick-reply-btn" onclick="handleQuickReply('Pokaż bluzy')">🧥 Bluzy</button>
-        <button class="quick-reply-btn" onclick="handleQuickReply('Pomoc z rozmiarem')">📏 Rozmiary</button>
-        <button class="quick-reply-btn" onclick="handleQuickReply('Jak zamówić')">🛒 Jak zamówić</button>
-    `;
+function toggleChatbot() {
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotButton = document.getElementById('chatbotButton');
     
-    const messagesContainer = document.getElementById('chatbotMessages');
-    const lastMessage = messagesContainer.lastElementChild;
-    if (lastMessage) {
-        lastMessage.appendChild(quickReplies);
+    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+    chatbotButton.classList.remove('pulse');
+    
+    if (chatbotWindow.style.display === 'flex') {
+        addQuickReplies();
     }
-}
-
-function handleQuickReply(message) {
-    document.getElementById('chatbotInput').value = message;
-    sendChatbotMessage();
 }
 
 function handleChatbotInput(event) {
@@ -4563,50 +3928,348 @@ function sendChatbotMessage() {
     const input = document.getElementById('chatbotInput');
     const message = input.value.trim();
     
-    if (!message) return;
-    
-    addChatMessage(message, 'user');
-    input.value = '';
-    
-    showTypingIndicator();
-    
-    setTimeout(() => {
-        hideTypingIndicator();
-        generateBotResponse(message);
-    }, 1000 + Math.random() * 1000);
+    if (message) {
+        addMessageToChat(message, 'user');
+        input.value = '';
+        
+        chatHistory.push({ role: 'user', message: message, timestamp: new Date() });
+        
+        showTypingIndicator();
+        
+        setTimeout(() => {
+            hideTypingIndicator();
+            processUserMessage(message);
+        }, 800 + Math.random() * 800);
+    }
 }
 
-function addChatMessage(content, type) {
-    const messagesContainer = document.getElementById('chatbotMessages');
+function processUserMessage(message) {
+    const lowerMessage = message.toLowerCase();
     
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${type}-message`;
-    
-    if (type === 'user') {
-        messageDiv.textContent = content;
-    } else {
-        messageDiv.innerHTML = content;
+    // SPRAWDZANIE KOSZYKA
+    if (lowerMessage.includes('koszyk') || lowerMessage.includes('koszyka') || lowerMessage.includes('co mam w koszyku')) {
+        showCartInChat();
+        return;
     }
     
-    messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    // DODAWANIE DO KOSZYKA
+    if (lowerMessage.includes('dodaj') || lowerMessage.includes('chcę kupić') || lowerMessage.includes('zamów')) {
+        handleAddToCartRequest(lowerMessage);
+        return;
+    }
     
-    chatHistory.push({
-        type: type,
-        content: type === 'user' ? content : messageDiv.innerHTML,
-        timestamp: new Date().toISOString()
+    // USUWANIE Z KOSZYKA
+    if (lowerMessage.includes('usuń') || lowerMessage.includes('usun') || lowerMessage.includes('wyjmij')) {
+        handleRemoveFromCartRequest(lowerMessage);
+        return;
+    }
+    
+    // PYTANIA O PRODUKTY
+    if (lowerMessage.includes('produkt') || lowerMessage.includes('koszulka') || lowerMessage.includes('bluza') || 
+        lowerMessage.includes('asortyment') || lowerMessage.includes('co masz')) {
+        showProductsInChat();
+        return;
+    }
+    
+    // PYTANIA O ROZMIARY
+    if (lowerMessage.includes('rozmiar') || lowerMessage.includes('rozmiaru') || lowerMessage.includes('size')) {
+        showSizeChart();
+        return;
+    }
+    
+    // PYTANIA O DOSTAWĘ
+    if (lowerMessage.includes('dostawa') || lowerMessage.includes('wysyłka') || lowerMessage.includes('czas') || lowerMessage.includes('kurier')) {
+        showShippingInfo();
+        return;
+    }
+    
+    // PYTANIA O PŁATNOŚCI
+    if (lowerMessage.includes('płatność') || lowerMessage.includes('płatności') || lowerMessage.includes('zapłać') || lowerMessage.includes('paypal')) {
+        showPaymentInfo();
+        return;
+    }
+    
+    // PYTANIA O ZWROTY
+    if (lowerMessage.includes('zwrot') || lowerMessage.includes('zwroty') || lowerMessage.includes('reklamacja')) {
+        showReturnPolicy();
+        return;
+    }
+    
+    // PYTANIA O MATERIAŁY
+    if (lowerMessage.includes('materiał') || lowerMessage.includes('skład') || lowerMessage.includes('bawełna')) {
+        showMaterialInfo();
+        return;
+    }
+    
+    // STANDARDOWE PYTANIA
+    const response = getChatbotResponse(message);
+    addMessageToChat(response, 'bot');
+    chatHistory.push({ role: 'bot', message: response, timestamp: new Date() });
+    
+    addQuickReplies();
+}
+
+function handleAddToCartRequest(message) {
+    const products = [
+        { name: 'Koszulka Rebel', price: 120, image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg' },
+        { name: 'Koszulka Vintage', price: 120, image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg' },
+        { name: 'Bluza Urban', price: 200, image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg' }
+    ];
+    
+    let matchedProduct = null;
+    
+    for (const product of products) {
+        if (message.includes(product.name.toLowerCase())) {
+            matchedProduct = product;
+            break;
+        }
+    }
+    
+    if (matchedProduct) {
+        addToCart(matchedProduct.name, matchedProduct.price, matchedProduct.image, 'M', 'Czarny');
+        
+        addMessageToChat(`✅ Dodano "${matchedProduct.name}" do koszyka! 🛒\n\nCena: ${matchedProduct.price} zł\nRozmiar: M (domyślny)\nKolor: Czarny (domyślny)\n\nChcesz zmienić rozmiar lub kolor?`, 'bot');
+        
+        showCartSummaryInChat();
+    } else {
+        addMessageToChat("Który produkt chcesz dodać do koszyka? 🛒", 'bot');
+        showProductsInChat(true);
+    }
+}
+
+function handleRemoveFromCartRequest(message) {
+    if (cart.length === 0) {
+        addMessageToChat("Twój koszyk jest pusty - nie ma nic do usunięcia! 🛒", 'bot');
+        return;
+    }
+    
+    showCartInChat(true);
+}
+
+function showCartInChat(showRemoveOptions = false) {
+    if (cart.length === 0) {
+        addMessageToChat("🛒 Twój koszyk jest pusty\n\nChcesz coś dodać? Sprawdź nasze produkty! 👇", 'bot');
+        showProductsInChat();
+        return;
+    }
+    
+    let message = "🛒 Zawartość Twojego koszyka:\n\n";
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        message += `• ${item.name}\n`;
+        message += `  Rozmiar: ${item.size || 'M'}\n`;
+        message += `  Kolor: ${item.color || 'Czarny'}\n`;
+        message += `  Ilość: ${item.quantity} × ${item.price} zł\n`;
+        message += `  Suma: ${item.quantity * item.price} zł\n\n`;
+        total += item.quantity * item.price;
     });
     
-    if (chatHistory.length > 50) {
-        chatHistory = chatHistory.slice(-50);
+    message += `💰 Łączna suma: ${total} zł\n\n`;
+    
+    if (showRemoveOptions) {
+        message += "Aby usunąć produkt, napisz 'usuń [nazwa produktu]'";
+    } else {
+        message += "Co chcesz zrobić dalej?";
     }
     
-    localStorage.setItem('adelbertus_chat_history', JSON.stringify(chatHistory));
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">🛒 Zamów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Wyczyść koszyk', 'user'); setTimeout(() => processUserMessage('Wyczyść koszyk'), 500)">🗑️ Wyczyść koszyk</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showProductsInChat(showAddButtons = false) {
+    const products = [
+        { 
+            name: 'Koszulka "Rebel"', 
+            price: 120, 
+            image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+            description: 'Bestseller! Unikalny wzór w stylu vintage'
+        },
+        { 
+            name: 'Koszulka "Vintage"', 
+            price: 120, 
+            image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg',
+            description: 'Klasyczny design inspirowany latami 90s'
+        },
+        { 
+            name: 'Bluza "Urban"', 
+            price: 200, 
+            image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+            description: 'Idealna na chłodniejsze dni, premium quality'
+        }
+    ];
+    
+    let message = "🎨 Nasze produkty:\n\n";
+    
+    products.forEach(product => {
+        message += `🏷️ ${product.name}\n`;
+        message += `💰 ${product.price} zł\n`;
+        message += `📝 ${product.description}\n\n`;
+    });
+    
+    addMessageToChat(message, 'bot');
+    
+    if (showAddButtons) {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        
+        products.forEach(product => {
+            const productSuggestion = document.createElement('div');
+            productSuggestion.className = 'product-suggestion';
+            productSuggestion.innerHTML = `
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">${product.price} zł</div>
+                <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}', 'M', 'Czarny'); 
+                                  addMessageToChat('✅ Dodano ${product.name} do koszyka!', 'bot'); 
+                                  setTimeout(() => showCartSummaryInChat(), 800)">
+                    🛒 Dodaj do koszyka
+                </button>
+            `;
+            messagesContainer.appendChild(productSuggestion);
+        });
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+}
+
+function showSizeChart() {
+    const sizeChart = `
+📏 Tabela rozmiarów (w cm):
+
+<table>
+<tr><th>Rozmiar</th><th>Klata</th><th>Długość</th><th>Rękaw</th></tr>
+<tr><td>S</td><td>48</td><td>70</td><td>20</td></tr>
+<tr><td>M</td><td>52</td><td>72</td><td>21</td></tr>
+<tr><td>L</td><td>56</td><td>74</td><td>22</td></tr>
+<tr><td>XL</td><td>60</td><td>76</td><td>23</td></tr>
+</table>
+
+💡 Porada: Zmierz swoją ulubioną koszulkę i porównaj z naszymi wymiarami!
+    `;
+    
+    addMessageToChat(sizeChart, 'bot');
+}
+
+function showShippingInfo() {
+    const shippingInfo = `
+🚚 Informacje o dostawie:
+
+• 📦 Darmowa dostawa od 200 zł
+• 🏪 Paczkomaty InPost - 14 zł
+• 🚚 Kurier DPD - 16 zł  
+• ⏰ Czas realizacji: 1-2 dni robocze
+• 📍 Wysyłka w całej Polsce
+
+📦 Zamówienia składane do 14:00 wysyłamy tego samego dnia!
+    `;
+    
+    addMessageToChat(shippingInfo, 'bot');
+}
+
+function showPaymentInfo() {
+    const paymentInfo = `
+💳 Metody płatności:
+
+• 🔵 PayPal (najszybsza opcja)
+• 💳 Karta kredytowa/debetowa
+• 📱 Przelew tradycyjny
+• 💰 Płatność przy odbiorze (dostawa kurierem)
+
+🛡️ Wszystkie płatności są bezpieczne i szyfrowane.
+    `;
+    
+    addMessageToChat(paymentInfo, 'bot');
+}
+
+function showReturnPolicy() {
+    const returnInfo = `
+📦 Polityka zwrotów:
+
+• 🔄 30 dni na zwrot bez podania przyczyny
+• 🆓 Darmowa wymiana na inny rozmiar
+• 📍 Zwroty przez Paczkomaty InPost
+• ✅ Produkt musi być nieprany z metkami
+
+❓ Masz problem z zamówieniem? Napisz do nas!
+    `;
+    
+    addMessageToChat(returnInfo, 'bot');
+}
+
+function showMaterialInfo() {
+    const materialInfo = `
+🧵 Materiały i jakość:
+
+👕 Koszulki:
+• 100% bawełna
+• Gramatura: 180g (idealna na nadruki)
+• Miękki, przewiewny materiał
+
+🧥 Bluzy:
+• 80% bawełna, 20% poliester  
+• Gramatura: 300g (super jakość)
+• Ciepłe i wygodne
+
+🎨 Nadruki:
+• Technologia DTF
+• Elastyczne i trwałe
+• Wytrzymują wiele prań
+    `;
+    
+    addMessageToChat(materialInfo, 'bot');
+}
+
+function showCartSummaryInChat() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    let message = `🛒 Podsumowanie koszyka:\n\n`;
+    message += `📦 Liczba produktów: ${itemCount}\n`;
+    message += `💰 Łączna kwota: ${total} zł\n\n`;
+    
+    if (total >= 200) {
+        message += `🎉 Masz darmową dostawę!\n\n`;
+    } else {
+        const needed = 200 - total;
+        message += `🚚 Do darmowej dostawy brakuje: ${needed} zł\n\n`;
+    }
+    
+    message += `Co chcesz zrobić dalej?`;
+    
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">✅ Zamów teraz</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż koszyk', 'user'); setTimeout(() => processUserMessage('Pokaż koszyk'), 500)">🛒 Pokaż koszyk</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addMessageToChat(message, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}-message`;
+    messageElement.innerHTML = message.replace(/\n/g, '<br>');
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
 function showTypingIndicator() {
-    const typingIndicator = document.getElementById('chatbotTyping');
-    typingIndicator.style.display = 'block';
+    document.getElementById('chatbotTyping').style.display = 'block';
     document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
 }
 
@@ -4614,265 +4277,112 @@ function hideTypingIndicator() {
     document.getElementById('chatbotTyping').style.display = 'none';
 }
 
-function generateBotResponse(userMessage) {
-    const lowerMessage = userMessage.toLowerCase();
-    let response = '';
+function addQuickReplies() {
+    const quickReplies = [
+        "🛒 Pokaż produkty",
+        "📏 Tabela rozmiarów", 
+        "🚚 Dostawa i płatności",
+        "🛍️ Pokaż koszyk",
+        "❓ Pomoc"
+    ];
     
-    if (lowerMessage.includes('cześć') || lowerMessage.includes('hej') || lowerMessage.includes('witaj')) {
-        response = `👋 Cześć! Witaj w Adelbertus Shop! Jak mogę Ci pomóc? Możesz zapytać o:<br><br>
-        • 🛍️ <strong>Produkty i kolekcje</strong><br>
-        • 📏 <strong>Dobór rozmiaru</strong><br>
-        • 🎨 <strong>Dostępne kolory i wzory</strong><br>
-        • 🚚 <strong>Dostawę i zwroty</strong><br>
-        • 💰 <strong>Płatności i promocje</strong><br><br>
-        <em>Co Cię interesuje?</em>`;
-    }
-    else if (lowerMessage.includes('koszulk') || lowerMessage.includes('tshirt') || lowerMessage.includes('podkoszulek')) {
-        response = generateProductResponse('koszulki');
-    }
-    else if (lowerMessage.includes('bluz') || lowerMessage.includes('hoodie') || lowerMessage.includes('sweter')) {
-        response = generateProductResponse('bluzy');
-    }
-    else if (lowerMessage.includes('rozmiar') || lowerMessage.includes('rozm') || lowerMessage.includes('size') || lowerMessage.includes('wymiar')) {
-        response = generateSizeGuide();
-    }
-    else if (lowerMessage.includes('zamów') || lowerMessage.includes('kup') || lowerMessage.includes('zakup') || lowerMessage.includes('zamow')) {
-        response = `🛒 <strong>Jak zamówić w Adelbertus Shop:</strong><br><br>
-        1. <strong>Wybierz produkt</strong> - przejrzyj naszą kolekcję<br>
-        2. <strong>Dostosuj</strong> - wybierz rozmiar i kolor<br>
-        3. <strong>Dodaj do koszyka</strong> - kliknij "Dodaj do koszyka"<br>
-        4. <strong>Złóż zamówienie</strong> - przejdź do koszyka i wybierz metodę płatności<br><br>
-        
-        <strong>Dostępne metody płatności:</strong><br>
-        • 💳 PayPal (najszybsza)<br>
-        • 📧 Zamówienie mailem<br>
-        • 📱 WhatsApp<br>
-        • 💰 Przelew tradycyjny<br><br>
-        
-        <em>Potrzebujesz pomocy z konkretnym produktem?</em>`;
-    }
-    else if (lowerMessage.includes('dostaw') || lowerMessage.includes('wysyłk') || lowerMessage.includes('przesyłk') || lowerMessage.includes('wysylk')) {
-        response = `🚚 <strong>Dostawa i wysyłka:</strong><br><br>
-        • <strong>Czas realizacji:</strong> 1-2 dni robocze<br>
-        • <strong>Dostawa InPost:</strong> 2-3 dni robocze (15 zł)<br>
-        • <strong>Dostawa kurierem:</strong> 1-2 dni robocze (20 zł)<br>
-        • <strong>Odbiór osobisty:</strong> Warszawa - 0 zł<br><br>
-        
-        <strong>📦 Darmowa dostawa przy zamówieniach powyżej 300 zł!</strong><br><br>
-        
-        <em>Masz pytania dotyczące konkretnego zamówienia?</em>`;
-    }
-    else if (lowerMessage.includes('zwrot') || lowerMessage.includes('reklamac') || lowerMessage.includes('wymian')) {
-        response = `🔄 <strong>Zwroty i reklamacje:</strong><br><br>
-        • <strong>Termin zwrotu:</strong> 14 dni od otrzymania<br>
-        • <strong>Warunki:</strong> produkt nieużywany, z metkami<br>
-        • <strong>Koszty zwrotu:</strong> ponosi klient (chyba że wada)<br>
-        • <strong>Wymiana:</strong> dostępna na ten sam produkt w innym rozmiarze<br><br>
-        
-        <strong>📞 Problemy z zamówieniem? Napisz do nas: mielniczukgrzegosz74@gmail.com</strong>`;
-    }
-    else if (lowerMessage.includes('cen') || lowerMessage.includes('płatność') || lowerMessage.includes('płatnosci') || lowerMessage.includes('platnosc')) {
-        response = `💰 <strong>Ceny i płatności:</strong><br><br>
-        • <strong>Koszulki:</strong> 120-150 zł<br>
-        • <strong>Bluzy:</strong> 200-250 zł<br>
-        • <strong>Czapki:</strong> 80-100 zł<br><br>
-        
-        <strong>Akceptowane płatności:</strong><br>
-        • 💳 Karty płatnicze (przez PayPal)<br>
-        • 📧 Zamówienie z płatnością mailem<br>
-        • 📱 BLIK i przelewy tradycyjne<br>
-        • 💰 Gotówka przy odbiorze osobistym<br><br>
-        
-        <strong>🎁 Newsletter = 10% zniżki na pierwsze zakupy!</strong>`;
-    }
-    else if (lowerMessage.includes('promocj') || lowerMessage.includes('rabat') || lowerMessage.includes('zniżk') || lowerMessage.includes('znizk')) {
-        response = `🎁 <strong>Promocje i zniżki:</strong><br><br>
-        • <strong>Newsletter:</strong> 10% zniżki na pierwsze zakupy<br>
-        • <strong>Stały klient:</strong> program lojalnościowy w przygotowaniu<br>
-        • <strong>Darmowa dostawa:</strong> przy zamówieniach powyżej 300 zł<br><br>
-        
-        <strong>💎 Exclusive:</strong> Niektóre produkty mają ograniczone edycje - śledź nasze social media!<br><br>
-        
-        <em>Chcesz otrzymać kod rabatowy? Zapisz się do newslettera!</em>`;
-    }
-    else if (lowerMessage.includes('kontakt') || lowerMessage.includes('mail') || lowerMessage.includes('email') || lowerMessage.includes('telefon')) {
-        response = `📞 <strong>Kontakt z Adelbertus Shop:</strong><br><br>
-        • <strong>📧 Email:</strong> mielniczukgrzegosz74@gmail.com<br>
-        • <strong>📱 Telefon/WhatsApp:</strong> 604 296 360<br>
-        • <strong>📸 Instagram:</strong> @mielniczukgrzegosz74<br>
-        • <strong>👥 Facebook:</strong> Adelbertus Shop<br><br>
-        
-        <strong>Godziny odpowiedzi:</strong> 9:00-18:00 (pn-pt)<br>
-        <strong>Odpowiadamy maksymalnie w ciągu 24h!</strong>`;
-    }
-    else {
-        response = `🤔 <strong>Przepraszam, nie zrozumiałem całkowicie.</strong><br><br>
-        Możesz zapytać mnie o:<br><br>
-        
-        <div class="suggestion-buttons">
-            <button class="suggestion-btn" onclick="handleQuickReply('Pokaż koszulki')">Koszulki</button>
-            <button class="suggestion-btn" onclick="handleQuickReply('Pokaż bluzy')">Bluzy</button>
-            <button class="suggestion-btn" onclick="handleQuickReply('Pomoc z rozmiarem')">Rozmiary</button>
-        </div>
-        
-        <div class="suggestion-buttons">
-            <button class="suggestion-btn" onclick="handleQuickReply('Jak zamówić')">Zamówienie</button>
-            <button class="suggestion-btn" onclick="handleQuickReply('Dostawa')">Dostawa</button>
-            <button class="suggestion-btn" onclick="handleQuickReply('Kontakt')">Kontakt</button>
-        </div><br>
-        
-        <em>...lub po prostu napisz swoje pytanie innymi słowami!</em>`;
+    const messagesContainer = document.getElementById('chatbotMessages');
+    
+    const existingReplies = messagesContainer.querySelector('.quick-replies');
+    if (existingReplies) {
+        existingReplies.remove();
     }
     
-    addChatMessage(response, 'bot');
+    const quickRepliesContainer = document.createElement('div');
+    quickRepliesContainer.className = 'quick-replies';
     
-    if (!lowerMessage.includes('rozmiar') && !lowerMessage.includes('kontakt')) {
-        setTimeout(addQuickReplies, 100);
-    }
-}
-
-function generateProductResponse(category) {
-    let products = [];
-    let title = '';
-    let description = '';
-    
-    switch(category) {
-        case 'koszulki':
-            title = '👕 Nasze Koszulki Vintage';
-            description = 'Unikalne wzory inspirowane latami 80s i 90s';
-            products = [
-                { name: 'Koszulka "Rebel"', price: '120 zł', image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg' },
-                { name: 'Koszulka "Vintage"', price: '120 zł', image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg' },
-                { name: 'Koszulka "Abstract"', price: '120 zł', image: 'https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png' }
-            ];
-            break;
-        case 'bluzy':
-            title = '🧥 Nasze Bluzy Premium';
-            description = 'Ciepłe i stylowe bluzy z limitowanych kolekcji';
-            products = [
-                { name: 'Bluza "Urban"', price: '200 zł', image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg' }
-            ];
-            break;
-    }
-    
-    let response = `<strong>${title}</strong><br>${description}<br><br>`;
-    
-    products.forEach((product, index) => {
-        response += `
-            <div class="product-suggestion">
-                ${product.image ? `<img src="${product.image}" alt="${product.name}" style="max-height: 120px; object-fit: cover;">` : ''}
-                <div class="product-name">${product.name}</div>
-                <div class="product-price">${product.price}</div>
-                <button onclick="chatbotAddToCart('${product.name}', ${parseInt(product.price)})" 
-                        style="background: var(--color-gold); border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; width: 100%;">
-                    🛒 Dodaj do koszyka
-                </button>
-            </div>
-        `;
+    quickReplies.forEach(reply => {
+        const button = document.createElement('button');
+        button.textContent = reply;
+        button.className = 'quick-reply-btn';
+        button.onclick = () => {
+            document.getElementById('chatbotInput').value = reply;
+            sendChatbotMessage();
+        };
+        quickRepliesContainer.appendChild(button);
     });
     
-    response += `<br><em>Potrzebujesz pomocy z doborem rozmiaru lub masz pytania o konkretny produkt?</em>`;
-    
-    return response;
+    messagesContainer.appendChild(quickRepliesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-function generateSizeGuide() {
-    return `<strong>📏 Tabela Rozmiarów (w cm):</strong><br><br>
+function getChatbotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
     
-    <div class="size-chart">
-        <table>
-            <tr>
-                <th>Rozmiar</th>
-                <th>S</th>
-                <th>M</th>
-                <th>L</th>
-                <th>XL</th>
-                <th>XXL</th>
-            </tr>
-            <tr>
-                <td><strong>Klatka piersiowa</strong></td>
-                <td>90-94</td>
-                <td>94-98</td>
-                <td>98-102</td>
-                <td>102-106</td>
-                <td>106-110</td>
-            </tr>
-            <tr>
-                <td><strong>Długość</strong></td>
-                <td>68</td>
-                <td>70</td>
-                <td>72</td>
-                <td>74</td>
-                <td>76</td>
-            </tr>
-            <tr>
-                <td><strong>Rękaw</strong></td>
-                <td>62</td>
-                <td>64</td>
-                <td>66</td>
-                <td>68</td>
-                <td>70</td>
-            </tr>
-        </table>
-    </div>
+    // WITANIE
+    if (message.includes('cześć') || message.includes('hej') || message.includes('siema') || message.includes('witaj')) {
+        return "Cześć! 😊 Jak mogę Ci pomóc? Możesz zapytać o produkty, rozmiary, dostawę lub poprosić mnie o pomoc w zakupach!";
+    }
     
-    <strong>💡 Jak zmierzyć się poprawnie:</strong><br>
-    • <strong>Klatka piersiowa:</strong> zmierz obwód w najszerszym miejscu klatki<br>
-    • <strong>Długość:</strong> od barku do dołu produktu<br>
-    • <strong>Rękaw:</strong> od barku do nadgarstka<br><br>
+    // PYTANIA O KONKRETNE PRODUKTY
+    if (message.includes('rebel')) {
+        return "Koszulka 'Rebel' to nasz bestseller! 💥\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 100% bawełna\n\nChcesz dodać ją do koszyka?";
+    }
     
-    <em>Nie jesteś pewien rozmiaru? Napisz swoje wymiary, a pomogę Ci dobrać idealny rozmiar!</em>`;
+    if (message.includes('vintage')) {
+        return "Koszulka 'Vintage' - klasyk w stylu retro! 🕺\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Idealna na codzienne noszenie\n\nInteresuje Cię ten model?";
+    }
+    
+    if (message.includes('urban') || message.includes('bluza')) {
+        return "Bluza 'Urban' - komfort i styl! 🧥\n• Cena: 200 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 80% bawełna, 20% poliester\n\nPerfekcyjna na chłodniejsze dni!";
+    }
+    
+    // PYTANIA O ZAMÓWIENIE
+    if (message.includes('zamów') || message.includes('kup') || message.includes('chcę kupić')) {
+        return "Świetnie! 🎉 Możesz:\n1. Dodać produkty do koszyka przez chat\n2. Przejść do zakładki 'Sklep'\n3. Użyć szybkich przycisków poniżej\n\nKtóry produkt Cię interesuje?";
+    }
+    
+    // PYTANIA O POMOC
+    if (message.includes('pomoc') || message.includes('pomóż') || message.includes('co mogę')) {
+        return "Oczywiście! Pomogę Ci:\n• 🛒 Wybrać i dodać produkty do koszyka\n• 📏 Dobrać odpowiedni rozmiar\n• 🚀 Szybko złożyć zamówienie\n• ❓ Odpowiedzieć na wszystkie pytania\n\nOd czego zaczynamy?";
+    }
+    
+    // PODZIĘKOWANIA
+    if (message.includes('dziękuję') || message.includes('dzięki') || message.includes('thx')) {
+        return "Nie ma za co! 🤗 Cieszę się, że mogłem pomóc. Jeśli masz jeszcze pytania, śmiało pisz! Miłych zakupów! 🛍️";
+    }
+    
+    // POŻEGNANIA
+    if (message.includes('pa') || message.includes('do widzenia') || message.includes('koniec')) {
+        return "Do zobaczenia! 👋 Mam nadzieję, że jeszcze się spotkamy. Pamiętaj - zawsze tu jestem, żeby pomóc!";
+    }
+    
+    // DOMYŚLNA ODPOWIEDŹ
+    return "Przepraszam, nie jestem pewien co masz na myśli. 🤔 Możesz:\n• Zapytać o konkretny produkt\n• Poprosić o pomoc w zakupach\n• Sprawdzić rozmiary lub dostawę\n• Użyć szybkich przycisków poniżej\n\nJak mogę Ci pomóc?";
 }
 
-function chatbotAddToCart(productName, price) {
-    const productButtons = document.querySelectorAll('.add-to-cart-btn');
-    let productFound = false;
-    
-    productButtons.forEach(button => {
-        if (button.getAttribute('data-name').includes(productName)) {
-            button.click();
-            productFound = true;
-        }
+// ===== SYSTEM FAQ =====
+function initFAQ() {
+    // Inicjalizacja sekcji FAQ
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            toggleFAQ(this);
+        });
     });
+}
+
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
     
-    if (productFound) {
-        addChatMessage(`✅ <strong>Dodano "${productName}" do koszyka!</strong><br><br>
-        Możesz kontynuować zakupy lub przejść do koszyka aby sfinalizować zamówienie.`, 'bot');
-        
-        const quickActions = document.createElement('div');
-        quickActions.className = 'quick-replies';
-        quickActions.innerHTML = `
-            <button class="quick-reply-btn" onclick="toggleCart()">🛒 Pokaż koszyk</button>
-            <button class="quick-reply-btn" onclick="handleQuickReply('Pokaż koszulki')">👕 Więcej produktów</button>
-            <button class="quick-reply-btn" onclick="handleQuickReply('Jak zamówić')">🚀 Zamówienie</button>
-        `;
-        
-        const messagesContainer = document.getElementById('chatbotMessages');
-        const lastMessage = messagesContainer.lastElementChild;
-        if (lastMessage) {
-            lastMessage.appendChild(quickActions);
-        }
+    if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
     } else {
-        addChatMessage(`❌ <strong>Przepraszam, nie udało się dodać produktu do koszyka.</strong><br><br>
-        Przejdź do sekcji sklep aby wybrać rozmiar i kolor, a następnie dodaj produkt ręcznie.`, 'bot');
+        answer.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
     }
 }
 
-// ===== INICJALIZACJA =====
-document.addEventListener('DOMContentLoaded', function() {
-    initNavigation();
-    initProductOptions();
-    initDesignStudio();
-    updateCart();
-    initCookieConsent();
-    initChatbot();
-    initFAQ();
-    
-    window.productSearch = new ProductSearch();
-    window.newsletterSystem = new NewsletterSystem();
-});
-
-// ===== POZOSTAŁE FUNKCJE =====
+// ===== SYSTEM NAWIGACJI =====
 function initNavigation() {
     const navButtons = document.querySelectorAll('.nav-btn');
     
@@ -4906,6 +4416,12 @@ function showSection(sectionId) {
     }
 }
 
+function toggleMobileMenu() {
+    const navContainer = document.getElementById('navContainer');
+    if (navContainer) navContainer.classList.toggle('show');
+}
+
+// ===== SYSTEM PRODUKTÓW =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('color-option')) {
@@ -4938,6 +4454,7 @@ function initProductOptions() {
     });
 }
 
+// ===== SYSTEM KOSZYKA =====
 function addToCart(name, price, image = null, size = null, color = null) {
     const existingIndex = cart.findIndex(item => 
         item.name === name && 
@@ -5061,45 +4578,63 @@ function sendOrderWhatsApp() {
     window.open(`https://wa.me/48604296360?text=${message}`);
 }
 
+// ===== STUDIO PROJEKTOWE =====
 function initDesignStudio() {
     canvas = new fabric.Canvas('designCanvas');
 }
 
-function initCookieConsent() {
-    if (!localStorage.getItem('cookies_accepted')) {
-        document.getElementById('cookieConsent').style.display = 'block';
-    }
-}
-
-function acceptCookies() {
-    localStorage.setItem('cookies_accepted', 'true');
-    document.getElementById('cookieConsent').style.display = 'none';
-}
-
-function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            toggleFAQ(this);
-        });
+function addText() {
+    const text = new fabric.IText('Twój tekst', {
+        left: 100,
+        top: 100,
+        fontFamily: 'Arial',
+        fill: '#000000',
+        fontSize: 20
     });
+    canvas.add(text);
 }
 
-function toggleFAQ(element) {
-    const answer = element.nextElementSibling;
-    const icon = element.querySelector('i');
+function addCustomText() {
+    const textInput = document.getElementById('textInput');
+    const colorPicker = document.getElementById('colorPicker');
     
-    if (answer.style.display === 'block') {
-        answer.style.display = 'none';
-        icon.classList.remove('fa-chevron-up');
-        icon.classList.add('fa-chevron-down');
-    } else {
-        answer.style.display = 'block';
-        icon.classList.remove('fa-chevron-down');
-        icon.classList.add('fa-chevron-up');
+    if (textInput.value.trim()) {
+        const text = new fabric.IText(textInput.value, {
+            left: 50,
+            top: 50,
+            fontFamily: 'Arial',
+            fill: colorPicker.value,
+            fontSize: 24
+        });
+        canvas.add(text);
+        textInput.value = '';
     }
 }
 
+function changeColor() {
+    const activeObject = canvas.getActiveObject();
+    const colorPicker = document.getElementById('colorPicker');
+    
+    if (activeObject) {
+        activeObject.set('fill', colorPicker.value);
+        canvas.renderAll();
+    }
+}
+
+function clearCanvas() {
+    canvas.clear();
+}
+
+function saveDesign() {
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 0.8
+    });
+    
+    showNotification('🎨 Projekt zapisany! Możesz go teraz dodać do koszyka.');
+}
+
+// ===== POWIADOMIENIA =====
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.textContent = message;
@@ -5122,6 +4657,18 @@ function showNotification(message) {
     }, 3000);
 }
 
+// ===== COOKIE CONSENT =====
+function initCookieConsent() {
+    if (!localStorage.getItem('cookies_accepted')) {
+        document.getElementById('cookieConsent').style.display = 'block';
+    }
+}
+
+function acceptCookies() {
+    localStorage.setItem('cookies_accepted', 'true');
+    document.getElementById('cookieConsent').style.display = 'none';
+}
+
 // ===== FUNKCJE GLOBALNE =====
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
@@ -5130,23 +4677,15 @@ window.toggleMobileMenu = toggleMobileMenu;
 window.sendOrderEmail = sendOrderEmail;
 window.sendOrderWhatsApp = sendOrderWhatsApp;
 window.acceptCookies = acceptCookies;
-window.closeNewsletter = function() {
-    window.newsletterSystem.closeNewsletter();
-};
-
-// Chatbot functions
-window.toggleChatbot = function() {
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    const chatbotButton = document.getElementById('chatbotButton');
-    
-    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-    chatbotButton.classList.remove('pulse');
-};
-
+window.toggleChatbot = toggleChatbot;
 window.handleChatbotInput = handleChatbotInput;
 window.sendChatbotMessage = sendChatbotMessage;
-window.handleQuickReply = handleQuickReply;
-window.chatbotAddToCart = chatbotAddToCart;
+window.addText = addText;
+window.addCustomText = addCustomText;
+window.changeColor = changeColor;
+window.clearCanvas = clearCanvas;
+window.saveDesign = saveDesign;
+window.toggleFAQ = toggleFAQ;
 </script>
 </body>
 </html>
