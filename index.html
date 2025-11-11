@@ -6,24 +6,6 @@
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
     
-    <!-- Structured Data dla SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Store",
-      "name": "AdelbertusShop",
-      "description": "Ekskluzywne projekty vintage 80s/90s - odzież z duszą",
-      "url": "https://adelbertusshop.pl",
-      "address": {
-        "@type": "PostalAddress", 
-        "addressCountry": "PL"
-      },
-      "openingHours": "Mo-Fr 09:00-17:00",
-      "telephone": "+48-604-296-360",
-      "email": "mielniczukgrzegosz74@gmail.com"
-    }
-    </script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
@@ -52,7 +34,6 @@
             background: var(--color-light);
             color: #333;
             line-height: 1.6;
-            padding-bottom: 80px; /* Zapobiega nakładaniu się na stopkę */
         }
         
         h1, h2, h3, h4, h5 {
@@ -72,62 +53,12 @@
             background: var(--color-gold);
         }
 
-        /* POPRAWIONE STYLE DLA RESPONSYWNOŚCI */
-        .mobile-menu-btn {
-            display: none;
-            background: var(--color-gold);
-            color: black;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: bold;
-            margin: 10px auto;
-            width: 90%;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-container {
-                display: none !important;
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .nav-container.mobile-open {
-                display: flex !important;
-            }
-            
-            .nav-btn {
-                width: 90%;
-                margin: 5px auto;
-                text-align: center;
-            }
-        }
-
-        /* STYLE DLA CHATBOTA - POPRAWIONE DLA MOBILE */
+        /* STYLE DLA CHATBOTA */
         .chatbot-container {
             position: fixed;
-            bottom: 80px; /* Wyżej żeby nie nakładał się na koszyk */
+            bottom: 20px;
             left: 20px;
             z-index: 1000;
-        }
-
-        @media (max-width: 768px) {
-            .chatbot-container {
-                bottom: 100px;
-                left: 10px;
-            }
-            
-            .chatbot-window {
-                width: 95vw !important;
-                left: 50% !important;
-                transform: translateX(-50%);
-                max-width: 400px;
-            }
         }
 
         .chatbot-button {
@@ -405,7 +336,7 @@
         
         /* Nagłówek i nawigacja */
         header {
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/7YqKvJZ/adelbertus-header-bg.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
             background-size: cover;
             background-position: center;
             color: white;
@@ -455,7 +386,6 @@
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
         
         .nav-btn:hover, .nav-btn.active {
@@ -469,7 +399,6 @@
             padding: 3rem 1rem;
             max-width: 1200px;
             margin: 0 auto;
-            min-height: 60vh;
         }
         
         section.active {
@@ -511,7 +440,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
         
         .product-card:hover {
@@ -526,7 +454,6 @@
             align-items: center;
             justify-content: center;
             background: var(--color-cream);
-            position: relative;
         }
         
         .product-image {
@@ -750,9 +677,6 @@
             padding: 3rem 1rem;
             text-align: center;
             margin-top: 4rem;
-            position: relative;
-            bottom: 0;
-            width: 100%;
         }
         
         .contact-info {
@@ -777,7 +701,6 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            text-decoration: none;
         }
         
         .social-link:hover {
@@ -785,11 +708,11 @@
             box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
         
-        /* Koszyk - POPRAWIONE DLA MOBILE */
+        /* Koszyk */
         #cartIcon {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 2rem;
+            right: 2rem;
             background: var(--color-gold);
             color: black;
             width: 60px;
@@ -802,15 +725,6 @@
             font-size: 1.5rem;
             z-index: 99;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        @media (max-width: 768px) {
-            #cartIcon {
-                bottom: 70px;
-                right: 15px;
-                width: 55px;
-                height: 55px;
-            }
         }
         
         #cartCount {
@@ -841,13 +755,6 @@
             box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
             padding: 2rem;
             overflow-y: auto;
-        }
-
-        @media (max-width: 768px) {
-            #cartPanel {
-                width: 100%;
-                right: -100%;
-            }
         }
         
         #cartPanel.open {
@@ -891,113 +798,6 @@
             animation: fadeIn 0.5s ease;
         }
         
-        /* Responsywność - POPRAWIONE */
-        @media (max-width: 768px) {
-            .products-grid, .blog-posts, .reviews {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .design-tools {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-
-            .section-title h2 {
-                font-size: 1.5rem;
-            }
-
-            .section-title p {
-                font-size: 1rem;
-            }
-
-            .charity-section {
-                padding: 2rem 1rem;
-                margin: 1rem 0;
-            }
-
-            .design-studio {
-                padding: 1rem;
-                margin: 1rem 0;
-            }
-
-            .canvas-container {
-                padding: 0.5rem;
-            }
-
-            /* Poprawki dla małych ekranów */
-            .product-card {
-                margin: 0.5rem;
-            }
-
-            .product-info {
-                padding: 1rem;
-            }
-
-            .nav-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
-                margin: 0.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.3rem;
-            }
-            
-            .product-title {
-                font-size: 1.1rem;
-            }
-            
-            .product-price {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Style dla przycisków w koszyku */
-        .cart-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 1rem;
-        }
-
-        .cart-buttons button {
-            padding: 12px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .cart-buttons button:hover {
-            opacity: 0.9;
-        }
-
-        .email-order-btn {
-            background: var(--color-gold);
-            color: black;
-        }
-
-        .whatsapp-order-btn {
-            background: #25D366;
-            color: white;
-        }
-
         /* Cookie consent */
         .cookie-consent {
             position: fixed;
@@ -1104,330 +904,249 @@
             line-height: 1.6;
         }
 
-        /* NOWE STYLE DODANE PRZEZ MNIE */
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 0.5rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                margin: 0.2rem 0;
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
 
-        /* Urgency Banner */
-        .urgency-banner {
-            background: linear-gradient(90deg, #e53e3e, #c53030);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            position: relative;
-            z-index: 50;
+            .chatbot-container {
+                bottom: 80px;
+                left: 10px;
+            }
+
+            .chatbot-window {
+                width: 95vw;
+                height: 70vh;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            /* Poprawki dla przycisków produktów */
+            .add-to-cart-btn {
+                width: 100%;
+                padding: 0.8rem;
+                font-size: 0.9rem;
+                margin-top: 0.5rem;
+            }
+            
+            /* Poprawki dla opcji produktów */
+            .product-options {
+                padding: 0.5rem 0;
+            }
+            
+            .color-options, .size-options {
+                justify-content: center;
+                gap: 0.3rem;
+            }
+            
+            .color-option {
+                width: 28px;
+                height: 28px;
+            }
+            
+            .size-option {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.8rem;
+            }
+            
+            /* Poprawki dla kart produktów */
+            .product-card {
+                margin: 0.5rem;
+                padding: 0.8rem;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            /* Poprawki dla studio projektowego */
+            .design-tools {
+                padding: 1rem;
+            }
+            
+            .tool-group {
+                padding: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            .canvas-controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .canvas-controls button {
+                width: 100%;
+                margin: 0.2rem 0;
+            }
+            
+            /* Poprawki dla koszyka */
+            #cartPanel {
+                width: 100vw;
+                padding: 1rem;
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                text-align: center;
+                padding: 0.8rem;
+            }
+            
+            .cart-item-image {
+                width: 80px;
+                height: 80px;
+                margin: 0 auto 0.5rem;
+            }
+            
+            /* Poprawki dla chatbota */
+            .chatbot-messages {
+                padding: 10px;
+            }
+            
+            .message {
+                max-width: 90%;
+                font-size: 0.9rem;
+            }
+            
+            /* Poprawki dla sekcji bloga */
+            .blog-post {
+                margin: 1rem 0;
+                padding: 1rem;
+            }
+            
+            /* Poprawki dla stopki */
+            .social-links {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .social-link {
+                width: 35px;
+                height: 35px;
+            }
         }
 
-        /* Search Bar */
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto 2rem;
+        /* DODATKOWE STYLE DLA BARDZO MAŁYCH EKRANÓW */
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            .nav-btn {
+                padding: 0.7rem 0.5rem;
+                font-size: 0.8rem;
+            }
+            
+            /* Poprawki dla tekstu */
+            body {
+                font-size: 14px;
+            }
+            
+            h1, h2, h3 {
+                font-size: 90%;
+            }
         }
 
-        .search-bar input {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid var(--color-gold);
-            border-radius: 30px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+        /* POPRAWKI DLA TABLETA */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-btn {
+                margin: 0.3rem;
+                flex: 0 1 calc(33.333% - 0.6rem);
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .search-bar input:focus {
-            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
-            outline: none;
-        }
-
-        /* Product Filters */
-        .product-filters {
+        /* Style dla przycisków w koszyku */
+        .cart-buttons {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 2rem;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
         }
 
-        .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid var(--color-gold);
-            background: white;
-            color: var(--color-dark);
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--color-gold);
-            color: black;
-        }
-
-        /* Why Us Section */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature i {
-            font-size: 2.5rem;
-            color: var(--color-gold);
-            margin-bottom: 1rem;
-        }
-
-        /* Newsletter Popup */
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.7);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .newsletter-popup {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            position: relative;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
+        .cart-buttons button {
+            padding: 12px;
+            border-radius: 5px;
             border: none;
-            font-size: 1.5rem;
             cursor: pointer;
-        }
-
-        /* Lookbook Section */
-        .lookbook-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .outfit-card {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .outfit-card img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .outfit-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .outfit-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .outfit-card:hover .outfit-info {
-            transform: translateY(0);
-        }
-
-        /* Wishlist Button */
-        .wishlist-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-
-        .wishlist-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .wishlist-btn.active {
-            color: #e53e3e;
-        }
-
-        /* Quick View Modal */
-        .quick-view-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 1rem;
-        }
-
-        .quick-view-content {
-            background: white;
-            max-width: 900px;
-            width: 100%;
-            border-radius: 15px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Loyalty Badge */
-        .loyalty-badge {
-            display: inline-block;
-            background: var(--color-gold);
-            color: black;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 0.8rem;
             font-weight: bold;
-            margin-left: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
         }
 
-        /* Social Proof */
-        .social-proof {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+        .cart-buttons button:hover {
+            opacity: 0.9;
         }
 
-        .proof-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Neon glow dla sekcji zbiórki */
-        .neon-glow {
-          color: #fff;
-          text-shadow:
-            0 0 5px #a855f7,
-            0 0 10px #a855f7,
-            0 0 20px #9333ea,
-            0 0 40px #9333ea;
-          animation: neonPulse 2s infinite alternate;
-        }
-        @keyframes neonPulse {
-          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
-          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
-        }
-
-        /* Typing efekt */
-        .typing {
-          border-right: 2px solid #ffd700;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-
-        /* Animacja donorów */
-        .donor-entry {
-          opacity: 0;
-          transform: translateY(10px);
-          animation: fadeInUp 1s forwards;
-        }
-        @keyframes fadeInUp {
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* DODANE: Style dla social media w każdej sekcji */
-        .section-social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 2rem 0;
-            padding: 1rem;
-        }
-
-        .section-social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 45px;
-            height: 45px;
+        .email-order-btn {
             background: var(--color-gold);
             color: black;
-            border-radius: 50%;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
         }
 
-        .section-social-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        .whatsapp-order-btn {
+            background: #25D366;
+            color: white;
         }
     </style>  
 </head>
 <body> 
-    <!-- Urgency Banner -->
-    <div class="urgency-banner">
-        🚀 DARMOWA DOSTAWA przy zamówieniach powyżej 200 zł! 
-        <span id="countdown">Tylko dziś do 23:59!</span>
-    </div>
-
     <!-- Chatbot -->
     <div class="chatbot-container">
         <button class="chatbot-button pulse" onclick="toggleChatbot()" id="chatbotButton">
@@ -1461,30 +1180,6 @@
         </div>
     </div>
 
-    <!-- Newsletter Popup -->
-    <div class="popup-overlay" id="newsletterPopup">
-        <div class="newsletter-popup">
-            <button class="popup-close" onclick="closeNewsletter()">×</button>
-            <h3>🎁 10% RABATU na pierwsze zakupy!</h3>
-            <p>Zapisz się do newslettera i otrzymaj kod rabatowy</p>
-            <div class="mt-4">
-                <input type="email" id="newsletterEmail" placeholder="Twój email" class="w-full p-3 border rounded mb-2">
-                <button onclick="subscribeNewsletter()" class="nav-btn gold-bg w-full">Zapisz się i odbierz kod</button>
-            </div>
-            <p class="text-sm text-gray-600 mt-2">*Zero spamu, tylko najlepsze oferty</p>
-        </div>
-    </div>
-
-    <!-- Quick View Modal -->
-    <div class="quick-view-modal" id="quickViewModal">
-        <div class="quick-view-content">
-            <button class="popup-close" onclick="closeQuickView()">×</button>
-            <div id="quickViewContent">
-                <!-- Zawartość będzie wczytywana dynamicznie -->
-            </div>
-        </div>
-    </div>
-
     <!-- Cookie Consent -->
     <div id="cookieConsent" class="cookie-consent">
         <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
@@ -1506,12 +1201,11 @@
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
             <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
-            <button class="nav-btn" data-section="why-us"><i class="fas fa-star"></i> Dlaczego My</button>
-            <button class="nav-btn" data-section="lookbook"><i class="fas fa-camera"></i> Lookbook</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
             <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
             <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
+            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
             <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
     </nav>
@@ -1525,35 +1219,6 @@
                 <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
             </div>
             
-            <!-- Social Proof -->
-            <div class="social-proof">
-                <div class="proof-item">
-                    <i class="fas fa-star gold-text"></i>
-                    <span>500+ zadowolonych klientów</span>
-                </div>
-                <div class="proof-item">
-                    <i class="fas fa-shipping-fast gold-text"></i>
-                    <span>Darmowa dostawa od 200 zł</span>
-                </div>
-                <div class="proof-item">
-                    <i class="fas fa-undo gold-text"></i>
-                    <span>30 dni na zwrot</span>
-                </div>
-            </div>
-
-            <!-- DODANE: Social media w sekcji głównej -->
-            <div class="section-social-links">
-                <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="section-social-link" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="section-social-link" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="section-social-link" target="_blank" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            
             <div class="charity-section">
                 <h3>Razem możemy więcej</h3>
                 <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
@@ -1565,47 +1230,104 @@
             </div>
             
             <div class="products-grid">
-                <!-- Featured products will be loaded here -->
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Rebel"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Vintage"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Bluza "Urban"</div>
+                        <div class="product-price">200 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
             </div>
-        </section>
-
-        <!-- Sklep z wyszukiwarką i filtrami -->
-        <section id="shop">
-            <div class="section-title">
-                <h2>Nasze Produkty</h2>
-                <p>Odkryj naszą ekskluzywną kolekcję vintage</p>
-            </div>
-
-            <!-- DODANE: Social media w sekcji sklepu -->
-            <div class="section-social-links">
-                <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="section-social-link" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="section-social-link" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="section-social-link" target="_blank" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            
-            <!-- Wyszukiwarka -->
-            <div class="search-bar">
-                <input type="text" id="productSearch" placeholder="🔍 Szukaj produktów..." onkeyup="filterProducts()">
-            </div>
-            
-            <!-- Filtry -->
-            <div class="product-filters">
-                <button class="filter-btn active" data-filter="all">Wszystkie</button>
-                <button class="filter-btn" data-filter="tshirt">Koszulki</button>
-                <button class="filter-btn" data-filter="hoodie">Bluzy</button>
-                <button class="filter-btn" data-filter="cap">Czapki</button>
-                <button class="filter-btn" data-filter="bestseller">Bestsellery</button>
-            </div>
-            
-            <h3 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h3>
-            <div class="products-grid" id="productsContainer">
-                <!-- Sklep - ZAKTUALIZOWANY -->
+        </section>        
+  <!-- Sklep - ZAKTUALIZOWANY -->
 <section id="shop">
     <div class="section-title">
         <h2>Nasze Produkty</h2>
@@ -3613,106 +3335,651 @@
             </div>
         </div>
     </div>
-</section>                
-            </div>
-        </section>
+</section>
+<!-- Studio projektowe - ZMODYFIKOWANE -->
+<section id="design" class="py-16 bg-black text-white relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
+            <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-8 relative">
+            
+            <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
+                
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
+                    
+                    <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="tshirt" data-price="120">Koszulka (120 zł)</option>
+                        <option value="hoodie" data-price="200">Bluza (200 zł)</option>
+                        <option value="cap" data-price="99">Czapka (99 zł)</option>
+                    </select>
+                    
+                    <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
 
-        <!-- Dlaczego My -->
-        <section id="why-us">
-            <div class="section-title">
-                <h2>Dlaczego Wybrać AdelbertusShop?</h2>
-                <p>Co nas wyróżnia na tle konkurencji</p>
-            </div>
+                    <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
+                    <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
+                </div>
 
-            <!-- DODANE: Social media w sekcji Dlaczego My -->
-            <div class="section-social-links">
-                <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="section-social-link" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="section-social-link" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="section-social-link" target="_blank" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
+                    <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                    <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
+                    
+                    <div class="flex gap-3 mb-3">
+                        <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
+                            <option value="Impact">Impact (80s/90s)</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Monoton">Monoton (Wymaga CSS)</option>
+                        </select>
+                        <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
+                    </div>
+                    
+                    <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
+                    <input type="color" id="textColor" value="#ffffff" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
+                </div>
+
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
+                    <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                    <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full" onclick="document.getElementById('designImage').click()">
+                        <i class="fas fa-upload"></i> Wybierz własny obraz
+                    </button>
+                </div>
+
             </div>
             
-            <div class="features-grid">
-                <div class="feature">
-                    <i class="fas fa-truck"></i>
-                    <h3>Szybka Dostawa</h3>
-                    <p>Wysyłka w 24h od złożenia zamówienia</p>
+            <div class="canvas-area lg:w-2/3 flex flex-col items-center">
+                
+                <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+                    <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
+                    <canvas id="designCanvas" width="400" height="400" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></canvas>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-tshirt"></i>
-                    <h3>Premium Quality</h3>
-                    <p>Tylko wysokiej jakości materiały</p>
+
+                <div class="canvas-controls flex justify-center space-x-4 mb-8">
+                    <button class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
+                    <button class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="clearCanvas()"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
+                    <button class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
                 </div>
-                <div class="feature">
-                    <i class="fas fa-palette"></i>
-                    <h3>Unikalne Wzory</h3>
-                    <p>Projekty, których nie znajdziesz nigdzie indziej</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-heart"></i>
-                    <h3>Wsparcie Dobroczynne</h3>
-                    <p>Część zysku przekazujemy na Domu Dziecka "Promyk"</p>
+
+                <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+                    <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
+                    
+                    <button class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="exportDesign()" title="Zapisz projekt jako obraz">
+                        <i class="fas fa-download"></i> Pobierz Projekt
+                    </button>
+                    <button class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
+                        <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>     
+<!-- 🎁 Sekcja Zbiórki FINALNA -->
+<section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
+    
+    <!-- Nagłówek -->
+    <div class="section-title text-center mb-10">
+        <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
+            [ UPLOAD NADZIEI // PROMYK ]
+        </h2>
+        <p class="text-lg italic mt-2 text-gray-300">
+            Jesteś częścią czegoś większego, niż Ty sam.  
+            (a przy okazji możesz być lepszy niż sąsiad 😉)
+        </p>
+    </div>
 
-        <!-- Lookbook -->
-        <section id="lookbook">
+    <!-- Sekcja emocji -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+        <h3 class="text-3xl font-bold mb-4">Twoja decyzja zmienia czyjeś życie</h3>
+        <p class="text-xl text-gray-200">
+            Każda złotówka = kawałek światła w ciemnym świecie.  
+            Nie musisz być bohaterem, wystarczy że klikniesz.
+        </p>
+    </div>
+    
+    <!-- Metody wsparcia -->
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+        <!-- BLIK -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">📱 BLIK TRANSFER</h4>
+            <div class="text-3xl font-mono font-bold text-green-400">573-939-925</div>
+            <p class="mt-2 text-sm">dopisz kod: <span class="font-bold">POMOC</span></p>
+        </div>
+        
+        <!-- PayPal -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">💳 PayPal</h4>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=VG9UP4MTHHWYU" target="_blank" 
+               class="mt-4 inline-block bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
+                ➡️ Przekaż darowiznę
+            </a>
+        </div>
+        
+        <!-- Dary -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">📦 Dary rzeczowe</h4>
+            <p>Tel: <span class="font-bold">604 296 360</span></p>
+            <p>Email: <span class="font-bold">mielniczukgrzegosz74@gmail.com</span></p>
+        </div>
+    </div>
+    
+    <!-- Lista darczyńców -->
+    <div class="donors-list mt-12 bg-black/30 p-6 rounded-xl border border-purple-800">
+        <h4 class="text-2xl font-bold mb-4">🔥 Ostatni, którzy dołączyli do gry:</h4>
+        <ul id="donorsList" class="space-y-2 text-green-300 font-mono"></ul>
+    </div>
+    
+    <!-- List od dzieci -->
+    <div class="bg-white/10 p-6 rounded-lg shadow-md mt-10 border-l-4 border-yellow-400">
+        <h4 class="text-2xl font-bold mb-4 text-yellow-300">✉️ List od dzieci z Domu Dziecka "Promyk"</h4>
+        <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
+    </div>
+</section>
+
+<style>
+/* Neon glow */
+.neon-glow {
+  color: #fff;
+  text-shadow:
+    0 0 5px #a855f7,
+    0 0 10px #a855f7,
+    0 0 20px #9333ea,
+    0 0 40px #9333ea;
+  animation: neonPulse 2s infinite alternate;
+}
+@keyframes neonPulse {
+  from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
+  to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
+}
+
+/* Typing efekt */
+.typing {
+  border-right: 2px solid #ffd700;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Animacja donorów */
+.donor-entry {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 1s forwards;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+
+<script>
+// 🔥 Donorzy rotacyjni
+const donors = [
+    {name: "Anna K.", amount: 50},
+    {name: "Marek Z.", amount: 100},
+    {name: "👑 Sekretny Darczyńca", amount: 250},
+    {name: "Natalia P.", amount: 75},
+    {name: "Bartek L.", amount: 30}
+];
+let donorIndex = 0;
+function addDonor() {
+    const list = document.getElementById("donorsList");
+    const li = document.createElement("li");
+    li.className = "donor-entry";
+    li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
+    list.prepend(li);
+    donorIndex = (donorIndex + 1) % donors.length;
+}
+setInterval(addDonor, 4000); // co 4s nowy donor
+
+// ✉️ Listy od dzieci (cykliczne)
+const letters = [
+    "Dziękujemy za każdą pomoc. Dzięki Tobie czujemy, że nie jesteśmy sami. ❤️",
+    "Każdy dar to dla nas promień światła w ciemności. ✨",
+    "Nie możemy oddać wszystkiego, co czujemy – ale dziękujemy z całego serca! 🙏",
+    "Twoja pomoc daje nam nadzieję na lepsze jutro. 🌍"
+];
+let letterIndex = 0;
+function typeLetter() {
+    const letterBox = document.getElementById("childrenLetter");
+    letterBox.textContent = ""; // reset
+    let i = 0;
+    function typeWriter() {
+        if (i < letters[letterIndex].length) {
+            letterBox.textContent += letters[letterIndex].charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    typeWriter();
+    letterIndex = (letterIndex + 1) % letters.length;
+}
+typeLetter();
+setInterval(typeLetter, 15000); // co 15s nowy list
+</script>
+<!-- Partnerzy -->
+        <section id="partners">
             <div class="section-title">
-                <h2>Lookbook</h2>
-                <p>Inspiracje jak nosić nasze produkty</p>
+                <h2>Nasi Partnerzy</h2>
+                <p>Współpracujemy z najlepszymi</p>
             </div>
-
-            <!-- DODANE: Social media w sekcji Lookbook -->
-            <div class="section-social-links">
-                <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="section-social-link" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="section-social-link" target="_blank" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="section-social-link" target="_blank" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-            </div>
-            
-            <div class="lookbook-grid">
-                <div class="outfit-card">
-                    <img src="https://i.ibb.co/6nG7J8T/lookbook-street-style.jpg" alt="Street Style">
-                    <div class="outfit-info">
-                        <h4>Street Style</h4>
-                        <p>Koszulka Rebel + jeansy</p>
+            <div class="partners-section">
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner1" alt="Partner 1" class="partner-logo">
+                        <h4>Partner Biznesowy</h4>
+                        <p>Współpraca od 2020 roku</p>
                     </div>
-                </div>
-                <div class="outfit-card">
-                    <img src="https://i.ibb.co/0jK8q9L/lookbook-vintage-vibes.jpg" alt="Vintage Vibes">
-                    <div class="outfit-info">
-                        <h4>Vintage Vibes</h4>
-                        <p>Koszulka Vintage + czapka</p>
+                    <div class="partner-card">
+                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner2" alt="Partner 2" class="partner-logo">
+                        <h4>Dostawca Materiałów</h4>
+                        <p>Najwyższa jakość</p>
                     </div>
-                </div>
-                <div class="outfit-card">
-                    <img src="https://i.ibb.co/4JpLw2Q/lookbook-urban-comfort.jpg" alt="Urban Comfort">
-                    <div class="outfit-info">
-                        <h4>Urban Comfort</h4>
-                        <p>Bluza Urban + spodnie dresowe</p>
+                    <div class="partner-card">
+                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner3" alt="Partner 3" class="partner-logo">
+                        <h4>Partner Technologiczny</h4>
+                        <p>Innowacyjne rozwiązania</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Pozostałe sekcje (Partnerzy, O nas, Blog, FAQ, Regulamin, Kontakt) -->
-        <!-- ... (zawartość pozostałych sekcji z dodanymi social media) ... -->
+        <!-- O nas -->
+        <section id="about">
+            <div class="section-title">
+                <h2>O Nas</h2>
+                <p>Poznaj historię naszej marki</p>
+            </div>
+            <div class="about-section">
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=G" alt="Założyciel" class="team-avatar">
+                        <h4>Grzegorz Mielniczuk</h4>
+                        <p>Założyciel & CEO</p>
+                        <p>Pasja do mody vintage od 2018 roku</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=A" alt="Designer" class="team-avatar">
+                        <h4>Anna Nowak</h4>
+                        <p>Główny Designer</p>
+                        <p>Tworzy niepowtarzalne wzory</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=M" alt="Marketing" class="team-avatar">
+                        <h4>Michał Kowalski</h4>
+                        <p>Specjalista Marketingu</p>
+                        <p>Dba o komunikację z klientami</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+<section id="blog" class="py-16 bg-gradient-to-br from-purple-900 via-black to-red-900 text-white relative overflow-hidden">
+  <div class="absolute inset-0 opacity-10 z-0">
+    <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
+    <div class="absolute top-20 right-10 text-5xl font-bold opacity-20">💿</div>
+    <div class="absolute bottom-20 left-15 text-7xl font-bold opacity-20">🎤</div>
+    <div class="absolute bottom-10 right-5 text-6xl font-bold opacity-20">👖</div>
+  </div>
 
-    </main>
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
+        ADELBERTUS VINTAGE
+      </h2>
+      <p class="text-xl text-gray-300">Powrót do złotej ery mody: Disco 80s & Hip Hop 90s</p>
+      
+      <div class="flex justify-center space-x-4 mt-6">
+        <a href="#" data-filter="disco" class="filter-btn px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-bold transition duration-300 hover:bg-yellow-400">🎧 DISCO</a>
+        <a href="#" data-filter="hiphop" class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-blue-400">👟 HIP HOP</a>
+        <a href="#" data-filter="streetwear" class="filter-btn px-4 py-2 bg-pink-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-pink-400">🕺 STREETWEAR</a>
+        <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
+      </div>
+    </div>
+    
+    <div id="styleDescription" class="mt-10 mb-16 p-8 rounded-xl border-2 border-dashed border-gray-600 bg-black bg-opacity-50 text-center hidden transition-all duration-500">
+      <h3 id="descriptionTitle" class="text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-pink-400"></h3>
+      <p id="descriptionText" class="text-gray-300 text-lg"></p>
+      <div id="relatedIcons" class="flex justify-center space-x-6 mt-4 text-3xl"></div>
+    </div>
+    <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/3">
+          <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
+              alt="Disco Fashion 80s" 
+              class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
+          <div class="mt-4 text-center">
+            <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
+          </div>
+        </div>
+        
+        <div class="md:w-2/3">
+          <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
+          <div class="text-gray-300 space-y-4">
+            <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
+            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
+              <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Jaskrawe, fluorescencyjne kolory</li>
+                <li>Spodnie dresowe z białymi paskami</li>
+                <li>Bluzy z logo wielkich marek</li>
+                <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
+              </ul>
+            </div>
+            <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
+            <div class="flex items-center space-x-4 mt-6">
+              <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
+              <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
 
+    <article data-tag="hiphop" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
+      <div class="flex flex-col md:flex-row gap-8">
+        <div class="md:w-1/3">
+          <img src="https://i.ibb.co/HT3YHsmS/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg" 
+              alt="Hip Hop Fashion 90s" 
+              class="w-full h-64 object-cover rounded-xl border-4 border-blue-500 shadow-2xl">
+          <div class="mt-4 text-center">
+            <span class="inline-block px-3 py-1 bg-blue-500 text-white text-sm font-bold rounded-full">💎 CULTURAL HIP HOP</span>
+          </div>
+        </div>
+        
+        <div class="md:w-2/3">
+          <h3 class="text-3xl font-bold mb-4 text-blue-400">👑 LATA 90s: ZŁOTA ERA HIP HOPU I STREETWEARU</h3>
+          <div class="text-gray-300 space-y-4">
+            <p class="text-lg">Gdy <strong class="text-blue-400">baggy jeansy</strong> opadające poniżej pasa i koszulki flanelowe stały się uniformem pokolenia. To czasy FUBU, Karl Kani i kultowych Nike Air Force 1.</p>
+            <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
+              <h4 class="font-bold text-blue-400 mb-2">🎤 STYL GANGSTA RAP vs SKATER:</h4>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Jeansy baggy - im szersze, tym lepsze</li>
+                <li>Koszulki oversize z logo zespołów</li>
+                <li>Bluzy z kapturem - must have każdego fana</li>
+                <li>Buty: Timberland lub Air Force 1</li>
+              </ul>
+            </div>
+            <p><strong class="text-red-400">Polski streetwear</strong> lat 90s to kultowe targowiska: Stadion Dziesięciolecia, Jarmark Europa. "Abidasy", "Panasonice" - każdy chciał mieć oryginał, ale nosił podróbkę.</p>
+            <div class="flex items-center space-x-4 mt-6">
+              <span class="text-sm text-gray-400">📅 Epoka: 1990-1999</span>
+              <span class="text-sm text-gray-400">🎵 Muzyka: Hip Hop, Gangsta Rap, G-Funk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+        <img src="https://i.ibb.co/b58Nxn0D/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg" 
+            alt="Street Art 1" 
+            class="w-full h-48 object-cover rounded-lg mb-4">
+        <p class="text-center text-gray-300 text-sm">🎨 Street Art - dusza ulicy lat 90s</p>
+      </div>
+      <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+        <img src="https://i.ibb.co/gMxPjFmR/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg" 
+            alt="Street Art 2" 
+            class="w-full h-48 object-cover rounded-lg mb-4">
+        <p class="text-center text-gray-300 text-sm">✌️ Graffiti - głos pokolenia</p>
+      </div>
+    </div>
+
+    <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
+      <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI I OPINIAMI KLIENTÓW</h3>
+      <div class="space-y-4">
+        <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
+        <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
+        <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+          🎤 Zostaw shoutout
+        </button>
+      </div>
+      
+      <div id="opinionsList" class="mt-8 space-y-4">
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-yellow-400">
+            <p class="font-bold text-yellow-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 🕺 **DiscoKing84** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiony dres Adidas z lat 80. jest po prostu OG! Stan idealny, jak prosto z Nowego Jorku. Szybka wysyłka i ekstra kontakt. Polecam każdemu fanowi vintage!</p>
+        </div>
+        
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-blue-500">
+            <p class="font-bold text-blue-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👑 **HiphopQueen92** <span class="text-xs text-gray-500 ml-3"> (Ocena: 5/5)</span>
+            </p>
+            <p class="text-gray-300">W końcu znalazłam kurtkę Phat Farm, o której marzyłam od lat 90! Wysoka jakość, super cena. To jest prawdziwy oldschool, a nie jakieś podróbki!</p>
+        </div>
+
+        <div class="p-4 bg-gray-800 rounded-lg shadow-md border-l-4 border-pink-500">
+            <p class="font-bold text-pink-400 flex items-center mb-1">
+                <i class="fas fa-star text-yellow-400 mr-2"></i> 👟 **SkaterBoy01** <span class="text-xs text-gray-500 ml-3"> (Ocena: 4/5)</span>
+            </p>
+            <p class="text-gray-300">Kupiłem koszulkę Fila. Rzecz jest używana, więc ma małą wadę, ale wszystko było opisane w aukcji. Szczerość sprzedawcy na plus, towar dotarł ekspresowo. </p>
+        </div>
+      </div>
+    </div>
+      <!-- FAQ -->
+        <section id="faq">
+            <div class="section-title">
+                <h2>Często Zadawane Pytania</h2>
+                <p>Znajdź odpowiedzi na swoje pytania</p>
+            </div>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Jak dobrać odpowiedni rozmiar?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Polecamy zmierzyć swoją ulubioną koszulkę i porównać wymiary z naszą tabelą rozmiarów dostępną w zakładce "Rozmiary".
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Jaki jest czas realizacji zamówienia?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Zamówienia realizujemy w ciągu 1-2 dni roboczych. Wysyłka następuje najpóźniej następnego dnia roboczego.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Czy mogę zwrócić produkt?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Tak, masz 30 dni na zwrot produktu. Warunkiem jest nienaruszony stan produktu z metkami.
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+    <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
+        <h2 class="text-4xl font-extrabold text-center text-yellow-400 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
+        <p class="text-center text-sm text-red-500 mb-6 font-bold">PAMIĘTAJ: Uzupełnij wszystkie pola oznaczone: [UZUPEŁNIJ]</p>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-6 mb-4 border-b border-gray-700 pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>**Sprzedawca:** Grzegosz Mielniczuk</li>
+            <li>**Forma działalności:** Działalność nierejestrowana (zgodnie z art. 5 ust. 1 Ustawy Prawo przedsiębiorców).</li>
+            <li>**Adres do korespondencji/zwrotów:** <b class="text-red-500">[UZUPEŁNIJ: Pełny adres Sprzedawcy]</b></li>
+            <li>**E-mail kontaktowy:** mielniczukgrzegosz74@gmail.com</li>
+            <li>**Telefon kontaktowy:** 604 296 360</li>
+            <li>Regulamin określa zasady sprzedaży towarów używanych (vintage) w ramach umowy zawieranej na odległość.</li>
+            <li>Sprzedawca jest zobowiązany do dostarczenia Towaru bez wad.</li>
+            <li>Ceny podane w Sklepie są cenami brutto. Sprzedawca jest zwolniony z VAT na podstawie limitu przychodów.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Do zawarcia Umowy Sprzedaży dochodzi po złożeniu zamówienia przez Klienta i przesłaniu przez Sprzedawcę wiadomości e-mail z potwierdzeniem przyjęcia zamówienia do realizacji.</li>
+            <li>**Główne cechy świadczenia:** Sprzedaż odzieży i akcesoriów typu Vintage (używanych), których stan i ewentualne wady są szczegółowo opisane w opisie produktu.</li>
+            <li>Minimalne wymagania techniczne do korzystania ze Sklepu: dostęp do Internetu, standardowa przeglądarka internetowa oraz aktywne konto e-mail.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 3. Dostawa Towaru i Płatności</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>**Metody płatności:** <b class="text-red-500">[UZUPEŁNIJ: np. Przelew tradycyjny, Płatności online (np. Przelewy24/BLIK), Płatność przy odbiorze (jeśli dotyczy)]</b>.</li>
+            <li>**Koszty dostawy:** Wskazane w procesie składania zamówienia. <b class="text-red-500">[UZUPEŁNIJ: Podaj stałą kwotę/cennik]</b>.</li>
+            <li>**Termin dostawy:** Wynosi standardowo <b class="text-red-500">[UZUPEŁNIJ: np. 3-7 dni roboczych]</b> liczone od dnia zaksięgowania płatności.</li>
+            <li>Dostawa odbywa się za pośrednictwem <b class="text-red-500">[UZUPEŁNIJ: np. InPost, Kurier DPD, Poczta Polska]</b>.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 4. Odstąpienie od Umowy</h3>
+        <p class="text-gray-400 mb-3">Klient, będący Konsumentem, ma prawo odstąpić od Umowy Sprzedaży w terminie **14 dni** bez podawania przyczyny.</p>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Termin odstąpienia wygasa po upływie 14 dni od dnia, w którym Klient wszedł w posiadanie rzeczy.</li>
+            <li>Oświadczenie o odstąpieniu można złożyć: <b class="text-red-500">[UZUPEŁNIJ: Np. mailowo, pisemnie na adres Sprzedawcy]</b>.</li>
+            <li>Klient ma obowiązek zwrócić Towar Sprzedawcy niezwłocznie, nie później niż 14 dni od dnia odstąpienia.</li>
+            <li>Koszty odesłania zwracanego Towaru ponosi <b class="text-red-500">[UZUPEŁNIJ: Klient/Sprzedawca, najczęściej Klient]</b>.</li>
+            <li>Zwrot płatności zostanie dokonany w terminie **14 dni** od otrzymania oświadczenia Klienta, pod warunkiem otrzymania Towaru.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 5. Reklamacje Towaru</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>Sprzedawca ponosi odpowiedzialność za brak zgodności Towaru z umową (rękojmia).</li>
+            <li>Reklamacje należy składać drogą elektroniczną lub pisemnie na adres Sprzedawcy, opisując wadę i swoje żądanie.</li>
+            <li>Klient może żądać: **naprawy**, **wymiany** (jeśli możliwe), **obniżenia ceny** lub **odstąpienia od umowy** (jeśli wada jest istotna).</li>
+            <li>Sprzedawca ustosunkuje się do żądania Klienta w terminie **14 dni** kalendarzowych.</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 6. Postanowienia Końcowe</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li>W sprawach nieuregulowanych Regulaminem zastosowanie mają przepisy prawa polskiego, w szczególności przepisy Kodeksu Cywilnego oraz Ustawy o prawach konsumenta.</li>
+            <li>Sprzedawca zastrzega sobie prawo do zmiany Regulaminu. Zmiany wchodzą w życie <b class="text-red-500">[UZUPEŁNIJ: np. 7 dni od opublikowania na stronie]</b>. Zamówienia złożone przed zmianą są realizowane na zasadach dotychczasowych.</li>
+        </ul>
+        <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: <b class="text-red-500">[UZUPEŁNIJ DATĘ]</b></p>
+    </div>
+
+    <div class="text-center mt-12 pt-8 border-t border-gray-700">
+      <p class="text-gray-400">ADELBERTUS VINTAGE © 2024 - Przywracamy duszę ulicy</p>
+      <div class="flex justify-center space-x-4 mt-4">
+        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">🕺</a>
+        <a href="#" data-style="disco" class="style-icon text-2xl hover:text-yellow-400 transition">💿</a>
+        <a href="#" data-style="hiphop" class="style-icon text-2xl hover:text-blue-400 transition">🎤</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👖</a>
+        <a href="#" data-style="streetwear" class="style-icon text-2xl hover:text-pink-400 transition">👟</a>
+      </div>
+    </div>
+  </div>
+</section>     
+        <!-- Kontakt - FINALNA WERSJA -->
+<section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
+  <div class="section-title text-center mb-10">
+    <h2 class="text-4xl font-extrabold text-gray-900">Kontakt</h2>
+    <p class="text-lg text-gray-600 mt-2">To Twoje miejsce – masz wpływ na wszystko, co tu się dzieje.</p>
+  </div>
+
+  <!-- Formularz kontaktowy -->
+  <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
+    <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
+    <form id="contactForm">
+      <div class="form-group mb-4">
+        <label class="block font-semibold mb-1">Imię i nazwisko</label>
+        <input type="text" required class="w-full border rounded-lg px-3 py-2">
+      </div>
+      
+      <div class="form-group mb-4">
+        <label class="block font-semibold mb-1">Email</label>
+        <input type="email" required class="w-full border rounded-lg px-3 py-2">
+      </div>
+      
+      <div class="form-group mb-4">
+        <label class="block font-semibold mb-1">Temat</label>
+        <input type="text" required class="w-full border rounded-lg px-3 py-2">
+      </div>
+      
+      <div class="form-group mb-4">
+        <label class="block font-semibold mb-1">Wiadomość</label>
+        <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
+      </div>
+      
+      <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+    </form>
+  </div>
+
+  <!-- Dane kontaktowe -->
+  <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+    <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
+    <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
+    <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
+    <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
+    
+    <h3 class="text-xl font-bold mt-6 mb-4">Social Media</h3>
+    <div class="social-links flex gap-4">
+      <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank">
+        <i class="fab fa-tiktok"></i>
+      </a>
+      <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Forum dyskusyjne -->
+  <div class="bg-white p-6 rounded-2xl shadow-md">
+    <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
+    <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
+    
+    <form id="forumForm" class="mb-6">
+      <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
+      <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
+      <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
+    </form>
+    
+    <div id="forumPosts" class="space-y-4">
+      <!-- Wpisy forum będą dodawane tutaj -->
+    </div>
+  </div>
+</section>
+
+<script>
+  // Lista słów zakazanych
+  const forbiddenWords = ["idiota", "głupek", "kurwa", "chuj", "pedał", "debil"];
+  
+  // Obsługa forum
+  document.getElementById("forumForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const user = document.getElementById("forumUser").value.trim();
+    const message = document.getElementById("forumMessage").value.trim();
+    
+    // Sprawdzenie wulgaryzmów
+    let containsBad = forbiddenWords.some(word => message.toLowerCase().includes(word));
+    
+    if (containsBad) {
+      alert("Twój wpis zawiera niedozwolone treści. Spróbuj napisać inaczej.");
+      return;
+    }
+    
+    if (user && message) {
+      const postDiv = document.createElement("div");
+      postDiv.classList.add("p-4", "bg-gray-50", "rounded-lg", "shadow-sm");
+      postDiv.innerHTML = `<p class="font-bold">${user}</p><p>${message}</p>`;
+      document.getElementById("forumPosts").prepend(postDiv);
+      
+      document.getElementById("forumForm").reset();
+    }
+  });
+</script>
+       
     <!-- Koszyk -->
-    <div id="cartIcon" onclick="toggleCart()">
+    <div id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
         <span id="cartCount">0</span>
     </div>
@@ -3759,27 +4026,37 @@
         </div>
         
         <div class="social-links">
-            <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="footer-ads">
+            <div class="footer-ad">
+                <p>Reklama 1</p>
+            </div>
+            <div class="footer-ad">
+                <p>Reklama 2</p>
+            </div>
+            <div class="footer-ad">
+                <p>Reklama 3</p>
+            </div>
         </div>
         
         <div class="mt-6">
-            <p>© 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
+            <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
             <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
         </div>
     </footer>
 
     <script>
-// ===== GLOBALNE ZMIENNE =====
+// ===== SYSTEM SKLEPU =====
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-let wishlist = JSON.parse(localStorage.getItem('adelbertus_wishlist')) || [];
 let canvas = null;
 let chatHistory = [];
 let currentProductContext = null;
-let products = [];
 
-// ===== INICJALIZACJA =====
+// Inicjalizacja
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initProductOptions();
@@ -3788,194 +4065,567 @@ document.addEventListener('DOMContentLoaded', function() {
     initCookieConsent();
     initChatbot();
     initFAQ();
-    loadProducts();
-    initNewsletterPopup();
-    initWishlist();
-    initProductFilters();
-    
-    // Pokazuj popup newsletter po 5 sekundach
-    setTimeout(showNewsletterPopup, 5000);
 });
 
-// ===== POPRAWIONA NAWIGACJA MOBILE =====
-function toggleMobileMenu() {
-    const navContainer = document.getElementById('navContainer');
-    navContainer.classList.toggle('mobile-open');
+// ===== ULEPSZONY CHATBOT =====
+function initChatbot() {
+    setTimeout(() => {
+        addQuickReplies();
+    }, 500);
 }
 
-function initNavigation() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const sections = document.querySelectorAll('section');
+function toggleChatbot() {
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotButton = document.getElementById('chatbotButton');
     
-    navButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Usuń active z wszystkich przycisków
-            navButtons.forEach(btn => btn.classList.remove('active'));
-            // Ukryj wszystkie sekcje
-            sections.forEach(section => section.classList.remove('active'));
-            
-            // Dodaj active do klikniętego przycisku
-            this.classList.add('active');
-            
-            // Pokaż odpowiednią sekcję
-            const sectionId = this.getAttribute('data-section');
-            document.getElementById(sectionId).classList.add('active');
-            
-            // Zamknij menu mobile po kliknięciu
-            if (window.innerWidth <= 768) {
-                document.getElementById('navContainer').classList.remove('mobile-open');
-            }
-            
-            // Przewiń do góry
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+    chatbotButton.classList.remove('pulse');
+    
+    if (chatbotWindow.style.display === 'flex') {
+        addQuickReplies();
+    }
+}
+
+function handleChatbotInput(event) {
+    if (event.key === 'Enter') {
+        sendChatbotMessage();
+    }
+}
+
+function sendChatbotMessage() {
+    const input = document.getElementById('chatbotInput');
+    const message = input.value.trim();
+    
+    if (message) {
+        addMessageToChat(message, 'user');
+        input.value = '';
+        
+        chatHistory.push({ role: 'user', message: message, timestamp: new Date() });
+        
+        showTypingIndicator();
+        
+        setTimeout(() => {
+            hideTypingIndicator();
+            processUserMessage(message);
+        }, 800 + Math.random() * 800);
+    }
+}
+
+function processUserMessage(message) {
+    const lowerMessage = message.toLowerCase();
+    
+    // SPRAWDZANIE KOSZYKA
+    if (lowerMessage.includes('koszyk') || lowerMessage.includes('koszyka') || lowerMessage.includes('co mam w koszyku')) {
+        showCartInChat();
+        return;
+    }
+    
+    // DODAWANIE DO KOSZYKA
+    if (lowerMessage.includes('dodaj') || lowerMessage.includes('chcę kupić') || lowerMessage.includes('zamów')) {
+        handleAddToCartRequest(lowerMessage);
+        return;
+    }
+    
+    // USUWANIE Z KOSZYKA
+    if (lowerMessage.includes('usuń') || lowerMessage.includes('usun') || lowerMessage.includes('wyjmij')) {
+        handleRemoveFromCartRequest(lowerMessage);
+        return;
+    }
+    
+    // PYTANIA O PRODUKTY
+    if (lowerMessage.includes('produkt') || lowerMessage.includes('koszulka') || lowerMessage.includes('bluza') || 
+        lowerMessage.includes('asortyment') || lowerMessage.includes('co masz')) {
+        showProductsInChat();
+        return;
+    }
+    
+    // PYTANIA O ROZMIARY
+    if (lowerMessage.includes('rozmiar') || lowerMessage.includes('rozmiaru') || lowerMessage.includes('size')) {
+        showSizeChart();
+        return;
+    }
+    
+    // PYTANIA O DOSTAWĘ
+    if (lowerMessage.includes('dostawa') || lowerMessage.includes('wysyłka') || lowerMessage.includes('czas') || lowerMessage.includes('kurier')) {
+        showShippingInfo();
+        return;
+    }
+    
+    // PYTANIA O PŁATNOŚCI
+    if (lowerMessage.includes('płatność') || lowerMessage.includes('płatności') || lowerMessage.includes('zapłać') || lowerMessage.includes('paypal')) {
+        showPaymentInfo();
+        return;
+    }
+    
+    // PYTANIA O ZWROTY
+    if (lowerMessage.includes('zwrot') || lowerMessage.includes('zwroty') || lowerMessage.includes('reklamacja')) {
+        showReturnPolicy();
+        return;
+    }
+    
+    // PYTANIA O MATERIAŁY
+    if (lowerMessage.includes('materiał') || lowerMessage.includes('skład') || lowerMessage.includes('bawełna')) {
+        showMaterialInfo();
+        return;
+    }
+    
+    // STANDARDOWE PYTANIA
+    const response = getChatbotResponse(message);
+    addMessageToChat(response, 'bot');
+    chatHistory.push({ role: 'bot', message: response, timestamp: new Date() });
+    
+    addQuickReplies();
+}
+
+function handleAddToCartRequest(message) {
+    const products = [
+        { name: 'Koszulka Rebel', price: 120, image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg' },
+        { name: 'Koszulka Vintage', price: 120, image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg' },
+        { name: 'Bluza Urban', price: 200, image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg' }
+    ];
+    
+    let matchedProduct = null;
+    
+    for (const product of products) {
+        if (message.includes(product.name.toLowerCase())) {
+            matchedProduct = product;
+            break;
+        }
+    }
+    
+    if (matchedProduct) {
+        addToCart(matchedProduct.name, matchedProduct.price, matchedProduct.image, 'M', 'Czarny');
+        
+        addMessageToChat(`✅ Dodano "${matchedProduct.name}" do koszyka! 🛒\n\nCena: ${matchedProduct.price} zł\nRozmiar: M (domyślny)\nKolor: Czarny (domyślny)\n\nChcesz zmienić rozmiar lub kolor?`, 'bot');
+        
+        showCartSummaryInChat();
+    } else {
+        addMessageToChat("Który produkt chcesz dodać do koszyka? 🛒", 'bot');
+        showProductsInChat(true);
+    }
+}
+
+function handleRemoveFromCartRequest(message) {
+    if (cart.length === 0) {
+        addMessageToChat("Twój koszyk jest pusty - nie ma nic do usunięcia! 🛒", 'bot');
+        return;
+    }
+    
+    showCartInChat(true);
+}
+
+function showCartInChat(showRemoveOptions = false) {
+    if (cart.length === 0) {
+        addMessageToChat("🛒 Twój koszyk jest pusty\n\nChcesz coś dodać? Sprawdź nasze produkty! 👇", 'bot');
+        showProductsInChat();
+        return;
+    }
+    
+    let message = "🛒 Zawartość Twojego koszyka:\n\n";
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        message += `• ${item.name}\n`;
+        message += `  Rozmiar: ${item.size || 'M'}\n`;
+        message += `  Kolor: ${item.color || 'Czarny'}\n`;
+        message += `  Ilość: ${item.quantity} × ${item.price} zł\n`;
+        message += `  Suma: ${item.quantity * item.price} zł\n\n`;
+        total += item.quantity * item.price;
+    });
+    
+    message += `💰 Łączna suma: ${total} zł\n\n`;
+    
+    if (showRemoveOptions) {
+        message += "Aby usunąć produkt, napisz 'usuń [nazwa produktu]'";
+    } else {
+        message += "Co chcesz zrobić dalej?";
+    }
+    
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">🛒 Zamów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Wyczyść koszyk', 'user'); setTimeout(() => processUserMessage('Wyczyść koszyk'), 500)">🗑️ Wyczyść koszyk</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showProductsInChat(showAddButtons = false) {
+    const products = [
+        { 
+            name: 'Koszulka "Rebel"', 
+            price: 120, 
+            image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+            description: 'Bestseller! Unikalny wzór w stylu vintage'
+        },
+        { 
+            name: 'Koszulka "Vintage"', 
+            price: 120, 
+            image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg',
+            description: 'Klasyczny design inspirowany latami 90s'
+        },
+        { 
+            name: 'Bluza "Urban"', 
+            price: 200, 
+            image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+            description: 'Idealna na chłodniejsze dni, premium quality'
+        }
+    ];
+    
+    let message = "🎨 Nasze produkty:\n\n";
+    
+    products.forEach(product => {
+        message += `🏷️ ${product.name}\n`;
+        message += `💰 ${product.price} zł\n`;
+        message += `📝 ${product.description}\n\n`;
+    });
+    
+    addMessageToChat(message, 'bot');
+    
+    if (showAddButtons) {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        
+        products.forEach(product => {
+            const productSuggestion = document.createElement('div');
+            productSuggestion.className = 'product-suggestion';
+            productSuggestion.innerHTML = `
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">${product.price} zł</div>
+                <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}', 'M', 'Czarny'); 
+                                  addMessageToChat('✅ Dodano ${product.name} do koszyka!', 'bot'); 
+                                  setTimeout(() => showCartSummaryInChat(), 800)">
+                    🛒 Dodaj do koszyka
+                </button>
+            `;
+            messagesContainer.appendChild(productSuggestion);
+        });
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+}
+
+function showSizeChart() {
+    const sizeChart = `
+📏 Tabela rozmiarów (w cm):
+
+<table>
+<tr><th>Rozmiar</th><th>Klata</th><th>Długość</th><th>Rękaw</th></tr>
+<tr><td>S</td><td>48</td><td>70</td><td>20</td></tr>
+<tr><td>M</td><td>52</td><td>72</td><td>21</td></tr>
+<tr><td>L</td><td>56</td><td>74</td><td>22</td></tr>
+<tr><td>XL</td><td>60</td><td>76</td><td>23</td></tr>
+</table>
+
+💡 Porada: Zmierz swoją ulubioną koszulkę i porównaj z naszymi wymiarami!
+    `;
+    
+    addMessageToChat(sizeChart, 'bot');
+}
+
+function showShippingInfo() {
+    const shippingInfo = `
+🚚 Informacje o dostawie:
+
+• 📦 Darmowa dostawa od 200 zł
+• 🏪 Paczkomaty InPost - 14 zł
+• 🚚 Kurier DPD - 16 zł  
+• ⏰ Czas realizacji: 1-2 dni robocze
+• 📍 Wysyłka w całej Polsce
+
+📦 Zamówienia składane do 14:00 wysyłamy tego samego dnia!
+    `;
+    
+    addMessageToChat(shippingInfo, 'bot');
+}
+
+function showPaymentInfo() {
+    const paymentInfo = `
+💳 Metody płatności:
+
+• 🔵 PayPal (najszybsza opcja)
+• 💳 Karta kredytowa/debetowa
+• 📱 Przelew tradycyjny
+• 💰 Płatność przy odbiorze (dostawa kurierem)
+
+🛡️ Wszystkie płatności są bezpieczne i szyfrowane.
+    `;
+    
+    addMessageToChat(paymentInfo, 'bot');
+}
+
+function showReturnPolicy() {
+    const returnInfo = `
+📦 Polityka zwrotów:
+
+• 🔄 30 dni na zwrot bez podania przyczyny
+• 🆓 Darmowa wymiana na inny rozmiar
+• 📍 Zwroty przez Paczkomaty InPost
+• ✅ Produkt musi być nieprany z metkami
+
+❓ Masz problem z zamówieniem? Napisz do nas!
+    `;
+    
+    addMessageToChat(returnInfo, 'bot');
+}
+
+function showMaterialInfo() {
+    const materialInfo = `
+🧵 Materiały i jakość:
+
+👕 Koszulki:
+• 100% bawełna
+• Gramatura: 180g (idealna na nadruki)
+• Miękki, przewiewny materiał
+
+🧥 Bluzy:
+• 80% bawełna, 20% poliester  
+• Gramatura: 300g (super jakość)
+• Ciepłe i wygodne
+
+🎨 Nadruki:
+• Technologia DTF
+• Elastyczne i trwałe
+• Wytrzymują wiele prań
+    `;
+    
+    addMessageToChat(materialInfo, 'bot');
+}
+
+function showCartSummaryInChat() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    let message = `🛒 Podsumowanie koszyka:\n\n`;
+    message += `📦 Liczba produktów: ${itemCount}\n`;
+    message += `💰 Łączna kwota: ${total} zł\n\n`;
+    
+    if (total >= 200) {
+        message += `🎉 Masz darmową dostawę!\n\n`;
+    } else {
+        const needed = 200 - total;
+        message += `🚚 Do darmowej dostawy brakuje: ${needed} zł\n\n`;
+    }
+    
+    message += `Co chcesz zrobić dalej?`;
+    
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">✅ Zamów teraz</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż koszyk', 'user'); setTimeout(() => processUserMessage('Pokaż koszyk'), 500)">🛒 Pokaż koszyk</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addMessageToChat(message, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}-message`;
+    messageElement.innerHTML = message.replace(/\n/g, '<br>');
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'block';
+    document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
+}
+
+function hideTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'none';
+}
+
+function addQuickReplies() {
+    const quickReplies = [
+        "🛒 Pokaż produkty",
+        "📏 Tabela rozmiarów", 
+        "🚚 Dostawa i płatności",
+        "🛍️ Pokaż koszyk",
+        "❓ Pomoc"
+    ];
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    
+    const existingReplies = messagesContainer.querySelector('.quick-replies');
+    if (existingReplies) {
+        existingReplies.remove();
+    }
+    
+    const quickRepliesContainer = document.createElement('div');
+    quickRepliesContainer.className = 'quick-replies';
+    
+    quickReplies.forEach(reply => {
+        const button = document.createElement('button');
+        button.textContent = reply;
+        button.className = 'quick-reply-btn';
+        button.onclick = () => {
+            document.getElementById('chatbotInput').value = reply;
+            sendChatbotMessage();
+        };
+        quickRepliesContainer.appendChild(button);
+    });
+    
+    messagesContainer.appendChild(quickRepliesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function getChatbotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // WITANIE
+    if (message.includes('cześć') || message.includes('hej') || message.includes('siema') || message.includes('witaj')) {
+        return "Cześć! 😊 Jak mogę Ci pomóc? Możesz zapytać o produkty, rozmiary, dostawę lub poprosić mnie o pomoc w zakupach!";
+    }
+    
+    // PYTANIA O KONKRETNE PRODUKTY
+    if (message.includes('rebel')) {
+        return "Koszulka 'Rebel' to nasz bestseller! 💥\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 100% bawełna\n\nChcesz dodać ją do koszyka?";
+    }
+    
+    if (message.includes('vintage')) {
+        return "Koszulka 'Vintage' - klasyk w stylu retro! 🕺\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Idealna na codzienne noszenie\n\nInteresuje Cię ten model?";
+    }
+    
+    if (message.includes('urban') || message.includes('bluza')) {
+        return "Bluza 'Urban' - komfort i styl! 🧥\n• Cena: 200 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 80% bawełna, 20% poliester\n\nPerfekcyjna na chłodniejsze dni!";
+    }
+    
+    // PYTANIA O ZAMÓWIENIE
+    if (message.includes('zamów') || message.includes('kup') || message.includes('chcę kupić')) {
+        return "Świetnie! 🎉 Możesz:\n1. Dodać produkty do koszyka przez chat\n2. Przejść do zakładki 'Sklep'\n3. Użyć szybkich przycisków poniżej\n\nKtóry produkt Cię interesuje?";
+    }
+    
+    // PYTANIA O POMOC
+    if (message.includes('pomoc') || message.includes('pomóż') || message.includes('co mogę')) {
+        return "Oczywiście! Pomogę Ci:\n• 🛒 Wybrać i dodać produkty do koszyka\n• 📏 Dobrać odpowiedny rozmiar\n• 🚀 Szybko złożyć zamówienie\n• ❓ Odpowiedzieć na wszystkie pytania\n\nOd czego zaczynamy?";
+    }
+    
+    // PODZIĘKOWANIA
+    if (message.includes('dziękuję') || message.includes('dzięki') || message.includes('thx')) {
+        return "Nie ma za co! 🤗 Cieszę się, że mogłem pomóc. Jeśli masz jeszcze pytania, śmiało pisz! Miłych zakupów! 🛍️";
+    }
+    
+    // POŻEGNANIA
+    if (message.includes('pa') || message.includes('do widzenia') || message.includes('koniec')) {
+        return "Do zobaczenia! 👋 Mam nadzieję, że jeszcze się spotkamy. Pamiętaj - zawsze tu jestem, żeby pomóc!";
+    }
+    
+    // DOMYŚLNA ODPOWIEDŹ
+    return "Przepraszam, nie jestem pewien co masz na myśli. 🤔 Możesz:\n• Zapytać o konkretny produkt\n• Poprosić o pomoc w zakupach\n• Sprawdzić rozmiary lub dostawę\n• Użyć szybkich przycisków poniżej\n\nJak mogę Ci pomóc?";
+}
+
+// ===== SYSTEM FAQ =====
+function initFAQ() {
+    // Inicjalizacja sekcji FAQ
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            toggleFAQ(this);
         });
     });
+}
+
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+    
+    if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    } else {
+        answer.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    }
+}
+
+// ===== SYSTEM NAWIGACJI =====
+function initNavigation() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (this.hasAttribute('data-section')) {
+                e.preventDefault();
+                
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
+            }
+        });
+    });
+    
+    document.getElementById('cartIcon').addEventListener('click', toggleCart);
+}
+
+function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    document.getElementById(sectionId).classList.add('active');
+    
+    if (window.innerWidth <= 768) {
+        const navContainer = document.getElementById('navContainer');
+        if (navContainer) navContainer.classList.remove('show');
+    }
+}
+
+function toggleMobileMenu() {
+    const navContainer = document.getElementById('navContainer');
+    if (navContainer) navContainer.classList.toggle('show');
 }
 
 // ===== SYSTEM PRODUKTÓW =====
-function loadProducts() {
-    // To jest uproszczona wersja - w prawdziwej aplikacji pobierałabyś dane z API
-    products = [
-        {
-            id: 1,
-            name: 'Koszulka "Rebel"',
-            price: 120,
-            image: 'https://i.ibb.co/0Qy7p3R/koszulka-rebel.jpg',
-            category: 'tshirt',
-            tags: ['bestseller', 'vintage'],
-            colors: ['Czarny', 'Biały', 'Bordowy'],
-            sizes: ['S', 'M', 'L', 'XL', 'XXL']
-        },
-        // ... więcej produktów
-    ];
-    
-    renderProducts(products);
-}
-
-function renderProducts(productsToRender) {
-    const container = document.getElementById('productsContainer');
-    container.innerHTML = '';
-    
-    productsToRender.forEach(product => {
-        const productCard = createProductCard(product);
-        container.appendChild(productCard);
-    });
-}
-
-function createProductCard(product) {
-    const card = document.createElement('div');
-    card.className = 'product-card fade-in';
-    card.dataset.category = product.category;
-    card.dataset.tags = product.tags.join(',');
-    
-    const isInWishlist = wishlist.some(item => item.id === product.id);
-    
-    card.innerHTML = `
-        <div class="product-image-container">
-            <img src="${product.image}" alt="${product.name}" class="product-image">
-            <button class="wishlist-btn ${isInWishlist ? 'active' : ''}" onclick="toggleWishlist(${product.id})">
-                <i class="fas fa-heart"></i>
-            </button>
-        </div>
-        <div class="product-info">
-            <div class="product-title">${product.name}</div>
-            <div class="product-price">${product.price} zł</div>
-            
-            <div class="product-options">
-                <div class="option-group">
-                    <div class="option-title">Kolor:</div>
-                    <div class="color-options">
-                        ${product.colors.map((color, index) => `
-                            <div class="color-option ${index === 0 ? 'selected' : ''}" 
-                                 style="background-color: ${getColorHex(color)}" 
-                                 data-color="${color}"></div>
-                        `).join('')}
-                    </div>
-                </div>
-                
-                <div class="option-group">
-                    <div class="option-title">Rozmiar:</div>
-                    <div class="size-options">
-                        ${product.sizes.map((size, index) => `
-                            <div class="size-option ${index === 0 ? 'selected' : ''}" data-size="${size}">${size}</div>
-                        `).join('')}
-                    </div>
-                </div>
-            </div>
-            
-            <button class="nav-btn add-to-cart-btn" 
-                    onclick="addToCartFromCard(this)"
-                    data-id="${product.id}"
-                    data-name="${product.name}" 
-                    data-price="${product.price}" 
-                    data-image="${product.image}">
-                Dodaj do koszyka
-            </button>
-            <button class="nav-btn mt-2 quick-view-btn" onclick="showQuickView(${product.id})">
-                Szybki podgląd
-            </button>
-        </div>
-    `;
-    
-    return card;
-}
-
-function getColorHex(colorName) {
-    const colors = {
-        'Czarny': '#000000',
-        'Biały': '#ffffff',
-        'Bordowy': '#800020',
-        'Grafitowy': '#36454F'
-    };
-    return colors[colorName] || '#000000';
-}
-
-// ===== SYSTEM FILTRÓW I WYSZUKIWARKI =====
-function initProductFilters() {
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            const filter = this.dataset.filter;
-            filterProducts();
-        });
-    });
-}
-
-function filterProducts() {
-    const searchTerm = document.getElementById('productSearch').value.toLowerCase();
-    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-    
-    const filtered = products.filter(product => {
-        const matchesSearch = product.name.toLowerCase().includes(searchTerm);
-        const matchesFilter = activeFilter === 'all' || 
-                            (activeFilter === 'bestseller' && product.tags.includes('bestseller')) ||
-                            product.category === activeFilter;
+function initProductOptions() {
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('color-option')) {
+            const options = e.target.closest('.color-options');
+            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
         
-        return matchesSearch && matchesFilter;
+        if (e.target.classList.contains('size-option')) {
+            const options = e.target.closest('.size-options');
+            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+            e.target.classList.add('selected');
+        }
+        
+        if (e.target.classList.contains('add-to-cart-btn')) {
+            e.preventDefault();
+            const productCard = e.target.closest('.product-card');
+            const name = e.target.getAttribute('data-name');
+            const price = parseFloat(e.target.getAttribute('data-price'));
+            const image = e.target.getAttribute('data-image');
+            
+            const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+            const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
+            
+            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+            
+            addToCart(name, price, image, size, color);
+        }
     });
-    
-    renderProducts(filtered);
 }
 
 // ===== SYSTEM KOSZYKA =====
-function addToCartFromCard(button) {
-    const card = button.closest('.product-card');
-    const name = button.getAttribute('data-name');
-    const price = parseFloat(button.getAttribute('data-price'));
-    const image = button.getAttribute('data-image');
-    const id = parseInt(button.getAttribute('data-id'));
-    
-    const selectedColor = card.querySelector('.color-options .color-option.selected').getAttribute('data-color');
-    const selectedSize = card.querySelector('.size-options .size-option.selected').getAttribute('data-size');
-    
-    addToCart(id, name, price, image, selectedSize, selectedColor);
-}
-
-function addToCart(id, name, price, image = null, size = null, color = null) {
+function addToCart(name, price, image = null, size = null, color = null) {
     const existingIndex = cart.findIndex(item => 
-        item.id === id && 
+        item.name === name && 
         item.size === size && 
         item.color === color
     );
@@ -3984,13 +4634,13 @@ function addToCart(id, name, price, image = null, size = null, color = null) {
         cart[existingIndex].quantity++;
     } else {
         cart.push({
-            id: id,
             name: name,
             price: price,
             quantity: 1,
             image: image,
             size: size,
-            color: color
+            color: color,
+            id: Date.now() + Math.random()
         });
     }
     
@@ -4023,13 +4673,7 @@ function updateCart() {
                 ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
                 <div class="flex-1">
                     <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × 
-                         <select onchange="updateCartQuantity(${index}, this.value)" class="border rounded px-1">
-                             ${[1,2,3,4,5].map(q => 
-                                 `<option value="${q}" ${q === item.quantity ? 'selected' : ''}>${q}</option>`
-                             ).join('')}
-                         </select>
-                    </div>
+                    <div>${item.price} zł × ${item.quantity}</div>
                     ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
                     ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
                 </div>
@@ -4046,11 +4690,6 @@ function updateCart() {
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
-function updateCartQuantity(index, newQuantity) {
-    cart[index].quantity = parseInt(newQuantity);
-    updateCart();
-}
-
 function removeFromCart(index) {
     cart.splice(index, 1);
     updateCart();
@@ -4060,153 +4699,107 @@ function toggleCart() {
     document.getElementById('cartPanel').classList.toggle('open');
 }
 
-// ===== SYSTEM WISHLIST =====
-function initWishlist() {
-    updateWishlistCount();
-}
-
-function toggleWishlist(productId) {
-    const product = products.find(p => p.id === productId);
-    const existingIndex = wishlist.findIndex(item => item.id === productId);
-    
-    if (existingIndex >= 0) {
-        wishlist.splice(existingIndex, 1);
-    } else {
-        wishlist.push(product);
-    }
-    
-    localStorage.setItem('adelbertus_wishlist', JSON.stringify(wishlist));
-    updateWishlistCount();
-    
-    // Aktualizuj przycisk w karcie produktu
-    const wishlistBtn = document.querySelector(`[onclick="toggleWishlist(${productId})"]`);
-    if (wishlistBtn) {
-        wishlistBtn.classList.toggle('active');
-    }
-    
-    showNotification(existingIndex >= 0 ? '❌ Usunięto z listy życzeń' : '❤️ Dodano do listy życzeń');
-}
-
-function updateWishlistCount() {
-    const wishlistCount = document.getElementById('wishlistCount');
-    if (wishlistCount) {
-        wishlistCount.textContent = wishlist.length;
-    }
-}
-
-// ===== QUICK VIEW =====
-function showQuickView(productId) {
-    const product = products.find(p => p.id === productId);
-    const modal = document.getElementById('quickViewModal');
-    const content = document.getElementById('quickViewContent');
-    
-    content.innerHTML = `
-        <div class="p-6">
-            <div class="flex flex-col md:flex-row gap-6">
-                <div class="md:w-1/2">
-                    <img src="${product.image}" alt="${product.name}" class="w-full rounded-lg">
-                </div>
-                <div class="md:w-1/2">
-                    <h3 class="text-2xl font-bold">${product.name}</h3>
-                    <div class="text-xl text-gold font-bold my-2">${product.price} zł</div>
-                    <p class="text-gray-600 mb-4">${product.description || 'Unikalny design w stylu vintage'}</p>
-                    
-                    <div class="product-options mb-4">
-                        <div class="option-group">
-                            <div class="option-title">Kolor:</div>
-                            <div class="color-options">
-                                ${product.colors.map((color, index) => `
-                                    <div class="color-option ${index === 0 ? 'selected' : ''}" 
-                                         style="background-color: ${getColorHex(color)}" 
-                                         data-color="${color}"></div>
-                                `).join('')}
-                            </div>
-                        </div>
-                        
-                        <div class="option-group">
-                            <div class="option-title">Rozmiar:</div>
-                            <div class="size-options">
-                                ${product.sizes.map((size, index) => `
-                                    <div class="size-option ${index === 0 ? 'selected' : ''}" data-size="${size}">${size}</div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="nav-btn gold-bg w-full mb-2" 
-                            onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}'); closeQuickView()">
-                        Dodaj do koszyka
-                    </button>
-                    <button class="nav-btn w-full" onclick="toggleWishlist(${product.id}); closeQuickView()">
-                        ❤️ Dodaj do listy życzeń
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    modal.style.display = 'flex';
-}
-
-function closeQuickView() {
-    document.getElementById('quickViewModal').style.display = 'none';
-}
-
-// ===== NEWSLETTER =====
-function initNewsletterPopup() {
-    if (!localStorage.getItem('newsletter_shown')) {
-        setTimeout(showNewsletterPopup, 5000);
-    }
-}
-
-function showNewsletterPopup() {
-    if (!localStorage.getItem('newsletter_subscribed') && !localStorage.getItem('newsletter_shown')) {
-        document.getElementById('newsletterPopup').style.display = 'flex';
-        localStorage.setItem('newsletter_shown', 'true');
-    }
-}
-
-function closeNewsletter() {
-    document.getElementById('newsletterPopup').style.display = 'none';
-}
-
-function subscribeNewsletter() {
-    const email = document.getElementById('newsletterEmail').value;
-    
-    if (validateEmail(email)) {
-        // Tutaj wyślij email do swojej bazy danych
-        localStorage.setItem('newsletter_subscribed', 'true');
-        
-        // Wygeneruj kod rabatowy
-        const discountCode = 'ADEL10-' + Math.random().toString(36).substr(2, 5).toUpperCase();
-        
-        showNotification(`🎉 Dziękujemy! Twój kod rabatowy: ${discountCode}`);
-        closeNewsletter();
-        
-        // Zapisz w localStorage dla przyszłych zakupów
-        localStorage.setItem('discount_code', discountCode);
-    } else {
-        showNotification('❌ Proszę podać poprawny adres email');
-    }
-}
-
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-// ===== PAYPAL =====
 function renderPayPalButton() {
     const container = document.getElementById('paypal-container');
     container.innerHTML = '';
     
     if (cart.length === 0) return;
     
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    
     paypal.HostedButtons({
         hostedButtonId: "L4639S4363CZE",
     }).render("#paypal-container");
+}
+
+function sendOrderEmail() {
+    let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+    
+    cart.forEach((item, index) => {
+        emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+        if (item.color) emailBody += ` (Kolor: ${item.color})`;
+        emailBody += '\n';
+    });
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+    emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+    emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+    
+    window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+}
+
+function sendOrderWhatsApp() {
+    let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+    
+    cart.forEach((item, index) => {
+        message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        if (item.size) message += ` (Rozmiar: ${item.size})`;
+        if (item.color) message += ` (Kolor: ${item.color})`;
+        message += '%0A';
+    });
+    
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+    message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+    message += `Proszę o potwierdzenie zamówienia.`;
+    
+    window.open(`https://wa.me/48604296360?text=${message}`);
+}
+
+// ===== STUDIO PROJEKTOWE =====
+function initDesignStudio() {
+    canvas = new fabric.Canvas('designCanvas');
+}
+
+function addText() {
+    const text = new fabric.IText('Twój tekst', {
+        left: 100,
+        top: 100,
+        fontFamily: 'Arial',
+        fill: '#000000',
+        fontSize: 20
+    });
+    canvas.add(text);
+}
+
+function addCustomText() {
+    const textInput = document.getElementById('textInput');
+    const colorPicker = document.getElementById('colorPicker');
+    
+    if (textInput.value.trim()) {
+        const text = new fabric.IText(textInput.value, {
+            left: 50,
+            top: 50,
+            fontFamily: 'Arial',
+            fill: colorPicker.value,
+            fontSize: 24
+        });
+        canvas.add(text);
+        textInput.value = '';
+    }
+}
+
+function changeColor() {
+    const activeObject = canvas.getActiveObject();
+    const colorPicker = document.getElementById('colorPicker');
+    
+    if (activeObject) {
+        activeObject.set('fill', colorPicker.value);
+        canvas.renderAll();
+    }
+}
+
+function clearCanvas() {
+    canvas.clear();
+}
+
+function saveDesign() {
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 0.8
+    });
+    
+    showNotification('🎨 Projekt zapisany! Możesz go teraz dodać do koszyka.');
 }
 
 // ===== POWIADOMIENIA =====
@@ -4232,53 +4825,16 @@ function showNotification(message) {
     }, 3000);
 }
 
-// ===== RESZTA SYSTEMU =====
-function initProductOptions() {
-    // Inicjalizacja opcji produktów (kolory, rozmiary)
-    document.addEventListener('click', function(e) {
-        // Obsługa wyboru koloru
-        if (e.target.classList.contains('color-option')) {
-            const colorOptions = e.target.parentElement.querySelectorAll('.color-option');
-            colorOptions.forEach(option => option.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
-        
-        // Obsługa wyboru rozmiaru
-        if (e.target.classList.contains('size-option')) {
-            const sizeOptions = e.target.parentElement.querySelectorAll('.size-option');
-            sizeOptions.forEach(option => option.classList.remove('selected'));
-            e.target.classList.add('selected');
-        }
-    });
-}
-
-function initDesignStudio() {
-    // Inicjalizacja studio projektowego
-    console.log('Design studio initialized');
-}
-
+// ===== COOKIE CONSENT =====
 function initCookieConsent() {
-    // Inicjalizacja zgody na cookies
     if (!localStorage.getItem('cookies_accepted')) {
-        setTimeout(() => {
-            document.getElementById('cookieConsent').style.display = 'block';
-        }, 2000);
+        document.getElementById('cookieConsent').style.display = 'block';
     }
 }
 
 function acceptCookies() {
     localStorage.setItem('cookies_accepted', 'true');
     document.getElementById('cookieConsent').style.display = 'none';
-}
-
-function initChatbot() {
-    // Inicjalizacja chatbota
-    console.log('Chatbot initialized');
-}
-
-function initFAQ() {
-    // Inicjalizacja sekcji FAQ
-    console.log('FAQ initialized');
 }
 
 // ===== FUNKCJE GLOBALNE =====
@@ -4292,91 +4848,12 @@ window.acceptCookies = acceptCookies;
 window.toggleChatbot = toggleChatbot;
 window.handleChatbotInput = handleChatbotInput;
 window.sendChatbotMessage = sendChatbotMessage;
+window.addText = addText;
+window.addCustomText = addCustomText;
+window.changeColor = changeColor;
+window.clearCanvas = clearCanvas;
+window.saveDesign = saveDesign;
 window.toggleFAQ = toggleFAQ;
-window.toggleWishlist = toggleWishlist;
-window.showQuickView = showQuickView;
-window.closeQuickView = closeQuickView;
-window.filterProducts = filterProducts;
-window.subscribeNewsletter = subscribeNewsletter;
-window.closeNewsletter = closeNewsletter;
-
-// Funkcje do zaimplementowania w przyszłości
-function sendOrderEmail() {
-    const orderDetails = cart.map(item => 
-        `${item.name} - ${item.price} zł x ${item.quantity} = ${item.price * item.quantity} zł`
-    ).join('\n');
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const subject = 'Zamówienie z AdelbertusShop';
-    const body = `Szczegóły zamówienia:\n\n${orderDetails}\n\nRAZEM: ${total} zł\n\nDziękujemy za zakupy!`;
-    
-    window.location.href = `mailto:mielniczukgrzegosz74@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function sendOrderWhatsApp() {
-    const orderDetails = cart.map(item => 
-        `• ${item.name} - ${item.price} zł x ${item.quantity}`
-    ).join('%0A');
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    const message = `Cześć! Chcę złożyć zamówienie:%0A%0A${orderDetails}%0A%0ARAZEM: ${total} zł`;
-    
-    window.open(`https://wa.me/48604296360?text=${message}`, '_blank');
-}
-
-function toggleChatbot() {
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    const isVisible = chatbotWindow.style.display === 'flex';
-    chatbotWindow.style.display = isVisible ? 'none' : 'flex';
-}
-
-function handleChatbotInput(event) {
-    if (event.key === 'Enter') {
-        sendChatbotMessage();
-    }
-}
-
-function sendChatbotMessage() {
-    // Podstawowa implementacja chatbota
-    const input = document.getElementById('chatbotInput');
-    const message = input.value.trim();
-    
-    if (message) {
-        addChatMessage(message, 'user');
-        input.value = '';
-        
-        // Symulacja odpowiedzi bota
-        setTimeout(() => {
-            let response = "Dziękuję za wiadomość! Jestem asystentem AdelbertusShop. Jak mogę Ci pomóc?";
-            
-            if (message.toLowerCase().includes('koszulka')) {
-                response = "Mamy świetne koszulki vintage! Który model Cię interesuje? Rebel, Vintage, a może Abstract?";
-            } else if (message.toLowerCase().includes('rozmiar')) {
-                response = "Pomogę Ci dobrać rozmiar! Jaki rozmiar zwykle nosisz? Mamy S, M, L, XL.";
-            } else if (message.toLowerCase().includes('dostawa')) {
-                response = "Dostawa trwa 2-3 dni robocze. Darmowa dostawa przy zamówieniach powyżej 200 zł!";
-            }
-            
-            addChatMessage(response, 'bot');
-        }, 1000);
-    }
-}
-
-function addChatMessage(text, sender) {
-    const messagesContainer = document.getElementById('chatbotMessages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${sender}-message`;
-    messageDiv.textContent = text;
-    messagesContainer.appendChild(messageDiv);
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-}
-
-function toggleFAQ(element) {
-    const answer = element.nextElementSibling;
-    const isVisible = answer.style.display === 'block';
-    answer.style.display = isVisible ? 'none' : 'block';
-    element.querySelector('i').className = isVisible ? 'fas fa-plus' : 'fas fa-minus';
-}
-    </script>
+</script>
 </body>
 </html>
