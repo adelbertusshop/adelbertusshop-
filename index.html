@@ -1198,6 +1198,8 @@
     </style>  
 </head>
 <body> 
+</body>
+</html>
     <!-- Chatbot -->
     <div class="chatbot-container">
         <button class="chatbot-button" onclick="toggleChatbot()">
@@ -1241,7 +1243,7 @@
         <div class="logo">AdelbertusShop</div>
         <p class="tagline">Tworzone z pasją, noszone z dumą</p>
     </header>
-    <!-- Nawigacja -->
+<!-- Nawigacja -->
 <nav>
     <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
         <i class="fas fa-bars"></i> Menu Adelbertus
@@ -1258,7 +1260,7 @@
         <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
         <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
     </div>
-</nav>
+</nav>    
     <!-- Sekcja główna -->
     <main>
         <!-- Strona główna -->
@@ -1701,11 +1703,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initDesignStudio();
     updateCart();
     initCookieConsent();
-    optimizeForMobile();
     optimizeImages();
-    
-    // Dodaj listener dla zmiany rozmiaru okna
-    window.addEventListener('resize', optimizeForMobile);
 });
 
 // ===== MOBILE MENU =====
@@ -1752,25 +1750,6 @@ function showSection(sectionId) {
     
     if (window.innerWidth <= 768) {
         document.getElementById('navContainer').classList.remove('show');
-    }
-}
-
-// ===== OPTYMALIZACJA DLA MOBILE =====
-function optimizeForMobile() {
-    isMobile = window.innerWidth <= 768;
-    
-    // Zmniejsz ilość animacji na słabszych urządzeniach
-    if (isMobile) {
-        document.body.classList.add('mobile-view');
-        
-        // Wyłącz niektóre ciężkie animacje
-        const animatedElements = document.querySelectorAll('.fade-in, .product-card');
-        animatedElements.forEach(el => {
-            el.style.animation = 'none';
-            el.style.opacity = '1';
-        });
-    } else {
-        document.body.classList.remove('mobile-view');
     }
 }
 
