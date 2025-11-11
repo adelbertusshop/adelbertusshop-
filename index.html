@@ -1198,8 +1198,6 @@
     </style>  
 </head>
 <body> 
-</body>
-</html>
     <!-- Chatbot -->
     <div class="chatbot-container">
         <button class="chatbot-button" onclick="toggleChatbot()">
@@ -1257,7 +1255,6 @@
         <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
         <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
         <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
-        <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
         <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
     </div>
 </nav>    
@@ -1691,10 +1688,9 @@
     </footer>
 
     <script>
-// ===== SYSTEM SKLEPU =====
+        // ===== SYSTEM SKLEPU =====
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
-let isMobile = window.innerWidth <= 768;
 
 // ===== INICJALIZACJA =====
 document.addEventListener('DOMContentLoaded', function() {
@@ -1703,7 +1699,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initDesignStudio();
     updateCart();
     initCookieConsent();
-    optimizeImages();
 });
 
 // ===== MOBILE MENU =====
@@ -1750,17 +1745,6 @@ function showSection(sectionId) {
     
     if (window.innerWidth <= 768) {
         document.getElementById('navContainer').classList.remove('show');
-    }
-}
-
-// Optymalizacja obrazków na mobile
-function optimizeImages() {
-    if (isMobile) {
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-            // Dodaj lazy loading dla obrazków
-            img.setAttribute('loading', 'lazy');
-        });
     }
 }
 
