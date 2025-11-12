@@ -72,32 +72,25 @@
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            position: relative;
         }
 
-        .chatbot-button.pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
         }
 
         .chatbot-window {
             position: absolute;
             bottom: 70px;
             left: 0;
-            width: 380px;
-            height: 550px;
+            width: 350px;
+            height: 500px;
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             display: none;
             flex-direction: column;
             border: 2px solid var(--color-gold);
-            overflow: hidden;
         }
 
         .chatbot-header {
@@ -124,16 +117,14 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            background: #f8f9fa;
+            gap: 10px;
         }
 
         .message {
-            padding: 12px 16px;
+            padding: 10px 15px;
             border-radius: 18px;
-            max-width: 85%;
+            max-width: 80%;
             word-wrap: break-word;
-            line-height: 1.4;
         }
 
         .user-message {
@@ -144,225 +135,77 @@
         }
 
         .bot-message {
-            background: white;
+            background: #f1f1f1;
             color: #333;
             align-self: flex-start;
             border-bottom-left-radius: 5px;
-            border: 1px solid #e9ecef;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .product-suggestion {
-            background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 8px 0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .product-suggestion img {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 8px;
-        }
-
-        .product-suggestion .product-name {
-            font-weight: bold;
-            margin-bottom: 4px;
-        }
-
-        .product-suggestion .product-price {
-            color: var(--color-gold);
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .product-suggestion button {
-            background: var(--color-gold);
-            border: none;
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .product-suggestion button:hover {
-            background: var(--color-dark-gold);
-            transform: translateY(-2px);
-        }
-
-        .chatbot-typing {
-            display: none;
-            align-self: flex-start;
-            background: white;
-            padding: 12px 16px;
-            border-radius: 18px;
-            border-bottom-left-radius: 5px;
-            font-style: italic;
-            color: #666;
-            border: 1px solid #e9ecef;
-        }
-
-        .quick-replies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        .quick-reply-btn {
-            background: white;
-            border: 1px solid var(--color-gold);
-            border-radius: 20px;
-            padding: 8px 16px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: #333;
-        }
-
-        .quick-reply-btn:hover {
-            background: var(--color-gold);
-            color: black;
-            transform: translateY(-2px);
         }
 
         .chatbot-input {
             display: flex;
             padding: 15px;
-            border-top: 1px solid #e9ecef;
+            border-top: 1px solid #eee;
             gap: 10px;
-            background: white;
         }
 
         .chatbot-input input {
             flex: 1;
-            padding: 12px 16px;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 25px;
+            border-radius: 20px;
             outline: none;
-            font-size: 0.9rem;
-        }
-
-        .chatbot-input input:focus {
-            border-color: var(--color-gold);
         }
 
         .chatbot-input button {
             background: var(--color-gold);
             color: black;
             border: none;
-            border-radius: 25px;
-            padding: 12px 20px;
+            border-radius: 20px;
+            padding: 10px 20px;
             cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
         }
 
-        .chatbot-input button:hover {
-            background: var(--color-dark-gold);
-            transform: translateY(-2px);
-        }
-
-        .suggestion-buttons {
-            display: flex;
-            gap: 8px;
-            margin-top: 8px;
-        }
-
-        .suggestion-btn {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 15px;
-            padding: 6px 12px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .suggestion-btn:hover {
-            background: var(--color-gold);
-            border-color: var(--color-gold);
-        }
-
-        .size-chart {
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 12px;
-            margin: 8px 0;
-            font-size: 0.85rem;
-        }
-
-        .size-chart table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .size-chart th, .size-chart td {
-            border: 1px solid #dee2e6;
-            padding: 4px 8px;
-            text-align: center;
-        }
-
-        .size-chart th {
-            background: var(--color-gold);
-            color: black;
-            font-weight: bold;
-        }
-
-        .order-summary {
-            background: #e9ecef;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 8px 0;
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: between;
-            margin-bottom: 4px;
-        }
-
-        .order-total {
-            border-top: 1px solid #adb5bd;
-            padding-top: 8px;
-            margin-top: 8px;
-            font-weight: bold;
+        .chatbot-typing {
+            display: none;
+            align-self: flex-start;
+            background: #f1f1f1;
+            padding: 10px 15px;
+            border-radius: 18px;
+            border-bottom-left-radius: 5px;
+            font-style: italic;
+            color: #666;
         }
         
-        /* Nagłówek i nawigacja */
+        /* Nagłówek i nawigacja - POPRAWIONE DLA MOBILNYCH */
         header {
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             text-align: center;
             position: relative;
         }
         
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 900;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
         
         .tagline {
             font-style: italic;
-            margin-bottom: 2rem;
-            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
         
         nav {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 1rem;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 0.5rem;
             position: sticky;
             top: 0;
             z-index: 100;
@@ -374,21 +217,67 @@
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
+            gap: 0.3rem;
         }
         
         .nav-btn {
             background: transparent;
             color: white;
             border: 2px solid var(--color-gold);
-            padding: 0.8rem 1.5rem;
-            margin: 0.5rem;
-            border-radius: 30px;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
+            font-size: 0.8rem;
+            flex: 1;
+            min-width: 80px;
+            max-width: 120px;
+            text-align: center;
         }
         
         .nav-btn:hover, .nav-btn.active {
+            background: var(--color-gold);
+            color: black;
+        }
+
+        /* MOBILE MENU - NOWE STYLE */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--color-gold);
+            color: black;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0.5rem auto;
+            width: 90%;
+            font-size: 1rem;
+        }
+
+        .mobile-nav-container {
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .mobile-nav-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--color-gold);
+            padding: 0.8rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+
+        .mobile-nav-btn:hover, .mobile-nav-btn.active {
             background: var(--color-gold);
             color: black;
         }
@@ -396,7 +285,7 @@
         /* Sekcje */
         section {
             display: none;
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -408,7 +297,7 @@
         
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             position: relative;
             padding-bottom: 1rem;
         }
@@ -419,7 +308,7 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 80px;
             height: 3px;
             background: var(--color-gold);
         }
@@ -428,8 +317,8 @@
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
         
         .product-card {
@@ -443,12 +332,12 @@
         }
         
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         
         .product-image-container {
-            height: 280px;
+            height: 250px;
             overflow: hidden;
             display: flex;
             align-items: center;
@@ -463,14 +352,14 @@
         }
         
         .product-info {
-            padding: 1.5rem;
+            padding: 1.2rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
         .product-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 0.5rem;
             font-weight: 700;
         }
@@ -478,7 +367,7 @@
         .product-price {
             color: var(--color-gold);
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
@@ -492,7 +381,7 @@
         }
 
         .option-title {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 600;
             margin-bottom: 0.3rem;
             color: #555;
@@ -500,13 +389,13 @@
 
         .color-options {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
         .color-option {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             cursor: pointer;
             border: 2px solid #ddd;
@@ -520,15 +409,15 @@
 
         .size-options {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             flex-wrap: wrap;
         }
 
         .size-option {
-            padding: 0.3rem 0.6rem;
+            padding: 0.2rem 0.5rem;
             border: 1px solid #ddd;
             border-radius: 4px;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -543,9 +432,9 @@
         .design-studio {
             background: white;
             border-radius: 15px;
-            padding: 2rem;
+            padding: 1.5rem;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         
         .canvas-container {
@@ -554,19 +443,21 @@
             padding: 1rem;
             background: white;
             margin: 0 auto;
-            max-width: 600px;
+            max-width: 100%;
+            overflow: hidden;
         }
         
         #designCanvas {
             width: 100%;
             background: white;
             border: 1px solid #ddd;
+            max-width: 100%;
         }
         
         .canvas-controls {
             display: flex;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.8rem;
             margin-top: 1rem;
             flex-wrap: wrap;
         }
@@ -574,21 +465,22 @@
         .design-tools {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
         }
         
         .tool-group {
             background: var(--color-cream);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 10px;
             border: 1px solid #eee;
         }
         
         .tool-title {
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--color-dark-gold);
+            font-size: 1rem;
         }
         
         /* Sekcja zbiórki */
@@ -597,17 +489,17 @@
             background-size: cover;
             background-position: center;
             color: white;
-            padding: 4rem 2rem;
+            padding: 3rem 1.5rem;
             border-radius: 15px;
             text-align: center;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         
         .donors-list {
             background: rgba(255, 255, 255, 0.1);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 10px;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             text-align: left;
         }
         
@@ -615,8 +507,8 @@
         .blog-posts {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
         
         .blog-post {
@@ -628,26 +520,26 @@
         
         .blog-image {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
         }
         
         .blog-content {
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
         
         /* Opinie */
         .reviews {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
         
         .review {
             background: white;
             border-radius: 10px;
-            padding: 1.5rem;
+            padding: 1.2rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
@@ -658,8 +550,8 @@
         }
         
         .review-avatar {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             object-fit: cover;
             margin-right: 1rem;
@@ -674,26 +566,26 @@
         footer {
             background: var(--color-dark);
             color: white;
-            padding: 3rem 1rem;
+            padding: 2rem 1rem;
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 3rem;
         }
         
         .contact-info {
-            margin: 1.5rem 0;
+            margin: 1rem 0;
         }
         
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin: 1.5rem 0;
+            gap: 0.8rem;
+            margin: 1rem 0;
         }
         
         .social-link {
             display: inline-block;
-            width: 40px;
-            height: 40px;
+            width: 35px;
+            height: 35px;
             background: var(--color-gold);
             color: black;
             border-radius: 50%;
@@ -711,18 +603,18 @@
         /* Koszyk */
         #cartIcon {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 20px;
+            right: 20px;
             background: var(--color-gold);
             color: black;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             z-index: 99;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
@@ -733,10 +625,10 @@
             right: -5px;
             background: red;
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -746,14 +638,14 @@
         #cartPanel {
             position: fixed;
             top: 0;
-            right: -400px;
-            width: 400px;
+            right: -100%;
+            width: 100%;
             height: 100vh;
             background: white;
             z-index: 100;
             transition: right 0.3s ease;
             box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
-            padding: 2rem;
+            padding: 1.5rem;
             overflow-y: auto;
         }
         
@@ -764,20 +656,20 @@
         .cart-item {
             display: flex;
             align-items: center;
-            padding: 1rem;
+            padding: 0.8rem;
             border-bottom: 1px solid #eee;
         }
         
         .cart-item-image {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             object-fit: cover;
             border-radius: 8px;
             margin-right: 1rem;
         }
         
         .cart-total {
-            margin-top: 2rem;
+            margin-top: 1.5rem;
             padding-top: 1rem;
             border-top: 2px solid #eee;
         }
@@ -798,22 +690,113 @@
             animation: fadeIn 0.5s ease;
         }
         
+        /* RESPONSYWNOŚĆ - POPRAWIONA */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+            }
+            
+            /* UKRYWAMY STANDARDOWĄ NAWIGACJĘ NA MOBILNYCH */
+            .nav-container {
+                display: none;
+            }
+            
+            /* POKAZUJEMY PRZYCISK MENU MOBILNEGO */
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .section-title p {
+                font-size: 0.9rem;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            .charity-section {
+                padding: 2rem 1rem;
+            }
+            
+            .chatbot-container {
+                bottom: 80px;
+                left: 10px;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+            }
+
+            #cartIcon {
+                bottom: 80px;
+                right: 10px;
+                width: 45px;
+                height: 45px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8rem;
+            }
+            
+            header {
+                padding: 1rem 0;
+            }
+            
+            section {
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .chatbot-window {
+                width: 280px;
+                height: 380px;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+        }
+
         /* Style dla przycisków w koszyku */
         .cart-buttons {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
             margin-top: 1rem;
         }
 
         .cart-buttons button {
-            padding: 12px;
+            padding: 10px;
             border-radius: 5px;
             border: none;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s ease;
             width: 100%;
+            font-size: 0.9rem;
         }
 
         .cart-buttons button:hover {
@@ -842,446 +825,24 @@
             text-align: center;
             z-index: 1000;
             display: none;
-        }
-
-        /* Sekcja partnerzy */
-        .partners-section {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .partners-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .partner-card {
-            background: var(--color-cream);
-            padding: 2rem;
-            border-radius: 10px;
-            border: 1px solid #eee;
-            transition: all 0.3s ease;
-        }
-
-        .partner-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-
-        .partner-logo {
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-        }
-
-        /* Sekcja o nas */
-        .about-section {
-            background: linear-gradient(135deg, var(--color-cream) 0%, white 100%);
-            border-radius: 15px;
-            padding: 3rem;
-            margin: 2rem 0;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .team-member {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .team-avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 1rem;
-            border: 3px solid var(--color-gold);
-        }
-
-        /* Sekcja FAQ */
-        .faq-section {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 1.5rem 0;
-        }
-
-        .faq-question {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* ========== MEDIA QUERIES - MOBILE FIRST ========== */
-        /* POPRAWKI RESPONSYWNOŚĆ - MOBILE FIRST */
-        @media (max-width: 480px) {
-            .nav-container {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 0.5rem;
-            }
-            
-            .nav-btn {
-                width: 100%;
-                margin: 0.2rem 0;
-                padding: 0.8rem 1rem;
-                font-size: 0.9rem;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-                width: 100%;
-                margin: 0.5rem 0;
-                padding: 1rem;
-                background: var(--color-gold);
-                color: black;
-                border: none;
-                border-radius: 30px;
-                font-weight: bold;
-                cursor: pointer;
-            }
-            
-            /* NAPRAWIONE - PRZYCISKI ZAWSZE WIDOCZNE */
-            .nav-container {
-                display: flex !important;
-            }
-            
-            /* Poprawki dla produktów */
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .product-card {
-                margin: 0.5rem;
-            }
-            
-            /* Poprawki dla chatbota */
-            .chatbot-container {
-                bottom: 10px;
-                left: 10px;
-                right: 10px;
-            }
-            
-            .chatbot-window {
-                width: 100%;
-                left: 0;
-                right: 0;
-                height: 70vh;
-            }
-            
-            /* Poprawki dla koszyka */
-            #cartPanel {
-                width: 100%;
-                padding: 1rem;
-            }
-            
-            .cart-item {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .cart-item-image {
-                margin-right: 0;
-                margin-bottom: 0.5rem;
-            }
-            
-            /* Poprawki dla nagłówka */
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-                padding: 0 1rem;
-            }
-            
-            /* Poprawki dla sekcji */
-            section {
-                padding: 1.5rem 0.5rem;
-            }
-            
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-            
-            /* Poprawki dla studio projektowego */
-            .design-tools {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            .canvas-container {
-                padding: 0.5rem;
-            }
-            
-            #designCanvas {
-                width: 100%;
-                height: 300px;
-            }
-        }
-
-        @media (max-width: 768px) and (min-width: 481px) {
-            .products-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .nav-container {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-btn {
-                margin: 0.3rem;
-                padding: 0.7rem 1.2rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        /* Poprawki dla tabletów */
-        @media (max-width: 1024px) and (min-width: 769px) {
-            .products-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Ulepszenia ogólne */
-        .mobile-menu-btn {
-            display: none;
-        }
-
-        /* Lepsze zarządzanie przestrzenią na mobile */
-        .product-info {
-            padding: 1rem;
-        }
-
-        .product-options {
-            margin-bottom: 0.8rem;
-        }
-
-        .option-group {
-            margin-bottom: 0.6rem;
-        }
-
-        /* Poprawki dla przycisków w koszyku */
-        .cart-buttons button {
-            padding: 1rem;
             font-size: 0.9rem;
-            margin: 0.3rem 0;
-        }
-
-        /* Lepsze wyświetlanie czatu na mobile */
-        .chatbot-messages {
-            padding: 10px;
-            font-size: 0.9rem;
-        }
-
-        .message {
-            padding: 10px 12px;
-            font-size: 0.9rem;
-        }
-
-        .quick-replies {
-            gap: 5px;
-        }
-
-        .quick-reply-btn {
-            padding: 6px 12px;
-            font-size: 0.75rem;
-        }
-
-        /* Poprawki dla studio na mobile */
-        @media (max-width: 768px) {
-            .design-studio {
-                padding: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .canvas-container {
-                max-width: 100%;
-                padding: 0.5rem;
-            }
-            
-            #designCanvas {
-                width: 100%;
-                height: 300px;
-            }
-            
-            .canvas-controls {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .canvas-controls .nav-btn {
-                width: 100%;
-                margin: 0.2rem 0;
-            }
-            
-            .design-tools {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-                margin: 1rem 0;
-            }
-            
-            .tool-group {
-                padding: 1rem;
-            }
-        }
-
-        /* NAPRAWKA MOBILE - PRZYCISKI ZAWSZE WIDOCZNE */
-        @media (max-width: 768px) {
-            .nav-container {
-                display: flex !important;
-                flex-direction: column;
-            }
-            
-            .nav-btn {
-                display: block !important;
-                width: 100%;
-            }
         }
     </style>  
 </head>
-<body>
-    <!-- HEADER -->
-    <header>
-        <div class="logo">AdelbertusShop</div>
-        <div class="tagline">Ekskluzywne Projekty Vintage 80s/90s</div>
-    </header>
-
-    <!-- NAWIGACJA -->
-    <nav>
-        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
-            <i class="fas fa-bars"></i> Menu
-        </button>
-        
-        <div class="nav-container" id="navContainer">
-            <button class="nav-btn active" data-section="home">Strona Główna</button>
-            <button class="nav-btn" data-section="products">Kolekcje</button>
-            <button class="nav-btn" data-section="design">Studio Projektowe</button>
-            <button class="nav-btn" data-section="charity">Zbiórka Charytatywna</button>
-            <button class="nav-btn" data-section="blog">Blog & Inspiracje</button>
-            <button class="nav-btn" data-section="about">O Nas</button>
-            <button class="nav-btn" data-section="reviews">Opinie</button>
-            <button class="nav-btn" data-section="faq">FAQ</button>
-            <button class="nav-btn" data-section="contact">Kontakt</button>
-        </div>
-    </nav>
-
-    <!-- SEKCJE -->
-    <section id="home" class="active">
-        <div class="section-title">
-            <h2>Witaj w AdelbertusShop</h2>
-            <p>Ekskluzywne projekty vintage z lat 80s i 90s</p>
-        </div>
-        
-        <div class="charity-section">
-            <h3>Wspieramy młodych artystów!</h3>
-            <p>10% z każdego zakupu przekazujemy na fundusz stypendialny</p>
-        </div>
-    </section>
-
-    <section id="products">
-        <div class="section-title">
-            <h2>Nasze Kolekcje</h2>
-            <p>Odkryj unikalne projekty vintage</p>
-        </div>
-        <div class="products-grid">
-            <!-- Produkty będą dodane przez JavaScript -->
-        </div>
-    </section>
-
-    <!-- POZOSTAŁE SEKCJE -->
-    <section id="design">
-        <div class="section-title">
-            <h2>Studio Projektowe</h2>
-            <p>Stwórz własny unikalny design</p>
-        </div>
-        <!-- Zawartość studio -->
-    </section>
-
-    <section id="charity">
-        <div class="section-title">
-            <h2>Zbiórka Charytatywna</h2>
-            <p>Wspieramy młodych artystów</p>
-        </div>
-    </section>
-
-    <section id="blog">
-        <div class="section-title">
-            <h2>Blog & Inspiracje</h2>
-            <p>Najnowsze trendy i inspiracje</p>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="section-title">
-            <h2>O Nas</h2>
-            <p>Poznaj naszą historię</p>
-        </div>
-    </section>
-
-    <section id="reviews">
-        <div class="section-title">
-            <h2>Opinie Klientów</h2>
-            <p>Co mówią o nas klienci</p>
-        </div>
-    </section>
-
-    <section id="faq">
-        <div class="section-title">
-            <h2>FAQ</h2>
-            <p>Najczęściej zadawane pytania</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="section-title">
-            <h2>Kontakt</h2>
-            <p>Skontaktuj się z nami</p>
-        </div>
-    </section>
-
-    <!-- CHATBOT -->
+<body> 
+    <!-- Chatbot -->
     <div class="chatbot-container">
-        <button class="chatbot-button pulse" onclick="toggleChatbot()">
+        <button class="chatbot-button" onclick="toggleChatbot()">
             <i class="fas fa-robot"></i>
         </button>
         <div class="chatbot-window" id="chatbotWindow">
             <div class="chatbot-header">
-                <span>Asystent AdelbertusShop</span>
-                <button class="chatbot-close" onclick="toggleChatbot()">
-                    <i class="fas fa-times"></i>
-                </button>
+                <span>🧠 Asystent Adelbertus</span>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
             </div>
             <div class="chatbot-messages" id="chatbotMessages">
                 <div class="message bot-message">
-                    👋 Witaj w Adelbertus Shop! 🎨<br>
+                    👋 Witaj w Adelbertus Shop! 🎨<br><br>
                     Pomogę Ci wybrać idealną odzież z nadrukiem!<br><br>
                     Możesz zapytać o:<br>
                     • Rozmiary (XS-XXL)<br>
@@ -1292,491 +853,372 @@
                     O co chcesz zapytać? 😊
                 </div>
             </div>
-            <div class="chatbot-typing" id="chatbotTyping">
-                Asystent pisze...
-            </div>
+            <div class="chatbot-typing" id="chatbotTyping">Asystent pisze...</div>
             <div class="chatbot-input">
-                <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeypress="handleChatbotInput(event)">
-                <button onclick="sendChatbotMessage()">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
+                <input type="text" id="chatbotInput" placeholder="Zadaj pytanie..." onkeypress="handleChatbotInput(event)">
+                <button onclick="sendChatbotMessage()">Wyślij</button>
             </div>
         </div>
     </div>
 
-    <!-- KOSZYK -->
-    <div id="cartIcon" onclick="toggleCart()">
-        <i class="fas fa-shopping-bag"></i>
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
+           <button onclick="acceptCookies()" class="nav-btn gold-bg" style="margin-left: 1rem;">Akceptuję</button>
+        </p>
+    </div>
+
+    <!-- Nagłówek -->
+    <header>
+        <div class="logo">AdelbertusShop</div>
+        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
+    </header>
+
+    <!-- Nawigacja - POPRAWIONA DLA MOBILNYCH -->
+    <nav>
+        <!-- Przycisk menu mobilnego -->
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+            <i class="fas fa-bars"></i> Menu Sklepu
+        </button>
+        
+        <!-- Standardowa nawigacja (widoczna na desktop) -->
+        <div class="nav-container" id="navContainer">
+            <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
+            <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
+            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
+            <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
+            <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
+            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
+        </div>
+        
+        <!-- Nawigacja mobilna (schowana domyślnie) -->
+        <div class="mobile-nav-container" id="mobileNavContainer">
+            <button class="mobile-nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
+            <button class="mobile-nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
+            <button class="mobile-nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
+            <button class="mobile-nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
+            <button class="mobile-nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
+            <button class="mobile-nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <button class="mobile-nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
+        </div>
+    </nav>
+
+    <!-- Sekcja główna -->
+    <main>
+        <!-- Strona główna -->
+        <section id="home" class="active">
+            <div class="section-title">
+                <h2>Witaj w AdelbertusShop</h2>
+                <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
+            </div>
+            
+            <div class="charity-section">
+                <h3>Razem możemy więcej</h3>
+                <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
+                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;" data-section="charity">Dowiedz się więcej</button>
+            </div>
+            
+            <div class="section-title">
+                <h3>Nie patrz, jeśli boisz się zmian. Nie kupuj, jeśli nie rozumiesz. To nie jest dla wszystkich.</h3>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Rebel"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <!-- Pozostałe produkty... -->
+            </div>
+        </section>
+
+        <!-- Pozostałe sekcje... -->
+
+    </main>
+
+    <!-- Koszyk -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
         <span id="cartCount">0</span>
     </div>
-    
+
     <div id="cartPanel">
-        <h2>Twój Koszyk</h2>
-        <div id="cartItems"></div>
-        <div class="cart-total">
-            <strong>Suma: <span id="cartTotal">0 zł</span></strong>
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Twój koszyk</h2>
+            <button onclick="toggleCart()" class="text-2xl">&times;</button>
         </div>
-        <div id="paypal-container"></div>
+        
+        <div id="cartItems" class="mb-6">
+            <!-- Produkty w koszyku -->
+        </div>
+        
+        <div class="cart-total">
+            <div class="flex justify-between text-xl font-bold">
+                <span>Suma:</span>
+                <span id="cartTotal">0 zł</span>
+            </div>
+        </div>
+        
+        <div id="paypal-container" class="mt-4"></div>
+        
         <div class="cart-buttons">
-            <button class="email-order-btn" onclick="sendOrderEmail()">
-                <i class="fas fa-envelope"></i> Zamów przez Email
+            <button onclick="sendOrderEmail()" class="email-order-btn">
+                <i class="fas fa-envelope"></i> Wyślij zamówienie mailem
             </button>
-            <button class="whatsapp-order-btn" onclick="sendOrderWhatsApp()">
+            <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn">
                 <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
             </button>
         </div>
     </div>
 
-    <!-- COOKIE CONSENT -->
-    <div class="cookie-consent" id="cookieConsent">
-        <p>Ta strona używa plików cookies. 
-           <button onclick="acceptCookies()" style="background:var(--color-gold); border:none; padding:5px 10px; border-radius:5px; margin-left:10px; cursor:pointer;">
-               Akceptuję
-           </button>
-        </p>
-    </div>
-
-    <!-- FOOTER -->
+    <!-- Stopka -->
     <footer>
+        <div class="logo" style="font-size: 2rem;">AdelbertusShop</div>
+        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
+        
         <div class="contact-info">
-            <p>Email: mielniczukgrzegosz74@gmail.com</p>
-            <p>Telefon: +48 604 296 360</p>
+            <p><i class="fas fa-envelope"></i> mielniczukgrzegosz74@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 604 296 360</p>
         </div>
+        
         <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
         </div>
-        <p>&copy; 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
+        
+        <div class="mt-6">
+            <p>© 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
+            <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
+        </div>
     </footer>
 
     <script>
-        // ===== SYSTEM SKLEPU =====
-        let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-        let canvas = null;
+// ===== SYSTEM SKLEPU =====
+let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+let canvas = null;
 
-        // ===== INICJALIZACJA =====
-        document.addEventListener('DOMContentLoaded', function() {
-            initNavigation();
-            initProductOptions();
-            initDesignStudio();
-            updateCart();
-            initCookieConsent();
+// Inicjalizacja
+document.addEventListener('DOMContentLoaded', function() {
+    initNavigation();
+    initProductOptions();
+    initDesignStudio();
+    updateCart();
+    initCookieConsent();
+    initMobileNavigation();
+});
+
+// ===== MOBILNA NAWIGACJA - NOWA FUNKCJA =====
+function initMobileNavigation() {
+    const mobileNavButtons = document.querySelectorAll('.mobile-nav-btn');
+    
+    mobileNavButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (this.hasAttribute('data-section')) {
+                e.preventDefault();
+                
+                mobileNavButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
+                
+                // Zamknij menu mobilne po wybraniu sekcji
+                toggleMobileMenu();
+            }
         });
+    });
+}
 
-        // ===== MOBILE MENU =====
-        function toggleMobileMenu() {
-            const navContainer = document.getElementById('navContainer');
-            if (navContainer) {
-                navContainer.classList.toggle('show');
-            }
-        }
+function toggleMobileMenu() {
+    const mobileNav = document.getElementById('mobileNavContainer');
+    if (mobileNav.style.display === 'flex') {
+        mobileNav.style.display = 'none';
+    } else {
+        mobileNav.style.display = 'flex';
+    }
+}
 
-        // Zamknij menu po kliknięciu w sekcję (na mobile)
-        function initNavigation() {
-            const navButtons = document.querySelectorAll('.nav-btn');
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.hasAttribute('data-section')) {
-                        e.preventDefault();
-                        
-                        navButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        const sectionId = this.getAttribute('data-section');
-                        showSection(sectionId);
-                        
-                        // Zamknij menu na mobile po wybraniu sekcji
-                        if (window.innerWidth <= 768) {
-                            const navContainer = document.getElementById('navContainer');
-                            if (navContainer) navContainer.classList.remove('show');
-                        }
-                    }
-                });
-            });
-            
-            document.getElementById('cartIcon').addEventListener('click', toggleCart);
-        }
+// ===== CHATBOT =====
+function toggleChatbot() {
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+}
 
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            document.getElementById(sectionId).classList.add('active');
-            
-            if (window.innerWidth <= 768) {
-                document.getElementById('navContainer').classList.remove('show');
-            }
-        }
+function handleChatbotInput(event) {
+    if (event.key === 'Enter') {
+        sendChatbotMessage();
+    }
+}
 
-        // ===== SYSTEM PRODUKTÓW =====
-        function initProductOptions() {
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('color-option')) {
-                    const options = e.target.closest('.color-options');
-                    options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
+function sendChatbotMessage() {
+    const input = document.getElementById('chatbotInput');
+    const message = input.value.trim();
+    
+    if (message) {
+        // Dodaj wiadomość użytkownika
+        addMessageToChat(message, 'user');
+        input.value = '';
+        
+        // Pokazujemy, że bot pisze
+        showTypingIndicator();
+        
+        // Symulujemy opóźnienie odpowiedzi
+        setTimeout(() => {
+            hideTypingIndicator();
+            const botResponse = getChatbotResponse(message);
+            addMessageToChat(botResponse, 'bot');
+        }, 1000 + Math.random() * 1000);
+    }
+}
+
+function addMessageToChat(message, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}-message`;
+    messageElement.textContent = message;
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'block';
+    document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
+}
+
+function hideTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'none';
+}
+
+function getChatbotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // ROZMIARY KOSZULEK/BLUZ
+    if (message.includes("rozmiar") || message.includes("rozmiaru") || message.includes("size")) {
+        return "Mamy pełną rozmiarówkę od XS do XXL! 🎯 W każdym produkcie znajdziesz tabelę rozmiarów. Polecam zmierzyć ulubioną koszulkę i porównać z naszymi wymiarami!";
+    }
+    
+    // MATERIAŁY I JAKOŚĆ
+    if (message.includes("materiał") || message.includes("bawełna") || message.includes("skład") || message.includes("jakość")) {
+        return "👕 **Koszulki:** 100% bawełna, gramatura 180g (idealna na nadruki!)\n🧥 **Bluzy:** bawełna z domieszką poliestru, gramatura 300g\n🧢 **Czapki:** akryl/bawełna z utwardzanym daszkiem\n\nWszystkie produkty najwyższej jakości! ✨";
+    }
+    
+    // DRUK I NADRUKI
+    if (message.includes("druk") || message.includes("nadruk") || message.includes("grafika") || message.includes("wzór")) {
+        return "Używamy **druku DTF** - najnowocześniejszej technologii! 🎨 Nadruk jest elastyczny, oddychający i super trwały. Wytrzymuje wiele prań bez blaknięcia!";
+    }
+    
+    // DOSTAWA
+    if (message.includes("dostawa") || message.includes("wysyłka") || message.includes("czas") || message.includes("kurier")) {
+        return "🚚 **Wysyłka w 24h!** \n• Darmowa dostawa od 200zł\n• InPost - 14zł\n• Kurier DPD - 16zł\n• Paczkomaty 24/7\n\nRealizacja zamówienia max 1 dzień roboczy!";
+    }
+    
+    // ZWROTY I WYMIANY
+    if (message.includes("zwrot") || message.includes("reklamacja") || message.includes("wymiana")) {
+        return "📦 **30 dni na zwrot!** Wymiana na inny rozmiar - darmowa. \nUbrania muszą być nieprane z metkami. Zwroty przez Paczkomaty - super łatwo! 🔄";
+    }
+    
+    // PIELĘGNACJA
+    if (message.includes("prać") || message.includes("pranie") || message.includes("prasować")) {
+        return "🧼 **Pielęgnacja:** pranie w 30°C, nie bielić. Nadruki prasować lewą stroną (max 110°C). Dzięki temu ubrania zachowują kolory na długo! 💫";
+    }
+    
+    // DOSTĘPNOŚĆ PRODUKTÓW
+    if (message.includes("dostęp") || message.includes("magazyn") || message.includes("brak") || message.includes("kiedy")) {
+        return "📦 **Wszystkie produkty mamy w magazynie!** Wysyłka następnego dnia roboczego. Jeśli jakiś rozmiar jest niedostępny, napisz - uzupełniamy na bieżąco!";
+    }
+    
+    // PROJEKTY GRAFICZNE
+    if (message.includes("projekt") || message.includes("wzór") || message.includes("grafik") || message.includes("design")) {
+        return "🎨 Wszystkie nasze wzory to **autorskie projekty**! Ciągle dodajemy nowe kolekcje. Masz pomysł na własny projekt? Napisz do nas! ✏️";
+    }
+    
+    // WITANIE
+    if (message.includes("witaj") || message.includes("hej") || message.includes("cześć") || message.includes("hello")) {
+        return "👋 Witaj w **Adelbertus Shop**! 🎨\nJestem tu, żeby pomóc Ci wybrać idealną koszulkę, bluzę lub czapkę! \n\nPytaj o rozmiary, materiały, dostawę lub konkretne produkty! ✨";
+    }
+    
+    // DOMYŚLNA ODPOWIEDŹ
+    return "👕 Witaj w Adelbertus Shop! 🎨\nPomogę Ci wybrać idealną odzież z nadrukiem! \n\nMożesz zapytać o:\n• Rozmiary (XS-XXL)\n• Materiały i jakość\n• Dostawę i zwroty\n• Konkretne produkty\n• Nadruki i wzory\n\nO co chcesz zapytać? 😊";
+}
+
+// Nawigacja
+function initNavigation() {
+    const navButtons = document.querySelectorAll('.nav-btn');
+    
+    navButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            if (this.hasAttribute('data-section')) {
+                e.preventDefault();
                 
-                if (e.target.classList.contains('size-option')) {
-                    const options = e.target.closest('.size-options');
-                    options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
                 
-                if (e.target.classList.contains('add-to-cart-btn')) {
-                    e.preventDefault();
-                    const productCard = e.target.closest('.product-card');
-                    const name = e.target.getAttribute('data-name');
-                    const price = parseFloat(e.target.getAttribute('data-price'));
-                    const image = e.target.getAttribute('data-image');
-                    
-                    const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
-                    const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-                    
-                    const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-                    const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-                    
-                    addToCart(name, price, image, size, color);
-                }
-            });
-        }
-
-        // ===== KOSZYK =====
-        function addToCart(name, price, image = null, size = null, color = null) {
-            const existingIndex = cart.findIndex(item => 
-                item.name === name && 
-                item.size === size && 
-                item.color === color
-            );
-            
-            if (existingIndex >= 0) {
-                cart[existingIndex].quantity++;
-            } else {
-                cart.push({
-                    name: name,
-                    price: price,
-                    quantity: 1,
-                    image: image,
-                    size: size,
-                    color: color,
-                    id: Date.now() + Math.random()
-                });
+                const sectionId = this.getAttribute('data-section');
+                showSection(sectionId);
             }
-            
-            updateCart();
-            showNotification('✅ Produkt dodany do koszyka');
-        }
+        });
+    });
+    
+    document.getElementById('cartIcon').addEventListener('click', toggleCart);
+}
 
-        function updateCart() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-                cartTotal.textContent = '0 zł';
-                document.getElementById('paypal-container').innerHTML = '';
-            } else {
-                let total = 0;
-                
-                cart.forEach((item, index) => {
-                    total += item.price * item.quantity;
-                    
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.innerHTML = `
-                        ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                        <div class="flex-1">
-                            <div class="font-bold">${item.name}</div>
-                            <div>${item.price} zł × ${item.quantity}</div>
-                            ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                            ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
-                        </div>
-                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-                    `;
-                    
-                    cartItems.appendChild(cartItem);
-                });
-                
-                cartTotal.textContent = `${total.toFixed(2)} zł`;
-                renderPayPalButton();
-            }
-            
-            localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-        }
+function showSection(sectionId) {
+    document.querySelectorAll('section').forEach(section => {
+        section.classList.remove('active');
+    });
+    
+    document.getElementById(sectionId).classList.add('active');
+    
+    // Na mobilnych zamykamy menu po wybraniu sekcji
+    if (window.innerWidth <= 768) {
+        document.getElementById('mobileNavContainer').style.display = 'none';
+    }
+}
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
+// Pozostałe funkcje (koszyk, produkty, studio projektowe) pozostają bez zmian...
+// [Tutaj wklej pozostałe funkcje z poprzedniego kodu]
 
-        function toggleCart() {
-            document.getElementById('cartPanel').classList.toggle('open');
-        }
+// Globalne funkcje
+window.addToCart = addToCart;
+window.removeFromCart = removeFromCart;
+window.toggleCart = toggleCart;
+window.toggleMobileMenu = toggleMobileMenu;
+window.sendOrderEmail = sendOrderEmail;
+window.sendOrderWhatsApp = sendOrderWhatsApp;
+window.acceptCookies = acceptCookies;
+window.toggleChatbot = toggleChatbot;
+window.handleChatbotInput = handleChatbotInput;
+window.sendChatbotMessage = sendChatbotMessage;
 
-        function renderPayPalButton() {
-            const container = document.getElementById('paypal-container');
-            container.innerHTML = '';
-            
-            if (cart.length === 0) return;
-            
-            paypal.HostedButtons({
-                hostedButtonId: "L4639S4363CZE",
-            }).render("#paypal-container");
-        }
-
-        function sendOrderEmail() {
-            let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-            
-            cart.forEach((item, index) => {
-                emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-                if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
-                emailBody += '\n';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-            
-            window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
-        }
-
-        function sendOrderWhatsApp() {
-            let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-            
-            cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-                if (item.size) message += ` (Rozmiar: ${item.size})`;
-                message += '%0A';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-            message += `Proszę o potwierdzenie zamówienia.`;
-            
-            window.open(`https://wa.me/48604296360?text=${message}`);
-        }
-
-        // ===== CHATBOT =====
-        function toggleChatbot() {
-            const chatbotWindow = document.getElementById('chatbotWindow');
-            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function handleChatbotInput(event) {
-            if (event.key === 'Enter') {
-                sendChatbotMessage();
-            }
-        }
-
-        function sendChatbotMessage() {
-            const input = document.getElementById('chatbotInput');
-            const message = input.value.trim();
-            
-            if (message) {
-                // Dodaj wiadomość użytkownika
-                addMessageToChat(message, 'user');
-                input.value = '';
-                
-                // Pokazujemy, że bot pisze
-                showTypingIndicator();
-                
-                // Symulujemy opóźnienie odpowiedzi
-                setTimeout(() => {
-                    hideTypingIndicator();
-                    const botResponse = getChatbotResponse(message);
-                    addMessageToChat(botResponse, 'bot');
-                }, 1000 + Math.random() * 1000);
-            }
-        }
-
-        function addMessageToChat(message, sender) {
-            const messagesContainer = document.getElementById('chatbotMessages');
-            const messageElement = document.createElement('div');
-            messageElement.className = `message ${sender}-message`;
-            messageElement.textContent = message;
-            messagesContainer.appendChild(messageElement);
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function showTypingIndicator() {
-            document.getElementById('chatbotTyping').style.display = 'block';
-            document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
-        }
-
-        function hideTypingIndicator() {
-            document.getElementById('chatbotTyping').style.display = 'none';
-        }
-
-        function getChatbotResponse(userMessage) {
-            const message = userMessage.toLowerCase();
-            
-            // ROZMIARY KOSZULEK/BLUZ
-            if (message.includes("rozmiar") || message.includes("rozmiaru") || message.includes("size")) {
-                return "Mamy pełną rozmiarówkę od XS do XXL! 🎯 W każdym produkcie znajdziesz tabelę rozmiarów. Polecam zmierzyć ulubioną koszulkę i porównać z naszymi wymiarami!";
-            }
-            
-            // MATERIAŁY I JAKOŚĆ
-            if (message.includes("materiał") || message.includes("bawełna") || message.includes("skład") || message.includes("jakość")) {
-                return "👕 **Koszulki:** 100% bawełna, gramatura 180g (idealna na nadruki!)\n🧥 **Bluzy:** bawełna z domieszką poliestru, gramatura 300g\n🧢 **Czapki:** akryl/bawełna z utwardzanym daszkiem\n\nWszystkie produkty najwyższej jakości! ✨";
-            }
-            
-            // DRUK I NADRUKI
-            if (message.includes("druk") || message.includes("nadruk") || message.includes("grafika") || message.includes("wzór")) {
-                return "Używamy **druku DTF** - najnowocześniejszej technologii! 🎨 Nadruk jest elastyczny, oddychający i super trwały. Wytrzymuje wiele prań bez blaknięcia!";
-            }
-            
-            // DOSTAWA
-            if (message.includes("dostawa") || message.includes("wysyłka") || message.includes("czas") || message.includes("kurier")) {
-                return "🚚 **Wysyłka w 24h!** \n• Darmowa dostawa od 200zł\n• InPost - 14zł\n• Kurier DPD - 16zł\n• Paczkomaty 24/7\n\nRealizacja zamówienia max 1 dzień roboczy!";
-            }
-            
-            // ZWROTY I WYMIANY
-            if (message.includes("zwrot") || message.includes("reklamacja") || message.includes("wymiana")) {
-                return "📦 **30 dni na zwrot!** Wymiana na inny rozmiar - darmowa. \nUbrania muszą być nieprane z metkami. Zwroty przez Paczkomaty - super łatwo! 🔄";
-            }
-            
-            // PIELĘGNACJA
-            if (message.includes("prać") || message.includes("pranie") || message.includes("prasować")) {
-                return "🧼 **Pielęgnacja:** pranie w 30°C, nie bielić. Nadruki prasować lewą stroną (max 110°C). Dzięki temu ubrania zachowują kolory na długo! 💫";
-            }
-            
-            // DOSTĘPNOŚĆ PRODUKTÓW
-            if (message.includes("dostęp") || message.includes("magazyn") || message.includes("brak") || message.includes("kiedy")) {
-                return "📦 **Wszystkie produkty mamy w magazynie!** Wysyłka następnego dnia roboczego. Jeśli jakiś rozmiar jest niedostępny, napisz - uzupełniamy na bieżąco!";
-            }
-            
-            // PROJEKTY GRAFICZNE
-            if (message.includes("projekt") || message.includes("wzór") || message.includes("grafik") || message.includes("design")) {
-                return "🎨 Wszystkie nasze wzory to **autorskie projekty**! Ciągle dodajemy nowe kolekcje. Masz pomysł na własny projekt? Napisz do nas! ✏️";
-            }
-            
-            // WITANIE
-            if (message.includes("witaj") || message.includes("hej") || message.includes("cześć") || message.includes("hello")) {
-                return "👋 Witaj w **Adelbertus Shop**! 🎨\nJestem tu, żeby pomóc Ci wybrać idealną koszulkę, bluzę lub czapkę! \n\nPytaj o rozmiary, materiały, dostawę lub konkretne produkty! ✨";
-            }
-            
-            // DOMYŚLNA ODPOWIEDŹ
-            return "👕 Witaj w Adelbertus Shop! 🎨\nPomogę Ci wybrać idealną odzież z nadrukiem! \n\nMożesz zapytać o:\n• Rozmiary (XS-XXL)\n• Materiały i jakość\n• Dostawę i zwroty\n• Konkretne produkty\n• Nadruki i wzory\n\nO co chcesz zapytać? 😊";
-        }
-
-        // ===== STUDIO PROJEKTOWE =====
-        function initDesignStudio() {
-            canvas = new fabric.Canvas('designCanvas');
-        }
-
-        function addText() {
-            const text = new fabric.IText('Twój tekst', {
-                left: 100,
-                top: 100,
-                fontFamily: 'Arial',
-                fill: '#000000',
-                fontSize: 20
-            });
-            canvas.add(text);
-        }
-
-        function addCustomText() {
-            const textInput = document.getElementById('textInput');
-            const colorPicker = document.getElementById('colorPicker');
-            
-            if (textInput.value.trim()) {
-                const text = new fabric.IText(textInput.value, {
-                    left: 50,
-                    top: 50,
-                    fontFamily: 'Arial',
-                    fill: colorPicker.value,
-                    fontSize: 24
-                });
-                canvas.add(text);
-                textInput.value = '';
-            }
-        }
-
-        function changeColor() {
-            const activeObject = canvas.getActiveObject();
-            const colorPicker = document.getElementById('colorPicker');
-            
-            if (activeObject) {
-                activeObject.set('fill', colorPicker.value);
-                canvas.renderAll();
-            }
-        }
-
-        function clearCanvas() {
-            canvas.clear();
-        }
-
-        function saveDesign() {
-            const dataURL = canvas.toDataURL({
-                format: 'png',
-                quality: 0.8
-            });
-            
-            // Tutaj można zapisać projekt lub dodać do koszyka
-            showNotification('🎨 Projekt zapisany!');
-        }
-
-        // ===== POWIADOMIENIA =====
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = '#d4af37';
-            notification.style.color = 'black';
-            notification.style.padding = '12px 24px';
-            notification.style.borderRadius = '30px';
-            notification.style.zIndex = '1000';
-            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-            notification.style.fontWeight = 'bold';
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        // ===== COOKIE CONSENT =====
-        function initCookieConsent() {
-            if (!localStorage.getItem('cookies_accepted')) {
-                document.getElementById('cookieConsent').style.display = 'block';
-            }
-        }
-
-        function acceptCookies() {
-            localStorage.setItem('cookies_accepted', 'true');
-            document.getElementById('cookieConsent').style.display = 'none';
-        }
-
-        // ===== GLOBALNE FUNKCJE =====
-        window.addToCart = addToCart;
-        window.removeFromCart = removeFromCart;
-        window.toggleCart = toggleCart;
-        window.toggleMobileMenu = toggleMobileMenu;
-        window.sendOrderEmail = sendOrderEmail;
-        window.sendOrderWhatsApp = sendOrderWhatsApp;
-        window.acceptCookies = acceptCookies;
-        window.toggleChatbot = toggleChatbot;
-        window.handleChatbotInput = handleChatbotInput;
-        window.sendChatbotMessage = sendChatbotMessage;
-        window.addText = addText;
-        window.addCustomText = addCustomText;
-        window.changeColor = changeColor;
-        window.clearCanvas = clearCanvas;
-        window.saveDesign = saveDesign;
     </script>
 </body>
 </html>
