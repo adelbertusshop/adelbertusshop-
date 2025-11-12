@@ -1,540 +1,1920 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AdelbertusShop — integracja</title>
-  <style>
-    /* Minimalne style — wklej swoje Tailwind/pełne style nad tym lub zamiast */
-    :root{--gold:#c79a2f;--bg:#f5f5f7}
-    body{font-family:Inter,system-ui,Arial;background:var(--bg);margin:0;color:#111}
-    header{background:#111;color:#fff;padding:1rem}
-    .container{max-width:1100px;margin:0 auto;padding:1rem}
-    .section-title h2{margin:0 0 .25rem 0}
-    .section{margin:2rem 0}
-    .grid{display:grid;gap:1rem}
-    .grid-2{grid-template-columns:repeat(2,1fr)}
-    .bg-white{background:#fff}
-    .rounded{border-radius:8px}
-    .p-4{padding:1rem}
-    .nav-btn{background:#111;color:#fff;padding:.6rem .9rem;border:none;border-radius:8px;cursor:pointer}
-    .gold-bg{background:var(--gold);color:#111}
-    /* Projektuj */
-    #design-area{display:flex;gap:1rem;flex-wrap:wrap}
-    .mockup{width:360px;height:420px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.12);background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
-    .mockup img{max-width:80%;max-height:80%}
-    .controls{flex:1;min-width:300px}
-    label{display:block;margin:.5rem 0 .2rem;font-weight:600}
-    input[type="file"]{display:block}
-    .chat{position:fixed;right:18px;bottom:18px;width:320px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.2);overflow:hidden}
-    .chat-header{background:var(--gold);padding:.5rem .75rem;font-weight:700}
-    .chat-body{height:320px;padding:.5rem;overflow:auto}
-    .chat-input{display:flex;padding:.5rem;gap:.5rem;border-top:1px solid #eee}
-    .bubble{background:#f1f1f1;padding:.5rem .75rem;border-radius:12px;margin:.4rem 0;max-width:80%}
-    .bubble.bot{background:#eee}
-    .bubble.me{background:var(--gold);color:#111;margin-left:auto}
-    .product-card{background:#fff;border-radius:10px;padding:1rem;display:flex;gap:1rem;align-items:flex-start}
-    .product-image{width:110px;height:110px;object-fit:cover;border-radius:8px}
-    /* responsywność */
-    @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
+    <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
+   
+        :root {
+            --color-gold: #d4af37;
+            --color-dark-gold: #b8941f;
+            --color-dark: #1a1a1a;
+            --color-light: #f8f5f0;
+            --color-cream: #fff8e7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--color-light);
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .gold-text {
+            color: var(--color-gold);
+        }
+        
+        .gold-border {
+            border: 2px solid var(--color-gold);
+        }
+        
+        .gold-bg {
+            background: var(--color-gold);
+        }
+        
+        /* Nagłówek i nawigacja */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .tagline {
+            font-style: italic;
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid var(--color-gold);
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover, .nav-btn.active {
+            background: var(--color-gold);
+            color: black;
+        }
+        
+        /* Menu mobilne */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--color-gold);
+            color: black;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+            width: 90%;
+            text-align: center;
+        }
+        
+        /* Sekcje */
+        section {
+            display: none;
+            padding: 3rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--color-gold);
+        }
+        
+        /* Karty produktów */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product-image-container {
+            height: 280px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-cream);
+        }
+        
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .product-price {
+            color: var(--color-gold);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* OPCJE PRODUKTÓW */
+        .product-options {
+            margin-bottom: 1rem;
+        }
+
+        .option-group {
+            margin-bottom: 0.8rem;
+        }
+
+        .option-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: #555;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ddd;
+            transition: all 0.2s ease;
+        }
+
+        .color-option:hover, .color-option.selected {
+            border-color: var(--color-gold);
+            transform: scale(1.1);
+        }
+
+        .size-options {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .size-option {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .size-option:hover, .size-option.selected {
+            border-color: var(--color-gold);
+            background-color: var(--color-gold);
+            color: white;
+        }
+        
+        /* Studio projektowe */
+        .design-studio {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+        }
+        
+        .canvas-container {
+            border: 3px solid var(--color-gold);
+            border-radius: 10px;
+            padding: 1rem;
+            background: white;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+        
+        #designCanvas {
+            width: 100%;
+            background: white;
+            border: 1px solid #ddd;
+        }
+        
+        .canvas-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .design-tools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tool-group {
+            background: var(--color-cream);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+        
+        .tool-title {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-dark-gold);
+        }
+        
+        /* Sekcja zbiórki */
+        .charity-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1840&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .donors-list {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: left;
+        }
+        
+        /* Sekcja bloga */
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .blog-post {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        /* Opinie */
+        .reviews {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .review {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .review-stars {
+            color: var(--color-gold);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Stopka */
+        footer {
+            background: var(--color-dark);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .contact-info {
+            margin: 1.5rem 0;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--color-gold);
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        /* Koszyk */
+        #cartIcon {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--color-gold);
+            color: black;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cartCount {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: red;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        #cartPanel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 100;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        #cartPanel.open {
+            right: 0;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+        
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #eee;
+        }
+        
+        /* PayPal container */
+        #paypal-container {
+            margin-top: 1rem;
+            min-height: 50px;
+        }
+        
+        /* Animacje */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+        
+        /* Cookie consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        /* Style dla przycisków w koszyku */
+        .cart-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .cart-buttons button {
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .cart-buttons button:hover {
+            opacity: 0.9;
+        }
+
+        .email-order-btn {
+            background: var(--color-gold);
+            color: black;
+        }
+
+        .whatsapp-order-btn {
+            background: #25D366;
+            color: white;
+        }
+        
+        /* ========== CHATBOT ========== */
+        .chatbot-container {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid var(--color-gold);
+        }
+        
+        .chatbot-container.open {
+            display: flex;
+        }
+        
+        .chatbot-header {
+            background: var(--color-gold);
+            color: black;
+            padding: 1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            align-self: flex-end;
+            background: var(--color-gold);
+            color: black;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.bot {
+            align-self: flex-start;
+            background: #f1f1f1;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            background: var(--color-gold);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 90px;
+            width: 60px;
+            height: 60px;
+            background: var(--color-gold);
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .quick-reply {
+            background: white;
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-reply:hover {
+            background: var(--color-gold);
+            color: black;
+        }
+        
+        /* ========== RESPONSYWNOŚĆ ========== */
+        @media (max-width: 768px) {
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            /* Nawigacja mobilne */
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                display: none;
+                width: 100%;
+            }
+            
+            .nav-container.show {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 90%;
+                margin: 0.3rem;
+                text-align: center;
+            }
+            
+            /* Sekcje */
+            section {
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Produkty */
+            .product-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            /* Studio projektowe */
+            .design-studio {
+                padding: 1rem;
+            }
+            
+            .canvas-container {
+                padding: 0.5rem;
+            }
+            
+            .canvas-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .canvas-controls .nav-btn {
+                width: 90%;
+                margin: 0.3rem;
+            }
+            
+            /* Koszyk */
+            #cartIcon {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            #cartCount {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            /* Stopka */
+            footer {
+                padding: 2rem 1rem;
+            }
+            
+            .charity-section {
+                padding: 2rem 1rem;
+            }
+            
+            /* Chatbot */
+            .chatbot-container {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            
+            .chatbot-toggle {
+                bottom: 80px;
+                right: 80px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            .product-title {
+                font-size: 1.1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .cart-buttons {
+                gap: 8px;
+            }
+            
+            .cart-buttons button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>  
 </head>
-<body>
-  <header>
-    <div class="container">
-      <h1>AdelbertusShop — Integracja (wersja robocza)</h1>
+<body> 
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
+           <button onclick="acceptCookies()" class="nav-btn gold-bg" style="margin-left: 1rem;">Akceptuję</button>
+        </p>
     </div>
-  </header>
 
-  <main class="container">
-    <!-- === TU WKLEJ CAŁY SWÓJ DOTYCHCZASOWY KOD KATALOGU/PRODUKTÓW === -->
-    <!-- Jeśli masz już swoje karty produktów, wklej je tutaj bez zmian. -->
-    <!-- (Poniżej przykładowa sekcja katalogu z 1 produktem — Twoje przyciski .add-to-cart-btn będą działać) -->
-    <section id="catalog" class="section">
-      <div class="section-title">
-        <h2>Katalog (przykład)</h2>
-        <p>Twoje produkty — wklej tu cały katalog, ja go nie nadpisuję.</p>
-      </div>
+    <!-- Nagłówek -->
+    <header>
+        <div class="logo">AdelbertusShop</div>
+        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
+    </header>
 
-      <div class="grid" id="catalogGrid">
-        <!-- Przykladowa karta — twoje karty będą identycznie działać -->
-        <div class="product-card">
-          <img class="product-image" src="https://i.ibb.co/kVB4DdxF/file-000000007a18620aa7175173df81f11a-1.png" alt="Live With">
-          <div>
-            <div class="product-title">Live With</div>
-            <div class="product-price">120 zł</div>
-            <p>Inspirujący napis.</p>
-            <button class="nav-btn add-to-cart-btn" data-name="Live With" data-price="120" data-image="https://i.ibb.co/kVB4DdxF/file-000000007a18620aa7175173df81f11a-1.png">Dodaj do koszyka</button>
-          </div>
+    <!-- Nawigacja -->
+    <nav>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i> Menu</button>
+        <div class="nav-container" id="navContainer">
+            <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
+            <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
+            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
+            <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
+            <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
+            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
+    </nav>
 
-        <!-- Jeśli chcesz, poniżej możesz wkleić całą długą listę kart, które wklejałeś. -->
-      </div>
-    </section>
-
-    <!-- Zbiórka -->
-    <section id="charity" class="section bg-white rounded p-4">
-      <div class="section-title">
-        <h2>Wspieramy Dom Dziecka "Promyk"</h2>
-        <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
-      </div>
-
-      <div class="charity-section">
-        <h3>Dołącz do naszych darczyńców</h3>
-        <p>Twoje wsparcie zmienia życie dzieci</p>
-
-        <div class="donors-list">
-          <h4>Ostatni darczyńcy:</h4>
-          <ul id="donorsList">
-            <li>Anonim - 100 zł</li>
-            <li>Maria K. - 50 zł</li>
-            <li>Firma XYZ - 500 zł</li>
-          </ul>
-        </div>
-
-        <button id="donateBtn" class="nav-btn gold-bg" style="margin-top:1.5rem">Wesprzyj zbiórkę</button>
-      </div>
-    </section>
-
-    <!-- Blog -->
-    <section id="blog" class="section">
-      <div class="section-title">
-        <h2>Nasz Blog</h2>
-        <p>Porady, trendy i inspiracje</p>
-      </div>
-
-      <div class="blog-posts grid grid-2">
-        <div class="blog-post bg-white p-4 rounded">
-          <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" style="width:100%;border-radius:8px">
-          <div class="blog-content">
-            <h3>Powrót do lat 90s</h3>
-            <p>Odkryj jak styl vintage powraca na ulice...</p>
-            <button class="nav-btn mt-4">Czytaj więcej</button>
-          </div>
-        </div>
-
-        <div class="blog-post bg-white p-4 rounded">
-          <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" style="width:100%;border-radius:8px">
-          <div class="blog-content">
-            <h3>Streetwear 2024</h3>
-            <p>Najnowsze trendy w modzie ulicznej...</p>
-            <button class="nav-btn mt-4">Czytaj więcej</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Regulamin -->
-    <section id="regulations" class="section bg-white p-4 rounded">
-      <div class="section-title">
-        <h2>Regulamin Sklepu</h2>
-        <p>Zasady korzystania z naszych usług</p>
-      </div>
-
-      <div>
-        <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
-        <p>Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
-
-        <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
-        <p>Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
-      </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="contact" class="section">
-      <div class="section-title">
-        <h2>Kontakt</h2>
-        <p>Skontaktuj się z nami</p>
-      </div>
-
-      <div class="bg-white p-4 rounded">
-        <div class="grid grid-2">
-          <div>
-            <h3>Dane kontaktowe</h3>
-            <p><strong>Email:</strong> mielniczukgrzegosz74@gmail.com</p>
-            <p><strong>Tel:</strong> 604 296 360</p>
-            <p><strong>Godziny:</strong> Pon-Pt: 9:00-17:00</p>
-
-            <div class="social-links">
-              <a href="https://instagram.com" target="_blank">IG</a> |
-              <a href="https://facebook.com" target="_blank">FB</a> |
-              <a href="https://tiktok.com" target="_blank">TT</a>
+    <!-- Sekcja główna -->
+    <main>
+        <!-- Strona główna -->
+        <section id="home" class="active">
+            <div class="section-title">
+                <h2>Witaj w AdelbertusShop</h2>
+                <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
             </div>
-          </div>
-
-          <div>
-            <h3>Formularz kontaktowy</h3>
-            <form id="contactForm">
-              <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2" required>
-              <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2" required>
-              <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2" required></textarea>
-              <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- === Sekcja PROJEKTUJ (kreator) === -->
-    <section id="projektuj" class="section bg-white p-4 rounded">
-      <div class="section-title">
-        <h2>Projektuj — kreator koszulki, bluzy i czapki</h2>
-        <p>Stwórz własny projekt: dodaj grafikę, tekst, wybierz kolor i rozmiar, zobacz podgląd i dodaj do koszyka.</p>
-      </div>
-
-      <div id="design-area">
-        <div class="mockup" id="mockup">
-          <div style="text-align:center;color:#666">
-            <div style="font-weight:700">Podgląd mockupu</div>
-            <img id="mockupGraphic" src="" alt="" style="display:none" />
-            <div id="mockupText" style="display:none;font-size:20px;font-weight:700"></div>
-          </div>
-        </div>
-
-        <div class="controls">
-          <label>Wybierz produkt</label>
-          <select id="designProduct">
-            <option value="Koszulka">Koszulka</option>
-            <option value="Bluza">Bluza</option>
-            <option value="Czapka">Czapka</option>
-          </select>
-
-          <label>Wgraj grafikę (PNG/JPG)</label>
-          <input type="file" id="graphicUpload" accept="image/*">
-
-          <label>Dodaj tekst</label>
-          <input type="text" id="designText" placeholder="Twój napis">
-
-          <label>Kolor mockupu</label>
-          <select id="mockupColor">
-            <option value="#ffffff">Biały</option>
-            <option value="#000000">Czarny</option>
-            <option value="#800020">Bordowy</option>
-            <option value="#36454F">Grafitowy</option>
-          </select>
-
-          <label>Rozmiar</label>
-          <select id="designSize">
-            <option value="S">S</option>
-            <option value="M">M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-          </select>
-
-          <div style="margin-top:1rem;display:flex;gap:.5rem">
-            <button id="previewBtn" class="nav-btn">Pokaż podgląd</button>
-            <button id="saveProjectBtn" class="nav-btn gold-bg">Dodaj projekt do koszyka</button>
-          </div>
-
-          <div style="margin-top:1rem">
-            <h4>Podgląd projektu</h4>
-            <div id="projectPreview" class="bg-white p-2 rounded" style="min-height:80px"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Koszyk prosty -->
-    <section id="cart" class="section">
-      <div class="section-title">
-        <h2>Koszyk</h2>
-        <p>Produkty dodane lokalnie (localStorage)</p>
-      </div>
-
-      <div id="cartContents" class="bg-white p-4 rounded"></div>
-      <div style="margin-top:1rem">
-        <button id="checkoutBtn" class="nav-btn gold-bg">Przejdź do zamówienia</button>
-        <button id="clearCartBtn" class="nav-btn" style="margin-left:.5rem">Wyczyść koszyk</button>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- AdelbertusBot (chat + integracja) -->
-  <div class="chat" id="adelbertusChat">
-    <div class="chat-header">AdelbertusBot — pomocnik sklepu</div>
-    <div class="chat-body" id="chatBody">
-      <div class="bubble bot">Cześć — jestem AdelbertusBot. Mogę pomóc z: Blog, Projektuj, Zbiórka, Regulamin, Kontakt, koszyk. Napisz, z czym chcesz pomocy.</div>
-    </div>
-    <div class="chat-input">
-      <input id="chatInput" placeholder="Napisz wiadomość..." style="flex:1;padding:.5rem;border-radius:8px;border:1px solid #ddd">
-      <button id="chatSend" class="nav-btn">Wyślij</button>
-    </div>
-  </div>
-
-  <script>
-    /* ======================
-       Helpery + Local Cart
-       ====================== */
-    const CART_KEY = 'adelbertus_cart_v1';
-    function getCart(){ try{ return JSON.parse(localStorage.getItem(CART_KEY)||'[]') }catch(e){return[]} }
-    function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)) }
-    function addToCart(item){
-      const cart = getCart();
-      cart.push(item);
-      saveCart(cart);
-      renderCart();
-      // emit event globalnie, można na to nasłuchiwać z backendu
-      window.dispatchEvent(new CustomEvent('adelbertus:productAdded', { detail: item }));
-    }
-    function renderCart(){
-      const el = document.getElementById('cartContents');
-      const cart = getCart();
-      if(!cart.length){ el.innerHTML = '<em>Koszyk pusty</em>'; return; }
-      el.innerHTML = '';
-      cart.forEach((p, idx)=>{
-        const d = document.createElement('div');
-        d.className = 'product-card';
-        d.innerHTML = `
-          <img class="product-image" src="${p.image||''}" alt="${p.name}">
-          <div>
-            <div style="font-weight:700">${p.name}</div>
-            <div>${p.price} zł — Rozmiar: ${p.size||'-'} — Kolor: ${p.color||'-'}</div>
-            <div style="margin-top:.5rem">
-              <button class="nav-btn remove-btn" data-idx="${idx}">Usuń</button>
+            
+            <div class="charity-section">
+                <h3>Razem możemy więcej</h3>
+                <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
+                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;" data-section="charity">Dowiedz się więcej</button>
             </div>
-          </div>
-        `;
-        el.appendChild(d);
-      });
-      // attach remove handlers
-      el.querySelectorAll('.remove-btn').forEach(b=>{
-        b.addEventListener('click', e=>{
-          const idx = +e.currentTarget.dataset.idx;
-          const c = getCart();
-          c.splice(idx,1);
-          saveCart(c);
-          renderCart();
+            
+            <div class="section-title">
+                <h3>Nie patrz, jeśli boisz się zmian. Nie kupuj, jeśli nie rozumiesz. To nie jest dla wszystkich.</h3>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Rebel"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Vintage"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Bluza "Urban"</div>
+                        <div class="product-price">200 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sklep -->
+        <section id="shop">
+            <div class="section-title">
+                <h2>Nasze Produkty</h2>
+                <p>Odkryj naszą ekskluzywną kolekcję</p>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h3>
+            <div class="products-grid">
+                <!-- Produkt 1 -->
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Rebel"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+
+                <!-- Produkt 2 -->
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Vintage"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="text-2xl font-bold my-6 text-center gold-text">Bluzy</h3>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Bluza "Urban"</div>
+                        <div class="product-price">200 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Studio projektowe -->
+        <section id="design">
+            <div class="section-title">
+                <h2>Studio Projektowe</h2>
+                <p>Stwórz swój unikalny projekt</p>
+            </div>
+            
+            <div class="design-studio">
+                <div class="canvas-container">
+                    <canvas id="designCanvas" width="600" height="400"></canvas>
+                </div>
+                
+                <div class="canvas-controls">
+                    <button class="nav-btn" onclick="addText()">Dodaj tekst</button>
+                    <button class="nav-btn" onclick="clearCanvas()">Wyczyść</button>
+                    <button class="nav-btn gold-bg" onclick="saveDesign()">Zapisz projekt</button>
+                </div>
+                
+                <div class="design-tools">
+                    <div class="tool-group">
+                        <div class="tool-title">Tekst</div>
+                        <input type="text" id="textInput" placeholder="Wpisz tekst" class="w-full p-2 border rounded">
+                        <button class="nav-btn mt-2" onclick="addCustomText()">Dodaj tekst</button>
+                    </div>
+                    
+                    <div class="tool-group">
+                        <div class="tool-title">Kolory</div>
+                        <input type="color" id="colorPicker" value="#000000">
+                        <button class="nav-btn mt-2" onclick="changeColor()">Zmień kolor</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zbiórka -->
+        <section id="charity">
+            <div class="section-title">
+                <h2>Wspieramy Dom Dziecka "Promyk"</h2>
+                <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
+            </div>
+            
+            <div class="charity-section">
+                <h3>Dołącz do naszych darczyńców</h3>
+                <p>Twoje wsparcie zmienia życie dzieci</p>
+                
+                <div class="donors-list">
+                    <h4>Ostatni darczyńcy:</h4>
+                    <ul id="donorsList">
+                        <li>Anonim - 100 zł</li>
+                        <li>Maria K. - 50 zł</li>
+                        <li>Firma XYZ - 500 zł</li>
+                    </ul>
+                </div>
+                
+                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;">Wesprzyj zbiórkę</button>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section id="blog">
+            <div class="section-title">
+                <h2>Nasz Blog</h2>
+                <p>Porady, trendy i inspiracje</p>
+            </div>
+            
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Powrót do lat 90s</h3>
+                        <p>Odkryj jak styl vintage powraca na ulice...</p>
+                        <button class="nav-btn mt-4">Czytaj więcej</button>
+                    </div>
+                </div>
+                
+                <div class="blog-post">
+                    <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Streetwear 2024</h3>
+                        <p>Najnowsze trendy w modzie ulicznej...</p>
+                        <button class="nav-btn mt-4">Czytaj więcej</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Regulamin -->
+        <section id="regulations">
+            <div class="section-title">
+                <h2>Regulamin Sklepu</h2>
+                <p>Zasady korzystania z naszych usług</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
+                <p class="mb-4">Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
+                
+                <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
+                <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
+            </div>
+        </section>
+
+        <!-- Kontakt -->
+        <section id="contact">
+            <div class="section-title">
+                <h2>Kontakt</h2>
+                <p>Skontaktuj się z nami</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
+                        <p class="mb-2"><i class="fas fa-envelope gold-text"></i> mielniczukgrzegosz74@gmail.com</p>
+                        <p class="mb-2"><i class="fas fa-phone gold-text"></i> 604 296 360</p>
+                        <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
+                        
+                        <div class="social-links">
+                            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Formularz kontaktowy</h3>
+                        <form id="contactForm">
+                            <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2">
+                            <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2">
+                            <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2"></textarea>
+                            <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Chatbot -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <span>Asystent AdelbertusShop</span>
+            <button onclick="toggleChatbot()" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                Cześć! Jestem Twoim asystentem modowym. Jak mogę Ci pomóc? 😊
+            </div>
+            <div class="message bot">
+                Możesz zapytać mnie o: <strong>nowości, doradztwo stylowe, dodawanie do koszyka, blog, projektowanie, zbiórkę, regulamin lub kontakt</strong>.
+            </div>
+        </div>
+        <div class="quick-replies" id="quickReplies">
+            <div class="quick-reply" onclick="sendQuickReply('Pokaż nowości')">Nowości</div>
+            <div class="quick-reply" onclick="sendQuickReply('Doradź mi styl')">Porada stylowa</div>
+            <div class="quick-reply" onclick="sendQuickReply('Co założyć?')">Dopasuj outfit</div>
+            <div class="quick-reply" onclick="sendQuickReply('Poleć blog')">Blog</div>
+            <div class="quick-reply" onclick="sendQuickReply('Projektuj')">Projektowanie</div>
+            <div class="quick-reply" onclick="sendQuickReply('Zbiórka')">Zbiórka</div>
+            <div class="quick-reply" onclick="sendQuickReply('Regulamin')">Regulamin</div>
+            <div class="quick-reply" onclick="sendQuickReply('Kontakt')">Kontakt</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeydown="handleChatInput(event)">
+            <button onclick="sendChatMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Koszyk -->
+    <div id="cartIcon">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cartCount">0</span>
+    </div>
+
+    <div id="cartPanel">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold">Twój koszyk</h2>
+            <button onclick="toggleCart()" class="text-2xl">&times;</button>
+        </div>
+        
+        <div id="cartItems" class="mb-6">
+            <!-- Produkty w koszyku -->
+        </div>
+        
+        <div class="cart-total">
+            <div class="flex justify-between text-xl font-bold">
+                <span>Suma:</span>
+                <span id="cartTotal">0 zł</span>
+            </div>
+        </div>
+        
+        <div id="paypal-container" class="mt-4"></div>
+        
+        <div class="cart-buttons">
+            <button onclick="sendOrderEmail()" class="email-order-btn">
+                <i class="fas fa-envelope"></i> Wyślij zamówienie mailem
+            </button>
+            <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn">
+                <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- Stopka -->
+    <footer>
+        <div class="logo">AdelbertusShop</div>
+        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
+        
+        <div class="contact-info">
+            <p><i class="fas fa-envelope"></i> mielniczukgrzegosz74@gmail.com</p>
+            <p><i class="fas fa-phone"></i> 604 296 360</p>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="mt-6">
+            <p>© 2024 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
+            <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ===== SYSTEM SKLEPU =====
+        let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+        let canvas = null;
+        let sessionMemory = {};
+        const sessionId = 'user_' + Date.now();
+
+        // Dane produktów dla chatbota
+        const products = [
+            {
+                id: 1,
+                name: "Koszulka Rebel",
+                price: 120,
+                category: "nowości",
+                material: "100% bawełna",
+                styleTip: "Idealna do jeansów i sneakersów",
+                image: "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
+            },
+            {
+                id: 2,
+                name: "Koszulka Vintage",
+                price: 120,
+                category: "klasyki",
+                material: "100% bawełna organiczna",
+                styleTip: "Doskonała do stylizacji retro",
+                image: "https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg"
+            },
+            {
+                id: 3,
+                name: "Bluza Urban",
+                price: 200,
+                category: "bluzy",
+                material: "Bawełna z domieszką poliestru",
+                styleTip: "Perfekcyjna na chłodniejsze dni",
+                image: "https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg"
+            }
+        ];
+
+        // Rozszerzone dane dla chatbota (z Twojego API)
+        const fashionFacts = [
+            "Streetwear narodził się w latach 90. w Kalifornii",
+            "Kolor czarny jest najpopularniejszy w modzie ulicznej",
+            "Oversize to trend, który nigdy nie wychodzi z mody",
+            "Wintage to nie tylko styl, to filozofia życia",
+            "Polskie projekty streetwear podbijają świat"
+        ];
+
+        const blogPosts = [
+            {
+                title: "Powrót do lat 90s",
+                summary: "Odkryj jak styl vintage powraca na ulice",
+                url: "#blog"
+            },
+            {
+                title: "Streetwear 2024",
+                summary: "Najnowsze trendy w modzie ulicznej",
+                url: "#blog"
+            }
+        ];
+
+        const projectTemplates = [
+            {
+                name: "Retro Vintage",
+                description: "Klasyczny design inspirowany latami 80/90"
+            },
+            {
+                name: "Urban Street",
+                description: "Nowoczesny streetwear z odważnymi nadrukami"
+            }
+        ];
+
+        const zbiórkaInfo = {
+            summary: "Wspieramy Dom Dziecka 'Promyk'. Każdy zakup to pomoc dla potrzebujących dzieci",
+            url: "#charity"
+        };
+
+        const regulations = {
+            summary: "Sklep działa na zasadach określonych w regulaminie",
+            url: "#regulations"
+        };
+
+        const contacts = {
+            email: "mielniczukgrzegosz74@gmail.com",
+            phone: "604 296 360",
+            address: "AdelbertusShop"
+        };
+
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', function() {
+            initNavigation();
+            initProductOptions();
+            initDesignStudio();
+            updateCart();
+            initCookieConsent();
+            initChatbot();
         });
-      });
-    }
 
-    document.getElementById('clearCartBtn').addEventListener('click', ()=>{
-      localStorage.removeItem(CART_KEY);
-      renderCart();
-    });
+        // ===== SYSTEM CHATBOTA =====
+        function initChatbot() {
+            if (!sessionMemory[sessionId]) {
+                sessionMemory[sessionId] = { history: [], cart: [] };
+            }
+        }
 
-    document.getElementById('checkoutBtn').addEventListener('click', ()=>{
-      const cart = getCart();
-      if(!cart.length){ alert('Koszyk pusty'); return; }
-      // tutaj możesz podłączyć wysyłkę do backendu - na razie generujemy prostą kopię JSON
-      const summary = JSON.stringify(cart, null, 2);
-      console.log('ZAMÓWIENIE:', summary);
-      alert('Zamówienie przygotowane. Sprawdź konsolę (devtools) lub zrób integrację z endpointem.');
-    });
+        function toggleChatbot() {
+            document.getElementById('chatbotContainer').classList.toggle('open');
+        }
 
-    /* ======================
-       Podłączenie przycisków .add-to-cart-btn (istniejące karty)
-       ====================== */
-    function attachExistingAddButtons(){
-      document.querySelectorAll('.add-to-cart-btn').forEach(btn=>{
-        btn.removeEventListener('click', onAddBtnClick);
-        btn.addEventListener('click', onAddBtnClick);
-      });
-    }
-    function onAddBtnClick(e){
-      const b = e.currentTarget;
-      const name = b.dataset.name || 'Produkt';
-      const price = b.dataset.price || '0';
-      const image = b.dataset.image || '';
-      // próbujemy zebrać wybrane opcje z karty (jeśli są)
-      const card = b.closest('.product-card');
-      let size = null, color = null;
-      if(card){
-        const selectedSize = card.querySelector('.size-option.selected');
-        const selectedColor = card.querySelector('.color-option.selected');
-        if(selectedSize) size = selectedSize.dataset.size;
-        if(selectedColor) color = selectedColor.dataset.color;
-      }
-      const item = { name, price: Number(price), image, size, color, id: 'p_'+Date.now() };
-      addToCart(item);
-      // powiadomienie szybsze
-      showBotMessage('Dodano do koszyka: ' + name, true);
-    }
+        function sendQuickReply(message) {
+            document.getElementById('chatbotInput').value = message;
+            sendChatMessage();
+        }
 
-    // attach on load and observe DOM (if you dynamically paste catalog later)
-    attachExistingAddButtons();
-    const observer = new MutationObserver(()=>attachExistingAddButtons());
-    observer.observe(document.getElementById('catalog') || document.body, { childList:true, subtree:true });
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
 
-    /* ======================
-       Projektuj — funkcjonalność
-       ====================== */
-    const graphicUpload = document.getElementById('graphicUpload');
-    const mockup = document.getElementById('mockup');
-    const mockupGraphic = document.getElementById('mockupGraphic');
-    const mockupText = document.getElementById('mockupText');
-    document.getElementById('previewBtn').addEventListener('click', ()=>{
-      const color = document.getElementById('mockupColor').value;
-      const text = document.getElementById('designText').value.trim();
-      const product = document.getElementById('designProduct').value;
-      mockup.style.background = color;
-      if(text){
-        mockupText.style.display = 'block';
-        mockupText.textContent = text;
-      } else {
-        mockupText.style.display = 'none';
-      }
-      if(mockupGraphic.dataset.loaded==='true'){
-        mockupGraphic.style.display = 'block';
-      } else {
-        mockupGraphic.style.display = 'none';
-      }
-      // preview summary
-      const preview = document.getElementById('projectPreview');
-      preview.innerHTML = `<strong>${product}</strong><div>Kolor: ${color}</div><div>Tekst: ${text||'-'}</div>`;
-    });
+        async function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
 
-    // load uploaded image into mockup
-    graphicUpload.addEventListener('change', (ev)=>{
-      const f = ev.target.files[0];
-      if(!f) return;
-      const reader = new FileReader();
-      reader.onload = function(e){
-        mockupGraphic.src = e.target.result;
-        mockupGraphic.style.display = 'block';
-        mockupGraphic.dataset.loaded = 'true';
-        mockupGraphic.style.maxWidth = '60%';
-        mockupGraphic.style.maxHeight = '60%';
-      };
-      reader.readAsDataURL(f);
-    });
+            // Dodaj wiadomość użytkownika do chatu
+            addMessageToChat(message, 'user');
+            input.value = '';
 
-    // save project -> add to cart as "projekt własny"
-    document.getElementById('saveProjectBtn').addEventListener('click', ()=>{
-      const product = document.getElementById('designProduct').value;
-      const color = document.getElementById('mockupColor').value;
-      const text = document.getElementById('designText').value.trim();
-      const size = document.getElementById('designSize').value;
-      let imageData = '';
-      if(mockupGraphic.dataset.loaded==='true') imageData = mockupGraphic.src;
-      const name = `Projekt: ${product} ${text?('- '+text):''}`;
-      const price = (product==='Bluza')?150:(product==='Czapka')?79:99; // przykładowe ceny
-      const item = {
-        id: 'proj_'+Date.now(),
-        name,
-        price,
-        image: imageData,
-        color,
-        text,
-        size,
-        custom: true
-      };
-      addToCart(item);
-      showBotMessage('Gotowe — projekt dodany do koszyka 👍', true);
-    });
+            // Symulacja "pisania" bota
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message bot';
+            typingIndicator.innerHTML = '<i>Asystent pisze...</i>';
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
 
-    /* ======================
-       Bot prosty + integracja wiedzy
-       ====================== */
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const chatSend = document.getElementById('chatSend');
+            // Wywołaj "API" chatbota
+            const reply = await processChatbotMessage(message);
+            
+            // Usuń indicator pisania i dodaj odpowiedź
+            messagesContainer.removeChild(typingIndicator);
+            addMessageToChat(reply, 'bot');
+        }
 
-    function showBotMessage(text, brief){
-      const d = document.createElement('div');
-      d.className = 'bubble bot';
-      d.textContent = text;
-      chatBody.appendChild(d);
-      chatBody.scrollTop = chatBody.scrollHeight;
-      // optionally keep a short history in localStorage
-      saveBotMemory({role:'bot',text,ts:Date.now()});
-      if(brief) setTimeout(()=>{/* no op */},400);
-    }
-    function showUserMessage(text){
-      const d = document.createElement('div');
-      d.className = 'bubble me';
-      d.textContent = text;
-      chatBody.appendChild(d);
-      chatBody.scrollTop = chatBody.scrollHeight;
-      saveBotMemory({role:'user',text,ts:Date.now()});
-    }
+        async function processChatbotMessage(message) {
+            // Symulacja opóźnienia odpowiedzi
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
 
-    // prosty "knowledge base" — bot zna sekcje i modę
-    const KNOWLEDGE = {
-      sections: {
-        blog: 'Sekcja Blog zawiera artykuły o trendach, poradach i inspiracjach.',
-        projektuj: 'W sekcji Projektuj możesz stworzyć własny projekt koszulki, bluzy lub czapki i dodać go do koszyka.',
-        zbiórka: 'Wspieramy Dom Dziecka "Promyk" — część wpływów idzie na pomoc.',
-        regulamin: 'Regulamin sklepu i warunki realizacji zamówień.',
-        kontakt: 'Dane kontaktowe i formularz kontaktowy.'
-      },
-      fashion: [
-        'Streetwear: wygoda + grafika + silne brandowe komunikaty.',
-        'Vintage: powrót klasycznych krojów i nadruków retro.',
-        'Transformujące nadruki: modne, ekskluzywne projekty reagujące na próbę.'
-      ]
-    };
+            const lower = message.toLowerCase();
+            let reply = "Nie rozumiem. Spróbuj: 'pokaż nowości', 'doradź mi styl', 'dodaj do koszyka'.";
 
-    // memory
-    const BOT_MEM_KEY = 'adelbertus_bot_mem_v1';
-    function getBotMemory(){ try{return JSON.parse(localStorage.getItem(BOT_MEM_KEY)||'[]')}catch(e){return[]} }
-    function saveBotMemory(entry){ const m=getBotMemory(); m.push(entry); localStorage.setItem(BOT_MEM_KEY, JSON.stringify(m)); }
+            const memory = sessionMemory[sessionId];
 
-    function processUserQuery(q){
-      q = q.toLowerCase().trim();
-      if(q.includes('projekt') || q.includes('projektuj')) return KNOWLEDGE.sections.projektuj;
-      if(q.includes('blog')) return KNOWLEDGE.sections.blog;
-      if(q.includes('zbiór') || q.includes('darcz') ) return KNOWLEDGE.sections.zbiórka;
-      if(q.includes('regulamin')) return KNOWLEDGE.sections.regulamin;
-      if(q.includes('kontakt')) return KNOWLEDGE.sections.kontakt;
-      if(q.includes('trendy')||q.includes('moda')) return 'Aktualne trendy: ' + KNOWLEDGE.fashion.join(' | ');
-      if(q.includes('koszyk')) return 'Sprawdź sekcję Koszyk — projekty i produkty są zapisywane lokalnie.';
-      if(q.includes('cena')) return 'Ceny: koszulka 99 zł (projekt własny), bluza 150 zł, czapka 79 zł — możesz je nadpisać w konfiguracji.';
-      // fallback
-      return "Przykro mi — nie rozumiem dokładnie. Mogę pomóc z: Blog, Projektuj, Zbiórka, Regulamin, Kontakt, koszyk, trendy modowe.";
-    }
+            // =======================
+            // Sekcje sklepu i produkty
+            // =======================
+            if (lower.includes("nowości")) {
+                const newItems = products.filter(p => p.category === "nowości").map(p => `${p.name} (${p.price} zł)`).join(", ");
+                reply = `Oto nasze nowości: ${newItems}. Mogę doradzić, jak je nosić lub dodać do koszyka.`;
+            } else {
+                const productMatch = products.find(p => lower.includes(p.name.toLowerCase()));
+                if (productMatch) {
+                    memory.cart.push(productMatch);
+                    addToCart(productMatch.name, productMatch.price, productMatch.image);
+                    reply = `Dodałem ${productMatch.name} do koszyka! 💫 Materiał: ${productMatch.material}. Tip stylowy: ${productMatch.styleTip}`;
+                }
+            }
 
-    chatSend.addEventListener('click', ()=>{
-      const q = chatInput.value.trim();
-      if(!q) return;
-      showUserMessage(q);
-      const answer = processUserQuery(q);
-      setTimeout(()=>showBotMessage(answer),300);
-      chatInput.value = '';
-    });
+            // =======================
+            // Porady modowe i ciekawostki
+            // =======================
+            if (lower.includes("moda") || lower.includes("styl") || lower.includes("trend") || lower.includes("doradź")) {
+                const fact = fashionFacts[Math.floor(Math.random() * fashionFacts.length)];
+                reply = `W modzie teraz królują odważne nadruki i streetwear. 🎨 Ciekawostka: ${fact}`;
+            }
 
-    chatInput.addEventListener('keydown',(e)=>{
-      if(e.key==='Enter'){ chatSend.click(); e.preventDefault(); }
-    });
+            // =======================
+            // Mix & Match
+            // =======================
+            if (lower.includes("co założyć") || lower.includes("dopasuj") || lower.includes("outfit")) {
+                const suggestions = products.filter(p => p.category === "nowości").slice(0,2).map(p => `${p.name}`).join(" + ");
+                reply = `Polecam zestaw: ${suggestions}. 👕 Wygląda świetnie razem i pasuje do casual streetwear!`;
+            }
 
-    /* ======================
-       Kontakt form
-       ====================== */
-    document.getElementById('contactForm').addEventListener('submit',(ev)=>{
-      ev.preventDefault();
-      alert('Wiadomość wysłana (demo). Jeśli chcesz, ustawmy wysyłkę na Twój serwer.');
-    });
+            // =======================
+            // Prezent / płeć
+            // =======================
+            if (lower.includes("dla chłopaka") || lower.includes("dla dziewczyny") || lower.includes("na prezent")) {
+                const suggestion = products[Math.floor(Math.random() * products.length)];
+                reply = `Idealnie na prezent: ${suggestion.name} (${suggestion.material}) – ${suggestion.styleTip} 🎁`;
+            }
 
-    /* ======================
-       Zbiórka (przycisk)
-       ====================== */
-    document.getElementById('donateBtn').addEventListener('click', ()=>{
-      const amt = prompt('Kwota darowizny w zł:', '50');
-      if(!amt) return;
-      const list = document.getElementById('donorsList');
-      const li = document.createElement('li');
-      li.textContent = `Anonim - ${amt} zł`;
-      list.insertBefore(li, list.firstChild);
-      showBotMessage(`Dzięki za wsparcie ${amt} zł!`);
-    });
+            // =======================
+            // Blog
+            // =======================
+            if (lower.includes("blog") || lower.includes("artykuł")) {
+                const post = blogPosts[Math.floor(Math.random() * blogPosts.length)];
+                reply = `Polecam przeczytać: "${post.title}" – ${post.summary}. 📖`;
+            }
 
-    /* ======================
-       Inicjalizacja
-       ====================== */
-    renderCart();
-    attachExistingAddButtons();
+            // =======================
+            // Projektuj
+            // =======================
+            if (lower.includes("projektuj") || lower.includes("stwórz projekt")) {
+                const template = projectTemplates[Math.floor(Math.random() * projectTemplates.length)];
+                reply = `W sekcji 'Projektuj' możesz stworzyć własny projekt. 🎨 Polecam szablon: ${template.name}. Opis: ${template.description}`;
+            }
 
-    // expose util to global (opcjonalnie)
-    window.adelbertus = {
-      addToCart,
-      getCart,
-      showBotMessage
-    };
+            // =======================
+            // Zbiórka
+            // =======================
+            if (lower.includes("zbiórka")) {
+                reply = `Oto info o zbiórkach: ${zbiórkaInfo.summary}. ❤️`;
+            }
 
-    // auto-focus chat small nicety
-    //document.getElementById('chatInput').focus();
-  </script>
+            // =======================
+            // Regulamin
+            // =======================
+            if (lower.includes("regulamin")) {
+                reply = `Regulamin sklepu: ${regulations.summary}. 📄`;
+            }
+
+            // =======================
+            // Kontakt
+            // =======================
+            if (lower.includes("kontakt")) {
+                reply = `Możesz się z nami skontaktować: 📧 ${contacts.email}, 📞 ${contacts.phone}`;
+            }
+
+            // Koszyk
+            if (lower.includes("koszyk") || lower.includes("koszyka")) {
+                if (cart.length === 0) {
+                    reply = "Twój koszyk jest pusty. 🛒 Chcesz, żebym polecił Ci jakieś produkty?";
+                } else {
+                    const cartItems = cart.map(item => `${item.name} (${item.quantity}x)`).join(", ");
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    reply = `W Twoim koszyku masz: ${cartItems}. Łączna kwota: ${total} zł. 💰`;
+                }
+            }
+
+            // Pomoc
+            if (lower.includes("pomoc") || lower.includes("help") || lower.includes("co potrafisz")) {
+                reply = "Potrafię: 🛍️ Pokazać nowości, 💡 Doradzić w stylizacji, 👕 Pomóc dobrać outfit, 🎁 Polecić prezent, 📖 Blog, 🎨 Projektowanie, ❤️ Zbiórka, 📄 Regulamin, 📞 Kontakt, 🛒 Koszyk. O co chcesz zapytać?";
+            }
+
+            memory.history.push({ message, reply });
+            return reply;
+        }
+
+        function addMessageToChat(message, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // ===== RESZTA SYSTEMU SKLEPU (pozostaje bez zmian) =====
+        function initNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.hasAttribute('data-section')) {
+                        e.preventDefault();
+                        
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const sectionId = this.getAttribute('data-section');
+                        showSection(sectionId);
+                    }
+                });
+            });
+            
+            document.getElementById('cartIcon').addEventListener('click', toggleCart);
+        }
+
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            
+            if (window.innerWidth <= 768) {
+                document.getElementById('navContainer').classList.remove('show');
+            }
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navContainer').classList.toggle('show');
+        }
+
+        // System produktów
+        function initProductOptions() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('color-option')) {
+                    const options = e.target.closest('.color-options');
+                    options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+                
+                if (e.target.classList.contains('size-option')) {
+                    const options = e.target.closest('.size-options');
+                    options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+                
+                if (e.target.classList.contains('add-to-cart-btn')) {
+                    e.preventDefault();
+                    const productCard = e.target.closest('.product-card');
+                    const name = e.target.getAttribute('data-name');
+                    const price = parseFloat(e.target.getAttribute('data-price'));
+                    const image = e.target.getAttribute('data-image');
+                    
+                    const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+                    const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
+                    
+                    const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+                    const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+                    
+                    addToCart(name, price, image, size, color);
+                }
+            });
+        }
+
+        // Koszyk
+        function addToCart(name, price, image = null, size = null, color = null) {
+            const existingIndex = cart.findIndex(item => 
+                item.name === name && 
+                item.size === size && 
+                item.color === color
+            );
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    image: image,
+                    size: size,
+                    color: color,
+                    id: Date.now() + Math.random()
+                });
+            }
+            
+            updateCart();
+            showNotification('✅ Produkt dodany do koszyka');
+        }
+
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+                cartTotal.textContent = '0 zł';
+                document.getElementById('paypal-container').innerHTML = '';
+            } else {
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                        <div class="flex-1">
+                            <div class="font-bold">${item.name}</div>
+                            <div>${item.price} zł × ${item.quantity}</div>
+                            ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                            ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                cartTotal.textContent = `${total.toFixed(2)} zł`;
+                renderPayPalButton();
+            }
+            
+            localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+        }
+
+        function renderPayPalButton() {
+            const container = document.getElementById('paypal-container');
+            container.innerHTML = '';
+            
+            if (cart.length === 0) return;
+            
+            paypal.HostedButtons({
+                hostedButtonId: "L4639S4363CZE",
+            }).render("#paypal-container");
+        }
+
+        function sendOrderEmail() {
+            let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+            
+            cart.forEach((item, index) => {
+                emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+                if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+                emailBody += '\n';
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+            
+            window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+        }
+
+        function sendOrderWhatsApp() {
+            let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+                if (item.size) message += ` (Rozmiar: ${item.size})`;
+                message += '%0A';
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+            message += `Proszę o potwierdzenie zamówienia.`;
+            
+            window.open(`https://wa.me/48604296360?text=${message}`);
+        }
+
+        // Studio projektowe
+        function initDesignStudio() {
+            canvas = new fabric.Canvas('designCanvas');
+        }
+
+        function addText() {
+            const text = new fabric.IText('Twój tekst', {
+                left: 100,
+                top: 100,
+                fontFamily: 'Arial',
+                fill: '#000000',
+                fontSize: 20
+            });
+            canvas.add(text);
+        }
+
+        function addCustomText() {
+            const textInput = document.getElementById('textInput');
+            const colorPicker = document.getElementById('colorPicker');
+            
+            if (textInput.value.trim()) {
+                const text = new fabric.IText(textInput.value, {
+                    left: 50,
+                    top: 50,
+                    fontFamily: 'Arial',
+                    fill: colorPicker.value,
+                    fontSize: 24
+                });
+                canvas.add(text);
+                textInput.value = '';
+            }
+        }
+
+        function changeColor() {
+            const activeObject = canvas.getActiveObject();
+            const colorPicker = document.getElementById('colorPicker');
+            
+            if (activeObject) {
+                activeObject.set('fill', colorPicker.value);
+                canvas.renderAll();
+            }
+        }
+
+        function clearCanvas() {
+            canvas.clear();
+        }
+
+        function saveDesign() {
+            const dataURL = canvas.toDataURL({
+                format: 'png',
+                quality: 0.8
+            });
+            
+            showNotification('🎨 Projekt zapisany!');
+        }
+
+        // Powiadomienia
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.backgroundColor = '#d4af37';
+            notification.style.color = 'black';
+            notification.style.padding = '12px 24px';
+            notification.style.borderRadius = '30px';
+            notification.style.zIndex = '1000';
+            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            notification.style.fontWeight = 'bold';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Cookie consent
+        function initCookieConsent() {
+            if (!localStorage.getItem('cookies_accepted')) {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+
+        // Globalne funkcje
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.toggleCart = toggleCart;
+        window.toggleMobileMenu = toggleMobileMenu;
+        window.sendOrderEmail = sendOrderEmail;
+        window.sendOrderWhatsApp = sendOrderWhatsApp;
+        window.acceptCookies = acceptCookies;
+        window.toggleChatbot = toggleChatbot;
+        window.sendQuickReply = sendQuickReply;
+        window.handleChatInput = handleChatInput;
+        window.sendChatMessage = sendChatMessage;
+    </script>
 </body>
 </html>
