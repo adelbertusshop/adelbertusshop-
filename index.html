@@ -1127,273 +1127,200 @@
                 </div>
             </div>
         </section>
-        <!-- Sekcja Projektuj -->
-<section id="projektuj" class="p-6 bg-gray-100">
-  <h2 class="text-3xl font-bold mb-4">Stwórz własny projekt</h2>
-  <div class="flex flex-col md:flex-row gap-6">
-    <!-- Panel narzędzi -->
-    <div class="w-full md:w-1/3 p-4 bg-white rounded shadow">
-      <h3 class="font-semibold mb-2">Opcje projektu</h3>
-      <label class="block mb-2">Wybierz produkt:
-        <select id="produktSelect" class="w-full border p-2 rounded">
-          <option value="koszulka">Koszulka</option>
-          <option value="bluza">Bluza</option>
-          <option value="czapka">Czapka</option>
-        </select>
-      </label>
-      <label class="block mb-2">Kolor:
-        <input type="color" id="kolorProdukt" value="#ffffff" class="w-full h-10 p-1 rounded">
-      </label>
-      <label class="block mb-2">Dodaj tekst:
-        <input type="text" id="tekstProjektu" placeholder="Twój napis" class="w-full border p-2 rounded">
-      </label>
-      <label class="block mb-2">Dodaj grafikę:
-        <input type="file" id="grafikaProjektu" accept="image/*" class="w-full">
-      </label>
-      <button id="dodajDoKoszyka" class="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Dodaj do koszyka</button>
-    </div>
+        <main>
+    <!-- Zbiórka -->
+    <section id="charity">
+        <div class="section-title">
+            <h2>Wspieramy Dom Dziecka "Promyk"</h2>
+            <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
+        </div>
+        
+        <div class="charity-section">
+            <h3>Dołącz do naszych darczyńców</h3>
+            <p>Twoje wsparcie zmienia życie dzieci</p>
+            
+            <div class="donors-list">
+                <h4>Ostatni darczyńcy:</h4>
+                <ul id="donorsList">
+                    <li>Anonim - 100 zł</li>
+                    <li>Maria K. - 50 zł</li>
+                    <li>Firma XYZ - 500 zł</li>
+                </ul>
+            </div>
+            
+            <button class="nav-btn gold-bg" style="margin-top: 1.5rem;">Wesprzyj zbiórkę</button>
+        </div>
+    </section>
 
-    <!-- Podgląd 3D -->
-    <div class="w-full md:w-2/3 p-4 bg-white rounded shadow flex justify-center items-center">
-      <canvas id="podglad3D" class="w-full h-96 bg-gray-200 rounded"></canvas>
-    </div>
-  </div>
-</section>
+    <!-- Blog -->
+    <section id="blog">
+        <div class="section-title">
+            <h2>Nasz Blog</h2>
+            <p>Porady, trendy i inspiracje</p>
+        </div>
+        
+        <div class="blog-posts">
+            <div class="blog-post">
+                <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" class="blog-image">
+                <div class="blog-content">
+                    <h3>Powrót do lat 90s</h3>
+                    <p>Odkryj jak styl vintage powraca na ulice...</p>
+                    <button class="nav-btn mt-4">Czytaj więcej</button>
+                </div>
+            </div>
+            
+            <div class="blog-post">
+                <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" class="blog-image">
+                <div class="blog-content">
+                    <h3>Streetwear 2024</h3>
+                    <p>Najnowsze trendy w modzie ulicznej...</p>
+                    <button class="nav-btn mt-4">Czytaj więcej</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- CzadBot -->
-<section id="czadbot" class="p-6 bg-white mt-6 rounded shadow">
-  <h2 class="text-3xl font-bold mb-4">CzadBot – Twój doradca modowy</h2>
-  <div class="flex flex-col md:flex-row gap-4">
-    <textarea id="czadInput" placeholder="Zadaj pytanie CzadBotowi..." class="w-full md:w-2/3 p-3 border rounded mb-2 md:mb-0"></textarea>
-    <button id="czadWywolaj" class="w-full md:w-1/3 bg-green-600 text-white py-2 rounded hover:bg-green-700">Zapytaj</button>
-  </div>
-  <div id="czadOdpowiedz" class="mt-4 p-3 border rounded bg-gray-50 min-h-[80px]"></div>
-</section>
+    <!-- Sekcja Projektuj -->
+    <section id="design">
+        <div class="section-title">
+            <h2>Projektuj Swój Produkt</h2>
+            <p>Twórz koszulki, bluzy i czapki wirtualnie</p>
+        </div>
+        
+        <div class="design-container grid md:grid-cols-2 gap-8">
+            <div class="product-preview bg-white p-6 rounded-lg shadow">
+                <canvas id="productCanvas" width="400" height="400" class="border rounded"></canvas>
+            </div>
+            
+            <div class="design-controls bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">Opcje projektowania</h3>
+                
+                <label class="block mb-2">Wybierz produkt:</label>
+                <select id="productType" class="w-full p-2 border rounded mb-4">
+                    <option value="tshirt">Koszulka</option>
+                    <option value="hoodie">Bluza</option>
+                    <option value="cap">Czapka</option>
+                </select>
+                
+                <label class="block mb-2">Kolor:</label>
+                <input type="color" id="productColor" value="#ffffff" class="w-full mb-4">
 
-<!-- Skrypty -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.153.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.153.0/examples/js/controls/OrbitControls.js"></script>
+                <label class="block mb-2">Dodaj tekst:</label>
+                <input type="text" id="productText" placeholder="Twój napis" class="w-full p-2 border rounded mb-4">
+
+                <label class="block mb-2">Dodaj grafikę:</label>
+                <input type="file" id="productImage" accept="image/*" class="w-full mb-4">
+
+                <button id="addToCartDesign" class="nav-btn gold-bg w-full">Dodaj do koszyka</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Regulamin -->
+    <section id="regulations">
+        <div class="section-title">
+            <h2>Regulamin Sklepu</h2>
+            <p>Zasady korzystania z naszych usług</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
+            <p class="mb-4">Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
+            
+            <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
+            <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
+        </div>
+    </section>
+
+    <!-- Kontakt -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Kontakt</h2>
+            <p>Skontaktuj się z nami</p>
+        </div>
+        
+        <div class="bg-white p-6 rounded-lg shadow">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
+                    <p class="mb-2"><i class="fas fa-envelope gold-text"></i> mielniczukgrzegosz74@gmail.com</p>
+                    <p class="mb-2"><i class="fas fa-phone gold-text"></i> 604 296 360</p>
+                    <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
+                    
+                    <div class="social-links">
+                        <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Formularz kontaktowy</h3>
+                    <form id="contactForm">
+                        <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2">
+                        <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2">
+                        <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2"></textarea>
+                        <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <script>
-const canvas = document.getElementById('podglad3D');
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0xf0f0f0);
+    // Sekcja Projektuj - podgląd w czasie rzeczywistym
+    const canvas = document.getElementById('productCanvas');
+    const ctx = canvas.getContext('2d');
+    const productType = document.getElementById('productType');
+    const productColor = document.getElementById('productColor');
+    const productText = document.getElementById('productText');
+    const productImage = document.getElementById('productImage');
+    const addToCartDesign = document.getElementById('addToCartDesign');
 
-const camera = new THREE.PerspectiveCamera(50, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-camera.position.set(0, 1.5, 3);
+    let uploadedImage = null;
 
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    function drawProduct() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = productColor.value;
+        ctx.fillRect(50, 50, 300, 300);
 
-// Orbit controls
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.05;
-controls.enablePan = false;
+        if(uploadedImage) {
+            ctx.drawImage(uploadedImage, 75, 75, 250, 250);
+        }
 
-// Światło
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(5,5,5);
-scene.add(light);
-scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-
-// Ładowanie modeli
-const loader = new THREE.GLTFLoader();
-let currentModel;
-
-const modele = {
-  koszulka: 'https://yourcdn.com/models/koszulka.glb',
-  bluza: 'https://yourcdn.com/models/bluza.glb',
-  czapka: 'https://yourcdn.com/models/czapka.glb'
-};
-
-function loadModel(type){
-  if(currentModel){
-    scene.remove(currentModel);
-    currentModel.traverse(c => { if(c.isMesh) c.material.map = null; });
-  }
-  loader.load(modele[type], gltf => {
-    currentModel = gltf.scene;
-    currentModel.traverse(c => { if(c.isMesh) c.material.color.set(document.getElementById('kolorProdukt').value); });
-    scene.add(currentModel);
-  });
-}
-
-// Początkowy model
-loadModel('koszulka');
-
-// Zmiana produktu
-document.getElementById('produktSelect').addEventListener('change', e => {
-  loadModel(e.target.value);
-});
-
-// Zmiana koloru
-document.getElementById('kolorProdukt').addEventListener('input', e => {
-  if(currentModel){
-    currentModel.traverse(c => { if(c.isMesh) c.material.color.set(e.target.value); });
-  }
-});
-
-// Dodawanie grafiki
-document.getElementById('grafikaProjektu').addEventListener('change', e => {
-  const file = e.target.files[0];
-  if(!file) return;
-  const reader = new FileReader();
-  reader.onload = function(ev){
-    const texLoader = new THREE.TextureLoader();
-    texLoader.load(ev.target.result, tex => {
-      if(currentModel){
-        currentModel.traverse(c => { if(c.isMesh) c.material.map = tex; c.material.needsUpdate = true; });
-      }
-    });
-  };
-  reader.readAsDataURL(file);
-});
-
-// Dodawanie do koszyka
-document.getElementById('dodajDoKoszyka').addEventListener('click', () => {
-  const produkt = document.getElementById('produktSelect').value;
-  const kolor = document.getElementById('kolorProdukt').value;
-  const tekst = document.getElementById('tekstProjektu').value;
-  alert(`Projekt dodany do koszyka:\nProdukt: ${produkt}\nKolor: ${kolor}\nTekst: ${tekst}`);
-  // Tutaj integracja z Twoim koszykiem
-});
-
-function animate(){
-  requestAnimationFrame(animate);
-  controls.update();
-  renderer.render(scene, camera);
-}
-animate();
-
-// --- CzadBot ---
-const czadBotWiedza = {
-  moda: "CzadBot zna trendy, kolory i style od streetwear po elegancję.",
-  blog: "Możesz pytać o wpisy w sekcji Blog.",
-  projektuj: "CzadBot zna kreator Projektuj, może doradzać w wyborze koloru i grafik.",
-  zbiorka: "Możesz pytać o Zbiórki i szczegóły finansowe.",
-  regulamin: "CzadBot zna regulamin sklepu.",
-  kontakt: "CzadBot doradza jak kontaktować się z obsługą."
-};
-
-document.getElementById('czadWywolaj').addEventListener('click', () => {
-  const question = document.getElementById('czadInput').value.toLowerCase();
-  let answer = "Nie wiem, spróbuj zapytać inaczej.";
-  for(const key in czadBotWiedza){
-    if(question.includes(key)){
-      answer = czadBotWiedza[key];
-      break;
+        ctx.fillStyle = "#000";
+        ctx.font = "20px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(productText.value, canvas.width / 2, 380);
     }
-  }
-  document.getElementById('czadOdpowiedz').innerText = answer;
-});
-</script>
-        
-        <!-- Zbiórka -->
-        <section id="charity">
-            <div class="section-title">
-                <h2>Wspieramy Dom Dziecka "Promyk"</h2>
-                <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
-            </div>
-            
-            <div class="charity-section">
-                <h3>Dołącz do naszych darczyńców</h3>
-                <p>Twoje wsparcie zmienia życie dzieci</p>
-                
-                <div class="donors-list">
-                    <h4>Ostatni darczyńcy:</h4>
-                    <ul id="donorsList">
-                        <li>Anonim - 100 zł</li>
-                        <li>Maria K. - 50 zł</li>
-                        <li>Firma XYZ - 500 zł</li>
-                    </ul>
-                </div>
-                
-                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;">Wesprzyj zbiórkę</button>
-            </div>
-        </section>
 
-        <!-- Blog -->
-        <section id="blog">
-            <div class="section-title">
-                <h2>Nasz Blog</h2>
-                <p>Porady, trendy i inspiracje</p>
-            </div>
-            
-            <div class="blog-posts">
-                <div class="blog-post">
-                    <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" class="blog-image">
-                    <div class="blog-content">
-                        <h3>Powrót do lat 90s</h3>
-                        <p>Odkryj jak styl vintage powraca na ulice...</p>
-                        <button class="nav-btn mt-4">Czytaj więcej</button>
-                    </div>
-                </div>
-                
-                <div class="blog-post">
-                    <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" class="blog-image">
-                    <div class="blog-content">
-                        <h3>Streetwear 2024</h3>
-                        <p>Najnowsze trendy w modzie ulicznej...</p>
-                        <button class="nav-btn mt-4">Czytaj więcej</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+    productType.addEventListener('change', drawProduct);
+    productColor.addEventListener('input', drawProduct);
+    productText.addEventListener('input', drawProduct);
+    productImage.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if(file) {
+            const img = new Image();
+            img.onload = () => { uploadedImage = img; drawProduct(); };
+            img.src = URL.createObjectURL(file);
+        }
+    });
 
-        <!-- Regulamin -->
-        <section id="regulations">
-            <div class="section-title">
-                <h2>Regulamin Sklepu</h2>
-                <p>Zasady korzystania z naszych usług</p>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
-                <p class="mb-4">Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
-                
-                <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
-                <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
-            </div>
-        </section>
+    drawProduct();
 
-        <!-- Kontakt -->
-        <section id="contact">
-            <div class="section-title">
-                <h2>Kontakt</h2>
-                <p>Skontaktuj się z nami</p>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow">
-                <div class="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
-                        <p class="mb-2"><i class="fas fa-envelope gold-text"></i> mielniczukgrzegosz74@gmail.com</p>
-                        <p class="mb-2"><i class="fas fa-phone gold-text"></i> 604 296 360</p>
-                        <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
-                        
-                        <div class="social-links">
-                            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">Formularz kontaktowy</h3>
-                        <form id="contactForm">
-                            <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2">
-                            <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2">
-                            <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2"></textarea>
-                            <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
+    // Integracja z koszykiem
+    addToCartDesign.addEventListener('click', () => {
+        const dataURL = canvas.toDataURL('image/png');
+        const item = {
+            name: `Projektowany produkt: ${productType.value}`,
+            price: 199,
+            image: dataURL
+        };
+        addToCart(item); // funkcja addToCart z Twojego sklepu
+        alert("Produkt dodany do koszyka!");
+    });
+</script>       
     <!-- Chatbot -->
     <button class="chatbot-toggle" onclick="toggleChatbot()">
         <i class="fas fa-comments"></i>
