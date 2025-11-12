@@ -736,7 +736,7 @@
                 font-size: 2.5rem;
             }
             
-            /* Nawigacja mobilna */
+            /* Nawigacja mobilne */
             .mobile-menu-btn {
                 display: block;
             }
@@ -1127,200 +1127,145 @@
                 </div>
             </div>
         </section>
-        <main>
-    <!-- Zbiórka -->
-    <section id="charity">
-        <div class="section-title">
-            <h2>Wspieramy Dom Dziecka "Promyk"</h2>
-            <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
-        </div>
-        
-        <div class="charity-section">
-            <h3>Dołącz do naszych darczyńców</h3>
-            <p>Twoje wsparcie zmienia życie dzieci</p>
-            
-            <div class="donors-list">
-                <h4>Ostatni darczyńcy:</h4>
-                <ul id="donorsList">
-                    <li>Anonim - 100 zł</li>
-                    <li>Maria K. - 50 zł</li>
-                    <li>Firma XYZ - 500 zł</li>
-                </ul>
+
+        <!-- Studio projektowe -->
+        <section id="design">
+            <div class="section-title">
+                <h2>Studio Projektowe</h2>
+                <p>Stwórz swój unikalny projekt</p>
             </div>
             
-            <button class="nav-btn gold-bg" style="margin-top: 1.5rem;">Wesprzyj zbiórkę</button>
-        </div>
-    </section>
-
-    <!-- Blog -->
-    <section id="blog">
-        <div class="section-title">
-            <h2>Nasz Blog</h2>
-            <p>Porady, trendy i inspiracje</p>
-        </div>
-        
-        <div class="blog-posts">
-            <div class="blog-post">
-                <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" class="blog-image">
-                <div class="blog-content">
-                    <h3>Powrót do lat 90s</h3>
-                    <p>Odkryj jak styl vintage powraca na ulice...</p>
-                    <button class="nav-btn mt-4">Czytaj więcej</button>
+            <div class="design-studio">
+                <div class="canvas-container">
+                    <canvas id="designCanvas" width="600" height="400"></canvas>
                 </div>
-            </div>
-            
-            <div class="blog-post">
-                <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" class="blog-image">
-                <div class="blog-content">
-                    <h3>Streetwear 2024</h3>
-                    <p>Najnowsze trendy w modzie ulicznej...</p>
-                    <button class="nav-btn mt-4">Czytaj więcej</button>
+                
+                <div class="canvas-controls">
+                    <button class="nav-btn" onclick="addText()">Dodaj tekst</button>
+                    <button class="nav-btn" onclick="clearCanvas()">Wyczyść</button>
+                    <button class="nav-btn gold-bg" onclick="saveDesign()">Zapisz projekt</button>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sekcja Projektuj -->
-    <section id="design">
-        <div class="section-title">
-            <h2>Projektuj Swój Produkt</h2>
-            <p>Twórz koszulki, bluzy i czapki wirtualnie</p>
-        </div>
-        
-        <div class="design-container grid md:grid-cols-2 gap-8">
-            <div class="product-preview bg-white p-6 rounded-lg shadow">
-                <canvas id="productCanvas" width="400" height="400" class="border rounded"></canvas>
-            </div>
-            
-            <div class="design-controls bg-white p-6 rounded-lg shadow">
-                <h3 class="text-xl font-bold mb-4">Opcje projektowania</h3>
                 
-                <label class="block mb-2">Wybierz produkt:</label>
-                <select id="productType" class="w-full p-2 border rounded mb-4">
-                    <option value="tshirt">Koszulka</option>
-                    <option value="hoodie">Bluza</option>
-                    <option value="cap">Czapka</option>
-                </select>
-                
-                <label class="block mb-2">Kolor:</label>
-                <input type="color" id="productColor" value="#ffffff" class="w-full mb-4">
-
-                <label class="block mb-2">Dodaj tekst:</label>
-                <input type="text" id="productText" placeholder="Twój napis" class="w-full p-2 border rounded mb-4">
-
-                <label class="block mb-2">Dodaj grafikę:</label>
-                <input type="file" id="productImage" accept="image/*" class="w-full mb-4">
-
-                <button id="addToCartDesign" class="nav-btn gold-bg w-full">Dodaj do koszyka</button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Regulamin -->
-    <section id="regulations">
-        <div class="section-title">
-            <h2>Regulamin Sklepu</h2>
-            <p>Zasady korzystania z naszych usług</p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow">
-            <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
-            <p class="mb-4">Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
-            
-            <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
-            <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
-        </div>
-    </section>
-
-    <!-- Kontakt -->
-    <section id="contact">
-        <div class="section-title">
-            <h2>Kontakt</h2>
-            <p>Skontaktuj się z nami</p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow">
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
-                    <p class="mb-2"><i class="fas fa-envelope gold-text"></i> mielniczukgrzegosz74@gmail.com</p>
-                    <p class="mb-2"><i class="fas fa-phone gold-text"></i> 604 296 360</p>
-                    <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
+                <div class="design-tools">
+                    <div class="tool-group">
+                        <div class="tool-title">Tekst</div>
+                        <input type="text" id="textInput" placeholder="Wpisz tekst" class="w-full p-2 border rounded">
+                        <button class="nav-btn mt-2" onclick="addCustomText()">Dodaj tekst</button>
+                    </div>
                     
-                    <div class="social-links">
-                        <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                    <div class="tool-group">
+                        <div class="tool-title">Kolory</div>
+                        <input type="color" id="colorPicker" value="#000000">
+                        <button class="nav-btn mt-2" onclick="changeColor()">Zmień kolor</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zbiórka -->
+        <section id="charity">
+            <div class="section-title">
+                <h2>Wspieramy Dom Dziecka "Promyk"</h2>
+                <p>Każdy zakup to pomoc dla potrzebujących dzieci</p>
+            </div>
+            
+            <div class="charity-section">
+                <h3>Dołącz do naszych darczyńców</h3>
+                <p>Twoje wsparcie zmienia życie dzieci</p>
+                
+                <div class="donors-list">
+                    <h4>Ostatni darczyńcy:</h4>
+                    <ul id="donorsList">
+                        <li>Anonim - 100 zł</li>
+                        <li>Maria K. - 50 zł</li>
+                        <li>Firma XYZ - 500 zł</li>
+                    </ul>
+                </div>
+                
+                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;">Wesprzyj zbiórkę</button>
+            </div>
+        </section>
+
+        <!-- Blog -->
+        <section id="blog">
+            <div class="section-title">
+                <h2>Nasz Blog</h2>
+                <p>Porady, trendy i inspiracje</p>
+            </div>
+            
+            <div class="blog-posts">
+                <div class="blog-post">
+                    <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Moda vintage" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Powrót do lat 90s</h3>
+                        <p>Odkryj jak styl vintage powraca na ulice...</p>
+                        <button class="nav-btn mt-4">Czytaj więcej</button>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 class="text-xl font-bold mb-4">Formularz kontaktowy</h3>
-                    <form id="contactForm">
-                        <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2">
-                        <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2">
-                        <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2"></textarea>
-                        <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-                    </form>
+                <div class="blog-post">
+                    <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Streetwear" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Streetwear 2024</h3>
+                        <p>Najnowsze trendy w modzie ulicznej...</p>
+                        <button class="nav-btn mt-4">Czytaj więcej</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
+        </section>
 
-<script>
-    // Sekcja Projektuj - podgląd w czasie rzeczywistym
-    const canvas = document.getElementById('productCanvas');
-    const ctx = canvas.getContext('2d');
-    const productType = document.getElementById('productType');
-    const productColor = document.getElementById('productColor');
-    const productText = document.getElementById('productText');
-    const productImage = document.getElementById('productImage');
-    const addToCartDesign = document.getElementById('addToCartDesign');
+        <!-- Regulamin -->
+        <section id="regulations">
+            <div class="section-title">
+                <h2>Regulamin Sklepu</h2>
+                <p>Zasady korzystania z naszych usług</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-xl font-bold mb-4">§1 Postanowienia ogólne</h3>
+                <p class="mb-4">Sklep internetowy AdelbertusShop działa na zasadach określonych w niniejszym regulaminie.</p>
+                
+                <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
+                <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
+            </div>
+        </section>
 
-    let uploadedImage = null;
+        <!-- Kontakt -->
+        <section id="contact">
+            <div class="section-title">
+                <h2>Kontakt</h2>
+                <p>Skontaktuj się z nami</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
+                        <p class="mb-2"><i class="fas fa-envelope gold-text"></i> mielniczukgrzegosz74@gmail.com</p>
+                        <p class="mb-2"><i class="fas fa-phone gold-text"></i> 604 296 360</p>
+                        <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
+                        
+                        <div class="social-links">
+                            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">Formularz kontaktowy</h3>
+                        <form id="contactForm">
+                            <input type="text" placeholder="Imię i nazwisko" class="w-full p-2 border rounded mb-2">
+                            <input type="email" placeholder="Email" class="w-full p-2 border rounded mb-2">
+                            <textarea placeholder="Wiadomość" rows="4" class="w-full p-2 border rounded mb-2"></textarea>
+                            <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    function drawProduct() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = productColor.value;
-        ctx.fillRect(50, 50, 300, 300);
-
-        if(uploadedImage) {
-            ctx.drawImage(uploadedImage, 75, 75, 250, 250);
-        }
-
-        ctx.fillStyle = "#000";
-        ctx.font = "20px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText(productText.value, canvas.width / 2, 380);
-    }
-
-    productType.addEventListener('change', drawProduct);
-    productColor.addEventListener('input', drawProduct);
-    productText.addEventListener('input', drawProduct);
-    productImage.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if(file) {
-            const img = new Image();
-            img.onload = () => { uploadedImage = img; drawProduct(); };
-            img.src = URL.createObjectURL(file);
-        }
-    });
-
-    drawProduct();
-
-    // Integracja z koszykiem
-    addToCartDesign.addEventListener('click', () => {
-        const dataURL = canvas.toDataURL('image/png');
-        const item = {
-            name: `Projektowany produkt: ${productType.value}`,
-            price: 199,
-            image: dataURL
-        };
-        addToCart(item); // funkcja addToCart z Twojego sklepu
-        alert("Produkt dodany do koszyka!");
-    });
-</script>       
     <!-- Chatbot -->
     <button class="chatbot-toggle" onclick="toggleChatbot()">
         <i class="fas fa-comments"></i>
@@ -1338,14 +1283,18 @@
                 Cześć! Jestem Twoim asystentem modowym. Jak mogę Ci pomóc? 😊
             </div>
             <div class="message bot">
-                Możesz zapytać mnie o: <strong>nowości, doradztwo stylowe, dodawanie do koszyka, lub poprosić o pomoc w doborze outfitu</strong>.
+                Możesz zapytać mnie o: <strong>nowości, doradztwo stylowe, dodawanie do koszyka, blog, projektowanie, zbiórkę, regulamin lub kontakt</strong>.
             </div>
         </div>
         <div class="quick-replies" id="quickReplies">
             <div class="quick-reply" onclick="sendQuickReply('Pokaż nowości')">Nowości</div>
             <div class="quick-reply" onclick="sendQuickReply('Doradź mi styl')">Porada stylowa</div>
             <div class="quick-reply" onclick="sendQuickReply('Co założyć?')">Dopasuj outfit</div>
-            <div class="quick-reply" onclick="sendQuickReply('Pokaż koszyk')">Koszyk</div>
+            <div class="quick-reply" onclick="sendQuickReply('Poleć blog')">Blog</div>
+            <div class="quick-reply" onclick="sendQuickReply('Projektuj')">Projektowanie</div>
+            <div class="quick-reply" onclick="sendQuickReply('Zbiórka')">Zbiórka</div>
+            <div class="quick-reply" onclick="sendQuickReply('Regulamin')">Regulamin</div>
+            <div class="quick-reply" onclick="sendQuickReply('Kontakt')">Kontakt</div>
         </div>
         <div class="chatbot-input">
             <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeydown="handleChatInput(event)">
@@ -1450,6 +1399,7 @@
             }
         ];
 
+        // Rozszerzone dane dla chatbota (z Twojego API)
         const fashionFacts = [
             "Streetwear narodził się w latach 90. w Kalifornii",
             "Kolor czarny jest najpopularniejszy w modzie ulicznej",
@@ -1457,6 +1407,46 @@
             "Wintage to nie tylko styl, to filozofia życia",
             "Polskie projekty streetwear podbijają świat"
         ];
+
+        const blogPosts = [
+            {
+                title: "Powrót do lat 90s",
+                summary: "Odkryj jak styl vintage powraca na ulice",
+                url: "#blog"
+            },
+            {
+                title: "Streetwear 2024",
+                summary: "Najnowsze trendy w modzie ulicznej",
+                url: "#blog"
+            }
+        ];
+
+        const projectTemplates = [
+            {
+                name: "Retro Vintage",
+                description: "Klasyczny design inspirowany latami 80/90"
+            },
+            {
+                name: "Urban Street",
+                description: "Nowoczesny streetwear z odważnymi nadrukami"
+            }
+        ];
+
+        const zbiórkaInfo = {
+            summary: "Wspieramy Dom Dziecka 'Promyk'. Każdy zakup to pomoc dla potrzebujących dzieci",
+            url: "#charity"
+        };
+
+        const regulations = {
+            summary: "Sklep działa na zasadach określonych w regulaminie",
+            url: "#regulations"
+        };
+
+        const contacts = {
+            email: "mielniczukgrzegosz74@gmail.com",
+            phone: "604 296 360",
+            address: "AdelbertusShop"
+        };
 
         // Inicjalizacja
         document.addEventListener('DOMContentLoaded', function() {
@@ -1523,49 +1513,101 @@
             const lower = message.toLowerCase();
             let reply = "Nie rozumiem. Spróbuj: 'pokaż nowości', 'doradź mi styl', 'dodaj do koszyka'.";
 
-            // Nowości
+            const memory = sessionMemory[sessionId];
+
+            // =======================
+            // Sekcje sklepu i produkty
+            // =======================
             if (lower.includes("nowości")) {
                 const newItems = products.filter(p => p.category === "nowości").map(p => `${p.name} (${p.price} zł)`).join(", ");
                 reply = `Oto nasze nowości: ${newItems}. Mogę doradzić, jak je nosić lub dodać do koszyka.`;
-            } 
-            // Dodawanie do koszyka
-            else {
+            } else {
                 const productMatch = products.find(p => lower.includes(p.name.toLowerCase()));
                 if (productMatch) {
+                    memory.cart.push(productMatch);
                     addToCart(productMatch.name, productMatch.price, productMatch.image);
                     reply = `Dodałem ${productMatch.name} do koszyka! 💫 Materiał: ${productMatch.material}. Tip stylowy: ${productMatch.styleTip}`;
-                } 
-                // Porady modowe
-                else if (lower.includes("moda") || lower.includes("styl") || lower.includes("trend") || lower.includes("doradź")) {
-                    const fact = fashionFacts[Math.floor(Math.random() * fashionFacts.length)];
-                    reply = `W modzie teraz królują odważne nadruki i streetwear. 🎨 Ciekawostka: ${fact}`;
-                } 
-                // Mix&match
-                else if (lower.includes("co założyć") || lower.includes("dopasuj") || lower.includes("outfit")) {
-                    const suggestions = products.filter(p => p.category === "nowości").slice(0,2).map(p => `${p.name}`).join(" + ");
-                    reply = `Polecam zestaw: ${suggestions}. 👕 To wygląda świetnie razem i pasuje do casual streetwear!`;
-                } 
-                // Prezent / płeć
-                else if (lower.includes("dla chłopaka") || lower.includes("dla dziewczyny") || lower.includes("na prezent")) {
-                    const suggestion = products[Math.floor(Math.random() * products.length)];
-                    reply = `Idealnie na prezent: ${suggestion.name} (${suggestion.material}) – ${suggestion.styleTip} 🎁`;
-                }
-                // Koszyk
-                else if (lower.includes("koszyk") || lower.includes("koszyka")) {
-                    if (cart.length === 0) {
-                        reply = "Twój koszyk jest pusty. 🛒 Chcesz, żebym polecił Ci jakieś produkty?";
-                    } else {
-                        const cartItems = cart.map(item => `${item.name} (${item.quantity}x)`).join(", ");
-                        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                        reply = `W Twoim koszyku masz: ${cartItems}. Łączna kwota: ${total} zł. 💰`;
-                    }
-                }
-                // Pomoc
-                else if (lower.includes("pomoc") || lower.includes("help") || lower.includes("co potrafisz")) {
-                    reply = "Potrafię: 🛍️ Pokazać nowości, 💡 Doradzić w stylizacji, 👕 Pomóc dobrać outfit, 🎁 Polecić prezent, 🛒 Pokażę co masz w koszyku. O co chcesz zapytać?";
                 }
             }
 
+            // =======================
+            // Porady modowe i ciekawostki
+            // =======================
+            if (lower.includes("moda") || lower.includes("styl") || lower.includes("trend") || lower.includes("doradź")) {
+                const fact = fashionFacts[Math.floor(Math.random() * fashionFacts.length)];
+                reply = `W modzie teraz królują odważne nadruki i streetwear. 🎨 Ciekawostka: ${fact}`;
+            }
+
+            // =======================
+            // Mix & Match
+            // =======================
+            if (lower.includes("co założyć") || lower.includes("dopasuj") || lower.includes("outfit")) {
+                const suggestions = products.filter(p => p.category === "nowości").slice(0,2).map(p => `${p.name}`).join(" + ");
+                reply = `Polecam zestaw: ${suggestions}. 👕 Wygląda świetnie razem i pasuje do casual streetwear!`;
+            }
+
+            // =======================
+            // Prezent / płeć
+            // =======================
+            if (lower.includes("dla chłopaka") || lower.includes("dla dziewczyny") || lower.includes("na prezent")) {
+                const suggestion = products[Math.floor(Math.random() * products.length)];
+                reply = `Idealnie na prezent: ${suggestion.name} (${suggestion.material}) – ${suggestion.styleTip} 🎁`;
+            }
+
+            // =======================
+            // Blog
+            // =======================
+            if (lower.includes("blog") || lower.includes("artykuł")) {
+                const post = blogPosts[Math.floor(Math.random() * blogPosts.length)];
+                reply = `Polecam przeczytać: "${post.title}" – ${post.summary}. 📖`;
+            }
+
+            // =======================
+            // Projektuj
+            // =======================
+            if (lower.includes("projektuj") || lower.includes("stwórz projekt")) {
+                const template = projectTemplates[Math.floor(Math.random() * projectTemplates.length)];
+                reply = `W sekcji 'Projektuj' możesz stworzyć własny projekt. 🎨 Polecam szablon: ${template.name}. Opis: ${template.description}`;
+            }
+
+            // =======================
+            // Zbiórka
+            // =======================
+            if (lower.includes("zbiórka")) {
+                reply = `Oto info o zbiórkach: ${zbiórkaInfo.summary}. ❤️`;
+            }
+
+            // =======================
+            // Regulamin
+            // =======================
+            if (lower.includes("regulamin")) {
+                reply = `Regulamin sklepu: ${regulations.summary}. 📄`;
+            }
+
+            // =======================
+            // Kontakt
+            // =======================
+            if (lower.includes("kontakt")) {
+                reply = `Możesz się z nami skontaktować: 📧 ${contacts.email}, 📞 ${contacts.phone}`;
+            }
+
+            // Koszyk
+            if (lower.includes("koszyk") || lower.includes("koszyka")) {
+                if (cart.length === 0) {
+                    reply = "Twój koszyk jest pusty. 🛒 Chcesz, żebym polecił Ci jakieś produkty?";
+                } else {
+                    const cartItems = cart.map(item => `${item.name} (${item.quantity}x)`).join(", ");
+                    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                    reply = `W Twoim koszyku masz: ${cartItems}. Łączna kwota: ${total} zł. 💰`;
+                }
+            }
+
+            // Pomoc
+            if (lower.includes("pomoc") || lower.includes("help") || lower.includes("co potrafisz")) {
+                reply = "Potrafię: 🛍️ Pokazać nowości, 💡 Doradzić w stylizacji, 👕 Pomóc dobrać outfit, 🎁 Polecić prezent, 📖 Blog, 🎨 Projektowanie, ❤️ Zbiórka, 📄 Regulamin, 📞 Kontakt, 🛒 Koszyk. O co chcesz zapytać?";
+            }
+
+            memory.history.push({ message, reply });
             return reply;
         }
 
@@ -1578,7 +1620,7 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        // ===== SYSTEM NAWIGACJI =====
+        // ===== RESZTA SYSTEMU SKLEPU (pozostaje bez zmian) =====
         function initNavigation() {
             const navButtons = document.querySelectorAll('.nav-btn');
             
@@ -1615,7 +1657,7 @@
             document.getElementById('navContainer').classList.toggle('show');
         }
 
-        // ===== SYSTEM PRODUKTÓW =====
+        // System produktów
         function initProductOptions() {
             document.addEventListener('click', function(e) {
                 if (e.target.classList.contains('color-option')) {
@@ -1648,7 +1690,7 @@
             });
         }
 
-        // ===== KOSZYK =====
+        // Koszyk
         function addToCart(name, price, image = null, size = null, color = null) {
             const existingIndex = cart.findIndex(item => 
                 item.name === name && 
@@ -1770,7 +1812,7 @@
             window.open(`https://wa.me/48604296360?text=${message}`);
         }
 
-        // ===== STUDIO PROJEKTOWE =====
+        // Studio projektowe
         function initDesignStudio() {
             canvas = new fabric.Canvas('designCanvas');
         }
@@ -1826,7 +1868,7 @@
             showNotification('🎨 Projekt zapisany!');
         }
 
-        // ===== POWIADOMIENIA =====
+        // Powiadomienia
         function showNotification(message) {
             const notification = document.createElement('div');
             notification.textContent = message;
@@ -1849,7 +1891,7 @@
             }, 3000);
         }
 
-        // ===== COOKIE CONSENT =====
+        // Cookie consent
         function initCookieConsent() {
             if (!localStorage.getItem('cookies_accepted')) {
                 document.getElementById('cookieConsent').style.display = 'block';
@@ -1875,4 +1917,4 @@
         window.sendChatMessage = sendChatMessage;
     </script>
 </body>
-</html>                    
+</html>
