@@ -435,6 +435,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
         
         .social-link:hover {
@@ -670,7 +671,7 @@
         .chatbot-toggle {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 90px;
             width: 60px;
             height: 60px;
             background: var(--color-gold);
@@ -684,6 +685,11 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             border: none;
             font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
         }
         
         .quick-replies {
@@ -825,7 +831,10 @@
             
             .chatbot-toggle {
                 bottom: 80px;
-                right: 20px;
+                right: 80px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
             }
         }
         
@@ -1237,9 +1246,9 @@
                         <p class="mb-4"><i class="fas fa-clock gold-text"></i> Pon-Pt: 9:00-17:00</p>
                         
                         <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
                         </div>
                     </div>
                     
@@ -1259,7 +1268,7 @@
 
     <!-- Chatbot -->
     <button class="chatbot-toggle" onclick="toggleChatbot()">
-        <i class="fas fa-robot"></i>
+        <i class="fas fa-comments"></i>
     </button>
 
     <div class="chatbot-container" id="chatbotContainer">
@@ -1337,9 +1346,9 @@
         </div>
         
         <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
         </div>
         
         <div class="mt-6">
