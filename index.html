@@ -112,6 +112,21 @@
             color: black;
         }
         
+        /* Menu mobilne */
+        .mobile-menu-btn {
+            display: none;
+            background: var(--color-gold);
+            color: black;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 0 auto 1rem;
+            width: 90%;
+            text-align: center;
+        }
+        
         /* Sekcje */
         section {
             display: none;
@@ -517,36 +532,20 @@
             animation: fadeIn 0.5s ease;
         }
         
-        /* Responsywność */
-        @media (max-width: 768px) {
-            .products-grid, .blog-posts, .reviews {
-                grid-template-columns: 1fr;
-            }
-            
-            #cartPanel {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .design-tools {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .nav-btn {
-                width: 80%;
-                margin: 0.3rem;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
+        /* Cookie consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            z-index: 1000;
+            display: none;
         }
-
+        
         /* Style dla przycisków w koszyku */
         .cart-buttons {
             display: flex;
@@ -578,19 +577,287 @@
             background: #25D366;
             color: white;
         }
-
-        /* Cookie consent */
-        .cookie-consent {
+        
+        /* ========== CHATBOT ========== */
+        .chatbot-container {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: #333;
-            color: white;
-            padding: 1rem;
-            text-align: center;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 2px solid var(--color-gold);
+        }
+        
+        .chatbot-container.open {
+            display: flex;
+        }
+        
+        .chatbot-header {
+            background: var(--color-gold);
+            color: black;
+            padding: 1rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 15px;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            align-self: flex-end;
+            background: var(--color-gold);
+            color: black;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.bot {
+            align-self: flex-start;
+            background: #f1f1f1;
+            color: #333;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+        }
+        
+        .chatbot-input button {
+            background: var(--color-gold);
+            color: black;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--color-gold);
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        .quick-replies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .quick-reply {
+            background: white;
+            border: 1px solid var(--color-gold);
+            color: var(--color-gold);
+            padding: 0.4rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-reply:hover {
+            background: var(--color-gold);
+            color: black;
+        }
+        
+        /* ========== RESPONSYWNOŚĆ ========== */
+        @media (max-width: 768px) {
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            /* Nawigacja mobilna */
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                display: none;
+                width: 100%;
+            }
+            
+            .nav-container.show {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 90%;
+                margin: 0.3rem;
+                text-align: center;
+            }
+            
+            /* Sekcje */
+            section {
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            
+            /* Produkty */
+            .product-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            /* Studio projektowe */
+            .design-studio {
+                padding: 1rem;
+            }
+            
+            .canvas-container {
+                padding: 0.5rem;
+            }
+            
+            .canvas-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .canvas-controls .nav-btn {
+                width: 90%;
+                margin: 0.3rem;
+            }
+            
+            /* Koszyk */
+            #cartIcon {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            #cartCount {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            /* Stopka */
+            footer {
+                padding: 2rem 1rem;
+            }
+            
+            .charity-section {
+                padding: 2rem 1rem;
+            }
+            
+            /* Chatbot */
+            .chatbot-container {
+                width: 100%;
+                height: 100%;
+                bottom: 0;
+                right: 0;
+                border-radius: 0;
+            }
+            
+            .chatbot-toggle {
+                bottom: 80px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            .product-title {
+                font-size: 1.1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .cart-buttons {
+                gap: 8px;
+            }
+            
+            .cart-buttons button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
         }
     </style>  
 </head>
@@ -814,8 +1081,6 @@
                         <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
                     </div>
                 </div>
-
-                <!-- Dodaj więcej produktów tutaj -->
             </div>
 
             <h3 class="text-2xl font-bold my-6 text-center gold-text">Bluzy</h3>
@@ -953,8 +1218,6 @@
                 
                 <h3 class="text-xl font-bold mb-4">§2 Zamówienia i płatności</h3>
                 <p class="mb-4">Realizacja zamówień odbywa się w ciągu 3-7 dni roboczych.</p>
-                
-                <!-- Dodaj więcej sekcji regulaminu -->
             </div>
         </section>
 
@@ -993,6 +1256,40 @@
             </div>
         </section>
     </main>
+
+    <!-- Chatbot -->
+    <button class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <span>Asystent AdelbertusShop</span>
+            <button onclick="toggleChatbot()" style="background: none; border: none; cursor: pointer;">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot">
+                Cześć! Jestem Twoim asystentem modowym. Jak mogę Ci pomóc? 😊
+            </div>
+            <div class="message bot">
+                Możesz zapytać mnie o: <strong>nowości, doradztwo stylowe, dodawanie do koszyka, lub poprosić o pomoc w doborze outfitu</strong>.
+            </div>
+        </div>
+        <div class="quick-replies" id="quickReplies">
+            <div class="quick-reply" onclick="sendQuickReply('Pokaż nowości')">Nowości</div>
+            <div class="quick-reply" onclick="sendQuickReply('Doradź mi styl')">Porada stylowa</div>
+            <div class="quick-reply" onclick="sendQuickReply('Co założyć?')">Dopasuj outfit</div>
+            <div class="quick-reply" onclick="sendQuickReply('Pokaż koszyk')">Koszyk</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeydown="handleChatInput(event)">
+            <button onclick="sendChatMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- Koszyk -->
     <div id="cartIcon">
@@ -1052,311 +1349,466 @@
     </footer>
 
     <script>
-// ===== SYSTEM SKLEPU =====
-let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-let canvas = null;
+        // ===== SYSTEM SKLEPU =====
+        let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+        let canvas = null;
+        let sessionMemory = {};
+        const sessionId = 'user_' + Date.now();
 
-// Inicjalizacja
-document.addEventListener('DOMContentLoaded', function() {
-    initNavigation();
-    initProductOptions();
-    initDesignStudio();
-    updateCart();
-    initCookieConsent();
-});
-
-// Nawigacja
-function initNavigation() {
-    const navButtons = document.querySelectorAll('.nav-btn');
-    
-    navButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            if (this.hasAttribute('data-section')) {
-                e.preventDefault();
-                
-                navButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                
-                const sectionId = this.getAttribute('data-section');
-                showSection(sectionId);
+        // Dane produktów dla chatbota
+        const products = [
+            {
+                id: 1,
+                name: "Koszulka Rebel",
+                price: 120,
+                category: "nowości",
+                material: "100% bawełna",
+                styleTip: "Idealna do jeansów i sneakersów",
+                image: "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
+            },
+            {
+                id: 2,
+                name: "Koszulka Vintage",
+                price: 120,
+                category: "klasyki",
+                material: "100% bawełna organiczna",
+                styleTip: "Doskonała do stylizacji retro",
+                image: "https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg"
+            },
+            {
+                id: 3,
+                name: "Bluza Urban",
+                price: 200,
+                category: "bluzy",
+                material: "Bawełna z domieszką poliestru",
+                styleTip: "Perfekcyjna na chłodniejsze dni",
+                image: "https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg"
             }
+        ];
+
+        const fashionFacts = [
+            "Streetwear narodził się w latach 90. w Kalifornii",
+            "Kolor czarny jest najpopularniejszy w modzie ulicznej",
+            "Oversize to trend, który nigdy nie wychodzi z mody",
+            "Wintage to nie tylko styl, to filozofia życia",
+            "Polskie projekty streetwear podbijają świat"
+        ];
+
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', function() {
+            initNavigation();
+            initProductOptions();
+            initDesignStudio();
+            updateCart();
+            initCookieConsent();
+            initChatbot();
         });
-    });
-    
-    document.getElementById('cartIcon').addEventListener('click', toggleCart);
-}
 
-function showSection(sectionId) {
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    document.getElementById(sectionId).classList.add('active');
-    
-    if (window.innerWidth <= 768) {
-        document.getElementById('navContainer').classList.remove('show');
-    }
-}
-
-function toggleMobileMenu() {
-    document.getElementById('navContainer').classList.toggle('show');
-}
-
-// System produktów
-function initProductOptions() {
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('color-option')) {
-            const options = e.target.closest('.color-options');
-            options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
+        // ===== SYSTEM CHATBOTA =====
+        function initChatbot() {
+            if (!sessionMemory[sessionId]) {
+                sessionMemory[sessionId] = { history: [], cart: [] };
+            }
         }
-        
-        if (e.target.classList.contains('size-option')) {
-            const options = e.target.closest('.size-options');
-            options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-            e.target.classList.add('selected');
+
+        function toggleChatbot() {
+            document.getElementById('chatbotContainer').classList.toggle('open');
         }
-        
-        if (e.target.classList.contains('add-to-cart-btn')) {
-            e.preventDefault();
-            const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
-            const image = e.target.getAttribute('data-image');
-            
-            const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
-            const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-            
-            const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-            const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-            
-            addToCart(name, price, image, size, color);
+
+        function sendQuickReply(message) {
+            document.getElementById('chatbotInput').value = message;
+            sendChatMessage();
         }
-    });
-}
 
-// Koszyk
-function addToCart(name, price, image = null, size = null, color = null) {
-    const existingIndex = cart.findIndex(item => 
-        item.name === name && 
-        item.size === size && 
-        item.color === color
-    );
-    
-    if (existingIndex >= 0) {
-        cart[existingIndex].quantity++;
-    } else {
-        cart.push({
-            name: name,
-            price: price,
-            quantity: 1,
-            image: image,
-            size: size,
-            color: color,
-            id: Date.now() + Math.random()
-        });
-    }
-    
-    updateCart();
-    showNotification('✅ Produkt dodany do koszyka');
-}
+        function handleChatInput(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
 
-function updateCart() {
-    const cartCount = document.getElementById('cartCount');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    
-    cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-    
-    cartItems.innerHTML = '';
-    
-    if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-        cartTotal.textContent = '0 zł';
-        document.getElementById('paypal-container').innerHTML = '';
-    } else {
-        let total = 0;
-        
-        cart.forEach((item, index) => {
-            total += item.price * item.quantity;
+        async function sendChatMessage() {
+            const input = document.getElementById('chatbotInput');
+            const message = input.value.trim();
             
-            const cartItem = document.createElement('div');
-            cartItem.className = 'cart-item';
-            cartItem.innerHTML = `
-                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                <div class="flex-1">
-                    <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × ${item.quantity}</div>
-                    ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                    ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
-                </div>
-                <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-            `;
+            if (!message) return;
+
+            // Dodaj wiadomość użytkownika do chatu
+            addMessageToChat(message, 'user');
+            input.value = '';
+
+            // Symulacja "pisania" bota
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message bot';
+            typingIndicator.innerHTML = '<i>Asystent pisze...</i>';
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+            // Wywołaj "API" chatbota
+            const reply = await processChatbotMessage(message);
             
-            cartItems.appendChild(cartItem);
-        });
-        
-        cartTotal.textContent = `${total.toFixed(2)} zł`;
-        renderPayPalButton();
-    }
-    
-    localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-}
+            // Usuń indicator pisania i dodaj odpowiedź
+            messagesContainer.removeChild(typingIndicator);
+            addMessageToChat(reply, 'bot');
+        }
 
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCart();
-}
+        async function processChatbotMessage(message) {
+            // Symulacja opóźnienia odpowiedzi
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
 
-function toggleCart() {
-    document.getElementById('cartPanel').classList.toggle('open');
-}
+            const lower = message.toLowerCase();
+            let reply = "Nie rozumiem. Spróbuj: 'pokaż nowości', 'doradź mi styl', 'dodaj do koszyka'.";
 
-function renderPayPalButton() {
-    const container = document.getElementById('paypal-container');
-    container.innerHTML = '';
-    
-    if (cart.length === 0) return;
-    
-    paypal.HostedButtons({
-        hostedButtonId: "L4639S4363CZE",
-    }).render("#paypal-container");
-}
+            // Nowości
+            if (lower.includes("nowości")) {
+                const newItems = products.filter(p => p.category === "nowości").map(p => `${p.name} (${p.price} zł)`).join(", ");
+                reply = `Oto nasze nowości: ${newItems}. Mogę doradzić, jak je nosić lub dodać do koszyka.`;
+            } 
+            // Dodawanie do koszyka
+            else {
+                const productMatch = products.find(p => lower.includes(p.name.toLowerCase()));
+                if (productMatch) {
+                    addToCart(productMatch.name, productMatch.price, productMatch.image);
+                    reply = `Dodałem ${productMatch.name} do koszyka! 💫 Materiał: ${productMatch.material}. Tip stylowy: ${productMatch.styleTip}`;
+                } 
+                // Porady modowe
+                else if (lower.includes("moda") || lower.includes("styl") || lower.includes("trend") || lower.includes("doradź")) {
+                    const fact = fashionFacts[Math.floor(Math.random() * fashionFacts.length)];
+                    reply = `W modzie teraz królują odważne nadruki i streetwear. 🎨 Ciekawostka: ${fact}`;
+                } 
+                // Mix&match
+                else if (lower.includes("co założyć") || lower.includes("dopasuj") || lower.includes("outfit")) {
+                    const suggestions = products.filter(p => p.category === "nowości").slice(0,2).map(p => `${p.name}`).join(" + ");
+                    reply = `Polecam zestaw: ${suggestions}. 👕 To wygląda świetnie razem i pasuje do casual streetwear!`;
+                } 
+                // Prezent / płeć
+                else if (lower.includes("dla chłopaka") || lower.includes("dla dziewczyny") || lower.includes("na prezent")) {
+                    const suggestion = products[Math.floor(Math.random() * products.length)];
+                    reply = `Idealnie na prezent: ${suggestion.name} (${suggestion.material}) – ${suggestion.styleTip} 🎁`;
+                }
+                // Koszyk
+                else if (lower.includes("koszyk") || lower.includes("koszyka")) {
+                    if (cart.length === 0) {
+                        reply = "Twój koszyk jest pusty. 🛒 Chcesz, żebym polecił Ci jakieś produkty?";
+                    } else {
+                        const cartItems = cart.map(item => `${item.name} (${item.quantity}x)`).join(", ");
+                        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                        reply = `W Twoim koszyku masz: ${cartItems}. Łączna kwota: ${total} zł. 💰`;
+                    }
+                }
+                // Pomoc
+                else if (lower.includes("pomoc") || lower.includes("help") || lower.includes("co potrafisz")) {
+                    reply = "Potrafię: 🛍️ Pokazać nowości, 💡 Doradzić w stylizacji, 👕 Pomóc dobrać outfit, 🎁 Polecić prezent, 🛒 Pokażę co masz w koszyku. O co chcesz zapytać?";
+                }
+            }
 
-function sendOrderEmail() {
-    let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-    
-    cart.forEach((item, index) => {
-        emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-        if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
-        emailBody += '\n';
-    });
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-    emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-    emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-    
-    window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
-}
+            return reply;
+        }
 
-function sendOrderWhatsApp() {
-    let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-    
-    cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
-        if (item.size) message += ` (Rozmiar: ${item.size})`;
-        message += '%0A';
-    });
-    
-    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-    message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-    message += `Proszę o potwierdzenie zamówienia.`;
-    
-    window.open(`https://wa.me/48604296360?text=${message}`);
-}
+        function addMessageToChat(message, sender) {
+            const messagesContainer = document.getElementById('chatbotMessages');
+            const messageElement = document.createElement('div');
+            messageElement.className = `message ${sender}`;
+            messageElement.textContent = message;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
 
-// Studio projektowe
-function initDesignStudio() {
-    canvas = new fabric.Canvas('designCanvas');
-}
+        // ===== SYSTEM NAWIGACJI =====
+        function initNavigation() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.hasAttribute('data-section')) {
+                        e.preventDefault();
+                        
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        const sectionId = this.getAttribute('data-section');
+                        showSection(sectionId);
+                    }
+                });
+            });
+            
+            document.getElementById('cartIcon').addEventListener('click', toggleCart);
+        }
 
-function addText() {
-    const text = new fabric.IText('Twój tekst', {
-        left: 100,
-        top: 100,
-        fontFamily: 'Arial',
-        fill: '#000000',
-        fontSize: 20
-    });
-    canvas.add(text);
-}
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            
+            if (window.innerWidth <= 768) {
+                document.getElementById('navContainer').classList.remove('show');
+            }
+        }
 
-function addCustomText() {
-    const textInput = document.getElementById('textInput');
-    const colorPicker = document.getElementById('colorPicker');
-    
-    if (textInput.value.trim()) {
-        const text = new fabric.IText(textInput.value, {
-            left: 50,
-            top: 50,
-            fontFamily: 'Arial',
-            fill: colorPicker.value,
-            fontSize: 24
-        });
-        canvas.add(text);
-        textInput.value = '';
-    }
-}
+        function toggleMobileMenu() {
+            document.getElementById('navContainer').classList.toggle('show');
+        }
 
-function changeColor() {
-    const activeObject = canvas.getActiveObject();
-    const colorPicker = document.getElementById('colorPicker');
-    
-    if (activeObject) {
-        activeObject.set('fill', colorPicker.value);
-        canvas.renderAll();
-    }
-}
+        // ===== SYSTEM PRODUKTÓW =====
+        function initProductOptions() {
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('color-option')) {
+                    const options = e.target.closest('.color-options');
+                    options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+                
+                if (e.target.classList.contains('size-option')) {
+                    const options = e.target.closest('.size-options');
+                    options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                    e.target.classList.add('selected');
+                }
+                
+                if (e.target.classList.contains('add-to-cart-btn')) {
+                    e.preventDefault();
+                    const productCard = e.target.closest('.product-card');
+                    const name = e.target.getAttribute('data-name');
+                    const price = parseFloat(e.target.getAttribute('data-price'));
+                    const image = e.target.getAttribute('data-image');
+                    
+                    const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+                    const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
+                    
+                    const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+                    const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+                    
+                    addToCart(name, price, image, size, color);
+                }
+            });
+        }
 
-function clearCanvas() {
-    canvas.clear();
-}
+        // ===== KOSZYK =====
+        function addToCart(name, price, image = null, size = null, color = null) {
+            const existingIndex = cart.findIndex(item => 
+                item.name === name && 
+                item.size === size && 
+                item.color === color
+            );
+            
+            if (existingIndex >= 0) {
+                cart[existingIndex].quantity++;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    image: image,
+                    size: size,
+                    color: color,
+                    id: Date.now() + Math.random()
+                });
+            }
+            
+            updateCart();
+            showNotification('✅ Produkt dodany do koszyka');
+        }
 
-function saveDesign() {
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
-    });
-    
-    // Tutaj można zapisać projekt lub dodać do koszyka
-    showNotification('🎨 Projekt zapisany!');
-}
+        function updateCart() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = '';
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+                cartTotal.textContent = '0 zł';
+                document.getElementById('paypal-container').innerHTML = '';
+            } else {
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                        <div class="flex-1">
+                            <div class="font-bold">${item.name}</div>
+                            <div>${item.price} zł × ${item.quantity}</div>
+                            ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                            ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                    `;
+                    
+                    cartItems.appendChild(cartItem);
+                });
+                
+                cartTotal.textContent = `${total.toFixed(2)} zł`;
+                renderPayPalButton();
+            }
+            
+            localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+        }
 
-// Powiadomienia
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.textContent = message;
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.left = '50%';
-    notification.style.transform = 'translateX(-50%)';
-    notification.style.backgroundColor = '#d4af37';
-    notification.style.color = 'black';
-    notification.style.padding = '12px 24px';
-    notification.style.borderRadius = '30px';
-    notification.style.zIndex = '1000';
-    notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-    notification.style.fontWeight = 'bold';
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
-}
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
 
-// Cookie consent
-function initCookieConsent() {
-    if (!localStorage.getItem('cookies_accepted')) {
-        document.getElementById('cookieConsent').style.display = 'block';
-    }
-}
+        function toggleCart() {
+            document.getElementById('cartPanel').classList.toggle('open');
+        }
 
-function acceptCookies() {
-    localStorage.setItem('cookies_accepted', 'true');
-    document.getElementById('cookieConsent').style.display = 'none';
-}
+        function renderPayPalButton() {
+            const container = document.getElementById('paypal-container');
+            container.innerHTML = '';
+            
+            if (cart.length === 0) return;
+            
+            paypal.HostedButtons({
+                hostedButtonId: "L4639S4363CZE",
+            }).render("#paypal-container");
+        }
 
-// Globalne funkcje
-window.addToCart = addToCart;
-window.removeFromCart = removeFromCart;
-window.toggleCart = toggleCart;
-window.toggleMobileMenu = toggleMobileMenu;
-window.sendOrderEmail = sendOrderEmail;
-window.sendOrderWhatsApp = sendOrderWhatsApp;
-window.acceptCookies = acceptCookies;
+        function sendOrderEmail() {
+            let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+            
+            cart.forEach((item, index) => {
+                emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+                if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+                emailBody += '\n';
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+            
+            window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+        }
+
+        function sendOrderWhatsApp() {
+            let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+            
+            cart.forEach((item, index) => {
+                message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+                if (item.size) message += ` (Rozmiar: ${item.size})`;
+                message += '%0A';
+            });
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+            message += `Proszę o potwierdzenie zamówienia.`;
+            
+            window.open(`https://wa.me/48604296360?text=${message}`);
+        }
+
+        // ===== STUDIO PROJEKTOWE =====
+        function initDesignStudio() {
+            canvas = new fabric.Canvas('designCanvas');
+        }
+
+        function addText() {
+            const text = new fabric.IText('Twój tekst', {
+                left: 100,
+                top: 100,
+                fontFamily: 'Arial',
+                fill: '#000000',
+                fontSize: 20
+            });
+            canvas.add(text);
+        }
+
+        function addCustomText() {
+            const textInput = document.getElementById('textInput');
+            const colorPicker = document.getElementById('colorPicker');
+            
+            if (textInput.value.trim()) {
+                const text = new fabric.IText(textInput.value, {
+                    left: 50,
+                    top: 50,
+                    fontFamily: 'Arial',
+                    fill: colorPicker.value,
+                    fontSize: 24
+                });
+                canvas.add(text);
+                textInput.value = '';
+            }
+        }
+
+        function changeColor() {
+            const activeObject = canvas.getActiveObject();
+            const colorPicker = document.getElementById('colorPicker');
+            
+            if (activeObject) {
+                activeObject.set('fill', colorPicker.value);
+                canvas.renderAll();
+            }
+        }
+
+        function clearCanvas() {
+            canvas.clear();
+        }
+
+        function saveDesign() {
+            const dataURL = canvas.toDataURL({
+                format: 'png',
+                quality: 0.8
+            });
+            
+            showNotification('🎨 Projekt zapisany!');
+        }
+
+        // ===== POWIADOMIENIA =====
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.left = '50%';
+            notification.style.transform = 'translateX(-50%)';
+            notification.style.backgroundColor = '#d4af37';
+            notification.style.color = 'black';
+            notification.style.padding = '12px 24px';
+            notification.style.borderRadius = '30px';
+            notification.style.zIndex = '1000';
+            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+            notification.style.fontWeight = 'bold';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // ===== COOKIE CONSENT =====
+        function initCookieConsent() {
+            if (!localStorage.getItem('cookies_accepted')) {
+                document.getElementById('cookieConsent').style.display = 'block';
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted', 'true');
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+
+        // Globalne funkcje
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.toggleCart = toggleCart;
+        window.toggleMobileMenu = toggleMobileMenu;
+        window.sendOrderEmail = sendOrderEmail;
+        window.sendOrderWhatsApp = sendOrderWhatsApp;
+        window.acceptCookies = acceptCookies;
+        window.toggleChatbot = toggleChatbot;
+        window.sendQuickReply = sendQuickReply;
+        window.handleChatInput = handleChatInput;
+        window.sendChatMessage = sendChatMessage;
     </script>
 </body>
 </html>
