@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -52,32 +53,6 @@
         .gold-bg {
             background: var(--color-gold);
         }
-
-        /* ========== STYLE CHATBOTA ADELBERTUSBOT ========== */
-        #adelbertus-bot{position:fixed;left:18px;bottom:18px;width:360px;max-width:calc(100%-40px);height:520px;z-index:9999;display:flex;gap:12px;align-items:flex-end;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
-        #ab-quick-column{width:56px;background:rgba(0,0,0,0.65);color:#fff;border-radius:14px;padding:8px;display:flex;flex-direction:column;gap:8px;align-items:center;box-shadow:0 6px 18px rgba(0,0,0,0.25);backdrop-filter:blur(6px);}
-        .ab-quick-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;background:transparent;border:none;color:#fff;}
-        .ab-quick-btn:hover{transform:translateY(-3px);}
-        #ab-chat-panel{flex:1;height:100%;background:linear-gradient(180deg, rgba(255,255,255,0.98), #fbfbfb);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,0.18);display:flex;flex-direction:column;overflow:hidden;}
-        #ab-header{padding:12px 14px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #eee;}
-        #ab-header img{width:44px;height:44px;border-radius:8px;}
-        #ab-header .title{font-weight:700;font-size:15px;}
-        #ab-header .sub{font-size:12px;color:#666;}
-        #ab-messages{padding:12px;flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
-        .ab-msg{max-width:80%;padding:10px 12px;border-radius:10px;line-height:1.35;}
-        .ab-msg.bot{background:#111827;color:#fff;align-self:flex-start;border-bottom-left-radius:2px;}
-        .ab-msg.user{background:#f3f4f6;color:#111;align-self:flex-end;border-bottom-right-radius:2px;}
-        #ab-input{padding:10px;border-top:1px solid #eee;display:flex;gap:8px;align-items:center;background:#fff;}
-        #ab-input input[type="text"]{flex:1;padding:10px;border-radius:8px;border:1px solid #e5e7eb;}
-        #ab-input button{padding:10px 12px;border-radius:8px;border:none;background:#111827;color:#fff;cursor:pointer;}
-        .ab-chip{display:inline-block;padding:6px 10px;border-radius:20px;border:1px solid #eee;margin-right:6px;margin-top:6px;cursor:pointer;font-size:13px;background:#fff;}
-        .ab-chip:hover{transform:translateY(-2px);}
-        .ab-typing{width:46px;height:14px;display:flex;gap:4px;align-items:center;}
-        .ab-typing span{width:8px;height:8px;border-radius:50%;background:#fff;display:inline-block;opacity:0.25;animation:ab-blink 1s infinite;}
-        .ab-typing span:nth-child(2){animation-delay:0.15s;}
-        .ab-typing span:nth-child(3){animation-delay:0.3s;}
-        @keyframes ab-blink{0%{opacity:.25}50%{opacity:1}100%{opacity:.25}}
-        @media(max-width:640px){#adelbertus-bot{left:10px;right:10px;bottom:10px;width:auto;height:420px;}#ab-quick-column{display:none;}}
 
         /* STYLE DLA CHATBOTA */
         .chatbot-container {
@@ -1134,215 +1109,186 @@
     </style>  
 </head>
 <body> 
-    <!-- CHATBOT ADELBERTUSBOT -->
-<div id="adelbertus-bot" aria-live="polite" role="region" aria-label="Adelbertus chatbot">
-    <div id="ab-quick-column" title="Szybkie komendy">
-        <button class="ab-quick-btn" data-action="showNew" title="Nowości"><i class="fa-solid fa-star"></i></button>
-        <button class="ab-quick-btn" data-action="advice" title="Porada"><i class="fa-solid fa-hat-wizard"></i></button>
-        <button class="ab-quick-btn" data-action="design" title="Projektuj"><i class="fa-solid fa-paintbrush"></i></button>
-        <button class="ab-quick-btn" data-action="blog" title="Blog"><i class="fa-solid fa-blog"></i></button>
-        <button class="ab-quick-btn" data-action="charity" title="Zbiórka"><i class="fa-solid fa-hand-holding-heart"></i></button>
-        <button class="ab-quick-btn" data-action="cart" title="Koszyk"><i class="fa-solid fa-bag-shopping"></i></button>
-    </div>
-
-    <div id="ab-chat-panel">
-        <div id="ab-header">
-            <img src="https://i.ibb.co/W4535SP6/file-0000000060286246be561a660f50e99e-2.png" alt="Adelbertus logo">
-            <div>
-                <div class="title">AdelbertusBot — Asystent AdelbertusShop</div>
-                <div class="sub">Pomagam z wyborem, projektem i promocją kolekcji.</div>
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button pulse" onclick="toggleChatbot()" id="chatbotButton">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <span>🧠 Asystent Zakupowy Adelbertus</span>
+                <button class="chatbot-close" onclick="toggleChatbot()">×</button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <strong>👋 Witaj w Adelbertus Shop!</strong><br><br>
+                    Jestem Twoim asystentem zakupowym! Nie tylko odpowiem na pytania, ale <strong>pomogę Ci wybrać i zamówić produkty</strong>.<br><br>
+                    
+                    <strong>Co mogę dla Ciebie zrobić:</strong><br>
+                    • 🛒 Pomóc wybrać i dodać produkty do koszyka<br>
+                    • 📏 Doradzić w doborze rozmiaru<br>
+                    • 🎨 Pokazać dostępne wzory i kolory<br>
+                    • 🚀 Szybko złożyć zamówienie<br>
+                    • ❓ Odpowiedzieć na wszystkie pytania<br><br>
+                    
+                    <em>Napisz co Cię interesuje lub użyj szybkich przycisków poniżej!</em>
+                </div>
+            </div>
+            <div class="chatbot-typing" id="chatbotTyping">Asystent pisze...</div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeypress="handleChatbotInput(event)">
+                <button onclick="sendChatbotMessage()"><i class="fas fa-paper-plane"></i></button>
             </div>
         </div>
-
-        <div id="ab-messages" role="log" aria-live="polite"></div>
-
-        <div id="ab-input">
-            <input id="ab-user-input" type="text" placeholder="Napisz... (np. Pokaż nowości / Dodaj 'Zrzuć maskę' do koszyka)">
-            <button id="ab-send-btn">Wyślij</button>
-        </div>
     </div>
-</div>
 
-<!-- Chatbot -->
-<div class="chatbot-container">
-    <button class="chatbot-button pulse" onclick="toggleChatbot()" id="chatbotButton">
-        <i class="fas fa-robot"></i>
-    </button>
-    <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-            <span>🧠 Asystent Zakupowy Adelbertus</span>
-            <button class="chatbot-close" onclick="toggleChatbot()">×</button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <div class="message bot-message">
-                <strong>👋 Witaj w Adelbertus Shop!</strong><br><br>
-                Jestem Twoim asystentem zakupowym! Nie tylko odpowiem na pytania, ale <strong>pomogę Ci wybrać i zamówić produkty</strong>.<br><br>
-                
-                <strong>Co mogę dla Ciebie zrobić:</strong><br>
-                • 🛒 Pomóc wybrać i dodać produkty do koszyka<br>
-                • 📏 Doradzić w doborze rozmiaru<br>
-                • 🎨 Pokazać dostępne wzory i kolory<br>
-                • 🚀 Szybko złożyć zamówienie<br>
-                • ❓ Odpowiedzieć na wszystkie pytania<br><br>
-                
-                <em>Napisz co Cię interesuje lub użyj szybkich przycisków poniżej!</em>
-            </div>
-        </div>
-        <div class="chatbot-typing" id="chatbotTyping">Asystent pisze...</div>
-        <div class="chatbot-input">
-            <input type="text" id="chatbotInput" placeholder="Napisz wiadomość..." onkeypress="handleChatbotInput(event)">
-            <button onclick="sendChatbotMessage()"><i class="fas fa-paper-plane"></i></button>
-        </div>
+    <!-- Cookie Consent -->
+    <div id="cookieConsent" class="cookie-consent">
+        <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
+           <button onclick="acceptCookies()" class="nav-btn gold-bg" style="margin-left: 1rem;">Akceptuję</button>
+        </p>
     </div>
-</div>
 
-<!-- Cookie Consent -->
-<div id="cookieConsent" class="cookie-consent">
-    <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
-       <button onclick="acceptCookies()" class="nav-btn gold-bg" style="margin-left: 1rem;">Akceptuję</button>
-    </p>
-</div>
+    <!-- Nagłówek -->
+    <header>
+        <div class="logo">AdelbertusShop</div>
+        <p class="tagline">Tworzone z pasją, noszone z dumą</p>
+    </header>
 
-<!-- Nagłówek -->
-<header>
-    <div class="logo">AdelbertusShop</div>
-    <p class="tagline">Tworzone z pasją, noszone z dumą</p>
-</header>
-
-<!-- Nawigacja -->
-<nav>
-    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i> Menu</button>
-    <div class="nav-container" id="navContainer">
-        <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
-        <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-        <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
-        <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
-        <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
-        <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
-        <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
-        <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
-        <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
-        <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
-    </div>
-</nav>
-
-<!-- Sekcja główna -->
-<main>
-    <!-- Strona główna -->
-    <section id="home" class="active">
-        <div class="section-title">
-            <h2>Witaj w AdelbertusShop</h2>
-            <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
+    <!-- Nawigacja -->
+    <nav>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i> Menu</button>
+        <div class="nav-container" id="navContainer">
+            <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
+            <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
+            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
+            <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
+            <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
+            <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
+            <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
+            <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
+            <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
-        
-        <div class="charity-section">
-            <h3>Razem możemy więcej</h3>
-            <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
-            <button class="nav-btn gold-bg" style="margin-top: 1.5rem;" data-section="charity">Dowiedz się więcej</button>
-        </div>
-        
-        <div class="section-title">
-            <h3>Nie patrz, jeśli boisz się zmian. Nie kupuj, jeśli nie rozumiesz. To nie jest dla wszystkich.</h3>
-        </div>
-        
-        <div class="products-grid">
-            <div class="product-card fade-in">
-                <div class="product-image-container">
-                    <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">Koszulka "Rebel"</div>
-                    <div class="product-price">120 zł</div>
-                    
-                    <div class="product-options">
-                        <div class="option-group">
-                            <div class="option-title">Kolor:</div>
-                            <div class="color-options">
-                                <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="option-group">
-                            <div class="option-title">Rozmiar:</div>
-                            <div class="size-options">
-                                <div class="size-option selected" data-size="S">S</div>
-                                <div class="size-option" data-size="M">M</div>
-                                <div class="size-option" data-size="L">L</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-                </div>
+    </nav>
+   
+    <!-- Sekcja główna -->
+    <main>
+        <!-- Strona główna -->
+        <section id="home" class="active">
+            <div class="section-title">
+                <h2>Witaj w AdelbertusShop</h2>
+                <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
             </div>
             
-            <div class="product-card fade-in">
-                <div class="product-image-container">
-                    <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">Koszulka "Vintage"</div>
-                    <div class="product-price">120 zł</div>
-                    
-                    <div class="product-options">
-                        <div class="option-group">
-                            <div class="option-title">Kolor:</div>
-                            <div class="color-options">
-                                <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="option-group">
-                            <div class="option-title">Rozmiar:</div>
-                            <div class="size-options">
-                                <div class="size-option selected" data-size="S">S</div>
-                                <div class="size-option" data-size="M">M</div>
-                                <div class="size-option" data-size="L">L</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
-                </div>
+            <div class="charity-section">
+                <h3>Razem możemy więcej</h3>
+                <p>Każdy zakup to wsparcie dla Domu Dziecka "Promyk"</p>
+                <button class="nav-btn gold-bg" style="margin-top: 1.5rem;" data-section="charity">Dowiedz się więcej</button>
             </div>
             
-            <div class="product-card fade-in">
-                <div class="product-image-container">
-                    <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
-                </div>
-                <div class="product-info">
-                    <div class="product-title">Bluza "Urban"</div>
-                    <div class="product-price">200 zł</div>
-                    
-                    <div class="product-options">
-                        <div class="option-group">
-                            <div class="option-title">Kolor:</div>
-                            <div class="color-options">
-                                <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                                <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+            <div class="section-title">
+                <h3>Nie patrz, jeśli boisz się zmian. Nie kupuj, jeśli nie rozumiesz. To nie jest dla wszystkich.</h3>
+            </div>
+            
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Rebel"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
                             </div>
                         </div>
                         
-                        <div class="option-group">
-                            <div class="option-title">Rozmiar:</div>
-                            <div class="size-options">
-                                <div class="size-option selected" data-size="S">S</div>
-                                <div class="size-option" data-size="M">M</div>
-                                <div class="size-option" data-size="L">L</div>
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Koszulka "Vintage"</div>
+                        <div class="product-price">120 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
                             </div>
                         </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">Dodaj do koszyka</button>
                     </div>
-                    
-                    <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                </div>
+                
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Bluza "Urban"</div>
+                        <div class="product-price">200 zł</div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn" data-name="Bluza Urban" data-price="200" data-image="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg">Dodaj do koszyka</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>    
+        </section>        
   <!-- Sklep - ZAKTUALIZOWANY -->
 <section id="shop">
     <div class="section-title">
@@ -4066,7 +4012,7 @@ setInterval(typeLetter, 15000); // co 15s nowy list
     </footer>
 
     <script>
-        // ===== SYSTEM SKLEPU =====
+// ===== SYSTEM SKLEPU =====
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
 let chatHistory = [];
@@ -4081,318 +4027,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCookieConsent();
     initChatbot();
     initFAQ();
-    initAdelbertusBot(); // DODANE: Inicjalizacja nowego chatbota
 });
-
-// ===== CHATBOT ADELBERTUSBOT =====
-function initAdelbertusBot() {
-    const messagesEl = document.getElementById('ab-messages');
-    const userInput = document.getElementById('ab-user-input');
-    const sendBtn = document.getElementById('ab-send-btn');
-    const quickBtns = document.querySelectorAll('.ab-quick-btn');
-
-    // Inicjalna wiadomość powitalna
-    setTimeout(() => {
-        pushBot("Cześć! Jestem AdelbertusBot — Twój asystent zakupowy. 🤖 Pomogę Ci znaleźć produkty, dodać je do koszyka, lub odpowiedzieć na pytania. Co Cię interesuje?", [
-            {label: 'Pokaż nowości', cmd: 'showNew'},
-            {label: 'Poradź mi', cmd: 'advice'},
-            {label: 'Pokaż koszyk', cmd: 'showCart'}
-        ]);
-    }, 1000);
-
-    // Obsługa wysyłania wiadomości
-    sendBtn.addEventListener('click', handleAdelbertusInput);
-    userInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleAdelbertusInput();
-    });
-
-    // Obsługa szybkich przycisków
-    quickBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const action = e.currentTarget.getAttribute('data-action');
-            handleQuickAction(action);
-        });
-    });
-}
-
-function handleAdelbertusInput() {
-    const input = document.getElementById('ab-user-input');
-    const text = input.value.trim();
-    
-    if (text) {
-        pushUser(text);
-        input.value = '';
-        handleUserCommand(text);
-    }
-}
-
-function handleQuickAction(action) {
-    const actions = {
-        'showNew': 'Pokaż nowości',
-        'advice': 'Poradź mi co wybrać',
-        'design': 'Jak projektować?',
-        'blog': 'Pokaż blog',
-        'charity': 'O zbiórce',
-        'cart': 'Pokaż koszyk'
-    };
-    
-    pushUser(actions[action]);
-    handleUserCommand(actions[action]);
-}
-
-// ===== FUNKCJE CHATBOTA ADELBERTUSBOT =====
-function pushBot(msg, chips = []) {
-    const messagesEl = document.getElementById('ab-messages');
-    const el = document.createElement('div');
-    el.className = 'ab-msg bot';
-    el.innerHTML = '<div style="font-weight:600;margin-bottom:6px;">AdelbertusBot</div><div class="bot-text"></div>';
-    messagesEl.appendChild(el);
-    
-    const textEl = el.querySelector('.bot-text');
-    typeWrite(textEl, msg, () => {
-        if (chips.length) {
-            chips.forEach(c => {
-                const chip = document.createElement('span');
-                chip.className = 'ab-chip';
-                chip.textContent = c.label;
-                chip.setAttribute('data-cmd', c.cmd);
-                chip.addEventListener('click', () => handleUserCommand(c.cmd));
-                textEl.appendChild(chip);
-            });
-        }
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-    });
-}
-
-function pushUser(text) {
-    const messagesEl = document.getElementById('ab-messages');
-    const el = document.createElement('div');
-    el.className = 'ab-msg user';
-    el.textContent = text;
-    messagesEl.appendChild(el);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-}
-
-function typeWrite(target, text, cb) {
-    const typingBox = document.createElement('div');
-    typingBox.className = 'ab-typing';
-    typingBox.innerHTML = '<span></span><span></span><span></span>';
-    target.appendChild(typingBox);
-    
-    setTimeout(() => {
-        typingBox.remove();
-        target.innerHTML += sanitize(text).replace(/\n/g, '<br>');
-        cb && cb();
-    }, Math.min(1200 + text.length * 6, 2400));
-}
-
-function sanitize(s) {
-    return String(s).replace(/[<>]/g, '');
-}
-
-function handleUserCommand(text) {
-    if (!text) return;
-    
-    const t = text.toLowerCase();
-    
-    if (t.includes('nowo') || text === 'showNew') {
-        showNewArrivals();
-        return;
-    }
-    
-    if (t.includes('koszyk') || text === 'showCart') {
-        showCart();
-        return;
-    }
-    
-    if (t.startsWith('dodaj ') || t.includes('dodaj do koszyka') || t.includes('do koszyka')) {
-        const m = text.match(/dodaj\s+["']?(.+?)["']?\s*(do koszyka)?$/i);
-        const name = m ? m[1] : text.replace(/dodaj|do koszyka/gi, '').trim();
-        
-        if (!name) {
-            pushBot('Napisz nazwę produktu, np. Dodaj "Zrzuć maskę" do koszyka.');
-            return;
-        }
-        
-        const catalog = buildCatalogFromDOM();
-        const product = catalog.find(p => p.name.toLowerCase() === name.toLowerCase());
-        
-        if (product) {
-            addToCart(product, 1);
-            return;
-        }
-        
-        const fuzzy = catalog.find(p => p.name.toLowerCase().includes(name.toLowerCase()));
-        if (fuzzy) {
-            addToCart(fuzzy, 1);
-            return;
-        }
-        
-        pushBot(`Nie znalazłem produktu o nazwie "${name}". Sprawdź nazwę lub napisz "Pokaż nowości".`);
-        return;
-    }
-    
-    if (t.includes('porad') || text === 'advice') {
-        giveStyleAdvice(text);
-        return;
-    }
-    
-    if (t.includes('projekt') || text === 'design') {
-        explainDesigner();
-        return;
-    }
-    
-    if (t.includes('blog') || text === 'blog') {
-        showBlogSummary();
-        return;
-    }
-    
-    if (t.includes('zbiór') || text === 'charity') {
-        showCharity();
-        return;
-    }
-    
-    if (t.includes('wyczyść koszyk')) {
-        sessionStorage.removeItem(CART_KEY);
-        pushBot('Koszyk wyczyszczony.');
-        return;
-    }
-    
-    pushBot("Nie do końca złapałem — mogę: pokazać nowości, dodać produkt do koszyka, pomóc przy projekcie, polecić outfit lub pokazać blog. Napisz np. 'Pokaż nowości' albo wybierz przycisk.");
-}
-
-function buildCatalogFromDOM() {
-    const items = [];
-    document.querySelectorAll('.product-card').forEach(card => {
-        const nameBtn = card.querySelector('.add-to-cart-btn');
-        const name = nameBtn?.dataset?.name || (card.querySelector('.product-title')?.textContent || 'Produkt');
-        const priceText = nameBtn?.dataset?.price || (card.querySelector('.product-price')?.textContent || '');
-        const price = Number((priceText+'').replace(/[^0-9.,]/g,'').replace(',','.')) || null;
-        const img = nameBtn?.dataset?.image || card.querySelector('img')?.src || '';
-        const desc = card.querySelector('.product-description')?.textContent || '';
-        items.push({name: name.trim(), price, img, desc, element: card});
-    });
-    return items;
-}
-
-const CART_KEY = 'adelbertus_cart_v1';
-
-function loadCart() {
-    return JSON.parse(sessionStorage.getItem(CART_KEY) || '[]');
-}
-
-function saveCart(c) {
-    sessionStorage.setItem(CART_KEY, JSON.stringify(c));
-}
-
-function addToCart(item, qty = 1, opts = {}) {
-    const cart = loadCart();
-    const existing = cart.find(i => i.name === item.name && JSON.stringify(i.opts || {}) === JSON.stringify(opts));
-    
-    if (existing) existing.qty += qty;
-    else cart.push({...item, qty, opts});
-    
-    saveCart(cart);
-    pushBot(`Dodałem *${item.name}* do Twojego koszyka.`);
-}
-
-function showCart() {
-    const cart = loadCart();
-    if (!cart.length) {
-        pushBot("Twój koszyk jest pusty. Możesz dodać produkt wpisując: Dodaj <nazwa produktu> do koszyka.");
-        return;
-    }
-    
-    let text = '<b>Twój koszyk:</b><br>';
-    let total = 0;
-    cart.forEach(it => {
-        const price = Number(it.price) || 0;
-        total += price * it.qty;
-        text += `${it.qty} × ${it.name} — ${price || '—'} zł<br>`;
-    });
-    text += `<br><b>Suma: ${total} zł</b>`;
-    pushBot(text, [
-        {label: 'Przejdź do zamówienia', cmd: 'order'},
-        {label: 'Wyczyść koszyk', cmd: 'clearCart'}
-    ]);
-}
-
-function showNewArrivals() {
-    const catalog = buildCatalogFromDOM().slice(0,12);
-    if (!catalog.length) {
-        pushBot('Brak wykrytych produktów na stronie. Upewnij się, że produkty mają klasę .product-card.');
-        return;
-    }
-    
-    let text = '<b>Nowości i topy:</b><br>';
-    catalog.forEach((p,i) => {
-        text += `${i+1}. <b>${p.name}</b> — ${p.price || '—'} zł<br>`;
-    });
-    text += '<br>Chcesz, żebym dodał któryś do koszyka? Napisz: Dodaj "nazwa" do koszyka.';
-    pushBot(text, [
-        {label: 'Dodaj 1. do koszyka', cmd: `dodaj "${catalog[0].name}" do koszyka`},
-        {label: 'Pokaż koszyk', cmd: 'Pokaż koszyk'}
-    ]);
-}
-
-function giveStyleAdvice(text) {
-    const catalog = buildCatalogFromDOM();
-    const popular = catalog.find(p => /Rebel|Vintage|Urban/i.test(p.name)) || catalog[0];
-    const response = `Masz ochotę na outfit? Polecam połączenie prostoty i symboliki: weź *${popular.name}* (${popular.price || '—'} zł) + neutralną bluzę. Dla prezentu sugeruję zestaw z czapką.`;
-    pushBot(response, [
-        {label: 'Dodaj polecany do koszyka', cmd: `dodaj "${popular.name}" do koszyka`}
-    ]);
-}
-
-function showBlogSummary() {
-    const posts = [];
-    document.querySelectorAll('#blog .blog-post').forEach(bp => {
-        const t = bp.querySelector('h3')?.textContent || bp.querySelector('.blog-content h3')?.textContent;
-        const p = bp.querySelector('p')?.textContent || bp.querySelector('.blog-content p')?.textContent;
-        if (t) posts.push({title: t, summary: p || ''});
-    });
-    
-    if (!posts.length) {
-        pushBot('Brak wykrytych wpisów w sekcji Blog. Mogę pokazać ogólne tematy: trendy, stylizacje, inspiracje projektowe.');
-        return;
-    }
-    
-    let txt = '<b>Ostatnie wpisy:</b><br>';
-    posts.slice(0,5).forEach(p => txt += `<b>${p.title}</b> — ${p.summary || ''}<br>`);
-    pushBot(txt);
-}
-
-function explainDesigner() {
-    const msg = `Sekcja "Zaprojektuj" to kreator, w którym możesz: wybrać koszulkę/bluzę/czapkę, dodać obraz (PNG/JPG), napisać tekst, wybrać rozmiar i kolor, a potem dodać projekt do koszyka. U nas projekt to zamówienie specjalne — płatność i produkcja zakończone przez system sklepu. Chcesz, żebym pokazał szablony?`;
-    pushBot(msg, [
-        {label: 'Pokaż szablony', cmd: 'Szablony projektów'},
-        {label: 'Jak dodać grafikę?', cmd: 'Jak dodać grafikę do projektu?'}
-    ]);
-}
-
-function showCharity() {
-    const donors = Array.from(document.querySelectorAll('#charity #donorsList li')).map(li => li.textContent);
-    let text = '<b>Wspieramy Dom Dziecka "Promyk"</b><br>Każdy zakup pomaga. ';
-    if (donors.length) text += '<br><i>Ostatni darczyńcy:</i><br>' + donors.join('<br>');
-    pushBot(text);
-}
-
-// API dla chatbota
-window.AdelbertusBotAPI = {
-    addToCartByName: function(name, qty = 1) {
-        const catalog = buildCatalogFromDOM();
-        const item = catalog.find(p => p.name.toLowerCase() === name.toLowerCase());
-        if (!item) {
-            pushBot(`Nie znalazłem produktu "${name}". Sprawdź pisownię lub napisz "Pokaż nowości".`);
-            return;
-        }
-        addToCart(item, qty);
-    },
-    showCart: showCart,
-    getCatalog: function() {
-        return buildCatalogFromDOM();
-    }
-};
 
 // ===== ULEPSZONY CHATBOT =====
 function initChatbot() {
@@ -4401,7 +4036,6 @@ function initChatbot() {
     }, 500);
 }
 
-// ... RESZTA TWOJEGO ORYGINALNEGO KODU CHATBOTA I SKLEPU ...
 function toggleChatbot() {
     const chatbotWindow = document.getElementById('chatbotWindow');
     const chatbotButton = document.getElementById('chatbotButton');
@@ -4439,7 +4073,6 @@ function sendChatbotMessage() {
     }
 }
 
-// ... DALSZA CZĘŚĆ TWOJEGO ORYGINALNEGO KODU ...
 function processUserMessage(message) {
     const lowerMessage = message.toLowerCase();
     
@@ -4455,7 +4088,403 @@ function processUserMessage(message) {
         return;
     }
     
-    // ... RESZTA FUNKCJI CHATBOTA ...
+    // USUWANIE Z KOSZYKA
+    if (lowerMessage.includes('usuń') || lowerMessage.includes('usun') || lowerMessage.includes('wyjmij')) {
+        handleRemoveFromCartRequest(lowerMessage);
+        return;
+    }
+    
+    // PYTANIA O PRODUKTY
+    if (lowerMessage.includes('produkt') || lowerMessage.includes('koszulka') || lowerMessage.includes('bluza') || 
+        lowerMessage.includes('asortyment') || lowerMessage.includes('co masz')) {
+        showProductsInChat();
+        return;
+    }
+    
+    // PYTANIA O ROZMIARY
+    if (lowerMessage.includes('rozmiar') || lowerMessage.includes('rozmiaru') || lowerMessage.includes('size')) {
+        showSizeChart();
+        return;
+    }
+    
+    // PYTANIA O DOSTAWĘ
+    if (lowerMessage.includes('dostawa') || lowerMessage.includes('wysyłka') || lowerMessage.includes('czas') || lowerMessage.includes('kurier')) {
+        showShippingInfo();
+        return;
+    }
+    
+    // PYTANIA O PŁATNOŚCI
+    if (lowerMessage.includes('płatność') || lowerMessage.includes('płatności') || lowerMessage.includes('zapłać') || lowerMessage.includes('paypal')) {
+        showPaymentInfo();
+        return;
+    }
+    
+    // PYTANIA O ZWROTY
+    if (lowerMessage.includes('zwrot') || lowerMessage.includes('zwroty') || lowerMessage.includes('reklamacja')) {
+        showReturnPolicy();
+        return;
+    }
+    
+    // PYTANIA O MATERIAŁY
+    if (lowerMessage.includes('materiał') || lowerMessage.includes('skład') || lowerMessage.includes('bawełna')) {
+        showMaterialInfo();
+        return;
+    }
+    
+    // STANDARDOWE PYTANIA
+    const response = getChatbotResponse(message);
+    addMessageToChat(response, 'bot');
+    chatHistory.push({ role: 'bot', message: response, timestamp: new Date() });
+    
+    addQuickReplies();
+}
+
+function handleAddToCartRequest(message) {
+    const products = [
+        { name: 'Koszulka Rebel', price: 120, image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg' },
+        { name: 'Koszulka Vintage', price: 120, image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg' },
+        { name: 'Bluza Urban', price: 200, image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg' }
+    ];
+    
+    let matchedProduct = null;
+    
+    for (const product of products) {
+        if (message.includes(product.name.toLowerCase())) {
+            matchedProduct = product;
+            break;
+        }
+    }
+    
+    if (matchedProduct) {
+        addToCart(matchedProduct.name, matchedProduct.price, matchedProduct.image, 'M', 'Czarny');
+        
+        addMessageToChat(`✅ Dodano "${matchedProduct.name}" do koszyka! 🛒\n\nCena: ${matchedProduct.price} zł\nRozmiar: M (domyślny)\nKolor: Czarny (domyślny)\n\nChcesz zmienić rozmiar lub kolor?`, 'bot');
+        
+        showCartSummaryInChat();
+    } else {
+        addMessageToChat("Który produkt chcesz dodać do koszyka? 🛒", 'bot');
+        showProductsInChat(true);
+    }
+}
+
+function handleRemoveFromCartRequest(message) {
+    if (cart.length === 0) {
+        addMessageToChat("Twój koszyk jest pusty - nie ma nic do usunięcia! 🛒", 'bot');
+        return;
+    }
+    
+    showCartInChat(true);
+}
+
+function showCartInChat(showRemoveOptions = false) {
+    if (cart.length === 0) {
+        addMessageToChat("🛒 Twój koszyk jest pusty\n\nChcesz coś dodać? Sprawdź nasze produkty! 👇", 'bot');
+        showProductsInChat();
+        return;
+    }
+    
+    let message = "🛒 Zawartość Twojego koszyka:\n\n";
+    let total = 0;
+    
+    cart.forEach((item, index) => {
+        message += `• ${item.name}\n`;
+        message += `  Rozmiar: ${item.size || 'M'}\n`;
+        message += `  Kolor: ${item.color || 'Czarny'}\n`;
+        message += `  Ilość: ${item.quantity} × ${item.price} zł\n`;
+        message += `  Suma: ${item.quantity * item.price} zł\n\n`;
+        total += item.quantity * item.price;
+    });
+    
+    message += `💰 Łączna suma: ${total} zł\n\n`;
+    
+    if (showRemoveOptions) {
+        message += "Aby usunąć produkt, napisz 'usuń [nazwa produktu]'";
+    } else {
+        message += "Co chcesz zrobić dalej?";
+    }
+    
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">🛒 Zamów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Wyczyść koszyk', 'user'); setTimeout(() => processUserMessage('Wyczyść koszyk'), 500)">🗑️ Wyczyść koszyk</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showProductsInChat(showAddButtons = false) {
+    const products = [
+        { 
+            name: 'Koszulka "Rebel"', 
+            price: 120, 
+            image: 'https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg',
+            description: 'Bestseller! Unikalny wzór w stylu vintage'
+        },
+        { 
+            name: 'Koszulka "Vintage"', 
+            price: 120, 
+            image: 'https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg',
+            description: 'Klasyczny design inspirowany latami 90s'
+        },
+        { 
+            name: 'Bluza "Urban"', 
+            price: 200, 
+            image: 'https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg',
+            description: 'Idealna na chłodniejsze dni, premium quality'
+        }
+    ];
+    
+    let message = "🎨 Nasze produkty:\n\n";
+    
+    products.forEach(product => {
+        message += `🏷️ ${product.name}\n`;
+        message += `💰 ${product.price} zł\n`;
+        message += `📝 ${product.description}\n\n`;
+    });
+    
+    addMessageToChat(message, 'bot');
+    
+    if (showAddButtons) {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        
+        products.forEach(product => {
+            const productSuggestion = document.createElement('div');
+            productSuggestion.className = 'product-suggestion';
+            productSuggestion.innerHTML = `
+                <div class="product-name">${product.name}</div>
+                <div class="product-price">${product.price} zł</div>
+                <button onclick="addToCart('${product.name}', ${product.price}, '${product.image}', 'M', 'Czarny'); 
+                                  addMessageToChat('✅ Dodano ${product.name} do koszyka!', 'bot'); 
+                                  setTimeout(() => showCartSummaryInChat(), 800)">
+                    🛒 Dodaj do koszyka
+                </button>
+            `;
+            messagesContainer.appendChild(productSuggestion);
+        });
+        
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+}
+
+function showSizeChart() {
+    const sizeChart = `
+📏 Tabela rozmiarów (w cm):
+
+<table>
+<tr><th>Rozmiar</th><th>Klata</th><th>Długość</th><th>Rękaw</th></tr>
+<tr><td>S</td><td>48</td><td>70</td><td>20</td></tr>
+<tr><td>M</td><td>52</td><td>72</td><td>21</td></tr>
+<tr><td>L</td><td>56</td><td>74</td><td>22</td></tr>
+<tr><td>XL</td><td>60</td><td>76</td><td>23</td></tr>
+</table>
+
+💡 Porada: Zmierz swoją ulubioną koszulkę i porównaj z naszymi wymiarami!
+    `;
+    
+    addMessageToChat(sizeChart, 'bot');
+}
+
+function showShippingInfo() {
+    const shippingInfo = `
+🚚 Informacje o dostawie:
+
+• 📦 Darmowa dostawa od 200 zł
+• 🏪 Paczkomaty InPost - 14 zł
+• 🚚 Kurier DPD - 16 zł  
+• ⏰ Czas realizacji: 1-2 dni robocze
+• 📍 Wysyłka w całej Polsce
+
+📦 Zamówienia składane do 14:00 wysyłamy tego samego dnia!
+    `;
+    
+    addMessageToChat(shippingInfo, 'bot');
+}
+
+function showPaymentInfo() {
+    const paymentInfo = `
+💳 Metody płatności:
+
+• 🔵 PayPal (najszybsza opcja)
+• 💳 Karta kredytowa/debetowa
+• 📱 Przelew tradycyjny
+• 💰 Płatność przy odbiorze (dostawa kurierem)
+
+🛡️ Wszystkie płatności są bezpieczne i szyfrowane.
+    `;
+    
+    addMessageToChat(paymentInfo, 'bot');
+}
+
+function showReturnPolicy() {
+    const returnInfo = `
+📦 Polityka zwrotów:
+
+• 🔄 30 dni na zwrot bez podania przyczyny
+• 🆓 Darmowa wymiana na inny rozmiar
+• 📍 Zwroty przez Paczkomaty InPost
+• ✅ Produkt musi być nieprany z metkami
+
+❓ Masz problem z zamówieniem? Napisz do nas!
+    `;
+    
+    addMessageToChat(returnInfo, 'bot');
+}
+
+function showMaterialInfo() {
+    const materialInfo = `
+🧵 Materiały i jakość:
+
+👕 Koszulki:
+• 100% bawełna
+• Gramatura: 180g (idealna na nadruki)
+• Miękki, przewiewny materiał
+
+🧥 Bluzy:
+• 80% bawełna, 20% poliester  
+• Gramatura: 300g (super jakość)
+• Ciepłe i wygodne
+
+🎨 Nadruki:
+• Technologia DTF
+• Elastyczne i trwałe
+• Wytrzymują wiele prań
+    `;
+    
+    addMessageToChat(materialInfo, 'bot');
+}
+
+function showCartSummaryInChat() {
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    const itemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    let message = `🛒 Podsumowanie koszyka:\n\n`;
+    message += `📦 Liczba produktów: ${itemCount}\n`;
+    message += `💰 Łączna kwota: ${total} zł\n\n`;
+    
+    if (total >= 200) {
+        message += `🎉 Masz darmową dostawę!\n\n`;
+    } else {
+        const needed = 200 - total;
+        message += `🚚 Do darmowej dostawy brakuje: ${needed} zł\n\n`;
+    }
+    
+    message += `Co chcesz zrobić dalej?`;
+    
+    addMessageToChat(message, 'bot');
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const actionButtons = document.createElement('div');
+    actionButtons.className = 'suggestion-buttons';
+    actionButtons.innerHTML = `
+        <button class="suggestion-btn" onclick="addMessageToChat('Chcę złożyć zamówienie', 'user'); setTimeout(() => processUserMessage('Chcę złożyć zamówienie'), 500)">✅ Zamów teraz</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż koszyk', 'user'); setTimeout(() => processUserMessage('Pokaż koszyk'), 500)">🛒 Pokaż koszyk</button>
+        <button class="suggestion-btn" onclick="addMessageToChat('Pokaż produkty', 'user'); setTimeout(() => processUserMessage('Pokaż produkty'), 500)">📦 Więcej produktów</button>
+    `;
+    messagesContainer.appendChild(actionButtons);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function addMessageToChat(message, sender) {
+    const messagesContainer = document.getElementById('chatbotMessages');
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}-message`;
+    messageElement.innerHTML = message.replace(/\n/g, '<br>');
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function showTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'block';
+    document.getElementById('chatbotMessages').scrollTop = document.getElementById('chatbotMessages').scrollHeight;
+}
+
+function hideTypingIndicator() {
+    document.getElementById('chatbotTyping').style.display = 'none';
+}
+
+function addQuickReplies() {
+    const quickReplies = [
+        "🛒 Pokaż produkty",
+        "📏 Tabela rozmiarów", 
+        "🚚 Dostawa i płatności",
+        "🛍️ Pokaż koszyk",
+        "❓ Pomoc"
+    ];
+    
+    const messagesContainer = document.getElementById('chatbotMessages');
+    
+    const existingReplies = messagesContainer.querySelector('.quick-replies');
+    if (existingReplies) {
+        existingReplies.remove();
+    }
+    
+    const quickRepliesContainer = document.createElement('div');
+    quickRepliesContainer.className = 'quick-replies';
+    
+    quickReplies.forEach(reply => {
+        const button = document.createElement('button');
+        button.textContent = reply;
+        button.className = 'quick-reply-btn';
+        button.onclick = () => {
+            document.getElementById('chatbotInput').value = reply;
+            sendChatbotMessage();
+        };
+        quickRepliesContainer.appendChild(button);
+    });
+    
+    messagesContainer.appendChild(quickRepliesContainer);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function getChatbotResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // WITANIE
+    if (message.includes('cześć') || message.includes('hej') || message.includes('siema') || message.includes('witaj')) {
+        return "Cześć! 😊 Jak mogę Ci pomóc? Możesz zapytać o produkty, rozmiary, dostawę lub poprosić mnie o pomoc w zakupach!";
+    }
+    
+    // PYTANIA O KONKRETNE PRODUKTY
+    if (message.includes('rebel')) {
+        return "Koszulka 'Rebel' to nasz bestseller! 💥\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 100% bawełna\n\nChcesz dodać ją do koszyka?";
+    }
+    
+    if (message.includes('vintage')) {
+        return "Koszulka 'Vintage' - klasyk w stylu retro! 🕺\n• Cena: 120 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Idealna na codzienne noszenie\n\nInteresuje Cię ten model?";
+    }
+    
+    if (message.includes('urban') || message.includes('bluza')) {
+        return "Bluza 'Urban' - komfort i styl! 🧥\n• Cena: 200 zł\n• Kolory: czarny, biały, bordowy\n• Dostępne rozmiary: S-XXL\n• Materiał: 80% bawełna, 20% poliester\n\nPerfekcyjna na chłodniejsze dni!";
+    }
+    
+    // PYTANIA O ZAMÓWIENIE
+    if (message.includes('zamów') || message.includes('kup') || message.includes('chcę kupić')) {
+        return "Świetnie! 🎉 Możesz:\n1. Dodać produkty do koszyka przez chat\n2. Przejść do zakładki 'Sklep'\n3. Użyć szybkich przycisków poniżej\n\nKtóry produkt Cię interesuje?";
+    }
+    
+    // PYTANIA O POMOC
+    if (message.includes('pomoc') || message.includes('pomóż') || message.includes('co mogę')) {
+        return "Oczywiście! Pomogę Ci:\n• 🛒 Wybrać i dodać produkty do koszyka\n• 📏 Dobrać odpowiedni rozmiar\n• 🚀 Szybko złożyć zamówienie\n• ❓ Odpowiedzieć na wszystkie pytania\n\nOd czego zaczynamy?";
+    }
+    
+    // PODZIĘKOWANIA
+    if (message.includes('dziękuję') || message.includes('dzięki') || message.includes('thx')) {
+        return "Nie ma za co! 🤗 Cieszę się, że mogłem pomóc. Jeśli masz jeszcze pytania, śmiało pisz! Miłych zakupów! 🛍️";
+    }
+    
+    // POŻEGNANIA
+    if (message.includes('pa') || message.includes('do widzenia') || message.includes('koniec')) {
+        return "Do zobaczenia! 👋 Mam nadzieję, że jeszcze się spotkamy. Pamiętaj - zawsze tu jestem, żeby pomóc!";
+    }
+    
+    // DOMYŚLNA ODPOWIEDŹ
+    return "Przepraszam, nie jestem pewien co masz na myśli. 🤔 Możesz:\n• Zapytać o konkretny produkt\n• Poprosić o pomoc w zakupach\n• Sprawdzić rozmiary lub dostawę\n• Użyć szybkich przycisków poniżej\n\nJak mogę Ci pomóc?";
+}
 
 // ===== SYSTEM FAQ =====
 function initFAQ() {
@@ -4790,3 +4819,4 @@ window.toggleFAQ = toggleFAQ;
 </script>
 </body>
 </html>
+ 
