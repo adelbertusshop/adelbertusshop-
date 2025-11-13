@@ -180,29 +180,105 @@
             color: black;
         }
 
-        .quick-row { 
-            display:flex; 
-            gap:8px; 
-            flex-wrap:wrap; 
-            margin-top:8px; 
+        /* === ULEPSZONE STYLE PRZYCISKÓW ADELBERTUSBOT === */
+        .quick-rows-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .quick-row {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .quick { 
-            background: var(--color-dark); 
-            color: var(--color-gold); 
             padding:6px 8px; 
             border-radius:999px; 
             font-size:13px; 
             cursor:pointer; 
             border:none;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .quick:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        /* Główne przyciski akcji */
+        .quick-row.main-actions .quick {
             background: var(--color-gold);
             color: black;
-            transform: translateY(-1px);
+            border: none;
+            flex: 1;
+            min-width: 80px;
+            font-weight: 600;
+        }
+
+        .quick-row.main-actions .quick:hover {
+            background: var(--color-dark-gold);
+            transform: translateY(-2px);
+        }
+
+        /* Przyciski pomocnicze */
+        .quick-row.help-actions .quick {
+            background: var(--color-dark);
+            color: var(--color-gold);
+            border: 1px solid var(--color-gold);
+            flex: 1;
+            min-width: 70px;
+        }
+
+        .quick-row.help-actions .quick:hover {
+            background: var(--color-gold);
+            color: black;
+        }
+
+        /* Przyciski informacyjne */
+        .quick-row.info-actions .quick {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--color-dark);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            flex: 1;
+            min-width: 60px;
+            font-size: 0.75rem;
+        }
+
+        .quick-row.info-actions .quick:hover {
+            background: var(--color-gold);
+            color: black;
+            border-color: var(--color-gold);
+        }
+
+        /* Przyciski kontaktowe */
+        .quick-row.contact-actions .quick {
+            background: transparent;
+            color: #666;
+            border: 1px solid #ddd;
+            flex: 1;
+            min-width: 90px;
+            font-size: 0.75rem;
+        }
+
+        .quick-row.contact-actions .quick:hover {
+            background: #f8f9fa;
+            color: var(--color-dark);
+            border-color: var(--color-gold);
+        }
+
+        /* Ikony w przyciskach */
+        .quick i {
+            margin-right: 4px;
+            font-size: 0.8em;
         }
 
         .adel-typing { 
@@ -273,6 +349,23 @@
             background: #f0fdf4;
             color: #16a34a;
             border: 1px solid #bbf7d0;
+        }
+
+        /* Responsywność dla przycisków */
+        @media (max-width: 380px) {
+            .quick-row {
+                gap: 4px;
+            }
+            
+            .quick {
+                padding: 6px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .quick i {
+                margin-right: 2px;
+                font-size: 0.7em;
+            }
         }
 
         /* Designer Modal Styles */
@@ -1172,7 +1265,7 @@
     </style>  
 </head>
 <body>
-    <!-- Cookie Consent -->
+  <!-- Cookie Consent -->
 <div id="cookieConsent" class="cookie-consent">
     <p>Ta strona używa plików cookies dla zapewnienia najlepszej jakości usług. 
        <button onclick="acceptCookies()" class="nav-btn gold-bg" style="margin-left: 1rem;">Akceptuję</button>
@@ -1235,24 +1328,65 @@
       </div>
     </div>
 
-    <div class="quick-row" id="adel-quick">
-      <button class="quick" data-cmd="Pokaż nowości">Nowości</button>
-      <button class="quick" data-cmd="Doradź mi styl">Porada stylowa</button>
-      <button class="quick" data-cmd="Dopasuj outfit">Dopasuj outfit</button>
-      <button class="quick" data-cmd="Blog">Blog</button>
-      <button class="quick" data-cmd="Projektuj">Projektuj</button>
-      <button class="quick" data-cmd="Zbiórka">Zbiórka</button>
-      <button class="quick" data-cmd="Regulamin">Regulamin</button>
-      <button class="quick" data-cmd="Kontakt">Kontakt</button>
-      <button class="quick" data-cmd="Pokaż koszyk">Pokaż koszyk</button>
-      <button class="quick" data-cmd="Co potrafisz?">Co potrafisz?</button>
+    <!-- ULEPSZONE PRZYCISKI SZYBKIEJ ODPOWIEDZI -->
+    <div class="quick-rows-container" id="adel-quick">
+      <!-- Pierwszy rząd - główne akcje -->
+      <div class="quick-row main-actions">
+        <button class="quick quick-primary" data-cmd="Pokaż produkty">
+          <i class="fas fa-tshirt"></i> Produkty
+        </button>
+        <button class="quick quick-primary" data-cmd="Pokaż nowości">
+          <i class="fas fa-star"></i> Nowości
+        </button>
+        <button class="quick quick-primary" data-cmd="Pokaż koszyk">
+          <i class="fas fa-shopping-cart"></i> Koszyk
+        </button>
+      </div>
+
+      <!-- Drugi rząd - pomoc i doradztwo -->
+      <div class="quick-row help-actions">
+        <button class="quick quick-secondary" data-cmd="Doradź mi styl">
+          <i class="fas fa-magic"></i> Porada stylowa
+        </button>
+        <button class="quick quick-secondary" data-cmd="Dopasuj outfit">
+          <i class="fas fa-user-check"></i> Dopasuj outfit
+        </button>
+        <button class="quick quick-secondary" data-cmd="Co potrafisz?">
+          <i class="fas fa-question"></i> Pomoc
+        </button>
+      </div>
+
+      <!-- Trzeci rząd - kreator i informacje -->
+      <div class="quick-row info-actions">
+        <button class="quick quick-tertiary" data-cmd="Projektuj">
+          <i class="fas fa-paint-brush"></i> Projektuj
+        </button>
+        <button class="quick quick-tertiary" data-cmd="Blog">
+          <i class="fas fa-blog"></i> Blog
+        </button>
+        <button class="quick quick-tertiary" data-cmd="Zbiórka">
+          <i class="fas fa-heart"></i> Zbiórka
+        </button>
+      </div>
+
+      <!-- Czwarty rząd - regulamin i kontakt -->
+      <div class="quick-row contact-actions">
+        <button class="quick quick-contact" data-cmd="Regulamin">
+          <i class="fas fa-file-alt"></i> Regulamin
+        </button>
+        <button class="quick quick-contact" data-cmd="Kontakt">
+          <i class="fas fa-envelope"></i> Kontakt
+        </button>
+      </div>
     </div>
 
     <div style="height:8px"></div>
 
     <div class="composer" role="application">
       <input type="text" id="adel-input" placeholder="Napisz do AdelbertusBota: np. 'Dodaj Buntownik do koszyka'">
-      <button class="send-btn" id="adel-send">Wyślij</button>
+      <button class="send-btn" id="adel-send">
+        <i class="fas fa-paper-plane"></i> Wyślij
+      </button>
     </div>
   </div>
 </div>
@@ -1318,7 +1452,7 @@
       </div>
     </div>
   </div>
-</div>    
+</div>   
     <!-- Sekcja główna -->
     <main>
         <!-- Strona główna -->
@@ -4530,7 +4664,7 @@ window.toggleFAQ = toggleFAQ;
   const msgs = document.getElementById('adel-messages');
   const input = document.getElementById('adel-input');
   const sendBtn = document.getElementById('adel-send');
-  const quick = document.getElementById('adel-quick');
+  const quickRowsContainer = document.querySelector('.quick-rows-container');
   const cartCountEl = document.getElementById('adel-cart-count');
   const cartSumEl = document.getElementById('adel-cart-sum');
 
@@ -4553,6 +4687,23 @@ window.toggleFAQ = toggleFAQ;
     cartCountEl.textContent = cart.reduce((n,p) => n + (p.qty||1), 0);
     cartSumEl.textContent = (sum && sum>0) ? (sum + ' zł') : '0 zł';
     window.dispatchEvent(new CustomEvent('adelbertuscart:updated', { detail: { cart, sum } }));
+  }
+
+  // Nowa funkcja do obsługi przycisków
+  function initQuickButtons() {
+    const quickButtons = document.querySelectorAll('.quick[data-cmd]');
+    quickButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        const cmd = this.getAttribute('data-cmd');
+        userSend(cmd);
+        
+        // Dodaj efekt wizualny kliknięcia
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          this.style.transform = '';
+        }, 150);
+      });
+    });
   }
 
   // --- Improved product scanning ---
@@ -4819,13 +4970,6 @@ window.toggleFAQ = toggleFAQ;
   }
 
   // --- Event handlers ---
-  quick.addEventListener('click', (e) => {
-    const btn = e.target.closest('button[data-cmd]');
-    if(!btn) return;
-    const cmd = btn.getAttribute('data-cmd');
-    userSend(cmd);
-  });
-
   sendBtn.addEventListener('click', () => {
     const v = input.value.trim();
     if(!v) return;
@@ -4879,6 +5023,9 @@ window.toggleFAQ = toggleFAQ;
       });
       saveState();
     }
+    
+    // Inicjalizacja event listenerów dla wszystkich przycisków
+    initQuickButtons();
     
     // Auto-open if URL parameter
     if(location.search.includes('chat=1')) openBot();
@@ -5217,4 +5364,5 @@ window.addEventListener('adelbertus-add-to-cart', e => {
 </script>
 </body>
 </html>
+        
  
