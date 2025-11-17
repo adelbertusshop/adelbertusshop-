@@ -6,29 +6,6 @@
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
     
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s">
-    <meta property="og:description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Unikalne designy, najwyższa jakość, wsparcie domu dziecka.">
-    <meta property="og:image" content="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">
-    <meta property="og:url" content="https://adelbertusshop.pl">
-    <meta property="og:type" content="website">
-    
-    <!-- Schema.org Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "AdelbertusShop",
-        "description": "Ekskluzywna odzież vintage z lat 80s/90s. Unikalne projekty, najwyższa jakość wykonania.",
-        "url": "https://adelbertusshop.pl",
-        "logo": "https://adelbertusshop.pl/logo.png",
-        "sameAs": [
-            "https://facebook.com/adelbertusshop",
-            "https://instagram.com/adelbertusshop"
-        ]
-    }
-    </script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
@@ -86,103 +63,7 @@
             background: var(--color-accent-dark);
         }
 
-        /* ===== NOWE: SEKCJA ZOBACZ RÓWNIEŻ ===== */
-        .also-viewed-section {
-            margin: 4rem 0;
-            padding: 3rem 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-        }
-
-        .also-viewed-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .also-viewed-card {
-            background: var(--color-cream);
-            border-radius: 10px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
-        }
-
-        .also-viewed-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .also-viewed-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin: 0 auto 1rem;
-        }
-
-        /* ===== NOWE: TAGI PRODUKTÓW ===== */
-        .product-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .product-tag {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 20px;
-            padding: 0.3rem 0.8rem;
-            font-size: 0.75rem;
-            color: #666;
-            transition: all 0.3s ease;
-        }
-
-        .product-tag:hover {
-            background: var(--color-gold);
-            color: black;
-            border-color: var(--color-gold);
-        }
-
-        /* ===== NOWE: KATEGORIE SEO ===== */
-        .categories-nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin: 2rem 0;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .category-btn {
-            background: transparent;
-            border: 2px solid var(--color-gold);
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .category-btn:hover,
-        .category-btn.active {
-            background: var(--color-gold);
-            color: black;
-            transform: translateY(-2px);
-        }
-
-        /* ===== POPUP DODANIA DO KOSZYKA ===== */
+        /* ===== NOWE: POPUP DODANIA DO KOSZYKA ===== */
         .cart-popup {
             position: fixed;
             top: 50%;
@@ -246,7 +127,7 @@
             color: black;
         }
 
-        /* ===== SEKCJA REKOMENDACJI ===== */
+        /* ===== NOWE: SEKCJA REKOMENDACJI ===== */
         .recommendations-section {
             margin: 3rem 0;
             padding: 2rem 0;
@@ -287,6 +168,7 @@
 
         /* ===== ULEPSZENIA RESPONSYWNOŚCI ===== */
         @media (max-width: 768px) {
+            /* Większe przyciski na mobile */
             .nav-btn {
                 padding: 1.2rem 2rem;
                 font-size: 1.1rem;
@@ -301,6 +183,7 @@
                 min-height: 60px;
             }
 
+            /* Większe odstępy */
             section {
                 padding: 2rem 1rem;
             }
@@ -314,6 +197,7 @@
                 margin-bottom: 1rem;
             }
 
+            /* Lepsza nawigacja mobilna */
             .nav-container {
                 padding: 1rem 0;
             }
@@ -331,8 +215,9 @@
                 margin-bottom: 1rem;
             }
 
+            /* Formularze bardziej przyjazne na mobile */
             input, select, textarea {
-                font-size: 16px !important;
+                font-size: 16px !important; /* Zapobiega zoomowaniu w iOS */
                 min-height: 50px;
                 padding: 1rem !important;
             }
@@ -341,26 +226,18 @@
                 margin-bottom: 1.5rem;
             }
 
+            /* Większe checkboxy i radio */
             input[type="checkbox"], input[type="radio"] {
                 width: 20px;
                 height: 20px;
                 margin-right: 10px;
             }
 
+            /* Większe ikony */
             .social-link {
                 width: 50px;
                 height: 50px;
                 font-size: 1.3rem;
-            }
-
-            .categories-nav {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .category-btn {
-                width: 100%;
-                text-align: center;
             }
         }
 
@@ -447,7 +324,7 @@
             color: white;
         }
 
-        /* ===== POZOSTAŁE STYLE ===== */
+        /* ===== POZOSTAŁE STYLE (bez zmian) ===== */
         .product-image {
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -970,7 +847,7 @@
             margin-bottom: 1rem;
         }
 
-        /* STYLE DLA OPISÓW PRODUKTÓW */
+        /* NOWE STYLE DLA OPISÓW PRODUKTÓW */
         .product-benefits {
             background: #f8f9fa;
             border-radius: 8px;
@@ -1032,7 +909,7 @@
             line-height: 1.4;
         }
 
-        /* STYLE DLA OPINII PRZY PRODUKTACH */
+        /* NOWE STYLE DLA OPINII PRZY PRODUKTACH */
         .product-reviews {
             margin: 1rem 0;
             border-top: 1px solid #eee;
@@ -1435,7 +1312,7 @@
             border-top: 2px solid #eee;
         }
 
-        /* Sekcja bezpiecznych płatności w koszyku */
+        /* NOWE: Sekcja bezpiecznych płatności w koszyku */
         .secure-checkout {
             background: #d4edda;
             border: 1px solid #c3e6cb;
@@ -1522,10 +1399,6 @@
 
             .payment-icons {
                 justify-content: center;
-            }
-
-            .also-viewed-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
         }
 
@@ -1699,78 +1572,7 @@
     </style>  
 </head>
 <body> 
-    <!-- Schema.org Product Markup dla głównych produktów -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "Product",
-                "name": "Koszulka Rebel - Ekskluzywny design vintage",
-                "description": "Unikalna koszulka z limitowanej serii vintage 80s/90s. Najwyższa jakość bawełny, ekskluzywny print odporny na pranie. Część zysku wspiera dom dziecka.",
-                "brand": {
-                    "@type": "Brand",
-                    "name": "AdelbertusShop"
-                },
-                "offers": {
-                    "@type": "Offer",
-                    "priceCurrency": "PLN",
-                    "price": "120.00",
-                    "priceValidUntil": "2025-12-31",
-                    "availability": "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition",
-                    "url": "https://adelbertusshop.pl/produkt/koszulka-rebel-vintage"
-                },
-                "image": [
-                    "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg",
-                    "https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg"
-                ],
-                "sku": "REBEL-BLACK-001",
-                "mpn": "ADB2024001",
-                "category": "Odzież męska/Koszulki",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.8",
-                    "reviewCount": "47",
-                    "bestRating": "5"
-                }
-            },
-            {
-                "@type": "Product",
-                "name": "Koszulka Vintage - Autentyczny styl lat 90s",
-                "description": "Koszulka vintage inspirowana kulturą lat 90s. Premium cotton, retro design, idealna dla miłośników autentycznego stylu.",
-                "brand": {
-                    "@type": "Brand",
-                    "name": "AdelbertusShop"
-                },
-                "offers": {
-                    "@type": "Offer",
-                    "priceCurrency": "PLN",
-                    "price": "120.00",
-                    "priceValidUntil": "2025-12-31",
-                    "availability": "https://schema.org/InStock",
-                    "itemCondition": "https://schema.org/NewCondition",
-                    "url": "https://adelbertusshop.pl/produkt/koszulka-vintage-90s"
-                },
-                "image": [
-                    "https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg",
-                    "https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
-                ],
-                "sku": "VINTAGE-BLACK-001",
-                "mpn": "ADB2024002",
-                "category": "Odzież męska/Koszulki",
-                "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "4.7",
-                    "reviewCount": "32",
-                    "bestRating": "5"
-                }
-            }
-        ]
-    }
-    </script>
-
-    <!-- Popup dodania do koszyka -->
+    <!-- ===== NOWY POPUP DODANIA DO KOSZYKA ===== -->
     <div class="cart-popup-overlay" id="cartPopupOverlay"></div>
     <div class="cart-popup" id="cartPopup">
         <div style="font-size: 3rem; color: var(--color-gold); margin-bottom: 1rem;">✓</div>
@@ -1866,15 +1668,6 @@
                 <p>Nie znajdziesz go nigdzie indziej. Ten znak nie istnieje dla świata. Noszą go tylko ci, którzy wiedzą</p>
             </div>
             
-            <!-- SEO Friendly Categories -->
-            <div class="categories-nav">
-                <a href="#koszulki-vintage" class="category-btn active">Koszulki Vintage</a>
-                <a href="#bluzy-retro" class="category-btn">Bluzy Retro</a>
-                <a href="#czapki-80s" class="category-btn">Czapki 80s</a>
-                <a href="#akcesoria" class="category-btn">Akcesoria</a>
-                <a href="#limited-edition" class="category-btn">Limited Edition</a>
-            </div>
-            
             <!-- Sekcja metod płatności -->
             <div class="payment-methods">
                 <div class="secure-payment">
@@ -1901,14 +1694,14 @@
             </div>
             
             <div class="products-grid">
-                <!-- Produkt 1 - Koszulka Rebel -->
+                <!-- Produkt 1 -->
                 <div class="product-card fade-in">
                     <div class="product-image-container" onclick="openImageZoom('https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg')">
                         <div class="loading-spinner"></div>
                         <img 
                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Crect width='100%25' height='100%25' fill='%23f8f5f0'/%3E%3C/svg%3E" 
                             data-src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" 
-                            alt="Koszulka Rebel Vintage - przód - AdelbertusShop" 
+                            alt="Koszulka Rebel - przód" 
                             class="product-image"
                             loading="lazy"
                         >
@@ -1934,17 +1727,8 @@
                     </div>
                     
                     <div class="product-info">
-                        <div class="product-title">Koszulka "Rebel" - Limited Edition</div>
+                        <div class="product-title">Koszulka "Rebel"</div>
                         <div class="product-price">120 zł</div>
-                        
-                        <!-- Tagi produktu -->
-                        <div class="product-tags">
-                            <span class="product-tag">vintage</span>
-                            <span class="product-tag">koszulka</span>
-                            <span class="product-tag">limited edition</span>
-                            <span class="product-tag">retro</span>
-                            <span class="product-tag">designerska</span>
-                        </div>
                         
                         <div class="product-benefits">
                             <div class="benefits-title">Co z tego masz?</div>
@@ -1975,24 +1759,20 @@
                             </div>
                         </div>
                         
-                        <button class="add-to-cart-btn" 
-                                data-name="Koszulka Rebel - Limited Edition" 
-                                data-price="120" 
-                                data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
-                                onclick="updateProductMeta('Koszulka Rebel - Limited Edition | AdelbertusShop', 'Ekskluzywna koszulka vintage z limitowanej serii. Unikalny design, premium quality. Kup teraz!')">
+                        <button class="add-to-cart-btn" data-name="Koszulka Rebel" data-price="120" data-image="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">
                             <i class="fas fa-shopping-cart"></i> Dodaj do koszyka
                         </button>
                     </div>
                 </div>
                 
-                <!-- Produkt 2 - Koszulka Vintage -->
+                <!-- Produkt 2 -->
                 <div class="product-card fade-in">
                     <div class="product-image-container" onclick="openImageZoom('https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg')">
                         <div class="loading-spinner"></div>
                         <img 
                             src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='280' height='280' viewBox='0 0 280 280'%3E%3Crect width='100%25' height='100%25' fill='%23f8f5f0'/%3E%3C/svg%3E" 
                             data-src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" 
-                            alt="Koszulka Vintage 90s - przód - AdelbertusShop" 
+                            alt="Koszulka Vintage" 
                             class="product-image"
                             loading="lazy"
                         >
@@ -2018,17 +1798,8 @@
                     </div>
                     
                     <div class="product-info">
-                        <div class="product-title">Koszulka "Vintage" - Retro Style</div>
+                        <div class="product-title">Koszulka "Vintage"</div>
                         <div class="product-price">120 zł</div>
-                        
-                        <!-- Tagi produktu -->
-                        <div class="product-tags">
-                            <span class="product-tag">vintage</span>
-                            <span class="product-tag">koszulka</span>
-                            <span class="product-tag">retro</span>
-                            <span class="product-tag">90s</span>
-                            <span class="product-tag">design</span>
-                        </div>
                         
                         <div class="product-benefits">
                             <div class="benefits-title">Co z tego masz?</div>
@@ -2059,68 +1830,14 @@
                             </div>
                         </div>
                         
-                        <button class="add-to-cart-btn" 
-                                data-name="Koszulka Vintage - Retro Style" 
-                                data-price="120" 
-                                data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg"
-                                onclick="updateProductMeta('Koszulka Vintage - Retro Style | AdelbertusShop', 'Autentyczna koszulka vintage w stylu lat 90s. Premium quality, retro design. Zamów teraz!')">
+                        <button class="add-to-cart-btn" data-name="Koszulka Vintage" data-price="120" data-image="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg">
                             <i class="fas fa-shopping-cart"></i> Dodaj do koszyka
                         </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Sekcja "Zobacz także" -->
-            <div class="also-viewed-section">
-                <div class="section-title">
-                    <h2>Zobacz także</h2>
-                    <p>Inne produkty, które mogą Ci się spodobać</p>
-                </div>
-                
-                <div class="also-viewed-grid">
-                    <div class="also-viewed-card" onclick="scrollToProduct('Bluza Urban')">
-                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban Vintage - AdelbertusShop" class="also-viewed-image">
-                        <h4>Bluza "Urban"</h4>
-                        <div class="product-price" style="font-size: 1.1rem;">200 zł</div>
-                        <div class="product-tags" style="justify-content: center; margin: 0.5rem 0;">
-                            <span class="product-tag">bluza</span>
-                            <span class="product-tag">vintage</span>
-                        </div>
-                    </div>
-                    
-                    <div class="also-viewed-card" onclick="scrollToProduct('Czapka Vintage')">
-                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Czapka Vintage 80s - AdelbertusShop" class="also-viewed-image">
-                        <h4>Czapka "Vintage"</h4>
-                        <div class="product-price" style="font-size: 1.1rem;">80 zł</div>
-                        <div class="product-tags" style="justify-content: center; margin: 0.5rem 0;">
-                            <span class="product-tag">czapka</span>
-                            <span class="product-tag">80s</span>
-                        </div>
-                    </div>
-                    
-                    <div class="also-viewed-card" onclick="scrollToProduct('Torba Retro')">
-                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Torba Retro Vintage - AdelbertusShop" class="also-viewed-image">
-                        <h4>Torba "Retro"</h4>
-                        <div class="product-price" style="font-size: 1.1rem;">150 zł</div>
-                        <div class="product-tags" style="justify-content: center; margin: 0.5rem 0;">
-                            <span class="product-tag">torba</span>
-                            <span class="product-tag">retro</span>
-                        </div>
-                    </div>
-                    
-                    <div class="also-viewed-card" onclick="scrollToProduct('Koszulka Limited')">
-                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Koszulka Limited Edition - AdelbertusShop" class="also-viewed-image">
-                        <h4>Koszulka "Limited"</h4>
-                        <div class="product-price" style="font-size: 1.1rem;">140 zł</div>
-                        <div class="product-tags" style="justify-content: center; margin: 0.5rem 0;">
-                            <span class="product-tag">limited</span>
-                            <span class="product-tag">exclusive</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sekcja rekomendacji -->
+            <!-- ===== NOWA SEKCJA REKOMENDACJI ===== -->
             <div class="recommendations-section">
                 <div class="section-title">
                     <h2>Klienci kupili także…</h2>
@@ -2129,7 +1846,7 @@
                 
                 <div class="recommendations-grid">
                     <div class="recommendation-card">
-                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban Vintage - AdelbertusShop" class="recommendation-image">
+                        <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="recommendation-image">
                         <h4>Bluza "Urban"</h4>
                         <div class="product-price" style="font-size: 1.1rem;">200 zł</div>
                         <button class="add-to-cart-btn" style="margin-top: 1rem; padding: 0.8rem 1.5rem !important;" 
@@ -2139,7 +1856,7 @@
                     </div>
                     
                     <div class="recommendation-card">
-                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Czapka Vintage 80s - AdelbertusShop" class="recommendation-image">
+                        <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Czapka Vintage" class="recommendation-image">
                         <h4>Czapka "Vintage"</h4>
                         <div class="product-price" style="font-size: 1.1rem;">80 zł</div>
                         <button class="add-to-cart-btn" style="margin-top: 1rem; padding: 0.8rem 1.5rem !important;" 
@@ -2149,7 +1866,7 @@
                     </div>
                     
                     <div class="recommendation-card">
-                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Torba Retro Vintage - AdelbertusShop" class="recommendation-image">
+                        <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Torba Retro" class="recommendation-image">
                         <h4>Torba "Retro"</h4>
                         <div class="product-price" style="font-size: 1.1rem;">150 zł</div>
                         <button class="add-to-cart-btn" style="margin-top: 1rem; padding: 0.8rem 1.5rem !important;" 
@@ -2161,7 +1878,7 @@
             </div>
         </section>
 
-        <!-- Sekcja Checkout -->
+        <!-- ===== NOWA SEKCJA CHECKOUT ===== -->
         <section id="checkout">
             <div class="section-title">
                 <h2>Zamówienie</h2>
@@ -2293,49 +2010,9 @@
     </footer>
 
     <script>
-        // ===== FUNKCJE SEO I META TAGÓW =====
+        // ===== NOWE FUNKCJE DLA CLEAN CHECKOUT FLOW =====
 
-        // Aktualizacja meta tagów dla produktów
-        function updateProductMeta(title, description) {
-            document.title = title;
-            
-            // Update meta description
-            let metaDesc = document.querySelector('meta[name="description"]');
-            if (!metaDesc) {
-                metaDesc = document.createElement('meta');
-                metaDesc.name = 'description';
-                document.head.appendChild(metaDesc);
-            }
-            metaDesc.content = description;
-            
-            // Update Open Graph
-            updateOpenGraph(title, description);
-        }
-
-        function updateOpenGraph(title, description) {
-            const ogTitle = document.querySelector('meta[property="og:title"]');
-            const ogDesc = document.querySelector('meta[property="og:description"]');
-            
-            if (ogTitle) ogTitle.content = title;
-            if (ogDesc) ogDesc.content = description;
-        }
-
-        function updateProductMetaTags(productName, productDescription) {
-            const title = `${productName} | AdelbertusShop - Ekskluzywne Vintage`;
-            const description = `${productDescription} | Kup teraz w AdelbertusShop! Darmowa dostawa i wsparcie domu dziecka.`;
-            updateProductMeta(title, description);
-        }
-
-        // ===== FUNKCJE DLA ZOBACZ RÓWNIEŻ =====
-
-        function scrollToProduct(productName) {
-            // W rzeczywistej implementacji można dodać płynne przewijanie do produktu
-            alert(`Przechodzisz do produktu: ${productName}`);
-            // window.location.href = `#product-${productName.toLowerCase().replace(/\s+/g, '-')}`;
-        }
-
-        // ===== FUNKCJE DLA CLEAN CHECKOUT FLOW =====
-
+        // Popup po dodaniu do koszyka
         function showCartPopup() {
             document.getElementById('cartPopup').style.display = 'block';
             document.getElementById('cartPopupOverlay').style.display = 'block';
@@ -2348,12 +2025,14 @@
 
         function goToCheckout() {
             closeCartPopup();
-            toggleCart();
+            toggleCart(); // Zamknij panel koszyka
+            // Przejdź do sekcji checkout
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
             });
             document.getElementById('checkout').classList.add('active');
             
+            // Zaktualizuj nawigację
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
@@ -2389,14 +2068,15 @@
             }
             
             updateCart();
-            showCartPopup();
+            showCartPopup(); // POKAŻ POPUP PO DODANIU
         }
 
-        // ===== POZOSTAŁE FUNKCJE =====
+        // ===== POZOSTAŁE FUNKCJE (zoptymalizowane) =====
         document.addEventListener('DOMContentLoaded', function() {
             initLazyLoading();
             initProductGalleries();
             
+            // Inicjalizacja mobile menu
             if (window.innerWidth <= 768) {
                 document.getElementById('navContainer').style.display = 'none';
             }
@@ -2557,6 +2237,7 @@
         }
 
         function sendChatbotMessage() {
+            // Implementacja chatbota
             console.log('Wysyłanie wiadomości chatbota');
         }
 
