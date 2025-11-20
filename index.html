@@ -14,7 +14,36 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
-   
+   /* ŚWIĄTECZNE OZDODY */
+.snowflake {
+    position: fixed;
+    color: white;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+.christmas-header {
+    background: linear-gradient(rgba(200, 0, 0, 0.8), rgba(0, 100, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
+    border-bottom: 3px solid gold;
+}
+
+.christmas-greeting {
+    background: linear-gradient(45deg, #b30000, #006400);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 2px solid gold;
+}
         :root {
             --color-gold: #d4af37;
             --color-dark-gold: #b8941f;
@@ -1438,6 +1467,12 @@
         <div class="logo">AdelbertusShop</div>
         <p class="tagline">Tworzone z pasją, noszone z dumą</p>
     </header>
+ <!-- ŚWIĄTECZNE OZDODY -->
+<div id="snow-container"></div>
+<div class="christmas-greeting">
+    <h2>🎄 Wesołych Świąt Bożego Narodzenia! 🎅</h2>
+    <p>Życzymy radosnych chwil w gronie najbliższych!</p>
+</div>
 
     <!-- Nawigacja -->
     <nav>
@@ -4694,7 +4729,28 @@ window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
 </script>
+// ŚWIĄTECZNE OZDODY
+function createSnow() {
+    const snowContainer = document.getElementById('snow-container');
+    const snowflakes = ['❄️', '🎄', '⭐', '🎁'];
+    
+    for (let i = 0; i < 30; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        snowflake.textContent = snowflakes[Math.floor(Math.random() * snowflakes.length)];
+        snowflake.style.left = Math.random() * 100 + 'vw';
+        snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        snowflake.style.opacity = Math.random();
+        snowContainer.appendChild(snowflake);
+    }
+}
 
+// Dodaj świąteczny nagłówek
+document.querySelector('header').classList.add('christmas-header');
+
+// Uruchom śnieg
+createSnow();
+</script>
 <style>
 /* Dodatkowe style dla nowych funkcjonalności */
 .neon-glow {
