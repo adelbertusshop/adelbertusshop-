@@ -4264,12 +4264,132 @@
             <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
             <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
         </div>
-    </footer>
+        <script>
+/* assets/js/site-security.js - wklejony bezpośrednio */
+(function(){
+  'use strict';
 
-    <!-- DODANE: Skrypt zabezpieczeń -->
-    <script src="/assets/js/site-security.js"></script>
+  // CONFIG
+  var MIN_FORM_TIME_MS = 3000;
+  var MIN_REPEAT_MS = 5000;
+  var MAX_UPLOAD_BYTES = 5 * 1024 * 1024;
+  var ALLOWED_FILE_TYPES = ['image/jpeg','image/png','image/webp','image/svg+xml','application/pdf'];
 
-    <script>
+  // helper: sanitize text inputs (strip script tags)
+  function sanitizeText(str){
+    return str.replace(/<\s*script[\s\S]*?>[\s\S]*?<\s*\/\s*script\s*>/gi, '')
+              .replace(/javascript:/gi, '');
+  }
+
+  // attach to all forms
+  document.addEventListener('DOMContentLoaded', function(){
+    var forms = document.querySelectorAll('form');
+    forms.forEach(function(form, idx){
+      // add honeypot if none exists (hidden field that humans won't fill)
+      if(!form.querySelector('input[name="please_leave_empty"]')){
+        var hp = document.createElement('input');
+        hp.type = 'text';
+        hp.name = 'please_leave_empty';
+        hp.value = '';
+        hp.tabIndex = -1;
+        hp.style.display = 'none';
+        form.appendChild(hp);
+      }
+
+      // mark form load time
+      form.dataset.formLoadTime = Date.now();
+      form.dataset.lastSubmit = 0;
+
+      // on submit checks
+      form.addEventListener('submit', function(e){
+        try {
+          var now = Date.now();
+
+          // 1) honeypot check
+          var hpField = form.querySelector('input[name="please_leave_empty"]');
+          if(hpField && hpField.value && hpField.value.trim() !== ''){
+            e.preventDefault();
+            return false;
+          }
+
+          // 2) minimal time check
+          var loadedAt = parseInt(form.dataset.formLoadTime || '0', 10);
+          if(now - loadedAt < MIN_FORM_TIME_MS){
+            e.preventDefault();
+            alert('Proszę chwilę poczekać przed wysłaniem formularza.');
+            return false;
+          }
+
+          // 3) rate limit (client side)
+          var last = parseInt(form.dataset.lastSubmit || '0', 10);
+          if(now - last < MIN_REPEAT_MS){
+            e.preventDefault();
+            alert('Prosimy odczekać chwilę przed kolejnym wysłaniem.');
+            return false;
+          }
+
+          // 4) sanitize text inputs
+          var textareas = form.querySelectorAll('textarea, input[type="text"], input[type="search"]');
+          textareas.forEach(function(el){
+            el.value = sanitizeText(el.value || '');
+          });
+
+          // 5) validate files
+          var files = form.querySelectorAll('input[type="file"]');
+          for(var i=0;i<files.length;i++){
+            var finput = files[i];
+            if(finput.files && finput.files.length){
+              for(var j=0;j<finput.files.length;j++){
+                var f = finput.files[j];
+                if(f.size > MAX_UPLOAD_BYTES){
+                  e.preventDefault();
+                  alert('Plik ' + f.name + ' jest zbyt duży. Limit ' + (MAX_UPLOAD_BYTES/1024/1024) + ' MB.');
+                  return false;
+                }
+                if(ALLOWED_FILE_TYPES.indexOf(f.type) === -1){
+                  e.preventDefault();
+                  alert('Niedozwolony typ pliku: ' + f.name);
+                  return false;
+                }
+              }
+            }
+          }
+
+          // pass — set lastSubmit
+          form.dataset.lastSubmit = now.toString();
+          return true;
+        } catch(err){
+          console.error('Security client error', err);
+          // nie blokuj, jeżeli coś pójdzie nie tak — serwer i tak zweryfikuje
+          return true;
+        }
+      });
+    });
+
+    // basic anti-rapid-navigation (optional)
+    // block excessive XHR/fetch spams by overriding fetch/XHR to track rates (light)
+    (function(){
+      var lastCall = 0;
+      var minGap = 100; // ms
+      var _fetch = window.fetch;
+      if(_fetch){
+        window.fetch = function(){
+          var now = Date.now();
+          if(now - lastCall < minGap){
+            // drop it
+            return new Promise(function(resolve,reject){ reject(new Error('Too many requests')); });
+          }
+          lastCall = now;
+          return _fetch.apply(this, arguments);
+        };
+      }
+    })();
+
+  });
+
+})();
+</script>
+   
 // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
