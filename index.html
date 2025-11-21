@@ -3650,98 +3650,406 @@
                 </div>
             </div>
         </section>
+        <!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Studio Projektowe ADELBERTUS — Projektuj</title>
 
-<!-- Studio projektowe - ZMODYFIKOWANE -->
+  <!-- Tailwind (CDN quick usage) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font: Monoton + system fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome (icons użyte w markup) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous" />
+
+  <!-- Fabric.js (canvas + obiekty) -->
+  <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+
+  <style>
+    /* drobne poprawki stylów aby canvas lepiej się skalował */
+    #productBaseDisplay { max-width: 560px; margin: 0 auto; }
+    #currentProductImg { max-width: 100%; height: auto; display:block; }
+    /* zapewniam, że canvas dopasowuje się na środku obrazka */
+    #designCanvas { outline: none; }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+<!-- Studio projektowe - GOTOWY -->
 <section id="design" class="py-16 bg-black text-white relative">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-            <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
-        </div>
-        
-        <div class="flex flex-col lg:flex-row gap-8 relative">
-            
-            <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
-                
-                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                    <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
-                    
-                    <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                        <option value="tshirt" data-price="120">Koszulka (120 zł)</option>
-                        <option value="hoodie" data-price="200">Bluza (200 zł)</option>
-                        <option value="cap" data-price="99">Czapka (99 zł)</option>
-                    </select>
-                    
-                    <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                        <option value="S">S</option>
-                        <option value="M">M</option>
-                        <option value="L">L</option>
-                        <option value="XL">XL</option>
-                        <option value="XXL">XXL</option>
-                    </select>
-
-                    <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
-                    <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
-                </div>
-
-                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                    <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
-                    <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                    <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
-                    
-                    <div class="flex gap-3 mb-3">
-                        <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
-                            <option value="Impact">Impact (80s/90s)</option>
-                            <option value="Arial">Arial</option>
-                            <option value="Times New Roman">Times New Roman</option>
-                            <option value="Courier New">Courier New</option>
-                            <option value="Verdana">Verdana</option>
-                            <option value="Monoton">Monoton (Wymaga CSS)</option>
-                        </select>
-                        <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
-                    </div>
-                    
-                    <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
-                    <input type="color" id="textColor" value="#ffffff" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
-                </div>
-
-                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                    <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
-                    <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-                    <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full" onclick="document.getElementById('designImage').click()">
-                        <i class="fas fa-upload"></i> Wybierz własny obraz
-                    </button>
-                </div>
-
-            </div>
-            
-            <div class="canvas-area lg:w-2/3 flex flex-col items-center">
-                
-                <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-                    <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
-                    <canvas id="designCanvas" width="400" height="400" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></canvas>
-                </div>
-
-                <div class="canvas-controls flex justify-center space-x-4 mb-8">
-                    <button class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
-                    <button class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="clearCanvas()"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
-                    <button class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
-                </div>
-
-                <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
-                    <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
-                    
-                    <button class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="exportDesign()" title="Zapisz projekt jako obraz">
-                        <i class="fas fa-download"></i> Pobierz Projekt
-                    </button>
-                    <button class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
-                        <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
-                    </button>
-                </div>
-            </div>
-        </div>
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
+      <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
     </div>
-</section>     
+
+    <div class="flex flex-col lg:flex-row gap-8 relative">
+      <!-- Tools -->
+      <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+          <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
+
+          <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+            <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka (120 zł)</option>
+            <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza (200 zł)</option>
+            <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka (99 zł)</option>
+          </select>
+
+          <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+            <option value="S">S</option>
+            <option value="M" selected>M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+            <option value="XXL">XXL</option>
+          </select>
+
+          <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
+          <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
+        </div>
+
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+          <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
+          <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+          <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
+
+          <div class="flex gap-3 mb-3">
+            <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
+              <option value="Impact, Charcoal, sans-serif">Impact (80s/90s)</option>
+              <option value="Arial, Helvetica, sans-serif">Arial</option>
+              <option value="Times New Roman, Times, serif">Times New Roman</option>
+              <option value="Courier New, Courier, monospace">Courier New</option>
+              <option value="Verdana, Geneva, sans-serif">Verdana</option>
+              <option value="'Monoton', cursive">Monoton (Wymaga CSS)</option>
+            </select>
+            <input type="number" id="fontSize" value="36" min="10" max="200" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
+          </div>
+
+          <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
+          <input type="color" id="textColor" value="#000000" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
+        </div>
+
+        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+          <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
+          <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+          <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 rounded" onclick="document.getElementById('designImage').click()">
+            <i class="fas fa-upload"></i> Wybierz własny obraz
+          </button>
+        </div>
+      </div>
+
+      <!-- Canvas area -->
+      <div class="canvas-area lg:w-2/3 flex flex-col items-center">
+        <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+          <img id="currentProductImg"
+               src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
+               alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
+          <!-- fabric canvas will be initialized on this element -->
+          <canvas id="designCanvas" width="400" height="400" class="absolute z-20"></canvas>
+        </div>
+
+        <div class="canvas-controls flex justify-center space-x-4 mb-8">
+          <button id="deleteBtn" class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
+          <button id="clearBtn" class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
+          <button id="bringFrontBtn" class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-layer-group"></i> Na wierzch</button>
+        </div>
+
+        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+          <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
+
+          <button id="exportBtn" class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" title="Zapisz projekt jako obraz">
+            <i class="fas fa-download"></i> Pobierz Projekt
+          </button>
+          <button id="addToCartBtn" class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" title="Dodaj do koszyka">
+            <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // --- Inicjalizacja Fabric.js ---
+  const canvas = new fabric.Canvas('designCanvas', {
+    preserveObjectStacking: true,
+    backgroundColor: 'transparent',
+    selection: true,
+  });
+
+  // ustawienia początkowe
+  const productTypeEl = document.getElementById('productType');
+  const productColorEl = document.getElementById('productColor');
+  const currentPriceEl = document.getElementById('currentPrice');
+  const currentProductImg = document.getElementById('currentProductImg');
+  const productBaseDisplay = document.getElementById('productBaseDisplay');
+
+  function updatePriceAndImage() {
+    const sel = productTypeEl.selectedOptions[0];
+    const price = sel.dataset.price || '0';
+    const img = sel.dataset.img || '';
+    currentPriceEl.textContent = price + ' zł';
+    if (img) currentProductImg.src = img;
+  }
+
+  // odpowiedź na zmianę koloru podstawowego - ustaw kolor tła obrazka (imitacja koloru tkaniny)
+  productColorEl.addEventListener('input', (e) => {
+    currentProductImg.style.backgroundColor = e.target.value;
+  });
+
+  productTypeEl.addEventListener('change', updatePriceAndImage);
+  updatePriceAndImage();
+
+  // Dodawanie tekstu
+  document.getElementById('addTextBtn').addEventListener('click', () => {
+    const text = document.getElementById('designText').value.trim();
+    if (!text) {
+      alert('Wpisz tekst przed dodaniem.');
+      return;
+    }
+    const fontFamily = document.getElementById('fontFamily').value;
+    const fontSize = parseInt(document.getElementById('fontSize').value, 10) || 36;
+    const textColor = document.getElementById('textColor').value || '#000000';
+
+    const textbox = new fabric.Textbox(text, {
+      left: canvas.getWidth() / 2,
+      top: canvas.getHeight() / 2,
+      originX: 'center',
+      originY: 'center',
+      fontFamily: fontFamily,
+      fontSize: fontSize,
+      fill: textColor,
+      editable: true,
+      objectCaching: false,
+      cursorStyle: 'pointer',
+    });
+
+    canvas.add(textbox).setActiveObject(textbox);
+    canvas.requestRenderAll();
+  });
+
+  // Obsługa wgrywania obrazków - dodaje obraz na canvas jako obiekt
+  function handleImageUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function (f) {
+      fabric.Image.fromURL(f.target.result, function (img) {
+        // skaluj obraz jeśli za duży
+        const maxDim = Math.min(canvas.getWidth(), canvas.getHeight()) * 0.85;
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        img.set({
+          left: canvas.getWidth() / 2,
+          top: canvas.getHeight() / 2,
+          originX: 'center',
+          originY: 'center',
+          selectable: true,
+        });
+        img.scale(scale);
+        canvas.add(img).setActiveObject(img);
+        canvas.requestRenderAll();
+      }, { crossOrigin: 'anonymous' });
+    };
+    reader.readAsDataURL(file);
+    // reset input
+    e.target.value = '';
+  }
+  // wystaw funkcję globalnie bo markup korzysta
+  window.handleImageUpload = handleImageUpload;
+
+  // delete selected
+  document.getElementById('deleteBtn').addEventListener('click', () => {
+    const active = canvas.getActiveObjects();
+    if (!active.length) return alert('Brak zaznaczonego obiektu.');
+    active.forEach(o => canvas.remove(o));
+    canvas.discardActiveObject();
+    canvas.requestRenderAll();
+  });
+
+  // clear all (usuwa wszystkie obiekty na canvasie)
+  document.getElementById('clearBtn').addEventListener('click', () => {
+    if (!confirm('Na pewno chcesz usunąć wszystkie elementy z projektu?')) return;
+    canvas.getObjects().forEach(o => canvas.remove(o));
+    canvas.requestRenderAll();
+  });
+
+  // bring to front
+  document.getElementById('bringFrontBtn').addEventListener('click', () => {
+    const active = canvas.getActiveObject();
+    if (!active) return alert('Zaznacz obiekt, który chcesz przesunąć na wierzch.');
+    active.bringToFront();
+    canvas.requestRenderAll();
+  });
+
+  // Eksport projektu: łączy obraz podstawowy + warstwę canvas i pobiera plik PNG
+  document.getElementById('exportBtn').addEventListener('click', exportDesign);
+  async function exportDesign() {
+    try {
+      // przygotuj obrazek z canvas (przez toString)
+      const designDataUrl = canvas.toDataURL({ format: 'png', multiplier: 2 });
+
+      // wczytaj produktowy obraz podkładowy
+      const baseImg = await loadImage(currentProductImg.src);
+      // utwórz tymczasowe płótno i narysuj bazę + design
+      const w = baseImg.width;
+      const h = baseImg.height;
+      const tmp = document.createElement('canvas');
+      tmp.width = w;
+      tmp.height = h;
+      const ctx = tmp.getContext('2d');
+
+      // tło (kolor tkaniny) - pobierz styl backgroundColor z obrazka
+      const bg = window.getComputedStyle(currentProductImg).backgroundColor || '#ffffff';
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // narysuj produktowy obraz w pełnym rozmiarze
+      ctx.drawImage(baseImg, 0, 0, w, h);
+
+      // narysuj projekt (dopasowujemy rozmiar designCanvas do wielkości baseImg)
+      const designImg = await loadImage(designDataUrl);
+      // centralnie umieszczamy design w środku (dopasowujemy rozmiar designCanvas -> baseImg)
+      const scale = Math.min(w / canvas.width, h / canvas.height) * 0.95;
+      const dw = canvas.width * scale;
+      const dh = canvas.height * scale;
+      const dx = (w - dw) / 2;
+      const dy = (h - dh) / 2;
+      ctx.drawImage(designImg, dx, dy, dw, dh);
+
+      // pobierz finalny obraz
+      const finalDataUrl = tmp.toDataURL('image/png');
+
+      downloadDataUrl(finalDataUrl, `projekt_adelbertus_${Date.now()}.png`);
+    } catch (err) {
+      console.error(err);
+      alert('Błąd podczas eksportu projektu. Sprawdź konsolę.');
+    }
+  }
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = src;
+    });
+  }
+
+  function downloadDataUrl(dataUrl, filename) {
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+
+  // Dodaj do koszyka (lokalnie w localStorage) — zapisuje obraz projektu + metadane
+  document.getElementById('addToCartBtn').addEventListener('click', addToCartFromDesign);
+  async function addToCartFromDesign() {
+    try {
+      // generuj miniaturę tak jak w eksporcie (ale mniejsza)
+      const designDataUrl = canvas.toDataURL({ format: 'png', multiplier: 1.5 });
+      const baseImg = await loadImage(currentProductImg.src);
+      const tmp = document.createElement('canvas');
+      tmp.width = 800;
+      tmp.height = 800;
+      const ctx = tmp.getContext('2d');
+      ctx.fillStyle = window.getComputedStyle(currentProductImg).backgroundColor || '#ffffff';
+      ctx.fillRect(0, 0, tmp.width, tmp.height);
+      ctx.drawImage(baseImg, 0, 0, tmp.width, tmp.height);
+      const designImg = await loadImage(designDataUrl);
+      const scale = Math.min(tmp.width / canvas.width, tmp.height / canvas.height) * 0.9;
+      const dw = canvas.width * scale;
+      const dh = canvas.height * scale;
+      const dx = (tmp.width - dw) / 2;
+      const dy = (tmp.height - dh) / 2;
+      ctx.drawImage(designImg, dx, dy, dw, dh);
+      const thumb = tmp.toDataURL('image/png');
+
+      // przygotuj produktowy obiekt
+      const cartItem = {
+        id: 'projekt_' + Date.now(),
+        productType: productTypeEl.value,
+        size: document.getElementById('productSize').value,
+        baseColor: productColorEl.value,
+        price: parseFloat(productTypeEl.selectedOptions[0].dataset.price) || 0,
+        image: thumb,
+        createdAt: new Date().toISOString(),
+      };
+
+      // zapisz do localStorage
+      const cart = JSON.parse(localStorage.getItem('adelbertus_cart') || '[]');
+      cart.push(cartItem);
+      localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+
+      alert('Projekt dodany do koszyka lokalnego. (localStorage)');
+    } catch (err) {
+      console.error(err);
+      alert('Błąd przy dodawaniu do koszyka.');
+    }
+  }
+
+  // Ułatwienia: kliknięcie dwukrotne edytuje tekst
+  canvas.on('mouse:dblclick', function (opt) {
+    const target = opt.target;
+    if (target && target.type === 'textbox') {
+      target.enterEditing();
+      target.selectAll();
+    }
+  });
+
+  // reset rozmiaru canvas gdy okno się zmienia — skalujemy tylko wizualnie, oryginalne współrzędne pozostają (używamy CSS)
+  function fitCanvasToContainer() {
+    // chcemy aby canvas był kwadratem w produkcie; dopasuj wielkość DOM canvas
+    const container = productBaseDisplay;
+    const size = Math.min(container.clientWidth * 0.9, container.clientHeight * 0.9, 500);
+    const canvasEl = document.getElementById('designCanvas');
+    canvasEl.style.width = size + 'px';
+    canvasEl.style.height = size + 'px';
+    canvas.setWidth(400);
+    canvas.setHeight(400);
+    canvas.calcOffset();
+  }
+  window.addEventListener('resize', fitCanvasToContainer);
+  fitCanvasToContainer();
+
+  // Zapewnienie, że font Monoton jest dostępny dla fabric
+  document.fonts.ready.then(() => {
+    // redraw canvas to use new fonts
+    canvas.requestRenderAll();
+  });
+
+  // DEKORACYJNE: zapewnij 'selectable' dla obiektów i prostą kontrolę klawiatury
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'Delete' || e.key === 'Backspace') && canvas.getActiveObjects().length) {
+      canvas.getActiveObjects().forEach(o => canvas.remove(o));
+      canvas.discardActiveObject();
+      canvas.requestRenderAll();
+    }
+    // Ctrl/Cmd + D duplikuj
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
+      const active = canvas.getActiveObject();
+      if (active) {
+        active.clone((cloned) => {
+          cloned.set({ left: active.left + 10, top: active.top + 10 });
+          canvas.add(cloned);
+          canvas.requestRenderAll();
+        });
+      }
+    }
+  });
+
+  // Koniec skryptu
+</script>
+
+</body>
+</html>
+
 
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
