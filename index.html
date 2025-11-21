@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,37 @@
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
-   
+
+   /* ŚWIĄTECZNE OZDODY */
+.snowflake {
+    position: fixed;
+    color: white;
+    font-size: 20px;
+    pointer-events: none;
+    z-index: 9999;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+.christmas-header {
+    background: linear-gradient(rgba(200, 0, 0, 0.8), rgba(0, 100, 0, 0.8)), url('https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg');
+    border-bottom: 3px solid gold;
+}
+
+.christmas-greeting {
+    background: linear-gradient(45deg, #b30000, #006400);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 2px solid gold;
+}
         :root {
             --color-gold: #d4af37;
             --color-dark-gold: #b8941f;
@@ -1438,6 +1468,13 @@
         <div class="logo">AdelbertusShop</div>
         <p class="tagline">Tworzone z pasją, noszone z dumą</p>
     </header>
+ 
+ <!-- ŚWIĄTECZNE OZDODY -->
+<div id="snow-container"></div>
+<div class="christmas-greeting">
+    <h2>🎄 Wesołych Świąt Bożego Narodzenia! 🎅</h2>
+    <p>Życzymy radosnych chwil w gronie najbliższych!</p>
+</div>
 
     <!-- Nawigacja -->
     <nav>
@@ -1707,7 +1744,8 @@
                 </div>
             </div>
         </section>
-       <!-- Sklep - ZAKTUALIZOWANY -->
+
+        <!-- Sklep - ZAKTUALIZOWANY -->
         <section id="shop">
             <div class="section-title">
                 <h2>Nasze Produkty</h2>
@@ -3514,605 +3552,648 @@
                             </div>
                             <div class="benefit-item">
                                 <span class="benefit-icon">✓</span>
-                                <
-                <div class="product-options">
-                    <div class="option-group">
-                        <div class="option-title">Kolor:</div>
-                        <div class="color-options">
-                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                                <span>Wygodne noszenie</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="option-group">
-                        <div class="option-title">Rozmiar:</div>
-                        <div class="size-options">
-                            <div class="size-option selected" data-size="S">S</div>
-                            <div class="size-option" data-size="M">M</div>
-                            <div class="size-option" data-size="L">L</div>
-                            <div class="size-option" data-size="XL">XL</div>
+                        
+                        <!-- OPCJE PRODUKTU -->
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                    <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                    <div class="size-option" data-size="XL">XL</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- KONIEC OPCJE PRODUKTU -->
+                        
+                        <button class="add-to-cart-btn-enhanced" data-name='Czapka "Street"' data-price="99" data-image="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg">
+                            🛒 Dodaj do koszyka
+                        </button>
+                        
+                        <div class="product-tags">
+                            <span class="product-tag">czapka</span>
+                            <span class="product-tag">street</span>
+                            <span class="product-tag">urban</span>
                         </div>
                     </div>
                 </div>
                 
-                <button class="add-to-cart-btn-enhanced" data-name='Czapka "Street"' data-price="99" data-image="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg">
-                    🛒 Dodaj do koszyka
-                </button>
+                <div class="product-card fade-in">
+                    <div class="product-image-container">
+                        <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
+                        <div class="product-gallery">
+                            <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium - przód" class="gallery-thumb active" onclick="changeProductImage(this, this.closest('.product-card'))">
+                            <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Czapka Premium - tył" class="gallery-thumb" onclick="changeProductImage(this, this.closest('.product-card'))">
+                            <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Czapka Premium - detal" class="gallery-thumb" onclick="changeProductImage(this, this.closest('.product-card'))">
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Czapka "Premium"</div>
+                        <div class="product-price">99 zł</div>
+                        
+                        <div class="product-benefits">
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span>
+                                <span>Premium materials</span>
+                            </div>
+                            <div class="benefit-item">
+                                <span class="benefit-icon">✓</span>
+                                <span>Ekskluzywny design</span>
+                            </div>
+                        </div>
+                        
+                        <div class="product-options">
+                            <div class="option-group">
+                                <div class="option-title">Kolor:</div>
+                                <div class="color-options">
+                                    <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
+                                    <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
+                                    <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
+                                    <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="option-group">
+                                <div class="option-title">Rozmiar:</div>
+                                <div class="size-options">
+                                    <div class="size-option selected" data-size="S">S</div>
+                                    <div class="size-option" data-size="M">M</div>
+                                    <div class="size-option" data-size="L">L</div>
+                                    <div class="size-option" data-size="XL">XL</div>
+                                    <div class="size-option" data-size="XXL">XXL</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="nav-btn add-to-cart-btn-enhanced" data-name="Czapka Premium" data-price="99" data-image="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg">🛒 Dodaj do koszyka</button>
+                        
+                        <div class="product-tags">
+                            <span class="product-tag">czapka</span>
+                            <span class="product-tag">premium</span>
+                            <span class="product-tag">exclusive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- Studio projektowe - ZMODYFIKOWANE -->
+<section id="design" class="py-16 bg-black text-white relative">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
+            <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
+        </div>
+        
+        <div class="flex flex-col lg:flex-row gap-8 relative">
+            
+            <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
                 
-                <div class="product-tags">
-                    <span class="product-tag">czapka</span>
-                    <span class="product-tag">street</span>
-                    <span class="product-tag">urban</span>
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
+                    
+                    <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="tshirt" data-price="120">Koszulka (120 zł)</option>
+                        <option value="hoodie" data-price="200">Bluza (200 zł)</option>
+                        <option value="cap" data-price="99">Czapka (99 zł)</option>
+                    </select>
+                    
+                    <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+
+                    <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
+                    <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
+                </div>
+
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
+                    <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
+                    <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
+                    
+                    <div class="flex gap-3 mb-3">
+                        <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
+                            <option value="Impact">Impact (80s/90s)</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Times New Roman">Times New Roman</option>
+                            <option value="Courier New">Courier New</option>
+                            <option value="Verdana">Verdana</option>
+                            <option value="Monoton">Monoton (Wymaga CSS)</option>
+                        </select>
+                        <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
+                    </div>
+                    
+                    <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
+                    <input type="color" id="textColor" value="#ffffff" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
+                </div>
+
+                <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
+                    <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
+                    <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
+                    <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full" onclick="document.getElementById('designImage').click()">
+                        <i class="fas fa-upload"></i> Wybierz własny obraz
+                    </button>
+                </div>
+
+            </div>
+            
+            <div class="canvas-area lg:w-2/3 flex flex-col items-center">
+                
+                <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+                    <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
+                    <canvas id="designCanvas" width="400" height="400" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></canvas>
+                </div>
+
+                <div class="canvas-controls flex justify-center space-x-4 mb-8">
+                    <button class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
+                    <button class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="clearCanvas()"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
+                    <button class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
+                </div>
+
+                <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+                    <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
+                    
+                    <button class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="exportDesign()" title="Zapisz projekt jako obraz">
+                        <i class="fas fa-download"></i> Pobierz Projekt
+                    </button>
+                    <button class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
+                        <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
+</section>     
+
+<!-- 🎁 Sekcja Zbiórki FINALNA -->
+<section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
+    
+    <!-- Nagłówek -->
+    <div class="section-title text-center mb-10">
+        <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
+            [ UPLOAD NADZIEI // PROMYK ]
+        </h2>
+        <p class="text-lg italic mt-2 text-gray-300">
+            Jesteś częścią czegoś większego, niż Ty sam.  
+            (a przy okazji możesz być lepszy niż sąsiad 😉)
+        </p>
+    </div>
+
+    <!-- Sekcja emocji -->
+    <div class="text-center max-w-2xl mx-auto mb-10">
+        <h3 class="text-3xl font-bold mb-4">Twoja decyzja zmienia czyjeś życie</h3>
+        <p class="text-xl text-gray-200">
+            Każda złotówka = kawałek światła w ciemnym świecie.  
+            Nie musisz być bohaterem, wystarczy że klikniesz.
+        </p>
+    </div>
+    
+    <!-- Metody wsparcia -->
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+        <!-- BLIK -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">📱 BLIK TRANSFER</h4>
+            <div class="text-3xl font-mono font-bold text-green-400">573-939-925</div>
+            <p class="mt-2 text-sm">dopisz kod: <span class="font-bold">POMOC</span></p>
+        </div>
         
-        <div class="product-card fade-in">
-            <div class="product-image-container">
-                <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
-                <div class="product-gallery">
-                    <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium - przód" class="gallery-thumb active" onclick="changeProductImage(this, this.closest('.product-card'))">
-                    <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Czapka Premium - tył" class="gallery-thumb" onclick="changeProductImage(this, this.closest('.product-card'))">
-                    <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Czapka Premium - detal" class="gallery-thumb" onclick="changeProductImage(this, this.closest('.product-card'))">
-                </div>
+        <!-- PayPal -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">💳 PayPal</h4>
+            <a href="https://www.paypal.com/donate/?hosted_button_id=VG9UP4MTHHWYU" target="_blank" 
+               class="mt-4 inline-block bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
+                ➡️ Przekaż darowiznę
+            </a>
+        </div>
+        
+        <!-- Dary -->
+        <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
+            <h4 class="text-2xl font-bold mb-2">📦 Dary rzeczowe</h4>
+            <p>Tel: <span class="font-bold">604 296 360</span></p>
+            <p>Email: <span class="font-bold">mielniczukgrzegosz74@gmail.com</span></p>
+        </div>
+    </div>
+    
+    <!-- Lista darczyńców -->
+    <div class="donors-list mt-12 bg-black/30 p-6 rounded-xl border border-purple-800">
+        <h4 class="text-2xl font-bold mb-4">🔥 Ostatni, którzy dołączyli do gry:</h4>
+        <ul id="donorsList" class="space-y-2 text-green-300 font-mono"></ul>
+    </div>
+    
+    <!-- List od dzieci -->
+    <div class="bg-white/10 p-6 rounded-lg shadow-md mt-10 border-l-4 border-yellow-400">
+        <h4 class="text-2xl font-bold mb-4 text-yellow-300">✉️ List od dzieci z Domu Dziecka "Promyk"</h4>
+        <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
+    </div>
+</section>
+<!-- Partnerzy -->
+<section id="partners">
+    <div class="section-title">
+        <h2>Nasi Partnerzy</h2>
+        <p>Współpracujemy z najlepszymi</p>
+    </div>
+    <div class="partners-section">
+        <div class="partners-grid">
+            <!-- Partner 1: Old School Wojtek -->
+            <div class="partner-card">
+                <a href="https://oldschool-wwwojtek.vercel.app" target="_blank" class="partner-link">
+                    <img src="https://i.ibb.co/Jj0Kb3cX/Messenger-creation-4-E58-DEDD-81-B0-493-E-BB9-B-C22-CAD893-C8-E.jpg" 
+                         alt="Old School Wojtek" 
+                         class="partner-logo">
+                </a>
+                <h4>Old School Wojtek</h4>
+                <p>Partner strategiczny</p>
             </div>
-            <div class="product-info">
-                <div class="product-title">Czapka "Premium"</div>
-                <div class="product-price">99 zł</div>
-                
-                <div class="product-benefits">
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <span>Premium materials</span>
+            
+            <!-- Partner 2: Klaudia -->
+            <div class="partner-card">
+                <a href="https://klaudia-3hjx.vercel.app" target="_blank" class="partner-link">
+                    <img src="https://i.ibb.co/99S1K3JX/Messenger-creation-FCFB3-CFD-3-BEF-4-D84-90-A8-F6687-B85-EA08.jpg" 
+                         alt="Klaudia" 
+                         class="partner-logo">
+                </a>
+                <h4>Klaudia</h4>
+                <p>Partner kreatywny</p>
+            </div>
+            
+            <!-- Partner 3: Rafał -->
+            <div class="partner-card">
+                <a href="https://rafa-five-phi.vercel.app" target="_blank" class="partner-link">
+                    <img src="https://i.ibb.co/LDmgftTK/Messenger-creation-34-C98-E94-CF4-A-45-BC-A903-4785-C05-DC7-F2.jpg" 
+                         alt="Rafał" 
+                         class="partner-logo">
+                </a>
+                <h4>Rafał</h4>
+                <p>Partner rozwojowy</p>
+            </div>
+
+            <!-- Partner 4: Filipex Riman -->
+            <div class="partner-card">
+                <a href="https://www.pkt.pl/firma/firma-budowlana-filipex-riman-pisyrakiewicz-9515570" target="_blank" class="partner-link">
+                    <img src="https://i.ibb.co/Fb7bp4rJ/Messenger-creation-64952-AE2-821-C-4-CB0-817-B-2-D516-E67-B84-C.jpg" 
+                         alt="Filipex Riman" 
+                         class="partner-logo">
+                </a>
+                <h4>Filipex Riman</h4>
+                <p>Partner budowlany</p>
+            </div>
+
+            <!-- Partner 5: Maniek Przewozy -->
+            <div class="partner-card">
+                <a href="https://maniek-przewozy-przew-z.vercel.app" target="_blank" class="partner-link">
+                    <div class="partner-placeholder">
+                        <i class="fas fa-truck fa-3x"></i>
+                        <p>Maniek Przewozy</p>
                     </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">✓</span>
-                        <span>Ekskluzywny design</span>
-                    </div>
-                </div>
-                
-                <div class="product-options">
-                    <div class="option-group">
-                        <div class="option-title">Kolor:</div>
-                        <div class="color-options">
-                            <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" data-color="Biały"></div>
-                            <div class="color-option" style="background-color: #800020;" data-color="Bordowy"></div>
-                            <div class="color-option" style="background-color: #36454F;" data-color="Grafitowy"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="option-group">
-                        <div class="option-title">Rozmiar:</div>
-                        <div class="size-options">
-                            <div class="size-option selected" data-size="S">S</div>
-                            <div class="size-option" data-size="M">M</div>
-                            <div class="size-option" data-size="L">L</div>
-                            <div class="size-option" data-size="XL">XL</div>
-                            <div class="size-option" data-size="XXL">XXL</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <button class="nav-btn add-to-cart-btn-enhanced" data-name="Czapka Premium" data-price="99" data-image="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg">🛒 Dodaj do koszyka</button>
-                
-                <div class="product-tags">
-                    <span class="product-tag">czapka</span>
-                    <span class="product-tag">premium</span>
-                    <span class="product-tag">exclusive</span>
-                </div>
+                </a>
+                <h4>Maniek Przewozy</h4>
+                <p>Partner transportowy</p>
             </div>
         </div>
     </div>
 </section>
 
-        <!-- Studio projektowe - ZMODYFIKOWANE -->
-        <section id="design" class="py-16 bg-black text-white relative">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-                    <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
-                </div>
-                
-                <div class="flex flex-col lg:flex-row gap-8 relative">
-                    
-                    <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
-                        
-                        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                            <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
-                            
-                            <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                                <option value="tshirt" data-price="120">Koszulka (120 zł)</option>
-                                <option value="hoodie" data-price="200">Bluza (200 zł)</option>
-                                <option value="cap" data-price="99">Czapka (99 zł)</option>
-                            </select>
-                            
-                            <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
-
-                            <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
-                            <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
-                        </div>
-
-                        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                            <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
-                            <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-                            <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
-                            
-                            <div class="flex gap-3 mb-3">
-                                <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
-                                    <option value="Impact">Impact (80s/90s)</option>
-                                    <option value="Arial">Arial</option>
-                                    <option value="Times New Roman">Times New Roman</option>
-                                    <option value="Courier New">Courier New</option>
-                                    <option value="Verdana">Verdana</option>
-                                    <option value="Monoton">Monoton (Wymaga CSS)</option>
-                                </select>
-                                <input type="number" id="fontSize" value="36" min="10" max="100" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
-                            </div>
-                            
-                            <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
-                            <input type="color" id="textColor" value="#ffffff" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
-                        </div>
-
-                        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-                            <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
-                            <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-                            <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full" onclick="document.getElementById('designImage').click()">
-                                <i class="fas fa-upload"></i> Wybierz własny obraz
-                            </button>
-                        </div>
-
-                    </div>
-                    
-                    <div class="canvas-area lg:w-2/3 flex flex-col items-center">
-                        
-                        <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-                            <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
-                            <canvas id="designCanvas" width="400" height="400" class="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></canvas>
-                        </div>
-
-                        <div class="canvas-controls flex justify-center space-x-4 mb-8">
-                            <button class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
-                            <button class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="clearCanvas()"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
-                            <button class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
-                        </div>
-
-                        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
-                            <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
-                            
-                            <button class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="exportDesign()" title="Zapisz projekt jako obraz">
-                                <i class="fas fa-download"></i> Pobierz Projekt
-                            </button>
-                            <button class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" onclick="addToCartFromDesign()" title="Dodaj do koszyka">
-                                <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
-                            </button>
-                        </div>
-                    </div>
-                </div>
+<!-- O nas -->
+<section id="about">
+    <div class="section-title">
+        <h2>O Nas</h2>
+        <p>Poznaj historię naszej marki</p>
+    </div>
+    <div class="about-section">
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="https://via.placeholder.com/120x120/d4af37/fff?text=G" alt="Założyciel" class="team-avatar">
+                <h4>Grzegorz Mielniczuk</h4>
+                <p>Założyciel & CEO</p>
+                <p>Pasja do mody vintage od 2018 roku</p>
             </div>
-        </section>     
+            <div class="team-member">
+                <img src="https://via.placeholder.com/120x120/d4af37/fff?text=A" alt="Designer" class="team-avatar">
+                <h4>Anna Nowak</h4>
+                <p>Główny Designer</p>
+                <p>Tworzy niepowtarzalne wzory</p>
+            </div>
+            <div class="team-member">
+                <img src="https://via.placeholder.com/120x120/d4af37/fff?text=M" alt="Marketing" class="team-avatar">
+                <h4>Michał Kowalski</h4>
+                <p>Specjalista Marketingu</p>
+                <p>Dba o komunikację z klientami</p>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <!-- 🎁 Sekcja Zbiórki FINALNA -->
-        <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
+<!-- Sekcja Blog -->
+<section id="blog" class="py-16 bg-gradient-to-br from-purple-900 via-black to-red-900 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 z-0">
+        <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
+        <div class="absolute top-20 right-10 text-5xl font-bold opacity-20">💿</div>
+        <div class="absolute bottom-20 left-15 text-7xl font-bold opacity-20">🎤</div>
+        <div class="absolute bottom-10 right-5 text-6xl font-bold opacity-20">👖</div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-16">
+            <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
+                ADELBERTUS VINTAGE
+            </h2>
+            <p class="text-xl text-gray-300">Powrót do złotej ery mody: Disco 80s & Hip Hop 90s</p>
             
-            <!-- Nagłówek -->
-            <div class="section-title text-center mb-10">
-                <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
-                    [ UPLOAD NADZIEI // PROMYK ]
-                </h2>
-                <p class="text-lg italic mt-2 text-gray-300">
-                    Jesteś częścią czegoś większego, niż Ty sam.  
-                    (a przy okazji możesz być lepszy niż sąsiad 😉)
-                </p>
+            <div class="flex justify-center space-x-4 mt-6">
+                <a href="#" data-filter="disco" class="filter-btn px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-bold transition duration-300 hover:bg-yellow-400">🎧 DISCO</a>
+                <a href="#" data-filter="hiphop" class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-blue-400">👟 HIP HOP</a>
+                <a href="#" data-filter="streetwear" class="filter-btn px-4 py-2 bg-pink-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-pink-400">🕺 STREETWEAR</a>
+                <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
             </div>
+        </div>
+        
+        <!-- Treść bloga -->
+        <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3">
+                    <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
+                         alt="Disco Fashion 80s" 
+                         class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
+                    <div class="mt-4 text-center">
+                        <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
+                    <div class="text-gray-300 space-y-4">
+                        <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
+                        <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
+                            <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Jaskrawe, fluorescencyjne kolory</li>
+                                <li>Spodnie dresowe z białymi paskami</li>
+                                <li>Bluzy z logo wielkich marek</li>
+                                <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
+                            </ul>
+                        </div>
+                        <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
+                        <div class="flex items-center space-x-4 mt-6">
+                            <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
+                            <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
 
-            <!-- Sekcja emocji -->
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h3 class="text-3xl font-bold mb-4">Twoja decyzja zmienia czyjeś życie</h3>
-                <p class="text-xl text-gray-200">
-                    Każda złotówka = kawałek światła w ciemnym świecie.  
-                    Nie musisz być bohaterem, wystarczy że klikniesz.
-                </p>
+        <!-- Dodatkowe artykuły blogowe -->
+        <article data-tag="hiphop" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/3">
+                    <img src="https://i.ibb.co/HT3YHsmS/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg" 
+                         alt="Hip Hop Fashion 90s" 
+                         class="w-full h-64 object-cover rounded-xl border-4 border-blue-500 shadow-2xl">
+                    <div class="mt-4 text-center">
+                        <span class="inline-block px-3 py-1 bg-blue-500 text-white text-sm font-bold rounded-full">💎 CULTURAL HIP HOP</span>
+                    </div>
+                </div>
+                
+                <div class="md:w-2/3">
+                    <h3 class="text-3xl font-bold mb-4 text-blue-400">👑 LATA 90s: ZŁOTA ERA HIP HOPU I STREETWEARU</h3>
+                    <div class="text-gray-300 space-y-4">
+                        <p class="text-lg">Gdy <strong class="text-blue-400">baggy jeansy</strong> opadające poniżej pasa i koszulki flanelowe stały się uniformem pokolenia. To czasy FUBU, Karl Kani i kultowych Nike Air Force 1.</p>
+                        <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-400 mb-2">🎤 STYL GANGSTA RAP vs SKATER:</h4>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li>Jeansy baggy - im szersze, tym lepsze</li>
+                                <li>Koszulki oversize z logo zespołów</li>
+                                <li>Bluzy z kapturem - must have każdego fana</li>
+                                <li>Buty: Timberland lub Air Force 1</li>
+                            </ul>
+                        </div>
+                        <p><strong class="text-red-400">Polski streetwear</strong> lat 90s to kultowe targowiska: Stadion Dziesięciolecia, Jarmark Europa. "Abidasy", "Panasonice" - każdy chciał mieć oryginał, ale nosił podróbkę.</p>
+                        <div class="flex items-center space-x-4 mt-6">
+                            <span class="text-sm text-gray-400">📅 Epoka: 1990-1999</span>
+                            <span class="text-sm text-gray-400">🎵 Muzyka: Hip Hop, Gangsta Rap, G-Funk</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Galeria zdjęć -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+                <img src="https://i.ibb.co/b58Nxn0D/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg" 
+                     alt="Street Art 1" 
+                     class="w-full h-48 object-cover rounded-lg mb-4">
+                <p class="text-center text-gray-300 text-sm">🎨 Street Art - dusza ulicy lat 90s</p>
+            </div>
+            <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
+                <img src="https://i.ibb.co/gMxPjFmR/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg" 
+                     alt="Street Art 2" 
+                     class="w-full h-48 object-cover rounded-lg mb-4">
+                <p class="text-center text-gray-300 text-sm">✌️ Graffiti - głos pokolenia</p>
+            </div>
+        </div>
+
+        <!-- Sekcja opinii -->
+        <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
+            <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI I OPINIAMI KLIENTÓW</h3>
+            <div class="space-y-4">
+                <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
+                <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
+                <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
+                    🎤 Zostaw shoutout
+                </button>
             </div>
             
-            <!-- Metody wsparcia -->
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <!-- BLIK -->
-                <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-                    <h4 class="text-2xl font-bold mb-2">📱 BLIK TRANSFER</h4>
-                    <div class="text-3xl font-mono font-bold text-green-400">573-939-925</div>
-                    <p class="mt-2 text-sm">dopisz kod: <span class="font-bold">POMOC</span></p>
-                </div>
-                
-                <!-- PayPal -->
-                <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-                    <h4 class="text-2xl font-bold mb-2">💳 PayPal</h4>
-                    <a href="https://www.paypal.com/donate/?hosted_button_id=VG9UP4MTHHWYU" target="_blank" 
-                       class="mt-4 inline-block bg-yellow-400 text-black font-bold px-4 py-2 rounded-lg hover:bg-yellow-300 transition">
-                        ➡️ Przekaż darowiznę
-                    </a>
-                </div>
-                
-                <!-- Dary -->
-                <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
-                    <h4 class="text-2xl font-bold mb-2">📦 Dary rzeczowe</h4>
-                    <p>Tel: <span class="font-bold">604 296 360</span></p>
-                    <p>Email: <span class="font-bold">mielniczukgrzegosz74@gmail.com</span></p>
-                </div>
+            <div id="opinionsList" class="mt-8 space-y-4">
+                <!-- Opinie będą dodawane dynamicznie -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+    <div class="section-title">
+        <h2>Często Zadawane Pytania</h2>
+        <p>Znajdź odpowiedzi na swoje pytania</p>
+    </div>
+    <div class="faq-section">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Jak dobrać odpowiedni rozmiar?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Polecamy zmierzyć swoją ulubioną koszulkę i porównać wymiary z naszą tabelą rozmiarów dostępną w zakładce "Rozmiary".
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Jaki jest czas realizacji zamówienia?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Zamówienia realizujemy w ciągu 1-2 dni roboczych. Wysyłka następuje najpóźniej następnego dnia roboczego.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Czy mogę zwrócić produkt?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Tak, masz 30 dni na zwrot produktu. Warunkiem jest nienaruszony stan produktu z metkami.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Jakie metody płatności akceptujecie?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Akceptujemy PayPal, karty kredytowe/debetowe, przelewy bankowe, BLIK oraz płatność przy odbiorze.
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                Czy oferujecie darmową dostawę?
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Tak, oferujemy darmową dostawę dla zamówień powyżej 200 zł. Dla zamówień poniżej tej kwoty koszt dostawy to 14 zł.
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Regulamin -->
+<section id="regulations">
+    <div class="section-title">
+        <h2>Regulamin</h2>
+        <p>Zasady korzystania ze sklepu</p>
+    </div>
+    <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
+        <h2 class="text-4xl font-extrabold text-center text-yellow-400 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
+        
+        <h3 class="text-2xl font-bold text-gray-300 mt-6 mb-4 border-b border-gray-700 pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li><strong>Sprzedawca:</strong> Grzegosz Mielniczuk</li>
+            <li><strong>Forma działalności:</strong> Działalność nierejestrowana</li>
+            <li><strong>Adres do korespondencji:</strong> [UZUPEŁNIJ]</li>
+            <li><strong>E-mail kontaktowy:</strong> mielniczukgrzegosz74@gmail.com</li>
+            <li><strong>Telefon kontaktowy:</strong> 604 296 360</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
+        <p class="text-gray-400">Umowa sprzedaży zawierana jest po złożeniu zamówienia przez Klienta i potwierdzeniu przez Sprzedawcę.</p>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 3. Dostawa Towaru i Płatności</h3>
+        <ul class="list-disc list-inside space-y-3 text-gray-400">
+            <li><strong>Metody płatności:</strong> PayPal, przelew bankowy, BLIK</li>
+            <li><strong>Koszty dostawy:</strong> 14 zł (darmowa dostawa od 200 zł)</li>
+            <li><strong>Termin dostawy:</strong> 3-7 dni roboczych</li>
+        </ul>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 4. Odstąpienie od Umowy</h3>
+        <p class="text-gray-400">Klient ma prawo odstąpić od umowy w terminie 14 dni bez podania przyczyny.</p>
+
+        <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 5. Reklamacje Towaru</h3>
+        <p class="text-gray-400">Reklamacje można składać mailowo lub telefonicznie. Rozpatrujemy je w ciągu 14 dni.</p>
+
+        <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: 01.01.2024</p>
+    </div>
+</section>
+
+<!-- Kontakt -->
+<section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
+    <div class="section-title text-center mb-10">
+        <h2 class="text-4xl font-extrabold text-gray-900">Kontakt</h2>
+        <p class="text-lg text-gray-600 mt-2">Skontaktuj się z nami</p>
+    </div>
+
+    <!-- Formularz kontaktowy -->
+    <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
+        <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
+        <form id="contactForm">
+            <div class="form-group mb-4">
+                <label class="block font-semibold mb-1">Imię i nazwisko</label>
+                <input type="text" required class="w-full border rounded-lg px-3 py-2">
             </div>
             
-            <!-- Lista darczyńców -->
-            <div class="donors-list mt-12 bg-black/30 p-6 rounded-xl border border-purple-800">
-                <h4 class="text-2xl font-bold mb-4">🔥 Ostatni, którzy dołączyli do gry:</h4>
-                <ul id="donorsList" class="space-y-2 text-green-300 font-mono"></ul>
+            <div class="form-group mb-4">
+                <label class="block font-semibold mb-1">Email</label>
+                <input type="email" required class="w-full border rounded-lg px-3 py-2">
             </div>
             
-            <!-- List od dzieci -->
-            <div class="bg-white/10 p-6 rounded-lg shadow-md mt-10 border-l-4 border-yellow-400">
-                <h4 class="text-2xl font-bold mb-4 text-yellow-300">✉️ List od dzieci z Domu Dziecka "Promyk"</h4>
-                <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
+            <div class="form-group mb-4">
+                <label class="block font-semibold mb-1">Temat</label>
+                <input type="text" required class="w-full border rounded-lg px-3 py-2">
             </div>
-        </section>
-
-        <!-- Partnerzy -->
-        <section id="partners">
-            <div class="section-title">
-                <h2>Nasi Partnerzy</h2>
-                <p>Współpracujemy z najlepszymi</p>
+            
+            <div class="form-group mb-4">
+                <label class="block font-semibold mb-1">Wiadomość</label>
+                <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
             </div>
-            <div class="partners-section">
-                <div class="partners-grid">
-                    <div class="partner-card">
-                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner1" alt="Partner 1" class="partner-logo">
-                        <h4>Partner Biznesowy</h4>
-                        <p>Współpraca od 2020 roku</p>
-                    </div>
-                    <div class="partner-card">
-                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner2" alt="Partner 2" class="partner-logo">
-                        <h4>Dostawca Materiałów</h4>
-                        <p>Najwyższa jakość</p>
-                    </div>
-                    <div class="partner-card">
-                        <img src="https://via.placeholder.com/150x80/fff/000?text=Partner3" alt="Partner 3" class="partner-logo">
-                        <h4>Partner Technologiczny</h4>
-                        <p>Innowacyjne rozwiązania</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            
+            <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
+        </form>
+    </div>
 
-        <!-- O nas -->
-        <section id="about">
-            <div class="section-title">
-                <h2>O Nas</h2>
-                <p>Poznaj historię naszej marki</p>
-            </div>
-            <div class="about-section">
-                <div class="team-grid">
-                    <div class="team-member">
-                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=G" alt="Założyciel" class="team-avatar">
-                        <h4>Grzegorz Mielniczuk</h4>
-                        <p>Założyciel & CEO</p>
-                        <p>Pasja do mody vintage od 2018 roku</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=A" alt="Designer" class="team-avatar">
-                        <h4>Anna Nowak</h4>
-                        <p>Główny Designer</p>
-                        <p>Tworzy niepowtarzalne wzory</p>
-                    </div>
-                    <div class="team-member">
-                        <img src="https://via.placeholder.com/120x120/d4af37/fff?text=M" alt="Marketing" class="team-avatar">
-                        <h4>Michał Kowalski</h4>
-                        <p>Specjalista Marketingu</p>
-                        <p>Dba o komunikację z klientami</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Dane kontaktowe -->
+    <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
+        <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
+        <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
+        <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
+        <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
+        
+        <h3 class="text-xl font-bold mt-6 mb-4">Social Media</h3>
+        <div class="social-links flex gap-4">
+            <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </div>
+    </div>
 
-        <!-- Sekcja Blog -->
-        <section id="blog" class="py-16 bg-gradient-to-br from-purple-900 via-black to-red-900 text-white relative overflow-hidden">
-            <div class="absolute inset-0 opacity-10 z-0">
-                <div class="absolute top-10 left-5 text-6xl font-bold opacity-20">🕺</div>
-                <div class="absolute top-20 right-10 text-5xl font-bold opacity-20">💿</div>
-                <div class="absolute bottom-20 left-15 text-7xl font-bold opacity-20">🎤</div>
-                <div class="absolute bottom-10 right-5 text-6xl font-bold opacity-20">👖</div>
-            </div>
-
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="text-center mb-16">
-                    <h2 class="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-yellow-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
-                        ADELBERTUS VINTAGE
-                    </h2>
-                    <p class="text-xl text-gray-300">Powrót do złotej ery mody: Disco 80s & Hip Hop 90s</p>
-                    
-                    <div class="flex justify-center space-x-4 mt-6">
-                        <a href="#" data-filter="disco" class="filter-btn px-4 py-2 bg-yellow-500 text-black rounded-full text-sm font-bold transition duration-300 hover:bg-yellow-400">🎧 DISCO</a>
-                        <a href="#" data-filter="hiphop" class="filter-btn px-4 py-2 bg-blue-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-blue-400">👟 HIP HOP</a>
-                        <a href="#" data-filter="streetwear" class="filter-btn px-4 py-2 bg-pink-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-pink-400">🕺 STREETWEAR</a>
-                        <a href="#" data-filter="all" class="filter-btn px-4 py-2 bg-gray-500 text-white rounded-full text-sm font-bold transition duration-300 hover:bg-gray-400">🔄 WSZYSTKO</a>
-                    </div>
-                </div>
-                
-                <!-- Treść bloga -->
-                <article data-tag="disco" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-yellow-400 transform hover:scale-[1.02] transition-all duration-300">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <img src="https://i.ibb.co/fdCd6mXh/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" 
-                                 alt="Disco Fashion 80s" 
-                                 class="w-full h-64 object-cover rounded-xl border-4 border-yellow-400 shadow-2xl">
-                            <div class="mt-4 text-center">
-                                <span class="inline-block px-3 py-1 bg-yellow-500 text-black text-sm font-bold rounded-full">🔥 LEGENDARNE DISCO</span>
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-2/3">
-                            <h3 class="text-3xl font-bold mb-4 text-yellow-400">🕺 LATA 80s: REWOLUCJA DISCO I NEW WAVE</h3>
-                            <div class="text-gray-300 space-y-4">
-                                <p class="text-lg">Czasy, gdy <strong class="text-yellow-400">bluzy oversize</strong>, dresy Adidasa i czapki baseballowe rządziły ulicami. Każdy chciał wyglądać jak bohater z "Beverly Hills Cop" czy "Flashdance".</p>
-                                <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-yellow-400">
-                                    <h4 class="font-bold text-yellow-400 mb-2">🎯 KLUCZOWE ELEMENTY STYLU 80s:</h4>
-                                    <ul class="list-disc list-inside space-y-1">
-                                        <li>Jaskrawe, fluorescencyjne kolory</li>
-                                        <li>Spodnie dresowe z białymi paskami</li>
-                                        <li>Bluzy z logo wielkich marek</li>
-                                        <li>Czapki baseballowe - obowiązkowo do tyłu!</li>
-                                    </ul>
-                                </div>
-                                <p>To była era, w której <strong class="text-pink-400">moda klubowa</strong> mieszała się z ulicznym stylem. Metaliczne tkaniny, skórzane kurtki i buty na platformie - tak wyglądał dress code na parkiecie.</p>
-                                <div class="flex items-center space-x-4 mt-6">
-                                    <span class="text-sm text-gray-400">📅 Epoka: 1980-1989</span>
-                                    <span class="text-sm text-gray-400">🎵 Muzyka: Disco, New Wave, Funk</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Dodatkowe artykuły blogowe -->
-                <article data-tag="hiphop" class="blog-post bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 mb-12 border-2 border-blue-500 transform hover:scale-[1.02] transition-all duration-300">
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <img src="https://i.ibb.co/HT3YHsmS/Messenger-creation-BDF4866-E-A667-40-C0-AE32-277-FFA07-C201.jpg" 
-                                 alt="Hip Hop Fashion 90s" 
-                                 class="w-full h-64 object-cover rounded-xl border-4 border-blue-500 shadow-2xl">
-                            <div class="mt-4 text-center">
-                                <span class="inline-block px-3 py-1 bg-blue-500 text-white text-sm font-bold rounded-full">💎 CULTURAL HIP HOP</span>
-                            </div>
-                        </div>
-                        
-                        <div class="md:w-2/3">
-                            <h3 class="text-3xl font-bold mb-4 text-blue-400">👑 LATA 90s: ZŁOTA ERA HIP HOPU I STREETWEARU</h3>
-                            <div class="text-gray-300 space-y-4">
-                                <p class="text-lg">Gdy <strong class="text-blue-400">baggy jeansy</strong> opadające poniżej pasa i koszulki flanelowe stały się uniformem pokolenia. To czasy FUBU, Karl Kani i kultowych Nike Air Force 1.</p>
-                                <div class="bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
-                                    <h4 class="font-bold text-blue-400 mb-2">🎤 STYL GANGSTA RAP vs SKATER:</h4>
-                                    <ul class="list-disc list-inside space-y-1">
-                                        <li>Jeansy baggy - im szersze, tym lepsze</li>
-                                        <li>Koszulki oversize z logo zespołów</li>
-                                        <li>Bluzy z kapturem - must have każdego fana</li>
-                                        <li>Buty: Timberland lub Air Force 1</li>
-                                    </ul>
-                                </div>
-                                <p><strong class="text-red-400">Polski streetwear</strong> lat 90s to kultowe targowiska: Stadion Dziesięciolecia, Jarmark Europa. "Abidasy", "Panasonice" - każdy chciał mieć oryginał, ale nosił podróbkę.</p>
-                                <div class="flex items-center space-x-4 mt-6">
-                                    <span class="text-sm text-gray-400">📅 Epoka: 1990-1999</span>
-                                    <span class="text-sm text-gray-400">🎵 Muzyka: Hip Hop, Gangsta Rap, G-Funk</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Galeria zdjęć -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-                    <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
-                        <img src="https://i.ibb.co/b58Nxn0D/Messenger-creation-9-B935-AD4-1-D3-B-4785-BBA4-6928-E5614-E31.jpg" 
-                             alt="Street Art 1" 
-                             class="w-full h-48 object-cover rounded-lg mb-4">
-                        <p class="text-center text-gray-300 text-sm">🎨 Street Art - dusza ulicy lat 90s</p>
-                    </div>
-                    <div class="bg-black bg-opacity-50 p-6 rounded-2xl border border-gray-700">
-                        <img src="https://i.ibb.co/gMxPjFmR/Messenger-creation-3-E45-BD0-B-6396-4-A75-825-F-17-A5-A3-C0-FEB1.jpg" 
-                             alt="Street Art 2" 
-                             class="w-full h-48 object-cover rounded-lg mb-4">
-                        <p class="text-center text-gray-300 text-sm">✌️ Graffiti - głos pokolenia</p>
-                    </div>
-                </div>
-
-                <!-- Sekcja opinii -->
-                <div class="bg-black bg-opacity-70 backdrop-blur-lg rounded-2xl p-8 border-2 border-green-500">
-                    <h3 class="text-2xl font-bold mb-6 text-green-400">💬 PODZIEL SIĘ WSPOMNIENIAMI I OPINIAMI KLIENTÓW</h3>
-                    <div class="space-y-4">
-                        <input type="text" id="opinionAuthor" placeholder="Twoja ksywa z tamtych lat..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400">
-                        <textarea id="opinionText" rows="3" placeholder="Twoje wspomnienia z ery disco/hip hop..." class="w-full bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400"></textarea>
-                        <button id="opinionSubmit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 transform hover:scale-105">
-                            🎤 Zostaw shoutout
-                        </button>
-                    </div>
-                    
-                    <div id="opinionsList" class="mt-8 space-y-4">
-                        <!-- Opinie będą dodawane dynamicznie -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ -->
-        <section id="faq">
-            <div class="section-title">
-                <h2>Często Zadawane Pytania</h2>
-                <p>Znajdź odpowiedzi na swoje pytania</p>
-            </div>
-            <div class="faq-section">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Jak dobrać odpowiedni rozmiar?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Polecamy zmierzyć swoją ulubioną koszulkę i porównać wymiary z naszą tabelą rozmiarów dostępną w zakładce "Rozmiary".
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Jaki jest czas realizacji zamówienia?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Zamówienia realizujemy w ciągu 1-2 dni roboczych. Wysyłka następuje najpóźniej następnego dnia roboczego.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Czy mogę zwrócić produkt?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Tak, masz 30 dni na zwrot produktu. Warunkiem jest nienaruszony stan produktu z metkami.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Jakie metody płatności akceptujecie?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Akceptujemy PayPal, karty kredytowe/debetowe, przelewy bankowe, BLIK oraz płatność przy odbiorze.
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Czy oferujecie darmową dostawę?
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        Tak, oferujemy darmową dostawę dla zamówień powyżej 200 zł. Dla zamówień poniżej tej kwoty koszt dostawy to 14 zł.
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Regulamin -->
-        <section id="regulations">
-            <div class="section-title">
-                <h2>Regulamin</h2>
-                <p>Zasady korzystania ze sklepu</p>
-            </div>
-            <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
-                <h2 class="text-4xl font-extrabold text-center text-yellow-400 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
-                
-                <h3 class="text-2xl font-bold text-gray-300 mt-6 mb-4 border-b border-gray-700 pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
-                <ul class="list-disc list-inside space-y-3 text-gray-400">
-                    <li><strong>Sprzedawca:</strong> Grzegosz Mielniczuk</li>
-                    <li><strong>Forma działalności:</strong> Działalność nierejestrowana</li>
-                    <li><strong>Adres do korespondencji:</strong> [UZUPEŁNIJ]</li>
-                    <li><strong>E-mail kontaktowy:</strong> mielniczukgrzegosz74@gmail.com</li>
-                    <li><strong>Telefon kontaktowy:</strong> 604 296 360</li>
-                </ul>
-
-                <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
-                <p class="text-gray-400">Umowa sprzedaży zawierana jest po złożeniu zamówienia przez Klienta i potwierdzeniu przez Sprzedawcę.</p>
-
-                <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 3. Dostawa Towaru i Płatności</h3>
-                <ul class="list-disc list-inside space-y-3 text-gray-400">
-                    <li><strong>Metody płatności:</strong> PayPal, przelew bankowy, BLIK</li>
-                    <li><strong>Koszty dostawy:</strong> 14 zł (darmowa dostawa od 200 zł)</li>
-                    <li><strong>Termin dostawy:</strong> 3-7 dni roboczych</li>
-                </ul>
-
-                <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 4. Odstąpienie od Umowy</h3>
-                <p class="text-gray-400">Klient ma prawo odstąpić od umowy w terminie 14 dni bez podania przyczyny.</p>
-
-                <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 5. Reklamacje Towaru</h3>
-                <p class="text-gray-400">Reklamacje można składać mailowo lub telefonicznie. Rozpatrujemy je w ciągu 14 dni.</p>
-
-                <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: 01.01.2024</p>
-            </div>
-        </section>
-
-        <!-- Kontakt -->
-        <section id="contact" class="bg-gradient-to-b from-white via-gray-50 to-white py-12 px-6">
-            <div class="section-title text-center mb-10">
-                <h2 class="text-4xl font-extrabold text-gray-900">Kontakt</h2>
-                <p class="text-lg text-gray-600 mt-2">Skontaktuj się z nami</p>
-            </div>
-
-            <!-- Formularz kontaktowy -->
-            <div class="email-form bg-white shadow-lg rounded-2xl p-8 mb-10">
-                <h3 class="text-2xl font-bold mb-4">Wyślij wiadomość</h3>
-                <form id="contactForm">
-                    <div class="form-group mb-4">
-                        <label class="block font-semibold mb-1">Imię i nazwisko</label>
-                        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                        <label class="block font-semibold mb-1">Email</label>
-                        <input type="email" required class="w-full border rounded-lg px-3 py-2">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                        <label class="block font-semibold mb-1">Temat</label>
-                        <input type="text" required class="w-full border rounded-lg px-3 py-2">
-                    </div>
-                    
-                    <div class="form-group mb-4">
-                        <label class="block font-semibold mb-1">Wiadomość</label>
-                        <textarea rows="5" required class="w-full border rounded-lg px-3 py-2"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="nav-btn gold-bg w-full">Wyślij wiadomość</button>
-                </form>
-            </div>
-
-            <!-- Dane kontaktowe -->
-            <div class="bg-white p-6 rounded-2xl shadow-md mb-10">
-                <h3 class="text-xl font-bold mb-4">Dane kontaktowe</h3>
-                <p class="mb-2"><i class="fas fa-envelope gold-text"></i> Email: <b>mielniczukgrzegosz74@gmail.com</b></p>
-                <p class="mb-2"><i class="fas fa-phone gold-text"></i> Telefon: <b>604 296 360</b></p>
-                <p class="mb-4"><i class="fas fa-clock gold-text"></i> Godziny odpowiedzi: <b>Pon-Pt 9:00-17:00</b></p>
-                
-                <h3 class="text-xl font-bold mt-6 mb-4">Social Media</h3>
-                <div class="social-links flex gap-4">
-                    <a href="https://www.instagram.com/mielniczukgrzegosz74/profilecard/?igsh=MXg1dWMycDBjeTlpYw==" class="social-link text-pink-500 text-2xl" target="_blank">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="https://www.tiktok.com/@ja.jestem3?_t=ZN-8z3xiAfOynu&_r=1" class="social-link text-black text-2xl" target="_blank">
-                        <i class="fab fa-tiktok"></i>
-                    </a>
-                    <a href="https://www.facebook.com/share/p/19jxDk2vM7/" class="social-link text-blue-600 text-2xl" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Forum dyskusyjne -->
-            <div class="bg-white p-6 rounded-2xl shadow-md">
-                <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
-                <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
-                
-                <form id="forumForm" class="mb-6">
-                    <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
-                    <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
-                    <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
-                </form>
-                
-                <div id="forumPosts" class="space-y-4">
-                    <!-- Wpisy forum będą dodawane tutaj -->
-                </div>
-            </div>
-        </section>
-    </main>
+    <!-- Forum dyskusyjne -->
+    <div class="bg-white p-6 rounded-2xl shadow-md">
+        <h3 class="text-2xl font-bold mb-4">Forum – Twoje miejsce na głos</h3>
+        <p class="text-gray-600 mb-4">Dodaj swój wpis i stań się częścią społeczności.</p>
+        
+        <form id="forumForm" class="mb-6">
+            <input type="text" id="forumUser" placeholder="Twoje imię" required class="w-full border rounded-lg px-3 py-2 mb-2">
+            <textarea id="forumMessage" rows="3" placeholder="Napisz swój wpis..." required class="w-full border rounded-lg px-3 py-2 mb-2"></textarea>
+            <button type="submit" class="nav-btn gold-bg w-full">Dodaj wpis</button>
+        </form>
+        
+        <div id="forumPosts" class="space-y-4">
+            <!-- Wpisy forum będą dodawane tutaj -->
+        </div>
+    </div>
+</section>
 
     <!-- Koszyk -->
     <div id="cartIcon">
@@ -4185,134 +4266,10 @@
         </div>
     </footer>
 
-    <!-- SYSTEM BEZPIECZEŃSTWA - WDROŻONY BEZPOŚREDNIO -->
+    <!-- DODANE: Skrypt zabezpieczeń -->
+    <script src="/assets/js/site-security.js"></script>
+
     <script>
-// ===== SYSTEM BEZPIECZEŃSTWA - WDROŻONY =====
-
-/* Zabezpieczenia po stronie klienta */
-(function(){
-  'use strict';
-
-  // CONFIG
-  var MIN_FORM_TIME_MS = 3000;       // minimalny czas od wejścia do wysłania (3s)
-  var MIN_REPEAT_MS = 5000;          // minimalny czas miedzy wysyłkami (5s)
-  var MAX_UPLOAD_BYTES = 5 * 1024 * 1024; // 5 MB limit uploadu
-  var ALLOWED_FILE_TYPES = ['image/jpeg','image/png','image/webp','image/svg+xml','application/pdf'];
-
-  // helper: sanitize text inputs (strip script tags)
-  function sanitizeText(str){
-    return str.replace(/<\s*script[\s\S]*?>[\s\S]*?<\s*\/\s*script\s*>/gi, '')
-              .replace(/javascript:/gi, '');
-  }
-
-  // attach to all forms
-  document.addEventListener('DOMContentLoaded', function(){
-    var forms = document.querySelectorAll('form');
-    forms.forEach(function(form, idx){
-      // add honeypot if none exists (hidden field that humans won't fill)
-      if(!form.querySelector('input[name="please_leave_empty"]')){
-        var hp = document.createElement('input');
-        hp.type = 'text';
-        hp.name = 'please_leave_empty';
-        hp.value = '';
-        hp.tabIndex = -1;
-        hp.style.display = 'none';
-        form.appendChild(hp);
-      }
-
-      // mark form load time
-      form.dataset.formLoadTime = Date.now();
-      form.dataset.lastSubmit = 0;
-
-      // on submit checks
-      form.addEventListener('submit', function(e){
-        try {
-          var now = Date.now();
-
-          // 1) honeypot check
-          var hpField = form.querySelector('input[name="please_leave_empty"]');
-          if(hpField && hpField.value && hpField.value.trim() !== ''){
-            e.preventDefault();
-            return false;
-          }
-
-          // 2) minimal time check
-          var loadedAt = parseInt(form.dataset.formLoadTime || '0', 10);
-          if(now - loadedAt < MIN_FORM_TIME_MS){
-            e.preventDefault();
-            alert('Proszę chwilę poczekać przed wysłaniem formularza.');
-            return false;
-          }
-
-          // 3) rate limit (client side)
-          var last = parseInt(form.dataset.lastSubmit || '0', 10);
-          if(now - last < MIN_REPEAT_MS){
-            e.preventDefault();
-            alert('Prosimy odczekać chwilę przed kolejnym wysłaniem.');
-            return false;
-          }
-
-          // 4) sanitize text inputs
-          var textareas = form.querySelectorAll('textarea, input[type="text"], input[type="search"]');
-          textareas.forEach(function(el){
-            el.value = sanitizeText(el.value || '');
-          });
-
-          // 5) validate files
-          var files = form.querySelectorAll('input[type="file"]');
-          for(var i=0;i<files.length;i++){
-            var finput = files[i];
-            if(finput.files && finput.files.length){
-              for(var j=0;j<finput.files.length;j++){
-                var f = finput.files[j];
-                if(f.size > MAX_UPLOAD_BYTES){
-                  e.preventDefault();
-                  alert('Plik ' + f.name + ' jest zbyt duży. Limit ' + (MAX_UPLOAD_BYTES/1024/1024) + ' MB.');
-                  return false;
-                }
-                if(ALLOWED_FILE_TYPES.indexOf(f.type) === -1){
-                  e.preventDefault();
-                  alert('Niedozwolony typ pliku: ' + f.name);
-                  return false;
-                }
-              }
-            }
-          }
-
-          // pass — set lastSubmit
-          form.dataset.lastSubmit = now.toString();
-          return true;
-        } catch(err){
-          console.error('Security client error', err);
-          // nie blokuj, jeżeli coś pójdzie nie tak — serwer i tak zweryfikuje
-          return true;
-        }
-      });
-    });
-
-    // basic anti-rapid-navigation (optional)
-    // block excessive XHR/fetch spams by overriding fetch/XHR to track rates (light)
-    (function(){
-      var lastCall = 0;
-      var minGap = 100; // ms
-      var _fetch = window.fetch;
-      if(_fetch){
-        window.fetch = function(){
-          var now = Date.now();
-          if(now - lastCall < minGap){
-            // drop it
-            return new Promise(function(resolve,reject){ reject(new Error('Too many requests')); });
-          }
-          lastCall = now;
-          return _fetch.apply(this, arguments);
-        };
-      }
-    })();
-
-  });
-
-})();
-
 // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
@@ -4624,7 +4581,7 @@ function updateProductBase() {
     const price = productType.selectedOptions[0].getAttribute('data-price');
     currentPrice.textContent = `${price} zł`;
     
-    // Aktualizacja obrazu produktu
+    // Aktualizacja obrazu produktu (tutaj można dodać różne obrazy dla różnych produktów)
     const productImg = document.getElementById('currentProductImg');
     productImg.style.backgroundColor = productColor;
 }
@@ -4821,7 +4778,7 @@ window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
 </script>
-
+                      
 <style>
 /* Dodatkowe style dla nowych funkcjonalności */
 .neon-glow {
