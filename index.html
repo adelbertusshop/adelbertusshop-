@@ -3650,466 +3650,607 @@
                 </div>
             </div>
         </section>
-       <!-- Studio projektowe - ZASTĘPUJĄCA, PROSTA I DZIAŁAJĄCA -->
+       <!-- Studio projektowe - FABRIC.JS + BODYPIX (USUWANIE TŁA AI, uproszczona wersja BodyPix Lite) -->
 <section id="design" class="py-16 bg-black text-white relative">
   <div class="container mx-auto px-4">
     <div class="text-center mb-8">
       <h2 class="text-4xl font-bold mb-2 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-      <p class="text-lg text-gray-400">Prosty edytor: tekst + grafika → pobierz / dodaj do koszyka (localStorage)</p>
+      <p class="text-lg text-gray-400">Profesjonalny kreator z automatycznym usuwaniem tła (BodyPix Lite).</p>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-6">
+    <div class="flex flex-col lg:flex-row gap-8">
       <!-- PANEL -->
-      <div class="lg:w-1/3 bg-gray-900 p-5 rounded-xl border border-gray-700">
-        <label class="block text-gray-300 mb-2">Produkt</label>
-        <select id="productType" class="w-full p-2 mb-3 bg-black border border-gray-700 text-white">
-          <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka (120 zł)</option>
-          <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza (200 zł)</option>
-          <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka (99 zł)</option>
-        </select>
-
-        <label class="block text-gray-300 mb-2">Rozmiar</label>
-        <select id="productSize" class="w-full p-2 mb-3 bg-black border border-gray-700 text-white">
-          <option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option>
-        </select>
-
-        <label class="block text-gray-300 mb-2">Kolor tkaniny</label>
-        <input id="productColor" type="color" value="#ffffff" class="w-full h-10 mb-4">
-
-        <hr class="border-gray-700 mb-4">
-
-        <label class="block text-gray-300 mb-2">Dodaj tekst</label>
-        <input id="textInput" class="w-full p-2 mb-2 bg-black border border-gray-700 text-white" placeholder="Wpisz tekst...">
-        <div class="flex gap-2 mb-3">
-          <select id="fontSelect" class="flex-1 p-2 bg-black border border-gray-700 text-white">
-            <option value="Impact, sans-serif">Impact</option>
-            <option value="Arial, sans-serif">Arial</option>
-            <option value="Verdana, sans-serif">Verdana</option>
-            <option value="Courier New, monospace">Courier</option>
+      <div class="lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700">
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2">Produkt</label>
+          <select id="productType" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded">
+            <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka — 120 zł</option>
+            <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza — 200 zł</option>
+            <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka — 99 zł</option>
           </select>
-          <input id="fontSize" type="number" value="36" min="8" max="200" class="w-20 p-2 bg-black border border-gray-700 text-white">
-        </div>
-        <label class="block text-gray-300 mb-2">Kolor tekstu</label>
-        <input id="textColor" type="color" value="#000000" class="w-full h-10 mb-3">
-        <button id="addText" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded mb-4">Dodaj tekst</button>
-
-        <label class="block text-gray-300 mb-2">Dodaj grafikę</label>
-        <input id="imgFile" type="file" accept="image/*" class="mb-3 w-full text-sm">
-        <button id="uploadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded mb-4">Wgraj obraz</button>
-
-        <div class="flex gap-2">
-          <button id="deleteBtn" class="flex-1 bg-red-600 hover:bg-red-700 py-2 rounded font-bold">Usuń</button>
-          <button id="clearBtn" class="flex-1 bg-gray-600 hover:bg-gray-700 py-2 rounded font-bold">Wyczyść</button>
         </div>
 
-        <div class="mt-4 text-sm text-gray-400">
-          <p>Wybierz obiekt → przeciągnij, użyj scroll (kółko) aby skalować zaznaczony.</p>
-          <p class="mt-1">Ctrl/Cmd + D — duplikuj. Delete — usuń.</p>
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2">Rozmiar</label>
+          <select id="productSize" class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded">
+            <option value="S">S</option><option value="M" selected>M</option><option value="L">L</option><option value="XL">XL</option><option value="XXL">XXL</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2">Kolor tkaniny</label>
+          <input id="productColor" type="color" value="#ffffff" class="w-full h-10 rounded border border-gray-700">
+        </div>
+
+        <hr class="border-gray-700 my-4">
+
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2">Dodaj tekst</label>
+          <input id="designText" placeholder="Wpisz tekst..." class="w-full p-3 bg-gray-800 border border-gray-700 text-white rounded mb-3">
+          <div class="flex gap-3 mb-3">
+            <select id="fontFamily" class="flex-1 p-2 bg-gray-800 border border-gray-700 text-white rounded">
+              <option value="Impact">Impact</option>
+              <option value="Arial">Arial</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Verdana">Verdana</option>
+            </select>
+            <input id="fontSize" type="number" value="48" min="8" max="240" class="w-24 p-2 bg-gray-800 border border-gray-700 text-white rounded text-center">
+          </div>
+          <label class="block text-gray-300 mb-2">Kolor tekstu</label>
+          <input id="textColor" type="color" value="#000000" class="w-full h-10 rounded border border-gray-700 mb-3">
+          <button id="addTextBtn" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-3 rounded">Dodaj tekst</button>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-gray-300 mb-2">Dodaj grafikę (PNG/JPG)</label>
+          <input id="designImage" type="file" accept="image/*" class="hidden">
+          <div class="flex gap-2">
+            <button id="selectImageBtn" class="flex-1 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded">Wybierz obraz</button>
+            <button id="removeBgBtn" title="Usuń tło (BodyPix Lite)" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-3 rounded">Usuń tło (AI)</button>
+          </div>
+          <button id="undoMaskBtn" class="mt-2 w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded text-sm">Cofnij maskę</button>
+        </div>
+
+        <div class="flex gap-3 mt-2">
+          <button id="deleteSelected" class="flex-1 bg-red-600 hover:bg-red-700 py-2 rounded font-bold">Usuń zaznaczone</button>
+          <button id="clearAll" class="flex-1 bg-gray-600 hover:bg-gray-700 py-2 rounded font-bold">Wyczyść</button>
+        </div>
+
+        <div class="flex gap-3 mt-3">
+          <button id="bringToFront" class="flex-1 bg-green-600 hover:bg-green-700 py-2 rounded font-bold">Na wierzch</button>
+          <button id="sendToBack" class="flex-1 bg-indigo-600 hover:bg-indigo-700 py-2 rounded font-bold">Na spód</button>
+        </div>
+
+        <div class="text-sm text-gray-400 mt-4">
+          <p>Podwójne kliknięcie na tekście — edytuj. Scroll (kółko) nad obiektem — skalowanie. Ctrl/Cmd + D — duplikuj. Delete — usuń.</p>
+          <p id="bodypixStatus" class="mt-2 text-xs text-gray-300">AI: niezaładowane</p>
         </div>
       </div>
 
       <!-- PODGLĄD -->
       <div class="lg:w-2/3 flex flex-col items-center">
-        <div id="previewWrap" class="relative bg-gray-800 rounded-xl overflow-hidden" style="width:520px;height:520px;border:1px solid #2a2a2a;">
-          <canvas id="editorCanvas" width="520" height="520" style="display:block;"></canvas>
+        <div id="productBaseDisplay" class="mb-4 relative w-[560px] h-[560px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
+          <img id="productBaseImage" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="produkt" class="w-full h-full object-contain absolute z-0" style="background-color:#ffffff;">
+          <canvas id="fabricCanvas" width="560" height="560" class="absolute z-10"></canvas>
         </div>
 
-        <div class="mt-4 flex gap-3 w-full justify-center">
-          <div class="text-xl font-bold text-yellow-400 self-center">Cena: <span id="price">120 zł</span></div>
-          <button id="exportBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">Pobierz</button>
-          <button id="cartBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Dodaj do koszyka</button>
+        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
+          <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
+          <button id="exportBtn" class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg">Pobierz Projekt</button>
+          <button id="addToCartBtn" class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">Dodaj do Koszyka</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKRYPT: prosty edytor na canvas -->
+<!-- Required libraries -->
+<script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/body-pix@2.0.5/dist/body-pix.min.js"></script>
+
 <script>
-(function(){
-  // --- ELEMENTY ---
-  const canvas = document.getElementById('editorCanvas');
-  const ctx = canvas.getContext('2d');
+/* Fabric.js + BodyPix integration */
+(async function(){
+  // Fabric init
+  const canvasEl = document.getElementById('fabricCanvas');
+  const fabricCanvas = new fabric.Canvas('fabricCanvas', { preserveObjectStacking: true, selection: true });
+  fabricCanvas.setBackgroundColor('transparent', fabricCanvas.renderAll.bind(fabricCanvas));
+
+  // DOM refs
   const productType = document.getElementById('productType');
   const productSize = document.getElementById('productSize');
   const productColor = document.getElementById('productColor');
-  const priceEl = document.getElementById('price');
+  const productBaseImage = document.getElementById('productBaseImage');
+  const currentPrice = document.getElementById('currentPrice');
 
-  const textInput = document.getElementById('textInput');
-  const addTextBtn = document.getElementById('addText');
-  const fontSelect = document.getElementById('fontSelect');
-  const fontSizeInput = document.getElementById('fontSize');
-  const textColorInput = document.getElementById('textColor');
+  const addTextBtn = document.getElementById('addTextBtn');
+  const designText = document.getElementById('designText');
+  const fontFamily = document.getElementById('fontFamily');
+  const fontSize = document.getElementById('fontSize');
+  const textColor = document.getElementById('textColor');
 
-  const imgFile = document.getElementById('imgFile');
-  const uploadBtn = document.getElementById('uploadBtn');
+  const selectImageBtn = document.getElementById('selectImageBtn');
+  const designImageInput = document.getElementById('designImage');
+  const removeBgBtn = document.getElementById('removeBgBtn');
+  const undoMaskBtn = document.getElementById('undoMaskBtn');
 
-  const deleteBtn = document.getElementById('deleteBtn');
-  const clearBtn = document.getElementById('clearBtn');
+  const deleteSelectedBtn = document.getElementById('deleteSelected');
+  const clearAllBtn = document.getElementById('clearAll');
+  const bringToFrontBtn = document.getElementById('bringToFront');
+  const sendToBackBtn = document.getElementById('sendToBack');
+
   const exportBtn = document.getElementById('exportBtn');
-  const cartBtn = document.getElementById('cartBtn');
+  const addToCartBtn = document.getElementById('addToCartBtn');
 
-  // --- STAN ---
-  let bgImage = new Image();
-  bgImage.crossOrigin = 'anonymous';
-  bgImage.src = productType.selectedOptions[0].dataset.img;
-  let objects = []; // { id,type:'text'|'image', x,y,w,h,scale,angle,z, props: { text,font,size,color } or { img } }
-  let selected = null;
-  let dragging = false;
-  let dragOffset = {x:0,y:0};
-  let zCounter = 1;
+  const bodypixStatus = document.getElementById('bodypixStatus');
 
-  // --- POMOCNIKI ---
-  function updatePriceAndBg(){
-    const opt = productType.selectedOptions[0];
-    priceEl.textContent = (opt.dataset.price || '0') + ' zł';
-    const src = opt.dataset.img;
-    if (src){
-      const im = new Image();
-      im.crossOrigin = 'anonymous';
-      im.onload = () => { bgImage = im; render(); };
-      im.onerror = () => { bgImage = new Image(); bgImage.src=''; render(); };
-      im.src = src;
-    }
+  // State
+  let zIndexCounter = 1;
+  let bodyPixNet = null;
+  let lastMaskedInfo = null; // { originalObjectId, originalSrcDataUrl }
+
+  // Update price & base image
+  function updatePriceAndBase(){
+    const sel = productType.selectedOptions[0];
+    const price = sel.dataset.price || '0';
+    const img = sel.dataset.img || '';
+    currentPrice.textContent = price + ' zł';
+    if (img) productBaseImage.src = img;
   }
-  productType.addEventListener('change', updatePriceAndBg);
-  updatePriceAndBg();
+  productType.addEventListener('change', updatePriceAndBase);
+  updatePriceAndBase();
 
-  function guid(){ return 'id'+Date.now()+Math.floor(Math.random()*1000); }
-
-  function clearCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
-
-  // RENDER: tło + obiekty w porządku z (rosnąco)
-  function render(){
-    // tło (kolor tkaniny)
-    ctx.save();
-    ctx.fillStyle = productColor.value || '#ffffff';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.restore();
-
-    // rysuj background image środkowo, utrzymując proporcje i dopasowanie
-    if (bgImage && bgImage.src){
-      const iw = bgImage.naturalWidth, ih = bgImage.naturalHeight;
-      if (iw && ih){
-        const scale = Math.min(canvas.width / iw, canvas.height / ih);
-        const w = iw * scale, h = ih * scale;
-        const dx = (canvas.width - w)/2, dy = (canvas.height - h)/2;
-        ctx.drawImage(bgImage, dx, dy, w, h);
-      }
-    }
-
-    // sort by z
-    const list = objects.slice().sort((a,b)=>a.z - b.z);
-    for (const o of list){
-      ctx.save();
-      ctx.translate(o.x, o.y);
-      ctx.rotate(o.angle || 0);
-      ctx.scale(o.scale, o.scale);
-      if (o.type === 'text'){
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillStyle = o.props.color || '#000';
-        ctx.font = (o.props.size || 36) + 'px ' + (o.props.font || 'sans-serif');
-        // multi-line support
-        const lines = String(o.props.text || '').split('\\n');
-        const lh = (o.props.size || 36) * 1.1;
-        for (let i=0;i<lines.length;i++){
-          ctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
-        }
-      } else if (o.type === 'image'){
-        if (o.props.img && o.props.img.complete){
-          const iw = o.props.img.naturalWidth, ih = o.props.img.naturalHeight;
-          const dw = o.w || iw, dh = o.h || ih;
-          ctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
-        }
-      }
-      // selection rectangle
-      if (selected && o.id === selected.id){
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = '#ff0';
-        const bboxW = (o.w||100) , bboxH = (o.h||50);
-        ctx.strokeRect(-bboxW/2, -bboxH/2, bboxW, bboxH);
-      }
-      ctx.restore();
-    }
-  }
-
-  // HIT TEST: odwrotna transformacja — sprawdź w porządku z najwyższym z
-  function hitTest(mx,my){
-    // iteruj od najwyższego z
-    const list = objects.slice().sort((a,b)=>b.z - a.z);
-    for (const o of list){
-      // transform point do lokalnych coords
-      const dx = mx - o.x, dy = my - o.y;
-      const cos = Math.cos(-o.angle||0), sin = Math.sin(-o.angle||0);
-      const lx = (dx * cos - dy * sin) / (o.scale || 1);
-      const ly = (dx * sin + dy * cos) / (o.scale || 1);
-      const w = o.w || (o.type==='text' ? (String(o.props.text||'').length * (o.props.size||36)*0.6) : (o.props.img ? o.props.img.naturalWidth : 100));
-      const h = o.h || (o.type==='text' ? (o.props.size||36) : (o.props.img ? o.props.img.naturalHeight : 100));
-      if (lx >= -w/2 && lx <= w/2 && ly >= -h/2 && ly <= h/2){
-        return o;
-      }
-    }
-    return null;
-  }
-
-  // MOUSE EVENTS
-  canvas.addEventListener('mousedown', (ev) => {
-    const r = canvas.getBoundingClientRect();
-    const mx = ev.clientX - r.left;
-    const my = ev.clientY - r.top;
-    const hit = hitTest(mx,my);
-    if (hit){
-      selected = hit;
-      dragging = true;
-      // compute offset in object's local coords
-      const dx = mx - hit.x, dy = my - hit.y;
-      dragOffset.x = dx; dragOffset.y = dy;
-      render();
-    } else {
-      selected = null;
-      render();
-    }
+  // product color mimic
+  productColor.addEventListener('input', (e) => {
+    productBaseImage.style.backgroundColor = e.target.value;
   });
 
-  canvas.addEventListener('mousemove', (ev) => {
-    if (!dragging || !selected) return;
-    const r = canvas.getBoundingClientRect();
-    const mx = ev.clientX - r.left;
-    const my = ev.clientY - r.top;
-    selected.x = mx - dragOffset.x;
-    selected.y = my - dragOffset.y;
-    render();
-  });
+  // Canvas responsiveness (keeps logical size fixed)
+  function fitCanvas(){
+    const container = document.getElementById('productBaseDisplay');
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    canvasEl.style.width = w + 'px';
+    canvasEl.style.height = h + 'px';
+    fabricCanvas.calcOffset();
+    fabricCanvas.renderAll();
+  }
+  window.addEventListener('resize', fitCanvas);
+  fitCanvas();
 
-  window.addEventListener('mouseup', () => { dragging = false; });
+  // Load BodyPix lightweight model lazily
+  async function ensureBodyPix(){
+    if (bodyPixNet) return bodyPixNet;
+    bodypixStatus.textContent = 'AI: ładowanie modelu...';
+    // load with mobileNet and smaller multiplier for speed (lite)
+    bodyPixNet = await bodyPix.load({
+      architecture: 'MobileNetV1',
+      outputStride: 16,
+      multiplier: 0.5, // lite
+      quantBytes: 2
+    });
+    bodypixStatus.textContent = 'AI: gotowy';
+    return bodyPixNet;
+  }
 
-  // wheel => scale selected
-  canvas.addEventListener('wheel', (ev) => {
-    if (!selected) return;
-    ev.preventDefault();
-    const delta = ev.deltaY < 0 ? 0.05 : -0.05;
-    selected.scale = Math.max(0.1, (selected.scale || 1) + delta);
-    render();
-  }, { passive:false });
-
-  // keyboard
-  window.addEventListener('keydown', (ev) => {
-    if ((ev.key === 'Delete' || ev.key === 'Backspace') && selected){
-      objects = objects.filter(o=>o.id !== selected.id);
-      selected = null; render();
-    }
-    if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'd' && selected){
-      const copy = JSON.parse(JSON.stringify(selected));
-      copy.id = guid();
-      copy.x += 15; copy.y += 15; copy.z = ++zCounter;
-      // restore img object if image
-      if (copy.type === 'image' && copy.props && copy.props.src){
-        const im = new Image(); im.crossOrigin='anonymous'; im.src = copy.props.src;
-        copy.props.img = im;
-      }
-      objects.push(copy);
-      selected = copy;
-      render();
-    }
-  });
-
-  // ADD TEXT
+  // Add text
   addTextBtn.addEventListener('click', () => {
-    const t = String(textInput.value || '').trim();
-    if (!t){ alert('Wpisz tekst.'); return; }
-    const o = {
-      id: guid(),
-      type: 'text',
-      x: canvas.width/2,
-      y: canvas.height/2,
-      w: (t.length || 6) * (parseInt(fontSizeInput.value,10)||36) * 0.6,
-      h: parseInt(fontSizeInput.value,10)||36,
-      scale: 1,
-      angle: 0,
-      z: ++zCounter,
-      props: { text: t, font: fontSelect.value, size: parseInt(fontSizeInput.value,10)||36, color: textColorInput.value }
-    };
-    objects.push(o);
-    selected = o;
-    render();
+    const txt = (designText.value || '').trim();
+    if (!txt) { alert('Wpisz tekst zanim dodasz.'); return; }
+    const obj = new fabric.Textbox(txt, {
+      left: fabricCanvas.getWidth() / 2,
+      top: fabricCanvas.getHeight() / 2,
+      originX: 'center',
+      originY: 'center',
+      fontFamily: fontFamily.value || 'Impact',
+      fontSize: parseInt(fontSize.value,10) || 48,
+      fill: textColor.value || '#000000',
+      editable: true,
+      objectCaching: false,
+      cornerStyle: 'circle',
+      cornerColor: '#fff',
+      borderColor: '#ff0',
+      padding: 8,
+      centeredRotation: true,
+      selectable: true
+    });
+    obj.set('zIndex', ++zIndexCounter);
+    fabricCanvas.add(obj).setActiveObject(obj);
+    fabricCanvas.requestRenderAll();
+    designText.value = '';
   });
 
-  // UPLOAD IMAGE
-  uploadBtn.addEventListener('click', () => imgFile.click());
-  imgFile.addEventListener('change', () => {
-    const f = imgFile.files && imgFile.files[0];
-    if (!f) return;
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const im = new Image();
-      im.crossOrigin = 'anonymous';
-      im.onload = () => {
-        const maxDim = Math.min(canvas.width, canvas.height) * 0.6;
-        const scale = Math.min(1, maxDim / Math.max(im.naturalWidth, im.naturalHeight));
-        const o = {
-          id: guid(),
-          type: 'image',
-          x: canvas.width/2,
-          y: canvas.height/2,
-          w: im.naturalWidth * scale,
-          h: im.naturalHeight * scale,
-          scale: 1,
-          angle: 0,
-          z: ++zCounter,
-          props: { src: e.target.result, img: im }
-        };
-        objects.push(o);
-        selected = o;
-        render();
-      };
-      im.src = e.target.result;
-    };
-    reader.readAsDataURL(f);
-    imgFile.value = '';
-  });
-
-  // DELETE / CLEAR
-  deleteBtn.addEventListener('click', () => {
-    if (!selected){ alert('Brak zaznaczonego obiektu.'); return; }
-    objects = objects.filter(o => o.id !== selected.id);
-    selected = null; render();
-  });
-  clearBtn.addEventListener('click', () => {
-    if (!confirm('Usuń wszystkie obiekty?')) return;
-    objects = []; selected=null; render();
-  });
-
-  // BRING TO FRONT
-  // double-click canvas to bring selected to front (or use this button pattern)
-  canvas.addEventListener('dblclick', () => {
-    if (!selected) return;
-    selected.z = ++zCounter;
-    render();
-  });
-
-  // EXPORT PNG
-  exportBtn.addEventListener('click', async () => {
-    try {
-      // create high-res canvas for export (2x)
-      const W = canvas.width * 2, H = canvas.height * 2;
-      const tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H;
-      const tctx = tmp.getContext('2d');
-
-      // fill bg color
-      tctx.fillStyle = productColor.value || '#fff';
-      tctx.fillRect(0,0,W,H);
-
-      // draw background image scaled
-      if (bgImage && bgImage.src && bgImage.naturalWidth){
-        const scale = Math.min(W / bgImage.naturalWidth, H / bgImage.naturalHeight);
-        const w = bgImage.naturalWidth * scale, h = bgImage.naturalHeight * scale;
-        const dx = (W - w)/2, dy = (H - h)/2;
-        tctx.drawImage(bgImage, dx, dy, w, h);
-      }
-
-      // draw objects
-      const list = objects.slice().sort((a,b)=>a.z - b.z);
-      for (const o of list){
-        tctx.save();
-        tctx.translate(o.x*2, o.y*2);
-        tctx.rotate(o.angle || 0);
-        tctx.scale(o.scale || 1, o.scale || 1);
-        if (o.type === 'text'){
-          tctx.fillStyle = o.props.color || '#000';
-          tctx.textAlign = 'center'; tctx.textBaseline='middle';
-          tctx.font = (o.props.size * 2) + 'px ' + (o.props.font || 'sans-serif');
-          const lines = String(o.props.text||'').split('\\n');
-          const lh = (o.props.size * 2) * 1.1;
-          for (let i=0;i<lines.length;i++){
-            tctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
-          }
-        } else if (o.type === 'image'){
-          if (o.props.img && o.props.img.complete){
-            const dw = (o.w||100) * 2;
-            const dh = (o.h||100) * 2;
-            tctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
-          }
-        }
-        tctx.restore();
-      }
-
-      // download
-      const data = tmp.toDataURL('image/png');
-      const a = document.createElement('a'); a.href = data; a.download = 'projekt_adelbertus_' + Date.now() + '.png';
-      document.body.appendChild(a); a.click(); a.remove();
-    } catch(err){
-      console.error(err); alert('Błąd eksportu — sprawdź konsolę.');
+  // Double click edit
+  fabricCanvas.on('mouse:dblclick', function(opt){
+    const target = opt.target;
+    if (target && target.type === 'textbox'){
+      target.enterEditing();
+      target.selectAll();
+      fabricCanvas.requestRenderAll();
     }
   });
 
-  // ADD TO CART -> save project snapshot + meta to localStorage
-  cartBtn.addEventListener('click', async () => {
+  // Image upload flow
+  selectImageBtn.addEventListener('click', () => designImageInput.click());
+  designImageInput.addEventListener('change', handleImageUpload);
+
+  async function handleImageUpload(e){
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev){
+      fabric.Image.fromURL(ev.target.result, {
+        left: fabricCanvas.getWidth()/2,
+        top: fabricCanvas.getHeight()/2,
+        originX: 'center',
+        originY: 'center',
+        selectable: true,
+        objectCaching: false,
+      }, function(img){
+        const maxDim = Math.min(fabricCanvas.getWidth(), fabricCanvas.getHeight()) * 0.75;
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        img.scale(scale);
+        // save original source as custom property for potential undo
+        img.originalSrc = ev.target.result;
+        img.set('selectable', true);
+        img.set('zIndex', ++zIndexCounter);
+        fabricCanvas.add(img).setActiveObject(img);
+        fabricCanvas.requestRenderAll();
+      }, { crossOrigin: 'anonymous' });
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  }
+
+  // Delete selected
+  deleteSelectedBtn.addEventListener('click', () => {
+    const active = fabricCanvas.getActiveObjects();
+    if (!active.length) return alert('Brak zaznaczonych obiektów');
+    active.forEach(o => fabricCanvas.remove(o));
+    fabricCanvas.discardActiveObject().renderAll();
+  });
+
+  // Clear all
+  clearAllBtn.addEventListener('click', () => {
+    if (!confirm('Na pewno usunąć wszystkie obiekty z projektu?')) return;
+    fabricCanvas.getObjects().forEach(o => fabricCanvas.remove(o));
+    fabricCanvas.discardActiveObject().renderAll();
+    zIndexCounter = 1;
+  });
+
+  // Bring/send
+  bringToFrontBtn.addEventListener('click', () => {
+    const obj = fabricCanvas.getActiveObject();
+    if (!obj) return alert('Zaznacz obiekt aby przenieść go na wierzch.');
+    fabricCanvas.bringToFront(obj);
+    obj.set('zIndex', ++zIndexCounter);
+    fabricCanvas.requestRenderAll();
+  });
+  sendToBackBtn.addEventListener('click', () => {
+    const obj = fabricCanvas.getActiveObject();
+    if (!obj) return alert('Zaznacz obiekt aby wysłać go na spód.');
+    fabricCanvas.sendToBack(obj);
+    fabricCanvas.requestRenderAll();
+  });
+
+  // Shortcuts: Delete and duplicate
+  document.addEventListener('keydown', (e) => {
+    if ((e.key === 'Delete' || e.key === 'Backspace') && fabricCanvas.getActiveObject()){
+      const active = fabricCanvas.getActiveObjects();
+      active.forEach(o => fabricCanvas.remove(o));
+      fabricCanvas.discardActiveObject().renderAll();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd'){
+      const active = fabricCanvas.getActiveObject();
+      if (active){
+        active.clone(function(cl){
+          cl.set({ left: active.left + 12, top: active.top + 12 });
+          cl.set('zIndex', ++zIndexCounter);
+          fabricCanvas.add(cl);
+          fabricCanvas.setActiveObject(cl);
+          fabricCanvas.requestRenderAll();
+        });
+      }
+    }
+  });
+
+  // Mouse wheel: scale target under pointer
+  const canvasElement = canvasEl;
+  canvasElement.addEventListener('wheel', function(e){
+    const target = fabricCanvas.findTarget(e);
+    if (target){
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 1.05 : 0.95;
+      target.scaleX = (target.scaleX || 1) * delta;
+      target.scaleY = (target.scaleY || 1) * delta;
+      fabricCanvas.requestRenderAll();
+    }
+  }, { passive: false });
+
+  // Export logic (base image + objects)
+  document.getElementById('exportBtn').addEventListener('click', async () => {
     try {
-      // make small thumbnail canvas
-      const W = 600, H = 600;
+      const w = productBaseImage.naturalWidth || fabricCanvas.getWidth();
+      const h = productBaseImage.naturalHeight || fabricCanvas.getHeight();
+      const tmp = document.createElement('canvas'); tmp.width = w; tmp.height = h;
+      const ctx = tmp.getContext('2d');
+      // background color mimic
+      const bg = window.getComputedStyle(productBaseImage).backgroundColor || '#fff';
+      ctx.fillStyle = bg; ctx.fillRect(0,0,w,h);
+      // draw base image
+      if (productBaseImage && productBaseImage.src){
+        await drawImageToCtx(ctx, productBaseImage, w, h);
+      }
+      // draw fabric objects
+      const objects = fabricCanvas.getObjects().slice().sort((a,b) => (a.zIndex||0) - (b.zIndex||0));
+      for (const o of objects){
+        await drawFabricObjectOnCtx(ctx, o, w, h);
+      }
+      const data = tmp.toDataURL('image/png');
+      downloadDataUrl(data, 'projekt_adelbertus_' + Date.now() + '.png');
+    } catch(err){
+      console.error(err); alert('Błąd podczas eksportu. Sprawdź konsolę.');
+    }
+  });
+
+  // Add to cart (localStorage)
+  addToCartBtn.addEventListener('click', async () => {
+    try {
+      const W = 800, H = 800;
       const tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H;
-      const tctx = tmp.getContext('2d');
-      tctx.fillStyle = productColor.value || '#fff'; tctx.fillRect(0,0,W,H);
-
-      if (bgImage && bgImage.src && bgImage.naturalWidth){
-        const scale = Math.min(W / bgImage.naturalWidth, H / bgImage.naturalHeight);
-        const w = bgImage.naturalWidth * scale, h = bgImage.naturalHeight * scale;
-        const dx = (W - w)/2, dy = (H - h)/2;
-        tctx.drawImage(bgImage, dx, dy, w, h);
+      const ctx = tmp.getContext('2d');
+      const bg = window.getComputedStyle(productBaseImage).backgroundColor || '#fff';
+      ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+      if (productBaseImage && productBaseImage.src){
+        await drawImageToCtx(ctx, productBaseImage, W, H);
       }
-
-      const list = objects.slice().sort((a,b)=>a.z - b.z);
-      for (const o of list){
-        tctx.save();
-        tctx.translate(o.x * (W/canvas.width), o.y * (H/canvas.height));
-        tctx.rotate(o.angle || 0);
-        tctx.scale(o.scale || 1, o.scale || 1);
-        if (o.type === 'text'){
-          tctx.fillStyle = o.props.color || '#000';
-          tctx.textAlign = 'center'; tctx.textBaseline='middle';
-          tctx.font = ((o.props.size||36) * 0.8) + 'px ' + (o.props.font || 'sans-serif');
-          const lines = String(o.props.text||'').split('\\n');
-          const lh = ((o.props.size||36) * 0.8) * 1.1;
-          for (let i=0;i<lines.length;i++){
-            tctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
-          }
-        } else if (o.type === 'image'){
-          if (o.props.img && o.props.img.complete){
-            const dw = (o.w||100) * 0.8;
-            const dh = (o.h||100) * 0.8;
-            tctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
-          }
-        }
-        tctx.restore();
+      const objects = fabricCanvas.getObjects().slice().sort((a,b) => (a.zIndex||0) - (b.zIndex||0));
+      for (const o of objects){
+        await drawFabricObjectOnCtx(ctx, o, W, H);
       }
-
       const thumb = tmp.toDataURL('image/png');
       const item = {
         id: 'projekt_' + Date.now(),
-        product: productType.value,
+        productType: productType.value,
         size: productSize.value,
-        color: productColor.value,
+        baseColor: productColor.value,
         price: parseFloat(productType.selectedOptions[0].dataset.price) || 0,
-        thumb,
-        objects
+        thumbnail: thumb,
+        objects: fabricCanvas.toJSON(['zIndex'])
       };
       const cart = JSON.parse(localStorage.getItem('adelbertus_cart') || '[]');
       cart.push(item);
       localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-      alert('Projekt dodany do koszyka lokalnego.');
+      alert('Projekt zapisany do koszyka lokalnego (localStorage).');
     } catch(err){
-      console.error(err); alert('Błąd dodawania do koszyka.');
+      console.error(err); alert('Błąd przy dodawaniu do koszyka.');
     }
   });
 
-  // initial draw
-  render();
+  // BODYPIX mask application
+  removeBgBtn.addEventListener('click', async () => {
+    const active = fabricCanvas.getActiveObject();
+    if (!active || !(active instanceof fabric.Image)) {
+      return alert('Zaznacz obiekt obrazu, na którym chcesz usunąć tło.');
+    }
+    try {
+      await ensureBodyPix(); // load model if needed
+      bodypixStatus.textContent = 'AI: segmentacja...';
+      // ensure underlying image element is ready
+      const imgEl = active._element || active.getElement();
+      if (!imgEl) throw new Error('Brak elementu obrazu.');
+      // perform segmentation
+      // options tuned for speed/accuracy tradeoff
+      const segmentation = await bodyPixNet.segmentPerson(imgEl, {
+        internalResolution: 'medium',
+        segmentationThreshold: 0.6,
+        maxDetections: 1,
+        scoreThreshold: 0.3,
+      });
+      // create mask imageData from segmentation
+      const mask = bodyPix.toMask(segmentation);
+      // draw original + mask to offscreen canvas to create alpha
+      const off = document.createElement('canvas');
+      off.width = imgEl.naturalWidth || imgEl.width;
+      off.height = imgEl.naturalHeight || imgEl.height;
+      const octx = off.getContext('2d');
+      // draw original
+      octx.drawImage(imgEl, 0, 0, off.width, off.height);
+      // get imageData of original
+      const orig = octx.getImageData(0,0,off.width, off.height);
+      // create mask imageData (mask has r,g,b,a values: keep alpha from mask)
+      const maskCanvas = document.createElement('canvas');
+      maskCanvas.width = mask.width; maskCanvas.height = mask.height;
+      const mctx = maskCanvas.getContext('2d');
+      // put mask RGBA then extract alpha
+      const maskImageData = mctx.createImageData(mask.width, mask.height);
+      // mask.data is Uint8ClampedArray length width*height*4
+      for (let i=0;i<mask.data.length;i++){
+        maskImageData.data[i] = mask.data[i];
+      }
+      mctx.putImageData(maskImageData, 0, 0);
+      // scale mask to original size if needed
+      if (maskCanvas.width !== off.width || maskCanvas.height !== off.height){
+        // draw scaled mask into temp
+        const scaled = document.createElement('canvas');
+        scaled.width = off.width; scaled.height = off.height;
+        const sctx = scaled.getContext('2d');
+        sctx.drawImage(maskCanvas, 0,0, scaled.width, scaled.height);
+        // get mask data scaled
+        const scaledData = sctx.getImageData(0,0,scaled.width, scaled.height).data;
+        // apply alpha
+        for (let p=0, q=0; p<orig.data.length; p+=4, q+=4){
+          // take alpha from scaledData q+3
+          orig.data[p+3] = scaledData[q+3];
+        }
+      } else {
+        // same size
+        const mdata = maskImageData.data;
+        for (let p=0, q=0; p<orig.data.length; p+=4, q+=4){
+          orig.data[p+3] = mdata[q+3];
+        }
+      }
+      // put modified imageData back
+      octx.putImageData(orig, 0,0);
+      // final dataURL
+      const maskedDataUrl = off.toDataURL('image/png');
 
-  // expose render for safety
-  window.adelbertus_render = render;
+      // store original for undo
+      lastMaskedInfo = { originalObjectId: active.toObject().id || active.__uid || ('img_' + Date.now()), originalSrc: active.originalSrc || (active.getSrc && active.getSrc()) || null };
 
-})();
+      // replace active object with masked image
+      fabric.Image.fromURL(maskedDataUrl, function(newImg){
+        // copy transform properties
+        newImg.left = active.left;
+        newImg.top = active.top;
+        newImg.scaleX = active.scaleX;
+        newImg.scaleY = active.scaleY;
+        newImg.angle = active.angle;
+        newImg.originX = active.originX;
+        newImg.originY = active.originY;
+        newImg.set('zIndex', ++zIndexCounter);
+        // preserve originalSrc for undo
+        newImg.originalSrc = active.originalSrc || (active.getSrc && active.getSrc()) || null;
+        // remove old and add new
+        fabricCanvas.remove(active);
+        fabricCanvas.add(newImg).setActiveObject(newImg);
+        fabricCanvas.requestRenderAll();
+        bodypixStatus.textContent = 'AI: maska zastosowana';
+      }, { crossOrigin: 'anonymous' });
+
+    } catch(err){
+      console.error('BodyPix error', err);
+      alert('Błąd podczas usuwania tła: ' + (err.message || err));
+      bodypixStatus.textContent = 'AI: błąd';
+    }
+  });
+
+  // Undo mask: if lastMaskedInfo present, try to find current selected image and restore originalSrc
+  undoMaskBtn.addEventListener('click', async () => {
+    const active = fabricCanvas.getActiveObject();
+    if (!active) { alert('Zaznacz obraz, aby cofnąć maskę (jeśli możliwe).'); return; }
+    // if active.originalSrc exists, replace it
+    if (active.originalSrc){
+      const origSrc = active.originalSrc;
+      fabric.Image.fromURL(origSrc, function(img){
+        img.left = active.left; img.top = active.top;
+        img.scaleX = active.scaleX; img.scaleY = active.scaleY; img.angle = active.angle;
+        img.set('zIndex', ++zIndexCounter);
+        img.originalSrc = origSrc;
+        fabricCanvas.remove(active);
+        fabricCanvas.add(img).setActiveObject(img);
+        fabricCanvas.requestRenderAll();
+        bodypixStatus.textContent = 'AI: cofnięto maskę (przywrócono oryginał)';
+      }, { crossOrigin: 'anonymous' });
+    } else {
+      alert('Brak zapisanego oryginalnego źródła obrazu (nie można cofnąć).');
+    }
+  });
+
+  // Helpers for drawing objects to ctx (same as before)
+  async function drawImageToCtx(ctx, imgEl, W, H){
+    return new Promise((resolve,reject) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        const iw = img.naturalWidth, ih = img.naturalHeight;
+        const scale = Math.min(W / iw, H / ih);
+        const w = iw * scale, h = ih * scale;
+        const dx = (W - w)/2, dy = (H - h)/2;
+        ctx.drawImage(img, dx, dy, w, h);
+        resolve();
+      };
+      img.onerror = reject;
+      img.src = imgEl.src;
+    });
+  }
+
+  async function drawFabricObjectOnCtx(ctx, obj, targetW, targetH){
+    return new Promise(async (resolve) => {
+      try {
+        const scaleX = targetW / fabricCanvas.getWidth();
+        const scaleY = targetH / fabricCanvas.getHeight();
+        const left = (obj.left || 0) * scaleX;
+        const top = (obj.top || 0) * scaleY;
+        const angle = (obj.angle || 0) * Math.PI / 180;
+        const objScaleX = (obj.scaleX || 1) * scaleX;
+        const objScaleY = (obj.scaleY || 1) * scaleY;
+        ctx.save();
+        ctx.translate(left, top);
+        ctx.rotate(angle);
+        ctx.scale(objScaleX, objScaleY);
+        if (obj.type === 'textbox' || obj instanceof fabric.Textbox){
+          const font = (obj.fontFamily || obj.font || 'sans-serif');
+          const fontSize = (obj.fontSize || 40) * (obj.scaleX || 1) * scaleX;
+          ctx.fillStyle = obj.fill || '#000';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.font = Math.round(fontSize) + 'px ' + font;
+          const lines = (obj.text || '').split('\n');
+          const lh = fontSize * 1.15;
+          for (let i=0;i<lines.length;i++){
+            ctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
+          }
+          ctx.restore();
+          return resolve();
+        } else if (obj.type === 'image' || obj instanceof fabric.Image){
+          const imgEl = obj._element || (obj.getElement && obj.getElement()) || null;
+          if (imgEl){
+            const w = (obj.width || imgEl.naturalWidth || 100) * (obj.scaleX || 1) * scaleX;
+            const h = (obj.height || imgEl.naturalHeight || 100) * (obj.scaleY || 1) * scaleY;
+            ctx.drawImage(imgEl, -w/2, -h/2, w, h);
+            ctx.restore();
+            return resolve();
+          } else if (obj.getSrc){
+            const src = obj.getSrc();
+            const img = new Image();
+            img.crossOrigin = 'anonymous';
+            img.onload = function(){
+              const w = (obj.width || img.naturalWidth) * (obj.scaleX || 1) * scaleX;
+              const h = (obj.height || img.naturalHeight) * (obj.scaleY || 1) * scaleY;
+              ctx.drawImage(img, -w/2, -h/2, w, h);
+              ctx.restore();
+              return resolve();
+            };
+            img.onerror = () => { ctx.restore(); return resolve(); };
+            img.src = src;
+            return;
+          }
+        }
+        ctx.restore();
+        resolve();
+      } catch(e){
+        console.warn('drawFabricObjectOnCtx error', e);
+        try{ ctx.restore(); }catch{}
+        resolve();
+      }
+    });
+  }
+
+  // utility: download dataURL
+  function downloadDataUrl(dataUrl, filename){
+    const a = document.createElement('a'); a.href = dataUrl; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  // expose fabricCanvas for debugging
+  window.fabricCanvas = fabricCanvas;
+  // final: ensure HiDPI crispness
+  (function fixHiDPI(){
+    const ratio = window.devicePixelRatio || 1;
+    const w = canvasEl.width, h = canvasEl.height;
+    canvasEl.width = w * ratio;
+    canvasEl.height = h * ratio;
+    canvasEl.style.width = w + 'px';
+    canvasEl.style.height = h + 'px';
+    fabricCanvas.setWidth(w);
+    fabricCanvas.setHeight(h);
+    fabricCanvas.calcOffset();
+  })();
+
+})(); // end IIFE
 </script>
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
