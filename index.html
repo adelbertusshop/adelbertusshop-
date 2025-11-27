@@ -3650,658 +3650,468 @@
                 </div>
             </div>
         </section>
-        <!doctype html>
-<html lang="pl">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Studio Projektowe ADELBERTUS — Projektuj</title>
-
-  <!-- Tailwind (CDN quick usage) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font: Monoton + system fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-
-  <!-- Font Awesome (icons użyte w markup) -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous" />
-
-  <!-- Fabric.js (canvas + obiekty) -->
-  <script src="https://unpkg.com/fabric@5.3.0/dist/fabric.min.js"></script>
-
-  <style>
-    /* drobne poprawki stylów aby canvas lepiej się skalował */
-    #productBaseDisplay { max-width: 560px; margin: 0 auto; }
-    #currentProductImg { max-width: 100%; height: auto; display:block; }
-    /* zapewniam, że canvas dopasowuje się na środku obrazka */
-    #designCanvas { outline: none; }
-  </style>
-</head>
-<body class="bg-black text-white">
-
-<!-- Studio projektowe - GOTOWY -->
+       <!-- Studio projektowe - ZASTĘPUJĄCA, PROSTA I DZIAŁAJĄCA -->
 <section id="design" class="py-16 bg-black text-white relative">
   <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-      <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold mb-2 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
+      <p class="text-lg text-gray-400">Prosty edytor: tekst + grafika → pobierz / dodaj do koszyka (localStorage)</p>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-8 relative">
-      <!-- Tools -->
-      <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-pink-400"><i class="fas fa-palette"></i> Opcje Produktu</div>
+    <div class="flex flex-col lg:flex-row gap-6">
+      <!-- PANEL -->
+      <div class="lg:w-1/3 bg-gray-900 p-5 rounded-xl border border-gray-700">
+        <label class="block text-gray-300 mb-2">Produkt</label>
+        <select id="productType" class="w-full p-2 mb-3 bg-black border border-gray-700 text-white">
+          <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka (120 zł)</option>
+          <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza (200 zł)</option>
+          <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka (99 zł)</option>
+        </select>
 
-          <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-            <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka (120 zł)</option>
-            <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza (200 zł)</option>
-            <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka (99 zł)</option>
+        <label class="block text-gray-300 mb-2">Rozmiar</label>
+        <select id="productSize" class="w-full p-2 mb-3 bg-black border border-gray-700 text-white">
+          <option>S</option><option selected>M</option><option>L</option><option>XL</option><option>XXL</option>
+        </select>
+
+        <label class="block text-gray-300 mb-2">Kolor tkaniny</label>
+        <input id="productColor" type="color" value="#ffffff" class="w-full h-10 mb-4">
+
+        <hr class="border-gray-700 mb-4">
+
+        <label class="block text-gray-300 mb-2">Dodaj tekst</label>
+        <input id="textInput" class="w-full p-2 mb-2 bg-black border border-gray-700 text-white" placeholder="Wpisz tekst...">
+        <div class="flex gap-2 mb-3">
+          <select id="fontSelect" class="flex-1 p-2 bg-black border border-gray-700 text-white">
+            <option value="Impact, sans-serif">Impact</option>
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Verdana, sans-serif">Verdana</option>
+            <option value="Courier New, monospace">Courier</option>
           </select>
+          <input id="fontSize" type="number" value="36" min="8" max="200" class="w-20 p-2 bg-black border border-gray-700 text-white">
+        </div>
+        <label class="block text-gray-300 mb-2">Kolor tekstu</label>
+        <input id="textColor" type="color" value="#000000" class="w-full h-10 mb-3">
+        <button id="addText" class="w-full bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 rounded mb-4">Dodaj tekst</button>
 
-          <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-          </select>
+        <label class="block text-gray-300 mb-2">Dodaj grafikę</label>
+        <input id="imgFile" type="file" accept="image/*" class="mb-3 w-full text-sm">
+        <button id="uploadBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded mb-4">Wgraj obraz</button>
 
-          <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
-          <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
+        <div class="flex gap-2">
+          <button id="deleteBtn" class="flex-1 bg-red-600 hover:bg-red-700 py-2 rounded font-bold">Usuń</button>
+          <button id="clearBtn" class="flex-1 bg-gray-600 hover:bg-gray-700 py-2 rounded font-bold">Wyczyść</button>
         </div>
 
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-yellow-400"><i class="fas fa-font"></i> Dodaj Tekst</div>
-          <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-          <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded transition duration-300 w-full mb-3">Dodaj Tekst</button>
-
-          <div class="flex gap-3 mb-3">
-            <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
-              <option value="Impact, Charcoal, sans-serif">Impact (80s/90s)</option>
-              <option value="Arial, Helvetica, sans-serif">Arial</option>
-              <option value="Times New Roman, Times, serif">Times New Roman</option>
-              <option value="Courier New, Courier, monospace">Courier New</option>
-              <option value="Verdana, Geneva, sans-serif">Verdana</option>
-              <option value="'Monoton', cursive">Monoton (Wymaga CSS)</option>
-            </select>
-            <input type="number" id="fontSize" value="36" min="10" max="200" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
-          </div>
-
-          <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
-          <input type="color" id="textColor" value="#000000" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
-        </div>
-
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-blue-400"><i class="fas fa-image"></i> Dodaj Grafikę</div>
-          <input type="file" id="designImage" accept="image/*" class="hidden" onchange="handleImageUpload(event)">
-          <button class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 rounded" onclick="document.getElementById('designImage').click()">
-            <i class="fas fa-upload"></i> Wybierz własny obraz
-          </button>
+        <div class="mt-4 text-sm text-gray-400">
+          <p>Wybierz obiekt → przeciągnij, użyj scroll (kółko) aby skalować zaznaczony.</p>
+          <p class="mt-1">Ctrl/Cmd + D — duplikuj. Delete — usuń.</p>
         </div>
       </div>
 
-      <!-- Canvas area -->
-      <div class="canvas-area lg:w-2/3 flex flex-col items-center">
-        <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-          <img id="currentProductImg"
-               src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg"
-               alt="Koszulka" class="w-full h-full object-contain absolute z-10" style="background-color: #ffffff;">
-          <!-- fabric canvas will be initialized on this element -->
-          <canvas id="designCanvas" width="400" height="400" class="absolute z-20"></canvas>
+      <!-- PODGLĄD -->
+      <div class="lg:w-2/3 flex flex-col items-center">
+        <div id="previewWrap" class="relative bg-gray-800 rounded-xl overflow-hidden" style="width:520px;height:520px;border:1px solid #2a2a2a;">
+          <canvas id="editorCanvas" width="520" height="520" style="display:block;"></canvas>
         </div>
 
-        <div class="canvas-controls flex justify-center space-x-4 mb-8">
-          <button id="deleteBtn" class="nav-btn bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-trash"></i> Usuń Zaznaczone</button>
-          <button id="clearBtn" class="nav-btn bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-eraser"></i> Wyczyść Całość</button>
-          <button id="bringFrontBtn" class="nav-btn bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full transition duration-300"><i class="fas fa-layer-group"></i> Na wierzch</button>
-        </div>
-
-        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
-          <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
-
-          <button id="exportBtn" class="side-button bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" title="Zapisz projekt jako obraz">
-            <i class="fas fa-download"></i> Pobierz Projekt
-          </button>
-          <button id="addToCartBtn" class="side-button bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300" title="Dodaj do koszyka">
-            <i class="fas fa-cart-plus"></i> Dodaj do Koszyka
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-    <!-- Studio projektowe - NAPRAWIONE (wklej w miejsce starej sekcji) -->
-<section id="design" class="py-16 bg-black text-white relative">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-12">
-      <h2 class="text-5xl font-bold mb-3 text-yellow-400">Studio Projektowe ADELBERTUS</h2>
-      <p class="text-xl text-gray-400">Stwórz swój unikalny produkt w stylu Vintage - 80s / 90s</p>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8 relative">
-      <!-- PANEL NARZĘDZI -->
-      <div class="design-tools lg:w-1/3 bg-gray-900 p-6 rounded-xl shadow-2xl border border-gray-700 h-fit">
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-pink-400">Opcje Produktu</div>
-
-          <select id="productType" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-            <option value="tshirt" data-price="120" data-img="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg">Koszulka (120 zł)</option>
-            <option value="hoodie" data-price="200" data-img="https://i.ibb.co/2s2g5Kk/hoodie-mockup.jpg">Bluza (200 zł)</option>
-            <option value="cap" data-price="99" data-img="https://i.ibb.co/0Vq1gY1/cap-mockup.jpg">Czapka (99 zł)</option>
-          </select>
-
-          <select id="productSize" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-            <option value="XXL">XXL</option>
-          </select>
-
-          <label for="productColor" class="text-gray-400 block mb-2">Kolor Podstawowy:</label>
-          <input type="color" id="productColor" value="#ffffff" class="w-full h-10 mb-3 border border-gray-700 rounded-lg cursor-pointer">
-        </div>
-
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-yellow-400">Dodaj Tekst</div>
-          <input type="text" id="designText" placeholder="Wpisz swój tekst" class="w-full p-3 border border-gray-700 bg-gray-900 rounded mb-3 text-white">
-          <button id="addTextBtn" class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded w-full mb-3">Dodaj Tekst</button>
-
-          <div class="flex gap-3 mb-3">
-            <select id="fontFamily" class="flex-1 p-2 border border-gray-700 bg-gray-900 rounded text-white">
-              <option value="Impact, sans-serif">Impact</option>
-              <option value="Arial, sans-serif">Arial</option>
-              <option value="Times New Roman, serif">Times New Roman</option>
-              <option value="Courier New, monospace">Courier New</option>
-              <option value="Verdana, sans-serif">Verdana</option>
-            </select>
-            <input type="number" id="fontSize" value="36" min="10" max="200" class="w-20 p-2 border border-gray-700 bg-gray-900 rounded text-white text-center">
-          </div>
-
-          <label for="textColor" class="text-gray-400 block mb-2">Kolor Tekstu:</label>
-          <input type="color" id="textColor" value="#000000" class="w-full h-10 border border-gray-700 rounded-lg cursor-pointer">
-        </div>
-
-        <div class="tool-group mb-6 p-4 bg-gray-800 rounded-lg">
-          <div class="tool-title text-xl font-semibold mb-3 text-blue-400">Dodaj Grafikę</div>
-          <input type="file" id="designImage" accept="image/*" class="hidden">
-          <button id="uploadImageBtn" class="nav-btn bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 rounded">Wybierz własny obraz</button>
-        </div>
-      </div>
-
-      <!-- OBSZAR PROJEKTOWANIA -->
-      <div class="canvas-area lg:w-2/3 flex flex-col items-center">
-        <div id="productBaseDisplay" class="mb-4 relative w-[500px] h-[500px] flex items-center justify-center bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
-          <img id="currentProductImg" src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka" class="w-full h-full object-contain absolute z-0" style="background-color: #ffffff;">
-          <!-- kontener DOM dla elementów projektowych (tekst/grafika) -->
-          <div id="designLayer" style="position:absolute; inset:0; z-index:10;"></div>
-        </div>
-
-        <div class="canvas-controls flex justify-center space-x-4 mb-8">
-          <button id="deleteBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-full">Usuń Zaznaczone</button>
-          <button id="clearBtn" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full">Wyczyść Całość</button>
-          <button id="bringToFrontBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full">Na wierzch</button>
-        </div>
-
-        <div class="final-actions bg-gray-900 p-6 rounded-xl shadow-2xl border border-yellow-400 flex flex-wrap justify-center gap-4 w-full">
-          <div class="text-xl font-bold mr-4 flex items-center">Cena: <span id="currentPrice" class="ml-2 text-yellow-400">120 zł</span></div>
-          <button id="exportBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-lg">Pobierz Projekt</button>
-          <button id="addToCartBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg">Dodaj do Koszyka</button>
+        <div class="mt-4 flex gap-3 w-full justify-center">
+          <div class="text-xl font-bold text-yellow-400 self-center">Cena: <span id="price">120 zł</span></div>
+          <button id="exportBtn" class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded">Pobierz</button>
+          <button id="cartBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Dodaj do koszyka</button>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- SKRYPT: prosty edytor bez zewnętrznych bibliotek -->
+<!-- SKRYPT: prosty edytor na canvas -->
 <script>
 (function(){
-  // ELEMENTY DOM
+  // --- ELEMENTY ---
+  const canvas = document.getElementById('editorCanvas');
+  const ctx = canvas.getContext('2d');
   const productType = document.getElementById('productType');
-  const productColor = document.getElementById('productColor');
   const productSize = document.getElementById('productSize');
-  const currentPrice = document.getElementById('currentPrice');
-  const currentProductImg = document.getElementById('currentProductImg');
-  const designLayer = document.getElementById('designLayer');
+  const productColor = document.getElementById('productColor');
+  const priceEl = document.getElementById('price');
 
-  const addTextBtn = document.getElementById('addTextBtn');
-  const designText = document.getElementById('designText');
-  const fontFamily = document.getElementById('fontFamily');
+  const textInput = document.getElementById('textInput');
+  const addTextBtn = document.getElementById('addText');
+  const fontSelect = document.getElementById('fontSelect');
   const fontSizeInput = document.getElementById('fontSize');
-  const textColor = document.getElementById('textColor');
+  const textColorInput = document.getElementById('textColor');
 
-  const uploadImageBtn = document.getElementById('uploadImageBtn');
-  const designImageInput = document.getElementById('designImage');
+  const imgFile = document.getElementById('imgFile');
+  const uploadBtn = document.getElementById('uploadBtn');
 
   const deleteBtn = document.getElementById('deleteBtn');
   const clearBtn = document.getElementById('clearBtn');
-  const bringToFrontBtn = document.getElementById('bringToFrontBtn');
   const exportBtn = document.getElementById('exportBtn');
-  const addToCartBtn = document.getElementById('addToCartBtn');
+  const cartBtn = document.getElementById('cartBtn');
 
-  // STAN: lista obiektów projektowych
-  // każdy obiekt: { id, type: 'text'|'image', x, y, scale, rotation, z, props: { text,font,size,color } lub { imgSrc, naturalW,naturalH } }
-  let objects = [];
-  let selectedId = null;
+  // --- STAN ---
+  let bgImage = new Image();
+  bgImage.crossOrigin = 'anonymous';
+  bgImage.src = productType.selectedOptions[0].dataset.img;
+  let objects = []; // { id,type:'text'|'image', x,y,w,h,scale,angle,z, props: { text,font,size,color } or { img } }
+  let selected = null;
+  let dragging = false;
+  let dragOffset = {x:0,y:0};
   let zCounter = 1;
 
-  // helper: aktualizuj cenę i obraz
-  function updatePriceAndImage(){
-    const sel = productType.selectedOptions[0];
-    const price = sel.dataset.price || '0';
-    const img = sel.dataset.img || '';
-    currentPrice.textContent = price + ' zł';
-    if (img) currentProductImg.src = img;
+  // --- POMOCNIKI ---
+  function updatePriceAndBg(){
+    const opt = productType.selectedOptions[0];
+    priceEl.textContent = (opt.dataset.price || '0') + ' zł';
+    const src = opt.dataset.img;
+    if (src){
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload = () => { bgImage = im; render(); };
+      im.onerror = () => { bgImage = new Image(); bgImage.src=''; render(); };
+      im.src = src;
+    }
   }
-  productType.addEventListener('change', updatePriceAndImage);
-  updatePriceAndImage();
+  productType.addEventListener('change', updatePriceAndBg);
+  updatePriceAndBg();
 
-  // kolor tkaniny - zmienia tło obrazka
-  productColor.addEventListener('input', e => {
-    currentProductImg.style.backgroundColor = e.target.value;
+  function guid(){ return 'id'+Date.now()+Math.floor(Math.random()*1000); }
+
+  function clearCanvas(){ ctx.clearRect(0,0,canvas.width,canvas.height); }
+
+  // RENDER: tło + obiekty w porządku z (rosnąco)
+  function render(){
+    // tło (kolor tkaniny)
+    ctx.save();
+    ctx.fillStyle = productColor.value || '#ffffff';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.restore();
+
+    // rysuj background image środkowo, utrzymując proporcje i dopasowanie
+    if (bgImage && bgImage.src){
+      const iw = bgImage.naturalWidth, ih = bgImage.naturalHeight;
+      if (iw && ih){
+        const scale = Math.min(canvas.width / iw, canvas.height / ih);
+        const w = iw * scale, h = ih * scale;
+        const dx = (canvas.width - w)/2, dy = (canvas.height - h)/2;
+        ctx.drawImage(bgImage, dx, dy, w, h);
+      }
+    }
+
+    // sort by z
+    const list = objects.slice().sort((a,b)=>a.z - b.z);
+    for (const o of list){
+      ctx.save();
+      ctx.translate(o.x, o.y);
+      ctx.rotate(o.angle || 0);
+      ctx.scale(o.scale, o.scale);
+      if (o.type === 'text'){
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = o.props.color || '#000';
+        ctx.font = (o.props.size || 36) + 'px ' + (o.props.font || 'sans-serif');
+        // multi-line support
+        const lines = String(o.props.text || '').split('\\n');
+        const lh = (o.props.size || 36) * 1.1;
+        for (let i=0;i<lines.length;i++){
+          ctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
+        }
+      } else if (o.type === 'image'){
+        if (o.props.img && o.props.img.complete){
+          const iw = o.props.img.naturalWidth, ih = o.props.img.naturalHeight;
+          const dw = o.w || iw, dh = o.h || ih;
+          ctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
+        }
+      }
+      // selection rectangle
+      if (selected && o.id === selected.id){
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#ff0';
+        const bboxW = (o.w||100) , bboxH = (o.h||50);
+        ctx.strokeRect(-bboxW/2, -bboxH/2, bboxW, bboxH);
+      }
+      ctx.restore();
+    }
+  }
+
+  // HIT TEST: odwrotna transformacja — sprawdź w porządku z najwyższym z
+  function hitTest(mx,my){
+    // iteruj od najwyższego z
+    const list = objects.slice().sort((a,b)=>b.z - a.z);
+    for (const o of list){
+      // transform point do lokalnych coords
+      const dx = mx - o.x, dy = my - o.y;
+      const cos = Math.cos(-o.angle||0), sin = Math.sin(-o.angle||0);
+      const lx = (dx * cos - dy * sin) / (o.scale || 1);
+      const ly = (dx * sin + dy * cos) / (o.scale || 1);
+      const w = o.w || (o.type==='text' ? (String(o.props.text||'').length * (o.props.size||36)*0.6) : (o.props.img ? o.props.img.naturalWidth : 100));
+      const h = o.h || (o.type==='text' ? (o.props.size||36) : (o.props.img ? o.props.img.naturalHeight : 100));
+      if (lx >= -w/2 && lx <= w/2 && ly >= -h/2 && ly <= h/2){
+        return o;
+      }
+    }
+    return null;
+  }
+
+  // MOUSE EVENTS
+  canvas.addEventListener('mousedown', (ev) => {
+    const r = canvas.getBoundingClientRect();
+    const mx = ev.clientX - r.left;
+    const my = ev.clientY - r.top;
+    const hit = hitTest(mx,my);
+    if (hit){
+      selected = hit;
+      dragging = true;
+      // compute offset in object's local coords
+      const dx = mx - hit.x, dy = my - hit.y;
+      dragOffset.x = dx; dragOffset.y = dy;
+      render();
+    } else {
+      selected = null;
+      render();
+    }
   });
 
-  // UTWÓRZ DOM dla obiektu
-  function createObjectDOM(o){
-    const el = document.createElement('div');
-    el.className = 'design-object';
-    el.dataset.id = o.id;
-    el.style.position = 'absolute';
-    el.style.left = (o.x * 100) + '%';
-    el.style.top = (o.y * 100) + '%';
-    el.style.transformOrigin = 'center center';
-    el.style.zIndex = o.z;
-    el.style.cursor = 'move';
-    el.style.userSelect = 'none';
-    el.style.display = 'flex';
-    el.style.alignItems = 'center';
-    el.style.justifyContent = 'center';
-    // viz border when selected
-    if (o.id === selectedId) el.style.outline = '2px dashed #ff0';
+  canvas.addEventListener('mousemove', (ev) => {
+    if (!dragging || !selected) return;
+    const r = canvas.getBoundingClientRect();
+    const mx = ev.clientX - r.left;
+    const my = ev.clientY - r.top;
+    selected.x = mx - dragOffset.x;
+    selected.y = my - dragOffset.y;
+    render();
+  });
 
-    if (o.type === 'text'){
-      el.innerText = o.props.text;
-      el.style.fontFamily = o.props.font;
-      el.style.fontSize = (o.props.size * o.scale) + 'px';
-      el.style.color = o.props.color;
-      el.style.whiteSpace = 'pre';
-      el.style.pointerEvents = 'auto';
-    } else if (o.type === 'image'){
-      const img = document.createElement('img');
-      img.src = o.props.imgSrc;
-      img.draggable = false;
-      img.style.maxWidth = (o.props.naturalW * o.scale) + 'px';
-      img.style.maxHeight = (o.props.naturalH * o.scale) + 'px';
-      img.style.pointerEvents = 'none';
-      el.appendChild(img);
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  // wheel => scale selected
+  canvas.addEventListener('wheel', (ev) => {
+    if (!selected) return;
+    ev.preventDefault();
+    const delta = ev.deltaY < 0 ? 0.05 : -0.05;
+    selected.scale = Math.max(0.1, (selected.scale || 1) + delta);
+    render();
+  }, { passive:false });
+
+  // keyboard
+  window.addEventListener('keydown', (ev) => {
+    if ((ev.key === 'Delete' || ev.key === 'Backspace') && selected){
+      objects = objects.filter(o=>o.id !== selected.id);
+      selected = null; render();
     }
-    // attach events for selection and drag
-    el.addEventListener('mousedown', function(e){
-      e.stopPropagation();
-      selectObject(o.id);
-      startDrag(e, o.id);
-    });
-    el.addEventListener('touchstart', function(e){
-      e.stopPropagation();
-      selectObject(o.id);
-      startDrag(e.touches[0], o.id);
-    }, { passive: true });
-
-    return el;
-  }
-
-  // RENDER: odśwież warstwę DOM
-  function renderAll(){
-    // clear
-    designLayer.innerHTML = '';
-    // sort objects by z
-    objects.sort((a,b) => a.z - b.z);
-    for (const o of objects){
-      const el = createObjectDOM(o);
-      designLayer.appendChild(el);
-    }
-  }
-
-  // DODAJ TEKST
-  addTextBtn.addEventListener('click', () => {
-    const txt = (designText.value || '').trim();
-    if (!txt) { alert('Wpisz tekst.'); return; }
-    const o = {
-      id: 'o' + Date.now(),
-      type: 'text',
-      x: 0.5, y: 0.5,
-      scale: 1,
-      rotation: 0,
-      z: ++zCounter,
-      props: {
-        text: txt,
-        font: fontFamily.value,
-        size: parseInt(fontSizeInput.value,10) || 36,
-        color: textColor.value || '#000000'
+    if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'd' && selected){
+      const copy = JSON.parse(JSON.stringify(selected));
+      copy.id = guid();
+      copy.x += 15; copy.y += 15; copy.z = ++zCounter;
+      // restore img object if image
+      if (copy.type === 'image' && copy.props && copy.props.src){
+        const im = new Image(); im.crossOrigin='anonymous'; im.src = copy.props.src;
+        copy.props.img = im;
       }
+      objects.push(copy);
+      selected = copy;
+      render();
+    }
+  });
+
+  // ADD TEXT
+  addTextBtn.addEventListener('click', () => {
+    const t = String(textInput.value || '').trim();
+    if (!t){ alert('Wpisz tekst.'); return; }
+    const o = {
+      id: guid(),
+      type: 'text',
+      x: canvas.width/2,
+      y: canvas.height/2,
+      w: (t.length || 6) * (parseInt(fontSizeInput.value,10)||36) * 0.6,
+      h: parseInt(fontSizeInput.value,10)||36,
+      scale: 1,
+      angle: 0,
+      z: ++zCounter,
+      props: { text: t, font: fontSelect.value, size: parseInt(fontSizeInput.value,10)||36, color: textColorInput.value }
     };
     objects.push(o);
-    selectedId = o.id;
-    renderAll();
+    selected = o;
+    render();
   });
 
-  // WGRYWANIE OBRAZU
-  uploadImageBtn.addEventListener('click', () => designImageInput.click());
-  designImageInput.addEventListener('change', handleImageFile);
-  function handleImageFile(e){
-    const file = e.target.files && e.target.files[0];
-    if (!file) return;
+  // UPLOAD IMAGE
+  uploadBtn.addEventListener('click', () => imgFile.click());
+  imgFile.addEventListener('change', () => {
+    const f = imgFile.files && imgFile.files[0];
+    if (!f) return;
     const reader = new FileReader();
-    reader.onload = function(ev){
-      const img = new Image();
-      img.onload = function(){
-        const ratioW = img.width;
-        const ratioH = img.height;
+    reader.onload = (e) => {
+      const im = new Image();
+      im.crossOrigin = 'anonymous';
+      im.onload = () => {
+        const maxDim = Math.min(canvas.width, canvas.height) * 0.6;
+        const scale = Math.min(1, maxDim / Math.max(im.naturalWidth, im.naturalHeight));
         const o = {
-          id: 'o' + Date.now(),
+          id: guid(),
           type: 'image',
-          x: 0.5, y: 0.5,
-          scale: Math.min(200 / ratioW, 200 / ratioH, 1),
-          rotation: 0,
+          x: canvas.width/2,
+          y: canvas.height/2,
+          w: im.naturalWidth * scale,
+          h: im.naturalHeight * scale,
+          scale: 1,
+          angle: 0,
           z: ++zCounter,
-          props: {
-            imgSrc: ev.target.result,
-            naturalW: Math.min(ratioW, 400),
-            naturalH: Math.min(ratioH, 400)
-          }
+          props: { src: e.target.result, img: im }
         };
         objects.push(o);
-        selectedId = o.id;
-        renderAll();
+        selected = o;
+        render();
       };
-      img.src = ev.target.result;
+      im.src = e.target.result;
     };
-    reader.readAsDataURL(file);
-    e.target.value = '';
-  }
-
-  // SELEKCJA
-  function selectObject(id){
-    selectedId = id;
-    renderAll();
-  }
-
-  // ODZNAKOWANIE PRZY KLIKNIECIU POZA
-  designLayer.parentElement.addEventListener('mousedown', () => {
-    selectedId = null;
-    renderAll();
+    reader.readAsDataURL(f);
+    imgFile.value = '';
   });
-  designLayer.parentElement.addEventListener('touchstart', () => {
-    selectedId = null;
-    renderAll();
-  }, { passive: true });
 
-  // DRAG
-  let dragState = null;
-  function startDrag(e, id){
-    const obj = objects.find(x=>x.id===id);
-    if (!obj) return;
-    const rect = designLayer.getBoundingClientRect();
-    const startX = e.clientX, startY = e.clientY;
-    const startObjX = obj.x, startObjY = obj.y;
-    dragState = { id, startX, startY, startObjX, startObjY, rect };
-    window.addEventListener('mousemove', onDrag);
-    window.addEventListener('mouseup', endDrag);
-    window.addEventListener('touchmove', onTouchDrag, { passive: false });
-    window.addEventListener('touchend', endDrag);
-  }
-  function onDrag(e){
-    if (!dragState) return;
-    const { id, startX, startY, startObjX, startObjY, rect } = dragState;
-    const dx = e.clientX - startX;
-    const dy = e.clientY - startY;
-    const nx = startObjX + dx / rect.width;
-    const ny = startObjY + dy / rect.height;
-    const obj = objects.find(x=>x.id===id);
-    if (!obj) return;
-    obj.x = Math.max(0, Math.min(1, nx));
-    obj.y = Math.max(0, Math.min(1, ny));
-    renderAll();
-  }
-  function onTouchDrag(e){
-    if (!dragState) return;
-    e.preventDefault();
-    const touch = e.touches[0];
-    onDrag({ clientX: touch.clientX, clientY: touch.clientY });
-  }
-  function endDrag(){
-    dragState = null;
-    window.removeEventListener('mousemove', onDrag);
-    window.removeEventListener('mouseup', endDrag);
-    window.removeEventListener('touchmove', onTouchDrag);
-    window.removeEventListener('touchend', endDrag);
-  }
-
-  // ZOOM (kółko myszy) — powiększa zaznaczony obiekt
-  designLayer.addEventListener('wheel', (e) => {
-    if (!selectedId) return;
-    e.preventDefault();
-    const obj = objects.find(o=>o.id===selectedId);
-    if (!obj) return;
-    const delta = e.deltaY < 0 ? 0.05 : -0.05;
-    obj.scale = Math.max(0.1, obj.scale + delta);
-    renderAll();
-  }, { passive: false });
-
-  // DELETE selected
+  // DELETE / CLEAR
   deleteBtn.addEventListener('click', () => {
-    if (!selectedId) { alert('Brak zaznaczonego obiektu.'); return; }
-    objects = objects.filter(o => o.id !== selectedId);
-    selectedId = null;
-    renderAll();
+    if (!selected){ alert('Brak zaznaczonego obiektu.'); return; }
+    objects = objects.filter(o => o.id !== selected.id);
+    selected = null; render();
   });
-
-  // CLEAR all
   clearBtn.addEventListener('click', () => {
-    if (!confirm('Na pewno usunąć wszystkie elementy projektu?')) return;
-    objects = [];
-    selectedId = null;
-    renderAll();
+    if (!confirm('Usuń wszystkie obiekty?')) return;
+    objects = []; selected=null; render();
   });
 
   // BRING TO FRONT
-  bringToFrontBtn.addEventListener('click', () => {
-    if (!selectedId) { alert('Zaznacz obiekt.'); return; }
-    const obj = objects.find(o=>o.id===selectedId);
-    if (!obj) return;
-    obj.z = ++zCounter;
-    renderAll();
+  // double-click canvas to bring selected to front (or use this button pattern)
+  canvas.addEventListener('dblclick', () => {
+    if (!selected) return;
+    selected.z = ++zCounter;
+    render();
   });
 
-  // EXPORT -> rysuje bazę + obiekty na canvasie i pobiera PNG
+  // EXPORT PNG
   exportBtn.addEventListener('click', async () => {
     try {
-      const baseSrc = currentProductImg.src;
-      const baseImg = await loadImage(baseSrc);
-      const w = baseImg.naturalWidth || 1000;
-      const h = baseImg.naturalHeight || 1000;
-      const tmp = document.createElement('canvas');
-      tmp.width = w; tmp.height = h;
-      const ctx = tmp.getContext('2d');
+      // create high-res canvas for export (2x)
+      const W = canvas.width * 2, H = canvas.height * 2;
+      const tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H;
+      const tctx = tmp.getContext('2d');
 
-      // tło (kolor tkaniny)
-      const bg = getComputedStyle(currentProductImg).backgroundColor || '#fff';
-      ctx.fillStyle = bg;
-      ctx.fillRect(0,0,w,h);
+      // fill bg color
+      tctx.fillStyle = productColor.value || '#fff';
+      tctx.fillRect(0,0,W,H);
 
-      // rysuj bazowy obraz wypełniając
-      ctx.drawImage(baseImg, 0, 0, w, h);
-
-      // rysuj obiekty - musimy dopasować pozycję procentową do wymiarów canvas
-      // obiekty rysujemy w kolejności z rosnącym z (jak na ekranie)
-      const drawOrder = objects.slice().sort((a,b)=>a.z - b.z);
-      for (const o of drawOrder){
-        const cx = o.x * w;
-        const cy = o.y * h;
-        if (o.type === 'text'){
-          ctx.save();
-          ctx.fillStyle = o.props.color || '#000';
-          ctx.font = (o.props.size * o.scale) + 'px ' + (o.props.font || 'sans-serif');
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          // obsługa wielowierszów
-          const lines = String(o.props.text).split('\\n');
-          const lineHeight = (o.props.size * o.scale) * 1.15;
-          const startY = cy - (lines.length-1) * lineHeight / 2;
-          for (let i=0;i<lines.length;i++){
-            ctx.fillText(lines[i], cx, startY + i*lineHeight);
-          }
-          ctx.restore();
-        } else if (o.type === 'image'){
-          // wczytaj obraz i narysuj z zachowaniem skalowania
-          try {
-            const img = await loadImage(o.props.imgSrc);
-            const dw = (o.props.naturalW) * o.scale;
-            const dh = (o.props.naturalH) * o.scale;
-            ctx.drawImage(img, cx - dw/2, cy - dh/2, dw, dh);
-          } catch(err){
-            console.warn('Błąd rysowania obrazka', err);
-          }
-        }
+      // draw background image scaled
+      if (bgImage && bgImage.src && bgImage.naturalWidth){
+        const scale = Math.min(W / bgImage.naturalWidth, H / bgImage.naturalHeight);
+        const w = bgImage.naturalWidth * scale, h = bgImage.naturalHeight * scale;
+        const dx = (W - w)/2, dy = (H - h)/2;
+        tctx.drawImage(bgImage, dx, dy, w, h);
       }
 
-      // pobierz plik
+      // draw objects
+      const list = objects.slice().sort((a,b)=>a.z - b.z);
+      for (const o of list){
+        tctx.save();
+        tctx.translate(o.x*2, o.y*2);
+        tctx.rotate(o.angle || 0);
+        tctx.scale(o.scale || 1, o.scale || 1);
+        if (o.type === 'text'){
+          tctx.fillStyle = o.props.color || '#000';
+          tctx.textAlign = 'center'; tctx.textBaseline='middle';
+          tctx.font = (o.props.size * 2) + 'px ' + (o.props.font || 'sans-serif');
+          const lines = String(o.props.text||'').split('\\n');
+          const lh = (o.props.size * 2) * 1.1;
+          for (let i=0;i<lines.length;i++){
+            tctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
+          }
+        } else if (o.type === 'image'){
+          if (o.props.img && o.props.img.complete){
+            const dw = (o.w||100) * 2;
+            const dh = (o.h||100) * 2;
+            tctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
+          }
+        }
+        tctx.restore();
+      }
+
+      // download
       const data = tmp.toDataURL('image/png');
-      const a = document.createElement('a');
-      a.href = data;
-      a.download = 'projekt_adelbertus_' + Date.now() + '.png';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      const a = document.createElement('a'); a.href = data; a.download = 'projekt_adelbertus_' + Date.now() + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
     } catch(err){
-      console.error(err);
-      alert('Błąd podczas eksportu. Sprawdź konsolę.');
+      console.error(err); alert('Błąd eksportu — sprawdź konsolę.');
     }
   });
 
-  // DODAJ DO KOSZYKA (localStorage)
-  addToCartBtn.addEventListener('click', async () => {
+  // ADD TO CART -> save project snapshot + meta to localStorage
+  cartBtn.addEventListener('click', async () => {
     try {
-      // stworzymy miniaturę 800x800
-      const baseSrc = currentProductImg.src;
-      const baseImg = await loadImage(baseSrc);
-      const w = 800, h = 800;
-      const tmp = document.createElement('canvas');
-      tmp.width = w; tmp.height = h;
-      const ctx = tmp.getContext('2d');
-      ctx.fillStyle = getComputedStyle(currentProductImg).backgroundColor || '#fff';
-      ctx.fillRect(0,0,w,h);
-      ctx.drawImage(baseImg, 0, 0, w, h);
+      // make small thumbnail canvas
+      const W = 600, H = 600;
+      const tmp = document.createElement('canvas'); tmp.width = W; tmp.height = H;
+      const tctx = tmp.getContext('2d');
+      tctx.fillStyle = productColor.value || '#fff'; tctx.fillRect(0,0,W,H);
 
-      // rysuj obiekty (jak wyżej)
-      const drawOrder = objects.slice().sort((a,b)=>a.z - b.z);
-      for (const o of drawOrder){
-        const cx = o.x * w;
-        const cy = o.y * w; // używamy w jako referencji (kwadrat)
+      if (bgImage && bgImage.src && bgImage.naturalWidth){
+        const scale = Math.min(W / bgImage.naturalWidth, H / bgImage.naturalHeight);
+        const w = bgImage.naturalWidth * scale, h = bgImage.naturalHeight * scale;
+        const dx = (W - w)/2, dy = (H - h)/2;
+        tctx.drawImage(bgImage, dx, dy, w, h);
+      }
+
+      const list = objects.slice().sort((a,b)=>a.z - b.z);
+      for (const o of list){
+        tctx.save();
+        tctx.translate(o.x * (W/canvas.width), o.y * (H/canvas.height));
+        tctx.rotate(o.angle || 0);
+        tctx.scale(o.scale || 1, o.scale || 1);
         if (o.type === 'text'){
-          ctx.save();
-          ctx.fillStyle = o.props.color || '#000';
-          ctx.font = (o.props.size * o.scale * 0.8) + 'px ' + (o.props.font || 'sans-serif');
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          const lines = String(o.props.text).split('\\n');
-          const lineHeight = (o.props.size * o.scale * 0.9);
-          const startY = cy - (lines.length-1) * lineHeight / 2;
+          tctx.fillStyle = o.props.color || '#000';
+          tctx.textAlign = 'center'; tctx.textBaseline='middle';
+          tctx.font = ((o.props.size||36) * 0.8) + 'px ' + (o.props.font || 'sans-serif');
+          const lines = String(o.props.text||'').split('\\n');
+          const lh = ((o.props.size||36) * 0.8) * 1.1;
           for (let i=0;i<lines.length;i++){
-            ctx.fillText(lines[i], cx, startY + i*lineHeight);
+            tctx.fillText(lines[i], 0, (i - (lines.length-1)/2) * lh);
           }
-          ctx.restore();
         } else if (o.type === 'image'){
-          try {
-            const img = await loadImage(o.props.imgSrc);
-            const dw = (o.props.naturalW) * o.scale * 0.9;
-            const dh = (o.props.naturalH) * o.scale * 0.9;
-            ctx.drawImage(img, cx - dw/2, cy - dh/2, dw, dh);
-          } catch(err){
-            console.warn('miniature draw error', err);
+          if (o.props.img && o.props.img.complete){
+            const dw = (o.w||100) * 0.8;
+            const dh = (o.h||100) * 0.8;
+            tctx.drawImage(o.props.img, -dw/2, -dh/2, dw, dh);
           }
         }
+        tctx.restore();
       }
 
       const thumb = tmp.toDataURL('image/png');
-      const cartItem = {
+      const item = {
         id: 'projekt_' + Date.now(),
-        productType: productType.value,
+        product: productType.value,
         size: productSize.value,
-        baseColor: productColor.value,
+        color: productColor.value,
         price: parseFloat(productType.selectedOptions[0].dataset.price) || 0,
-        image: thumb,
-        createdAt: new Date().toISOString(),
-        objects // zapisz stan projektu (możesz odczytać później)
+        thumb,
+        objects
       };
-
       const cart = JSON.parse(localStorage.getItem('adelbertus_cart') || '[]');
-      cart.push(cartItem);
+      cart.push(item);
       localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-      alert('Projekt dodany do koszyka lokalnego (localStorage).');
+      alert('Projekt dodany do koszyka lokalnego.');
     } catch(err){
-      console.error(err);
-      alert('Błąd przy dodawaniu do koszyka.');
+      console.error(err); alert('Błąd dodawania do koszyka.');
     }
   });
 
-  // utility: wczytaj obraz jako Promise
-  function loadImage(src){
-    return new Promise((resolve,reject) => {
-      const i = new Image();
-      i.crossOrigin = 'anonymous';
-      i.onload = () => resolve(i);
-      i.onerror = (e) => reject(e);
-      i.src = src;
-    });
-  }
+  // initial draw
+  render();
 
-  // DODATKOWE: przycisk edycji tekstu — podwójne kliknięcie elementu tekstowego
-  designLayer.addEventListener('dblclick', (e) => {
-    const target = e.target.closest('.design-object');
-    if (!target) return;
-    const id = target.dataset.id;
-    const o = objects.find(x=>x.id===id);
-    if (!o) return;
-    if (o.type === 'text'){
-      const newText = prompt('Edytuj tekst:', o.props.text);
-      if (newText !== null){ o.props.text = newText; renderAll(); }
-    }
-  });
-
-  // KLAWISZE: Delete usuwa zaznaczony
-  window.addEventListener('keydown', (e) => {
-    if ((e.key === 'Delete' || e.key === 'Backspace') && selectedId){
-      objects = objects.filter(o=>o.id!==selectedId);
-      selectedId = null;
-      renderAll();
-    }
-    // Ctrl/Cmd+D duplikuj
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd' && selectedId){
-      const o = objects.find(x=>x.id===selectedId);
-      if (o){
-        const copy = JSON.parse(JSON.stringify(o));
-        copy.id = 'o' + Date.now();
-        copy.x = Math.min(0.9, copy.x + 0.03);
-        copy.y = Math.min(0.9, copy.y + 0.03);
-        copy.z = ++zCounter;
-        objects.push(copy);
-        selectedId = copy.id;
-        renderAll();
-      }
-    }
-  });
-
-  // RYSOWANIE PIERWSZE (puste)
-  renderAll();
-
-  // USTAWIENIA: reaguj na zmianę rozmiaru obszaru aby zachować względne pozycje wizualne (nic skomplikowanego)
-  window.addEventListener('resize', () => renderAll());
+  // expose render for safety
+  window.adelbertus_render = render;
 
 })();
 </script>
-
+        
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
