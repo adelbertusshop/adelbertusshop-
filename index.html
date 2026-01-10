@@ -5900,7 +5900,7 @@
     <script src="/assets/js/site-security.js"></script>
 
     <script
-// ===== GŁÓWNY KOD JAVASCRIPT =====
+        // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
@@ -5978,13 +5978,7 @@ function initProductOptions() {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
             const name = e.target.getAttribute('data-name');
-            
-            // WAŻNE: Pobierz AKTUALNĄ cenę z produktu na stronie, NIE z data-price!
-            const priceElement = productCard.querySelector('.product-price');
-            const priceText = priceElement.textContent;
-            const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
-            const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
-            
+            const price = parseFloat(e.target.getAttribute('data-price'));
             const image = e.target.getAttribute('data-image');
             
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
@@ -6001,32 +5995,6 @@ function initProductOptions() {
 
 // ===== SYSTEM KOSZYKA =====
 function addToCart(name, price, image = null, size = null, color = null) {
-    // POPRAWIŁEM TUTAJ: Zawsze bierz aktualną cenę z widoku produktu
-    let actualPrice = price;
-    
-    // Szukamy produktu po nazwie na stronie aby pobrać AKTUALNĄ cenę
-    const productCards = document.querySelectorAll('.product-card');
-    for (const card of productCards) {
-        const cardNameElement = card.querySelector('.product-title');
-        if (cardNameElement) {
-            const cardName = cardNameElement.textContent.trim();
-            
-            // Jeśli nazwy się zgadzają (nawet częściowo)
-            if (cardName === name || name.includes(cardName) || cardName.includes(name)) {
-                const priceElement = card.querySelector('.product-price');
-                if (priceElement) {
-                    const priceText = priceElement.textContent;
-                    // Wyciągamy liczbę z tekstu (np. "80 zł" -> 80)
-                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
-                    if (priceMatch) {
-                        actualPrice = parseFloat(priceMatch[1].replace(',', '.'));
-                    }
-                }
-                break;
-            }
-        }
-    }
-    
     const existingIndex = cart.findIndex(item => 
         item.name === name && 
         item.size === size && 
@@ -6035,11 +6003,10 @@ function addToCart(name, price, image = null, size = null, color = null) {
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
-        cart[existingIndex].price = actualPrice; // ZAWSZE aktualna cena
     } else {
         cart.push({
             name: name,
-            price: actualPrice, // Użyj ZAWSZE aktualnej ceny
+            price: price,
             quantity: 1,
             image: image,
             size: size,
@@ -6285,12 +6252,7 @@ function exportDesign() {
 function addToCartFromDesign() {
     const productType = document.getElementById('productType');
     const productName = `Projektowany ${productType.selectedOptions[0].textContent.split(' ')[0]}`;
-    
-    // WAŻNE: Pobierz AKTUALNĄ cenę z selecta, NIE z data-price!
-    const currentPriceElement = document.getElementById('currentPrice');
-    const priceText = currentPriceElement.textContent;
-    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
-    const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+    const price = parseInt(productType.selectedOptions[0].getAttribute('data-price'));
     
     // Eksport projektu jako obraz
     const dataURL = canvas.toDataURL({
@@ -6492,7 +6454,3 @@ window.goToCheckout = goToCheckout;
 </style>
 </body>
 </html>
-        
-        
-
-
