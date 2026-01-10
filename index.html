@@ -5899,8 +5899,8 @@
     <!-- DODANE: Skrypt zabezpieczeń -->
     <script src="/assets/js/site-security.js"></script>
 
-    <script>
-        // ===== GŁÓWNY KOD JAVASCRIPT =====
+    <script
+// ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
@@ -5978,7 +5978,13 @@ function initProductOptions() {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
             const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
+            
+            // WAŻNE: Pobierz AKTUALNĄ cenę z produktu na stronie, NIE z data-price!
+            const priceElement = productCard.querySelector('.product-price');
+            const priceText = priceElement.textContent;
+            const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+            const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+            
             const image = e.target.getAttribute('data-image');
             
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
@@ -6279,7 +6285,12 @@ function exportDesign() {
 function addToCartFromDesign() {
     const productType = document.getElementById('productType');
     const productName = `Projektowany ${productType.selectedOptions[0].textContent.split(' ')[0]}`;
-    const price = parseInt(productType.selectedOptions[0].getAttribute('data-price'));
+    
+    // WAŻNE: Pobierz AKTUALNĄ cenę z selecta, NIE z data-price!
+    const currentPriceElement = document.getElementById('currentPrice');
+    const priceText = currentPriceElement.textContent;
+    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+    const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
     
     // Eksport projektu jako obraz
     const dataURL = canvas.toDataURL({
@@ -6481,3 +6492,7 @@ window.goToCheckout = goToCheckout;
 </style>
 </body>
 </html>
+        
+        
+
+
