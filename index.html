@@ -5900,7 +5900,7 @@
     <script src="/assets/js/site-security.js"></script>
 
     <script>
-// ===== GŁÓWNY KOD JAVASCRIPT =====
+        // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
@@ -5995,6 +5995,32 @@ function initProductOptions() {
 
 // ===== SYSTEM KOSZYKA =====
 function addToCart(name, price, image = null, size = null, color = null) {
+    // POPRAWIŁEM TUTAJ: Zawsze bierz aktualną cenę z widoku produktu
+    let actualPrice = price;
+    
+    // Szukamy produktu po nazwie na stronie aby pobrać AKTUALNĄ cenę
+    const productCards = document.querySelectorAll('.product-card');
+    for (const card of productCards) {
+        const cardNameElement = card.querySelector('.product-title');
+        if (cardNameElement) {
+            const cardName = cardNameElement.textContent.trim();
+            
+            // Jeśli nazwy się zgadzają (nawet częściowo)
+            if (cardName === name || name.includes(cardName) || cardName.includes(name)) {
+                const priceElement = card.querySelector('.product-price');
+                if (priceElement) {
+                    const priceText = priceElement.textContent;
+                    // Wyciągamy liczbę z tekstu (np. "80 zł" -> 80)
+                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                    if (priceMatch) {
+                        actualPrice = parseFloat(priceMatch[1].replace(',', '.'));
+                    }
+                }
+                break;
+            }
+        }
+    }
+    
     const existingIndex = cart.findIndex(item => 
         item.name === name && 
         item.size === size && 
@@ -6003,10 +6029,11 @@ function addToCart(name, price, image = null, size = null, color = null) {
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
+        cart[existingIndex].price = actualPrice; // ZAWSZE aktualna cena
     } else {
         cart.push({
             name: name,
-            price: price,
+            price: actualPrice, // Użyj ZAWSZE aktualnej ceny
             quantity: 1,
             image: image,
             size: size,
