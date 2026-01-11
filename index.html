@@ -5951,7 +5951,7 @@ function toggleMobileMenu() {
     if (navContainer) navContainer.classList.toggle('show');
 }
 
-// ===== SYSTEM PRODUKTÓW =====
+// ===== SYSTEM PRODUKTÓW - POPRAWIONY =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('color-option')) {
@@ -5969,10 +5969,39 @@ function initProductOptions() {
         if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
+            const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
+            
+            // POPRAWIŁEM: Szukamy ceny w różnych miejscach
+            let price = 0;
+            
+            // 1. Szukaj w .product-price
             const priceElement = productCard.querySelector('.product-price');
-            const priceText = priceElement.textContent;
-            const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
+            if (priceElement) {
+                const priceText = priceElement.textContent;
+                const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1].replace(',', '.'));
+                }
+            } 
+            // 2. Jeśli nie ma .product-price, szukaj w .price
+            else {
+                const altPriceElement = productCard.querySelector('.price');
+                if (altPriceElement) {
+                    const priceText = altPriceElement.textContent;
+                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                    if (priceMatch) {
+                        price = parseFloat(priceMatch[1].replace(',', '.'));
+                    }
+                }
+                // 3. Jeśli nadal nie ma, użyj ceny z przycisku
+                else {
+                    const buttonPrice = e.target.getAttribute('data-price');
+                    if (buttonPrice) {
+                        price = parseFloat(buttonPrice);
+                    }
+                }
+            }
+            
             const image = e.target.getAttribute('data-image');
             
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
@@ -5980,6 +6009,11 @@ function initProductOptions() {
             
             const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
             const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+            
+            // POPRAWIŁEM: Jeśli cena = 0, użyj domyślnej 80 zł
+            if (price === 0 || isNaN(price)) {
+                price = 80;
+            }
             
             addToCart(name, price, image, size, color);
             showCartPopup();
@@ -5989,8 +6023,11 @@ function initProductOptions() {
 
 // ===== SYSTEM KOSZYKA =====
 function addToCart(name, price, image = null, size = null, color = null) {
+    // POPRAWIŁEM: Usuń stare nazwy z "(...)"
+    const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
+    
     const existingIndex = cart.findIndex(item => 
-        item.name === name && 
+        item.name === cleanName && 
         item.size === size && 
         item.color === color
     );
@@ -6000,7 +6037,7 @@ function addToCart(name, price, image = null, size = null, color = null) {
         cart[existingIndex].price = price;
     } else {
         cart.push({
-            name: name,
+            name: cleanName,
             price: price,
             quantity: 1,
             image: image,
@@ -6113,7 +6150,7 @@ function sendOrderWhatsApp() {
     window.open(`https://wa.me/48604296360?text=${message}`);
 }
 
-// ===== INNE FUNKCJE (skrócone) =====
+// ===== INNE FUNKCJE =====
 function initImageZoom() {
     document.querySelectorAll('img[loading="lazy"]').forEach(img => {
         img.addEventListener('load', function() { this.classList.add('loaded'); });
