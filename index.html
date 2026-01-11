@@ -5979,7 +5979,13 @@ function initProductOptions() {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
             const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
+            
+            // Pobiera cenę ZAWSZE z .product-price, NIE z data-price
+            const priceElement = productCard.querySelector('.product-price');
+            const priceText = priceElement.textContent;
+            // Wyciąga liczbę (np. "80 zł" → 80, "120,50 zł" → 120.50)
+            const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
+            
             const image = e.target.getAttribute('data-image');
             
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
@@ -6004,6 +6010,7 @@ function addToCart(name, price, image = null, size = null, color = null) {
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
+        cart[existingIndex].price = price; // ZAWSZE aktualna cena
     } else {
         cart.push({
             name: name,
@@ -6045,7 +6052,7 @@ function updateCart() {
                 ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
                 <div class="flex-1">
                     <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × ${item.quantity}</div>
+                    <div>${item.price.toFixed(2)} zł × ${item.quantity}</div>
                     ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
                     ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
                 </div>
@@ -6105,7 +6112,7 @@ function sendOrderEmail() {
     let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
     
     cart.forEach((item, index) => {
-        emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        emailBody += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
         if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
         if (item.color) emailBody += ` (Kolor: ${item.color})`;
         emailBody += '\n';
@@ -6123,7 +6130,7 @@ function sendOrderWhatsApp() {
     let message = 'Zamówienie z AdelbertusShop:%0A%0A';
     
     cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        message += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
         if (item.size) message += ` (Rozmiar: ${item.size})`;
         if (item.color) message += ` (Kolor: ${item.color})`;
         message += '%0A';
@@ -6208,11 +6215,11 @@ function updateProductBase() {
     const productColor = document.getElementById('productColor').value;
     const currentPrice = document.getElementById('currentPrice');
     
-    // Aktualizacja ceny
-    const price = productType.selectedOptions[0].getAttribute('data-price');
-    currentPrice.textContent = `${price} zł`;
+    // Aktualizacja ceny - zawsze z elementu, nie z data-price
+    const priceText = currentPrice.textContent;
+    const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
     
-    // Aktualizacja obrazu produktu (tutaj można dodać różne obrazy dla różnych produktów)
+    // Aktualizacja obrazu produktu
     const productImg = document.getElementById('currentProductImg');
     productImg.style.backgroundColor = productColor;
 }
