@@ -4176,7 +4176,6 @@ let canvas = null;
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initProductOptions();
-    initDesignStudio();
     updateCart();
     initCookieConsent();
     initChatbot();
@@ -4190,31 +4189,23 @@ document.addEventListener('DOMContentLoaded', function() {
 // ===== SYSTEM NAWIGACJI =====
 function initNavigation() {
     const navButtons = document.querySelectorAll('.nav-btn');
-    
     navButtons.forEach(button => {
         button.addEventListener('click', function(e) {
             if (this.hasAttribute('data-section')) {
                 e.preventDefault();
-                
                 navButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                
                 const sectionId = this.getAttribute('data-section');
                 showSection(sectionId);
             }
         });
     });
-    
     document.getElementById('cartIcon').addEventListener('click', toggleCart);
 }
 
 function showSection(sectionId) {
-    document.querySelectorAll('section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
+    document.querySelectorAll('section').forEach(section => section.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
-    
     if (window.innerWidth <= 768) {
         const navContainer = document.getElementById('navContainer');
         if (navContainer) navContainer.classList.remove('show');
@@ -4226,7 +4217,7 @@ function toggleMobileMenu() {
     if (navContainer) navContainer.classList.toggle('show');
 }
 
-// ===== SYSTEM PRODUKTÓW =====
+// ===== SYSTEM PRODUKTÓW - POPRAWIONY =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('color-option')) {
@@ -4244,8 +4235,39 @@ function initProductOptions() {
         if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
-            const price = parseFloat(e.target.getAttribute('data-price'));
+            const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
+            
+            // POPRAWIŁEM: Szukamy ceny w różnych miejscach
+            let price = 0;
+            
+            // 1. Szukaj w .product-price
+            const priceElement = productCard.querySelector('.product-price');
+            if (priceElement) {
+                const priceText = priceElement.textContent;
+                const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1].replace(',', '.'));
+                }
+            } 
+            // 2. Jeśli nie ma .product-price, szukaj w .price
+            else {
+                const altPriceElement = productCard.querySelector('.price');
+                if (altPriceElement) {
+                    const priceText = altPriceElement.textContent;
+                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                    if (priceMatch) {
+                        price = parseFloat(priceMatch[1].replace(',', '.'));
+                    }
+                }
+                // 3. Jeśli nadal nie ma, użyj ceny z przycisku
+                else {
+                    const buttonPrice = e.target.getAttribute('data-price');
+                    if (buttonPrice) {
+                        price = parseFloat(buttonPrice);
+                    }
+                }
+            }
+            
             const image = e.target.getAttribute('data-image');
             
             const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
@@ -4253,6 +4275,11 @@ function initProductOptions() {
             
             const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
             const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+            
+            // POPRAWIŁEM: Jeśli cena = 0, użyj domyślnej 80 zł
+            if (price === 0 || isNaN(price)) {
+                price = 80;
+            }
             
             addToCart(name, price, image, size, color);
             showCartPopup();
@@ -4262,17 +4289,21 @@ function initProductOptions() {
 
 // ===== SYSTEM KOSZYKA =====
 function addToCart(name, price, image = null, size = null, color = null) {
+    // POPRAWIŁEM: Usuń stare nazwy z "(...)"
+    const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
+    
     const existingIndex = cart.findIndex(item => 
-        item.name === name && 
+        item.name === cleanName && 
         item.size === size && 
         item.color === color
     );
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
+        cart[existingIndex].price = price;
     } else {
         cart.push({
-            name: name,
+            name: cleanName,
             price: price,
             quantity: 1,
             image: image,
@@ -4292,7 +4323,6 @@ function updateCart() {
     const cartTotal = document.getElementById('cartTotal');
     
     cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-    
     cartItems.innerHTML = '';
     
     if (cart.length === 0) {
@@ -4301,30 +4331,25 @@ function updateCart() {
         document.getElementById('paypal-container').innerHTML = '';
     } else {
         let total = 0;
-        
         cart.forEach((item, index) => {
             total += item.price * item.quantity;
-            
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
                 ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
                 <div class="flex-1">
                     <div class="font-bold">${item.name}</div>
-                    <div>${item.price} zł × ${item.quantity}</div>
+                    <div>${item.price.toFixed(2)} zł × ${item.quantity}</div>
                     ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
                     ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
                 </div>
                 <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
             `;
-            
             cartItems.appendChild(cartItem);
         });
-        
         cartTotal.textContent = `${total.toFixed(2)} zł`;
         renderPayPalButton();
     }
-    
     localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
 }
 
@@ -4340,21 +4365,15 @@ function toggleCart() {
 function renderPayPalButton() {
     const container = document.getElementById('paypal-container');
     container.innerHTML = '';
-    
     if (cart.length === 0) return;
-    
-    paypal.HostedButtons({
-        hostedButtonId: "L4639S4363CZE",
-    }).render("#paypal-container");
+    paypal.HostedButtons({hostedButtonId: "L4639S4363CZE"}).render("#paypal-container");
 }
 
 // ===== POPUP KOSZYKA =====
 function showCartPopup() {
     const popup = document.getElementById('cartPopup');
     popup.style.display = 'block';
-    setTimeout(() => {
-        popup.style.display = 'none';
-    }, 5000);
+    setTimeout(() => popup.style.display = 'none', 5000);
 }
 
 function hideCartPopup() {
@@ -4369,256 +4388,56 @@ function goToCheckout() {
 // ===== ZAMÓWIENIA =====
 function sendOrderEmail() {
     let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-    
     cart.forEach((item, index) => {
-        emailBody += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        emailBody += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
         if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
         if (item.color) emailBody += ` (Kolor: ${item.color})`;
         emailBody += '\n';
     });
-    
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
     emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-    emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-    
+    emailBody += `Proszę o potwierdzenie zamówienia.`;
     window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
 }
 
 function sendOrderWhatsApp() {
     let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-    
     cart.forEach((item, index) => {
-        message += `${index + 1}. ${item.name} - ${item.price} zł × ${item.quantity}`;
+        message += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
         if (item.size) message += ` (Rozmiar: ${item.size})`;
         if (item.color) message += ` (Kolor: ${item.color})`;
         message += '%0A';
     });
-    
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
     message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
     message += `Proszę o potwierdzenie zamówienia.`;
-    
     window.open(`https://wa.me/48604296360?text=${message}`);
 }
 
-// ===== ZOOM OBRAZKÓW =====
+// ===== INNE FUNKCJE =====
 function initImageZoom() {
-    // Lazy loading
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    images.forEach(img => {
-        img.addEventListener('load', function() {
-            this.classList.add('loaded');
-        });
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.addEventListener('load', function() { this.classList.add('loaded'); });
     });
 }
 
 function openImageZoom(src) {
-    const overlay = document.getElementById('imageZoomOverlay');
-    const zoomedImg = document.getElementById('zoomedImage');
-    zoomedImg.src = src;
-    overlay.style.display = 'flex';
+    document.getElementById('imageZoomOverlay').style.display = 'flex';
+    document.getElementById('zoomedImage').src = src;
 }
 
 function closeImageZoom() {
     document.getElementById('imageZoomOverlay').style.display = 'none';
 }
 
-// ===== GALERIA PRODUKTÓW =====
-function initProductGalleries() {
-    // Inicjalizacja galerii produktów
-}
-
 function changeProductImage(thumb, productCard) {
-    const mainImage = productCard.querySelector('.product-image');
-    const galleryThumbs = productCard.querySelectorAll('.gallery-thumb');
-    
-    galleryThumbs.forEach(thumb => thumb.classList.remove('active'));
+    productCard.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
     thumb.classList.add('active');
-    
-    mainImage.src = thumb.src;
+    productCard.querySelector('.product-image').src = thumb.src;
 }
 
-// ===== STUDIO PROJEKTOWE =====
-function initDesignStudio() {
-    canvas = new fabric.Canvas('designCanvas');
-    
-    // Event listeners dla studio
-    document.getElementById('addTextBtn').addEventListener('click', addCustomText);
-    document.getElementById('productType').addEventListener('change', updateProductBase);
-    document.getElementById('productColor').addEventListener('input', updateProductBase);
-}
-
-function addCustomText() {
-    const textInput = document.getElementById('designText');
-    const fontFamily = document.getElementById('fontFamily').value;
-    const fontSize = parseInt(document.getElementById('fontSize').value);
-    const textColor = document.getElementById('textColor').value;
-    
-    if (textInput.value.trim()) {
-        const text = new fabric.IText(textInput.value, {
-            left: 50,
-            top: 50,
-            fontFamily: fontFamily,
-            fill: textColor,
-            fontSize: fontSize
-        });
-        canvas.add(text);
-        textInput.value = '';
-    }
-}
-
-function updateProductBase() {
-    const productType = document.getElementById('productType');
-    const productColor = document.getElementById('productColor').value;
-    const currentPrice = document.getElementById('currentPrice');
-    
-    // Aktualizacja ceny
-    const price = productType.selectedOptions[0].getAttribute('data-price');
-    currentPrice.textContent = `${price} zł`;
-    
-    // Aktualizacja obrazu produktu (tutaj można dodać różne obrazy dla różnych produktów)
-    const productImg = document.getElementById('currentProductImg');
-    productImg.style.backgroundColor = productColor;
-}
-
-function deleteSelectedObject() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        canvas.remove(activeObject);
-    }
-}
-
-function clearCanvas() {
-    canvas.clear();
-}
-
-function bringToFront() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        activeObject.bringToFront();
-        canvas.renderAll();
-    }
-}
-
-function exportDesign() {
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
-    });
-    
-    const link = document.createElement('a');
-    link.download = 'adelbertus-design.png';
-    link.href = dataURL;
-    link.click();
-    
-    showNotification('🎨 Projekt został pobrany!');
-}
-
-function addToCartFromDesign() {
-    const productType = document.getElementById('productType');
-    const productName = `Projektowany ${productType.selectedOptions[0].textContent.split(' ')[0]}`;
-    const price = parseInt(productType.selectedOptions[0].getAttribute('data-price'));
-    
-    // Eksport projektu jako obraz
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
-    });
-    
-    addToCart(productName, price, dataURL, 'Uniwersalny', 'Projektowany');
-}
-
-// ===== CHATBOT =====
-function initChatbot() {
-    // Podstawowa inicjalizacja chatbota
-}
-
-function toggleChatbot() {
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-}
-
-// ===== FAQ =====
-function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            toggleFAQ(this);
-        });
-    });
-}
-
-function toggleFAQ(element) {
-    const answer = element.nextElementSibling;
-    const icon = element.querySelector('i');
-    
-    if (answer.style.display === 'block') {
-        answer.style.display = 'none';
-        icon.classList.remove('fa-chevron-up');
-        icon.classList.add('fa-chevron-down');
-    } else {
-        answer.style.display = 'block';
-        icon.classList.remove('fa-chevron-down');
-        icon.classList.add('fa-chevron-up');
-    }
-}
-
-// ===== FORUM =====
-function initForum() {
-    const forumForm = document.getElementById('forumForm');
-    if (forumForm) {
-        forumForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const user = document.getElementById('forumUser').value.trim();
-            const message = document.getElementById('forumMessage').value.trim();
-            
-            if (user && message) {
-                addForumPost(user, message);
-                forumForm.reset();
-            }
-        });
-    }
-}
-
-function addForumPost(user, message) {
-    const postsContainer = document.getElementById('forumPosts');
-    const postDiv = document.createElement('div');
-    postDiv.className = 'p-4 bg-gray-50 rounded-lg shadow-sm';
-    postDiv.innerHTML = `
-        <p class="font-bold">${user}</p>
-        <p>${message}</p>
-        <p class="text-sm text-gray-500 mt-2">${new Date().toLocaleString('pl-PL')}</p>
-    `;
-    postsContainer.prepend(postDiv);
-}
-
-// ===== ZBIÓRKA =====
-function initCharitySection() {
-    // Rotacyjni darczyńcy
-    const donors = [
-        {name: "Anna K.", amount: 50},
-        {name: "Marek Z.", amount: 100},
-        {name: "👑 Sekretny Darczyńca", amount: 250},
-        {name: "Natalia P.", amount: 75},
-        {name: "Bartek L.", amount: 30}
-    ];
-    
-    let donorIndex = 0;
-    setInterval(() => {
-        const list = document.getElementById('donorsList');
-        if (list) {
-            const li = document.createElement('li');
-            li.className = 'donor-entry';
-            li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
-            list.prepend(li);
-            donorIndex = (donorIndex + 1) % donors.length;
-        }
-    }, 4000);
-}
-
-// ===== COOKIE CONSENT =====
 function initCookieConsent() {
     if (!localStorage.getItem('cookies_accepted')) {
         document.getElementById('cookieConsent').style.display = 'block';
@@ -4630,27 +4449,32 @@ function acceptCookies() {
     document.getElementById('cookieConsent').style.display = 'none';
 }
 
-// ===== POWIADOMIENIA =====
+function initCharitySection() {
+    const donors = [
+        {name: "Anna K.", amount: 50},
+        {name: "Marek Z.", amount: 100},
+        {name: "👑 Sekretny Darczyńca", amount: 250},
+        {name: "Natalia P.", amount: 75},
+        {name: "Bartek L.", amount: 30}
+    ];
+    let donorIndex = 0;
+    setInterval(() => {
+        const list = document.getElementById('donorsList');
+        if (list) {
+            const li = document.createElement('li');
+            li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
+            list.prepend(li);
+            donorIndex = (donorIndex + 1) % donors.length;
+        }
+    }, 4000);
+}
+
 function showNotification(message) {
     const notification = document.createElement('div');
     notification.textContent = message;
-    notification.style.position = 'fixed';
-    notification.style.bottom = '20px';
-    notification.style.left = '50%';
-    notification.style.transform = 'translateX(-50%)';
-    notification.style.backgroundColor = '#d4af37';
-    notification.style.color = 'black';
-    notification.style.padding = '12px 24px';
-    notification.style.borderRadius = '30px';
-    notification.style.zIndex = '1000';
-    notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-    notification.style.fontWeight = 'bold';
-    
+    notification.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#d4af37;color:black;padding:12px 24px;border-radius:30px;z-index:1000;box-shadow:0 4px 15px rgba(0,0,0,0.2);font-weight:bold;';
     document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.remove();
-    }, 3000);
+    setTimeout(() => notification.remove(), 3000);
 }
 
 // ===== FUNKCJE GLOBALNE =====
