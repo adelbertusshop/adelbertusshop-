@@ -5,11 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
-    <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
+    <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
     
@@ -570,58 +569,6 @@
             color: white;
         }
         
-        /* Studio projektowe */
-        .design-studio {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-        
-        .canvas-container {
-            border: 3px solid var(--color-gold);
-            border-radius: 10px;
-            padding: 1rem;
-            background: white;
-            margin: 0 auto;
-            max-width: 600px;
-        }
-        
-        #designCanvas {
-            width: 100%;
-            background: white;
-            border: 1px solid #ddd;
-        }
-        
-        .canvas-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .design-tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .tool-group {
-            background: var(--color-cream);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #eee;
-        }
-        
-        .tool-title {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--color-dark-gold);
-        }
-        
         /* Sekcja zbiórki */
         .charity-section {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1840&q=80');
@@ -905,34 +852,6 @@
             object-fit: cover;
             margin: 0 auto 1rem;
             border: 3px solid var(--color-gold);
-        }
-
-        /* Sekcja FAQ */
-        .faq-section {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 1.5rem 0;
-        }
-
-        .faq-question {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            color: #666;
-            line-height: 1.6;
         }
 
         /* Style dla przycisków w koszyku */
@@ -1446,12 +1365,10 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
             <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
-            <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
             <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
@@ -4211,7 +4128,7 @@
                 <div class="option-title">Kolor:</div>
                 <div class="color-options">
                     <div class="color-option selected" style="background-color: #000000;" data-color="Czarny"></div>
-                    <div class="color-option" style="background-color: #808080;" data-color="Szary"></div>
+                                    <div class="color-option" style="background-color: #808080;" data-color="Szary"></div>
                     <div class="color-option" style="background-color: #800000;" data-color="Bordowy"></div>
                 </div>
             </div>
@@ -4223,21 +4140,9 @@
                     <div class="size-option" data-size="M">M</div>
                     <div class="size-option" data-size="L">L</div>
                     <div class="size-option" data-size="XL">XL</div>
-                    <div class="size-option" data-size="XXL">XXL</div>
+    <div class="size-option" data-size="XXL">XXL</div>
                 </div>
             </div>
-        </div>
-        <!-- KONIEC OPCJI PRODUKTU -->
-        
-        <button class="nav-btn add-to-cart-btn-enhanced" data-name="Bluza Wojownik" data-price="200" data-image="https://i.ibb.co/0RCYxJ9x/1765281063951-1.jpg">🛒 Dodaj do koszyka</button>
-        
-        <div class="product-tags">
-            <span class="product-tag">bluza</span>
-            <span class="product-tag">wojownik</span>
-            <span class="product-tag">siła</span>
-        </div>
-    </div>
-</div>
 
 <!-- Bluza Kiss -->
 <div class="product-card fade-in">
