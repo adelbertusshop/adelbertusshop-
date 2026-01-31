@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
-    <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami. Stwórz własny design w naszym studio!">
+    <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
     
@@ -569,58 +568,6 @@
             color: white;
         }
         
-        /* Studio projektowe */
-        .design-studio {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            margin: 2rem 0;
-        }
-        
-        .canvas-container {
-            border: 3px solid var(--color-gold);
-            border-radius: 10px;
-            padding: 1rem;
-            background: white;
-            margin: 0 auto;
-            max-width: 600px;
-        }
-        
-        #designCanvas {
-            width: 100%;
-            background: white;
-            border: 1px solid #ddd;
-        }
-        
-        .canvas-controls {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .design-tools {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .tool-group {
-            background: var(--color-cream);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #eee;
-        }
-        
-        .tool-title {
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--color-dark-gold);
-        }
-        
         /* Sekcja zbiórki */
         .charity-section {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1840&q=80');
@@ -904,34 +851,6 @@
             object-fit: cover;
             margin: 0 auto 1rem;
             border: 3px solid var(--color-gold);
-        }
-
-        /* Sekcja FAQ */
-        .faq-section {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem 2rem;
-            margin: 2rem 0;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 1.5rem 0;
-        }
-
-        .faq-question {
-            font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-answer {
-            color: #666;
-            line-height: 1.6;
         }
 
         /* Style dla przycisków w koszyku */
@@ -1445,12 +1364,10 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="design"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="about"><i class="fas fa-info-circle"></i> O nas</button>
             <button class="nav-btn" data-section="blog"><i class="fas fa-blog"></i> Blog</button>
-            <button class="nav-btn" data-section="faq"><i class="fas fa-question-circle"></i> FAQ</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
             <button class="nav-btn" data-section="contact"><i class="fas fa-envelope"></i> Kontakt</button>
         </div>
@@ -4142,65 +4059,6 @@
                 </div>
             </div>
         </section>
-       
-       <!-- Studio projektowe -->
-        <section id="design">
-            <div class="section-title">
-                <h2>Studio Projektowe</h2>
-                <p>Stwórz swój własny, unikalny projekt</p>
-            </div>
-            
-            <div class="design-studio">
-                <div class="canvas-container">
-                    <canvas id="designCanvas" width="600" height="400"></canvas>
-                </div>
-                
-                <div class="canvas-controls">
-                    <button class="nav-btn" onclick="deleteSelectedObject()"><i class="fas fa-trash"></i> Usuń zaznaczone</button>
-                    <button class="nav-btn" onclick="clearCanvas()"><i class="fas fa-broom"></i> Wyczyść wszystko</button>
-                    <button class="nav-btn" onclick="bringToFront()"><i class="fas fa-layer-group"></i> Na wierzch</button>
-                    <button class="nav-btn" onclick="exportDesign()"><i class="fas fa-download"></i> Pobierz projekt</button>
-                    <button class="nav-btn gold-bg" onclick="addToCartFromDesign()"><i class="fas fa-cart-plus"></i> Dodaj do koszyka</button>
-                </div>
-                
-                <div class="design-tools">
-                    <div class="tool-group">
-                        <div class="tool-title">Wybierz produkt</div>
-                        <select id="productType" class="nav-btn" style="width: 100%;">
-                            <option value="tshirt" data-price="80">Koszulka - 80 zł</option>
-                            <option value="hoodie" data-price="170">Bluza - 170 zł</option>
-                            <option value="cap" data-price="90">Czapka - 90 zł</option>
-                        </select>
-                        
-                        <div style="margin-top: 1rem;">
-                            <label>Kolor produktu:</label>
-                            <input type="color" id="productColor" value="#ffffff" style="width: 100%; height: 40px;">
-                        </div>
-                    </div>
-                    
-                    <div class="tool-group">
-                        <div class="tool-title">Dodaj tekst</div>
-                        <input type="text" id="designText" placeholder="Wpisz tekst..." class="nav-btn" style="width: 100%; margin-bottom: 0.5rem;">
-                        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                            <select id="fontFamily" class="nav-btn" style="flex: 1;">
-                                <option value="Arial">Arial</option>
-                                <option value="Impact">Impact</option>
-                                <option value="Times New Roman">Times New Roman</option>
-                            </select>
-                            <input type="number" id="fontSize" value="24" min="8" max="72" class="nav-btn" style="width: 80px;">
-                        </div>
-                        <label>Kolor tekstu:</label>
-                        <input type="color" id="textColor" value="#000000" style="width: 100%; height: 40px; margin-bottom: 0.5rem;">
-                        <button class="nav-btn" onclick="addCustomText()" style="width: 100%;"><i class="fas fa-font"></i> Dodaj tekst</button>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: 2rem;">
-                    <h3>Aktualna cena: <span id="currentPrice">80 zł</span></h3>
-                    <p class="text-sm text-gray-600">Cena aktualizuje się automatycznie po zmianie produktu</p>
-                </div>
-            </div>
-        </section>
         
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
@@ -4488,60 +4346,6 @@
     </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq">
-    <div class="section-title">
-        <h2>Często Zadawane Pytania</h2>
-        <p>Znajdź odpowiedzi na swoje pytania</p>
-    </div>
-    <div class="faq-section">
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                Jak dobrać odpowiedni rozmiar?
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                Polecamy zmierzyć swoją ulubioną koszulkę i porównać wymiary z naszą tabelą rozmiarów dostępną w zakładce "Rozmiary".
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                Jaki jest czas realizacji zamówienia?
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                Zamówienia realizujemy w ciągu 1-2 dni roboczych. Wysyłka następuje najpóźniej następnego dnia roboczego.
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                Czy mogę zwrócić produkt?
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                Tak, masz 30 dni na zwrot produktu. Warunkiem jest nienaruszony stan produktu z metkami.
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                Jakie metody płatności akceptujecie?
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                Akceptujemy PayPal, karty kredytowe/debetowe, przelewy bankowe, BLIK oraz płatność przy odbiorze.
-            </div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-question" onclick="toggleFAQ(this)">
-                Czy oferujecie darmową dostawę?
-                <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-answer">
-                Tak, oferujemy darmową dostawę dla zamówień powyżej 200 zł. Dla zamówień poniżej tej kwoty koszt dostawy to 14 zł.
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Regulamin -->
 <section id="regulations">
     <div class="section-title">
