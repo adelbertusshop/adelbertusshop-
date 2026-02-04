@@ -4673,7 +4673,7 @@ function updateCart() {
             const cartItem = document.createElement('div');
             cartItem.className = 'cart-item';
             cartItem.innerHTML = `
-                ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                \( {item.image ? `<img src=" \){item.image}" class="cart-item-image">` : ''}
                 <div class="flex-1">
                     <div class="font-bold">${item.name}</div>
                     <div>${item.price} zł × ${item.quantity}</div>
@@ -4895,14 +4895,139 @@ function addToCartFromDesign() {
     addToCart(productName, price, dataURL, 'Uniwersalny', 'Projektowany');
 }
 
-// ===== CHATBOT =====
-function initChatbot() {
-    // Podstawowa inicjalizacja chatbota
+// ===== CHATBOT – rozbudowana wersja =====
+
+let chatHistory = JSON.parse(localStorage.getItem('adelbertus_chat_history')) || [];
+
+const SHOP = {
+    email: "mielniczukgrzegosz74@gmail.com",
+    phone: "+48 604 296 360",
+    whatsapp: "48604296360",
+    delivery: "2–5 dni roboczych (InPost / kurier), od 12,90 zł – darmowa powyżej 299 zł",
+    returns: "14 dni od odbioru, towar nieużywany z metkami, koszt odesłania ponosi kupujący",
+    payments: "PayPal (przycisk w koszyku), przelew tradycyjny, Blik po kontakcie"
+};
+
+function saveChat() {
+    localStorage.setItem('adelbertus_chat_history', JSON.stringify(chatHistory));
 }
 
-function toggleChatbot() {
-    const chatbotWindow = document.getElementById('chatbotWindow');
-    chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+function cartInfo() {
+    if (cart.length === 0) return "Aktualnie nic nie masz w koszyku.";
+    let sum = 0, qty = 0;
+    let lines = [];
+    cart.forEach(it => {
+        const sub = it.price * it.quantity;
+        sum += sub;
+        qty += it.quantity;
+        let desc = it.name;
+        if (it.size && it.size !== 'Nie wybrano') desc += ` (${it.size})`;
+        if (it.color && it.color !== 'Nie wybrano') desc += ` – ${it.color}`;
+        lines.push(`• ${desc} × ${it.quantity} szt. = ${sub.toFixed(2)} zł`);
+    });
+    return `Koszyk (\( {qty} szt.):\n \){lines.join('\n')}\n\nSuma: ${sum.toFixed(2)} zł`;
+}
+
+function botAnswer(msg) {
+    const txt = (msg || '').toLowerCase().trim();
+    if (!txt) return "Napisz coś – postaram się pomóc 😊";
+
+    if (txt.match(/cześć|hej|hi|dzień dobry/)) return "Cześć! 👋 W czym pomóc?";
+    if (txt.match(/koszyk|co mam|zamówienie|co w koszyku/)) return cartInfo();
+    if (txt.match(/dostaw|wysyłka|ile kosztuje wysyłka|paczkomat|kurier/)) return SHOP.delivery;
+    if (txt.match(/zwrot|zwroty|reklamacja|odesłać|zwrócić/)) return SHOP.returns;
+    if (txt.match(/płatność|płatności|zapłacić|paypal|przelew|blik/)) return SHOP.payments;
+    if (txt.match(/kontakt|telefon|email|whatsapp|napisać do was/)) {
+        return `Najszybciej:\nWhatsApp / tel: ${SHOP.phone}\nEmail: ${SHOP.email}`;
+    }
+    if (txt.match(/dzięki|dziękuję|pa|do widzenia/)) return "Bardzo proszę! ☺️ Wpadaj jeszcze.";
+
+    return "Przepraszam, nie za bardzo rozumiem… 😅\nMoże napisz prościej:\nkoszyk • dostawa • zwrot • kontakt • płatność";
+}
+
+function appendMessage(sender, text) {
+    chatHistory.push({sender, text, time: Date.now()});
+
+    const box = document.getElementById('chatbox-messages');
+    if (!box) return;
+
+    const row = document.createElement('div');
+    row.className = sender === 'user' ? 'text-right mb-2.5' : 'text-left mb-2.5';
+    row.innerHTML = `
+        <div class="inline-block max-w-[80%] px-3.5 py-2.5 rounded-2xl ${sender==='user'?'bg-purple-50 rounded-br-none':'bg-gray-100 rounded-bl-none'}">
+            ${text.replace(/\n/g, '<br>')}
+        </div>
+        <div class="text-[10px] text-gray-500 mt-1 opacity-70">
+            ${new Date().toLocaleTimeString('pl-PL', {hour:'2-digit', minute:'2-digit'})}
+        </div>
+    `;
+    box.appendChild(row);
+    box.scrollTop = box.scrollHeight;
+}
+
+function buildChatWindow() {
+    if (document.getElementById('chat-floating-window')) return;
+
+    const win = document.createElement('div');
+    win.id = 'chat-floating-window';
+    win.className = 'fixed bottom-20 right-5 w-80 sm:w-96 bg-white rounded-xl shadow-2xl flex flex-col z-[9999] hidden border border-gray-200';
+    win.style.height = '460px';
+    win.style.maxHeight = 'calc(100vh - 100px)';
+    win.innerHTML = `
+        <div class="bg-purple-700 text-white px-4 py-3 flex justify-between items-center rounded-t-xl">
+            <strong>Asystent Adelbertus</strong>
+            <button id="chat-close-btn" class="text-xl leading-none">×</button>
+        </div>
+        <div id="chatbox-messages" class="flex-1 p-4 overflow-y-auto bg-gray-50"></div>
+        <div class="p-3 border-t">
+            <div class="flex">
+                <input id="chatbox-input" type="text" placeholder="Napisz wiadomość..." class="flex-1 border rounded-l-lg px-4 py-2 focus:outline-none focus:border-purple-600">
+                <button id="chatbox-send-btn" class="bg-purple-700 text-white px-5 rounded-r-lg hover:bg-purple-800">Wyślij</button>
+            </div>
+            <div class="text-xs text-gray-500 text-center mt-2">np. koszyk • dostawa • zwrot</div>
+        </div>
+    `;
+    document.body.appendChild(win);
+
+    document.getElementById('chat-close-btn').onclick = toggleChatbot;
+    document.getElementById('chatbox-send-btn').onclick = sendChatMsg;
+    document.getElementById('chatbox-input').onkeypress = e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            sendChatMsg();
+        }
+    };
+
+    // odtwórz historię
+    chatHistory.forEach(m => appendMessage(m.sender, m.text));
+}
+
+function sendChatMsg() {
+    const inp = document.getElementById('chatbox-input');
+    if (!inp) return;
+    const val = inp.value.trim();
+    if (!val) return;
+
+    appendMessage('user', val);
+    inp.value = '';
+
+    setTimeout(() => {
+        const reply = botAnswer(val);
+        appendMessage('bot', reply);
+        saveChat();
+    }, 500);
+}
+
+function initChatbot() {
+    buildChatWindow();
+
+    // pierwsze powitanie jeśli pusto
+    if (chatHistory.length === 0) {
+        const greet = "Cześć! 👋 Jestem asystentem Adelbertus Shop.\nW czym mogę pomóc? (koszyk, dostawa, zwrot, kontakt...)";
+        appendMessage('bot', greet);
+        chatHistory.push({sender: 'bot', text: greet, time: Date.now()});
+        saveChat();
+    }
 }
 
 // ===== FAQ =====
@@ -5026,7 +5151,10 @@ window.toggleMobileMenu = toggleMobileMenu;
 window.sendOrderEmail = sendOrderEmail;
 window.sendOrderWhatsApp = sendOrderWhatsApp;
 window.acceptCookies = acceptCookies;
-window.toggleChatbot = toggleChatbot;
+window.toggleChatbot = function() {
+    const w = document.getElementById('chat-floating-window');
+    if (w) w.classList.toggle('hidden');
+};
 window.openImageZoom = openImageZoom;
 window.closeImageZoom = closeImageZoom;
 window.changeProductImage = changeProductImage;
@@ -5039,6 +5167,7 @@ window.exportDesign = exportDesign;
 window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
+
 </script>
                       
 <style>
@@ -5083,6 +5212,10 @@ window.goToCheckout = goToCheckout;
 .product-image.loaded {
   opacity: 1;
 }
+
+/* Podstawowe style chatbota – możesz później przenieść do głównego CSS */
+#chat-floating-window .bg-purple-50 { background-color: #f3e8ff; }
+#chat-floating-window .bg-gray-100 { background-color: #f3f4f6; }
 </style>
 </body>
 </html>
