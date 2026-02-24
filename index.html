@@ -5143,17 +5143,21 @@
     <script>
         <script>
             <script>
+            <script>
 // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
+let canvas = null;
 
 // Inicjalizacja strony
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initProductOptions();
+    initDesignStudio();
     updateCart();
     initCookieConsent();
     initChatbot();
+    initFAQ();
     initImageZoom();
     initProductGalleries();
     initForum();
@@ -5453,6 +5457,96 @@ function changeProductImage(thumb, productCard) {
     mainImage.src = thumb.src;
 }
 
+// ===== STUDIO PROJEKTOWE =====
+function initDesignStudio() {
+    canvas = new fabric.Canvas('designCanvas');
+    
+    // Event listeners dla studio
+    document.getElementById('addTextBtn').addEventListener('click', addCustomText);
+    document.getElementById('productType').addEventListener('change', updateProductBase);
+    document.getElementById('productColor').addEventListener('input', updateProductBase);
+}
+
+function addCustomText() {
+    const textInput = document.getElementById('designText');
+    const fontFamily = document.getElementById('fontFamily').value;
+    const fontSize = parseInt(document.getElementById('fontSize').value);
+    const textColor = document.getElementById('textColor').value;
+    
+    if (textInput.value.trim()) {
+        const text = new fabric.IText(textInput.value, {
+            left: 50,
+            top: 50,
+            fontFamily: fontFamily,
+            fill: textColor,
+            fontSize: fontSize
+        });
+        canvas.add(text);
+        textInput.value = '';
+    }
+}
+
+function updateProductBase() {
+    const productType = document.getElementById('productType');
+    const productColor = document.getElementById('productColor').value;
+    const currentPrice = document.getElementById('currentPrice');
+    
+    // Aktualizacja ceny
+    const price = productType.selectedOptions[0].getAttribute('data-price');
+    currentPrice.textContent = `${price} zł`;
+    
+    // Aktualizacja obrazu produktu (tutaj można dodać różne obrazy dla różnych produktów)
+    const productImg = document.getElementById('currentProductImg');
+    productImg.style.backgroundColor = productColor;
+}
+
+function deleteSelectedObject() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+        canvas.remove(activeObject);
+    }
+}
+
+function clearCanvas() {
+    canvas.clear();
+}
+
+function bringToFront() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+        activeObject.bringToFront();
+        canvas.renderAll();
+    }
+}
+
+function exportDesign() {
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 0.8
+    });
+    
+    const link = document.createElement('a');
+    link.download = 'adelbertus-design.png';
+    link.href = dataURL;
+    link.click();
+    
+    showNotification('🎨 Projekt został pobrany!');
+}
+
+function addToCartFromDesign() {
+    const productType = document.getElementById('productType');
+    const productName = `Projektowany ${productType.selectedOptions[0].textContent.split(' ')[0]}`;
+    const price = parseInt(productType.selectedOptions[0].getAttribute('data-price'));
+    
+    // Eksport projektu jako obraz
+    const dataURL = canvas.toDataURL({
+        format: 'png',
+        quality: 0.8
+    });
+    
+    addToCart(productName, price, dataURL, 'Uniwersalny', 'Projektowany');
+}
+
 // ===== CHATBOT =====
 function initChatbot() {
     // Podstawowa inicjalizacja chatbota
@@ -5461,6 +5555,31 @@ function initChatbot() {
 function toggleChatbot() {
     const chatbotWindow = document.getElementById('chatbotWindow');
     chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+}
+
+// ===== FAQ =====
+function initFAQ() {
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            toggleFAQ(this);
+        });
+    });
+}
+
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const icon = element.querySelector('i');
+    
+    if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    } else {
+        answer.style.display = 'block';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    }
 }
 
 // ===== FORUM =====
@@ -5563,6 +5682,13 @@ window.toggleChatbot = toggleChatbot;
 window.openImageZoom = openImageZoom;
 window.closeImageZoom = closeImageZoom;
 window.changeProductImage = changeProductImage;
+window.toggleFAQ = toggleFAQ;
+window.addCustomText = addCustomText;
+window.deleteSelectedObject = deleteSelectedObject;
+window.clearCanvas = clearCanvas;
+window.bringToFront = bringToFront;
+window.exportDesign = exportDesign;
+window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
 
@@ -5730,3 +5856,4 @@ addBotMessage("Cześć 👋 Jestem asystentem sklepu. Napisz 'chcę zamówić' i
 
 </body>
 </html>
+
