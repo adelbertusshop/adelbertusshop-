@@ -5219,7 +5219,7 @@ function toggleMobileMenu() {
     if (navContainer) navContainer.classList.toggle('show');
 }
 
-// ===== SYSTEM PRODUKTÓW =====
+// ===== SYSTEM PRODUKTÓW - POPRAWIONY (Z CENAMI) =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('color-option')) {
@@ -5237,13 +5237,38 @@ function initProductOptions() {
         if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
+            const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
             
-            // Pobiera cenę ZAWSZE z .product-price, NIE z data-price
+            // POPRAWIŁEM: Szukamy ceny w różnych miejscach
+            let price = 0;
+            
+            // 1. Szukaj w .product-price
             const priceElement = productCard.querySelector('.product-price');
-            const priceText = priceElement.textContent;
-            // Wyciąga liczbę (np. "80 zł" → 80, "120,50 zł" → 120.50)
-            const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
+            if (priceElement) {
+                const priceText = priceElement.textContent;
+                const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1].replace(',', '.'));
+                }
+            } 
+            // 2. Jeśli nie ma .product-price, szukaj w .price
+            else {
+                const altPriceElement = productCard.querySelector('.price');
+                if (altPriceElement) {
+                    const priceText = altPriceElement.textContent;
+                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                    if (priceMatch) {
+                        price = parseFloat(priceMatch[1].replace(',', '.'));
+                    }
+                }
+                // 3. Jeśli nadal nie ma, użyj ceny z przycisku
+                else {
+                    const buttonPrice = e.target.getAttribute('data-price');
+                    if (buttonPrice) {
+                        price = parseFloat(buttonPrice);
+                    }
+                }
+            }
             
             const image = e.target.getAttribute('data-image');
             
@@ -5253,26 +5278,34 @@ function initProductOptions() {
             const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
             const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
             
+            // POPRAWIŁEM: Jeśli cena = 0, użyj domyślnej 80 zł
+            if (price === 0 || isNaN(price)) {
+                price = 80;
+            }
+            
             addToCart(name, price, image, size, color);
             showCartPopup();
         }
     });
 }
 
-// ===== SYSTEM KOSZYKA =====
+// ===== SYSTEM KOSZYKA - POPRAWIONY (Z CENAMI) =====
 function addToCart(name, price, image = null, size = null, color = null) {
+    // POPRAWIŁEM: Usuń stare nazwy z "(...)"
+    const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
+    
     const existingIndex = cart.findIndex(item => 
-        item.name === name && 
+        item.name === cleanName && 
         item.size === size && 
         item.color === color
     );
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
-        cart[existingIndex].price = price; // ZAWSZE aktualna cena
+        cart[existingIndex].price = price;
     } else {
         cart.push({
-            name: name,
+            name: cleanName,
             price: price,
             quantity: 1,
             image: image,
@@ -5474,11 +5507,11 @@ function updateProductBase() {
     const productColor = document.getElementById('productColor').value;
     const currentPrice = document.getElementById('currentPrice');
     
-    // Aktualizacja ceny - zawsze z elementu, nie z data-price
-    const priceText = currentPrice.textContent;
-    const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
+    // Aktualizacja ceny
+    const price = productType.selectedOptions[0].getAttribute('data-price');
+    currentPrice.textContent = `${price} zł`;
     
-    // Aktualizacja obrazu produktu
+    // Aktualizacja obrazu produktu (tutaj można dodać różne obrazy dla różnych produktów)
     const productImg = document.getElementById('currentProductImg');
     productImg.style.backgroundColor = productColor;
 }
@@ -5675,7 +5708,7 @@ window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
 </script>
-                      
+
 <style>
 /* Dodatkowe style dla nowych funkcjonalności */
 .neon-glow {
@@ -5719,5 +5752,6 @@ window.goToCheckout = goToCheckout;
   opacity: 1;
 }
 </style>
+
 </body>
 </html>
