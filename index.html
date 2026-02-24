@@ -5144,7 +5144,7 @@
         <script>
             <script>
             <script>
-// ===== GŁÓWNY KOD JAVASCRIPT =====
+            // ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 let canvas = null;
@@ -5691,123 +5691,6 @@ window.exportDesign = exportDesign;
 window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
-
-// ===== STAN ROZMOWY =====
-let stan = {
-  etap: null,
-  zamowienie: {
-    produkt: "",
-    rozmiar: "",
-    imie: ""
-  }
-};
-// ===== WYŚWIETLANIE =====
-function addBotMessage(text) {
-  const msg = document.createElement("div");
-  msg.className = "bot";
-  msg.textContent = text;
-  document.getElementById("messages").appendChild(msg);
-  scrollToBottom();
-}
-function addUserMessage(text) {
-  const msg = document.createElement("div");
-  msg.className = "user";
-  msg.textContent = text;
-  document.getElementById("messages").appendChild(msg);
-  scrollToBottom();
-}
-function scrollToBottom() {
-  const box = document.getElementById("chatbox");
-  box.scrollTop = box.scrollHeight;
-}
-// ===== ROZPOZNAWANIE INTENCJI =====
-function rozpoznajIntencje(msg) {
-  if (msg.match(/zamów|kup|chcę/i)) return "ZAMOWIENIE";
-  if (msg.match(/promocj|rabat/i)) return "PROMOCJE";
-  if (msg.match(/kontakt|telefon/i)) return "KONTAKT";
-  return "INNE";
-}
-// ===== AKCJE =====
-function rozpocznijZamowienie() {
-  stan.etap = "PRODUKT";
-  addBotMessage("Super 🔥 Co chcesz zamówić?");
-}
-function pokazPromocje() {
-  addBotMessage("Aktualne promocje znajdziesz w sekcji poniżej 👇");
-  document.getElementById("promocje")?.scrollIntoView({ behavior: "smooth" });
-}
-function pokazKontakt() {
-  addBotMessage("Możesz napisać do nas na WhatsApp: +48 123 456 789 📱");
-}
-// ===== OBSŁUGA FLOW =====
-function obsluzFlow(msg) {
-  if (stan.etap === "PRODUKT") {
-    stan.zamowienie.produkt = msg;
-    stan.etap = "ROZMIAR";
-    addBotMessage("Jaki rozmiar?");
-    return true;
-  }
-  if (stan.etap === "ROZMIAR") {
-    stan.zamowienie.rozmiar = msg;
-    stan.etap = "IMIE";
-    addBotMessage("Podaj swoje imię do zamówienia:");
-    return true;
-  }
-  if (stan.etap === "IMIE") {
-    stan.zamowienie.imie = msg;
-    stan.etap = null;
-    finalizujZamowienie();
-    return true;
-  }
-  return false;
-}
-// ===== FINALIZACJA =====
-function finalizujZamowienie() {
-  const numer = "48123456789";
-  const tresc = `
-Nowe zamówienie:
-Produkt: ${stan.zamowienie.produkt}
-Rozmiar: ${stan.zamowienie.rozmiar}
-Imię: ${stan.zamowienie.imie}
-  `;
-  const link = `https://wa.me/${numer}?text=${encodeURIComponent(tresc)}`;
-  addBotMessage("Gotowe ✅ Przekierowuję Cię do WhatsApp, żeby potwierdzić zamówienie.");
-  setTimeout(() => {
-    window.open(link, "_blank");
-  }, 1500);
-  stan.zamowienie = { produkt: "", rozmiar: "", imie: "" };
-}
-// ===== GŁÓWNA OBSŁUGA WIADOMOŚCI =====
-function obsluzWiadomosc(userMessage) {
-  if (obsluzFlow(userMessage)) return;
-  const intencja = rozpoznajIntencje(userMessage);
-  switch (intencja) {
-    case "ZAMOWIENIE":
-      rozpocznijZamowienie();
-      break;
-    case "PROMOCJE":
-      pokazPromocje();
-      break;
-    case "KONTAKT":
-      pokazKontakt();
-      break;
-    default:
-      addBotMessage("Napisz np. 'chcę zamówić', 'promocje' albo 'kontakt'.");
-  }
-}
-// ===== EVENTY =====
-document.getElementById("sendBtn").addEventListener("click", () => {
-  const input = document.getElementById("chatInput");
-  const message = input.value.trim();
-  if (!message) return;
-  addUserMessage(message);
-  obsluzWiadomosc(message);
-  input.value = "";
-});
-document.getElementById("chatInput").addEventListener("keypress", (e) => {
-  if (e.key === "Enter") document.getElementById("sendBtn").click();
-});
-addBotMessage("Cześć 👋 Jestem asystentem sklepu. Napisz 'chcę zamówić' i zaczynamy.");
 </script>
 
 <style>
@@ -5855,5 +5738,6 @@ addBotMessage("Cześć 👋 Jestem asystentem sklepu. Napisz 'chcę zamówić' i
 </style>
 
 </body>
-</html>
+</html>   
+
 
