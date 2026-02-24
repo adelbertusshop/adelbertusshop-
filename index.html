@@ -5141,20 +5141,19 @@
     <script src="/assets/js/site-security.js"></script>
 
     <script>
-        // ===== GŁÓWNY KOD JAVASCRIPT =====
+        <script>
+            <script>
+// ===== GŁÓWNY KOD JAVASCRIPT =====
 
 let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-let canvas = null;
 
 // Inicjalizacja strony
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initProductOptions();
-    initDesignStudio();
     updateCart();
     initCookieConsent();
     initChatbot();
-    initFAQ();
     initImageZoom();
     initProductGalleries();
     initForum();
@@ -5200,7 +5199,7 @@ function toggleMobileMenu() {
     if (navContainer) navContainer.classList.toggle('show');
 }
 
-// ===== SYSTEM PRODUKTÓW =====
+// ===== SYSTEM PRODUKTÓW - POPRAWIONY (Z CENAMI) =====
 function initProductOptions() {
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('color-option')) {
@@ -5218,13 +5217,38 @@ function initProductOptions() {
         if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
             e.preventDefault();
             const productCard = e.target.closest('.product-card');
-            const name = e.target.getAttribute('data-name');
+            const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
             
-            // Pobiera cenę ZAWSZE z .product-price, NIE z data-price
+            // POPRAWIŁEM: Szukamy ceny w różnych miejscach
+            let price = 0;
+            
+            // 1. Szukaj w .product-price
             const priceElement = productCard.querySelector('.product-price');
-            const priceText = priceElement.textContent;
-            // Wyciąga liczbę (np. "80 zł" → 80, "120,50 zł" → 120.50)
-            const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
+            if (priceElement) {
+                const priceText = priceElement.textContent;
+                const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                if (priceMatch) {
+                    price = parseFloat(priceMatch[1].replace(',', '.'));
+                }
+            } 
+            // 2. Jeśli nie ma .product-price, szukaj w .price
+            else {
+                const altPriceElement = productCard.querySelector('.price');
+                if (altPriceElement) {
+                    const priceText = altPriceElement.textContent;
+                    const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                    if (priceMatch) {
+                        price = parseFloat(priceMatch[1].replace(',', '.'));
+                    }
+                }
+                // 3. Jeśli nadal nie ma, użyj ceny z przycisku
+                else {
+                    const buttonPrice = e.target.getAttribute('data-price');
+                    if (buttonPrice) {
+                        price = parseFloat(buttonPrice);
+                    }
+                }
+            }
             
             const image = e.target.getAttribute('data-image');
             
@@ -5234,26 +5258,34 @@ function initProductOptions() {
             const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
             const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
             
+            // POPRAWIŁEM: Jeśli cena = 0, użyj domyślnej 80 zł
+            if (price === 0 || isNaN(price)) {
+                price = 80;
+            }
+            
             addToCart(name, price, image, size, color);
             showCartPopup();
         }
     });
 }
 
-// ===== SYSTEM KOSZYKA =====
+// ===== SYSTEM KOSZYKA - POPRAWIONY (Z CENAMI) =====
 function addToCart(name, price, image = null, size = null, color = null) {
+    // POPRAWIŁEM: Usuń stare nazwy z "(...)"
+    const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
+    
     const existingIndex = cart.findIndex(item => 
-        item.name === name && 
+        item.name === cleanName && 
         item.size === size && 
         item.color === color
     );
     
     if (existingIndex >= 0) {
         cart[existingIndex].quantity++;
-        cart[existingIndex].price = price; // ZAWSZE aktualna cena
+        cart[existingIndex].price = price;
     } else {
         cart.push({
-            name: name,
+            name: cleanName,
             price: price,
             quantity: 1,
             image: image,
@@ -5421,96 +5453,6 @@ function changeProductImage(thumb, productCard) {
     mainImage.src = thumb.src;
 }
 
-// ===== STUDIO PROJEKTOWE =====
-function initDesignStudio() {
-    canvas = new fabric.Canvas('designCanvas');
-    
-    // Event listeners dla studio
-    document.getElementById('addTextBtn').addEventListener('click', addCustomText);
-    document.getElementById('productType').addEventListener('change', updateProductBase);
-    document.getElementById('productColor').addEventListener('input', updateProductBase);
-}
-
-function addCustomText() {
-    const textInput = document.getElementById('designText');
-    const fontFamily = document.getElementById('fontFamily').value;
-    const fontSize = parseInt(document.getElementById('fontSize').value);
-    const textColor = document.getElementById('textColor').value;
-    
-    if (textInput.value.trim()) {
-        const text = new fabric.IText(textInput.value, {
-            left: 50,
-            top: 50,
-            fontFamily: fontFamily,
-            fill: textColor,
-            fontSize: fontSize
-        });
-        canvas.add(text);
-        textInput.value = '';
-    }
-}
-
-function updateProductBase() {
-    const productType = document.getElementById('productType');
-    const productColor = document.getElementById('productColor').value;
-    const currentPrice = document.getElementById('currentPrice');
-    
-    // Aktualizacja ceny - zawsze z elementu, nie z data-price
-    const priceText = currentPrice.textContent;
-    const price = parseFloat(priceText.replace(/[^\d,.]/g, '').replace(',', '.'));
-    
-    // Aktualizacja obrazu produktu
-    const productImg = document.getElementById('currentProductImg');
-    productImg.style.backgroundColor = productColor;
-}
-
-function deleteSelectedObject() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        canvas.remove(activeObject);
-    }
-}
-
-function clearCanvas() {
-    canvas.clear();
-}
-
-function bringToFront() {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        activeObject.bringToFront();
-        canvas.renderAll();
-    }
-}
-
-function exportDesign() {
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
-    });
-    
-    const link = document.createElement('a');
-    link.download = 'adelbertus-design.png';
-    link.href = dataURL;
-    link.click();
-    
-    showNotification('🎨 Projekt został pobrany!');
-}
-
-function addToCartFromDesign() {
-    const productType = document.getElementById('productType');
-    const productName = `Projektowany ${productType.selectedOptions[0].textContent.split(' ')[0]}`;
-    const price = parseInt(productType.selectedOptions[0].getAttribute('data-price'));
-    
-    // Eksport projektu jako obraz
-    const dataURL = canvas.toDataURL({
-        format: 'png',
-        quality: 0.8
-    });
-    
-    addToCart(productName, price, dataURL, 'Uniwersalny', 'Projektowany');
-}
-
 // ===== CHATBOT =====
 function initChatbot() {
     // Podstawowa inicjalizacja chatbota
@@ -5519,31 +5461,6 @@ function initChatbot() {
 function toggleChatbot() {
     const chatbotWindow = document.getElementById('chatbotWindow');
     chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-}
-
-// ===== FAQ =====
-function initFAQ() {
-    const faqQuestions = document.querySelectorAll('.faq-question');
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', function() {
-            toggleFAQ(this);
-        });
-    });
-}
-
-function toggleFAQ(element) {
-    const answer = element.nextElementSibling;
-    const icon = element.querySelector('i');
-    
-    if (answer.style.display === 'block') {
-        answer.style.display = 'none';
-        icon.classList.remove('fa-chevron-up');
-        icon.classList.add('fa-chevron-down');
-    } else {
-        answer.style.display = 'block';
-        icon.classList.remove('fa-chevron-down');
-        icon.classList.add('fa-chevron-up');
-    }
 }
 
 // ===== FORUM =====
@@ -5646,17 +5563,127 @@ window.toggleChatbot = toggleChatbot;
 window.openImageZoom = openImageZoom;
 window.closeImageZoom = closeImageZoom;
 window.changeProductImage = changeProductImage;
-window.toggleFAQ = toggleFAQ;
-window.addCustomText = addCustomText;
-window.deleteSelectedObject = deleteSelectedObject;
-window.clearCanvas = clearCanvas;
-window.bringToFront = bringToFront;
-window.exportDesign = exportDesign;
-window.addToCartFromDesign = addToCartFromDesign;
 window.hideCartPopup = hideCartPopup;
 window.goToCheckout = goToCheckout;
+
+// ===== STAN ROZMOWY =====
+let stan = {
+  etap: null,
+  zamowienie: {
+    produkt: "",
+    rozmiar: "",
+    imie: ""
+  }
+};
+// ===== WYŚWIETLANIE =====
+function addBotMessage(text) {
+  const msg = document.createElement("div");
+  msg.className = "bot";
+  msg.textContent = text;
+  document.getElementById("messages").appendChild(msg);
+  scrollToBottom();
+}
+function addUserMessage(text) {
+  const msg = document.createElement("div");
+  msg.className = "user";
+  msg.textContent = text;
+  document.getElementById("messages").appendChild(msg);
+  scrollToBottom();
+}
+function scrollToBottom() {
+  const box = document.getElementById("chatbox");
+  box.scrollTop = box.scrollHeight;
+}
+// ===== ROZPOZNAWANIE INTENCJI =====
+function rozpoznajIntencje(msg) {
+  if (msg.match(/zamów|kup|chcę/i)) return "ZAMOWIENIE";
+  if (msg.match(/promocj|rabat/i)) return "PROMOCJE";
+  if (msg.match(/kontakt|telefon/i)) return "KONTAKT";
+  return "INNE";
+}
+// ===== AKCJE =====
+function rozpocznijZamowienie() {
+  stan.etap = "PRODUKT";
+  addBotMessage("Super 🔥 Co chcesz zamówić?");
+}
+function pokazPromocje() {
+  addBotMessage("Aktualne promocje znajdziesz w sekcji poniżej 👇");
+  document.getElementById("promocje")?.scrollIntoView({ behavior: "smooth" });
+}
+function pokazKontakt() {
+  addBotMessage("Możesz napisać do nas na WhatsApp: +48 123 456 789 📱");
+}
+// ===== OBSŁUGA FLOW =====
+function obsluzFlow(msg) {
+  if (stan.etap === "PRODUKT") {
+    stan.zamowienie.produkt = msg;
+    stan.etap = "ROZMIAR";
+    addBotMessage("Jaki rozmiar?");
+    return true;
+  }
+  if (stan.etap === "ROZMIAR") {
+    stan.zamowienie.rozmiar = msg;
+    stan.etap = "IMIE";
+    addBotMessage("Podaj swoje imię do zamówienia:");
+    return true;
+  }
+  if (stan.etap === "IMIE") {
+    stan.zamowienie.imie = msg;
+    stan.etap = null;
+    finalizujZamowienie();
+    return true;
+  }
+  return false;
+}
+// ===== FINALIZACJA =====
+function finalizujZamowienie() {
+  const numer = "48123456789";
+  const tresc = `
+Nowe zamówienie:
+Produkt: ${stan.zamowienie.produkt}
+Rozmiar: ${stan.zamowienie.rozmiar}
+Imię: ${stan.zamowienie.imie}
+  `;
+  const link = `https://wa.me/${numer}?text=${encodeURIComponent(tresc)}`;
+  addBotMessage("Gotowe ✅ Przekierowuję Cię do WhatsApp, żeby potwierdzić zamówienie.");
+  setTimeout(() => {
+    window.open(link, "_blank");
+  }, 1500);
+  stan.zamowienie = { produkt: "", rozmiar: "", imie: "" };
+}
+// ===== GŁÓWNA OBSŁUGA WIADOMOŚCI =====
+function obsluzWiadomosc(userMessage) {
+  if (obsluzFlow(userMessage)) return;
+  const intencja = rozpoznajIntencje(userMessage);
+  switch (intencja) {
+    case "ZAMOWIENIE":
+      rozpocznijZamowienie();
+      break;
+    case "PROMOCJE":
+      pokazPromocje();
+      break;
+    case "KONTAKT":
+      pokazKontakt();
+      break;
+    default:
+      addBotMessage("Napisz np. 'chcę zamówić', 'promocje' albo 'kontakt'.");
+  }
+}
+// ===== EVENTY =====
+document.getElementById("sendBtn").addEventListener("click", () => {
+  const input = document.getElementById("chatInput");
+  const message = input.value.trim();
+  if (!message) return;
+  addUserMessage(message);
+  obsluzWiadomosc(message);
+  input.value = "";
+});
+document.getElementById("chatInput").addEventListener("keypress", (e) => {
+  if (e.key === "Enter") document.getElementById("sendBtn").click();
+});
+addBotMessage("Cześć 👋 Jestem asystentem sklepu. Napisz 'chcę zamówić' i zaczynamy.");
 </script>
-                      
+
 <style>
 /* Dodatkowe style dla nowych funkcjonalności */
 .neon-glow {
@@ -5700,5 +5727,6 @@ window.goToCheckout = goToCheckout;
   opacity: 1;
 }
 </style>
+
 </body>
 </html>
