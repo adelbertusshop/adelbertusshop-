@@ -1550,8 +1550,7 @@
                 })();
             </script>
         </section>
-
-        <!-- Sklep - ZAKTUALIZOWANY -->
+            <!-- Sklep - ZAKTUALIZOWANY -->
         <section id="shop">
             <div class="section-title">
                 <h2>Nasze Produkty</h2>
@@ -1572,10 +1571,18 @@
                 <div class="payment-method">PayPal</div>
             </div>
             
+            <!-- Pasek kategorii -->
+            <div class="category-filters" style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin: 2rem 0;">
+                <button class="nav-btn category-btn active" data-category="all">Wszystko</button>
+                <button class="nav-btn category-btn" data-category="koszulka">Koszulki</button>
+                <button class="nav-btn category-btn" data-category="bluza">Bluzy</button>
+                <button class="nav-btn category-btn" data-category="czapka">Czapki</button>
+            </div>
+            
             <h3 class="text-2xl font-bold mb-6 text-center gold-text">Koszulki</h3>
             <div class="products-grid">
                 <!-- Oryginalne 8 koszulek -->
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulka Rebel" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1663,7 +1670,7 @@
                 </div>
 
                 <!-- KOSZULKA ROCK -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png" alt="Koszulka Rock" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1722,7 +1729,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg" alt="Koszulka Vintage" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1781,7 +1788,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png" alt="Koszulka Abstract" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1840,7 +1847,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png" alt="Koszulka Geometry" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1899,7 +1906,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg" alt="Koszulka Modern" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -1958,7 +1965,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg" alt="Koszulka Premium" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2017,7 +2024,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg" alt="Koszulka Urban" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2076,7 +2083,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png" alt="Koszulka Art" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2136,7 +2143,7 @@
                 </div>
 
                 <!-- Nowe koszulki - 26 sztuk -->
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png" alt="Puzel" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2196,7 +2203,7 @@
                     </div>
                 </div>
 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/JFMF5VFz/file-00000000465c620a87ec4dbf4bd0ce30.png" alt="Wybrany" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2259,7 +2266,7 @@
 <h3 class="text-2xl font-bold my-6 text-center gold-text">Koszulki</h3>
 <div class="products-grid">
     <!-- Koszulka Game Over -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/JFwsTR50/1765139504481.png" alt="Koszulka Game Over" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2317,7 +2324,7 @@
     </div>
 
     <!-- Koszulka Master -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/pvfCCw30/1765139433826.png" alt="Koszulka Master" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2375,7 +2382,7 @@
     </div>
 
     <!-- Koszulka Mix Tape -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/0VmWzt4t/1765139223781.png" alt="Koszulka Mix Tape" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2433,7 +2440,7 @@
     </div>
 
     <!-- Koszulka Bóg OldSchoolu -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/9kqmxvjC/1765139285646.png" alt="Koszulka Bóg OldSchoolu" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2491,7 +2498,7 @@
     </div>
 
     <!-- Koszulka Step Outside -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/TM5Y3K2k/Screenshot-20251126-225355-Chrome-2.jpg" alt="Koszulka Step Outside" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2549,7 +2556,7 @@
     </div>
 
     <!-- Koszulka Adelbertus -->
-    <div class="product-card fade-in">
+    <div class="product-card fade-in" data-category="koszulka">
         <div class="product-image-container">
             <img src="https://i.ibb.co/xt8wnJzx/Screenshot-20251126-225407-Chrome-2.jpg" alt="Koszulka Adelbertus" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
             <div class="product-gallery">
@@ -2608,7 +2615,7 @@
 </div>
                 
                 <!-- KOSZULKA Widzisz tylko to -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/DfS0dwsT/Gemini-Generated-Image-at9vdxat9vdxat9v.png" alt="Koszulka Widzisz tylko to" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2668,7 +2675,7 @@
                 </div>
 
                 <!-- KOSZULKA Wojownik -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/zT44RNgV/Gemini-Generated-Image-2sh2qt2sh2qt2sh2.png" alt="Koszulka Wojownik" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2728,7 +2735,7 @@
                 </div>
 
                 <!-- KOSZULKA Dj Cool -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/Dggqc9tN/Gemini-Generated-Image-jdggbpjdggbpjdgg-1.png" alt="Koszulka Dj Cool" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2788,7 +2795,7 @@
                 </div>
 
                 <!-- KOSZULKA Symbol Pi -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/TMDRVdmM/Gemini-Generated-Image-g07sw2g07sw2g07s-1.png" alt="Koszulka Symbol Pi" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2848,7 +2855,7 @@
                 </div>
 
                 <!-- KOSZULKA Own Nothing -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/HDSzLwF5/Gemini-Generated-Image-rava93rava93rava.png" alt="Koszulka Own Nothing" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2908,7 +2915,7 @@
                 </div>
 
                 <!-- KOSZULKA Nadchodzi -->
-                <div class="product-card">
+                <div class="product-card" data-category="koszulka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/4Rn3HKMr/Gemini-Generated-Image-w0selow0selow0se.png" alt="Koszulka Nadchodzi" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -2966,13 +2973,13 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
             
             <!-- BLUZY -->
             <h3 class="text-2xl font-bold my-6 text-center gold-text">Bluzy</h3>
             <div class="products-grid">
                 <!-- Bluza Urban -->
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluza Urban" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3032,7 +3039,7 @@
                 </div>
 
                 <!-- Bluza Rock -->
-                <div class="product-card">
+                <div class="product-card" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png" alt="Bluza Rock" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3091,7 +3098,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg" alt="Bluza Street" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3150,7 +3157,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg" alt="Bluza Premium" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3209,7 +3216,7 @@
                     </div>
                 </div>
 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg" alt="Bluza Comfort" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3268,7 +3275,7 @@
                     </div>
                 </div>
 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png" alt="Bluza Style" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3327,7 +3334,7 @@
                     </div>
                 </div>
 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="bluza">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg" alt="Bluza Fashion" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -3385,9 +3392,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
             <!-- Bluza Postać -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/4nvSL5MZ/Screenshot-20251206-174259-Chrome-2.jpg" alt="Bluza Postać" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3445,7 +3452,7 @@
 </div>
 
 <!-- Bluza Fuck Police -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/yH14sh7/1765058892064.png" alt="Bluza Fuck Police" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3503,7 +3510,7 @@
 </div>
 
 <!-- Bluza System -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/BHdWxR2K/1765059602383.png" alt="Bluza System" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3561,7 +3568,7 @@
 </div>
 
 <!-- Bluza Old School -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/27Xx6Gvg/1765059124080.png" alt="Bluza Old School" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3619,7 +3626,7 @@
 </div>
 
 <!-- Bluza Game Over -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/KcSxZtKs/1765058809631.png" alt="Bluza Game Over" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3677,7 +3684,7 @@
 </div>
 
 <!-- Bluza Jestem -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/PZfXBw4r/1765059013678.png" alt="Bluza Jestem" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3734,7 +3741,7 @@
     </div>
 </div>
             <!-- Bluza Samotność -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/CpLNV2xF/1765280750258-1.jpg" alt="Bluza Samotność" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3792,7 +3799,7 @@
 </div>
 
 <!-- Bluza Maska -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/VWKjcRYJ/1765280808416-1.jpg" alt="Bluza Maska" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3850,7 +3857,7 @@
 </div>
 
 <!-- Bluza Oko -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/zHRKxVnT/1765280880141-1.jpg" alt="Bluza Oko" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3908,7 +3915,7 @@
 </div>
 
 <!-- Bluza Bombox -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/M5WXVDPw/1765280939157-1.jpg" alt="Bluza Bombox" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -3966,7 +3973,7 @@
 </div>
 
 <!-- Bluza Dłoń -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/v4TcwgVg/1765280999604-1.jpg" alt="Bluza Dłoń" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -4024,7 +4031,7 @@
 </div>
 
 <!-- Bluza Wojownik -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/0RCYxJ9x/1765281063951-1.jpg" alt="Bluza Wojownik" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -4082,7 +4089,7 @@
 </div>
 
 <!-- Bluza Kiss -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/7dyWTbWt/1765281231206-1.jpg" alt="Bluza Kiss" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -4140,7 +4147,7 @@
 </div>
 
 <!-- Bluza Kontrolowany -->
-<div class="product-card fade-in">
+<div class="product-card fade-in" data-category="bluza">
     <div class="product-image-container">
         <img src="https://i.ibb.co/hxkHhmGz/1765137452776.png" alt="Bluza Kontrolowany" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
         <div class="product-gallery">
@@ -4200,7 +4207,7 @@
             <h3 class="text-2xl font-bold my-6 text-center gold-text">Czapki</h3>
             <div class="products-grid">
                 <!-- Czapka Classic -->
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapka Classic" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4259,7 +4266,7 @@
                     </div>
                 </div>
 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg" alt="Czapka Sport" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4319,7 +4326,7 @@
                 </div>
 
                 <!-- CZAPKA Adelbertus -->
-                <div class="product-card">
+                <div class="product-card" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/FLQYNBnj/Screenshot-2025-08-24-13-01-48.png" alt="Czapka Adelbertus" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4378,7 +4385,7 @@
                 </div>
 
                 <!-- CZAPKA Adelbertus Zimowa -->
-                <div class="product-card">
+                <div class="product-card" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/Pv6HCvQk/Screenshot-2025-08-24-12-44-15.png" alt="Czapka Adelbertus Zimowa" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4437,7 +4444,7 @@
                 </div>
 
                 <!-- CZAPKA Symbol Pi -->
-                <div class="product-card">
+                <div class="product-card" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/MyCYBwj3/Screenshot-2025-08-24-13-16-08.png" alt="Czapka Symbol Pi" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4495,7 +4502,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg" alt="Czapka Street" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4555,7 +4562,7 @@
                     </div>
                 </div>
                 
-                <div class="product-card fade-in">
+                <div class="product-card fade-in" data-category="czapka">
                     <div class="product-image-container">
                         <img src="https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg" alt="Czapka Premium" class="product-image" loading="lazy" onclick="openImageZoom(this.src)">
                         <div class="product-gallery">
@@ -4612,8 +4619,31 @@
                     </div>
                 </div>
             </div>
+            
+            <script>
+                // Filtrowanie produktów po kategorii
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // Usuń active ze wszystkich przycisków
+                        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                        // Dodaj active do klikniętego
+                        this.classList.add('active');
+                        
+                        const category = this.dataset.category;
+                        const products = document.querySelectorAll('.product-card');
+                        
+                        products.forEach(product => {
+                            if (category === 'all' || product.dataset.category === category) {
+                                product.style.display = '';
+                            } else {
+                                product.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            </script>
         </section>
-       
+
 <!-- 🎁 Sekcja Zbiórki FINALNA -->
 <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
     
