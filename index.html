@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -1107,7 +1107,7 @@
             color: #666;
         }
         
-        /* Design Studio - NOWE STYLE */
+        /* Design Studio - NOWE STYLE Z MOCKUPAMI */
         .design-studio-container {
             background: white;
             border-radius: 20px;
@@ -4695,7 +4695,7 @@
                     </div>
                     <div>
                         <label class="block font-bold mb-2">Kolor produktu</label>
-                        <input type="color" id="designStudioProductColor" value="#ffffff" class="w-full h-10 border rounded">
+                        <input type="color" id="designStudioProductColor" value="#000000" class="w-full h-10 border rounded">
                     </div>
                 </div>
 
@@ -4707,7 +4707,7 @@
 
                 <div class="design-studio-canvas-wrapper">
                     <canvas id="designStudioCanvas" width="500" height="500"></canvas>
-                    <div class="design-studio-print-area" style="left: 150px; top: 150px; width: 200px; height: 200px; border: 2px dashed #d4af37; position: absolute; pointer-events: none;"></div>
+                    <div class="design-studio-print-area" id="designStudioPrintArea" style="left: 150px; top: 150px; width: 200px; height: 300px; border: 2px dashed #d4af37; position: absolute; pointer-events: none;"></div>
                 </div>
 
                 <div class="design-studio-tools">
@@ -4725,7 +4725,7 @@
                         </select>
                         <div class="flex gap-2 mb-2">
                             <input type="number" id="designStudioFontSize" value="24" min="8" max="200" class="w-20 p-2 border rounded">
-                            <input type="color" id="designStudioTextColor" value="#000000" class="design-studio-color-picker">
+                            <input type="color" id="designStudioTextColor" value="#ffffff" class="design-studio-color-picker">
                         </div>
                         <button onclick="designStudio.addText()">➕ Dodaj tekst</button>
                     </div>
@@ -5605,43 +5605,112 @@
             
             window.designStudio.canvas = new fabric.Canvas('designStudioCanvas');
             window.designStudio.currentSide = 'front';
-            window.designStudio.printArea = { left: 150, top: 150, width: 200, height: 200 };
             
-            window.designStudio.canvas.setWidth(500);
-            window.designStudio.canvas.setHeight(500);
+            // Funkcja do ładowania mockupu
+            const loadMockup = () => {
+                const productType = document.getElementById('designStudioProduct').value;
+                const side = window.designStudio.currentSide;
+                let imgUrl = '';
+                
+                // Placeholderowe mockupy - w rzeczywistości można zastąpić własnymi PNG
+                if (productType === 'koszulka') {
+                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // przykładowy mockup (czarny T-shirt przód)
+                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył koszulki (ten sam placeholder)
+                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (placeholder)
+                } else if (productType === 'bluza') {
+                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // czarna bluza przód (placeholder)
+                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył (placeholder)
+                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (placeholder)
+                } else if (productType === 'czapka') {
+                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // czarna czapka przód (placeholder)
+                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył czapki (placeholder)
+                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (nie dotyczy, ale placeholder)
+                }
+                
+                fabric.Image.fromURL(imgUrl, (img) => {
+                    // Usuń poprzedni mockup (jeśli istnieje)
+                    const existingMockup = window.designStudio.canvas.getObjects().find(obj => obj.name === 'mockup');
+                    if (existingMockup) {
+                        window.designStudio.canvas.remove(existingMockup);
+                    }
+                    
+                    img.set({
+                        left: 0,
+                        top: 0,
+                        originX: 'left',
+                        originY: 'top',
+                        selectable: false,
+                        evented: false,
+                        hasControls: false,
+                        hasBorders: false,
+                        opacity: 0.6,
+                        name: 'mockup'
+                    });
+                    
+                    // Skaluj do rozmiaru canvasa
+                    const scaleX = 500 / img.width;
+                    const scaleY = 500 / img.height;
+                    const scale = Math.min(scaleX, scaleY);
+                    img.scale(scale);
+                    
+                    // Wyśrodkuj
+                    img.set({
+                        left: (500 - img.width * scale) / 2,
+                        top: (500 - img.height * scale) / 2
+                    });
+                    
+                    window.designStudio.canvas.add(img);
+                    img.sendToBack();
+                    window.designStudio.canvas.renderAll();
+                });
+            };
             
-            const rect = new fabric.Rect({
-                left: 150,
-                top: 150,
-                width: 200,
-                height: 200,
-                fill: 'rgba(212, 175, 55, 0.1)',
-                stroke: '#d4af37',
-                strokeDashArray: [5, 5],
-                selectable: false,
-                evented: false,
-                hasControls: false,
-                hasBorders: false,
-                name: 'printArea'
-            });
-            window.designStudio.canvas.add(rect);
-            rect.sendToBack();
+            // Załaduj początkowy mockup
+            loadMockup();
             
-            const productColor = document.getElementById('designStudioProductColor');
-            productColor.addEventListener('input', function(e) {
-                window.designStudio.canvas.backgroundColor = e.target.value;
-                window.designStudio.canvas.renderAll();
-            });
-            window.designStudio.canvas.backgroundColor = '#ffffff';
-            
+            // Zmiana produktu lub strony – przeładuj mockup
+            document.getElementById('designStudioProduct').addEventListener('change', loadMockup);
             document.querySelectorAll('.design-studio-side-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     document.querySelectorAll('.design-studio-side-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     window.designStudio.currentSide = this.dataset.side;
+                    loadMockup();
                     showNotification(`Strona: ${this.dataset.side === 'front' ? 'Przód' : this.dataset.side === 'back' ? 'Tył' : 'Rękawy'}`);
                 });
             });
+            
+            // Obsługa koloru tła (produktu) – tylko zmiana koloru, mockup zostaje
+            const productColor = document.getElementById('designStudioProductColor');
+            productColor.addEventListener('input', function(e) {
+                window.designStudio.canvas.backgroundColor = e.target.value;
+                window.designStudio.canvas.renderAll();
+            });
+            window.designStudio.canvas.backgroundColor = '#000000';
+            
+            // Obszar nadruku – dostosowanie do produktu
+            const updatePrintArea = () => {
+                const productType = document.getElementById('designStudioProduct').value;
+                const printArea = document.getElementById('designStudioPrintArea');
+                if (productType === 'koszulka') {
+                    printArea.style.width = '200px';
+                    printArea.style.height = '300px';
+                    printArea.style.left = '150px';
+                    printArea.style.top = '100px';
+                } else if (productType === 'bluza') {
+                    printArea.style.width = '220px';
+                    printArea.style.height = '280px';
+                    printArea.style.left = '140px';
+                    printArea.style.top = '110px';
+                } else if (productType === 'czapka') {
+                    printArea.style.width = '150px';
+                    printArea.style.height = '150px';
+                    printArea.style.left = '175px';
+                    printArea.style.top = '175px';
+                }
+            };
+            updatePrintArea();
+            document.getElementById('designStudioProduct').addEventListener('change', updatePrintArea);
             
             const jsonInput = document.getElementById('designStudioLoadJSON');
             jsonInput.addEventListener('change', function(e) {
@@ -5728,7 +5797,7 @@
 
         window.designStudio.clearCanvas = function() {
             window.designStudio.canvas.getObjects().forEach(obj => {
-                if (obj.name !== 'printArea') {
+                if (obj.name !== 'mockup' && obj.name !== 'printArea') {
                     window.designStudio.canvas.remove(obj);
                 }
             });
