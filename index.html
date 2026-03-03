@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>AdelbertusShop | Ekskluzywne Projekty Vintage 80s/90s</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.">
     
@@ -1164,6 +1164,8 @@
             border: 2px dashed var(--color-gold);
             pointer-events: none;
             box-sizing: border-box;
+            background: transparent;
+            z-index: 10;
         }
         
         .design-studio-tools {
@@ -4694,7 +4696,7 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block font-bold mb-2">Kolor produktu</label>
+                        <label class="block font-bold mb-2">Kolor produktu (tło)</label>
                         <input type="color" id="designStudioProductColor" value="#000000" class="w-full h-10 border rounded">
                     </div>
                 </div>
@@ -4702,7 +4704,7 @@
                 <div class="design-studio-side-tabs">
                     <button class="design-studio-side-btn active" data-side="front">Przód</button>
                     <button class="design-studio-side-btn" data-side="back">Tył</button>
-                    <button class="design-studio-side-btn" data-side="sleeve">Rękawy</button>
+                    <button class="design-studio-side-btn" data-side="sleeve">Rękaw</button>
                 </div>
 
                 <div class="design-studio-canvas-wrapper">
@@ -5606,26 +5608,29 @@
             window.designStudio.canvas = new fabric.Canvas('designStudioCanvas');
             window.designStudio.currentSide = 'front';
             
-            // Funkcja do ładowania mockupu
+            // MAPOWANIE MOCKUPÓW (REALISTYCZNE PNG Z PRZEZROCZYSTYM TŁEM)
+            const mockupUrls = {
+                koszulka: {
+                    front: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png', // placeholder (wstaw tu właściwy PNG)
+                    back: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png',
+                    sleeve: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'
+                },
+                bluza: {
+                    front: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png', // placeholder (czarna bluza przód)
+                    back: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png',
+                    sleeve: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'
+                },
+                czapka: {
+                    front: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png', // placeholder (czarna czapka)
+                    back: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png',
+                    sleeve: 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'
+                }
+            };
+            
             const loadMockup = () => {
                 const productType = document.getElementById('designStudioProduct').value;
                 const side = window.designStudio.currentSide;
-                let imgUrl = '';
-                
-                // Placeholderowe mockupy - w rzeczywistości można zastąpić własnymi PNG
-                if (productType === 'koszulka') {
-                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // przykładowy mockup (czarny T-shirt przód)
-                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył koszulki (ten sam placeholder)
-                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (placeholder)
-                } else if (productType === 'bluza') {
-                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // czarna bluza przód (placeholder)
-                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył (placeholder)
-                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (placeholder)
-                } else if (productType === 'czapka') {
-                    if (side === 'front') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // czarna czapka przód (placeholder)
-                    else if (side === 'back') imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // tył czapki (placeholder)
-                    else imgUrl = 'https://i.ibb.co/tJdVbXZ/black-tshirt-front.png'; // rękaw (nie dotyczy, ale placeholder)
-                }
+                let imgUrl = mockupUrls[productType][side];
                 
                 fabric.Image.fromURL(imgUrl, (img) => {
                     // Usuń poprzedni mockup (jeśli istnieje)
@@ -5662,7 +5667,7 @@
                     window.designStudio.canvas.add(img);
                     img.sendToBack();
                     window.designStudio.canvas.renderAll();
-                });
+                }, null, { crossOrigin: 'anonymous' });
             };
             
             // Załaduj początkowy mockup
@@ -5676,7 +5681,7 @@
                     this.classList.add('active');
                     window.designStudio.currentSide = this.dataset.side;
                     loadMockup();
-                    showNotification(`Strona: ${this.dataset.side === 'front' ? 'Przód' : this.dataset.side === 'back' ? 'Tył' : 'Rękawy'}`);
+                    showNotification(`Strona: ${this.dataset.side === 'front' ? 'Przód' : this.dataset.side === 'back' ? 'Tył' : 'Rękaw'}`);
                 });
             });
             
