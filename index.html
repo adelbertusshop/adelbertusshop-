@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
+    <!-- PayPal SDK (nowy, tylko komponenty buttons) -->
+    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=buttons&currency=PLN"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
@@ -760,9 +761,9 @@
         }
         
         /* PayPal container */
-        #paypal-container {
+        #paypal-button-container {
             margin-top: 1rem;
-            min-height: 50px;
+            min-height: 45px;
         }
         
         /* Animacje */
@@ -1510,6 +1511,25 @@
           background: var(--color-dark-gold);
           transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* NOWY WYBÓR ROZMIARU W KONFIGURATORZE */
+        .size-selector {
+          margin: 12px 0 8px;
+        }
+        .size-selector select {
+          width: 100%;
+          padding: 12px;
+          border-radius: 8px;
+          background: var(--card);
+          border: 1px solid var(--border);
+          color: var(--text);
+          font-size: 14px;
+          cursor: pointer;
+          outline: none;
+        }
+        .size-selector select:hover {
+          border-color: var(--color-gold);
         }
 
         /* RESPONSYWNOŚĆ – MOBILE */
@@ -2562,6 +2582,18 @@
 
                     <!-- NOWY PRZYCISK DODAJ DO KOSZYKA -->
                     <button class="cart-config-btn" onclick="addCustomToCart()">🛒 DODAJ DO KOSZYKA <span id="configPriceLabel">(170 zł)</span></button>
+                    
+                    <!-- WYBÓR ROZMIARU (NOWY) -->
+                    <div class="size-selector">
+                        <select id="configSize">
+                            <option value="S">Rozmiar: S</option>
+                            <option value="M" selected>Rozmiar: M</option>
+                            <option value="L">Rozmiar: L</option>
+                            <option value="XL">Rozmiar: XL</option>
+                            <option value="XXL">Rozmiar: XXL</option>
+                        </select>
+                    </div>
+
                     <div style="margin-top:16px; font-size:10px; color:var(--muted); text-align:center;">DRIP STUDIO © 2026</div>
                 </div>  <!-- koniec prawego panelu -->
             </div>  <!-- koniec main-layout -->
@@ -2589,7 +2621,15 @@
                 </div>
             </div>
             
-            <div id="paypal-container" class="mt-4"></div>
+            <!-- NOWY PayPal Button (czysty) -->
+            <div id="paypal-button-container" class="mt-4"></div>
+            
+            <!-- NOWY Blok BLIK -->
+            <div style="margin:2rem 0; padding:1.5rem; background:#000; color:#d4af37; border:2px solid #d4af37; border-radius:12px; text-align:center; font-weight:bold;">
+                <div style="font-size:1.4rem;">Płatności BLIK</div>
+                <div style="font-size:1.8rem; letter-spacing:2px;">573 939 925</div>
+                <div style="font-size:1rem; margin-top:0.8rem;">W tytule przelewu dopisz: PROJEKT + nazwa produktu (koszulka / bluza / czapka / własny projekt) + imię</div>
+            </div>
             
             <div class="cart-buttons">
                 <button onclick="sendOrderEmail()" class="email-order-btn">
@@ -2873,6 +2913,9 @@
             initProductGalleries();
             initForum();
             initCharitySection();
+
+            // Inicjalizacja PayPal (NOWA)
+            renderPayPalButton();
         });
 
         function initNavigation() {
@@ -3015,7 +3058,9 @@
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
                 cartTotal.textContent = '0 zł';
-                document.getElementById('paypal-container').innerHTML = '';
+                // Czyścimy kontener PayPal
+                const container = document.getElementById('paypal-button-container');
+                if (container) container.innerHTML = '';
             } else {
                 let total = 0;
                 
@@ -3039,6 +3084,8 @@
                 });
                 
                 cartTotal.textContent = `${total.toFixed(2)} zł`;
+                
+                // Renderuj przycisk PayPal z nową kwotą
                 renderPayPalButton();
             }
             
@@ -3052,19 +3099,70 @@
 
         function toggleCart() {
             document.getElementById('cartPanel').classList.toggle('open');
+            // Po otwarciu koszyka odświeżamy przycisk PayPal (na wypadek zmiany kwoty)
+            if (cart.length > 0) {
+                renderPayPalButton();
+            }
         }
 
+        // NOWA funkcja renderująca PayPal Button (SDK Buttons)
         function renderPayPalButton() {
-            const container = document.getElementById('paypal-container');
+            const container = document.getElementById('paypal-button-container');
+            if (!container) return;
+            
+            // Czyścimy kontener
             container.innerHTML = '';
             
             if (cart.length === 0) return;
             
-            if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
-                paypal.HostedButtons({
-                    hostedButtonId: "L4639S4363CZE",
-                }).render("#paypal-container");
+            // Pobieramy kwotę z #cartTotal
+            const totalSpan = document.getElementById('cartTotal');
+            if (!totalSpan) return;
+            
+            let totalText = totalSpan.textContent; // np. "199.99 zł"
+            // Usuwamy "zł" i zamieniamy przecinek na kropkę
+            let amountStr = totalText.replace('zł', '').replace(',', '.').trim();
+            let amount = parseFloat(amountStr);
+            
+            if (isNaN(amount) || amount <= 0) return;
+            
+            // Inicjalizujemy przycisk PayPal
+            if (typeof paypal === 'undefined') {
+                console.error('PayPal SDK nie załadowany');
+                return;
             }
+            
+            paypal.Buttons({
+                style: {
+                    layout: 'vertical',
+                    color: 'gold',
+                    shape: 'rect',
+                    label: 'paypal'
+                },
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: amount.toFixed(2),
+                                currency_code: 'PLN'
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Płatność udana! Dziękujemy, ' + details.payer.name.given_name);
+                        // Opcjonalnie: czyścimy koszyk po udanej płatności
+                        // cart = [];
+                        // updateCart();
+                        // toggleCart();
+                    });
+                },
+                onError: function(err) {
+                    console.error('Błąd PayPal:', err);
+                    alert('Wystąpił błąd podczas płatności. Spróbuj ponownie później.');
+                }
+            }).render('#paypal-button-container');
         }
 
         function showCartPopup() {
@@ -3471,7 +3569,35 @@
             window.clearView = function() { state.views[state.view] = []; state.selected = null; updateEditControls(); updateLayers(); render(); };
             window.exportDesign = function() { const link = document.createElement('a'); link.download = `drip-studio-${state.product}-${state.view}.png`; link.href = canvas.toDataURL('image/png'); link.click(); };
             function updatePriceLabel() { const span = document.getElementById('configPriceLabel'); if (!span) return; let price = 80; if (state.product === 'hoodie') price = 170; else if (state.product === 'cap') price = 99; span.textContent = `(${price} zł)`; }
-            window.addCustomToCart = function() { const dataURL = canvas.toDataURL('image/png'); let productName = ''; let price = 80; if (state.product === 'hoodie') { productName = 'Bluza'; price = 170; } else if (state.product === 'tshirt') { productName = 'Koszulka'; price = 80; } else if (state.product === 'cap') { productName = 'Czapka'; price = 99; } const customName = "Custom " + productName + " (" + state.view + ")"; if (typeof addToCart === 'function') { addToCart(customName, price, dataURL, "Custom", "Custom"); showCartPopup(); } else { console.error('Funkcja addToCart nie istnieje'); } };
+            
+            // ZMIENIONA funkcja addCustomToCart – dodaje rozmiar z selecta
+            window.addCustomToCart = function() { 
+                const dataURL = canvas.toDataURL('image/png'); 
+                let productName = ''; 
+                let price = 80; 
+                if (state.product === 'hoodie') { 
+                    productName = 'Bluza'; 
+                    price = 170; 
+                } else if (state.product === 'tshirt') { 
+                    productName = 'Koszulka'; 
+                    price = 80; 
+                } else if (state.product === 'cap') { 
+                    productName = 'Czapka'; 
+                    price = 99; 
+                } 
+                const customName = "Custom " + productName + " (" + state.view + ")"; 
+                // Pobieramy wybrany rozmiar
+                const sizeSelect = document.getElementById('configSize');
+                const selectedSize = sizeSelect ? sizeSelect.value : 'M';
+                
+                if (typeof addToCart === 'function') { 
+                    addToCart(customName, price, dataURL, selectedSize, "Custom"); 
+                    showCartPopup(); 
+                } else { 
+                    console.error('Funkcja addToCart nie istnieje'); 
+                } 
+            };
+            
             setView('front'); updatePriceLabel(); render();
         })();
     </script>
