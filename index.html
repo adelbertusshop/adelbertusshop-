@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<!DOCTYPE html> do </html>. Tylko kod. Zero tekstu, zero „wklej tu”, zero wyjaśnień. Cały plik albo spierdalaj.
+
+[tu wklejasz CAŁY swój aktualny kod index.html]   <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
@@ -9,8 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <!-- PayPal SDK (tylko Smart Payment Buttons) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&currency=PLN"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
@@ -760,8 +761,8 @@
             border-top: 2px solid #eee;
         }
         
-        /* PayPal container - nowy */
-        #paypal-button-container {
+        /* PayPal container */
+        #paypal-container {
             margin-top: 1rem;
             min-height: 50px;
         }
@@ -4896,14 +4897,7 @@
                 </div>
             </div>
             
-            <!-- NOWY PayPal Smart Payment Buttons -->
-            <div id="paypal-button-container" class="mt-4"></div>
-            
-            <!-- DUŻY BLOK BLIK -->
-            <div style="margin-top:1.5rem; padding:1rem; background:#000; color:#d4af37; border:2px solid #d4af37; border-radius:12px; text-align:center;">
-                <strong>Płatności BLIK:</strong> 573 939 925<br>
-                W tytule przelewu dopisz: PROJEKT + imię / nazwa produktu
-            </div>
+            <div id="paypal-container" class="mt-4"></div>
             
             <div class="cart-buttons">
                 <button onclick="sendOrderEmail()" class="email-order-btn">
@@ -5108,7 +5102,7 @@
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
                 cartTotal.textContent = '0 zł';
-                document.getElementById('paypal-button-container').innerHTML = '';
+                document.getElementById('paypal-container').innerHTML = '';
             } else {
                 let total = 0;
                 
@@ -5147,41 +5141,16 @@
             document.getElementById('cartPanel').classList.toggle('open');
         }
 
-        // NOWA funkcja renderująca PayPal Smart Payment Buttons
         function renderPayPalButton() {
-            const container = document.getElementById('paypal-button-container');
+            const container = document.getElementById('paypal-container');
             container.innerHTML = '';
             
             if (cart.length === 0) return;
             
-            const totalAmount = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2);
-            
-            if (typeof paypal !== 'undefined' && paypal.Buttons) {
-                paypal.Buttons({
-                    style: {
-                        shape: 'rect',
-                        color: 'gold',
-                        layout: 'vertical',
-                        label: 'paypal'
-                    },
-                    createOrder: function(data, actions) {
-                        return actions.order.create({
-                            purchase_units: [{
-                                amount: {
-                                    value: totalAmount
-                                }
-                            }]
-                        });
-                    },
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(details) {
-                            alert('Płatność zakończona! Dziękujemy.');
-                            cart = [];
-                            updateCart();
-                            toggleCart();
-                        });
-                    }
-                }).render('#paypal-button-container');
+            if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
+                paypal.HostedButtons({
+                    hostedButtonId: "L4639S4363CZE",
+                }).render("#paypal-container");
             }
         }
 
