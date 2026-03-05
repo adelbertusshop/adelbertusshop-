@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,8 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <!-- PayPal SDK (nowy, tylko komponenty buttons) -->
-    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=buttons&currency=PLN"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
@@ -761,9 +761,9 @@
         }
         
         /* PayPal container */
-        #paypal-button-container {
+        #paypal-container {
             margin-top: 1rem;
-            min-height: 45px;
+            min-height: 50px;
         }
         
         /* Animacje */
@@ -1108,9 +1108,21 @@
         }
         
         /* DODATKOWE STYLE DLA KONFIGURATORA */
+        .configurator-root {
+          --bg: #0a0a0a;
+          --surface: #111111;
+          --card: #181818;
+          --border: #2a2a2a;
+          --accent: #e8ff00;
+          --accent2: #ff3c3c;
+          --text: #f0f0f0;
+          --muted: #666;
+          --white: #ffffff;
+        }
+
         .configurator-section {
-          background: #0a0a0a;
-          color: #f0f0f0;
+          background: var(--bg);
+          color: var(--text);
           font-family: 'DM Sans', sans-serif;
           min-height: 100vh;
           overflow-x: hidden;
@@ -1122,7 +1134,7 @@
           align-items: center;
           justify-content: space-between;
           padding: 20px 40px;
-          border-bottom: 1px solid #2a2a2a;
+          border-bottom: 1px solid var(--border);
           position: sticky;
           top: 0;
           background: rgba(10,10,10,0.95);
@@ -1134,14 +1146,14 @@
           font-family: 'Bebas Neue', sans-serif;
           font-size: 28px;
           letter-spacing: 4px;
-          color: #e8ff00;
+          color: var(--accent);
         }
-        .configurator-section .logo span { color: #ffffff; }
+        .configurator-section .logo span { color: var(--white); }
 
         .configurator-section .header-badge {
           font-family: 'Space Mono', monospace;
           font-size: 11px;
-          color: #666;
+          color: var(--muted);
           letter-spacing: 2px;
           text-transform: uppercase;
         }
@@ -1155,8 +1167,8 @@
 
         /* ===== LEWY PANEL ===== */
         .left-panel {
-          background: #111111;
-          border-right: 1px solid #2a2a2a;
+          background: var(--surface);
+          border-right: 1px solid var(--border);
           padding: 24px;
           overflow-y: auto;
         }
@@ -1165,10 +1177,10 @@
           font-family: 'Bebas Neue', sans-serif;
           font-size: 18px;
           letter-spacing: 3px;
-          color: #e8ff00;
+          color: var(--accent);
           margin-bottom: 20px;
           padding-bottom: 12px;
-          border-bottom: 1px solid #2a2a2a;
+          border-bottom: 1px solid var(--border);
         }
 
         .product-grid {
@@ -1179,20 +1191,20 @@
         }
 
         .product-btn {
-          background: #181818;
-          border: 2px solid #2a2a2a;
+          background: var(--card);
+          border: 2px solid var(--border);
           border-radius: 10px;
           padding: 14px 8px;
           cursor: pointer;
           transition: all 0.2s;
           text-align: center;
-          color: #f0f0f0;
+          color: var(--text);
         }
-        .product-btn:hover { border-color: #e8ff00; }
-        .product-btn.active { border-color: #e8ff00; background: rgba(232,255,0,0.06); }
+        .product-btn:hover { border-color: var(--accent); }
+        .product-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.06); }
         .product-btn .icon { font-size: 26px; display: block; margin-bottom: 6px; }
-        .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: #666; }
-        .product-btn.active .label { color: #e8ff00; }
+        .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+        .product-btn.active .label { color: var(--accent); }
 
         .view-tabs {
           display: flex;
@@ -1205,20 +1217,20 @@
           flex: 1;
           min-width: 0;
           padding: 8px 4px;
-          background: #181818;
-          border: 1px solid #2a2a2a;
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 6px;
           cursor: pointer;
           font-family: 'Space Mono', monospace;
           font-size: 9px;
           letter-spacing: 1px;
           text-transform: uppercase;
-          color: #666;
+          color: var(--muted);
           transition: all 0.2s;
           text-align: center;
         }
-        .view-tab:hover { border-color: #e8ff00; color: #f0f0f0; }
-        .view-tab.active { background: #e8ff00; color: #000; border-color: #e8ff00; font-weight: 700; }
+        .view-tab:hover { border-color: var(--accent); color: var(--text); }
+        .view-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
 
         .color-row {
           display: flex;
@@ -1236,23 +1248,23 @@
           transition: all 0.2s;
         }
         .color-swatch:hover { transform: scale(1.15); }
-        .color-swatch.active { border-color: #e8ff00; box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
+        .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
 
         .tool-section { margin-bottom: 24px; }
         .input-field {
           width: 100%;
-          background: #181818;
-          border: 1px solid #2a2a2a;
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 8px;
           padding: 10px 14px;
-          color: #f0f0f0;
+          color: var(--text);
           font-family: 'DM Sans', sans-serif;
           font-size: 14px;
           outline: none;
           transition: border-color 0.2s;
           margin-bottom: 8px;
         }
-        .input-field:focus { border-color: #e8ff00; }
+        .input-field:focus { border-color: var(--accent); }
 
         .input-row {
           display: grid;
@@ -1263,11 +1275,11 @@
 
         .select-field {
           width: 100%;
-          background: #181818;
-          border: 1px solid #2a2a2a;
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 8px;
           padding: 10px 14px;
-          color: #f0f0f0;
+          color: var(--text);
           font-family: 'DM Sans', sans-serif;
           font-size: 13px;
           outline: none;
@@ -1277,7 +1289,7 @@
 
         .range-field {
           width: 100%;
-          accent-color: #e8ff00;
+          accent-color: var(--accent);
           cursor: pointer;
           margin-bottom: 4px;
         }
@@ -1285,7 +1297,7 @@
           display: flex;
           justify-content: space-between;
           font-size: 11px;
-          color: #666;
+          color: var(--muted);
           margin-bottom: 6px;
         }
 
@@ -1303,24 +1315,24 @@
           margin-bottom: 8px;
         }
         .btn-accent {
-          background: #e8ff00;
+          background: var(--accent);
           color: #000;
         }
         .btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
         .btn-outline {
           background: transparent;
-          color: #f0f0f0;
-          border: 1px solid #2a2a2a;
+          color: var(--text);
+          border: 1px solid var(--border);
         }
-        .btn-outline:hover { border-color: #e8ff00; color: #e8ff00; }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
         .btn-danger {
           background: transparent;
-          color: #ff3c3c;
-          border: 1px solid #ff3c3c;
+          color: var(--accent2);
+          border: 1px solid var(--accent2);
         }
-        .btn-danger:hover { background: #ff3c3c; color: #fff; }
+        .btn-danger:hover { background: var(--accent2); color: #fff; }
 
-        .separator { height: 1px; background: #2a2a2a; margin: 20px 0; }
+        .separator { height: 1px; background: var(--border); margin: 20px 0; }
         #editControls { transition: opacity 0.2s; }
 
         .color-text-row {
@@ -1337,8 +1349,8 @@
           border-radius: 50%;
           cursor: pointer;
           padding: 2px;
-          background: #181818;
-          border: 2px solid #2a2a2a;
+          background: var(--card);
+          border: 2px solid var(--border);
         }
 
         /* ===== PANEL ŚRODKOWY – CANVAS ===== */
@@ -1349,7 +1361,7 @@
           justify-content: center;
           padding: 40px;
           position: relative;
-          background: radial-gradient(ellipse at center, #1a1a1a 0%, #0a0a0a 70%);
+          background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg) 70%);
         }
 
         .canvas-wrapper {
@@ -1372,7 +1384,7 @@
           margin-top: 16px;
           font-family: 'Space Mono', monospace;
           font-size: 10px;
-          color: #666;
+          color: var(--muted);
           letter-spacing: 2px;
           text-align: center;
         }
@@ -1385,22 +1397,22 @@
           font-family: 'Bebas Neue', sans-serif;
           font-size: 14px;
           letter-spacing: 4px;
-          color: #666;
+          color: var(--muted);
           white-space: nowrap;
         }
 
         /* ===== PRAWY PANEL – WARSTWY, UPLOAD, EKSPORT ===== */
         .right-panel {
-          background: #111111;
-          border-left: 1px solid #2a2a2a;
+          background: var(--surface);
+          border-left: 1px solid var(--border);
           padding: 24px;
           overflow-y: auto;
           scrollbar-width: thin;
-          scrollbar-color: #2a2a2a transparent;
+          scrollbar-color: var(--border) transparent;
         }
         .right-panel::-webkit-scrollbar { width: 4px; }
         .right-panel::-webkit-scrollbar-track { background: transparent; }
-        .right-panel::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 2px; }
+        .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
         .layers-list {
           display: flex;
@@ -1410,8 +1422,8 @@
         }
 
         .layer-item {
-          background: #181818;
-          border: 1px solid #2a2a2a;
+          background: var(--card);
+          border: 1px solid var(--border);
           border-radius: 8px;
           padding: 10px 12px;
           display: flex;
@@ -1421,33 +1433,33 @@
           transition: all 0.2s;
           font-size: 13px;
         }
-        .layer-item:hover { border-color: #e8ff00; }
-        .layer-item.selected { border-color: #e8ff00; background: rgba(232,255,0,0.05); }
+        .layer-item:hover { border-color: var(--accent); }
+        .layer-item.selected { border-color: var(--accent); background: rgba(232,255,0,0.05); }
 
         .layer-icon { font-size: 16px; }
         .layer-name { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .layer-delete {
-          color: #666;
+          color: var(--muted);
           cursor: pointer;
           font-size: 14px;
           padding: 2px 6px;
           border-radius: 4px;
           transition: all 0.2s;
         }
-        .layer-delete:hover { color: #ff3c3c; background: rgba(255,60,60,0.1); }
+        .layer-delete:hover { color: var(--accent2); background: rgba(255,60,60,0.1); }
 
         .empty-layers {
           text-align: center;
           padding: 30px 20px;
-          color: #666;
+          color: var(--muted);
           font-size: 12px;
-          border: 1px dashed #2a2a2a;
+          border: 1px dashed var(--border);
           border-radius: 10px;
           line-height: 1.8;
         }
 
         .upload-zone {
-          border: 2px dashed #2a2a2a;
+          border: 2px dashed var(--border);
           border-radius: 10px;
           padding: 24px;
           text-align: center;
@@ -1455,17 +1467,17 @@
           transition: all 0.2s;
           margin-bottom: 16px;
         }
-        .upload-zone:hover { border-color: #e8ff00; background: rgba(232,255,0,0.03); }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(232,255,0,0.03); }
         .upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; }
-        .upload-zone .upload-text { font-size: 12px; color: #666; line-height: 1.6; }
-        .upload-zone .upload-text strong { color: #e8ff00; }
+        .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+        .upload-zone .upload-text strong { color: var(--accent); }
 
         #fileInput { display: none; }
 
         .export-btn {
           width: 100%;
           padding: 14px;
-          background: linear-gradient(135deg, #e8ff00, #b8cc00);
+          background: linear-gradient(135deg, var(--accent), #b8cc00);
           color: #000;
           border: none;
           border-radius: 10px;
@@ -1482,7 +1494,7 @@
         .cart-config-btn {
           width: 100%;
           padding: 16px;
-          background: #d4af37;
+          background: var(--color-gold);
           color: #000;
           border: none;
           border-radius: 10px;
@@ -1496,28 +1508,9 @@
           box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
         }
         .cart-config-btn:hover {
-          background: #b8941f;
+          background: var(--color-dark-gold);
           transform: translateY(-2px);
           box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
-        }
-
-        /* NOWY WYBÓR ROZMIARU W KONFIGURATORZE */
-        .size-selector {
-          margin: 12px 0 8px;
-        }
-        .size-selector select {
-          width: 100%;
-          padding: 12px;
-          border-radius: 8px;
-          background: #181818;
-          border: 1px solid #2a2a2a;
-          color: #f0f0f0;
-          font-size: 14px;
-          cursor: pointer;
-          outline: none;
-        }
-        .size-selector select:hover {
-          border-color: #d4af37;
         }
 
         /* RESPONSYWNOŚĆ – MOBILE */
@@ -1534,10 +1527,10 @@
             width: 100%;
           }
           .left-panel {
-            border-bottom: 1px solid #2a2a2a;
+            border-bottom: 1px solid var(--border);
           }
           .right-panel {
-            border-top: 1px solid #2a2a2a;
+            border-top: 1px solid var(--border);
           }
           .center-panel {
             padding: 20px 16px;
@@ -1995,10 +1988,10 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="studio"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <button class="nav-btn" data-section="studio"><i class="fas fa-paint-brush"></i> Projektuj</button>
         </div>
     </nav>
    
@@ -2300,139 +2293,6 @@
           </div>
         </div>
 
-        <!-- NOWA SEKCJA KONFIGURATORA (STUDIO) -->
-        <section id="studio" class="configurator-section">
-            <div class="main-layout">
-                <!-- LEWY PANEL (PRODUKT, WIDOK, KOLOR, DODAJ NAPIS, EDYTUJ) -->
-                <div class="left-panel">
-                    <div class="panel-title">// PRODUKT</div>
-                    <div class="product-grid">
-                        <button class="product-btn active" onclick="setProduct('hoodie')"><span class="icon">🧥</span><span class="label">Bluza</span></button>
-                        <button class="product-btn" onclick="setProduct('tshirt')"><span class="icon">👕</span><span class="label">Koszulka</span></button>
-                        <button class="product-btn" onclick="setProduct('cap')"><span class="icon">🧢</span><span class="label">Czapka</span></button>
-                    </div>
-
-                    <div class="panel-title">// WIDOK</div>
-                    <div class="view-tabs" id="viewTabs">
-                        <button class="view-tab active" onclick="setView('front')">Przód</button>
-                        <button class="view-tab" onclick="setView('back')">Tył</button>
-                        <button class="view-tab" id="sleeveTab" onclick="setView('left')">L. Rękaw</button>
-                        <button class="view-tab" id="sleeveTab2" onclick="setView('right')">P. Rękaw</button>
-                    </div>
-
-                    <div class="panel-title">// KOLOR PRODUKTU</div>
-                    <div class="color-row" id="colorSwatches">
-                        <div class="color-swatch active" style="background:#ffffff; border:2px solid #ccc;" onclick="setProductColor('#ffffff',this)" title="Biały"></div>
-                        <div class="color-swatch" style="background:#1a1a1a;" onclick="setProductColor('#1a1a1a',this)" title="Czarny"></div>
-                        <div class="color-swatch" style="background:#2d3a8c;" onclick="setProductColor('#2d3a8c',this)" title="Granat"></div>
-                        <div class="color-swatch" style="background:#c0392b;" onclick="setProductColor('#c0392b',this)" title="Czerwony"></div>
-                        <div class="color-swatch" style="background:#27ae60;" onclick="setProductColor('#27ae60',this)" title="Zielony"></div>
-                        <div class="color-swatch" style="background:#f39c12;" onclick="setProductColor('#f39c12',this)" title="Żółty"></div>
-                        <div class="color-swatch" style="background:#8e44ad;" onclick="setProductColor('#8e44ad',this)" title="Fiolet"></div>
-                        <div class="color-swatch" style="background:#7f8c8d;" onclick="setProductColor('#7f8c8d',this)" title="Szary"></div>
-                        <div class="color-swatch" style="background:#e8c5a0;" onclick="setProductColor('#e8c5a0',this)" title="Beż"></div>
-                    </div>
-
-                    <div class="separator"></div>
-                    <div class="panel-title">// DODAJ NAPIS</div>
-                    <div class="tool-section">
-                        <input type="text" class="input-field" id="textInput" placeholder="Wpisz tekst..." maxlength="60">
-                        <div class="input-row">
-                            <select class="select-field" id="fontSelect">
-                                <option value="Bebas Neue">Bebas Neue</option>
-                                <option value="DM Sans" selected>DM Sans</option>
-                                <option value="Space Mono">Space Mono</option>
-                                <option value="Arial">Arial</option>
-                                <option value="Georgia">Georgia</option>
-                                <option value="Impact">Impact</option>
-                                <option value="Courier New">Courier New</option>
-                                <option value="Verdana">Verdana</option>
-                            </select>
-                            <select class="select-field" id="fontWeight">
-                                <option value="400">Regular</option>
-                                <option value="700" selected>Bold</option>
-                            </select>
-                        </div>
-
-                        <div class="range-label"><span>Rozmiar</span><span id="fontSizeVal">36px</span></div>
-                        <input type="range" class="range-field" id="fontSize" min="12" max="120" value="36" oninput="document.getElementById('fontSizeVal').textContent=this.value+'px'">
-
-                        <div class="color-text-row">
-                            <label style="font-size:12px;color:var(--muted);">Kolor:</label>
-                            <input type="color" id="textColor" value="#000000">
-                            <select class="select-field" id="textAlign" style="flex:1">
-                                <option value="center">Środek</option>
-                                <option value="left">Lewo</option>
-                                <option value="right">Prawo</option>
-                            </select>
-                        </div>
-
-                        <button class="btn btn-accent" onclick="addText()">+ Dodaj Napis</button>
-                    </div>
-
-                    <div class="separator"></div>
-                    <div class="panel-title">// EDYTUJ ZAZNACZONY</div>
-                    <div class="tool-section" id="editControls" style="opacity:0.4;pointer-events:none">
-                        <div class="range-label"><span>Obrót</span><span id="rotateVal">0°</span></div>
-                        <input type="range" class="range-field" id="rotateSlider" min="-180" max="180" value="0" oninput="updateRotation(this.value)">
-
-                        <div class="range-label"><span>Skala</span><span id="scaleVal">100%</span></div>
-                        <input type="range" class="range-field" id="scaleSlider" min="20" max="300" value="100" oninput="updateScale(this.value)">
-
-                        <div class="range-label"><span>Przezroczystość</span><span id="opacityVal">100%</span></div>
-                        <input type="range" class="range-field" id="opacitySlider" min="10" max="100" value="100" oninput="updateOpacity(this.value)">
-
-                        <button class="btn btn-danger" onclick="deleteSelected()">🗑 Usuń zaznaczony</button>
-                        <button class="btn btn-outline" onclick="copyToView()">↗️ Kopiuj tekst na inny widok</button>
-                        <button class="btn btn-outline" onclick="clearView()">🧹 Wyczyść ten widok</button>
-                    </div>
-                </div>  <!-- koniec lewego panelu -->
-
-                <!-- PANEL ŚRODKOWY – CANVAS Z PRODUKTEM -->
-                <div class="center-panel">
-                    <div class="canvas-wrapper">
-                        <div class="view-indicator" id="viewIndicator">PRZÓD</div>
-                        <canvas id="mainCanvas" width="440" height="500"></canvas>
-                    </div>
-                    <div class="canvas-hint">◈ kliknij i przeciągnij by przesunąć element ◈</div>
-                </div>
-
-                <!-- PRAWY PANEL – WARSTWY, UPLOAD GRAFIKI, EKSPORT, DODAJ DO KOSZYKA -->
-                <div class="right-panel">
-                    <div class="panel-title">// WARSTWY</div>
-                    <div class="layers-list" id="layersList">
-                        <div class="empty-layers">Brak elementów.<br>Dodaj napis lub grafikę<br>by zacząć projektowanie.</div>
-                    </div>
-
-                    <div class="panel-title">// GRAFIKA</div>
-                    <!-- ukryty input file -->
-                    <input type="file" id="fileInput" accept="image/*" onchange="uploadImage(event)">
-                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
-                        <div class="upload-icon">🖼️</div>
-                        <div class="upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG, JPG, GIF max 2MB</div>
-                    </div>
-
-                    <button class="export-btn" onclick="exportDesign()">EKSPORTUJ PROJEKT</button>
-
-                    <!-- NOWY PRZYCISK DODAJ DO KOSZYKA -->
-                    <button class="cart-config-btn" onclick="addCustomToCart()">🛒 DODAJ DO KOSZYKA <span id="configPriceLabel">(170 zł)</span></button>
-                    
-                    <!-- WYBÓR ROZMIARU (NOWY) -->
-                    <div class="size-selector">
-                        <select id="configSize">
-                            <option value="S">Rozmiar: S</option>
-                            <option value="M" selected>Rozmiar: M</option>
-                            <option value="L">Rozmiar: L</option>
-                            <option value="XL">Rozmiar: XL</option>
-                            <option value="XXL">Rozmiar: XXL</option>
-                        </select>
-                    </div>
-
-                    <div style="margin-top:16px; font-size:10px; color:#666; text-align:center;">DRIP STUDIO © 2026</div>
-                </div>  <!-- koniec prawego panelu -->
-            </div>  <!-- koniec main-layout -->
-        </section>
-
         <!-- 🎁 Sekcja Zbiórki FINALNA -->
         <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
             
@@ -2587,6 +2447,127 @@
             </div>
         </section>
 
+        <!-- NOWA SEKCJA KONFIGURATORA (STUDIO) -->
+        <section id="studio" class="configurator-section">
+            <div class="main-layout">
+                <!-- LEWY PANEL (PRODUKT, WIDOK, KOLOR, DODAJ NAPIS, EDYTUJ) -->
+                <div class="left-panel">
+                    <div class="panel-title">// PRODUKT</div>
+                    <div class="product-grid">
+                        <button class="product-btn active" onclick="setProduct('hoodie')"><span class="icon">🧥</span><span class="label">Bluza</span></button>
+                        <button class="product-btn" onclick="setProduct('tshirt')"><span class="icon">👕</span><span class="label">Koszulka</span></button>
+                        <button class="product-btn" onclick="setProduct('cap')"><span class="icon">🧢</span><span class="label">Czapka</span></button>
+                    </div>
+
+                    <div class="panel-title">// WIDOK</div>
+                    <div class="view-tabs" id="viewTabs">
+                        <button class="view-tab active" onclick="setView('front')">Przód</button>
+                        <button class="view-tab" onclick="setView('back')">Tył</button>
+                        <button class="view-tab" id="sleeveTab" onclick="setView('left')">L. Rękaw</button>
+                        <button class="view-tab" id="sleeveTab2" onclick="setView('right')">P. Rękaw</button>
+                    </div>
+
+                    <div class="panel-title">// KOLOR PRODUKTU</div>
+                    <div class="color-row" id="colorSwatches">
+                        <div class="color-swatch active" style="background:#ffffff; border:2px solid #ccc;" onclick="setProductColor('#ffffff',this)" title="Biały"></div>
+                        <div class="color-swatch" style="background:#1a1a1a;" onclick="setProductColor('#1a1a1a',this)" title="Czarny"></div>
+                        <div class="color-swatch" style="background:#2d3a8c;" onclick="setProductColor('#2d3a8c',this)" title="Granat"></div>
+                        <div class="color-swatch" style="background:#c0392b;" onclick="setProductColor('#c0392b',this)" title="Czerwony"></div>
+                        <div class="color-swatch" style="background:#27ae60;" onclick="setProductColor('#27ae60',this)" title="Zielony"></div>
+                        <div class="color-swatch" style="background:#f39c12;" onclick="setProductColor('#f39c12',this)" title="Żółty"></div>
+                        <div class="color-swatch" style="background:#8e44ad;" onclick="setProductColor('#8e44ad',this)" title="Fiolet"></div>
+                        <div class="color-swatch" style="background:#7f8c8d;" onclick="setProductColor('#7f8c8d',this)" title="Szary"></div>
+                        <div class="color-swatch" style="background:#e8c5a0;" onclick="setProductColor('#e8c5a0',this)" title="Beż"></div>
+                    </div>
+
+                    <div class="separator"></div>
+                    <div class="panel-title">// DODAJ NAPIS</div>
+                    <div class="tool-section">
+                        <input type="text" class="input-field" id="textInput" placeholder="Wpisz tekst..." maxlength="60">
+                        <div class="input-row">
+                            <select class="select-field" id="fontSelect">
+                                <option value="Bebas Neue">Bebas Neue</option>
+                                <option value="DM Sans" selected>DM Sans</option>
+                                <option value="Space Mono">Space Mono</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Georgia">Georgia</option>
+                                <option value="Impact">Impact</option>
+                                <option value="Courier New">Courier New</option>
+                                <option value="Verdana">Verdana</option>
+                            </select>
+                            <select class="select-field" id="fontWeight">
+                                <option value="400">Regular</option>
+                                <option value="700" selected>Bold</option>
+                            </select>
+                        </div>
+
+                        <div class="range-label"><span>Rozmiar</span><span id="fontSizeVal">36px</span></div>
+                        <input type="range" class="range-field" id="fontSize" min="12" max="120" value="36" oninput="document.getElementById('fontSizeVal').textContent=this.value+'px'">
+
+                        <div class="color-text-row">
+                            <label style="font-size:12px;color:var(--muted);">Kolor:</label>
+                            <input type="color" id="textColor" value="#000000">
+                            <select class="select-field" id="textAlign" style="flex:1">
+                                <option value="center">Środek</option>
+                                <option value="left">Lewo</option>
+                                <option value="right">Prawo</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-accent" onclick="addText()">+ Dodaj Napis</button>
+                    </div>
+
+                    <div class="separator"></div>
+                    <div class="panel-title">// EDYTUJ ZAZNACZONY</div>
+                    <div class="tool-section" id="editControls" style="opacity:0.4;pointer-events:none">
+                        <div class="range-label"><span>Obrót</span><span id="rotateVal">0°</span></div>
+                        <input type="range" class="range-field" id="rotateSlider" min="-180" max="180" value="0" oninput="updateRotation(this.value)">
+
+                        <div class="range-label"><span>Skala</span><span id="scaleVal">100%</span></div>
+                        <input type="range" class="range-field" id="scaleSlider" min="20" max="300" value="100" oninput="updateScale(this.value)">
+
+                        <div class="range-label"><span>Przezroczystość</span><span id="opacityVal">100%</span></div>
+                        <input type="range" class="range-field" id="opacitySlider" min="10" max="100" value="100" oninput="updateOpacity(this.value)">
+
+                        <button class="btn btn-danger" onclick="deleteSelected()">🗑 Usuń zaznaczony</button>
+                        <button class="btn btn-outline" onclick="copyToView()">↗️ Kopiuj tekst na inny widok</button>
+                        <button class="btn btn-outline" onclick="clearView()">🧹 Wyczyść ten widok</button>
+                    </div>
+                </div>  <!-- koniec lewego panelu -->
+
+                <!-- PANEL ŚRODKOWY – CANVAS Z PRODUKTEM -->
+                <div class="center-panel">
+                    <div class="canvas-wrapper">
+                        <div class="view-indicator" id="viewIndicator">PRZÓD</div>
+                        <canvas id="mainCanvas" width="440" height="500"></canvas>
+                    </div>
+                    <div class="canvas-hint">◈ kliknij i przeciągnij by przesunąć element ◈</div>
+                </div>
+
+                <!-- PRAWY PANEL – WARSTWY, UPLOAD GRAFIKI, EKSPORT, DODAJ DO KOSZYKA -->
+                <div class="right-panel">
+                    <div class="panel-title">// WARSTWY</div>
+                    <div class="layers-list" id="layersList">
+                        <div class="empty-layers">Brak elementów.<br>Dodaj napis lub grafikę<br>by zacząć projektowanie.</div>
+                    </div>
+
+                    <div class="panel-title">// GRAFIKA</div>
+                    <!-- ukryty input file -->
+                    <input type="file" id="fileInput" accept="image/*" onchange="uploadImage(event)">
+                    <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                        <div class="upload-icon">🖼️</div>
+                        <div class="upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG, JPG, GIF max 2MB</div>
+                    </div>
+
+                    <button class="export-btn" onclick="exportDesign()">EKSPORTUJ PROJEKT</button>
+
+                    <!-- NOWY PRZYCISK DODAJ DO KOSZYKA -->
+                    <button class="cart-config-btn" onclick="addCustomToCart()">🛒 DODAJ DO KOSZYKA <span id="configPriceLabel">(170 zł)</span></button>
+                    <div style="margin-top:16px; font-size:10px; color:var(--muted); text-align:center;">DRIP STUDIO © 2026</div>
+                </div>  <!-- koniec prawego panelu -->
+            </div>  <!-- koniec main-layout -->
+        </section>
+
         <!-- Koszyk -->
         <div id="cartIcon">
             <i class="fas fa-shopping-cart"></i>
@@ -2609,15 +2590,7 @@
                 </div>
             </div>
             
-            <!-- NOWY PayPal Button (czysty) -->
-            <div id="paypal-button-container" class="mt-4"></div>
-            
-            <!-- NOWY Blok BLIK -->
-            <div style="margin:2rem 0; padding:1.5rem; background:#000; color:#d4af37; border:2px solid #d4af37; border-radius:12px; text-align:center; font-weight:bold;">
-                <div style="font-size:1.4rem;">Płatności BLIK</div>
-                <div style="font-size:1.8rem; letter-spacing:2px;">573 939 925</div>
-                <div style="font-size:1rem; margin-top:0.8rem;">W tytule przelewu dopisz: PROJEKT + nazwa produktu (koszulka / bluza / czapka / własny projekt) + imię</div>
-            </div>
+            <div id="paypal-container" class="mt-4"></div>
             
             <div class="cart-buttons">
                 <button onclick="sendOrderEmail()" class="email-order-btn">
@@ -2901,9 +2874,6 @@
             initProductGalleries();
             initForum();
             initCharitySection();
-
-            // Inicjalizacja PayPal (NOWA)
-            renderPayPalButton();
         });
 
         function initNavigation() {
@@ -3046,9 +3016,7 @@
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
                 cartTotal.textContent = '0 zł';
-                // Czyścimy kontener PayPal
-                const container = document.getElementById('paypal-button-container');
-                if (container) container.innerHTML = '';
+                document.getElementById('paypal-container').innerHTML = '';
             } else {
                 let total = 0;
                 
@@ -3072,8 +3040,6 @@
                 });
                 
                 cartTotal.textContent = `${total.toFixed(2)} zł`;
-                
-                // Renderuj przycisk PayPal z nową kwotą
                 renderPayPalButton();
             }
             
@@ -3087,70 +3053,19 @@
 
         function toggleCart() {
             document.getElementById('cartPanel').classList.toggle('open');
-            // Po otwarciu koszyka odświeżamy przycisk PayPal (na wypadek zmiany kwoty)
-            if (cart.length > 0) {
-                renderPayPalButton();
-            }
         }
 
-        // NOWA funkcja renderująca PayPal Button (SDK Buttons)
         function renderPayPalButton() {
-            const container = document.getElementById('paypal-button-container');
-            if (!container) return;
-            
-            // Czyścimy kontener
+            const container = document.getElementById('paypal-container');
             container.innerHTML = '';
             
             if (cart.length === 0) return;
             
-            // Pobieramy kwotę z #cartTotal
-            const totalSpan = document.getElementById('cartTotal');
-            if (!totalSpan) return;
-            
-            let totalText = totalSpan.textContent; // np. "199.99 zł"
-            // Usuwamy "zł" i zamieniamy przecinek na kropkę
-            let amountStr = totalText.replace('zł', '').replace(',', '.').trim();
-            let amount = parseFloat(amountStr);
-            
-            if (isNaN(amount) || amount <= 0) return;
-            
-            // Inicjalizujemy przycisk PayPal
-            if (typeof paypal === 'undefined') {
-                console.error('PayPal SDK nie załadowany');
-                return;
+            if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
+                paypal.HostedButtons({
+                    hostedButtonId: "L4639S4363CZE",
+                }).render("#paypal-container");
             }
-            
-            paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'gold',
-                    shape: 'rect',
-                    label: 'paypal'
-                },
-                createOrder: function(data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            amount: {
-                                value: amount.toFixed(2),
-                                currency_code: 'PLN'
-                            }
-                        }]
-                    });
-                },
-                onApprove: function(data, actions) {
-                    return actions.order.capture().then(function(details) {
-                        alert('Płatność udana! Dziękujemy, ' + details.payer.name.given_name);
-                        // Opcjonalnie: czyścimy koszyk po udanej płatności
-                        // cart = [];
-                        // updateCart();
-                        // toggleCart();
-                    });
-                },
-                onError: function(err) {
-                    console.error('Błąd PayPal:', err);
-                    alert('Wystąpił błąd podczas płatności. Spróbuj ponownie później.');
-                }
-            }).render('#paypal-button-container');
         }
 
         function showCartPopup() {
@@ -3557,35 +3472,7 @@
             window.clearView = function() { state.views[state.view] = []; state.selected = null; updateEditControls(); updateLayers(); render(); };
             window.exportDesign = function() { const link = document.createElement('a'); link.download = `drip-studio-${state.product}-${state.view}.png`; link.href = canvas.toDataURL('image/png'); link.click(); };
             function updatePriceLabel() { const span = document.getElementById('configPriceLabel'); if (!span) return; let price = 80; if (state.product === 'hoodie') price = 170; else if (state.product === 'cap') price = 99; span.textContent = `(${price} zł)`; }
-            
-            // ZMIENIONA funkcja addCustomToCart – dodaje rozmiar z selecta
-            window.addCustomToCart = function() { 
-                const dataURL = canvas.toDataURL('image/png'); 
-                let productName = ''; 
-                let price = 80; 
-                if (state.product === 'hoodie') { 
-                    productName = 'Bluza'; 
-                    price = 170; 
-                } else if (state.product === 'tshirt') { 
-                    productName = 'Koszulka'; 
-                    price = 80; 
-                } else if (state.product === 'cap') { 
-                    productName = 'Czapka'; 
-                    price = 99; 
-                } 
-                const customName = "Custom " + productName + " (" + state.view + ")"; 
-                // Pobieramy wybrany rozmiar
-                const sizeSelect = document.getElementById('configSize');
-                const selectedSize = sizeSelect ? sizeSelect.value : 'M';
-                
-                if (typeof addToCart === 'function') { 
-                    addToCart(customName, price, dataURL, selectedSize, "Custom"); 
-                    showCartPopup(); 
-                } else { 
-                    console.error('Funkcja addToCart nie istnieje'); 
-                } 
-            };
-            
+            window.addCustomToCart = function() { const dataURL = canvas.toDataURL('image/png'); let productName = ''; let price = 80; if (state.product === 'hoodie') { productName = 'Bluza'; price = 170; } else if (state.product === 'tshirt') { productName = 'Koszulka'; price = 80; } else if (state.product === 'cap') { productName = 'Czapka'; price = 99; } const customName = "Custom " + productName + " (" + state.view + ")"; if (typeof addToCart === 'function') { addToCart(customName, price, dataURL, "Custom", "Custom"); showCartPopup(); } else { console.error('Funkcja addToCart nie istnieje'); } };
             setView('front'); updatePriceLabel(); render();
         })();
     </script>
