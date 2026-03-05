@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>AdelbertusShop — Konfigurator Odzieży</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.">
     
@@ -1106,7 +1106,454 @@
             color: #666;
         }
         
-        /* Responsywność dla wszystkich etapów */
+        /* DODATKOWE STYLE DLA KONFIGURATORA */
+        .configurator-root {
+          --bg: #0a0a0a;
+          --surface: #111111;
+          --card: #181818;
+          --border: #2a2a2a;
+          --accent: #e8ff00;
+          --accent2: #ff3c3c;
+          --text: #f0f0f0;
+          --muted: #666;
+          --white: #ffffff;
+        }
+
+        .configurator-section {
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          min-height: 100vh;
+          overflow-x: hidden;
+          padding: 0;
+        }
+
+        .configurator-section header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 40px;
+          border-bottom: 1px solid var(--border);
+          position: sticky;
+          top: 0;
+          background: rgba(10,10,10,0.95);
+          backdrop-filter: blur(10px);
+          z-index: 100;
+        }
+
+        .configurator-section .logo {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 28px;
+          letter-spacing: 4px;
+          color: var(--accent);
+        }
+        .configurator-section .logo span { color: var(--white); }
+
+        .configurator-section .header-badge {
+          font-family: 'Space Mono', monospace;
+          font-size: 11px;
+          color: var(--muted);
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        /* ----- GŁÓWNY UKŁAD: 3 KOLUMNY (DESKTOP) ----- */
+        .main-layout {
+          display: grid;
+          grid-template-columns: 320px 1fr 300px;
+          min-height: calc(100vh - 73px);
+        }
+
+        /* ===== LEWY PANEL ===== */
+        .left-panel {
+          background: var(--surface);
+          border-right: 1px solid var(--border);
+          padding: 24px;
+          overflow-y: auto;
+        }
+
+        .panel-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 18px;
+          letter-spacing: 3px;
+          color: var(--accent);
+          margin-bottom: 20px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid var(--border);
+        }
+
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+          margin-bottom: 28px;
+        }
+
+        .product-btn {
+          background: var(--card);
+          border: 2px solid var(--border);
+          border-radius: 10px;
+          padding: 14px 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+          text-align: center;
+          color: var(--text);
+        }
+        .product-btn:hover { border-color: var(--accent); }
+        .product-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.06); }
+        .product-btn .icon { font-size: 26px; display: block; margin-bottom: 6px; }
+        .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+        .product-btn.active .label { color: var(--accent); }
+
+        .view-tabs {
+          display: flex;
+          gap: 6px;
+          margin-bottom: 28px;
+          flex-wrap: wrap;
+        }
+
+        .view-tab {
+          flex: 1;
+          min-width: 0;
+          padding: 8px 4px;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          cursor: pointer;
+          font-family: 'Space Mono', monospace;
+          font-size: 9px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--muted);
+          transition: all 0.2s;
+          text-align: center;
+        }
+        .view-tab:hover { border-color: var(--accent); color: var(--text); }
+        .view-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+
+        .color-row {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-bottom: 24px;
+        }
+
+        .color-swatch {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 2px solid transparent;
+          transition: all 0.2s;
+        }
+        .color-swatch:hover { transform: scale(1.15); }
+        .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
+
+        .tool-section { margin-bottom: 24px; }
+        .input-field {
+          width: 100%;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s;
+          margin-bottom: 8px;
+        }
+        .input-field:focus { border-color: var(--accent); }
+
+        .input-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin-bottom: 8px;
+        }
+
+        .select-field {
+          width: 100%;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          outline: none;
+          cursor: pointer;
+          appearance: none;
+        }
+
+        .range-field {
+          width: 100%;
+          accent-color: var(--accent);
+          cursor: pointer;
+          margin-bottom: 4px;
+        }
+        .range-label {
+          display: flex;
+          justify-content: space-between;
+          font-size: 11px;
+          color: var(--muted);
+          margin-bottom: 6px;
+        }
+
+        .btn {
+          width: 100%;
+          padding: 11px;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 12px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          transition: all 0.2s;
+          margin-bottom: 8px;
+        }
+        .btn-accent {
+          background: var(--accent);
+          color: #000;
+        }
+        .btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
+        .btn-outline {
+          background: transparent;
+          color: var(--text);
+          border: 1px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-danger {
+          background: transparent;
+          color: var(--accent2);
+          border: 1px solid var(--accent2);
+        }
+        .btn-danger:hover { background: var(--accent2); color: #fff; }
+
+        .separator { height: 1px; background: var(--border); margin: 20px 0; }
+        #editControls { transition: opacity 0.2s; }
+
+        .color-text-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 8px;
+        }
+        input[type="color"] {
+          -webkit-appearance: none;
+          border: none;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          cursor: pointer;
+          padding: 2px;
+          background: var(--card);
+          border: 2px solid var(--border);
+        }
+
+        /* ===== PANEL ŚRODKOWY – CANVAS ===== */
+        .center-panel {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 40px;
+          position: relative;
+          background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg) 70%);
+        }
+
+        .canvas-wrapper {
+          position: relative;
+          width: 440px;
+          height: 500px;
+        }
+
+        #mainCanvas {
+          border-radius: 16px;
+          cursor: crosshair;
+          display: block;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 440 / 500;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+        }
+
+        .canvas-hint {
+          margin-top: 16px;
+          font-family: 'Space Mono', monospace;
+          font-size: 10px;
+          color: var(--muted);
+          letter-spacing: 2px;
+          text-align: center;
+        }
+
+        .view-indicator {
+          position: absolute;
+          top: -36px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 14px;
+          letter-spacing: 4px;
+          color: var(--muted);
+          white-space: nowrap;
+        }
+
+        /* ===== PRAWY PANEL – WARSTWY, UPLOAD, EKSPORT ===== */
+        .right-panel {
+          background: var(--surface);
+          border-left: 1px solid var(--border);
+          padding: 24px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: var(--border) transparent;
+        }
+        .right-panel::-webkit-scrollbar { width: 4px; }
+        .right-panel::-webkit-scrollbar-track { background: transparent; }
+        .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .layers-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 24px;
+        }
+
+        .layer-item {
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 12px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-size: 13px;
+        }
+        .layer-item:hover { border-color: var(--accent); }
+        .layer-item.selected { border-color: var(--accent); background: rgba(232,255,0,0.05); }
+
+        .layer-icon { font-size: 16px; }
+        .layer-name { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .layer-delete {
+          color: var(--muted);
+          cursor: pointer;
+          font-size: 14px;
+          padding: 2px 6px;
+          border-radius: 4px;
+          transition: all 0.2s;
+        }
+        .layer-delete:hover { color: var(--accent2); background: rgba(255,60,60,0.1); }
+
+        .empty-layers {
+          text-align: center;
+          padding: 30px 20px;
+          color: var(--muted);
+          font-size: 12px;
+          border: 1px dashed var(--border);
+          border-radius: 10px;
+          line-height: 1.8;
+        }
+
+        .upload-zone {
+          border: 2px dashed var(--border);
+          border-radius: 10px;
+          padding: 24px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-bottom: 16px;
+        }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(232,255,0,0.03); }
+        .upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; }
+        .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+        .upload-zone .upload-text strong { color: var(--accent); }
+
+        #fileInput { display: none; }
+
+        .export-btn {
+          width: 100%;
+          padding: 14px;
+          background: linear-gradient(135deg, var(--accent), #b8cc00);
+          color: #000;
+          border: none;
+          border-radius: 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 18px;
+          letter-spacing: 3px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 16px;
+        }
+        .export-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,255,0,0.3); }
+
+        /* NOWY PRZYCISK DODAJ DO KOSZYKA W PRAWYM PANELU */
+        .cart-config-btn {
+          width: 100%;
+          padding: 16px;
+          background: var(--color-gold);
+          color: #000;
+          border: none;
+          border-radius: 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 20px;
+          letter-spacing: 2px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 16px;
+          font-weight: bold;
+          box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        .cart-config-btn:hover {
+          background: var(--color-dark-gold);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* RESPONSYWNOŚĆ – MOBILE */
+        @media (max-width: 1100px) {
+          .main-layout {
+            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+          }
+          .left-panel, .right-panel {
+            padding: 16px;
+            border-right: none;
+            border-left: none;
+            width: 100%;
+          }
+          .left-panel {
+            border-bottom: 1px solid var(--border);
+          }
+          .right-panel {
+            border-top: 1px solid var(--border);
+          }
+          .center-panel {
+            padding: 20px 16px;
+            order: -1; /* canvas na górze */
+          }
+          .canvas-wrapper {
+            width: 100%;
+            max-width: 440px;
+            height: auto;
+            margin: 0 auto;
+          }
+          #mainCanvas {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 440 / 500;
+          }
+          .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          .btn, .export-btn, .cart-config-btn {
+            width: 100%;
+          }
+        }
+
         @media (max-width: 768px) {
             .products-grid, .blog-posts, .reviews {
                 grid-template-columns: 1fr;
@@ -1125,7 +1572,6 @@
                 font-size: 2.5rem;
             }
             
-            /* Nawigacja mobilne */
             .mobile-menu-btn {
                 display: block;
             }
@@ -1149,7 +1595,6 @@
                 font-size: 1.1rem;
             }
             
-            /* Sekcje */
             section {
                 padding: 1.5rem 0.5rem;
             }
@@ -1158,7 +1603,6 @@
                 margin-bottom: 1.5rem;
             }
             
-            /* Produkty */
             .product-card {
                 margin: 0 auto;
                 max-width: 100%;
@@ -1168,7 +1612,6 @@
                 height: 200px;
             }
             
-            /* Koszyk */
             #cartIcon {
                 bottom: 1rem;
                 right: 1rem;
@@ -1183,7 +1626,6 @@
                 font-size: 0.7rem;
             }
             
-            /* Stopka */
             footer {
                 padding: 2rem 1rem;
             }
@@ -1192,7 +1634,6 @@
                 padding: 2rem 1rem;
             }
             
-            /* Chatbot */
             .chatbot-container {
                 bottom: 80px;
                 left: 10px;
@@ -1203,7 +1644,6 @@
                 height: 400px;
             }
             
-            /* Nowe elementy - mobilne */
             .cart-popup {
                 left: 10px;
                 right: 10px;
@@ -1275,406 +1715,6 @@
             }
         }
     </style>  
-
-    <!-- DODATKOWE STYLE DLA KONFIGURATORA -->
-    <style>
-      /* ----- GŁÓWNE ZMIENNE KONFIGURATORA ----- */
-      .configurator-root {
-        --bg: #0a0a0a;
-        --surface: #111111;
-        --card: #181818;
-        --border: #2a2a2a;
-        --accent: #e8ff00;
-        --accent2: #ff3c3c;
-        --text: #f0f0f0;
-        --muted: #666;
-        --white: #ffffff;
-      }
-
-      .configurator-section {
-        background: var(--bg);
-        color: var(--text);
-        font-family: 'DM Sans', sans-serif;
-        min-height: 100vh;
-        overflow-x: hidden;
-        padding: 0;
-      }
-
-      .configurator-section header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 40px;
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        background: rgba(10,10,10,0.95);
-        backdrop-filter: blur(10px);
-        z-index: 100;
-      }
-
-      .configurator-section .logo {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 28px;
-        letter-spacing: 4px;
-        color: var(--accent);
-      }
-      .configurator-section .logo span { color: var(--white); }
-
-      .configurator-section .header-badge {
-        font-family: 'Space Mono', monospace;
-        font-size: 11px;
-        color: var(--muted);
-        letter-spacing: 2px;
-        text-transform: uppercase;
-      }
-
-      /* ----- GŁÓWNY UKŁAD: 3 KOLUMNY ----- */
-      .main-layout {
-        display: grid;
-        grid-template-columns: 320px 1fr 300px;
-        min-height: calc(100vh - 73px);
-      }
-
-      /* ===== LEWY PANEL ===== */
-      .left-panel {
-        background: var(--surface);
-        border-right: 1px solid var(--border);
-        padding: 24px;
-        overflow-y: auto;
-      }
-
-      .panel-title {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 18px;
-        letter-spacing: 3px;
-        color: var(--accent);
-        margin-bottom: 20px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--border);
-      }
-
-      /* Selektor produktu */
-      .product-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 8px;
-        margin-bottom: 28px;
-      }
-
-      .product-btn {
-        background: var(--card);
-        border: 2px solid var(--border);
-        border-radius: 10px;
-        padding: 14px 8px;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-align: center;
-        color: var(--text);
-      }
-      .product-btn:hover { border-color: var(--accent); }
-      .product-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.06); }
-      .product-btn .icon { font-size: 26px; display: block; margin-bottom: 6px; }
-      .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-      .product-btn.active .label { color: var(--accent); }
-
-      /* Zakładki widoku (przód/tył/rękawy) */
-      .view-tabs {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 28px;
-        flex-wrap: wrap;
-      }
-
-      .view-tab {
-        flex: 1;
-        min-width: 0;
-        padding: 8px 4px;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 6px;
-        cursor: pointer;
-        font-family: 'Space Mono', monospace;
-        font-size: 9px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: var(--muted);
-        transition: all 0.2s;
-        text-align: center;
-      }
-      .view-tab:hover { border-color: var(--accent); color: var(--text); }
-      .view-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
-
-      /* Próbki kolorów produktu */
-      .color-row {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 24px;
-      }
-
-      .color-swatch {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: all 0.2s;
-      }
-      .color-swatch:hover { transform: scale(1.15); }
-      .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
-
-      /* Sekcje narzędzi */
-      .tool-section { margin-bottom: 24px; }
-      .input-field {
-        width: 100%;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 10px 14px;
-        color: var(--text);
-        font-family: 'DM Sans', sans-serif;
-        font-size: 14px;
-        outline: none;
-        transition: border-color 0.2s;
-        margin-bottom: 8px;
-      }
-      .input-field:focus { border-color: var(--accent); }
-
-      .input-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
-        margin-bottom: 8px;
-      }
-
-      .select-field {
-        width: 100%;
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 10px 14px;
-        color: var(--text);
-        font-family: 'DM Sans', sans-serif;
-        font-size: 13px;
-        outline: none;
-        cursor: pointer;
-        appearance: none;
-      }
-
-      .range-field {
-        width: 100%;
-        accent-color: var(--accent);
-        cursor: pointer;
-        margin-bottom: 4px;
-      }
-      .range-label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 11px;
-        color: var(--muted);
-        margin-bottom: 6px;
-      }
-
-      .btn {
-        width: 100%;
-        padding: 11px;
-        border-radius: 8px;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 12px;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        transition: all 0.2s;
-        margin-bottom: 8px;
-      }
-      .btn-accent {
-        background: var(--accent);
-        color: #000;
-      }
-      .btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
-      .btn-outline {
-        background: transparent;
-        color: var(--text);
-        border: 1px solid var(--border);
-      }
-      .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-      .btn-danger {
-        background: transparent;
-        color: var(--accent2);
-        border: 1px solid var(--accent2);
-      }
-      .btn-danger:hover { background: var(--accent2); color: #fff; }
-
-      /* separator */
-      .separator { height: 1px; background: var(--border); margin: 20px 0; }
-
-      /* Kontrolki edycji (dla zaznaczonego elementu) */
-      #editControls { transition: opacity 0.2s; }
-
-      /* Kolor tekstu + align */
-      .color-text-row {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 8px;
-      }
-      input[type="color"] {
-        -webkit-appearance: none;
-        border: none;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        cursor: pointer;
-        padding: 2px;
-        background: var(--card);
-        border: 2px solid var(--border);
-      }
-
-      /* ===== PANEL ŚRODKOWY – CANVAS ===== */
-      .center-panel {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 40px;
-        position: relative;
-        background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg) 70%);
-      }
-
-      .canvas-wrapper {
-        position: relative;
-        width: 440px;
-        height: 500px;
-      }
-
-      #mainCanvas {
-        border-radius: 16px;
-        cursor: crosshair;
-        display: block;
-        box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-      }
-
-      .canvas-hint {
-        margin-top: 16px;
-        font-family: 'Space Mono', monospace;
-        font-size: 10px;
-        color: var(--muted);
-        letter-spacing: 2px;
-        text-align: center;
-      }
-
-      .view-indicator {
-        position: absolute;
-        top: -36px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 14px;
-        letter-spacing: 4px;
-        color: var(--muted);
-        white-space: nowrap;
-      }
-
-      /* ===== PRAWY PANEL – WARSTWY, UPLOAD, EKSPORT ===== */
-      .right-panel {
-        background: var(--surface);
-        border-left: 1px solid var(--border);
-        padding: 24px;
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: var(--border) transparent;
-      }
-      .right-panel::-webkit-scrollbar { width: 4px; }
-      .right-panel::-webkit-scrollbar-track { background: transparent; }
-      .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-      /* Lista warstw */
-      .layers-list {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 24px;
-      }
-
-      .layer-item {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 10px 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        cursor: pointer;
-        transition: all 0.2s;
-        font-size: 13px;
-      }
-      .layer-item:hover { border-color: var(--accent); }
-      .layer-item.selected { border-color: var(--accent); background: rgba(232,255,0,0.05); }
-
-      .layer-icon { font-size: 16px; }
-      .layer-name { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .layer-delete {
-        color: var(--muted);
-        cursor: pointer;
-        font-size: 14px;
-        padding: 2px 6px;
-        border-radius: 4px;
-        transition: all 0.2s;
-      }
-      .layer-delete:hover { color: var(--accent2); background: rgba(255,60,60,0.1); }
-
-      .empty-layers {
-        text-align: center;
-        padding: 30px 20px;
-        color: var(--muted);
-        font-size: 12px;
-        border: 1px dashed var(--border);
-        border-radius: 10px;
-        line-height: 1.8;
-      }
-
-      /* Strefa przesyłania */
-      .upload-zone {
-        border: 2px dashed var(--border);
-        border-radius: 10px;
-        padding: 24px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-bottom: 16px;
-      }
-      .upload-zone:hover { border-color: var(--accent); background: rgba(232,255,0,0.03); }
-      .upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; }
-      .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
-      .upload-zone .upload-text strong { color: var(--accent); }
-
-      #fileInput { display: none; }
-
-      /* Przycisk eksportu */
-      .export-btn {
-        width: 100%;
-        padding: 14px;
-        background: linear-gradient(135deg, var(--accent), #b8cc00);
-        color: #000;
-        border: none;
-        border-radius: 10px;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 18px;
-        letter-spacing: 3px;
-        cursor: pointer;
-        transition: all 0.2s;
-        margin-top: 16px;
-      }
-      .export-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,255,0,0.3); }
-
-      /* responsywność */
-      @media (max-width: 1100px) {
-        .main-layout { grid-template-columns: 280px 1fr 260px; }
-        .canvas-wrapper { width: 360px; height: 420px; }
-      }
-    </style>
 </head>
 <body>
     <!-- Chatbot -->
@@ -5146,7 +5186,7 @@
                     <div class="canvas-hint">◈ kliknij i przeciągnij by przesunąć element ◈</div>
                 </div>
 
-                <!-- PRAWY PANEL – WARSTWY, UPLOAD GRAFIKI, EKSPORT -->
+                <!-- PRAWY PANEL – WARSTWY, UPLOAD GRAFIKI, EKSPORT, DODAJ DO KOSZYKA -->
                 <div class="right-panel">
                     <div class="panel-title">// WARSTWY</div>
                     <div class="layers-list" id="layersList">
@@ -5162,6 +5202,9 @@
                     </div>
 
                     <button class="export-btn" onclick="exportDesign()">EKSPORTUJ PROJEKT</button>
+
+                    <!-- NOWY PRZYCISK DODAJ DO KOSZYKA -->
+                    <button class="cart-config-btn" onclick="addCustomToCart()">🛒 DODAJ DO KOSZYKA <span id="configPriceLabel">(170 zł)</span></button>
                     <div style="margin-top:16px; font-size:10px; color:var(--muted); text-align:center;">DRIP STUDIO © 2026</div>
                 </div>  <!-- koniec prawego panelu -->
             </div>  <!-- koniec main-layout -->
@@ -5561,6 +5604,7 @@
                         document.querySelectorAll('.product-btn').forEach((b,i) => {
                             b.classList.toggle('active', ['hoodie','tshirt','cap'][i] === p);
                         });
+                        updatePriceLabel();
                         render();
                     };
 
@@ -5757,8 +5801,39 @@
                         link.click();
                     };
 
+                    // Funkcja aktualizująca cenę w przycisku
+                    function updatePriceLabel() {
+                        const span = document.getElementById('configPriceLabel');
+                        if (!span) return;
+                        let price = 80; // domyślnie koszulka
+                        if (state.product === 'hoodie') price = 170;
+                        else if (state.product === 'cap') price = 99;
+                        span.textContent = `(${price} zł)`;
+                    }
+
+                    // Dodanie projektu do koszyka
+                    window.addCustomToCart = function() {
+                        const canvas = document.getElementById('mainCanvas');
+                        const dataURL = canvas.toDataURL('image/png'); // screenshot canvas
+                        let productName = '';
+                        let price = 80;
+                        if (state.product === 'hoodie') { productName = 'Bluza'; price = 170; }
+                        else if (state.product === 'tshirt') { productName = 'Koszulka'; price = 80; }
+                        else if (state.product === 'cap') { productName = 'Czapka'; price = 99; }
+                        
+                        const customName = "Custom " + productName + " (" + state.view + ")";
+                        // Używamy globalnej funkcji addToCart (istniejącej)
+                        if (typeof addToCart === 'function') {
+                            addToCart(customName, price, dataURL, "Custom", "Custom");
+                            showCartPopup();
+                        } else {
+                            console.error('Funkcja addToCart nie istnieje');
+                        }
+                    };
+
                     // inicjalizacja
                     setView('front');
+                    updatePriceLabel();
                     render();
                 })();
             </script>
