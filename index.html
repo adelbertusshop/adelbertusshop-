@@ -1369,7 +1369,7 @@
           height: 500px;
         }
 
-        #mainCanvas {
+        #cfgCanvas {
           border-radius: 16px;
           cursor: crosshair;
           display: block;
@@ -1471,7 +1471,7 @@
         .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
         .upload-zone .upload-text strong { color: var(--accent); }
 
-        #fileInput { display: none; }
+        #cfgFileInput { display: none; }
 
         .export-btn {
           width: 100%;
@@ -1512,45 +1512,77 @@
           box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
         }
 
-        /* RESPONSYWNOŚĆ – MOBILE */
+        /* RESPONSYWNOŚĆ – MOBILE (max-width 1100px) */
         @media (max-width: 1100px) {
+          /* Główny layout w kolumnie */
           .main-layout {
-            grid-template-columns: 1fr;
             display: flex;
             flex-direction: column;
           }
-          .left-panel, .right-panel {
-            padding: 16px;
-            border-right: none;
-            border-left: none;
-            width: 100%;
-          }
-          .left-panel {
-            border-bottom: 1px solid var(--border);
-          }
-          .right-panel {
-            border-top: 1px solid var(--border);
-          }
+          
+          /* Canvas na górze z odpowiednimi wymiarami */
           .center-panel {
+            order: -1;
             padding: 20px 16px;
-            order: -1; /* canvas na górze */
-          }
-          .canvas-wrapper {
             width: 100%;
+          }
+          
+          .canvas-wrapper {
+            width: 90vw;
             max-width: 440px;
             height: auto;
             margin: 0 auto;
           }
-          #mainCanvas {
+          
+          #cfgCanvas {
             width: 100%;
             height: auto;
             aspect-ratio: 440 / 500;
           }
+          
+          /* Lewy i prawy panel na pełnej szerokości z paddingiem i dużymi przyciskami */
+          .left-panel, .right-panel {
+            width: 100%;
+            padding: 16px;
+            border-left: none;
+            border-right: none;
+          }
+          
+          .left-panel {
+            border-bottom: 1px solid var(--border);
+          }
+          
+          .right-panel {
+            border-top: 1px solid var(--border);
+          }
+          
+          /* Większe przyciski i elementy formularzy dla lepszego dotyku */
+          .btn, .export-btn, .cart-config-btn, .product-btn, .view-tab, .input-field, .select-field {
+            min-height: 48px;
+            font-size: 14px;
+          }
+          
           .product-grid {
             grid-template-columns: repeat(3, 1fr);
           }
-          .btn, .export-btn, .cart-config-btn {
-            width: 100%;
+          
+          .color-swatch {
+            width: 42px;
+            height: 42px;
+          }
+          
+          .range-field {
+            height: 40px;
+          }
+          
+          /* Zapobieganie poziomemu scrollowi */
+          body, html {
+            overflow-x: hidden;
+            max-width: 100%;
+          }
+          
+          .configurator-section {
+            overflow-x: hidden;
           }
         }
 
@@ -1916,6 +1948,46 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        .neon-glow {
+          color: #fff;
+          text-shadow:
+            0 0 5px #a855f7,
+            0 0 10px #a855f7,
+            0 0 20px #9333ea,
+            0 0 40px #9333ea;
+          animation: neonPulse 2s infinite alternate;
+        }
+
+        @keyframes neonPulse {
+          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
+          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
+        }
+
+        .typing {
+          border-right: 2px solid #ffd700;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+
+        .donor-entry {
+          opacity: 0;
+          transform: translateY(10px);
+          animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .product-image[data-src] {
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+
+        .product-image.loaded {
+          opacity: 1;
         }
     </style>  
 </head>
@@ -2389,7 +2461,7 @@
 
               <div class="separator"></div>
               <div class="panel-title">// GRAFIKA</div>
-              <input type="file" id="cfgFileInput" accept="image/*" style="display:none">
+              <input type="file" id="cfgFileInput" accept="image/*" style="display:none" onchange="cfgUploadImage(event)">
               <div class="upload-zone" onclick="document.getElementById('cfgFileInput').click()">
                 <div class="upload-icon">🖼️</div>
                 <div class="upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG · JPG · SVG</div>
@@ -3569,7 +3641,8 @@
             img.onload=()=>{
               const maxW=160,maxH=160; let w=img.width,h=img.height;
               if(w>maxW){h=h*maxW/w;w=maxW;} if(h>maxH){w=w*maxH/h;h=maxH;}
-              state.views[state.view].push({type:'image',img,x:canvas.width/2,y:canvas.height/2,w,h,rotation:0,scale:100,opacity:1,name:file.name});
+              const newEl = {type:'image',img,x:canvas.width/2,y:canvas.height/2,w,h,rotation:0,scale:100,opacity:1,name:file.name};
+              state.views[state.view].push(newEl);
               state.selected=state.views[state.view].length-1;
               syncEditControls(); renderLayers(); render();
             };
