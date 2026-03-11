@@ -2349,12 +2349,12 @@
               <div class="order-box" style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:4px;">
                 <div class="range-label">Kolor koszulki/bluzy:</div>
                 <div class="color-row" id="cfgOrderColors" style="gap:8px; margin-bottom:8px;">
-                  <div class="color-swatch active" style="background:#000; width:26px; height:26px;" data-name="Czarny" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="color-swatch" style="background:#fff; border:2px solid #ddd; width:26px; height:26px;" data-name="Biały" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="color-swatch" style="background:#800020; width:26px; height:26px;" data-name="Bordowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="color-swatch" style="background:#36454F; width:26px; height:26px;" data-name="Grafitowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="color-swatch" style="background:#2d3a8c; width:26px; height:26px;" data-name="Granat" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="color-swatch" style="background:#808080; width:26px; height:26px;" data-name="Szary" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch active" style="background:#000; width:26px; height:26px;" data-name="Czarny" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch" style="background:#fff; border:2px solid #ddd; width:26px; height:26px;" data-name="Biały" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch" style="background:#800020; width:26px; height:26px;" data-name="Bordowy" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch" style="background:#36454F; width:26px; height:26px;" data-name="Grafitowy" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch" style="background:#2d3a8c; width:26px; height:26px;" data-name="Granat" onclick="cfgSelectOrderColor(this)"></div>
+                  <div class="order-swatch" style="background:#808080; width:26px; height:26px;" data-name="Szary" onclick="cfgSelectOrderColor(this)"></div>
                 </div>
                 <div class="range-label" id="cfgOrderColorLabel">Wybrany kolor: <strong>Czarny</strong></div>
 
@@ -3529,11 +3529,11 @@
         };
         window.cfgSetColor=function(color,el){
           state.productColor=color;
-          document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+          document.querySelectorAll('#cfgColorSwatches .color-swatch').forEach(s=>s.classList.remove('active'));
           el.classList.add('active'); render();
         };
         window.cfgSelectOrderColor=function(el){
-          document.querySelectorAll('.color-swatch').forEach(s=>s.classList.remove('active'));
+          document.querySelectorAll('#cfgOrderColors .order-swatch').forEach(s=>s.classList.remove('active'));
           el.classList.add('active'); state.orderColor=el.dataset.name;
           document.getElementById('cfgOrderColorLabel').innerHTML=`Wybrany kolor: <strong>${state.orderColor}</strong>`;
         };
