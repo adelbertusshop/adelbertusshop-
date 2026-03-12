@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -1987,7 +1988,6 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="studio"><i class="fas fa-paint-brush"></i> Projektuj</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
@@ -2225,184 +2225,6 @@
               </div>
             </div>
 
-          </div>
-        </section>
-
-        <!-- STUDIO KONFIGURATOR -->
-        <section id="studio" class="configurator-section">
-          <header>
-            <div class="logo">DRIP<span>STUDIO</span></div>
-            <div class="header-badge">// KONFIGURATOR WŁASNEGO PROJEKTU</div>
-          </header>
-          <div class="main-layout">
-            <!-- LEWY PANEL -->
-            <div class="left-panel">
-              <div class="panel-title">// PRODUKT</div>
-              <div class="product-grid">
-                <button class="product-btn active" data-prod="hoodie" onclick="cfgSetProduct('hoodie',this)">
-                  <span class="icon">🧥</span>
-                  <span class="label">Bluza</span>
-                </button>
-                <button class="product-btn" data-prod="tshirt" onclick="cfgSetProduct('tshirt',this)">
-                  <span class="icon">👕</span>
-                  <span class="label">Koszulka</span>
-                </button>
-                <button class="product-btn" data-prod="cap" onclick="cfgSetProduct('cap',this)">
-                  <span class="icon">🧢</span>
-                  <span class="label">Czapka</span>
-                </button>
-              </div>
-
-              <div class="panel-title">// WIDOK</div>
-              <div class="view-tabs">
-                <button class="view-tab active" onclick="cfgSetView('front',this)">Przód</button>
-                <button class="view-tab" onclick="cfgSetView('back',this)">Tył</button>
-                <button class="view-tab" onclick="cfgSetView('left',this)">L.Rękaw</button>
-                <button class="view-tab" onclick="cfgSetView('right',this)">P.Rękaw</button>
-              </div>
-
-              <div class="panel-title">// KOLOR PRODUKTU</div>
-              <div class="color-row" id="cfgColorSwatches">
-                <div class="color-swatch active" style="background:#ffffff;border:2px solid #aaa" data-color="#ffffff" onclick="cfgSetColor('#ffffff',this)" title="Biały"></div>
-                <div class="color-swatch" style="background:#1a1a1a" data-color="#1a1a1a" onclick="cfgSetColor('#1a1a1a',this)" title="Czarny"></div>
-                <div class="color-swatch" style="background:#2d3a8c" data-color="#2d3a8c" onclick="cfgSetColor('#2d3a8c',this)" title="Granat"></div>
-                <div class="color-swatch" style="background:#c0392b" data-color="#c0392b" onclick="cfgSetColor('#c0392b',this)" title="Czerwony"></div>
-                <div class="color-swatch" style="background:#27ae60" data-color="#27ae60" onclick="cfgSetColor('#27ae60',this)" title="Zielony"></div>
-                <div class="color-swatch" style="background:#f39c12" data-color="#f39c12" onclick="cfgSetColor('#f39c12',this)" title="Żółty"></div>
-                <div class="color-swatch" style="background:#8e44ad" data-color="#8e44ad" onclick="cfgSetColor('#8e44ad',this)" title="Fiolet"></div>
-                <div class="color-swatch" style="background:#7f8c8d" data-color="#7f8c8d" onclick="cfgSetColor('#7f8c8d',this)" title="Szary"></div>
-                <div class="color-swatch" style="background:#e8c5a0" data-color="#e8c5a0" onclick="cfgSetColor('#e8c5a0',this)" title="Beż"></div>
-              </div>
-
-              <div class="separator"></div>
-              <div class="panel-title">// DODAJ NAPIS</div>
-              <div class="tool-section">
-                <input type="text" class="input-field" id="cfgTextInput" placeholder="Wpisz tekst..." maxlength="60">
-                <div class="input-row">
-                  <select class="select-field" id="cfgFontSelect">
-                    <option value="Bebas Neue">Bebas Neue</option>
-                    <option value="DM Sans" selected>DM Sans</option>
-                    <option value="Space Mono">Space Mono</option>
-                    <option value="Impact">Impact</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Verdana">Verdana</option>
-                  </select>
-                  <select class="select-field" id="cfgFontWeight">
-                    <option value="400">Regular</option>
-                    <option value="700" selected>Bold</option>
-                  </select>
-                </div>
-                <div class="range-field">
-                  <div class="range-label"><span>Rozmiar</span><span id="cfgFontSizeVal">36px</span></div>
-                  <input type="range" class="range-field" id="cfgFontSize" min="12" max="120" value="36"
-                    oninput="document.getElementById('cfgFontSizeVal').textContent=this.value+'px'">
-                </div>
-                <div class="color-text-row">
-                  <label class="range-label">Kolor:</label>
-                  <input type="color" id="cfgTextColor" value="#000000" class="color-picker">
-                  <select class="select-field" id="cfgTextAlign" style="flex:1">
-                    <option value="center">Środek</option>
-                    <option value="left">Lewo</option>
-                    <option value="right">Prawo</option>
-                  </select>
-                </div>
-                <button class="btn btn-accent" onclick="cfgAddText()">+ Dodaj Napis</button>
-              </div>
-
-              <div class="separator"></div>
-              <div class="panel-title">// EDYTUJ ZAZNACZONY</div>
-              <div class="tool-section" id="cfgEditControls" style="opacity:.35;pointer-events:none">
-                <div class="range-field">
-                  <div class="range-label"><span>Obrót</span><span id="cfgRotVal">0°</span></div>
-                  <input type="range" class="range-field" id="cfgRotSlider" min="-180" max="180" value="0"
-                    oninput="cfgUpdateRot(this.value)">
-                </div>
-                <div class="range-field">
-                  <div class="range-label"><span>Skala</span><span id="cfgScaleVal">100%</span></div>
-                  <input type="range" class="range-field" id="cfgScaleSlider" min="20" max="300" value="100"
-                    oninput="cfgUpdateScale(this.value)">
-                </div>
-                <div class="range-field">
-                  <div class="range-label"><span>Przezroczystość</span><span id="cfgOpacVal">100%</span></div>
-                  <input type="range" class="range-field" id="cfgOpacSlider" min="10" max="100" value="100"
-                    oninput="cfgUpdateOpac(this.value)">
-                </div>
-                <button class="btn btn-danger" onclick="cfgDeleteSelected()">🗑 Usuń zaznaczony</button>
-                <button class="btn btn-outline" onclick="cfgCopyToView()">↗ Kopiuj na inny widok</button>
-                <button class="btn btn-outline" onclick="cfgClearView()">🧹 Wyczyść widok</button>
-              </div>
-            </div>
-
-            <!-- ŚRODKOWY CANVAS -->
-            <div class="center-panel">
-              <div class="canvas-wrapper">
-                <div class="view-indicator" id="cfgViewLabel">PRZÓD</div>
-                <canvas id="cfgCanvas" width="440" height="500"></canvas>
-              </div>
-              <div class="canvas-hint">◈ kliknij i przeciągnij element ◈</div>
-            </div>
-
-            <!-- PRAWY PANEL -->
-            <div class="right-panel">
-              <div class="panel-title">// OPCJE ZAMÓWIENIA</div>
-              <div class="order-box" style="background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px; margin-bottom:4px;">
-                <div class="range-label">Kolor koszulki/bluzy:</div>
-                <div class="color-row" id="cfgOrderColors" style="gap:8px; margin-bottom:8px;">
-                  <div class="order-swatch active" style="background:#000; width:26px; height:26px;" data-name="Czarny" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="order-swatch" style="background:#fff; border:2px solid #ddd; width:26px; height:26px;" data-name="Biały" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="order-swatch" style="background:#800020; width:26px; height:26px;" data-name="Bordowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="order-swatch" style="background:#36454F; width:26px; height:26px;" data-name="Grafitowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="order-swatch" style="background:#2d3a8c; width:26px; height:26px;" data-name="Granat" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="order-swatch" style="background:#808080; width:26px; height:26px;" data-name="Szary" onclick="cfgSelectOrderColor(this)"></div>
-                </div>
-                <div class="range-label" id="cfgOrderColorLabel">Wybrany kolor: <strong>Czarny</strong></div>
-
-                <div class="range-label" style="margin-top:14px">Rozmiar:</div>
-                <div class="size-options" style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;" id="cfgSizeBtns">
-                  <button class="size-option" onclick="cfgSelectSize(this)">XS</button>
-                  <button class="size-option active" onclick="cfgSelectSize(this)">S</button>
-                  <button class="size-option" onclick="cfgSelectSize(this)">M</button>
-                  <button class="size-option" onclick="cfgSelectSize(this)">L</button>
-                  <button class="size-option" onclick="cfgSelectSize(this)">XL</button>
-                  <button class="size-option" onclick="cfgSelectSize(this)">XXL</button>
-                </div>
-
-                <div class="range-label" style="margin-top:14px">Ilość:</div>
-                <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-                  <button style="width:30px; height:30px; background:var(--bg); border:1px solid var(--border); border-radius:6px;" onclick="cfgQtyChange(-1)">−</button>
-                  <input type="number" id="cfgQtyInput" value="1" min="1" max="99" readonly style="width:48px; text-align:center; background:var(--bg); border:1px solid var(--border); border-radius:6px; color:var(--text); padding:5px;">
-                  <button style="width:30px; height:30px; background:var(--bg); border:1px solid var(--border); border-radius:6px;" onclick="cfgQtyChange(1)">+</button>
-                </div>
-
-                <div style="display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--border);">
-                  <span class="range-label">Cena:</span>
-                  <span style="font-size:1.5rem; font-weight:900; color:var(--accent); font-family:'Bebas Neue',sans-serif;" id="cfgPriceDisplay">170 zł</span>
-                </div>
-              </div>
-
-              <div class="separator"></div>
-              <div class="panel-title">// WARSTWY</div>
-              <div class="layers-list" id="cfgLayersList">
-                <div class="empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>
-              </div>
-
-              <div class="separator"></div>
-              <div class="panel-title">// GRAFIKA</div>
-              <input type="file" id="cfgFileInput" accept="image/*" style="display:none">
-              <div class="upload-zone" onclick="document.getElementById('cfgFileInput').click()">
-                <div class="upload-icon">🖼️</div>
-                <div class="upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG · JPG · SVG</div>
-              </div>
-
-              <button class="btn btn-outline" style="background:var(--card); color:var(--text); border:1px solid var(--border);" onclick="cfgExport()">⬇ EKSPORTUJ PNG</button>
-
-              <button class="cart-config-btn" onclick="cfgAddToCart()">
-                🛒 DODAJ DO KOSZYKA <span style="background:rgba(0,0,0,0.2); border-radius:12px; padding:2px 10px; font-size:13px; font-weight:900;" id="cfgCartPriceLabel">170 zł</span>
-              </button>
-
-              <div style="text-align:center; font-size:9px; color:var(--muted); letter-spacing:1px; margin-top:4px;">DRIP STUDIO © 2026 · AdelbertusShop</div>
-            </div>
           </div>
         </section>
 
@@ -3305,366 +3127,6 @@
         function initProductGalleries() {
         }
 
-        // ========== KONFIGURATOR ==========
-        const canvas = document.getElementById('cfgCanvas');
-        const ctx    = canvas.getContext('2d');
-
-        const state = {
-          product: 'hoodie', view: 'front', productColor: '#ffffff',
-          views: { front:[], back:[], left:[], right:[] },
-          selected: null, dragging: false, dragOffX: 0, dragOffY: 0,
-          orderColor: 'Czarny', orderSize: 'S',
-        };
-
-        const PRICES = { hoodie: 170, tshirt: 80, cap: 99 };
-
-        function darken(hex, amt) {
-          let r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
-          return '#'+[r,g,b].map(v=>Math.max(0,v-Math.round(255*amt)).toString(16).padStart(2,'0')).join('');
-        }
-
-        function drawSleeve(W,H,c) {
-          ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-          ctx.beginPath();
-          ctx.moveTo(W*.15,H*.08); ctx.lineTo(W*.85,H*.08);
-          ctx.lineTo(W*.85,H*.92); ctx.lineTo(W*.15,H*.92);
-          ctx.closePath(); ctx.fill(); ctx.stroke();
-          ctx.fillStyle=darken(c,.1); ctx.fillRect(W*.15,H*.86,W*.7,H*.06); ctx.strokeRect(W*.15,H*.86,W*.7,H*.06);
-          ctx.fillStyle=darken(c,.06); ctx.fillRect(W*.15,H*.08,W*.7,H*.06);
-        }
-        function drawSleeveTee(W,H,c) {
-          ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-          ctx.beginPath();
-          ctx.moveTo(W*.15,H*.12); ctx.lineTo(W*.85,H*.12);
-          ctx.lineTo(W*.85,H*.88); ctx.lineTo(W*.15,H*.88);
-          ctx.closePath(); ctx.fill(); ctx.stroke();
-        }
-
-        const shapes = {
-          hoodie: {
-            front(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath();
-              ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
-              ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.1);
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.15,W*.2,H*.1,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.07);
-              ctx.fillRect(W*.35,H*.65,W*.3,H*.15); ctx.strokeRect(W*.35,H*.65,W*.3,H*.15);
-            },
-            back(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath();
-              ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
-              ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-            },
-            left:(W,H,c)=>drawSleeve(W,H,c), right:(W,H,c)=>drawSleeve(W,H,c),
-          },
-          tshirt: {
-            front(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath();
-              ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
-              ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.08);
-              ctx.beginPath(); ctx.arc(W*.5,H*.12,W*.1,0,Math.PI*2); ctx.fill(); ctx.stroke();
-            },
-            back(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath();
-              ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
-              ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-            },
-            left:(W,H,c)=>drawSleeveTee(W,H,c), right:(W,H,c)=>drawSleeveTee(W,H,c),
-          },
-          cap: {
-            front(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.48,H*.08,0,0,Math.PI); ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.12);
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.18);
-              ctx.beginPath(); ctx.arc(W*.5,H*.1,10,0,Math.PI*2); ctx.fill(); ctx.stroke();
-            },
-            back(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.12);
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-              ctx.fillStyle=darken(c,.2);
-              ctx.fillRect(W*.42,H*.52,W*.16,H*.06); ctx.strokeRect(W*.42,H*.52,W*.16,H*.06);
-            },
-            left(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-              ctx.beginPath();
-              ctx.moveTo(W*.2,H*.55); ctx.lineTo(W*.05,H*.6); ctx.lineTo(W*.05,H*.65); ctx.lineTo(W*.8,H*.65); ctx.lineTo(W*.8,H*.58);
-              ctx.closePath(); ctx.fill(); ctx.stroke();
-            },
-            right(W,H,c) {
-              ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-              ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-            },
-          }
-        };
-
-        function getBounds(el) {
-          if (el.type==='text') {
-            ctx.save(); ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
-            const m=ctx.measureText(el.text); ctx.restore();
-            return { w:m.width, h:el.size*1.2 };
-          }
-          return { w:el.w||60, h:el.h||60 };
-        }
-
-        function render() {
-          const W=canvas.width, H=canvas.height;
-          ctx.clearRect(0,0,W,H);
-          ctx.fillStyle='#1a1a1a'; ctx.fillRect(0,0,W,H);
-          ctx.fillStyle='#242424';
-          for(let x=20;x<W;x+=20) for(let y=20;y<H;y+=20) {
-            ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
-          }
-          const s=shapes[state.product];
-          if(s&&s[state.view]) s[state.view](W,H,state.productColor);
-          state.views[state.view].forEach((el,i) => {
-            ctx.save();
-            ctx.globalAlpha=el.opacity!==undefined?el.opacity:1;
-            ctx.translate(el.x,el.y);
-            ctx.rotate((el.rotation||0)*Math.PI/180);
-            const sc=(el.scale||100)/100; ctx.scale(sc,sc);
-            if(el.type==='text') {
-              ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
-              ctx.fillStyle=el.color; ctx.textAlign=el.align||'center'; ctx.textBaseline='middle';
-              ctx.fillText(el.text,0,0);
-            } else if(el.type==='image'&&el.img) {
-              ctx.drawImage(el.img,-el.w/2,-el.h/2,el.w,el.h);
-            }
-            if(state.selected===i) {
-              const b=getBounds(el);
-              ctx.strokeStyle='#e8ff00'; ctx.lineWidth=2/sc; ctx.setLineDash([6/sc,3/sc]);
-              ctx.strokeRect(-b.w/2-7/sc,-b.h/2-7/sc,b.w+14/sc,b.h+14/sc);
-              ctx.setLineDash([]); ctx.fillStyle='#e8ff00';
-              const hw=b.w/2+9/sc, hh=b.h/2+9/sc;
-              [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]].forEach(([x,y])=>ctx.fillRect(x-4/sc,y-4/sc,8/sc,8/sc));
-            }
-            ctx.restore();
-          });
-        }
-
-        function getPos(e) {
-          const rect=canvas.getBoundingClientRect();
-          const sx=canvas.width/rect.width, sy=canvas.height/rect.height;
-          const cx=e.touches?e.touches[0].clientX:e.clientX;
-          const cy=e.touches?e.touches[0].clientY:e.clientY;
-          return {x:(cx-rect.left)*sx, y:(cy-rect.top)*sy};
-        }
-        function hitTest(el,px,py) {
-          const dx=px-el.x, dy=py-el.y;
-          const ang=-(el.rotation||0)*Math.PI/180;
-          const sc=(el.scale||100)/100;
-          const rx=(Math.cos(ang)*dx-Math.sin(ang)*dy)/sc;
-          const ry=(Math.sin(ang)*dx+Math.cos(ang)*dy)/sc;
-          const b=getBounds(el);
-          return Math.abs(rx)<b.w/2+12&&Math.abs(ry)<b.h/2+12;
-        }
-
-        canvas.addEventListener('mousedown',startDrag);
-        canvas.addEventListener('touchstart',startDrag,{passive:false});
-        window.addEventListener('mousemove',doDrag);
-        window.addEventListener('touchmove',doDrag,{passive:false});
-        window.addEventListener('mouseup',stopDrag);
-        window.addEventListener('touchend',stopDrag);
-
-        function startDrag(e) {
-          e.preventDefault();
-          const pos=getPos(e), els=state.views[state.view];
-          let found=false;
-          for(let i=els.length-1;i>=0;i--) {
-            if(hitTest(els[i],pos.x,pos.y)) {
-              state.selected=i; state.dragging=true;
-              state.dragOffX=pos.x-els[i].x; state.dragOffY=pos.y-els[i].y;
-              found=true; break;
-            }
-          }
-          if(!found) state.selected=null;
-          syncEditControls(); renderLayers(); render();
-        }
-        function doDrag(e) {
-          if(!state.dragging||state.selected===null) return;
-          e.preventDefault();
-          const pos=getPos(e), el=state.views[state.view][state.selected];
-          if(el){el.x=pos.x-state.dragOffX; el.y=pos.y-state.dragOffY; render();}
-        }
-        function stopDrag(){state.dragging=false;}
-
-        window.cfgSetProduct=function(p,btn){
-          state.product=p; state.selected=null;
-          document.querySelectorAll('.product-btn').forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active'); updatePriceUI(); render();
-        };
-        window.cfgSetView=function(v,btn){
-          state.view=v; state.selected=null;
-          const labels={front:'PRZÓD',back:'TYŁ',left:'LEWY RĘKAW',right:'PRAWY RĘKAW'};
-          document.getElementById('cfgViewLabel').textContent=labels[v];
-          document.querySelectorAll('.view-tab').forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active'); syncEditControls(); renderLayers(); render();
-        };
-        window.cfgSetColor=function(color,el){
-          state.productColor=color;
-          document.querySelectorAll('#cfgColorSwatches .color-swatch').forEach(s=>s.classList.remove('active'));
-          el.classList.add('active'); render();
-        };
-        window.cfgSelectOrderColor=function(el){
-          document.querySelectorAll('#cfgOrderColors .order-swatch').forEach(s=>s.classList.remove('active'));
-          el.classList.add('active'); state.orderColor=el.dataset.name;
-          document.getElementById('cfgOrderColorLabel').innerHTML=`Wybrany kolor: <strong>${state.orderColor}</strong>`;
-        };
-        window.cfgSelectSize=function(btn){
-          document.querySelectorAll('.size-option').forEach(b=>b.classList.remove('active'));
-          btn.classList.add('active'); state.orderSize=btn.textContent.trim();
-        };
-        window.cfgQtyChange=function(dir){
-          const inp=document.getElementById('cfgQtyInput');
-          inp.value=Math.max(1,Math.min(99,parseInt(inp.value)+dir));
-        };
-        window.cfgAddText=function(){
-          const text=document.getElementById('cfgTextInput').value.trim();
-          if(!text) return;
-          state.views[state.view].push({
-            type:'text', text,
-            x:canvas.width/2, y:canvas.height/2,
-            font:document.getElementById('cfgFontSelect').value,
-            weight:document.getElementById('cfgFontWeight').value,
-            size:parseInt(document.getElementById('cfgFontSize').value),
-            color:document.getElementById('cfgTextColor').value,
-            align:document.getElementById('cfgTextAlign').value,
-            rotation:0, scale:100, opacity:1,
-          });
-          state.selected=state.views[state.view].length-1;
-          syncEditControls(); renderLayers(); render();
-        };
-        window.cfgUploadImage=function(event){
-          const file=event.target.files[0]; if(!file) return;
-          const reader=new FileReader();
-          reader.onload=e=>{
-            const img=new Image();
-            img.onload=()=>{
-              const maxW=160,maxH=160; let w=img.width,h=img.height;
-              if(w>maxW){h=h*maxW/w;w=maxW;} if(h>maxH){w=w*maxH/h;h=maxH;}
-              state.views[state.view].push({type:'image',img,x:canvas.width/2,y:canvas.height/2,w,h,rotation:0,scale:100,opacity:1,name:file.name});
-              state.selected=state.views[state.view].length-1;
-              syncEditControls(); renderLayers(); render();
-            };
-            img.src=e.target.result;
-          };
-          reader.readAsDataURL(file); event.target.value='';
-        };
-        window.cfgUpdateRot=function(v){
-          document.getElementById('cfgRotVal').textContent=v+'°';
-          if(state.selected!==null){state.views[state.view][state.selected].rotation=parseInt(v);render();}
-        };
-        window.cfgUpdateScale=function(v){
-          document.getElementById('cfgScaleVal').textContent=v+'%';
-          if(state.selected!==null){state.views[state.view][state.selected].scale=parseInt(v);render();}
-        };
-        window.cfgUpdateOpac=function(v){
-          document.getElementById('cfgOpacVal').textContent=v+'%';
-          if(state.selected!==null){state.views[state.view][state.selected].opacity=parseInt(v)/100;render();}
-        };
-        window.cfgDeleteSelected=function(){
-          if(state.selected===null) return;
-          state.views[state.view].splice(state.selected,1);
-          state.selected=null; syncEditControls(); renderLayers(); render();
-        };
-        window.cfgCopyToView=function(){
-          const views=['front','back','left','right'], cur=state.view;
-          const els=state.views[cur].filter(e=>e.type!=='image');
-          if(!els.length){alert('Brak tekstów do skopiowania.');return;}
-          const target=views.find(v=>v!==cur&&state.views[v].length===0)||views.find(v=>v!==cur);
-          if(target){state.views[target]=JSON.parse(JSON.stringify(els));alert(`Skopiowano tekst na widok: ${target}`);renderLayers();render();}
-        };
-        window.cfgClearView=function(){
-          state.views[state.view]=[]; state.selected=null;
-          syncEditControls(); renderLayers(); render();
-        };
-        window.cfgExport=function(){
-          const a=document.createElement('a');
-          a.download=`drip-studio-${state.product}-${state.view}.png`;
-          a.href=canvas.toDataURL('image/png'); a.click();
-        };
-        window.cfgAddToCart=function(){
-          if(typeof addToCart!=='function'){console.error('addToCart nie znaleziony');return;}
-          const prodNames={hoodie:'Bluza Custom',tshirt:'Koszulka Custom',cap:'Czapka Custom'};
-          const qty=parseInt(document.getElementById('cfgQtyInput').value)||1;
-          const name=prodNames[state.product], price=PRICES[state.product];
-          const thumb=canvas.toDataURL('image/png');
-          for(let i=0;i<qty;i++) addToCart(name,price,thumb,state.orderSize,state.orderColor);
-          if(typeof showCartPopup==='function') showCartPopup();
-          if(typeof showNotification==='function') showNotification('✅ Projekt dodany do koszyka!');
-        };
-
-        function syncEditControls(){
-          const ctrl=document.getElementById('cfgEditControls');
-          const el=state.selected!==null?state.views[state.view][state.selected]:null;
-          if(el){
-            ctrl.style.opacity='1'; ctrl.style.pointerEvents='auto';
-            document.getElementById('cfgRotSlider').value=el.rotation||0;
-            document.getElementById('cfgRotVal').textContent=(el.rotation||0)+'°';
-            document.getElementById('cfgScaleSlider').value=el.scale||100;
-            document.getElementById('cfgScaleVal').textContent=(el.scale||100)+'%';
-            const op=el.opacity!==undefined?Math.round(el.opacity*100):100;
-            document.getElementById('cfgOpacSlider').value=op;
-            document.getElementById('cfgOpacVal').textContent=op+'%';
-          } else {
-            ctrl.style.opacity='.35'; ctrl.style.pointerEvents='none';
-          }
-        }
-        function renderLayers(){
-          const list=document.getElementById('cfgLayersList'), els=state.views[state.view];
-          if(!els.length){list.innerHTML='<div class="empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>';return;}
-          list.innerHTML=[...els].reverse().map((el,ri)=>{
-            const i=els.length-1-ri;
-            const icon=el.type==='text'?'✏️':'🖼️';
-            const name=el.type==='text'?el.text.substring(0,16):(el.name||'Grafika');
-            return `<div class="layer-item ${state.selected===i?'selected':''}" onclick="cfgSelectLayer(${i})">
-              <span class="layer-icon">${icon}</span><span class="layer-name">${name}</span>
-              <span class="layer-delete" onclick="event.stopPropagation();cfgDeleteLayer(${i})">✕</span>
-            </div>`;
-          }).join('');
-        }
-        window.cfgSelectLayer=function(i){state.selected=i;syncEditControls();renderLayers();render();};
-        window.cfgDeleteLayer=function(i){
-          state.views[state.view].splice(i,1);
-          if(state.selected===i) state.selected=null;
-          else if(state.selected>i) state.selected--;
-          syncEditControls(); renderLayers(); render();
-        };
-        function updatePriceUI(){
-          const p=PRICES[state.product];
-          document.getElementById('cfgPriceDisplay').textContent=p+' zł';
-          document.getElementById('cfgCartPriceLabel').textContent=p+' zł';
-        }
-
-        updatePriceUI(); renderLayers(); render();
-
         window.addToCart = addToCart;
         window.removeFromCart = removeFromCart;
         window.toggleCart = toggleCart;
@@ -3731,5 +3193,754 @@
         }
     </style>
 
+    <!-- ============================================================
+     SEKCJA #STUDIO — DRIP STUDIO KONFIGURATOR
+     DROP-IN REPLACEMENT dla <section id="studio">
+     Wpięty w globalny addToCart() z Twojego sklepu
+     ============================================================ -->
+
+<section id="studio" class="cfg-root">
+
+  <!-- TOP BAR -->
+  <div class="cfg-topbar">
+    <div class="cfg-logo">DRIP<span>STUDIO</span></div>
+    <div class="cfg-badge">// KONFIGURATOR WŁASNEGO PROJEKTU</div>
+  </div>
+
+  <!-- MAIN 3-COLUMN LAYOUT -->
+  <div class="cfg-layout">
+
+    <div class="cfg-panel cfg-panel-left">
+
+      <div class="cfg-section-label">// PRODUKT</div>
+      <div class="cfg-product-grid">
+        <button class="cfg-prod-btn active" data-prod="hoodie" onclick="cfgSetProduct('hoodie',this)">
+          <span class="cfg-prod-icon">🧥</span>
+          <span class="cfg-prod-label">Bluza</span>
+        </button>
+        <button class="cfg-prod-btn" data-prod="tshirt" onclick="cfgSetProduct('tshirt',this)">
+          <span class="cfg-prod-icon">👕</span>
+          <span class="cfg-prod-label">Koszulka</span>
+        </button>
+        <button class="cfg-prod-btn" data-prod="cap" onclick="cfgSetProduct('cap',this)">
+          <span class="cfg-prod-icon">🧢</span>
+          <span class="cfg-prod-label">Czapka</span>
+        </button>
+      </div>
+
+      <div class="cfg-section-label">// WIDOK</div>
+      <div class="cfg-view-tabs">
+        <button class="cfg-view-tab active" onclick="cfgSetView('front',this)">Przód</button>
+        <button class="cfg-view-tab" onclick="cfgSetView('back',this)">Tył</button>
+        <button class="cfg-view-tab" onclick="cfgSetView('left',this)">L.Rękaw</button>
+        <button class="cfg-view-tab" onclick="cfgSetView('right',this)">P.Rękaw</button>
+      </div>
+
+      <div class="cfg-section-label">// KOLOR PRODUKTU</div>
+      <div class="cfg-color-row" id="cfgColorSwatches">
+        <div class="cfg-swatch active" style="background:#ffffff;border:2px solid #aaa" data-color="#ffffff" onclick="cfgSetColor('#ffffff',this)" title="Biały"></div>
+        <div class="cfg-swatch" style="background:#1a1a1a" data-color="#1a1a1a" onclick="cfgSetColor('#1a1a1a',this)" title="Czarny"></div>
+        <div class="cfg-swatch" style="background:#2d3a8c" data-color="#2d3a8c" onclick="cfgSetColor('#2d3a8c',this)" title="Granat"></div>
+        <div class="cfg-swatch" style="background:#c0392b" data-color="#c0392b" onclick="cfgSetColor('#c0392b',this)" title="Czerwony"></div>
+        <div class="cfg-swatch" style="background:#27ae60" data-color="#27ae60" onclick="cfgSetColor('#27ae60',this)" title="Zielony"></div>
+        <div class="cfg-swatch" style="background:#f39c12" data-color="#f39c12" onclick="cfgSetColor('#f39c12',this)" title="Żółty"></div>
+        <div class="cfg-swatch" style="background:#8e44ad" data-color="#8e44ad" onclick="cfgSetColor('#8e44ad',this)" title="Fiolet"></div>
+        <div class="cfg-swatch" style="background:#7f8c8d" data-color="#7f8c8d" onclick="cfgSetColor('#7f8c8d',this)" title="Szary"></div>
+        <div class="cfg-swatch" style="background:#e8c5a0" data-color="#e8c5a0" onclick="cfgSetColor('#e8c5a0',this)" title="Beż"></div>
+      </div>
+
+      <div class="cfg-divider"></div>
+
+      <div class="cfg-section-label">// DODAJ NAPIS</div>
+      <div class="cfg-tool-group">
+        <input type="text" class="cfg-input" id="cfgTextInput" placeholder="Wpisz tekst..." maxlength="60">
+        <div class="cfg-row-2">
+          <select class="cfg-select" id="cfgFontSelect">
+            <option value="Bebas Neue">Bebas Neue</option>
+            <option value="DM Sans" selected>DM Sans</option>
+            <option value="Space Mono">Space Mono</option>
+            <option value="Impact">Impact</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Verdana">Verdana</option>
+          </select>
+          <select class="cfg-select" id="cfgFontWeight">
+            <option value="400">Regular</option>
+            <option value="700" selected>Bold</option>
+          </select>
+        </div>
+        <div class="cfg-range-wrap">
+          <div class="cfg-range-labels"><span>Rozmiar</span><span id="cfgFontSizeVal">36px</span></div>
+          <input type="range" class="cfg-range" id="cfgFontSize" min="12" max="120" value="36"
+            oninput="document.getElementById('cfgFontSizeVal').textContent=this.value+'px'">
+        </div>
+        <div class="cfg-color-text-row">
+          <label class="cfg-mini-label">Kolor:</label>
+          <input type="color" id="cfgTextColor" value="#000000" class="cfg-colorpicker">
+          <select class="cfg-select" id="cfgTextAlign" style="flex:1">
+            <option value="center">Środek</option>
+            <option value="left">Lewo</option>
+            <option value="right">Prawo</option>
+          </select>
+        </div>
+        <button class="cfg-btn cfg-btn-accent" onclick="cfgAddText()">+ Dodaj Napis</button>
+      </div>
+
+      <div class="cfg-divider"></div>
+
+      <div class="cfg-section-label">// EDYTUJ ZAZNACZONY</div>
+      <div class="cfg-tool-group" id="cfgEditControls" style="opacity:.35;pointer-events:none">
+        <div class="cfg-range-wrap">
+          <div class="cfg-range-labels"><span>Obrót</span><span id="cfgRotVal">0°</span></div>
+          <input type="range" class="cfg-range" id="cfgRotSlider" min="-180" max="180" value="0"
+            oninput="cfgUpdateRot(this.value)">
+        </div>
+        <div class="cfg-range-wrap">
+          <div class="cfg-range-labels"><span>Skala</span><span id="cfgScaleVal">100%</span></div>
+          <input type="range" class="cfg-range" id="cfgScaleSlider" min="20" max="300" value="100"
+            oninput="cfgUpdateScale(this.value)">
+        </div>
+        <div class="cfg-range-wrap">
+          <div class="cfg-range-labels"><span>Przezroczystość</span><span id="cfgOpacVal">100%</span></div>
+          <input type="range" class="cfg-range" id="cfgOpacSlider" min="10" max="100" value="100"
+            oninput="cfgUpdateOpac(this.value)">
+        </div>
+        <button class="cfg-btn cfg-btn-danger" onclick="cfgDeleteSelected()">🗑 Usuń zaznaczony</button>
+        <button class="cfg-btn cfg-btn-outline" onclick="cfgCopyToView()">↗ Kopiuj na inny widok</button>
+        <button class="cfg-btn cfg-btn-outline" onclick="cfgClearView()">🧹 Wyczyść widok</button>
+      </div>
+
+    </div>
+
+    <!-- CANVAS -->
+    <div class="cfg-canvas-col">
+      <div class="cfg-canvas-wrap">
+        <div class="cfg-view-label" id="cfgViewLabel">PRZÓD</div>
+        <canvas id="cfgCanvas" width="440" height="500"></canvas>
+      </div>
+      <div class="cfg-canvas-hint">◈ kliknij i przeciągnij element ◈</div>
+    </div>
+
+    <!-- PRAWY PANEL -->
+    <div class="cfg-panel cfg-panel-right">
+
+      <div class="cfg-section-label">// OPCJE ZAMÓWIENIA</div>
+
+      <div class="cfg-order-box">
+        <div class="cfg-order-label">Kolor koszulki/bluzy:</div>
+        <div class="cfg-order-colors" id="cfgOrderColors">
+          <div class="cfg-order-swatch active" style="background:#000;border:2px solid #333" data-name="Czarny" onclick="cfgSelectOrderColor(this)"></div>
+          <div class="cfg-order-swatch" style="background:#fff;border:2px solid #ddd" data-name="Biały" onclick="cfgSelectOrderColor(this)"></div>
+          <div class="cfg-order-swatch" style="background:#800020" data-name="Bordowy" onclick="cfgSelectOrderColor(this)"></div>
+          <div class="cfg-order-swatch" style="background:#36454F" data-name="Grafitowy" onclick="cfgSelectOrderColor(this)"></div>
+          <div class="cfg-order-swatch" style="background:#2d3a8c" data-name="Granat" onclick="cfgSelectOrderColor(this)"></div>
+          <div class="cfg-order-swatch" style="background:#808080" data-name="Szary" onclick="cfgSelectOrderColor(this)"></div>
+        </div>
+        <div class="cfg-order-selected-color" id="cfgOrderColorLabel">Wybrany kolor: <strong>Czarny</strong></div>
+
+        <div class="cfg-order-label" style="margin-top:14px">Rozmiar:</div>
+        <div class="cfg-size-btns" id="cfgSizeBtns">
+          <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XS</button>
+          <button class="cfg-size-btn active" onclick="cfgSelectSize(this)">S</button>
+          <button class="cfg-size-btn" onclick="cfgSelectSize(this)">M</button>
+          <button class="cfg-size-btn" onclick="cfgSelectSize(this)">L</button>
+          <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XL</button>
+          <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XXL</button>
+        </div>
+
+        <div class="cfg-order-label" style="margin-top:14px">Ilość:</div>
+        <div class="cfg-qty-row">
+          <button class="cfg-qty-btn" onclick="cfgQtyChange(-1)">−</button>
+          <input type="number" id="cfgQtyInput" value="1" min="1" max="99" readonly class="cfg-qty-input">
+          <button class="cfg-qty-btn" onclick="cfgQtyChange(1)">+</button>
+        </div>
+
+        <div class="cfg-price-display">
+          <span class="cfg-price-label">Cena:</span>
+          <span class="cfg-price-value" id="cfgPriceDisplay">170 zł</span>
+        </div>
+      </div>
+
+      <div class="cfg-divider"></div>
+
+      <div class="cfg-section-label">// WARSTWY</div>
+      <div class="cfg-layers-list" id="cfgLayersList">
+        <div class="cfg-empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>
+      </div>
+
+      <div class="cfg-divider"></div>
+
+      <div class="cfg-section-label">// GRAFIKA</div>
+      <input type="file" id="cfgFileInput" accept="image/*" onchange="cfgUploadImage(event)" style="display:none">
+      <div class="cfg-upload-zone" onclick="document.getElementById('cfgFileInput').click()">
+        <div class="cfg-upload-icon">🖼️</div>
+        <div class="cfg-upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG · JPG · SVG</div>
+      </div>
+
+      <button class="cfg-btn cfg-btn-export" onclick="cfgExport()">⬇ EKSPORTUJ PNG</button>
+
+      <button class="cfg-btn cfg-btn-cart" onclick="cfgAddToCart()">
+        🛒 DODAJ DO KOSZYKA
+        <span class="cfg-cart-price" id="cfgCartPriceLabel">170 zł</span>
+      </button>
+
+      <div class="cfg-footer-note">DRIP STUDIO © 2026 · AdelbertusShop</div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<style>
+.cfg-root {
+  --cfg-bg: #0a0a0a;
+  --cfg-surface: #111;
+  --cfg-card: #181818;
+  --cfg-border: #2a2a2a;
+  --cfg-accent: #e8ff00;
+  --cfg-accent2: #ff3c3c;
+  --cfg-text: #f0f0f0;
+  --cfg-muted: #666;
+  background: var(--cfg-bg);
+  color: var(--cfg-text);
+  font-family: 'Montserrat', sans-serif;
+  min-height: 100vh;
+  padding: 0;
+}
+.cfg-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--cfg-border);
+  background: rgba(10,10,10,0.96);
+  position: sticky;
+  top: 56px;
+  z-index: 90;
+  backdrop-filter: blur(10px);
+}
+.cfg-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; color: var(--cfg-accent); }
+.cfg-logo span { color: #fff; }
+.cfg-badge { font-size: 10px; letter-spacing: 2px; color: var(--cfg-muted); text-transform: uppercase; }
+.cfg-layout { display: grid; grid-template-columns: 300px 1fr 300px; min-height: calc(100vh - 57px); }
+.cfg-panel { padding: 20px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--cfg-border) transparent; }
+.cfg-panel-left { background: var(--cfg-surface); border-right: 1px solid var(--cfg-border); }
+.cfg-panel-right { background: var(--cfg-surface); border-left: 1px solid var(--cfg-border); }
+.cfg-section-label {
+  font-size: 11px; letter-spacing: 2.5px; color: var(--cfg-accent);
+  font-family: 'Space Mono', monospace; margin: 0 0 10px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--cfg-border);
+}
+.cfg-divider { height: 1px; background: var(--cfg-border); margin: 18px 0; }
+.cfg-product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 20px; }
+.cfg-prod-btn {
+  background: var(--cfg-card); border: 2px solid var(--cfg-border); border-radius: 10px;
+  padding: 12px 6px; cursor: pointer; transition: all .2s; text-align: center;
+  color: var(--cfg-text); display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.cfg-prod-btn:hover, .cfg-prod-btn.active { border-color: var(--cfg-accent); background: rgba(232,255,0,.06); }
+.cfg-prod-icon { font-size: 22px; }
+.cfg-prod-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cfg-muted); }
+.cfg-prod-btn.active .cfg-prod-label { color: var(--cfg-accent); }
+.cfg-view-tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+.cfg-view-tab {
+  flex: 1; min-width: 0; padding: 7px 4px; background: var(--cfg-card);
+  border: 1px solid var(--cfg-border); border-radius: 6px; cursor: pointer;
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--cfg-muted);
+  font-family: 'Space Mono', monospace; transition: all .2s; text-align: center;
+}
+.cfg-view-tab:hover { border-color: var(--cfg-accent); color: var(--cfg-text); }
+.cfg-view-tab.active { background: var(--cfg-accent); color: #000; border-color: var(--cfg-accent); font-weight: 700; }
+.cfg-color-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 0; }
+.cfg-swatch { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all .2s; }
+.cfg-swatch:hover { transform: scale(1.15); }
+.cfg-swatch.active { border-color: var(--cfg-accent) !important; box-shadow: 0 0 0 3px rgba(232,255,0,.3); }
+.cfg-input, .cfg-select {
+  width: 100%; background: var(--cfg-card); border: 1px solid var(--cfg-border);
+  border-radius: 7px; padding: 9px 12px; color: var(--cfg-text);
+  font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none;
+  transition: border-color .2s; margin-bottom: 7px;
+}
+.cfg-input:focus, .cfg-select:focus { border-color: var(--cfg-accent); }
+.cfg-select { cursor: pointer; appearance: none; }
+.cfg-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.cfg-row-2 .cfg-select { margin-bottom: 7px; }
+.cfg-range-wrap { margin-bottom: 10px; }
+.cfg-range-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--cfg-muted); margin-bottom: 4px; }
+.cfg-range { width: 100%; accent-color: var(--cfg-accent); cursor: pointer; }
+.cfg-color-text-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.cfg-mini-label { font-size: 11px; color: var(--cfg-muted); white-space: nowrap; }
+.cfg-colorpicker {
+  -webkit-appearance: none; border: none; width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer; padding: 2px;
+  background: var(--cfg-card); border: 2px solid var(--cfg-border);
+}
+.cfg-tool-group { display: flex; flex-direction: column; }
+.cfg-btn {
+  width: 100%; padding: 10px; border-radius: 7px; border: none; cursor: pointer;
+  font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+  transition: all .2s; margin-bottom: 7px; font-family: 'Montserrat', sans-serif;
+}
+.cfg-btn-accent { background: var(--cfg-accent); color: #000; }
+.cfg-btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
+.cfg-btn-outline { background: transparent; color: var(--cfg-text); border: 1px solid var(--cfg-border); }
+.cfg-btn-outline:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
+.cfg-btn-danger { background: transparent; color: var(--cfg-accent2); border: 1px solid var(--cfg-accent2); }
+.cfg-btn-danger:hover { background: var(--cfg-accent2); color: #fff; }
+.cfg-btn-export { background: var(--cfg-card); color: var(--cfg-text); border: 1px solid var(--cfg-border); margin-top: 6px; }
+.cfg-btn-export:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
+.cfg-btn-cart {
+  background: linear-gradient(135deg, #d4af37, #b8941f); color: #000;
+  font-size: 14px; letter-spacing: 2px; padding: 16px 12px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  box-shadow: 0 6px 20px rgba(212,175,55,.35); margin-bottom: 12px;
+}
+.cfg-btn-cart:hover { background: linear-gradient(135deg, #e8c840, #c9a520); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,.5); }
+.cfg-cart-price { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 900; }
+.cfg-canvas-col {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 32px 20px; background: radial-gradient(ellipse at center, #1c1c1c 0%, var(--cfg-bg) 70%);
+}
+.cfg-canvas-wrap { position: relative; width: 440px; max-width: 100%; }
+.cfg-view-label {
+  position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px;
+  color: var(--cfg-muted); white-space: nowrap;
+}
+#cfgCanvas {
+  border-radius: 14px; cursor: crosshair; display: block;
+  width: 100%; height: auto; aspect-ratio: 440/500;
+  box-shadow: 0 24px 70px rgba(0,0,0,.85);
+}
+.cfg-canvas-hint { margin-top: 12px; font-size: 9px; color: var(--cfg-muted); letter-spacing: 2px; font-family: 'Space Mono', monospace; text-align: center; }
+.cfg-order-box { background: var(--cfg-card); border: 1px solid var(--cfg-border); border-radius: 10px; padding: 14px; margin-bottom: 4px; }
+.cfg-order-label { font-size: 10px; color: var(--cfg-muted); letter-spacing: 1px; margin-bottom: 7px; text-transform: uppercase; }
+.cfg-order-colors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.cfg-order-swatch { width: 26px; height: 26px; border-radius: 50%; cursor: pointer; transition: all .18s; }
+.cfg-order-swatch:hover { transform: scale(1.2); }
+.cfg-order-swatch.active { box-shadow: 0 0 0 3px var(--cfg-accent); transform: scale(1.1); }
+.cfg-order-selected-color { font-size: 11px; color: var(--cfg-muted); margin-bottom: 0; }
+.cfg-order-selected-color strong { color: var(--cfg-accent); }
+.cfg-size-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
+.cfg-size-btn {
+  padding: 6px 10px; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
+  border-radius: 5px; color: var(--cfg-text); font-size: 11px; font-weight: 700;
+  cursor: pointer; transition: all .15s; font-family: 'Montserrat', sans-serif;
+}
+.cfg-size-btn:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
+.cfg-size-btn.active { background: var(--cfg-accent); border-color: var(--cfg-accent); color: #000; }
+.cfg-qty-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.cfg-qty-btn {
+  width: 30px; height: 30px; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
+  border-radius: 6px; color: var(--cfg-text); font-size: 1.1rem; font-weight: 700;
+  cursor: pointer; line-height: 1; transition: all .15s;
+}
+.cfg-qty-btn:hover { border-color: var(--cfg-accent); background: var(--cfg-accent); color: #000; }
+.cfg-qty-input {
+  width: 48px; text-align: center; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
+  border-radius: 6px; color: var(--cfg-text); font-size: 0.95rem; font-weight: 700;
+  padding: 5px; font-family: 'Montserrat', sans-serif;
+}
+.cfg-price-display { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid var(--cfg-border); }
+.cfg-price-label { font-size: 11px; color: var(--cfg-muted); text-transform: uppercase; letter-spacing: 1px; }
+.cfg-price-value { font-size: 1.5rem; font-weight: 900; color: var(--cfg-accent); font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+.cfg-layers-list { display: flex; flex-direction: column; gap: 6px; max-height: 180px; overflow-y: auto; margin-bottom: 4px; }
+.cfg-empty-layers { text-align: center; padding: 18px 10px; color: var(--cfg-muted); font-size: 11px; border: 1px dashed var(--cfg-border); border-radius: 8px; line-height: 1.7; }
+.cfg-layer-item {
+  background: var(--cfg-card); border: 1px solid var(--cfg-border); border-radius: 7px;
+  padding: 8px 10px; display: flex; align-items: center; gap: 8px;
+  cursor: pointer; font-size: 12px; transition: all .18s;
+}
+.cfg-layer-item:hover { border-color: var(--cfg-accent); }
+.cfg-layer-item.selected { border-color: var(--cfg-accent); background: rgba(232,255,0,.05); }
+.cfg-layer-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
+.cfg-layer-del { color: var(--cfg-muted); cursor: pointer; padding: 1px 6px; border-radius: 4px; font-size: 13px; transition: all .18s; }
+.cfg-layer-del:hover { color: var(--cfg-accent2); background: rgba(255,60,60,.12); }
+.cfg-upload-zone { border: 2px dashed var(--cfg-border); border-radius: 9px; padding: 18px; text-align: center; cursor: pointer; transition: all .2s; margin-bottom: 10px; }
+.cfg-upload-zone:hover { border-color: var(--cfg-accent); background: rgba(232,255,0,.03); }
+.cfg-upload-icon { font-size: 24px; margin-bottom: 6px; }
+.cfg-upload-text { font-size: 11px; color: var(--cfg-muted); line-height: 1.6; }
+.cfg-upload-text strong { color: var(--cfg-accent); }
+.cfg-footer-note { text-align: center; font-size: 9px; color: var(--cfg-muted); letter-spacing: 1px; margin-top: 4px; }
+@media (max-width: 1100px) {
+  .cfg-layout { display: flex; flex-direction: column; }
+  .cfg-canvas-col { order: -1; padding: 20px 12px; }
+  .cfg-canvas-wrap { width: 100%; max-width: 440px; margin: 0 auto; }
+  .cfg-panel-left, .cfg-panel-right { border-right: none; border-left: none; border-top: 1px solid var(--cfg-border); width: 100%; }
+}
+@media (max-width: 480px) {
+  .cfg-topbar { padding: 12px 16px; }
+  .cfg-badge { display: none; }
+  .cfg-order-box { padding: 10px; }
+}
+</style>
+
+
+<script>
+(function() {
+  'use strict';
+
+  const canvas = document.getElementById('cfgCanvas');
+  const ctx    = canvas.getContext('2d');
+
+  const state = {
+    product: 'hoodie', view: 'front', productColor: '#ffffff',
+    views: { front:[], back:[], left:[], right:[] },
+    selected: null, dragging: false, dragOffX: 0, dragOffY: 0,
+    orderColor: 'Czarny', orderSize: 'S',
+  };
+
+  const PRICES = { hoodie: 170, tshirt: 80, cap: 99 };
+
+  function darken(hex, amt) {
+    let r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
+    return '#'+[r,g,b].map(v=>Math.max(0,v-Math.round(255*amt)).toString(16).padStart(2,'0')).join('');
+  }
+
+  function drawSleeve(W,H,c) {
+    ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(W*.15,H*.08); ctx.lineTo(W*.85,H*.08);
+    ctx.lineTo(W*.85,H*.92); ctx.lineTo(W*.15,H*.92);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+    ctx.fillStyle=darken(c,.1); ctx.fillRect(W*.15,H*.86,W*.7,H*.06); ctx.strokeRect(W*.15,H*.86,W*.7,H*.06);
+    ctx.fillStyle=darken(c,.06); ctx.fillRect(W*.15,H*.08,W*.7,H*.06);
+  }
+  function drawSleeveTee(W,H,c) {
+    ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(W*.15,H*.12); ctx.lineTo(W*.85,H*.12);
+    ctx.lineTo(W*.85,H*.88); ctx.lineTo(W*.15,H*.88);
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+
+  const shapes = {
+    hoodie: {
+      front(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
+        ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.1);
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.15,W*.2,H*.1,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.07);
+        ctx.fillRect(W*.35,H*.65,W*.3,H*.15); ctx.strokeRect(W*.35,H*.65,W*.3,H*.15);
+      },
+      back(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
+        ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+      },
+      left:(W,H,c)=>drawSleeve(W,H,c), right:(W,H,c)=>drawSleeve(W,H,c),
+    },
+    tshirt: {
+      front(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
+        ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.08);
+        ctx.beginPath(); ctx.arc(W*.5,H*.12,W*.1,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      },
+      back(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath();
+        ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
+        ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+      },
+      left:(W,H,c)=>drawSleeveTee(W,H,c), right:(W,H,c)=>drawSleeveTee(W,H,c),
+    },
+    cap: {
+      front(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.48,H*.08,0,0,Math.PI); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.12);
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.18);
+        ctx.beginPath(); ctx.arc(W*.5,H*.1,10,0,Math.PI*2); ctx.fill(); ctx.stroke();
+      },
+      back(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.12);
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
+        ctx.fillStyle=darken(c,.2);
+        ctx.fillRect(W*.42,H*.52,W*.16,H*.06); ctx.strokeRect(W*.42,H*.52,W*.16,H*.06);
+      },
+      left(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(W*.2,H*.55); ctx.lineTo(W*.05,H*.6); ctx.lineTo(W*.05,H*.65); ctx.lineTo(W*.8,H*.65); ctx.lineTo(W*.8,H*.58);
+        ctx.closePath(); ctx.fill(); ctx.stroke();
+      },
+      right(W,H,c) {
+        ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
+        ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
+      },
+    }
+  };
+
+  function getBounds(el) {
+    if (el.type==='text') {
+      ctx.save(); ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
+      const m=ctx.measureText(el.text); ctx.restore();
+      return { w:m.width, h:el.size*1.2 };
+    }
+    return { w:el.w||60, h:el.h||60 };
+  }
+
+  function render() {
+    const W=canvas.width, H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#1a1a1a'; ctx.fillRect(0,0,W,H);
+    ctx.fillStyle='#242424';
+    for(let x=20;x<W;x+=20) for(let y=20;y<H;y+=20) {
+      ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
+    }
+    const s=shapes[state.product];
+    if(s&&s[state.view]) s[state.view](W,H,state.productColor);
+    state.views[state.view].forEach((el,i) => {
+      ctx.save();
+      ctx.globalAlpha=el.opacity!==undefined?el.opacity:1;
+      ctx.translate(el.x,el.y);
+      ctx.rotate((el.rotation||0)*Math.PI/180);
+      const sc=(el.scale||100)/100; ctx.scale(sc,sc);
+      if(el.type==='text') {
+        ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
+        ctx.fillStyle=el.color; ctx.textAlign=el.align||'center'; ctx.textBaseline='middle';
+        ctx.fillText(el.text,0,0);
+      } else if(el.type==='image'&&el.img) {
+        ctx.drawImage(el.img,-el.w/2,-el.h/2,el.w,el.h);
+      }
+      if(state.selected===i) {
+        const b=getBounds(el);
+        ctx.strokeStyle='#e8ff00'; ctx.lineWidth=2/sc; ctx.setLineDash([6/sc,3/sc]);
+        ctx.strokeRect(-b.w/2-7/sc,-b.h/2-7/sc,b.w+14/sc,b.h+14/sc);
+        ctx.setLineDash([]); ctx.fillStyle='#e8ff00';
+        const hw=b.w/2+9/sc, hh=b.h/2+9/sc;
+        [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]].forEach(([x,y])=>ctx.fillRect(x-4/sc,y-4/sc,8/sc,8/sc));
+      }
+      ctx.restore();
+    });
+  }
+
+  function getPos(e) {
+    const rect=canvas.getBoundingClientRect();
+    const sx=canvas.width/rect.width, sy=canvas.height/rect.height;
+    const cx=e.touches?e.touches[0].clientX:e.clientX;
+    const cy=e.touches?e.touches[0].clientY:e.clientY;
+    return {x:(cx-rect.left)*sx, y:(cy-rect.top)*sy};
+  }
+  function hitTest(el,px,py) {
+    const dx=px-el.x, dy=py-el.y;
+    const ang=-(el.rotation||0)*Math.PI/180;
+    const sc=(el.scale||100)/100;
+    const rx=(Math.cos(ang)*dx-Math.sin(ang)*dy)/sc;
+    const ry=(Math.sin(ang)*dx+Math.cos(ang)*dy)/sc;
+    const b=getBounds(el);
+    return Math.abs(rx)<b.w/2+12&&Math.abs(ry)<b.h/2+12;
+  }
+
+  canvas.addEventListener('mousedown',startDrag);
+  canvas.addEventListener('touchstart',startDrag,{passive:false});
+  window.addEventListener('mousemove',doDrag);
+  window.addEventListener('touchmove',doDrag,{passive:false});
+  window.addEventListener('mouseup',stopDrag);
+  window.addEventListener('touchend',stopDrag);
+
+  function startDrag(e) {
+    e.preventDefault();
+    const pos=getPos(e), els=state.views[state.view];
+    let found=false;
+    for(let i=els.length-1;i>=0;i--) {
+      if(hitTest(els[i],pos.x,pos.y)) {
+        state.selected=i; state.dragging=true;
+        state.dragOffX=pos.x-els[i].x; state.dragOffY=pos.y-els[i].y;
+        found=true; break;
+      }
+    }
+    if(!found) state.selected=null;
+    syncEditControls(); renderLayers(); render();
+  }
+  function doDrag(e) {
+    if(!state.dragging||state.selected===null) return;
+    e.preventDefault();
+    const pos=getPos(e), el=state.views[state.view][state.selected];
+    if(el){el.x=pos.x-state.dragOffX; el.y=pos.y-state.dragOffY; render();}
+  }
+  function stopDrag(){state.dragging=false;}
+
+  window.cfgSetProduct=function(p,btn){
+    state.product=p; state.selected=null;
+    document.querySelectorAll('.cfg-prod-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); updatePriceUI(); render();
+  };
+  window.cfgSetView=function(v,btn){
+    state.view=v; state.selected=null;
+    const labels={front:'PRZÓD',back:'TYŁ',left:'LEWY RĘKAW',right:'PRAWY RĘKAW'};
+    document.getElementById('cfgViewLabel').textContent=labels[v];
+    document.querySelectorAll('.cfg-view-tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); syncEditControls(); renderLayers(); render();
+  };
+  window.cfgSetColor=function(color,el){
+    state.productColor=color;
+    document.querySelectorAll('.cfg-swatch').forEach(s=>s.classList.remove('active'));
+    el.classList.add('active'); render();
+  };
+  window.cfgSelectOrderColor=function(el){
+    document.querySelectorAll('.cfg-order-swatch').forEach(s=>s.classList.remove('active'));
+    el.classList.add('active'); state.orderColor=el.dataset.name;
+    document.getElementById('cfgOrderColorLabel').innerHTML=`Wybrany kolor: <strong>${state.orderColor}</strong>`;
+  };
+  window.cfgSelectSize=function(btn){
+    document.querySelectorAll('.cfg-size-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); state.orderSize=btn.textContent.trim();
+  };
+  window.cfgQtyChange=function(dir){
+    const inp=document.getElementById('cfgQtyInput');
+    inp.value=Math.max(1,Math.min(99,parseInt(inp.value)+dir));
+  };
+  window.cfgAddText=function(){
+    const text=document.getElementById('cfgTextInput').value.trim();
+    if(!text) return;
+    state.views[state.view].push({
+      type:'text', text,
+      x:canvas.width/2, y:canvas.height/2,
+      font:document.getElementById('cfgFontSelect').value,
+      weight:document.getElementById('cfgFontWeight').value,
+      size:parseInt(document.getElementById('cfgFontSize').value),
+      color:document.getElementById('cfgTextColor').value,
+      align:document.getElementById('cfgTextAlign').value,
+      rotation:0, scale:100, opacity:1,
+    });
+    state.selected=state.views[state.view].length-1;
+    syncEditControls(); renderLayers(); render();
+  };
+  window.cfgUploadImage=function(event){
+    const file=event.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=e=>{
+      const img=new Image();
+      img.onload=()=>{
+        const maxW=160,maxH=160; let w=img.width,h=img.height;
+        if(w>maxW){h=h*maxW/w;w=maxW;} if(h>maxH){w=w*maxH/h;h=maxH;}
+        state.views[state.view].push({type:'image',img,x:canvas.width/2,y:canvas.height/2,w,h,rotation:0,scale:100,opacity:1,name:file.name});
+        state.selected=state.views[state.view].length-1;
+        syncEditControls(); renderLayers(); render();
+      };
+      img.src=e.target.result;
+    };
+    reader.readAsDataURL(file); event.target.value='';
+  };
+  window.cfgUpdateRot=function(v){
+    document.getElementById('cfgRotVal').textContent=v+'°';
+    if(state.selected!==null){state.views[state.view][state.selected].rotation=parseInt(v);render();}
+  };
+  window.cfgUpdateScale=function(v){
+    document.getElementById('cfgScaleVal').textContent=v+'%';
+    if(state.selected!==null){state.views[state.view][state.selected].scale=parseInt(v);render();}
+  };
+  window.cfgUpdateOpac=function(v){
+    document.getElementById('cfgOpacVal').textContent=v+'%';
+    if(state.selected!==null){state.views[state.view][state.selected].opacity=parseInt(v)/100;render();}
+  };
+  window.cfgDeleteSelected=function(){
+    if(state.selected===null) return;
+    state.views[state.view].splice(state.selected,1);
+    state.selected=null; syncEditControls(); renderLayers(); render();
+  };
+  window.cfgCopyToView=function(){
+    const views=['front','back','left','right'], cur=state.view;
+    const els=state.views[cur].filter(e=>e.type!=='image');
+    if(!els.length){alert('Brak tekstów do skopiowania.');return;}
+    const target=views.find(v=>v!==cur&&state.views[v].length===0)||views.find(v=>v!==cur);
+    if(target){state.views[target]=JSON.parse(JSON.stringify(els));alert(`Skopiowano tekst na widok: ${target}`);renderLayers();render();}
+  };
+  window.cfgClearView=function(){
+    state.views[state.view]=[]; state.selected=null;
+    syncEditControls(); renderLayers(); render();
+  };
+  window.cfgExport=function(){
+    const a=document.createElement('a');
+    a.download=`drip-studio-${state.product}-${state.view}.png`;
+    a.href=canvas.toDataURL('image/png'); a.click();
+  };
+  window.cfgAddToCart=function(){
+    if(typeof addToCart!=='function'){console.error('addToCart nie znaleziony');return;}
+    const prodNames={hoodie:'Bluza Custom',tshirt:'Koszulka Custom',cap:'Czapka Custom'};
+    const qty=parseInt(document.getElementById('cfgQtyInput').value)||1;
+    const name=prodNames[state.product], price=PRICES[state.product];
+    const thumb=canvas.toDataURL('image/png');
+    for(let i=0;i<qty;i++) addToCart(name,price,thumb,state.orderSize,state.orderColor);
+    if(typeof showCartPopup==='function') showCartPopup();
+    if(typeof showNotification==='function') showNotification('✅ Projekt dodany do koszyka!');
+  };
+
+  function syncEditControls(){
+    const ctrl=document.getElementById('cfgEditControls');
+    const el=state.selected!==null?state.views[state.view][state.selected]:null;
+    if(el){
+      ctrl.style.opacity='1'; ctrl.style.pointerEvents='auto';
+      document.getElementById('cfgRotSlider').value=el.rotation||0;
+      document.getElementById('cfgRotVal').textContent=(el.rotation||0)+'°';
+      document.getElementById('cfgScaleSlider').value=el.scale||100;
+      document.getElementById('cfgScaleVal').textContent=(el.scale||100)+'%';
+      const op=el.opacity!==undefined?Math.round(el.opacity*100):100;
+      document.getElementById('cfgOpacSlider').value=op;
+      document.getElementById('cfgOpacVal').textContent=op+'%';
+    } else {
+      ctrl.style.opacity='.35'; ctrl.style.pointerEvents='none';
+    }
+  }
+  function renderLayers(){
+    const list=document.getElementById('cfgLayersList'), els=state.views[state.view];
+    if(!els.length){list.innerHTML='<div class="cfg-empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>';return;}
+    list.innerHTML=[...els].reverse().map((el,ri)=>{
+      const i=els.length-1-ri;
+      const icon=el.type==='text'?'✏️':'🖼️';
+      const name=el.type==='text'?el.text.substring(0,16):(el.name||'Grafika');
+      return `<div class="cfg-layer-item ${state.selected===i?'selected':''}" onclick="cfgSelectLayer(${i})">
+        <span>${icon}</span><span class="cfg-layer-name">${name}</span>
+        <span class="cfg-layer-del" onclick="event.stopPropagation();cfgDeleteLayer(${i})">✕</span>
+      </div>`;
+    }).join('');
+  }
+  window.cfgSelectLayer=function(i){state.selected=i;syncEditControls();renderLayers();render();};
+  window.cfgDeleteLayer=function(i){
+    state.views[state.view].splice(i,1);
+    if(state.selected===i) state.selected=null;
+    else if(state.selected>i) state.selected--;
+    syncEditControls(); renderLayers(); render();
+  };
+  function updatePriceUI(){
+    const p=PRICES[state.product];
+    document.getElementById('cfgPriceDisplay').textContent=p+' zł';
+    document.getElementById('cfgCartPriceLabel').textContent=p+' zł';
+  }
+
+  updatePriceUI(); renderLayers(); render();
+
+})();
+</script>
     </body>
     </html>
