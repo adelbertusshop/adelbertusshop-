@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -10,8 +9,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;700&family=Space+Mono&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://www.paypal.com/sdk/js?client-id=BAApXIlx_i9yxgPZvc4vuso00U8LSVbTZl57n3Pcfr0LfvppkHOPgUjsoN8-QLjxxH-Qb1DlbNOd-Pb2Z4&components=hosted-buttons&disable-funding=venmo&currency=PLN"></script>
+    
+    <!-- dodatkowe fonty dla konfiguratora -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono&family=DM+Sans&display=swap" rel="stylesheet">
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
@@ -22,6 +23,16 @@
             --color-dark: #1a1a1a;
             --color-light: #f8f5f0;
             --color-cream: #fff8e7;
+            /* zmienne konfiguratora (zgodne z nowym kodem) */
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --card: #181818;
+            --border: #2a2a2a;
+            --accent: #e8ff00;
+            --accent2: #ff3c3c;
+            --text: #f0f0f0;
+            --muted: #666;
+            --white: #ffffff;
         }
         
         * {
@@ -1108,187 +1119,613 @@
             color: #666;
         }
         
-        /* DODATKOWE STYLE DLA KONFIGURATORA */
-        .cfg-root {
-          --cfg-bg: #0a0a0a;
-          --cfg-surface: #111;
-          --cfg-card: #181818;
-          --cfg-border: #2a2a2a;
-          --cfg-accent: #e8ff00;
-          --cfg-accent2: #ff3c3c;
-          --cfg-text: #f0f0f0;
-          --cfg-muted: #666;
-          background: var(--cfg-bg);
-          color: var(--cfg-text);
-          font-family: 'Montserrat', sans-serif;
+        /* DODATKOWE STYLE DLA KONFIGURATORA (z nowego kodu) */
+        .configurator-root {
+          --bg: #0a0a0a;
+          --surface: #111111;
+          --card: #181818;
+          --border: #2a2a2a;
+          --accent: #e8ff00;
+          --accent2: #ff3c3c;
+          --text: #f0f0f0;
+          --muted: #666;
+          --white: #ffffff;
+        }
+
+        .configurator-section {
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
           min-height: 100vh;
+          overflow-x: hidden;
           padding: 0;
         }
-        .cfg-topbar {
+
+        .configurator-section header {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 16px 32px;
-          border-bottom: 1px solid var(--cfg-border);
-          background: rgba(10,10,10,0.96);
+          padding: 20px 40px;
+          border-bottom: 1px solid var(--border);
           position: sticky;
-          top: 56px;
-          z-index: 90;
+          top: 0;
+          background: rgba(10,10,10,0.95);
           backdrop-filter: blur(10px);
+          z-index: 100;
         }
-        .cfg-logo { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 4px; color: var(--cfg-accent); }
-        .cfg-logo span { color: #fff; }
-        .cfg-badge { font-size: 10px; letter-spacing: 2px; color: var(--cfg-muted); text-transform: uppercase; }
-        .cfg-layout { display: grid; grid-template-columns: 300px 1fr 300px; min-height: calc(100vh - 57px); }
-        .cfg-panel { padding: 20px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--cfg-border) transparent; }
-        .cfg-panel-left { background: var(--cfg-surface); border-right: 1px solid var(--cfg-border); }
-        .cfg-panel-right { background: var(--cfg-surface); border-left: 1px solid var(--cfg-border); }
-        .cfg-section-label {
-          font-size: 11px; letter-spacing: 2.5px; color: var(--cfg-accent);
-          font-family: 'Space Mono', monospace; margin: 0 0 10px;
-          padding-bottom: 8px; border-bottom: 1px solid var(--cfg-border);
+
+        .configurator-section .logo {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 28px;
+          letter-spacing: 4px;
+          color: var(--accent);
         }
-        .cfg-divider { height: 1px; background: var(--cfg-border); margin: 18px 0; }
-        .cfg-product-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 6px; margin-bottom: 20px; }
-        .cfg-prod-btn {
-          background: var(--cfg-card); border: 2px solid var(--cfg-border); border-radius: 10px;
-          padding: 12px 6px; cursor: pointer; transition: all .2s; text-align: center;
-          color: var(--cfg-text); display: flex; flex-direction: column; align-items: center; gap: 4px;
+        .configurator-section .logo span { color: var(--white); }
+
+        .configurator-section .header-badge {
+          font-family: 'Space Mono', monospace;
+          font-size: 11px;
+          color: var(--muted);
+          letter-spacing: 2px;
+          text-transform: uppercase;
         }
-        .cfg-prod-btn:hover, .cfg-prod-btn.active { border-color: var(--cfg-accent); background: rgba(232,255,0,.06); }
-        .cfg-prod-icon { font-size: 22px; }
-        .cfg-prod-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--cfg-muted); }
-        .cfg-prod-btn.active .cfg-prod-label { color: var(--cfg-accent); }
-        .cfg-view-tabs { display: flex; gap: 5px; margin-bottom: 20px; flex-wrap: wrap; }
-        .cfg-view-tab {
-          flex: 1; min-width: 0; padding: 7px 4px; background: var(--cfg-card);
-          border: 1px solid var(--cfg-border); border-radius: 6px; cursor: pointer;
-          font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--cfg-muted);
-          font-family: 'Space Mono', monospace; transition: all .2s; text-align: center;
+
+        /* ----- GŁÓWNY UKŁAD: 3 KOLUMNY (DESKTOP) ----- */
+        .main-layout {
+          display: grid;
+          grid-template-columns: 320px 1fr 300px;
+          min-height: calc(100vh - 73px);
         }
-        .cfg-view-tab:hover { border-color: var(--cfg-accent); color: var(--cfg-text); }
-        .cfg-view-tab.active { background: var(--cfg-accent); color: #000; border-color: var(--cfg-accent); font-weight: 700; }
-        .cfg-color-row { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 0; }
-        .cfg-swatch { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all .2s; }
-        .cfg-swatch:hover { transform: scale(1.15); }
-        .cfg-swatch.active { border-color: var(--cfg-accent) !important; box-shadow: 0 0 0 3px rgba(232,255,0,.3); }
-        .cfg-input, .cfg-select {
-          width: 100%; background: var(--cfg-card); border: 1px solid var(--cfg-border);
-          border-radius: 7px; padding: 9px 12px; color: var(--cfg-text);
-          font-family: 'Montserrat', sans-serif; font-size: 13px; outline: none;
-          transition: border-color .2s; margin-bottom: 7px;
+
+        /* ===== LEWY PANEL ===== */
+        .left-panel {
+          background: var(--surface);
+          border-right: 1px solid var(--border);
+          padding: 24px;
+          overflow-y: auto;
         }
-        .cfg-input:focus, .cfg-select:focus { border-color: var(--cfg-accent); }
-        .cfg-select { cursor: pointer; appearance: none; }
-        .cfg-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-        .cfg-row-2 .cfg-select { margin-bottom: 7px; }
-        .cfg-range-wrap { margin-bottom: 10px; }
-        .cfg-range-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--cfg-muted); margin-bottom: 4px; }
-        .cfg-range { width: 100%; accent-color: var(--cfg-accent); cursor: pointer; }
-        .cfg-color-text-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-        .cfg-mini-label { font-size: 11px; color: var(--cfg-muted); white-space: nowrap; }
-        .cfg-colorpicker {
-          -webkit-appearance: none; border: none; width: 32px; height: 32px;
-          border-radius: 50%; cursor: pointer; padding: 2px;
-          background: var(--cfg-card); border: 2px solid var(--cfg-border);
+
+        .panel-title {
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 18px;
+          letter-spacing: 3px;
+          color: var(--accent);
+          margin-bottom: 20px;
+          padding-bottom: 12px;
+          border-bottom: 1px solid var(--border);
         }
-        .cfg-tool-group { display: flex; flex-direction: column; }
-        .cfg-btn {
-          width: 100%; padding: 10px; border-radius: 7px; border: none; cursor: pointer;
-          font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
-          transition: all .2s; margin-bottom: 7px; font-family: 'Montserrat', sans-serif;
+
+        .product-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 8px;
+          margin-bottom: 28px;
         }
-        .cfg-btn-accent { background: var(--cfg-accent); color: #000; }
-        .cfg-btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
-        .cfg-btn-outline { background: transparent; color: var(--cfg-text); border: 1px solid var(--cfg-border); }
-        .cfg-btn-outline:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
-        .cfg-btn-danger { background: transparent; color: var(--cfg-accent2); border: 1px solid var(--cfg-accent2); }
-        .cfg-btn-danger:hover { background: var(--cfg-accent2); color: #fff; }
-        .cfg-btn-export { background: var(--cfg-card); color: var(--cfg-text); border: 1px solid var(--cfg-border); margin-top: 6px; }
-        .cfg-btn-export:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
-        .cfg-btn-cart {
-          background: linear-gradient(135deg, #d4af37, #b8941f); color: #000;
-          font-size: 14px; letter-spacing: 2px; padding: 16px 12px; border-radius: 10px;
-          display: flex; align-items: center; justify-content: center; gap: 8px;
-          box-shadow: 0 6px 20px rgba(212,175,55,.35); margin-bottom: 12px;
+
+        .product-btn {
+          background: var(--card);
+          border: 2px solid var(--border);
+          border-radius: 10px;
+          padding: 14px 8px;
+          cursor: pointer;
+          transition: all 0.2s;
+          text-align: center;
+          color: var(--text);
         }
-        .cfg-btn-cart:hover { background: linear-gradient(135deg, #e8c840, #c9a520); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,175,55,.5); }
-        .cfg-cart-price { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: 900; }
-        .cfg-canvas-col {
-          display: flex; flex-direction: column; align-items: center; justify-content: center;
-          padding: 32px 20px; background: radial-gradient(ellipse at center, #1c1c1c 0%, var(--cfg-bg) 70%);
+        .product-btn:hover { border-color: var(--accent); }
+        .product-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.06); }
+        .product-btn .icon { font-size: 26px; display: block; margin-bottom: 6px; }
+        .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+        .product-btn.active .label { color: var(--accent); }
+
+        .view-tabs {
+          display: flex;
+          gap: 6px;
+          margin-bottom: 28px;
+          flex-wrap: wrap;
         }
-        .cfg-canvas-wrap { position: relative; width: 440px; max-width: 100%; }
-        .cfg-view-label {
-          position: absolute; top: -28px; left: 50%; transform: translateX(-50%);
-          font-family: 'Bebas Neue', sans-serif; font-size: 13px; letter-spacing: 4px;
-          color: var(--cfg-muted); white-space: nowrap;
+
+        .view-tab {
+          flex: 1;
+          min-width: 0;
+          padding: 8px 4px;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 6px;
+          cursor: pointer;
+          font-family: 'Space Mono', monospace;
+          font-size: 9px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: var(--muted);
+          transition: all 0.2s;
+          text-align: center;
         }
-        #cfgCanvas {
-          border-radius: 14px; cursor: crosshair; display: block;
-          width: 100%; height: auto; aspect-ratio: 440/500;
-          box-shadow: 0 24px 70px rgba(0,0,0,.85);
+        .view-tab:hover { border-color: var(--accent); color: var(--text); }
+        .view-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
+
+        .color-row {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+          margin-bottom: 24px;
         }
-        .cfg-canvas-hint { margin-top: 12px; font-size: 9px; color: var(--cfg-muted); letter-spacing: 2px; font-family: 'Space Mono', monospace; text-align: center; }
-        .cfg-order-box { background: var(--cfg-card); border: 1px solid var(--cfg-border); border-radius: 10px; padding: 14px; margin-bottom: 4px; }
-        .cfg-order-label { font-size: 10px; color: var(--cfg-muted); letter-spacing: 1px; margin-bottom: 7px; text-transform: uppercase; }
-        .cfg-order-colors { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
-        .cfg-order-swatch { width: 26px; height: 26px; border-radius: 50%; cursor: pointer; transition: all .18s; }
-        .cfg-order-swatch:hover { transform: scale(1.2); }
-        .cfg-order-swatch.active { box-shadow: 0 0 0 3px var(--cfg-accent); transform: scale(1.1); }
-        .cfg-order-selected-color { font-size: 11px; color: var(--cfg-muted); margin-bottom: 0; }
-        .cfg-order-selected-color strong { color: var(--cfg-accent); }
-        .cfg-size-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 2px; }
-        .cfg-size-btn {
-          padding: 6px 10px; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
-          border-radius: 5px; color: var(--cfg-text); font-size: 11px; font-weight: 700;
-          cursor: pointer; transition: all .15s; font-family: 'Montserrat', sans-serif;
+
+        .color-swatch {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          cursor: pointer;
+          border: 2px solid transparent;
+          transition: all 0.2s;
         }
-        .cfg-size-btn:hover { border-color: var(--cfg-accent); color: var(--cfg-accent); }
-        .cfg-size-btn.active { background: var(--cfg-accent); border-color: var(--cfg-accent); color: #000; }
-        .cfg-qty-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-        .cfg-qty-btn {
-          width: 30px; height: 30px; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
-          border-radius: 6px; color: var(--cfg-text); font-size: 1.1rem; font-weight: 700;
-          cursor: pointer; line-height: 1; transition: all .15s;
+        .color-swatch:hover { transform: scale(1.15); }
+        .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
+
+        .tool-section { margin-bottom: 24px; }
+        .input-field {
+          width: 100%;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 14px;
+          outline: none;
+          transition: border-color 0.2s;
+          margin-bottom: 8px;
         }
-        .cfg-qty-btn:hover { border-color: var(--cfg-accent); background: var(--cfg-accent); color: #000; }
-        .cfg-qty-input {
-          width: 48px; text-align: center; background: var(--cfg-bg); border: 1.5px solid var(--cfg-border);
-          border-radius: 6px; color: var(--cfg-text); font-size: 0.95rem; font-weight: 700;
-          padding: 5px; font-family: 'Montserrat', sans-serif;
+        .input-field:focus { border-color: var(--accent); }
+
+        .input-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin-bottom: 8px;
         }
-        .cfg-price-display { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid var(--cfg-border); }
-        .cfg-price-label { font-size: 11px; color: var(--cfg-muted); text-transform: uppercase; letter-spacing: 1px; }
-        .cfg-price-value { font-size: 1.5rem; font-weight: 900; color: var(--cfg-accent); font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
-        .cfg-layers-list { display: flex; flex-direction: column; gap: 6px; max-height: 180px; overflow-y: auto; margin-bottom: 4px; }
-        .cfg-empty-layers { text-align: center; padding: 18px 10px; color: var(--cfg-muted); font-size: 11px; border: 1px dashed var(--cfg-border); border-radius: 8px; line-height: 1.7; }
-        .cfg-layer-item {
-          background: var(--cfg-card); border: 1px solid var(--cfg-border); border-radius: 7px;
-          padding: 8px 10px; display: flex; align-items: center; gap: 8px;
-          cursor: pointer; font-size: 12px; transition: all .18s;
+
+        .select-field {
+          width: 100%;
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 14px;
+          color: var(--text);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 13px;
+          outline: none;
+          cursor: pointer;
+          appearance: none;
         }
-        .cfg-layer-item:hover { border-color: var(--cfg-accent); }
-        .cfg-layer-item.selected { border-color: var(--cfg-accent); background: rgba(232,255,0,.05); }
-        .cfg-layer-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; }
-        .cfg-layer-del { color: var(--cfg-muted); cursor: pointer; padding: 1px 6px; border-radius: 4px; font-size: 13px; transition: all .18s; }
-        .cfg-layer-del:hover { color: var(--cfg-accent2); background: rgba(255,60,60,.12); }
-        .cfg-upload-zone { border: 2px dashed var(--cfg-border); border-radius: 9px; padding: 18px; text-align: center; cursor: pointer; transition: all .2s; margin-bottom: 10px; }
-        .cfg-upload-zone:hover { border-color: var(--cfg-accent); background: rgba(232,255,0,.03); }
-        .cfg-upload-icon { font-size: 24px; margin-bottom: 6px; }
-        .cfg-upload-text { font-size: 11px; color: var(--cfg-muted); line-height: 1.6; }
-        .cfg-upload-text strong { color: var(--cfg-accent); }
-        .cfg-footer-note { text-align: center; font-size: 9px; color: var(--cfg-muted); letter-spacing: 1px; margin-top: 4px; }
+
+        .range-field {
+          width: 100%;
+          accent-color: var(--accent);
+          cursor: pointer;
+          margin-bottom: 4px;
+        }
+        .range-label {
+          display: flex;
+          justify-content: space-between;
+          font-size: 11px;
+          color: var(--muted);
+          margin-bottom: 6px;
+        }
+
+        .btn {
+          width: 100%;
+          padding: 11px;
+          border-radius: 8px;
+          border: none;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 12px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          transition: all 0.2s;
+          margin-bottom: 8px;
+        }
+        .btn-accent {
+          background: var(--accent);
+          color: #000;
+        }
+        .btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
+        .btn-outline {
+          background: transparent;
+          color: var(--text);
+          border: 1px solid var(--border);
+        }
+        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+        .btn-danger {
+          background: transparent;
+          color: var(--accent2);
+          border: 1px solid var(--accent2);
+        }
+        .btn-danger:hover { background: var(--accent2); color: #fff; }
+
+        .separator { height: 1px; background: var(--border); margin: 20px 0; }
+        #editControls { transition: opacity 0.2s; }
+
+        .color-text-row {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 8px;
+        }
+        input[type="color"] {
+          -webkit-appearance: none;
+          border: none;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          cursor: pointer;
+          padding: 2px;
+          background: var(--card);
+          border: 2px solid var(--border);
+        }
+
+        /* ===== PANEL ŚRODKOWY – CANVAS ===== */
+        .center-panel {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 40px;
+          position: relative;
+          background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg) 70%);
+        }
+
+        .canvas-wrapper {
+          position: relative;
+          width: 440px;
+          height: 500px;
+        }
+
+        #mainCanvas {
+          border-radius: 16px;
+          cursor: crosshair;
+          display: block;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 440 / 500;
+          box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+        }
+
+        .canvas-hint {
+          margin-top: 16px;
+          font-family: 'Space Mono', monospace;
+          font-size: 10px;
+          color: var(--muted);
+          letter-spacing: 2px;
+          text-align: center;
+        }
+
+        .view-indicator {
+          position: absolute;
+          top: -36px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 14px;
+          letter-spacing: 4px;
+          color: var(--muted);
+          white-space: nowrap;
+        }
+
+        /* ===== PRAWY PANEL – WARSTWY, UPLOAD, EKSPORT ===== */
+        .right-panel {
+          background: var(--surface);
+          border-left: 1px solid var(--border);
+          padding: 24px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: var(--border) transparent;
+        }
+        .right-panel::-webkit-scrollbar { width: 4px; }
+        .right-panel::-webkit-scrollbar-track { background: transparent; }
+        .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .layers-list {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 24px;
+        }
+
+        .layer-item {
+          background: var(--card);
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          padding: 10px 12px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-size: 13px;
+        }
+        .layer-item:hover { border-color: var(--accent); }
+        .layer-item.selected { border-color: var(--accent); background: rgba(232,255,0,0.05); }
+
+        .layer-icon { font-size: 16px; }
+        .layer-name { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .layer-delete {
+          color: var(--muted);
+          cursor: pointer;
+          font-size: 14px;
+          padding: 2px 6px;
+          border-radius: 4px;
+          transition: all 0.2s;
+        }
+        .layer-delete:hover { color: var(--accent2); background: rgba(255,60,60,0.1); }
+
+        .empty-layers {
+          text-align: center;
+          padding: 30px 20px;
+          color: var(--muted);
+          font-size: 12px;
+          border: 1px dashed var(--border);
+          border-radius: 10px;
+          line-height: 1.8;
+        }
+
+        .upload-zone {
+          border: 2px dashed var(--border);
+          border-radius: 10px;
+          padding: 24px;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-bottom: 16px;
+        }
+        .upload-zone:hover { border-color: var(--accent); background: rgba(232,255,0,0.03); }
+        .upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; }
+        .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
+        .upload-zone .upload-text strong { color: var(--accent); }
+
+        #fileInput { display: none; }
+
+        .export-btn {
+          width: 100%;
+          padding: 14px;
+          background: linear-gradient(135deg, var(--accent), #b8cc00);
+          color: #000;
+          border: none;
+          border-radius: 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 18px;
+          letter-spacing: 3px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 16px;
+        }
+        .export-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,255,0,0.3); }
+
+        /* NOWY PRZYCISK DODAJ DO KOSZYKA W PRAWYM PANELU */
+        .cart-config-btn {
+          width: 100%;
+          padding: 16px;
+          background: var(--color-gold);
+          color: #000;
+          border: none;
+          border-radius: 10px;
+          font-family: 'Bebas Neue', sans-serif;
+          font-size: 20px;
+          letter-spacing: 2px;
+          cursor: pointer;
+          transition: all 0.2s;
+          margin-top: 16px;
+          font-weight: bold;
+          box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
+        .cart-config-btn:hover {
+          background: var(--color-dark-gold);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* RESPONSYWNOŚĆ – MOBILE */
         @media (max-width: 1100px) {
-          .cfg-layout { display: flex; flex-direction: column; }
-          .cfg-canvas-col { order: -1; padding: 20px 12px; }
-          .cfg-canvas-wrap { width: 100%; max-width: 440px; margin: 0 auto; }
-          .cfg-panel-left, .cfg-panel-right { border-right: none; border-left: none; border-top: 1px solid var(--cfg-border); width: 100%; }
+          .main-layout {
+            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
+          }
+          .left-panel, .right-panel {
+            padding: 16px;
+            border-right: none;
+            border-left: none;
+            width: 100%;
+          }
+          .left-panel {
+            border-bottom: 1px solid var(--border);
+          }
+          .right-panel {
+            border-top: 1px solid var(--border);
+          }
+          .center-panel {
+            padding: 20px 16px;
+            order: -1; /* canvas na górze */
+          }
+          .canvas-wrapper {
+            width: 100%;
+            max-width: 440px;
+            height: auto;
+            margin: 0 auto;
+          }
+          #mainCanvas {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 440 / 500;
+          }
+          .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          .btn, .export-btn, .cart-config-btn {
+            width: 100%;
+          }
         }
+
+        @media (max-width: 768px) {
+            .products-grid, .blog-posts, .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .design-tools {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                display: none;
+                width: 100%;
+            }
+            
+            .nav-container.show {
+                display: flex;
+            }
+            
+            .nav-btn {
+                width: 90%;
+                margin: 0.3rem;
+                text-align: center;
+                padding: 1rem 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            section {
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+            
+            .product-card {
+                margin: 0 auto;
+                max-width: 100%;
+            }
+            
+            .product-image-container {
+                height: 200px;
+            }
+            
+            #cartIcon {
+                bottom: 1rem;
+                right: 1rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            #cartCount {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+            
+            footer {
+                padding: 2rem 1rem;
+            }
+            
+            .charity-section {
+                padding: 2rem 1rem;
+            }
+            
+            .chatbot-container {
+                bottom: 80px;
+                left: 10px;
+            }
+
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .cart-popup {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
+            
+            .cart-popup-buttons {
+                flex-direction: column;
+            }
+            
+            .add-to-cart-btn-enhanced {
+                padding: 15px 24px !important;
+                font-size: 1.1rem !important;
+            }
+            
+            .product-benefits, .target-audience {
+                padding: 0.8rem;
+            }
+        }
+
         @media (max-width: 480px) {
-          .cfg-topbar { padding: 12px 16px; }
-          .cfg-badge { display: none; }
-          .cfg-order-box { padding: 10px; }
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .product-info {
+                padding: 1rem;
+            }
+            
+            .product-title {
+                font-size: 1.1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .cart-buttons {
+                gap: 8px;
+            }
+            
+            .cart-buttons button {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+
+            .chatbot-window {
+                width: 280px;
+                height: 380px;
+            }
+
+            .chatbot-container {
+                bottom: 70px;
+                left: 5px;
+            }
+            
+            .payment-methods {
+                gap: 5px;
+            }
+            
+            .payment-method {
+                width: 45px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
         }
 
         /* ===== STYLE DLA NOWYCH MODALI (od Claude'a) ===== */
@@ -1423,7 +1860,6 @@
             .smodal-box { padding: 1.5rem; }
             .smodal-products-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        /* ===== KONIEC STYLÓD MODALI ===== */
 
         /* Kafelki kategorii w sklepie */
         .shop-category-grid {
@@ -1493,7 +1929,30 @@
             align-items: center;
             gap: 0.5rem;
         }
-    </style>  
+        /* style dla studia (konfigurator) – uzupełnienie */
+        .neon-glow {
+          color: #fff;
+          text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea, 0 0 40px #9333ea;
+          animation: neonPulse 2s infinite alternate;
+        }
+        @keyframes neonPulse {
+          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
+          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
+        }
+        .typing {
+          border-right: 2px solid #ffd700;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+        .donor-entry {
+          opacity: 0;
+          transform: translateY(10px);
+          animation: fadeInUp 1s forwards;
+        }
+        @keyframes fadeInUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
 <body>
     <!-- Chatbot -->
@@ -1509,15 +1968,13 @@
             <div class="chatbot-messages" id="chatbotMessages">
                 <div class="message bot-message">
                     <strong>👋 Witaj w Adelbertus Shop!</strong><br><br>
-                    Jestem Twoim asystentem zakupowym! Nie tylko odpowiem na pytania, ale <strong>pomogę Ci wybrać i zamówić produkty</strong>.<br><br>
-                    
+                    Jestem Twoim asystentem zakupowym!<br><br>
                     <strong>Co mogę dla Ciebie zrobić:</strong><br>
                     • 🛒 Pomóc wybrać i dodać produkty do koszyka<br>
                     • 📏 Doradzić w doborze rozmiaru<br>
                     • 🎨 Pokazać dostępne wzory i kolory<br>
                     • 🚀 Szybko złożyć zamówienie<br>
                     • ❓ Odpowiedzieć na wszystkie pytania<br><br>
-                    
                     <em>Napisz co Cię interesuje lub użyj szybkich przycisków poniżej!</em>
                 </div>
             </div>
@@ -1563,10 +2020,11 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
-            <button class="nav-btn" data-section="studio"><i class="fas fa-paint-brush"></i> Drip Studio</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
+            <!-- nowy przycisk do studia -->
+            <button class="nav-btn" data-section="studio"><i class="fas fa-paint-brush"></i> Konfigurator</button>
         </div>
     </nav>
    
@@ -1613,7 +2071,6 @@
                     </div>
                     <div class="product-info">
                         <div class="product-title">Koszulka "Portret"</div>
-                        
                     </div>
                 </div>
                 
@@ -1628,7 +2085,6 @@
                     </div>
                     <div class="product-info">
                         <div class="product-title">Koszulka "Adelbertus"</div>
-                        
                     </div>
                 </div>
                 
@@ -1643,7 +2099,6 @@
                     </div>
                     <div class="product-info">
                         <div class="product-title">Bluza "Adelbertus"</div>
-                        
                     </div>
                 </div>
             </div>
@@ -1657,7 +2112,6 @@
                         </div>
                         <div class="product-info">
                             <div class="product-title">Koszulka "Zakazany Produkt"</div>
-                            
                         </div>
                     </div>
                     <div class="product-card">
@@ -1666,7 +2120,6 @@
                         </div>
                         <div class="product-info">
                             <div class="product-title">Koszulka "Rzymianin"</div>
-                            
                         </div>
                     </div>
                 </div>
@@ -1739,7 +2192,7 @@
             </script>
         </section>
         
-        <!-- Sklep – NOWY HTML OD CLAUDE'A (kafelki + modale) -->
+        <!-- Sklep – kafelki + modale -->
         <section id="shop">
           <div class="shop-header">
             <h2 class="section-title">Nasze Produkty</h2>
@@ -1756,9 +2209,7 @@
             </div>
           </div>
 
-          <!-- KAFELKI KATEGORII -->
           <div class="shop-category-grid">
-
             <div class="shop-cat-tile" data-category="koszulka" onclick="openCategoryModal('koszulka')">
               <div class="shop-cat-img-wrap">
                 <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulki">
@@ -1772,7 +2223,6 @@
                 <span class="shop-cat-cta">Przeglądaj <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
-
             <div class="shop-cat-tile" data-category="bluza" onclick="openCategoryModal('bluza')">
               <div class="shop-cat-img-wrap">
                 <img src="https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg" alt="Bluzy">
@@ -1786,7 +2236,6 @@
                 <span class="shop-cat-cta">Przeglądaj <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
-
             <div class="shop-cat-tile" data-category="czapka" onclick="openCategoryModal('czapka')">
               <div class="shop-cat-img-wrap">
                 <img src="https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png" alt="Czapki">
@@ -1800,16 +2249,14 @@
                 <span class="shop-cat-cta">Przeglądaj <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
-
           </div>
         </section>
 
-        <!-- ===== MODAL KATEGORII ===== -->
+        <!-- MODAL KATEGORII -->
         <div id="shopCatModal" class="smodal-backdrop" onclick="closeCatModal(event)">
           <div class="smodal-box smodal-cat">
             <button class="smodal-close" onclick="closeCategoryModal()"><i class="fas fa-times"></i></button>
             <h2 class="smodal-title" id="catModalTitle">Koszulki</h2>
-
             <div class="smodal-pagination-info">
               <span id="catPageInfo"></span>
               <div class="smodal-pag-btns">
@@ -1817,47 +2264,37 @@
                 <button id="catNextBtn" onclick="catChangePage(1)"><i class="fas fa-chevron-right"></i></button>
               </div>
             </div>
-
             <div class="smodal-products-grid" id="catModalGrid"></div>
           </div>
         </div>
 
-        <!-- ===== MODAL PRODUKTU ===== -->
+        <!-- MODAL PRODUKTU -->
         <div id="shopProdModal" class="smodal-backdrop" onclick="closeProdModal(event)">
           <div class="smodal-box smodal-prod">
             <button class="smodal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
-
             <div class="sprod-layout">
-              <!-- lewa: zdjęcia -->
               <div class="sprod-gallery">
                 <div class="sprod-main-img-wrap">
                   <img id="sprodMainImg" src="" alt="">
                 </div>
                 <div class="sprod-thumbs" id="sprodThumbs"></div>
               </div>
-
-              <!-- prawa: info -->
               <div class="sprod-details">
                 <h2 class="sprod-title" id="sprodTitle"></h2>
                 <div class="sprod-price" id="sprodPrice"></div>
-
                 <div class="sprod-section-label">Kolor</div>
                 <div class="sprod-colors" id="sprodColors"></div>
-
                 <div class="sprod-section-label">Rozmiar</div>
                 <div class="sprod-sizes" id="sprodSizes"></div>
-
                 <div class="sprod-section-label">Ilość</div>
                 <div class="sprod-qty-row">
                   <button class="sprod-qty-btn" onclick="sprodQtyChange(-1)">−</button>
                   <input type="number" id="sprodQty" value="1" min="1" max="99" readonly>
                   <button class="sprod-qty-btn" onclick="sprodQtyChange(1)">+</button>
                 </div>
-
                 <button class="sprod-add-btn" onclick="sprodAddToCart()">
                   <i class="fas fa-shopping-cart"></i> Dodaj do koszyka
                 </button>
-
                 <div class="sprod-benefits">
                   <div><i class="fas fa-check"></i> Premium jakość 180g bawełna</div>
                   <div><i class="fas fa-check"></i> DTF printing technology</div>
@@ -1868,228 +2305,28 @@
           </div>
         </div>
 
-        <!-- ============================================================
-             SEKCJA #STUDIO — DRIP STUDIO KONFIGURATOR
-             ============================================================ -->
-        <section id="studio" class="cfg-root">
-          <!-- TOP BAR -->
-          <div class="cfg-topbar">
-            <div class="cfg-logo">DRIP<span>STUDIO</span></div>
-            <div class="cfg-badge">// KONFIGURATOR WŁASNEGO PROJEKTU</div>
-          </div>
-
-          <!-- MAIN 3-COLUMN LAYOUT -->
-          <div class="cfg-layout">
-
-            <div class="cfg-panel cfg-panel-left">
-
-              <div class="cfg-section-label">// PRODUKT</div>
-              <div class="cfg-product-grid">
-                <button class="cfg-prod-btn active" data-prod="hoodie" onclick="cfgSetProduct('hoodie',this)">
-                  <span class="cfg-prod-icon">🧥</span>
-                  <span class="cfg-prod-label">Bluza</span>
-                </button>
-                <button class="cfg-prod-btn" data-prod="tshirt" onclick="cfgSetProduct('tshirt',this)">
-                  <span class="cfg-prod-icon">👕</span>
-                  <span class="cfg-prod-label">Koszulka</span>
-                </button>
-                <button class="cfg-prod-btn" data-prod="cap" onclick="cfgSetProduct('cap',this)">
-                  <span class="cfg-prod-icon">🧢</span>
-                  <span class="cfg-prod-label">Czapka</span>
-                </button>
-              </div>
-
-              <div class="cfg-section-label">// WIDOK</div>
-              <div class="cfg-view-tabs">
-                <button class="cfg-view-tab active" onclick="cfgSetView('front',this)">Przód</button>
-                <button class="cfg-view-tab" onclick="cfgSetView('back',this)">Tył</button>
-                <button class="cfg-view-tab" onclick="cfgSetView('left',this)">L.Rękaw</button>
-                <button class="cfg-view-tab" onclick="cfgSetView('right',this)">P.Rękaw</button>
-              </div>
-
-              <div class="cfg-section-label">// KOLOR PRODUKTU</div>
-              <div class="cfg-color-row" id="cfgColorSwatches">
-                <div class="cfg-swatch active" style="background:#ffffff;border:2px solid #aaa" data-color="#ffffff" onclick="cfgSetColor('#ffffff',this)" title="Biały"></div>
-                <div class="cfg-swatch" style="background:#1a1a1a" data-color="#1a1a1a" onclick="cfgSetColor('#1a1a1a',this)" title="Czarny"></div>
-                <div class="cfg-swatch" style="background:#2d3a8c" data-color="#2d3a8c" onclick="cfgSetColor('#2d3a8c',this)" title="Granat"></div>
-                <div class="cfg-swatch" style="background:#c0392b" data-color="#c0392b" onclick="cfgSetColor('#c0392b',this)" title="Czerwony"></div>
-                <div class="cfg-swatch" style="background:#27ae60" data-color="#27ae60" onclick="cfgSetColor('#27ae60',this)" title="Zielony"></div>
-                <div class="cfg-swatch" style="background:#f39c12" data-color="#f39c12" onclick="cfgSetColor('#f39c12',this)" title="Żółty"></div>
-                <div class="cfg-swatch" style="background:#8e44ad" data-color="#8e44ad" onclick="cfgSetColor('#8e44ad',this)" title="Fiolet"></div>
-                <div class="cfg-swatch" style="background:#7f8c8d" data-color="#7f8c8d" onclick="cfgSetColor('#7f8c8d',this)" title="Szary"></div>
-                <div class="cfg-swatch" style="background:#e8c5a0" data-color="#e8c5a0" onclick="cfgSetColor('#e8c5a0',this)" title="Beż"></div>
-              </div>
-
-              <div class="cfg-divider"></div>
-
-              <div class="cfg-section-label">// DODAJ NAPIS</div>
-              <div class="cfg-tool-group">
-                <input type="text" class="cfg-input" id="cfgTextInput" placeholder="Wpisz tekst..." maxlength="60">
-                <div class="cfg-row-2">
-                  <select class="cfg-select" id="cfgFontSelect">
-                    <option value="Bebas Neue">Bebas Neue</option>
-                    <option value="DM Sans" selected>DM Sans</option>
-                    <option value="Space Mono">Space Mono</option>
-                    <option value="Impact">Impact</option>
-                    <option value="Georgia">Georgia</option>
-                    <option value="Courier New">Courier New</option>
-                    <option value="Verdana">Verdana</option>
-                  </select>
-                  <select class="cfg-select" id="cfgFontWeight">
-                    <option value="400">Regular</option>
-                    <option value="700" selected>Bold</option>
-                  </select>
-                </div>
-                <div class="cfg-range-wrap">
-                  <div class="cfg-range-labels"><span>Rozmiar</span><span id="cfgFontSizeVal">36px</span></div>
-                  <input type="range" class="cfg-range" id="cfgFontSize" min="12" max="120" value="36"
-                    oninput="document.getElementById('cfgFontSizeVal').textContent=this.value+'px'">
-                </div>
-                <div class="cfg-color-text-row">
-                  <label class="cfg-mini-label">Kolor:</label>
-                  <input type="color" id="cfgTextColor" value="#000000" class="cfg-colorpicker">
-                  <select class="cfg-select" id="cfgTextAlign" style="flex:1">
-                    <option value="center">Środek</option>
-                    <option value="left">Lewo</option>
-                    <option value="right">Prawo</option>
-                  </select>
-                </div>
-                <button class="cfg-btn cfg-btn-accent" onclick="cfgAddText()">+ Dodaj Napis</button>
-              </div>
-
-              <div class="cfg-divider"></div>
-
-              <div class="cfg-section-label">// EDYTUJ ZAZNACZONY</div>
-              <div class="cfg-tool-group" id="cfgEditControls" style="opacity:.35;pointer-events:none">
-                <div class="cfg-range-wrap">
-                  <div class="cfg-range-labels"><span>Obrót</span><span id="cfgRotVal">0°</span></div>
-                  <input type="range" class="cfg-range" id="cfgRotSlider" min="-180" max="180" value="0"
-                    oninput="cfgUpdateRot(this.value)">
-                </div>
-                <div class="cfg-range-wrap">
-                  <div class="cfg-range-labels"><span>Skala</span><span id="cfgScaleVal">100%</span></div>
-                  <input type="range" class="cfg-range" id="cfgScaleSlider" min="20" max="300" value="100"
-                    oninput="cfgUpdateScale(this.value)">
-                </div>
-                <div class="cfg-range-wrap">
-                  <div class="cfg-range-labels"><span>Przezroczystość</span><span id="cfgOpacVal">100%</span></div>
-                  <input type="range" class="cfg-range" id="cfgOpacSlider" min="10" max="100" value="100"
-                    oninput="cfgUpdateOpac(this.value)">
-                </div>
-                <button class="cfg-btn cfg-btn-danger" onclick="cfgDeleteSelected()">🗑 Usuń zaznaczony</button>
-                <button class="cfg-btn cfg-btn-outline" onclick="cfgCopyToView()">↗ Kopiuj na inny widok</button>
-                <button class="cfg-btn cfg-btn-outline" onclick="cfgClearView()">🧹 Wyczyść widok</button>
-              </div>
-
-            </div>
-
-            <!-- CANVAS -->
-            <div class="cfg-canvas-col">
-              <div class="cfg-canvas-wrap">
-                <div class="cfg-view-label" id="cfgViewLabel">PRZÓD</div>
-                <canvas id="cfgCanvas" width="440" height="500"></canvas>
-              </div>
-              <div class="cfg-canvas-hint">◈ kliknij i przeciągnij element ◈</div>
-            </div>
-
-            <!-- PRAWY PANEL -->
-            <div class="cfg-panel cfg-panel-right">
-
-              <div class="cfg-section-label">// OPCJE ZAMÓWIENIA</div>
-
-              <div class="cfg-order-box">
-                <div class="cfg-order-label">Kolor koszulki/bluzy:</div>
-                <div class="cfg-order-colors" id="cfgOrderColors">
-                  <div class="cfg-order-swatch active" style="background:#000;border:2px solid #333" data-name="Czarny" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="cfg-order-swatch" style="background:#fff;border:2px solid #ddd" data-name="Biały" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="cfg-order-swatch" style="background:#800020" data-name="Bordowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="cfg-order-swatch" style="background:#36454F" data-name="Grafitowy" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="cfg-order-swatch" style="background:#2d3a8c" data-name="Granat" onclick="cfgSelectOrderColor(this)"></div>
-                  <div class="cfg-order-swatch" style="background:#808080" data-name="Szary" onclick="cfgSelectOrderColor(this)"></div>
-                </div>
-                <div class="cfg-order-selected-color" id="cfgOrderColorLabel">Wybrany kolor: <strong>Czarny</strong></div>
-
-                <div class="cfg-order-label" style="margin-top:14px">Rozmiar:</div>
-                <div class="cfg-size-btns" id="cfgSizeBtns">
-                  <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XS</button>
-                  <button class="cfg-size-btn active" onclick="cfgSelectSize(this)">S</button>
-                  <button class="cfg-size-btn" onclick="cfgSelectSize(this)">M</button>
-                  <button class="cfg-size-btn" onclick="cfgSelectSize(this)">L</button>
-                  <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XL</button>
-                  <button class="cfg-size-btn" onclick="cfgSelectSize(this)">XXL</button>
-                </div>
-
-                <div class="cfg-order-label" style="margin-top:14px">Ilość:</div>
-                <div class="cfg-qty-row">
-                  <button class="cfg-qty-btn" onclick="cfgQtyChange(-1)">−</button>
-                  <input type="number" id="cfgQtyInput" value="1" min="1" max="99" readonly class="cfg-qty-input">
-                  <button class="cfg-qty-btn" onclick="cfgQtyChange(1)">+</button>
-                </div>
-
-                <div class="cfg-price-display">
-                  <span class="cfg-price-label">Cena:</span>
-                  <span class="cfg-price-value" id="cfgPriceDisplay">170 zł</span>
-                </div>
-              </div>
-
-              <div class="cfg-divider"></div>
-
-              <div class="cfg-section-label">// WARSTWY</div>
-              <div class="cfg-layers-list" id="cfgLayersList">
-                <div class="cfg-empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>
-              </div>
-
-              <div class="cfg-divider"></div>
-
-              <div class="cfg-section-label">// GRAFIKA</div>
-              <input type="file" id="cfgFileInput" accept="image/*" onchange="cfgUploadImage(event)" style="display:none">
-              <div class="cfg-upload-zone" onclick="document.getElementById('cfgFileInput').click()">
-                <div class="cfg-upload-icon">🖼️</div>
-                <div class="cfg-upload-text"><strong>Kliknij</strong> lub przeciągnij<br>PNG · JPG · SVG</div>
-              </div>
-
-              <button class="cfg-btn cfg-btn-export" onclick="cfgExport()">⬇ EKSPORTUJ PNG</button>
-
-              <button class="cfg-btn cfg-btn-cart" onclick="cfgAddToCart()">
-                🛒 DODAJ DO KOSZYKA
-                <span class="cfg-cart-price" id="cfgCartPriceLabel">170 zł</span>
-              </button>
-
-              <div class="cfg-footer-note">DRIP STUDIO © 2026 · AdelbertusShop</div>
-
-            </div>
-
-          </div>
-        </section>
-
-        <!-- 🎁 Sekcja Zbiórki FINALNA -->
+        <!-- Sekcja Zbiórki -->
         <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
-            
             <div class="section-title text-center mb-10">
                 <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
                     [ UPLOAD NADZIEI // PROMYK ]
                 </h2>
                 <p class="text-lg italic mt-2 text-gray-300">
                     Jesteś częścią czegoś większego, niż Ty sam.  
-                    (a przy okazji możesz być lepszy niż sąsiad 😉)
                 </p>
             </div>
-
             <div class="text-center max-w-2xl mx-auto mb-10">
                 <h3 class="text-3xl font-bold mb-4">Twoja decyzja zmienia czyjeś życie</h3>
                 <p class="text-xl text-gray-200">
                     Każda złotówka = kawałek światła w ciemnym świecie.  
-                    Nie musisz być bohaterem, wystarczy że klikniesz.
                 </p>
             </div>
-            
             <div class="grid md:grid-cols-3 gap-8 text-center">
                 <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
                     <h4 class="text-2xl font-bold mb-2">📱 BLIK TRANSFER</h4>
                     <div class="text-3xl font-mono font-bold text-green-400">573-939-925</div>
                     <p class="mt-2 text-sm">dopisz kod: <span class="font-bold">POMOC</span></p>
                 </div>
-                
                 <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
                     <h4 class="text-2xl font-bold mb-2">💳 PayPal</h4>
                     <a href="https://www.paypal.com/donate/?hosted_button_id=VG9UP4MTHHWYU" target="_blank" 
@@ -2097,19 +2334,16 @@
                         ➡️ Przekaż darowiznę
                     </a>
                 </div>
-                
                 <div class="p-6 bg-black/40 rounded-xl border border-purple-700 shadow-md hover:scale-105 transition">
                     <h4 class="text-2xl font-bold mb-2">📦 Dary rzeczowe</h4>
                     <p>Tel: <span class="font-bold">604 296 360</span></p>
                     <p>Email: <span class="font-bold">mielniczukgrzegosz74@gmail.com</span></p>
                 </div>
             </div>
-            
             <div class="donors-list mt-12 bg-black/30 p-6 rounded-xl border border-purple-800">
                 <h4 class="text-2xl font-bold mb-4">🔥 Ostatni, którzy dołączyli do gry:</h4>
                 <ul id="donorsList" class="space-y-2 text-green-300 font-mono"></ul>
             </div>
-            
             <div class="bg-white/10 p-6 rounded-lg shadow-md mt-10 border-l-4 border-yellow-400">
                 <h4 class="text-2xl font-bold mb-4 text-yellow-300">✉️ List od dzieci z Domu Dziecka "Promyk"</h4>
                 <div id="childrenLetter" class="italic text-lg text-gray-100 typing"></div>
@@ -2133,7 +2367,6 @@
                         <h4>Old School Wojtek</h4>
                         <p>Partner strategiczny</p>
                     </div>
-                    
                     <div class="partner-card">
                         <a href="https://klaudia-3hjx.vercel.app" target="_blank" class="partner-link">
                             <img src="https://i.ibb.co/99S1K3JX/Messenger-creation-FCFB3-CFD-3-BEF-4-D84-90-A8-F6687-B85-EA08.jpg" 
@@ -2143,7 +2376,6 @@
                         <h4>Klaudia</h4>
                         <p>Partner kreatywny</p>
                     </div>
-                    
                     <div class="partner-card">
                         <a href="https://rafa-five-phi.vercel.app" target="_blank" class="partner-link">
                             <img src="https://i.ibb.co/LDmgftTK/Messenger-creation-34-C98-E94-CF4-A-45-BC-A903-4785-C05-DC7-F2.jpg" 
@@ -2153,7 +2385,6 @@
                         <h4>Rafał</h4>
                         <p>Partner rozwojowy</p>
                     </div>
-
                     <div class="partner-card">
                         <a href="https://www.pkt.pl/firma/firma-budowlana-filipex-riman-pisyrakiewicz-9515570" target="_blank" class="partner-link">
                             <img src="https://i.ibb.co/Fb7bp4rJ/Messenger-creation-64952-AE2-821-C-4-CB0-817-B-2-D516-E67-B84-C.jpg" 
@@ -2163,7 +2394,6 @@
                         <h4>Filipex Riman</h4>
                         <p>Partner budowlany</p>
                     </div>
-
                     <div class="partner-card">
                         <a href="https://maniek-przewozy-przew-z.vercel.app" target="_blank" class="partner-link">
                             <div class="partner-placeholder">
@@ -2186,7 +2416,6 @@
             </div>
             <div class="regulamin-section bg-gray-900 bg-opacity-70 p-8 rounded-2xl shadow-xl mt-12 border-t-4 border-yellow-400">
                 <h2 class="text-4xl font-extrabold text-center text-yellow-400 mb-8">Regulamin Sklepu Internetowego (Działalność Nierejestrowana)</h2>
-                
                 <h3 class="text-2xl font-bold text-gray-300 mt-6 mb-4 border-b border-gray-700 pb-2">§ 1. Postanowienia Ogólne i Dane Sprzedawcy</h3>
                 <ul class="list-disc list-inside space-y-3 text-gray-400">
                     <li><strong>Sprzedawca:</strong> Grzegosz Mielniczuk</li>
@@ -2195,24 +2424,120 @@
                     <li><strong>E-mail kontaktowy:</strong> mielniczukgrzegosz74@gmail.com</li>
                     <li><strong>Telefon kontaktowy:</strong> 604 296 360</li>
                 </ul>
-
                 <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 2. Warunki Zawierania Umowy Sprzedaży</h3>
                 <p class="text-gray-400">Umowa sprzedaży zawierana jest po złożeniu zamówienia przez Klienta i potwierdzeniu przez Sprzedawcę.</p>
-
                 <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 3. Dostawa Towaru i Płatności</h3>
                 <ul class="list-disc list-inside space-y-3 text-gray-400">
                     <li><strong>Metody płatności:</strong> PayPal, przelew bankowy, BLIK</li>
                     <li><strong>Koszty dostawy:</strong> 14 zł (darmowa dostawa od 200 zł)</li>
                     <li><strong>Termin dostawy:</strong> 3-7 dni roboczych</li>
                 </ul>
-
                 <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 4. Odstąpienie od Umowy</h3>
                 <p class="text-gray-400">Klient ma prawo odstąpić od umowy w terminie 14 dni bez podania przyczyny.</p>
-
                 <h3 class="text-2xl font-bold text-gray-300 mt-8 mb-4 border-b border-gray-700 pb-2">§ 5. Reklamacje Towaru</h3>
                 <p class="text-gray-400">Reklamacje można składać mailowo lub telefonicznie. Rozpatrujemy je w ciągu 14 dni.</p>
-
                 <p class="text-sm text-center text-gray-500 mt-10">Regulamin obowiązuje od: 01.01.2024</p>
+            </div>
+        </section>
+
+        <!-- STUDIO / KONFIGURATOR (nowa sekcja) -->
+        <section id="studio">
+            <div class="container configurator-section" style="background:var(--bg); color:var(--text); border-radius:20px;">
+                <h2 style="text-align:center; padding:20px; color:var(--accent); font-family:'Bebas Neue';">Zaprojektuj swoją koszulkę</h2>
+                <div class="designer" style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+                    <div class="left-panel" style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:20px; width:250px;">
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Kolor produktu</h3>
+                            <div class="color-swatches" id="product-colors" style="display:flex; gap:5px; flex-wrap:wrap;">
+                                <div class="swatch" data-color="#ffffff" style="background:#fff; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#000000" style="background:#000; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#000080" style="background:#000080; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#ff0000" style="background:#f00; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#008000" style="background:#008000; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#808080" style="background:#808080; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                                <div class="swatch" data-color="#f5f5dc" style="background:#f5f5dc; width:30px; height:30px; border-radius:50%; cursor:pointer;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Tekst</h3>
+                            <input type="text" id="text-input" placeholder="Wpisz tekst" style="width:100%; padding:8px; margin-bottom:10px;">
+                            <select id="font-select" style="width:100%; padding:8px; margin-bottom:10px;">
+                                <option value="Bebas Neue">Bebas Neue</option>
+                                <option value="Impact">Impact</option>
+                                <option value="Arial">Arial</option>
+                            </select>
+                            <input type="range" id="font-size-slider" min="10" max="100" value="30" style="width:100%;">
+                            <input type="color" id="font-color-picker" value="#000000" style="width:100%; margin:5px 0;">
+                            <div class="alignment-buttons" style="display:flex; gap:5px;">
+                                <button id="align-left"><i class="fas fa-align-left"></i></button>
+                                <button id="align-center"><i class="fas fa-align-center"></i></button>
+                                <button id="align-right"><i class="fas fa-align-right"></i></button>
+                            </div>
+                            <button id="add-text-btn" style="width:100%; padding:10px; background:transparent; border:1px solid var(--accent); color:var(--accent);">Dodaj tekst</button>
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Obraz</h3>
+                            <input type="file" id="image-upload" accept="image/png,image/jpeg" style="color:white;">
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Warstwy</h3>
+                            <div class="layers-list" id="layers-list" style="max-height:150px; overflow-y:auto;"></div>
+                            <button id="delete-layer-btn" style="width:100%; margin-top:5px;">Usuń warstwę</button>
+                            <button id="clear-all-btn" style="width:100%;">Wyczyść wszystko</button>
+                        </div>
+                        <div class="tool-group" id="layer-controls" style="display:none;">
+                            <h3 style="color:var(--gold);">Kontrola warstwy</h3>
+                            <label>Obrót: <input type="range" id="rotation-slider" min="0" max="360" value="0" style="width:100%;"></label>
+                            <label>Skala: <input type="range" id="scale-slider" min="50" max="200" value="100" style="width:100%;"></label>
+                            <label>Przezroczystość: <input type="range" id="opacity-slider" min="0" max="100" value="100" style="width:100%;"></label>
+                        </div>
+                    </div>
+                    <div class="canvas-container" style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:20px;">
+                        <canvas id="tshirt-canvas" width="440" height="500" style="border:1px solid var(--border); background:white;"></canvas>
+                    </div>
+                    <div class="right-panel" style="background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:20px; width:250px;">
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Produkt</h3>
+                            <div class="product-selector">
+                                <label><input type="radio" name="product" value="tshirt" checked> Koszulka - 80zł</label><br>
+                                <label><input type="radio" name="product" value="hoodie"> Bluza - 170zł</label><br>
+                                <label><input type="radio" name="product" value="cap"> Czapka - 99zł</label>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Kolor zamówienia</h3>
+                            <div class="color-swatches" id="order-colors" style="display:flex; gap:5px;">
+                                <div class="swatch" data-color="#000000" style="background:#000;"></div>
+                                <div class="swatch" data-color="#ffffff" style="background:#fff;"></div>
+                                <div class="swatch" data-color="#800020" style="background:#800020;"></div>
+                                <div class="swatch" data-color="#808080" style="background:#808080;"></div>
+                                <div class="swatch" data-color="#000080" style="background:#000080;"></div>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Rozmiar</h3>
+                            <div class="size-buttons" style="display:flex; gap:5px; flex-wrap:wrap;">
+                                <button class="size-btn" data-size="XS">XS</button>
+                                <button class="size-btn" data-size="S">S</button>
+                                <button class="size-btn" data-size="M">M</button>
+                                <button class="size-btn" data-size="L">L</button>
+                                <button class="size-btn" data-size="XL">XL</button>
+                                <button class="size-btn" data-size="XXL">XXL</button>
+                            </div>
+                        </div>
+                        <div class="tool-group">
+                            <h3 style="color:var(--gold);">Ilość</h3>
+                            <div class="quantity-control" style="display:flex; gap:5px;">
+                                <button id="qty-minus">-</button>
+                                <input type="number" id="quantity" value="1" min="1" max="99" style="width:50px; text-align:center;">
+                                <button id="qty-plus">+</button>
+                            </div>
+                        </div>
+                        <div class="price-display" id="price-display" style="color:var(--gold);">Cena: 80zł</div>
+                        <button id="export-btn" style="width:100%; padding:10px; background:transparent; border:1px solid var(--accent); color:var(--accent);">Eksportuj PNG</button>
+                        <button id="add-to-cart-btn-config" style="width:100%; padding:10px; background:var(--color-gold); color:black; margin-top:10px;">Dodaj do koszyka</button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -2227,28 +2552,18 @@
                 <h2 class="text-2xl font-bold">Twój koszyk</h2>
                 <button onclick="toggleCart()" class="text-2xl">&times;</button>
             </div>
-            
-            <div id="cartItems" class="mb-6">
-            </div>
-            
+            <div id="cartItems" class="mb-6"></div>
             <div class="cart-total">
                 <div class="flex justify-between text-xl font-bold">
                     <span>Suma:</span>
                     <span id="cartTotal">0 zł</span>
                 </div>
             </div>
-            
             <div id="paypal-container" class="mt-4"></div>
-            
             <div class="cart-buttons">
-                <button onclick="sendOrderEmail()" class="email-order-btn">
-                    <i class="fas fa-envelope"></i> Wyślij zamówienie mailem
-                </button>
-                <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn">
-                    <i class="fab fa-whatsapp"></i> Zamów przez WhatsApp
-                </button>
+                <button onclick="sendOrderEmail()" class="email-order-btn"><i class="fas fa-envelope"></i> Wyślij zamówienie mailem</button>
+                <button onclick="sendOrderWhatsApp()" class="whatsapp-order-btn"><i class="fab fa-whatsapp"></i> Zamów przez WhatsApp</button>
             </div>
-            
             <p class="text-sm text-gray-600 text-center mt-4">Akceptujemy również przelewy bankowe i BLIK</p>
         </div>
 
@@ -2256,42 +2571,31 @@
         <footer>
             <div class="logo">AdelbertusShop</div>
             <p class="tagline">Tworzone z pasją, noszone z dumą</p>
-            
             <div class="contact-info">
                 <p><i class="fas fa-envelope"></i> mielniczukgrzegosz74@gmail.com</p>
                 <p><i class="fas fa-phone"></i> 604 296 360</p>
             </div>
-            
             <div class="social-links">
                 <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
             </div>
-            
             <div class="footer-ads">
-                <div class="footer-ad">
-                    <p>Reklama 1</p>
-                </div>
-                <div class="footer-ad">
-                    <p>Reklama 2</p>
-                </div>
-                <div class="footer-ad">
-                    <p>Reklama 3</p>
-                </div>
+                <div class="footer-ad"><p>Reklama 1</p></div>
+                <div class="footer-ad"><p>Reklama 2</p></div>
+                <div class="footer-ad"><p>Reklama 3</p></div>
             </div>
-            
             <div class="mt-6">
                 <p>© 2023 AdelbertusShop. Wszystkie prawa zastrzeżone.</p>
                 <p>Działalność nierejestrowana na podstawie art. 5 ustawy o swobodzie działalności gospodarczej.</p>
             </div>
         </footer>
 
-        <script src="/assets/js/site-security.js"></script>
-    </main>
+    <script src="/assets/js/site-security.js"></script>
 
     <script>
         // ============================================================
-        // DANE PRODUKTÓW DO MODALU SKLEPU
+        // DANE PRODUKTÓW DO MODALU SKLEPU (od Claude'a)
         // ============================================================
         const SHOP_PRODUCTS = {
           koszulka: [
@@ -2343,17 +2647,12 @@
           ]
         };
 
-        /* ============================================================
-           STAN MODALU
-           ============================================================ */
+        /* ===== STAN MODALU ===== */
         let _catCurrent = null;
         let _catPage = 0;
         const CAT_PAGE_SIZE = 9;
         let _prodCurrent = null;
 
-        /* ============================================================
-           MODAL KATEGORII
-           ============================================================ */
         function openCategoryModal(cat) {
           _catCurrent = cat;
           _catPage = 0;
@@ -2408,9 +2707,6 @@
           if (e.target === document.getElementById('shopCatModal')) closeCategoryModal();
         }
 
-        /* ============================================================
-           MODAL PRODUKTU
-           ============================================================ */
         function openProductModal(cat, idx) {
           const prod = SHOP_PRODUCTS[cat][idx];
           _prodCurrent = { ...prod };
@@ -2422,7 +2718,6 @@
           document.getElementById('sprodMainImg').src = prod.images[0];
           document.getElementById('sprodQty').value = 1;
 
-          // Miniaturki
           const thumbsEl = document.getElementById('sprodThumbs');
           thumbsEl.innerHTML = '';
           prod.images.forEach((src, i) => {
@@ -2438,7 +2733,6 @@
             thumbsEl.appendChild(img);
           });
 
-          // Kolory
           const colorsEl = document.getElementById('sprodColors');
           colorsEl.innerHTML = '';
           const colorNames = { '#000':'Czarny','#fff':'Biały','#ffffff':'Biały','#800020':'Bordowy','#36454F':'Grafitowy','#808080':'Szary','#002b36':'Granatowy','#800080':'Fioletowy','#800000':'Bordowy','#FF4500':'Pomarańczowy','#C41E3A':'Czerwony' };
@@ -2456,7 +2750,6 @@
             colorsEl.appendChild(dot);
           });
 
-          // Rozmiary
           const sizesEl = document.getElementById('sprodSizes');
           sizesEl.innerHTML = '';
           prod.sizes.forEach(s => {
@@ -2502,7 +2795,6 @@
           if (e.target === document.getElementById('shopProdModal')) closeProductModal();
         }
 
-        // ESC zamyka modaly
         document.addEventListener('keydown', e => {
           if (e.key === 'Escape') {
             closeProductModal();
@@ -2510,7 +2802,7 @@
           }
         });
 
-        // ========== ISTNIEJĄCY JS SKLEPU (koszyk, konfigurator itd.) ==========
+        // ========== ISTNIEJĄCY JS SKLEPU ==========
         let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -2523,25 +2815,23 @@
             initProductGalleries();
             initForum();
             initCharitySection();
+            // inicjalizacja konfiguratora
+            initConfigurator();
         });
 
         function initNavigation() {
             const navButtons = document.querySelectorAll('.nav-btn');
-            
             navButtons.forEach(button => {
                 button.addEventListener('click', function(e) {
                     if (this.hasAttribute('data-section')) {
                         e.preventDefault();
-                        
                         navButtons.forEach(btn => btn.classList.remove('active'));
                         this.classList.add('active');
-                        
                         const sectionId = this.getAttribute('data-section');
                         showSection(sectionId);
                     }
                 });
             });
-            
             document.getElementById('cartIcon').addEventListener('click', toggleCart);
         }
 
@@ -2549,9 +2839,7 @@
             document.querySelectorAll('section').forEach(section => {
                 section.classList.remove('active');
             });
-            
             document.getElementById(sectionId).classList.add('active');
-            
             if (window.innerWidth <= 768) {
                 const navContainer = document.getElementById('navContainer');
                 if (navContainer) navContainer.classList.remove('show');
@@ -2570,20 +2858,16 @@
                     options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
                     e.target.classList.add('selected');
                 }
-                
                 if (e.target.classList.contains('size-option')) {
                     const options = e.target.closest('.size-options');
                     options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
                     e.target.classList.add('selected');
                 }
-                
                 if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
                     e.preventDefault();
                     const productCard = e.target.closest('.product-card');
                     const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
-                    
                     let price = 0;
-                    
                     const priceElement = productCard.querySelector('.product-price');
                     if (priceElement) {
                         const priceText = priceElement.textContent;
@@ -2606,19 +2890,14 @@
                             }
                         }
                     }
-                    
                     const image = e.target.getAttribute('data-image');
-                    
                     const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
                     const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-                    
                     const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
                     const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-                    
                     if (price === 0 || isNaN(price)) {
                         price = 80;
                     }
-                    
                     addToCart(name, price, image, size, color);
                     showCartPopup();
                 }
@@ -2627,13 +2906,9 @@
 
         function addToCart(name, price, image = null, size = null, color = null) {
             const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
-            
             const existingIndex = cart.findIndex(item => 
-                item.name === cleanName && 
-                item.size === size && 
-                item.color === color
+                item.name === cleanName && item.size === size && item.color === color
             );
-            
             if (existingIndex >= 0) {
                 cart[existingIndex].quantity++;
                 cart[existingIndex].price = price;
@@ -2648,7 +2923,6 @@
                     id: Date.now() + Math.random()
                 });
             }
-            
             updateCart();
             showNotification('✅ Produkt dodany do koszyka');
         }
@@ -2657,21 +2931,16 @@
             const cartCount = document.getElementById('cartCount');
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
-            
             cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
             cartItems.innerHTML = '';
-            
             if (cart.length === 0) {
                 cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
                 cartTotal.textContent = '0 zł';
                 document.getElementById('paypal-container').innerHTML = '';
             } else {
                 let total = 0;
-                
                 cart.forEach((item, index) => {
                     total += item.price * item.quantity;
-                    
                     const cartItem = document.createElement('div');
                     cartItem.className = 'cart-item';
                     cartItem.innerHTML = `
@@ -2684,14 +2953,11 @@
                         </div>
                         <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
                     `;
-                    
                     cartItems.appendChild(cartItem);
                 });
-                
                 cartTotal.textContent = `${total.toFixed(2)} zł`;
                 renderPayPalButton();
             }
-            
             localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
         }
 
@@ -2707,605 +2973,292 @@
         function renderPayPalButton() {
             const container = document.getElementById('paypal-container');
             container.innerHTML = '';
-            
             if (cart.length === 0) return;
-            
             if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
-                paypal.HostedButtons({
-                    hostedButtonId: "L4639S4363CZE",
-                }).render("#paypal-container");
+                paypal.HostedButtons({ hostedButtonId: "L4639S4363CZE" }).render("#paypal-container");
             }
         }
 
         function showCartPopup() {
             const popup = document.getElementById('cartPopup');
             popup.style.display = 'block';
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 5000);
+            setTimeout(() => popup.style.display = 'none', 5000);
         }
 
-        function hideCartPopup() {
-            document.getElementById('cartPopup').style.display = 'none';
-        }
-
-        function goToCheckout() {
-            toggleCart();
-            hideCartPopup();
-        }
+        function hideCartPopup() { document.getElementById('cartPopup').style.display = 'none'; }
+        function goToCheckout() { toggleCart(); hideCartPopup(); }
 
         function sendOrderEmail() {
             let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-            
             cart.forEach((item, index) => {
                 emailBody += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
                 if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
                 if (item.color) emailBody += ` (Kolor: ${item.color})`;
                 emailBody += '\n';
             });
-            
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-            
+            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\nData: ${new Date().toLocaleString('pl-PL')}\n\n`;
             window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
         }
 
         function sendOrderWhatsApp() {
             let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-            
             cart.forEach((item, index) => {
                 message += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
                 if (item.size) message += ` (Rozmiar: ${item.size})`;
                 if (item.color) message += ` (Kolor: ${item.color})`;
                 message += '%0A';
             });
-            
             const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-            message += `Proszę o potwierdzenie zamówienia.`;
-            
+            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0AData: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
             window.open(`https://wa.me/48604296360?text=${message}`);
         }
 
         function initImageZoom() {
             const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.add('loaded');
-                });
-            });
+            images.forEach(img => img.addEventListener('load', function() { this.classList.add('loaded'); }));
         }
-
         function openImageZoom(src) {
-            const overlay = document.getElementById('imageZoomOverlay');
-            const zoomedImg = document.getElementById('zoomedImage');
-            zoomedImg.src = src;
-            overlay.style.display = 'flex';
+            document.getElementById('zoomedImage').src = src;
+            document.getElementById('imageZoomOverlay').style.display = 'flex';
         }
-
-        function closeImageZoom() {
-            document.getElementById('imageZoomOverlay').style.display = 'none';
-        }
-
+        function closeImageZoom() { document.getElementById('imageZoomOverlay').style.display = 'none'; }
         function changeProductImage(thumb, productCard) {
             const mainImage = productCard.querySelector('.product-image');
-            const galleryThumbs = productCard.querySelectorAll('.gallery-thumb');
-            
-            galleryThumbs.forEach(thumb => thumb.classList.remove('active'));
+            productCard.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
             thumb.classList.add('active');
-            
             mainImage.src = thumb.src;
         }
-
-        function initChatbot() {
-        }
-
+        function initChatbot() {}
         function toggleChatbot() {
-            const chatbotWindow = document.getElementById('chatbotWindow');
-            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            const w = document.getElementById('chatbotWindow');
+            w.style.display = w.style.display === 'flex' ? 'none' : 'flex';
         }
+        function initForum() {}
+        function addForumPost(u,m){}
+        function initCharitySection() {
+            const donors = [{name:"Anna K.",amount:50},{name:"Marek Z.",amount:100},{name:"👑 Sekretny Darczyńca",amount:250}];
+            let idx=0;
+            setInterval(()=>{
+                const list=document.getElementById('donorsList');
+                if(list){
+                    const li=document.createElement('li');
+                    li.className='donor-entry';
+                    li.textContent=`${donors[idx].name} – ${donors[idx].amount} zł`;
+                    list.prepend(li);
+                    idx=(idx+1)%donors.length;
+                }
+            },4000);
+        }
+        function initCookieConsent() {
+            if (!localStorage.getItem('cookies_accepted'))
+                document.getElementById('cookieConsent').style.display = 'block';
+        }
+        function acceptCookies() {
+            localStorage.setItem('cookies_accepted','true');
+            document.getElementById('cookieConsent').style.display = 'none';
+        }
+        function showNotification(m){
+            const n=document.createElement('div');
+            n.textContent=m; n.style.position='fixed'; n.style.bottom='20px'; n.style.left='50%'; n.style.transform='translateX(-50%)'; n.style.backgroundColor='#d4af37'; n.style.color='black'; n.style.padding='12px 24px'; n.style.borderRadius='30px'; n.style.zIndex='1000'; n.style.fontWeight='bold';
+            document.body.appendChild(n);
+            setTimeout(()=>n.remove(),3000);
+        }
+        function initCart(){ updateCart(); }
+        function initProductGalleries(){}
 
-        function handleChatbotInput(e) {
-            if (e.key === 'Enter') {
-                sendChatbotMessage();
+        // Konfigurator (studio) – uproszczona obsługa
+        function initConfigurator() {
+            const canvas = document.getElementById('tshirt-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let layers = [];
+            let selectedId = null;
+            let isDragging = false, dragOffsetX, dragOffsetY;
+            let productColor = '#ffffff';
+            let currentProduct = 'tshirt';
+            const prices = { tshirt:80, hoodie:170, cap:99 };
+            let orderQty = 1, orderColor = '#000000', orderSize = 'M';
+
+            function drawBase() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle = productColor;
+                ctx.beginPath();
+                ctx.moveTo(200,50); ctx.lineTo(240,50); ctx.lineTo(235,70); ctx.lineTo(205,70); ctx.closePath(); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(180,70); ctx.lineTo(200,50); ctx.lineTo(205,70); ctx.lineTo(180,90); ctx.closePath(); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(240,50); ctx.lineTo(260,70); ctx.lineTo(235,70); ctx.closePath(); ctx.fill();
+                ctx.beginPath();
+                ctx.moveTo(180,90); ctx.lineTo(260,90); ctx.lineTo(250,450); ctx.lineTo(190,450); ctx.closePath(); ctx.fill();
             }
-        }
 
-        function sendChatbotMessage() {
-            const input = document.getElementById('chatbotInput');
-            const message = input.value.trim();
-            if (!message) return;
-            
-            // Add user message
-            const messagesDiv = document.getElementById('chatbotMessages');
-            const userMsgDiv = document.createElement('div');
-            userMsgDiv.className = 'message user-message';
-            userMsgDiv.textContent = message;
-            messagesDiv.appendChild(userMsgDiv);
-            
-            // Clear input
-            input.value = '';
-            
-            // Show typing indicator
-            document.getElementById('chatbotTyping').style.display = 'block';
-            
-            // Simulate response
-            setTimeout(() => {
-                document.getElementById('chatbotTyping').style.display = 'none';
-                
-                const botMsgDiv = document.createElement('div');
-                botMsgDiv.className = 'message bot-message';
-                botMsgDiv.innerHTML = 'Dziękuję za wiadomość! Asystent jest w trakcie nauki. W międzyczasie zapraszam do zapoznania się z naszymi produktami w sklepie lub skorzystania z konfiguratora Drip Studio!';
-                messagesDiv.appendChild(botMsgDiv);
-                
-                // Scroll to bottom
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }, 1500);
-        }
-
-        function initForum() {
-            const forumForm = document.getElementById('forumForm');
-            if (forumForm) {
-                forumForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const user = document.getElementById('forumUser').value.trim();
-                    const message = document.getElementById('forumMessage').value.trim();
-                    
-                    if (user && message) {
-                        addForumPost(user, message);
-                        forumForm.reset();
+            function render() {
+                drawBase();
+                layers.forEach(l => {
+                    ctx.save();
+                    ctx.globalAlpha = l.opacity/100;
+                    ctx.translate(l.x, l.y);
+                    ctx.rotate(l.rotation*Math.PI/180);
+                    ctx.scale(l.scale/100, l.scale/100);
+                    if (l.type==='text') {
+                        ctx.font = `${l.fontSize}px ${l.font}`;
+                        ctx.fillStyle = l.fontColor;
+                        ctx.textAlign = l.align;
+                        ctx.fillText(l.text,0,0);
+                    } else if (l.type==='image' && l.img) {
+                        ctx.drawImage(l.img, -l.img.width/2, -l.img.height/2);
+                    }
+                    ctx.restore();
+                    if (l.id===selectedId) {
+                        ctx.save();
+                        ctx.strokeStyle='#e8ff00'; ctx.setLineDash([5,5]); ctx.strokeRect(l.x-20, l.y-20, 40,40);
+                        ctx.restore();
                     }
                 });
             }
-        }
 
-        function addForumPost(user, message) {
-            const postsContainer = document.getElementById('forumPosts');
-            const postDiv = document.createElement('div');
-            postDiv.className = 'p-4 bg-gray-50 rounded-lg shadow-sm';
-            postDiv.innerHTML = `
-                <p class="font-bold">${user}</p>
-                <p>${message}</p>
-                <p class="text-sm text-gray-500 mt-2">${new Date().toLocaleString('pl-PL')}</p>
-            `;
-            postsContainer.prepend(postDiv);
-        }
+            function updateLayersList() {
+                const list = document.getElementById('layers-list');
+                if (!list) return;
+                list.innerHTML = '';
+                layers.forEach(l => {
+                    const div = document.createElement('div');
+                    div.className = 'layer-item' + (l.id===selectedId?' selected':'');
+                    div.textContent = l.type==='text' ? l.text : 'Obraz';
+                    div.addEventListener('click',()=>{ selectedId = l.id; updateLayerControls(); render(); });
+                    list.appendChild(div);
+                });
+            }
 
-        function initCharitySection() {
-            const donors = [
-                {name: "Anna K.", amount: 50},
-                {name: "Marek Z.", amount: 100},
-                {name: "👑 Sekretny Darczyńca", amount: 250},
-                {name: "Natalia P.", amount: 75},
-                {name: "Bartek L.", amount: 30}
-            ];
-            
-            let donorIndex = 0;
-            setInterval(() => {
-                const list = document.getElementById('donorsList');
-                if (list) {
-                    const li = document.createElement('li');
-                    li.className = 'donor-entry';
-                    li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
-                    list.prepend(li);
-                    donorIndex = (donorIndex + 1) % donors.length;
+            function updateLayerControls() {
+                const ctrl = document.getElementById('layer-controls');
+                if (!ctrl) return;
+                if (selectedId) {
+                    ctrl.style.display='block';
+                    const l = layers.find(la=>la.id===selectedId);
+                    if(l){
+                        document.getElementById('rotation-slider').value = l.rotation;
+                        document.getElementById('scale-slider').value = l.scale;
+                        document.getElementById('opacity-slider').value = l.opacity;
+                    }
+                } else ctrl.style.display='none';
+            }
+
+            document.querySelectorAll('#product-colors .swatch').forEach(s=>{
+                s.addEventListener('click',()=>{
+                    document.querySelectorAll('#product-colors .swatch').forEach(ss=>ss.classList.remove('selected'));
+                    s.classList.add('selected');
+                    productColor = s.dataset.color;
+                    render();
+                });
+            });
+
+            document.getElementById('add-text-btn')?.addEventListener('click',()=>{
+                const text = document.getElementById('text-input')?.value;
+                if(text){
+                    layers.push({
+                        id:Date.now(), type:'text', x:220, y:250, text,
+                        font: document.getElementById('font-select')?.value || 'Arial',
+                        fontSize: parseInt(document.getElementById('font-size-slider')?.value||30),
+                        fontColor: document.getElementById('font-color-picker')?.value||'#000',
+                        align:'center', rotation:0, scale:100, opacity:100
+                    });
+                    selectedId = layers[layers.length-1].id;
+                    updateLayersList(); updateLayerControls(); render();
                 }
-            }, 4000);
-        }
-
-        function initCookieConsent() {
-            if (!localStorage.getItem('cookies_accepted')) {
-                document.getElementById('cookieConsent').style.display = 'block';
-            }
-        }
-
-        function acceptCookies() {
-            localStorage.setItem('cookies_accepted', 'true');
-            document.getElementById('cookieConsent').style.display = 'none';
-        }
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = '#d4af37';
-            notification.style.color = 'black';
-            notification.style.padding = '12px 24px';
-            notification.style.borderRadius = '30px';
-            notification.style.zIndex = '1000';
-            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-            notification.style.fontWeight = 'bold';
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        function initCart() {
-            updateCart();
-        }
-
-        function initProductGalleries() {
-        }
-
-        // ============================================================
-        // KONFIGURATOR DRIP STUDIO
-        // ============================================================
-        (function() {
-          'use strict';
-
-          const canvas = document.getElementById('cfgCanvas');
-          if (!canvas) return; // Safety check
-          
-          const ctx    = canvas.getContext('2d');
-
-          const state = {
-            product: 'hoodie', view: 'front', productColor: '#ffffff',
-            views: { front:[], back:[], left:[], right:[] },
-            selected: null, dragging: false, dragOffX: 0, dragOffY: 0,
-            orderColor: 'Czarny', orderSize: 'S',
-          };
-
-          const PRICES = { hoodie: 170, tshirt: 80, cap: 99 };
-
-          function darken(hex, amt) {
-            let r=parseInt(hex.slice(1,3),16), g=parseInt(hex.slice(3,5),16), b=parseInt(hex.slice(5,7),16);
-            return '#'+[r,g,b].map(v=>Math.max(0,v-Math.round(255*amt)).toString(16).padStart(2,'0')).join('');
-          }
-
-          function drawSleeve(W,H,c) {
-            ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-            ctx.beginPath();
-            ctx.moveTo(W*.15,H*.08); ctx.lineTo(W*.85,H*.08);
-            ctx.lineTo(W*.85,H*.92); ctx.lineTo(W*.15,H*.92);
-            ctx.closePath(); ctx.fill(); ctx.stroke();
-            ctx.fillStyle=darken(c,.1); ctx.fillRect(W*.15,H*.86,W*.7,H*.06); ctx.strokeRect(W*.15,H*.86,W*.7,H*.06);
-            ctx.fillStyle=darken(c,.06); ctx.fillRect(W*.15,H*.08,W*.7,H*.06);
-          }
-          function drawSleeveTee(W,H,c) {
-            ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-            ctx.beginPath();
-            ctx.moveTo(W*.15,H*.12); ctx.lineTo(W*.85,H*.12);
-            ctx.lineTo(W*.85,H*.88); ctx.lineTo(W*.15,H*.88);
-            ctx.closePath(); ctx.fill(); ctx.stroke();
-          }
-
-          const shapes = {
-            hoodie: {
-              front(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath();
-                ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
-                ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.1);
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.15,W*.2,H*.1,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.07);
-                ctx.fillRect(W*.35,H*.65,W*.3,H*.15); ctx.strokeRect(W*.35,H*.65,W*.3,H*.15);
-              },
-              back(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath();
-                ctx.moveTo(W*.3,H*.1); ctx.lineTo(W*.7,H*.1); ctx.lineTo(W*.9,H*.4);
-                ctx.lineTo(W*.9,H*.9); ctx.lineTo(W*.1,H*.9); ctx.lineTo(W*.1,H*.4);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-              },
-              left:(W,H,c)=>drawSleeve(W,H,c), right:(W,H,c)=>drawSleeve(W,H,c),
-            },
-            tshirt: {
-              front(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath();
-                ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
-                ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.08);
-                ctx.beginPath(); ctx.arc(W*.5,H*.12,W*.1,0,Math.PI*2); ctx.fill(); ctx.stroke();
-              },
-              back(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath();
-                ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.12,H*.35); ctx.lineTo(W*.06,H*.95);
-                ctx.lineTo(W*.94,H*.95); ctx.lineTo(W*.88,H*.35); ctx.lineTo(W*.78,H*.12);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(W*.22,H*.12); ctx.lineTo(W*.02,H*.16); ctx.lineTo(W*.02,H*.38); ctx.lineTo(W*.12,H*.38); ctx.lineTo(W*.12,H*.35);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(W*.78,H*.12); ctx.lineTo(W*.98,H*.16); ctx.lineTo(W*.98,H*.38); ctx.lineTo(W*.88,H*.38); ctx.lineTo(W*.88,H*.35);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-              },
-              left:(W,H,c)=>drawSleeveTee(W,H,c), right:(W,H,c)=>drawSleeveTee(W,H,c),
-            },
-            cap: {
-              front(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.48,H*.08,0,0,Math.PI); ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.12);
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.18);
-                ctx.beginPath(); ctx.arc(W*.5,H*.1,10,0,Math.PI*2); ctx.fill(); ctx.stroke();
-              },
-              back(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.42,W*.42,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.12);
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.56,W*.42,H*.05,0,0,Math.PI*2); ctx.fill(); ctx.stroke();
-                ctx.fillStyle=darken(c,.2);
-                ctx.fillRect(W*.42,H*.52,W*.16,H*.06); ctx.strokeRect(W*.42,H*.52,W*.16,H*.06);
-              },
-              left(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(W*.2,H*.55); ctx.lineTo(W*.05,H*.6); ctx.lineTo(W*.05,H*.65); ctx.lineTo(W*.8,H*.65); ctx.lineTo(W*.8,H*.58);
-                ctx.closePath(); ctx.fill(); ctx.stroke();
-              },
-              right(W,H,c) {
-                ctx.fillStyle=c; ctx.strokeStyle=darken(c,.15); ctx.lineWidth=2;
-                ctx.beginPath(); ctx.ellipse(W*.5,H*.45,W*.3,H*.35,0,Math.PI,0); ctx.closePath(); ctx.fill(); ctx.stroke();
-              },
-            }
-          };
-
-          function getBounds(el) {
-            if (el.type==='text') {
-              ctx.save(); ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
-              const m=ctx.measureText(el.text); ctx.restore();
-              return { w:m.width, h:el.size*1.2 };
-            }
-            return { w:el.w||60, h:el.h||60 };
-          }
-
-          function render() {
-            const W=canvas.width, H=canvas.height;
-            ctx.clearRect(0,0,W,H);
-            ctx.fillStyle='#1a1a1a'; ctx.fillRect(0,0,W,H);
-            ctx.fillStyle='#242424';
-            for(let x=20;x<W;x+=20) for(let y=20;y<H;y+=20) {
-              ctx.beginPath(); ctx.arc(x,y,1,0,Math.PI*2); ctx.fill();
-            }
-            const s=shapes[state.product];
-            if(s&&s[state.view]) s[state.view](W,H,state.productColor);
-            state.views[state.view].forEach((el,i) => {
-              ctx.save();
-              ctx.globalAlpha=el.opacity!==undefined?el.opacity:1;
-              ctx.translate(el.x,el.y);
-              ctx.rotate((el.rotation||0)*Math.PI/180);
-              const sc=(el.scale||100)/100; ctx.scale(sc,sc);
-              if(el.type==='text') {
-                ctx.font=`${el.weight||700} ${el.size}px "${el.font}"`;
-                ctx.fillStyle=el.color; ctx.textAlign=el.align||'center'; ctx.textBaseline='middle';
-                ctx.fillText(el.text,0,0);
-              } else if(el.type==='image'&&el.img) {
-                ctx.drawImage(el.img,-el.w/2,-el.h/2,el.w,el.h);
-              }
-              if(state.selected===i) {
-                const b=getBounds(el);
-                ctx.strokeStyle='#e8ff00'; ctx.lineWidth=2/sc; ctx.setLineDash([6/sc,3/sc]);
-                ctx.strokeRect(-b.w/2-7/sc,-b.h/2-7/sc,b.w+14/sc,b.h+14/sc);
-                ctx.setLineDash([]); ctx.fillStyle='#e8ff00';
-                const hw=b.w/2+9/sc, hh=b.h/2+9/sc;
-                [[-hw,-hh],[hw,-hh],[hw,hh],[-hw,hh]].forEach(([x,y])=>ctx.fillRect(x-4/sc,y-4/sc,8/sc,8/sc));
-              }
-              ctx.restore();
             });
-          }
 
-          function getPos(e) {
-            const rect=canvas.getBoundingClientRect();
-            const sx=canvas.width/rect.width, sy=canvas.height/rect.height;
-            const cx=e.touches?e.touches[0].clientX:e.clientX;
-            const cy=e.touches?e.touches[0].clientY:e.clientY;
-            return {x:(cx-rect.left)*sx, y:(cy-rect.top)*sy};
-          }
-          function hitTest(el,px,py) {
-            const dx=px-el.x, dy=py-el.y;
-            const ang=-(el.rotation||0)*Math.PI/180;
-            const sc=(el.scale||100)/100;
-            const rx=(Math.cos(ang)*dx-Math.sin(ang)*dy)/sc;
-            const ry=(Math.sin(ang)*dx+Math.cos(ang)*dy)/sc;
-            const b=getBounds(el);
-            return Math.abs(rx)<b.w/2+12&&Math.abs(ry)<b.h/2+12;
-          }
-
-          canvas.addEventListener('mousedown',startDrag);
-          canvas.addEventListener('touchstart',startDrag,{passive:false});
-          window.addEventListener('mousemove',doDrag);
-          window.addEventListener('touchmove',doDrag,{passive:false});
-          window.addEventListener('mouseup',stopDrag);
-          window.addEventListener('touchend',stopDrag);
-
-          function startDrag(e) {
-            e.preventDefault();
-            const pos=getPos(e), els=state.views[state.view];
-            let found=false;
-            for(let i=els.length-1;i>=0;i--) {
-              if(hitTest(els[i],pos.x,pos.y)) {
-                state.selected=i; state.dragging=true;
-                state.dragOffX=pos.x-els[i].x; state.dragOffY=pos.y-els[i].y;
-                found=true; break;
-              }
-            }
-            if(!found) state.selected=null;
-            syncEditControls(); renderLayers(); render();
-          }
-          function doDrag(e) {
-            if(!state.dragging||state.selected===null) return;
-            e.preventDefault();
-            const pos=getPos(e), el=state.views[state.view][state.selected];
-            if(el){el.x=pos.x-state.dragOffX; el.y=pos.y-state.dragOffY; render();}
-          }
-          function stopDrag(){state.dragging=false;}
-
-          window.cfgSetProduct=function(p,btn){
-            state.product=p; state.selected=null;
-            document.querySelectorAll('.cfg-prod-btn').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active'); updatePriceUI(); render();
-          };
-          window.cfgSetView=function(v,btn){
-            state.view=v; state.selected=null;
-            const labels={front:'PRZÓD',back:'TYŁ',left:'LEWY RĘKAW',right:'PRAWY RĘKAW'};
-            document.getElementById('cfgViewLabel').textContent=labels[v];
-            document.querySelectorAll('.cfg-view-tab').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active'); syncEditControls(); renderLayers(); render();
-          };
-          window.cfgSetColor=function(color,el){
-            state.productColor=color;
-            document.querySelectorAll('.cfg-swatch').forEach(s=>s.classList.remove('active'));
-            el.classList.add('active'); render();
-          };
-          window.cfgSelectOrderColor=function(el){
-            document.querySelectorAll('.cfg-order-swatch').forEach(s=>s.classList.remove('active'));
-            el.classList.add('active'); state.orderColor=el.dataset.name;
-            document.getElementById('cfgOrderColorLabel').innerHTML=`Wybrany kolor: <strong>${state.orderColor}</strong>`;
-          };
-          window.cfgSelectSize=function(btn){
-            document.querySelectorAll('.cfg-size-btn').forEach(b=>b.classList.remove('active'));
-            btn.classList.add('active'); state.orderSize=btn.textContent.trim();
-          };
-          window.cfgQtyChange=function(dir){
-            const inp=document.getElementById('cfgQtyInput');
-            inp.value=Math.max(1,Math.min(99,parseInt(inp.value)+dir));
-          };
-          window.cfgAddText=function(){
-            const text=document.getElementById('cfgTextInput').value.trim();
-            if(!text) return;
-            state.views[state.view].push({
-              type:'text', text,
-              x:canvas.width/2, y:canvas.height/2,
-              font:document.getElementById('cfgFontSelect').value,
-              weight:document.getElementById('cfgFontWeight').value,
-              size:parseInt(document.getElementById('cfgFontSize').value),
-              color:document.getElementById('cfgTextColor').value,
-              align:document.getElementById('cfgTextAlign').value,
-              rotation:0, scale:100, opacity:1,
+            document.getElementById('image-upload')?.addEventListener('change',e=>{
+                const file = e.target.files[0];
+                if(file){
+                    const reader = new FileReader();
+                    reader.onload=ev=>{
+                        const img = new Image();
+                        img.onload=()=>{
+                            layers.push({ id:Date.now(), type:'image', x:220, y:250, img, rotation:0, scale:100, opacity:100 });
+                            selectedId = layers[layers.length-1].id;
+                            updateLayersList(); updateLayerControls(); render();
+                        };
+                        img.src=ev.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
             });
-            state.selected=state.views[state.view].length-1;
-            syncEditControls(); renderLayers(); render();
-          };
-          window.cfgUploadImage=function(event){
-            const file=event.target.files[0]; if(!file) return;
-            const reader=new FileReader();
-            reader.onload=e=>{
-              const img=new Image();
-              img.onload=()=>{
-                const maxW=160,maxH=160; let w=img.width,h=img.height;
-                if(w>maxW){h=h*maxW/w;w=maxW;} if(h>maxH){w=w*maxH/h;h=maxH;}
-                state.views[state.view].push({type:'image',img,x:canvas.width/2,y:canvas.height/2,w,h,rotation:0,scale:100,opacity:1,name:file.name});
-                state.selected=state.views[state.view].length-1;
-                syncEditControls(); renderLayers(); render();
-              };
-              img.src=e.target.result;
-            };
-            reader.readAsDataURL(file); event.target.value='';
-          };
-          window.cfgUpdateRot=function(v){
-            document.getElementById('cfgRotVal').textContent=v+'°';
-            if(state.selected!==null){state.views[state.view][state.selected].rotation=parseInt(v);render();}
-          };
-          window.cfgUpdateScale=function(v){
-            document.getElementById('cfgScaleVal').textContent=v+'%';
-            if(state.selected!==null){state.views[state.view][state.selected].scale=parseInt(v);render();}
-          };
-          window.cfgUpdateOpac=function(v){
-            document.getElementById('cfgOpacVal').textContent=v+'%';
-            if(state.selected!==null){state.views[state.view][state.selected].opacity=parseInt(v)/100;render();}
-          };
-          window.cfgDeleteSelected=function(){
-            if(state.selected===null) return;
-            state.views[state.view].splice(state.selected,1);
-            state.selected=null; syncEditControls(); renderLayers(); render();
-          };
-          window.cfgCopyToView=function(){
-            const views=['front','back','left','right'], cur=state.view;
-            const els=state.views[cur].filter(e=>e.type!=='image');
-            if(!els.length){alert('Brak tekstów do skopiowania.');return;}
-            const target=views.find(v=>v!==cur&&state.views[v].length===0)||views.find(v=>v!==cur);
-            if(target){state.views[target]=JSON.parse(JSON.stringify(els));alert(`Skopiowano tekst na widok: ${target}`);renderLayers();render();}
-          };
-          window.cfgClearView=function(){
-            state.views[state.view]=[]; state.selected=null;
-            syncEditControls(); renderLayers(); render();
-          };
-          window.cfgExport=function(){
-            const a=document.createElement('a');
-            a.download=`drip-studio-${state.product}-${state.view}.png`;
-            a.href=canvas.toDataURL('image/png'); a.click();
-          };
-          window.cfgAddToCart=function(){
-            if(typeof addToCart!=='function'){console.error('addToCart nie znaleziony');return;}
-            const prodNames={hoodie:'Bluza Custom',tshirt:'Koszulka Custom',cap:'Czapka Custom'};
-            const qty=parseInt(document.getElementById('cfgQtyInput').value)||1;
-            const name=prodNames[state.product], price=PRICES[state.product];
-            const thumb=canvas.toDataURL('image/png');
-            for(let i=0;i<qty;i++) addToCart(name,price,thumb,state.orderSize,state.orderColor);
-            if(typeof showCartPopup==='function') showCartPopup();
-            if(typeof showNotification==='function') showNotification('✅ Projekt dodany do koszyka!');
-          };
 
-          function syncEditControls(){
-            const ctrl=document.getElementById('cfgEditControls');
-            const el=state.selected!==null?state.views[state.view][state.selected]:null;
-            if(el){
-              ctrl.style.opacity='1'; ctrl.style.pointerEvents='auto';
-              document.getElementById('cfgRotSlider').value=el.rotation||0;
-              document.getElementById('cfgRotVal').textContent=(el.rotation||0)+'°';
-              document.getElementById('cfgScaleSlider').value=el.scale||100;
-              document.getElementById('cfgScaleVal').textContent=(el.scale||100)+'%';
-              const op=el.opacity!==undefined?Math.round(el.opacity*100):100;
-              document.getElementById('cfgOpacSlider').value=op;
-              document.getElementById('cfgOpacVal').textContent=op+'%';
-            } else {
-              ctrl.style.opacity='.35'; ctrl.style.pointerEvents='none';
-            }
-          }
-          function renderLayers(){
-            const list=document.getElementById('cfgLayersList'), els=state.views[state.view];
-            if(!els.length){list.innerHTML='<div class="cfg-empty-layers">Brak elementów.<br>Dodaj napis lub grafikę.</div>';return;}
-            list.innerHTML=[...els].reverse().map((el,ri)=>{
-              const i=els.length-1-ri;
-              const icon=el.type==='text'?'✏️':'🖼️';
-              const name=el.type==='text'?el.text.substring(0,16):(el.name||'Grafika');
-              return `<div class="cfg-layer-item ${state.selected===i?'selected':''}" onclick="cfgSelectLayer(${i})">
-                <span>${icon}</span><span class="cfg-layer-name">${name}</span>
-                <span class="cfg-layer-del" onclick="event.stopPropagation();cfgDeleteLayer(${i})">✕</span>
-              </div>`;
-            }).join('');
-          }
-          window.cfgSelectLayer=function(i){state.selected=i;syncEditControls();renderLayers();render();};
-          window.cfgDeleteLayer=function(i){
-            state.views[state.view].splice(i,1);
-            if(state.selected===i) state.selected=null;
-            else if(state.selected>i) state.selected--;
-            syncEditControls(); renderLayers(); render();
-          };
-          function updatePriceUI(){
-            const p=PRICES[state.product];
-            document.getElementById('cfgPriceDisplay').textContent=p+' zł';
-            document.getElementById('cfgCartPriceLabel').textContent=p+' zł';
-          }
+            document.getElementById('delete-layer-btn')?.addEventListener('click',()=>{
+                if(selectedId){ layers = layers.filter(l=>l.id!==selectedId); selectedId=null; updateLayersList(); updateLayerControls(); render(); }
+            });
+            document.getElementById('clear-all-btn')?.addEventListener('click',()=>{ layers=[]; selectedId=null; updateLayersList(); updateLayerControls(); render(); });
 
-          updatePriceUI(); renderLayers(); render();
+            ['rotation-slider','scale-slider','opacity-slider'].forEach(id=>{
+                document.getElementById(id)?.addEventListener('input',e=>{
+                    if(selectedId){
+                        const l = layers.find(la=>la.id===selectedId);
+                        if(l){ l[id.split('-')[0]] = parseInt(e.target.value); render(); }
+                    }
+                });
+            });
 
-        })();
+            document.querySelectorAll('input[name="product"]').forEach(r=>{
+                r.addEventListener('change',e=>{ currentProduct = e.target.value; document.getElementById('price-display').textContent=`Cena: ${prices[currentProduct]*orderQty}zł`; });
+            });
+            document.getElementById('order-colors')?.addEventListener('click',e=>{
+                if(e.target.classList.contains('swatch')){
+                    document.querySelectorAll('#order-colors .swatch').forEach(s=>s.classList.remove('selected'));
+                    e.target.classList.add('selected'); orderColor = e.target.dataset.color;
+                }
+            });
+            document.querySelectorAll('.size-btn').forEach(b=>{
+                b.addEventListener('click',e=>{
+                    document.querySelectorAll('.size-btn').forEach(bb=>bb.classList.remove('selected'));
+                    e.target.classList.add('selected'); orderSize = e.target.dataset.size;
+                });
+            });
+            document.getElementById('qty-minus')?.addEventListener('click',()=>{ if(orderQty>1)orderQty--; document.getElementById('quantity').value=orderQty; updatePrice(); });
+            document.getElementById('qty-plus')?.addEventListener('click',()=>{ if(orderQty<99)orderQty++; document.getElementById('quantity').value=orderQty; updatePrice(); });
+            function updatePrice(){ document.getElementById('price-display').textContent=`Cena: ${prices[currentProduct]*orderQty}zł`; }
+            document.getElementById('export-btn')?.addEventListener('click',()=>{
+                const link = document.createElement('a');
+                link.download = 'projekt.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+            document.getElementById('add-to-cart-btn-config')?.addEventListener('click',()=>{
+                const name = `Projekt ${currentProduct}`;
+                const price = prices[currentProduct]*orderQty;
+                addToCart(name, price, canvas.toDataURL('image/png'), orderSize, orderColor);
+                showCartPopup();
+            });
 
-        // Export functions to global scope
+            // drag & drop
+            canvas.addEventListener('mousedown',e=>{
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX-rect.left, y = e.clientY-rect.top;
+                for(let i=layers.length-1;i>=0;i--){
+                    const l=layers[i];
+                    let w=40,h=40;
+                    if(l.type==='text'){ w=100; h=l.fontSize; }
+                    else if(l.img){ w=l.img.width*l.scale/200; h=l.img.height*l.scale/200; }
+                    if(x>=l.x-w/2 && x<=l.x+w/2 && y>=l.y-h/2 && y<=l.y+h/2){
+                        selectedId=l.id; dragOffsetX=x-l.x; dragOffsetY=y-l.y; isDragging=true;
+                        updateLayersList(); updateLayerControls(); render();
+                        break;
+                    }
+                }
+            });
+            canvas.addEventListener('mousemove',e=>{
+                if(isDragging && selectedId){
+                    const rect=canvas.getBoundingClientRect();
+                    const x=e.clientX-rect.left, y=e.clientY-rect.top;
+                    const l=layers.find(la=>la.id===selectedId);
+                    if(l){ l.x = x-dragOffsetX; l.y = y-dragOffsetY; render(); }
+                }
+            });
+            canvas.addEventListener('mouseup',()=>{ isDragging=false; });
+            render();
+        }
+
         window.addToCart = addToCart;
         window.removeFromCart = removeFromCart;
         window.toggleCart = toggleCart;
@@ -3314,8 +3267,6 @@
         window.sendOrderWhatsApp = sendOrderWhatsApp;
         window.acceptCookies = acceptCookies;
         window.toggleChatbot = toggleChatbot;
-        window.handleChatbotInput = handleChatbotInput;
-        window.sendChatbotMessage = sendChatbotMessage;
         window.openImageZoom = openImageZoom;
         window.closeImageZoom = closeImageZoom;
         window.changeProductImage = changeProductImage;
@@ -3331,47 +3282,6 @@
         window.sprodQtyChange = sprodQtyChange;
         window.sprodAddToCart = sprodAddToCart;
     </script>
-
-    <style>
-        .neon-glow {
-          color: #fff;
-          text-shadow:
-            0 0 5px #a855f7,
-            0 0 10px #a855f7,
-            0 0 20px #9333ea,
-            0 0 40px #9333ea;
-          animation: neonPulse 2s infinite alternate;
-        }
-
-        @keyframes neonPulse {
-          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
-          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
-        }
-
-        .typing {
-          border-right: 2px solid #ffd700;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-
-        .donor-entry {
-          opacity: 0;
-          transform: translateY(10px);
-          animation: fadeInUp 1s forwards;
-        }
-
-        @keyframes fadeInUp {
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-image[data-src] {
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .product-image.loaded {
-          opacity: 1;
-        }
-    </style>
 </body>
 </html>
+
