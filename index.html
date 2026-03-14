@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>AdelbertusShop — Konfigurator Odzieży</title>
     <meta name="description" content="Sklep z odzieżą vintage w stylu 80s i 90s. Koszulki, bluzy, czapki z unikalnymi projektami.">
     
@@ -1252,8 +1252,10 @@
         }
 
         #studioCanvas {
-          width: 500px;
-          height: 560px;
+          width: 100%;
+          max-width: 500px;
+          height: auto;
+          aspect-ratio: 500 / 560;
           background: #111;
           border-radius: 10px;
           border: 1px solid #2c2c2c;
@@ -1302,6 +1304,7 @@
           align-items:center;
           gap:8px;
           margin:6px 0;
+          flex-wrap: wrap;
         }
 
         .field-row input[type="text"], .field-row select, .field-row input[type="number"] {
@@ -1457,173 +1460,6 @@
         .help {
           color:#8e8e8e;
           font-size:.8rem;
-        }
-
-        @media (max-width: 1100px) {
-          .configurator {
-            grid-template-columns: 1fr;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .products-grid, .blog-posts, .reviews {
-            grid-template-columns: 1fr;
-          }
-          
-          #cartPanel {
-            width: 100%;
-            right: -100%;
-          }
-          
-          .design-tools {
-            grid-template-columns: 1fr;
-          }
-          
-          .logo {
-            font-size: 2.5rem;
-          }
-          
-          .mobile-menu-btn {
-            display: block;
-          }
-          
-          .nav-container {
-            flex-direction: column;
-            align-items: center;
-            display: none;
-            width: 100%;
-          }
-          
-          .nav-container.show {
-            display: flex;
-          }
-          
-          .nav-btn {
-            width: 90%;
-            margin: 0.3rem;
-            text-align: center;
-            padding: 1rem 1.5rem;
-            font-size: 1.1rem;
-          }
-          
-          section {
-            padding: 1.5rem 0.5rem;
-          }
-          
-          .section-title {
-            margin-bottom: 1.5rem;
-          }
-          
-          .product-card {
-            margin: 0 auto;
-            max-width: 100%;
-          }
-          
-          .product-image-container {
-            height: 200px;
-          }
-          
-          #cartIcon {
-            bottom: 1rem;
-            right: 1rem;
-            width: 50px;
-            height: 50px;
-            font-size: 1.2rem;
-          }
-          
-          #cartCount {
-            width: 20px;
-            height: 20px;
-            font-size: 0.7rem;
-          }
-          
-          footer {
-            padding: 2rem 1rem;
-          }
-          
-          .charity-section {
-            padding: 2rem 1rem;
-          }
-          
-          .chatbot-container {
-            bottom: 80px;
-            left: 10px;
-          }
-
-          .chatbot-window {
-            width: 300px;
-            height: 400px;
-          }
-          
-          .cart-popup {
-            left: 10px;
-            right: 10px;
-            max-width: none;
-          }
-          
-          .cart-popup-buttons {
-            flex-direction: column;
-          }
-          
-          .add-to-cart-btn-enhanced {
-            padding: 15px 24px !important;
-            font-size: 1.1rem !important;
-          }
-          
-          .product-benefits, .target-audience {
-            padding: 0.8rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .logo {
-            font-size: 2rem;
-          }
-          
-          .tagline {
-            font-size: 1rem;
-          }
-          
-          .product-info {
-            padding: 1rem;
-          }
-          
-          .product-title {
-            font-size: 1.1rem;
-          }
-          
-          .product-price {
-            font-size: 1.1rem;
-          }
-          
-          .cart-buttons {
-            gap: 8px;
-          }
-          
-          .cart-buttons button {
-            padding: 10px;
-            font-size: 0.9rem;
-          }
-
-          .chatbot-window {
-            width: 280px;
-            height: 380px;
-          }
-
-          .chatbot-container {
-            bottom: 70px;
-            left: 5px;
-          }
-          
-          .payment-methods {
-            gap: 5px;
-          }
-          
-          .payment-method {
-            width: 45px;
-            height: 25px;
-            font-size: 0.7rem;
-          }
         }
 
         /* STYLE DLA MODALI KATEGORII */
@@ -1841,6 +1677,211 @@
 
         @keyframes fadeInUp {
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSYWNOŚĆ - TELEFONY I TABLETY ===== */
+        @media (max-width: 1100px) {
+            .configurator {
+                grid-template-columns: 1fr;
+                padding: 10px;
+            }
+            
+            .panel[style*="grid-row: span 2;"] {
+                grid-row: auto !important;
+            }
+            
+            #studioCanvas {
+                max-width: 100%;
+            }
+            
+            .canvas-wrap {
+                overflow-x: auto;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .nav-container {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .nav-container.show {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                margin: 0.3rem 0;
+                text-align: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .reviews {
+                grid-template-columns: 1fr;
+            }
+            
+            #cartPanel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .chatbot-window {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .chatbot-container {
+                bottom: 80px;
+            }
+            
+            .cart-popup {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+            }
+            
+            .cart-popup-buttons {
+                flex-direction: column;
+            }
+            
+            .product-row {
+                flex-wrap: wrap;
+            }
+            
+            .product-card {
+                min-width: 120px;
+            }
+            
+            .tool-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .field-row {
+                flex-wrap: wrap;
+            }
+            
+            .field-row .btn {
+                width: 100%;
+            }
+            
+            .sprod-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .smodal-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .smodal-box {
+                padding: 1.5rem;
+            }
+            
+            .order-summary .summary-row {
+                font-size: 0.8rem;
+            }
+            
+            #studioCanvas {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .configurator-section .top-title {
+                font-size: 22px;
+            }
+            
+            .tool-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .size-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cart-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .cart-item-image {
+                margin-bottom: 0.5rem;
+            }
+            
+            .smodal-products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sprod-thumbs {
+                justify-content: center;
+            }
+            
+            .sprod-qty-row {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .payment-methods {
+                gap: 5px;
+            }
+            
+            .payment-method {
+                width: 45px;
+                height: 25px;
+                font-size: 0.7rem;
+            }
+            
+            .chatbot-window {
+                width: 280px;
+                height: 380px;
+            }
+            
+            .editor-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .product-card h4 {
+                font-size: 0.9rem;
+            }
+            
+            .product-card p {
+                font-size: 0.8rem;
+            }
+            
+            .btn {
+                font-size: 0.7rem;
+                padding: 6px 8px;
+            }
+            
+            .swatch {
+                width: 28px;
+                height: 28px;
+            }
         }
     </style>  
 </head>
