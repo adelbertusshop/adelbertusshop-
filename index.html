@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-Mx1uC3G6QZ+fF6I8vYg9p8YJ4mDL9GTELr6P7fM1x9kixywG4z5G6uA+W2gQj34n9ZsK5JjGxuxkL2I6xT8tTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap');
@@ -1110,7 +1109,7 @@
             color: #666;
         }
         
-        /* DODATKOWE STYLE DLA KONFIGURATORA */
+        /* STYLE KONFIGURATORA (w pełni zintegrowane) */
         .configurator-root {
           --bg: #0a0a0a;
           --surface: #111111;
@@ -1132,595 +1131,502 @@
           padding: 0;
         }
 
-        .configurator-section header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
+        .configurator-section .top-row {
           padding: 20px 40px;
           border-bottom: 1px solid var(--border);
-          position: sticky;
-          top: 0;
-          background: rgba(10,10,10,0.95);
-          backdrop-filter: blur(10px);
-          z-index: 100;
         }
 
-        .configurator-section .logo {
+        .configurator-section .top-title {
           font-family: 'Bebas Neue', sans-serif;
           font-size: 28px;
           letter-spacing: 4px;
           color: var(--accent);
+          margin: 0;
         }
-        .configurator-section .logo span { color: var(--white); }
 
-        .configurator-section .header-badge {
+        .configurator-section .subtle {
           font-family: 'Space Mono', monospace;
           font-size: 11px;
           color: var(--muted);
           letter-spacing: 2px;
           text-transform: uppercase;
+          margin: 4px 0 0 0;
         }
 
-        /* ----- GŁÓWNY UKŁAD: 3 KOLUMNY (DESKTOP) ----- */
-        .main-layout {
+        .configurator {
           display: grid;
-          grid-template-columns: 320px 1fr 300px;
-          min-height: calc(100vh - 73px);
+          grid-template-columns: 360px 1fr 340px;
+          gap: 16px;
+          padding: 20px;
+          max-width: 1700px;
+          margin: 0 auto;
         }
 
-        /* ===== LEWY PANEL ===== */
-        .left-panel {
-          background: var(--surface);
-          border-right: 1px solid var(--border);
-          padding: 24px;
-          overflow-y: auto;
+        .panel {
+          border: 1px solid #303030;
+          background: linear-gradient(180deg,#0f0f0f,#111111);
+          border-radius: 12px;
+          box-shadow: 0 0 40px rgba(0,0,0,.7);
         }
 
-        .panel-title {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 18px;
-          letter-spacing: 3px;
-          color: var(--accent);
-          margin-bottom: 20px;
-          padding-bottom: 12px;
-          border-bottom: 1px solid var(--border);
-        }
-
-        .product-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 8px;
-          margin-bottom: 28px;
-        }
-
-        .product-btn {
-          background: var(--card);
-          border: 2px solid var(--border);
-          border-radius: 10px;
-          padding: 14px 8px;
-          cursor: pointer;
-          transition: all 0.2s;
-          text-align: center;
-          color: var(--text);
-        }
-        .product-btn:hover { border-color: var(--accent); }
-        .product-btn.active { border-color: var(--accent); background: rgba(232,255,0,0.06); }
-        .product-btn .icon { font-size: 26px; display: block; margin-bottom: 6px; }
-        .product-btn .label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-        .product-btn.active .label { color: var(--accent); }
-
-        .view-tabs {
-          display: flex;
-          gap: 6px;
-          margin-bottom: 28px;
-          flex-wrap: wrap;
-        }
-
-        .view-tab {
-          flex: 1;
-          min-width: 0;
-          padding: 8px 4px;
-          background: var(--card);
-          border: 1px solid var(--border);
-          border-radius: 6px;
-          cursor: pointer;
-          font-family: 'Space Mono', monospace;
-          font-size: 9px;
-          letter-spacing: 1px;
+        .panel-header {
+          padding: 14px 16px;
+          border-bottom: 1px solid #222;
+          font-family: "Bebas Neue", cursive;
+          letter-spacing: 0.04em;
           text-transform: uppercase;
-          color: var(--muted);
-          transition: all 0.2s;
-          text-align: center;
+          font-size: 1rem;
+          color: #e8ff00;
         }
-        .view-tab:hover { border-color: var(--accent); color: var(--text); }
-        .view-tab.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
 
-        .color-row {
+        .panel-body {
+          padding: 14px;
+          overflow: auto;
+        }
+
+        .product-row {
           display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-          margin-bottom: 24px;
+          gap: 10px;
+          margin-bottom: 10px;
         }
 
-        .color-swatch {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
+        .product-card {
+          flex: 1;
+          background: #111;
+          border: 1px solid #333;
+          color: #fff;
+          border-radius: 10px;
+          padding: 10px;
           cursor: pointer;
-          border: 2px solid transparent;
-          transition: all 0.2s;
-        }
-        .color-swatch:hover { transform: scale(1.15); }
-        .color-swatch.active { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(232,255,0,0.3); }
-
-        .tool-section { margin-bottom: 24px; }
-        .input-field {
-          width: 100%;
-          background: var(--card);
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          padding: 10px 14px;
-          color: var(--text);
-          font-family: 'DM Sans', sans-serif;
-          font-size: 14px;
-          outline: none;
-          transition: border-color 0.2s;
-          margin-bottom: 8px;
-        }
-        .input-field:focus { border-color: var(--accent); }
-
-        .input-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 8px;
-          margin-bottom: 8px;
+          transition: all .2s ease;
         }
 
-        .select-field {
-          width: 100%;
-          background: var(--card);
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          padding: 10px 14px;
-          color: var(--text);
-          font-family: 'DM Sans', sans-serif;
-          font-size: 13px;
-          outline: none;
-          cursor: pointer;
-          appearance: none;
+        .product-card.active {
+          border-color: #d4af37;
+          box-shadow: 0 0 15px #d4af37;
+          background: #171717;
         }
 
-        .range-field {
-          width: 100%;
-          accent-color: var(--accent);
-          cursor: pointer;
-          margin-bottom: 4px;
+        .product-card:hover {
+          border-color: #e8ff00;
+          transform: translateY(-1px);
         }
-        .range-label {
+
+        .product-card h4 {
+          margin: 0;
+          font-size: 1rem;
+          font-weight: 700;
+        }
+
+        .product-card p {
+          margin: 8px 0 0;
+          font-size: 0.9rem;
+          color: #ccc;
+        }
+
+        .canvas-wrap {
+          background: radial-gradient(circle at top,#1a1a1a,#080808);
+          border-radius: 14px;
+          border: 1px solid #313131;
+          box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+          padding: 10px;
+        }
+
+        .canvas-top {
           display: flex;
           justify-content: space-between;
-          font-size: 11px;
-          color: var(--muted);
-          margin-bottom: 6px;
+          align-items: center;
+          margin-bottom: 8px;
+        }
+
+        #activeName {
+          font-size: 1.4rem;
+          font-family: "Bebas Neue", cursive;
+          color: #e8ff00;
+          margin: 0;
+        }
+
+        #zoomLabel {
+          font-size: .9rem;
+          color: #ccc;
+        }
+
+        #studioCanvas {
+          width: 500px;
+          height: 560px;
+          background: #111;
+          border-radius: 10px;
+          border: 1px solid #2c2c2c;
+          cursor: grab;
+        }
+
+        .tool-grid {
+          display: grid;
+          grid-template-columns: repeat(6,1fr);
+          gap:6px;
+        }
+
+        .swatch {
+          width: 32px;
+          height: 32px;
+          border-radius: 6px;
+          border: 2px solid transparent;
+          cursor:pointer;
+          transition: all .15s ease;
+        }
+
+        .swatch.active {
+          border-color: #d4af37;
+          box-shadow: 0 0 10px #d4af37;
+        }
+
+        .swatch:hover {
+          transform: scale(1.05);
+        }
+
+        .section {
+          margin-bottom: 12px;
+        }
+
+        .section h3 {
+          margin: 8px 0 6px;
+          font-size: 1rem;
+          text-transform: uppercase;
+          letter-spacing: .05em;
+          color: #e8ff00;
+          font-family:"Bebas Neue",cursive;
+        }
+
+        .field-row {
+          display:flex;
+          align-items:center;
+          gap:8px;
+          margin:6px 0;
+        }
+
+        .field-row input[type="text"], .field-row select, .field-row input[type="number"] {
+          width:100%;
+          padding:6px 8px;
+          background:#121212;
+          border:1px solid #333;
+          color:#fff;
+          border-radius:6px;
         }
 
         .btn {
-          width: 100%;
-          padding: 11px;
-          border-radius: 8px;
-          border: none;
-          cursor: pointer;
-          font-weight: 600;
-          font-size: 12px;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          transition: all 0.2s;
-          margin-bottom: 8px;
-        }
-        .btn-accent {
-          background: var(--accent);
-          color: #000;
-        }
-        .btn-accent:hover { background: #d4e800; transform: translateY(-1px); }
-        .btn-outline {
-          background: transparent;
-          color: var(--text);
-          border: 1px solid var(--border);
-        }
-        .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-        .btn-danger {
-          background: transparent;
-          color: var(--accent2);
-          border: 1px solid var(--accent2);
-        }
-        .btn-danger:hover { background: var(--accent2); color: #fff; }
-
-        .separator { height: 1px; background: var(--border); margin: 20px 0; }
-        #editControls { transition: opacity 0.2s; }
-
-        .color-text-row {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          margin-bottom: 8px;
-        }
-        input[type="color"] {
-          -webkit-appearance: none;
-          border: none;
-          width: 36px;
-          height: 36px;
-          border-radius: 50%;
-          cursor: pointer;
-          padding: 2px;
-          background: var(--card);
-          border: 2px solid var(--border);
+          border:0;
+          border-radius:8px;
+          padding:8px 10px;
+          background:#1d1d1d;
+          color:#fff;
+          cursor:pointer;
+          border:1px solid #333;
+          transition:.15s;
         }
 
-        /* ===== PANEL ŚRODKOWY – CANVAS ===== */
-        .center-panel {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          padding: 40px;
-          position: relative;
-          background: radial-gradient(ellipse at center, #1a1a1a 0%, var(--bg) 70%);
+        .btn:hover {
+          background:#2d2d2d;
+          border-color:#e8ff00;
         }
 
-        .canvas-wrapper {
-          position: relative;
-          width: 440px;
-          height: 500px;
+        .btn.primary {
+          background:#e8ff00;
+          color:#111;
+          font-weight:700;
+          border-color:#d4af37;
         }
 
-        #mainCanvas {
-          border-radius: 16px;
-          cursor: crosshair;
-          display: block;
-          width: 100%;
-          height: auto;
-          aspect-ratio: 440 / 500;
-          box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+        .btn-small {
+          padding:4px 8px;
+          font-size:.8rem;
         }
 
-        .canvas-hint {
-          margin-top: 16px;
-          font-family: 'Space Mono', monospace;
-          font-size: 10px;
-          color: var(--muted);
-          letter-spacing: 2px;
-          text-align: center;
+        .toggle-group {
+          display:flex;
+          gap:4px;
+          flex-wrap:wrap;
         }
 
-        .view-indicator {
-          position: absolute;
-          top: -36px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 14px;
-          letter-spacing: 4px;
-          color: var(--muted);
-          white-space: nowrap;
+        .toggle {
+          border:1px solid #333;
+          background:#121212;
+          color:#fff;
+          padding:5px 8px;
+          border-radius:6px;
+          cursor:pointer;
         }
 
-        /* ===== PRAWY PANEL – WARSTWY, UPLOAD, EKSPORT ===== */
-        .right-panel {
-          background: var(--surface);
-          border-left: 1px solid var(--border);
-          padding: 24px;
-          overflow-y: auto;
-          scrollbar-width: thin;
-          scrollbar-color: var(--border) transparent;
+        .toggle.active {
+          background:#e8ff00;
+          color:#111;
+          border-color:#d4af37;
         }
-        .right-panel::-webkit-scrollbar { width: 4px; }
-        .right-panel::-webkit-scrollbar-track { background: transparent; }
-        .right-panel::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
         .layers-list {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          margin-bottom: 24px;
+          list-style:none;
+          margin:0;
+          padding:0;
+          display:grid;
+          gap:6px;
         }
 
         .layer-item {
-          background: var(--card);
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          padding: 10px 12px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-size: 13px;
-        }
-        .layer-item:hover { border-color: var(--accent); }
-        .layer-item.selected { border-color: var(--accent); background: rgba(232,255,0,0.05); }
-
-        .layer-icon { font-size: 16px; }
-        .layer-name { flex: 1; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .layer-delete {
-          color: var(--muted);
-          cursor: pointer;
-          font-size: 14px;
-          padding: 2px 6px;
-          border-radius: 4px;
-          transition: all 0.2s;
-        }
-        .layer-delete:hover { color: var(--accent2); background: rgba(255,60,60,0.1); }
-
-        .empty-layers {
-          text-align: center;
-          padding: 30px 20px;
-          color: var(--muted);
-          font-size: 12px;
-          border: 1px dashed var(--border);
-          border-radius: 10px;
-          line-height: 1.8;
+          border:1px solid #2d2d2d;
+          background:#111;
+          display:flex;
+          align-items:center;
+          gap:5px;
+          padding:6px;
+          border-radius:6px;
+          cursor:pointer;
         }
 
-        .upload-zone {
-          border: 2px dashed var(--border);
-          border-radius: 10px;
-          padding: 24px;
-          text-align: center;
-          cursor: pointer;
-          transition: all 0.2s;
-          margin-bottom: 16px;
-        }
-        .upload-zone:hover { border-color: var(--accent); background: rgba(232,255,0,0.03); }
-        .upload-zone .upload-icon { font-size: 28px; margin-bottom: 8px; }
-        .upload-zone .upload-text { font-size: 12px; color: var(--muted); line-height: 1.6; }
-        .upload-zone .upload-text strong { color: var(--accent); }
-
-        #fileInput { display: none; }
-
-        .export-btn {
-          width: 100%;
-          padding: 14px;
-          background: linear-gradient(135deg, var(--accent), #b8cc00);
-          color: #000;
-          border: none;
-          border-radius: 10px;
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 18px;
-          letter-spacing: 3px;
-          cursor: pointer;
-          transition: all 0.2s;
-          margin-top: 16px;
-        }
-        .export-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(232,255,0,0.3); }
-
-        /* NOWY PRZYCISK DODAJ DO KOSZYKA W PRAWYM PANELU */
-        .cart-config-btn {
-          width: 100%;
-          padding: 16px;
-          background: var(--color-gold);
-          color: #000;
-          border: none;
-          border-radius: 10px;
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: 20px;
-          letter-spacing: 2px;
-          cursor: pointer;
-          transition: all 0.2s;
-          margin-top: 16px;
-          font-weight: bold;
-          box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
-        }
-        .cart-config-btn:hover {
-          background: var(--color-dark-gold);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5);
+        .layer-item.active {
+          border:1px solid #d4af37;
+          background:#1f1f1f;
         }
 
-        /* RESPONSYWNOŚĆ – MOBILE */
+        .layer-item .thumb {
+          width:28px;
+          height:28px;
+          background:#222;
+          border-radius:4px;
+        }
+
+        .layer-controls {
+          border:1px solid #333;
+          background:#111;
+          border-radius:8px;
+          padding:8px;
+        }
+
+        .editor-grid {
+          display:grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 6px;
+        }
+
+        .size-grid {
+          display:grid;
+          grid-template-columns: repeat(4, minmax(0,1fr));
+          gap:6px;
+        }
+
+        .size-btn {
+          border:1px solid #333;
+          background:#121212;
+          color:#fff;
+          border-radius:6px;
+          padding:6px;
+          cursor:pointer;
+        }
+
+        .size-btn.active {
+          background:#e8ff00;
+          color:#111;
+          border-color:#d4af37;
+        }
+
+        .order-summary {
+          border: 1px solid #333;
+          background:#141414;
+          border-radius:10px;
+          padding:10px;
+          margin-top:10px;
+        }
+
+        .summary-row {
+          display:flex;
+          justify-content:space-between;
+          margin:4px 0;
+          font-size:.9rem;
+        }
+
+        .mini-silhouette {
+          width: 72px;
+          height: 72px;
+          background:#111;
+          border-radius:8px;
+          border:1px solid #333;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          margin-top:6px;
+        }
+
+        .help {
+          color:#8e8e8e;
+          font-size:.8rem;
+        }
+
         @media (max-width: 1100px) {
-          .main-layout {
+          .configurator {
             grid-template-columns: 1fr;
-            display: flex;
-            flex-direction: column;
-          }
-          .left-panel, .right-panel {
-            padding: 16px;
-            border-right: none;
-            border-left: none;
-            width: 100%;
-          }
-          .left-panel {
-            border-bottom: 1px solid var(--border);
-          }
-          .right-panel {
-            border-top: 1px solid var(--border);
-          }
-          .center-panel {
-            padding: 20px 16px;
-            order: -1; /* canvas na górze */
-          }
-          .canvas-wrapper {
-            width: 100%;
-            max-width: 440px;
-            height: auto;
-            margin: 0 auto;
-          }
-          #mainCanvas {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 440 / 500;
-          }
-          .product-grid {
-            grid-template-columns: repeat(3, 1fr);
-          }
-          .btn, .export-btn, .cart-config-btn {
-            width: 100%;
           }
         }
 
         @media (max-width: 768px) {
-            .products-grid, .blog-posts, .reviews {
-                grid-template-columns: 1fr;
-            }
-            
-            #cartPanel {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .design-tools {
-                grid-template-columns: 1fr;
-            }
-            
-            .logo {
-                font-size: 2.5rem;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-container {
-                flex-direction: column;
-                align-items: center;
-                display: none;
-                width: 100%;
-            }
-            
-            .nav-container.show {
-                display: flex;
-            }
-            
-            .nav-btn {
-                width: 90%;
-                margin: 0.3rem;
-                text-align: center;
-                padding: 1rem 1.5rem;
-                font-size: 1.1rem;
-            }
-            
-            section {
-                padding: 1.5rem 0.5rem;
-            }
-            
-            .section-title {
-                margin-bottom: 1.5rem;
-            }
-            
-            .product-card {
-                margin: 0 auto;
-                max-width: 100%;
-            }
-            
-            .product-image-container {
-                height: 200px;
-            }
-            
-            #cartIcon {
-                bottom: 1rem;
-                right: 1rem;
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            #cartCount {
-                width: 20px;
-                height: 20px;
-                font-size: 0.7rem;
-            }
-            
-            footer {
-                padding: 2rem 1rem;
-            }
-            
-            .charity-section {
-                padding: 2rem 1rem;
-            }
-            
-            .chatbot-container {
-                bottom: 80px;
-                left: 10px;
-            }
+          .products-grid, .blog-posts, .reviews {
+            grid-template-columns: 1fr;
+          }
+          
+          #cartPanel {
+            width: 100%;
+            right: -100%;
+          }
+          
+          .design-tools {
+            grid-template-columns: 1fr;
+          }
+          
+          .logo {
+            font-size: 2.5rem;
+          }
+          
+          .mobile-menu-btn {
+            display: block;
+          }
+          
+          .nav-container {
+            flex-direction: column;
+            align-items: center;
+            display: none;
+            width: 100%;
+          }
+          
+          .nav-container.show {
+            display: flex;
+          }
+          
+          .nav-btn {
+            width: 90%;
+            margin: 0.3rem;
+            text-align: center;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+          }
+          
+          section {
+            padding: 1.5rem 0.5rem;
+          }
+          
+          .section-title {
+            margin-bottom: 1.5rem;
+          }
+          
+          .product-card {
+            margin: 0 auto;
+            max-width: 100%;
+          }
+          
+          .product-image-container {
+            height: 200px;
+          }
+          
+          #cartIcon {
+            bottom: 1rem;
+            right: 1rem;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+          }
+          
+          #cartCount {
+            width: 20px;
+            height: 20px;
+            font-size: 0.7rem;
+          }
+          
+          footer {
+            padding: 2rem 1rem;
+          }
+          
+          .charity-section {
+            padding: 2rem 1rem;
+          }
+          
+          .chatbot-container {
+            bottom: 80px;
+            left: 10px;
+          }
 
-            .chatbot-window {
-                width: 300px;
-                height: 400px;
-            }
-            
-            .cart-popup {
-                left: 10px;
-                right: 10px;
-                max-width: none;
-            }
-            
-            .cart-popup-buttons {
-                flex-direction: column;
-            }
-            
-            .add-to-cart-btn-enhanced {
-                padding: 15px 24px !important;
-                font-size: 1.1rem !important;
-            }
-            
-            .product-benefits, .target-audience {
-                padding: 0.8rem;
-            }
+          .chatbot-window {
+            width: 300px;
+            height: 400px;
+          }
+          
+          .cart-popup {
+            left: 10px;
+            right: 10px;
+            max-width: none;
+          }
+          
+          .cart-popup-buttons {
+            flex-direction: column;
+          }
+          
+          .add-to-cart-btn-enhanced {
+            padding: 15px 24px !important;
+            font-size: 1.1rem !important;
+          }
+          
+          .product-benefits, .target-audience {
+            padding: 0.8rem;
+          }
         }
 
         @media (max-width: 480px) {
-            .logo {
-                font-size: 2rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .product-info {
-                padding: 1rem;
-            }
-            
-            .product-title {
-                font-size: 1.1rem;
-            }
-            
-            .product-price {
-                font-size: 1.1rem;
-            }
-            
-            .cart-buttons {
-                gap: 8px;
-            }
-            
-            .cart-buttons button {
-                padding: 10px;
-                font-size: 0.9rem;
-            }
+          .logo {
+            font-size: 2rem;
+          }
+          
+          .tagline {
+            font-size: 1rem;
+          }
+          
+          .product-info {
+            padding: 1rem;
+          }
+          
+          .product-title {
+            font-size: 1.1rem;
+          }
+          
+          .product-price {
+            font-size: 1.1rem;
+          }
+          
+          .cart-buttons {
+            gap: 8px;
+          }
+          
+          .cart-buttons button {
+            padding: 10px;
+            font-size: 0.9rem;
+          }
 
-            .chatbot-window {
-                width: 280px;
-                height: 380px;
-            }
+          .chatbot-window {
+            width: 280px;
+            height: 380px;
+          }
 
-            .chatbot-container {
-                bottom: 70px;
-                left: 5px;
-            }
-            
-            .payment-methods {
-                gap: 5px;
-            }
-            
-            .payment-method {
-                width: 45px;
-                height: 25px;
-                font-size: 0.7rem;
-            }
+          .chatbot-container {
+            bottom: 70px;
+            left: 5px;
+          }
+          
+          .payment-methods {
+            gap: 5px;
+          }
+          
+          .payment-method {
+            width: 45px;
+            height: 25px;
+            font-size: 0.7rem;
+          }
         }
 
-        /* ===== STYLE DLA NOWYCH MODALI (od Claude'a) ===== */
-        /* Modal kategorii i produktu */
+        /* STYLE DLA MODALI KATEGORII */
         .smodal-backdrop {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -1784,7 +1690,6 @@
         .smodal-prod-card-name { font-weight: 600; margin-bottom: 0.3rem; }
         .smodal-prod-card-price { color: var(--color-gold); font-weight: 700; }
 
-        /* Modal produktu */
         .sprod-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .sprod-gallery { display: flex; flex-direction: column; gap: 1rem; }
         .sprod-main-img-wrap {
@@ -1801,7 +1706,6 @@
             object-fit: cover; cursor: pointer; border: 2px solid transparent;
         }
         .sprod-thumbs img.active { border-color: var(--color-gold); }
-
         .sprod-details { display: flex; flex-direction: column; gap: 1.5rem; }
         .sprod-title { font-size: 2rem; font-weight: 700; color: var(--color-dark); }
         .sprod-price { font-size: 1.8rem; color: var(--color-gold); font-weight: 700; }
@@ -1846,14 +1750,6 @@
         .sprod-benefits div { margin: 0.5rem 0; display: flex; align-items: center; gap: 0.8rem; }
         .sprod-benefits i { color: var(--color-gold); }
 
-        @media (max-width: 768px) {
-            .sprod-layout { grid-template-columns: 1fr; }
-            .smodal-box { padding: 1.5rem; }
-            .smodal-products-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        /* ===== KONIEC STYLÓD MODALI ===== */
-
-        /* Kafelki kategorii w sklepie */
         .shop-category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1922,58 +1818,30 @@
             gap: 0.5rem;
         }
         
-        /* STARE STYLE Z KONFIGURATORA (przeniesione) */
-        :root { color-scheme: dark; }
-        * { box-sizing: border-box; }
-        body { margin: 0; font-family: "DM Sans", sans-serif; background: #0a0a0a; color: #f8f8f8; }
-        section#studio { padding: 20px; max-width: 1700px; margin: 0 auto; }
-        .configurator { display: grid; grid-template-columns: 360px 1fr 340px; gap: 16px; align-items: stretch; }
-        .panel { border: 1px solid #303030; background: linear-gradient(180deg,#0f0f0f,#111111); border-radius: 12px; box-shadow: 0 0 40px rgba(0,0,0,.7); }
-        .panel-header { padding: 14px 16px; border-bottom: 1px solid #222; font-family: "Bebas Neue", cursive; letter-spacing: 0.04em; text-transform: uppercase; font-size: 1rem; color: #e8ff00; }
-        .panel-body { padding: 14px; overflow: auto; }
-        .top-title { font-family: "Bebas Neue", cursive; font-size: 2rem; margin: 0 0 6px; color: #e8ff00; }
-        .subtle { color: #aaa; }
-        .product-row { display: flex; gap: 10px; margin-bottom: 10px; }
-        .product-card { flex: 1; background: #111; border: 1px solid #333; color: #fff; border-radius: 10px; padding: 10px; cursor: pointer; transition: all .2s ease; }
-        .product-card.active { border-color: #d4af37; box-shadow: 0 0 15px #d4af37; background: #171717; }
-        .product-card:hover { border-color: #e8ff00; transform: translateY(-1px); }
-        .product-card h4 { margin: 0; font-size: 1rem; font-weight: 700; }
-        .product-card p { margin: 8px 0 0; font-size: 0.9rem; color: #ccc; }
-        .canvas-wrap { background: radial-gradient(circle at top,#1a1a1a,#080808); border-radius: 14px; border: 1px solid #313131; box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02); padding: 10px; }
-        .canvas-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        #activeName { font-size: 1.4rem; font-family: "Bebas Neue", cursive; color: #e8ff00; margin: 0; }
-        #zoomLabel { font-size: .9rem; color: #ccc; }
-        #studioCanvas { width: 500px; height: 560px; background: #111; border-radius: 10px; border: 1px solid #2c2c2c; cursor: grab; }
-        .tool-grid { display:grid; grid-template-columns: repeat(6,1fr); gap:6px; }
-        .swatch { width: 32px; height: 32px; border-radius: 6px; border: 2px solid transparent; cursor:pointer; transition: all .15s ease; }
-        .swatch.active { border-color: #d4af37; box-shadow: 0 0 10px #d4af37; }
-        .swatch:hover { transform: scale(1.05); }
-        .section { margin-bottom: 12px; }
-        .section h3 { margin: 8px 0 6px; font-size: 1rem; text-transform: uppercase; letter-spacing: .05em; color: #e8ff00; font-family:"Bebas Neue",cursive; }
-        .field-row { display:flex; align-items:center; gap:8px; margin:6px 0; }
-        .field-row input[type="text"], .field-row select, .field-row input[type="number"] { width:100%; padding:6px 8px; background:#121212; border:1px solid #333; color:#fff; border-radius:6px; }
-        .btn { border:0; border-radius:8px; padding:8px 10px; background:#1d1d1d; color:#fff; cursor:pointer; border:1px solid #333; transition:.15s; }
-        .btn:hover { background:#2d2d2d; border-color:#e8ff00; }
-        .btn.primary { background:#e8ff00; color:#111; font-weight:700; border-color:#d4af37; }
-        .btn-small { padding:4px 8px; font-size:.8rem; }
-        .toggle-group { display:flex; gap:4px; flex-wrap:wrap; }
-        .toggle { border:1px solid #333; background:#121212; color:#fff; padding:5px 8px; border-radius:6px; cursor:pointer; }
-        .toggle.active { background:#e8ff00; color:#111; border-color:#d4af37; }
-        .layers-list { list-style:none; margin:0; padding:0; display:grid; gap:6px; }
-        .layer-item { border:1px solid #2d2d2d; background:#111; display:flex; align-items:center; gap:5px; padding:6px; border-radius:6px; cursor:pointer; }
-        .layer-item.active { border:1px solid #d4af37; background:#1f1f1f; }
-        .layer-item .thumb { width:28px;height:28px;background:#222;border-radius:4px; }
-        .layer-controls { border:1px solid #333; background:#111; border-radius:8px; padding:8px; }
-        .right-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
-        .size-grid { display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:6px; }
-        .size-btn { border:1px solid #333; background:#121212; color:#fff; border-radius:6px; padding:6px; cursor:pointer; }
-        .size-btn.active { background:#e8ff00; color:#111; border-color:#d4af37; }
-        .order-summary { border: 1px solid #333; background:#141414; border-radius:10px; padding:10px; margin-top:10px; }
-        .summary-row { display:flex; justify-content:space-between; margin:4px 0; font-size:.9rem; }
-        .mini-silhouette { width: 72px; height: 72px; background:#111; border-radius:8px; border:1px solid #333; display:flex; align-items:center; justify-content:center; margin-top:6px; }
-        .editor-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-        .help { color:#8e8e8e; font-size:.8rem; }
-        .top-row { margin-bottom: 10px; }
+        .neon-glow {
+          color: #fff;
+          text-shadow:
+            0 0 5px #a855f7,
+            0 0 10px #a855f7,
+            0 0 20px #9333ea,
+            0 0 40px #9333ea;
+          animation: neonPulse 2s infinite alternate;
+        }
+
+        @keyframes neonPulse {
+          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
+          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
+        }
+
+        .donor-entry {
+          opacity: 0;
+          transform: translateY(10px);
+          animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+          to { opacity: 1; transform: translateY(0); }
+        }
     </style>  
 </head>
 <body>
@@ -2044,6 +1912,7 @@
         <div class="nav-container" id="navContainer">
             <button class="nav-btn active" data-section="home"><i class="fas fa-home"></i> Strona Główna</button>
             <button class="nav-btn" data-section="shop"><i class="fas fa-tshirt"></i> Sklep</button>
+            <button class="nav-btn" data-section="configurator"><i class="fas fa-paint-brush"></i> Konfigurator</button>
             <button class="nav-btn" data-section="charity"><i class="fas fa-hand-holding-heart"></i> Zbiórka</button>
             <button class="nav-btn" data-section="partners"><i class="fas fa-handshake"></i> Partnerzy</button>
             <button class="nav-btn" data-section="regulations"><i class="fas fa-file-alt"></i> Regulamin</button>
@@ -2157,69 +2026,9 @@
                 <div id="rotating-reviews" class="reviews-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
                 </div>
             </div>
-            
-            <script>
-                (function() {
-                    const allReviews = [
-                        { name: "Anna K.", text: "Koszulki są niesamowite! Jakość wykonania i oryginalny design - polecam każdemu!", stars: 5 },
-                        { name: "Marek W.", text: "Zamówienie dotarło błyskawicznie, a bluza jest jeszcze lepsza niż na zdjęciach. Na pewno wrócę!", stars: 5 },
-                        { name: "Katarzyna M.", text: "Uwielbiam styl vintage, a Adelbertus robi to perfekcyjnie. Moja nowa ulubiona marka.", stars: 5 },
-                        { name: "Tomasz L.", text: "Świetny kontakt ze sklepem, a produkt zgodny z opisem. Polecam!", stars: 5 }
-                    ];
-                    
-                    const reviewContainer = document.getElementById('rotating-reviews');
-                    
-                    function displayReviews(index) {
-                        const reviewsToShow = [];
-                        for (let i = 0; i < 4; i++) {
-                            reviewsToShow.push(allReviews[(index + i) % allReviews.length]);
-                        }
-                        
-                        reviewContainer.innerHTML = reviewsToShow.map(review => `
-                            <div class="review" style="background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                                <div class="review-header" style="display: flex; align-items: center; margin-bottom: 1rem;">
-                                    <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #b8941f); display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: bold; color: black;">${review.name.charAt(0)}</div>
-                                    <div>
-                                        <div style="font-weight: bold;">${review.name}</div>
-                                        <div class="review-stars" style="color: #d4af37;">${'⭐'.repeat(review.stars)}</div>
-                                    </div>
-                                </div>
-                                <p style="font-style: italic;">"${review.text}"</p>
-                            </div>
-                        `).join('');
-                    }
-                    
-                    const lastRotationKey = 'adelbertus_reviews_last_rotation';
-                    const lastRotation = localStorage.getItem(lastRotationKey);
-                    const now = Date.now();
-                    const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
-                    
-                    let currentIndex = parseInt(localStorage.getItem('adelbertus_reviews_index')) || 0;
-                    
-                    if (!lastRotation || now - parseInt(lastRotation) > twoDaysMs) {
-                        currentIndex = (currentIndex + 1) % allReviews.length;
-                        localStorage.setItem('adelbertus_reviews_index', currentIndex);
-                        localStorage.setItem(lastRotationKey, now);
-                    }
-                    
-                    displayReviews(currentIndex);
-                    
-                    setInterval(() => {
-                        const now = Date.now();
-                        const lastRotation = localStorage.getItem(lastRotationKey);
-                        if (now - parseInt(lastRotation) > twoDaysMs) {
-                            let currentIndex = parseInt(localStorage.getItem('adelbertus_reviews_index')) || 0;
-                            currentIndex = (currentIndex + 1) % allReviews.length;
-                            localStorage.setItem('adelbertus_reviews_index', currentIndex);
-                            localStorage.setItem(lastRotationKey, now);
-                            displayReviews(currentIndex);
-                        }
-                    }, 3600000);
-                })();
-            </script>
         </section>
         
-        <!-- Sklep – NOWY HTML OD CLAUDE'A (kafelki + modale) -->
+        <!-- Sklep – Kafelki + modale -->
         <section id="shop">
           <div class="shop-header">
             <h2 class="section-title">Nasze Produkty</h2>
@@ -2238,7 +2047,6 @@
 
           <!-- KAFELKI KATEGORII -->
           <div class="shop-category-grid">
-
             <div class="shop-cat-tile" data-category="koszulka" onclick="openCategoryModal('koszulka')">
               <div class="shop-cat-img-wrap">
                 <img src="https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg" alt="Koszulki">
@@ -2280,77 +2088,180 @@
                 <span class="shop-cat-cta">Przeglądaj <i class="fas fa-arrow-right"></i></span>
               </div>
             </div>
-
           </div>
         </section>
 
-        <!-- ===== MODAL KATEGORII ===== (dodany na końcu body, przed stopką) -->
-        <div id="shopCatModal" class="smodal-backdrop" onclick="closeCatModal(event)">
-          <div class="smodal-box smodal-cat">
-            <button class="smodal-close" onclick="closeCategoryModal()"><i class="fas fa-times"></i></button>
-            <h2 class="smodal-title" id="catModalTitle">Koszulki</h2>
-
-            <div class="smodal-pagination-info">
-              <span id="catPageInfo"></span>
-              <div class="smodal-pag-btns">
-                <button id="catPrevBtn" onclick="catChangePage(-1)"><i class="fas fa-chevron-left"></i></button>
-                <button id="catNextBtn" onclick="catChangePage(1)"><i class="fas fa-chevron-right"></i></button>
-              </div>
+        <!-- KONFIGURATOR – w pełni zintegrowany -->
+        <section id="configurator">
+            <div class="configurator-section">
+                <div class="top-row">
+                    <h1 class="top-title">AdelbertusShop - Premium Konfigurator</h1>
+                    <p class="subtle">Brutalist streetwear design studio</p>
+                </div>
+                <div class="configurator">
+                    <div class="panel" style="grid-row: span 2;">
+                        <div class="panel-header">Design Tools</div>
+                        <div class="panel-body">
+                            <div class="section"><h3>Product color</h3><div id="colorSwatches" class="tool-grid"></div></div>
+                            <div class="section"><h3>Tekst</h3>
+                                <div class="field-row"><input id="liveText" type="text" placeholder="Wpisz tekst..."/></div>
+                                <div class="field-row"><select id="fontFamily"></select></div>
+                                <div class="field-row"><label style="width:100%">Rozmiar: <span id="fontSizeLabel">36</span>px</label><input id="fontSize" type="range" min="12" max="120" value="36"/></div>
+                                <div class="field-row"><input id="textColor" type="color" value="#ffffff"/><div class="toggle-group" id="presetTextColors"></div></div>
+                                <div class="field-row"><div class="toggle" id="boldBtn">B</div><div class="toggle" id="italicBtn">I</div><div class="toggle" id="underlineBtn">U</div></div>
+                                <div class="field-row"><button class="btn primary" id="addTextBtn">ADD TEXT</button></div>
+                            </div>
+                            <div class="section"><h3>Image Upload</h3>
+                                <div id="dropZone" style="border:1px dashed #555; border-radius:8px; padding:12px; text-align:center; color:#ccc;">Przeciągnij obraz lub kliknij</div>
+                                <div class="field-row" style="margin-top:8px;"><button class="btn" id="addImageBtn">ADD IMAGE</button></div>
+                            </div>
+                            <div class="section"><h3>Warstwy</h3>
+                                <div class="layer-controls" id="layerControlPanel">
+                                    <div class="field-row"><span id="selectedLayerName">Brak wybranej warstwy</span></div>
+                                    <div class="editor-grid">
+                                        <div><label>X</label><input id="layerX" type="number" /></div>
+                                        <div><label>Y</label><input id="layerY" type="number" /></div>
+                                        <div><label>Rotacja</label><input id="layerRotation" type="range" min="0" max="360" /></div>
+                                        <div><label>Skala</label><input id="layerScale" type="range" min="50" max="300" /></div>
+                                        <div style="grid-column: span 2;"><label>Opacity</label><input id="layerOpacity" type="range" min="0" max="100" /></div>
+                                    </div>
+                                    <div class="field-row">
+                                        <button class="btn btn-small" id="bringForward">↗</button>
+                                        <button class="btn btn-small" id="sendBackward">↙</button>
+                                        <button class="btn btn-small" id="toFront">⤴</button>
+                                        <button class="btn btn-small" id="toBack">⤵</button>
+                                    </div>
+                                    <div class="field-row">
+                                        <button class="btn btn-small" id="duplicateLayer">Kopiuj</button>
+                                        <button class="btn btn-small" id="deleteLayer">Usuń</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3>Lista warstw</h3>
+                                <ul id="layersList" class="layers-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-header">Product Selector + Canvas</div>
+                        <div class="panel-body">
+                            <div class="product-row">
+                                <div class="product-card active" data-product="hoodie"><h4>Bluza</h4><p>170 zł</p></div>
+                                <div class="product-card" data-product="tshirt"><h4>Koszulka</h4><p>80 zł</p></div>
+                                <div class="product-card" data-product="cap"><h4>Czapka</h4><p>99 zł</p></div>
+                            </div>
+                            <div class="canvas-wrap">
+                                <div class="canvas-top">
+                                    <div id="activeName">Bluza</div>
+                                    <div>
+                                        <button class="btn btn-small" id="gridToggle">Pokaż siatkę</button> 
+                                        <span id="zoomLabel">Zoom 100%</span>
+                                    </div>
+                                </div>
+                                <canvas id="studioCanvas" width="500" height="560"></canvas>
+                                <div class="field-row"><label class="help">Przeciągnij, skaluj, obracaj, kliknij warstwę aby edytować</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel" style="grid-row: span 2;">
+                        <div class="panel-header">Order Options</div>
+                        <div class="panel-body">
+                            <div class="section"><h3>Kolor produktu do druku</h3>
+                                <div id="orderColorGrid" class="tool-grid"></div>
+                                <div id="orderColorSelected" class="field-row"></div>
+                                <div class="mini-silhouette" id="orderPreview"></div>
+                            </div>
+                            <div class="section"><h3>Rozmiar</h3>
+                                <div class="size-grid" id="sizeGrid"></div>
+                                <div class="field-row"><button class="btn btn-small" id="sizeGuideBtn">Size guide</button></div>
+                                <div id="sizeGuide" class="help" style="display:none;">XS 50/67, S 52/69, M 54/71, L 57/74, XL 60/76, XXL 63/78, 2XL 66/80</div>
+                            </div>
+                            <div class="section"><h3>Ilość</h3>
+                                <div class="field-row">
+                                    <button class="btn btn-small" id="qtyMinus">−</button>
+                                    <input id="qtyInput" type="number" min="1" max="99" value="1" style="width:60px; text-align:center;"/>
+                                    <button class="btn btn-small" id="qtyPlus">+</button>
+                                </div>
+                                <div id="bulkHint" class="help"></div>
+                            </div>
+                            <div class="section"><h3>Cena</h3>
+                                <div class="field-row"><div style="font-size:1.9rem; font-weight:800; color:#e8ff00;" id="priceTag">170 zł</div></div>
+                                <div id="priceBreakdown" class="help"></div>
+                            </div>
+                            <div class="field-row">
+                                <button class="btn primary" id="exportPng">⬇ EKSPORTUJ PNG</button>
+                                <button class="btn primary" id="addToCartBtn">🛒 DODAJ DO KOSZYKA</button>
+                            </div>
+                            <div class="order-summary">
+                                <h3 style="margin:0 0 8px;font-size:1rem;">Podsumowanie</h3>
+                                <div class="summary-row"><span>Produkt</span><strong id="sumProduct">Bluza</strong></div>
+                                <div class="summary-row"><span>Kolor produktu</span><span id="sumColor">Czarny</span></div>
+                                <div class="summary-row"><span>Rozmiar</span><span id="sumSize">L</span></div>
+                                <div class="summary-row"><span>Ilość</span><span id="sumQty">1</span></div>
+                                <div class="summary-row"><span>Cena</span><strong id="sumTotal">170 zł</strong></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="smodal-products-grid" id="catModalGrid"></div>
-          </div>
+        <!-- ===== MODAL KATEGORII ===== -->
+        <div id="shopCatModal" class="smodal-backdrop" onclick="closeCatModal(event)">
+            <div class="smodal-box smodal-cat">
+                <button class="smodal-close" onclick="closeCategoryModal()"><i class="fas fa-times"></i></button>
+                <h2 class="smodal-title" id="catModalTitle">Koszulki</h2>
+                <div class="smodal-pagination-info">
+                    <span id="catPageInfo"></span>
+                    <div class="smodal-pag-btns">
+                        <button id="catPrevBtn" onclick="catChangePage(-1)"><i class="fas fa-chevron-left"></i></button>
+                        <button id="catNextBtn" onclick="catChangePage(1)"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="smodal-products-grid" id="catModalGrid"></div>
+            </div>
         </div>
 
         <!-- ===== MODAL PRODUKTU ===== -->
         <div id="shopProdModal" class="smodal-backdrop" onclick="closeProdModal(event)">
-          <div class="smodal-box smodal-prod">
-            <button class="smodal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
-
-            <div class="sprod-layout">
-              <!-- lewa: zdjęcia -->
-              <div class="sprod-gallery">
-                <div class="sprod-main-img-wrap">
-                  <img id="sprodMainImg" src="" alt="">
+            <div class="smodal-box smodal-prod">
+                <button class="smodal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+                <div class="sprod-layout">
+                    <div class="sprod-gallery">
+                        <div class="sprod-main-img-wrap">
+                            <img id="sprodMainImg" src="" alt="">
+                        </div>
+                        <div class="sprod-thumbs" id="sprodThumbs"></div>
+                    </div>
+                    <div class="sprod-details">
+                        <h2 class="sprod-title" id="sprodTitle"></h2>
+                        <div class="sprod-price" id="sprodPrice"></div>
+                        <div class="sprod-section-label">Kolor</div>
+                        <div class="sprod-colors" id="sprodColors"></div>
+                        <div class="sprod-section-label">Rozmiar</div>
+                        <div class="sprod-sizes" id="sprodSizes"></div>
+                        <div class="sprod-section-label">Ilość</div>
+                        <div class="sprod-qty-row">
+                            <button class="sprod-qty-btn" onclick="sprodQtyChange(-1)">−</button>
+                            <input type="number" id="sprodQty" value="1" min="1" max="99" readonly>
+                            <button class="sprod-qty-btn" onclick="sprodQtyChange(1)">+</button>
+                        </div>
+                        <button class="sprod-add-btn" onclick="sprodAddToCart()">
+                            <i class="fas fa-shopping-cart"></i> Dodaj do koszyka
+                        </button>
+                        <div class="sprod-benefits">
+                            <div><i class="fas fa-check"></i> Premium jakość 180g bawełna</div>
+                            <div><i class="fas fa-check"></i> DTF printing technology</div>
+                            <div><i class="fas fa-truck"></i> Dostawa 3–7 dni roboczych</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="sprod-thumbs" id="sprodThumbs"></div>
-              </div>
-
-              <!-- prawa: info -->
-              <div class="sprod-details">
-                <h2 class="sprod-title" id="sprodTitle"></h2>
-                <div class="sprod-price" id="sprodPrice"></div>
-
-                <div class="sprod-section-label">Kolor</div>
-                <div class="sprod-colors" id="sprodColors"></div>
-
-                <div class="sprod-section-label">Rozmiar</div>
-                <div class="sprod-sizes" id="sprodSizes"></div>
-
-                <div class="sprod-section-label">Ilość</div>
-                <div class="sprod-qty-row">
-                  <button class="sprod-qty-btn" onclick="sprodQtyChange(-1)">−</button>
-                  <input type="number" id="sprodQty" value="1" min="1" max="99" readonly>
-                  <button class="sprod-qty-btn" onclick="sprodQtyChange(1)">+</button>
-                </div>
-
-                <button class="sprod-add-btn" onclick="sprodAddToCart()">
-                  <i class="fas fa-shopping-cart"></i> Dodaj do koszyka
-                </button>
-
-                <div class="sprod-benefits">
-                  <div><i class="fas fa-check"></i> Premium jakość 180g bawełna</div>
-                  <div><i class="fas fa-check"></i> DTF printing technology</div>
-                  <div><i class="fas fa-truck"></i> Dostawa 3–7 dni roboczych</div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
 
-        <!-- 🎁 Sekcja Zbiórki FINALNA -->
+        <!-- 🎁 Sekcja Zbiórki -->
         <section id="charity" class="bg-gradient-to-r from-gray-900 via-purple-900 to-black text-white py-12 px-6 rounded-2xl shadow-lg">
-            
             <div class="section-title text-center mb-10">
                 <h2 class="text-5xl font-extrabold tracking-wide neon-glow">
                     [ UPLOAD NADZIEI // PROMYK ]
@@ -2412,9 +2323,7 @@
                 <div class="partners-grid">
                     <div class="partner-card">
                         <a href="https://oldschool-wwwojtek.vercel.app" target="_blank" class="partner-link">
-                            <img src="https://i.ibb.co/Jj0Kb3cX/Messenger-creation-4-E58-DEDD-81-B0-493-E-BB9-B-C22-CAD893-C8-E.jpg" 
-                                 alt="Old School Wojtek" 
-                                 class="partner-logo">
+                            <img src="https://i.ibb.co/Jj0Kb3cX/Messenger-creation-4-E58-DEDD-81-B0-493-E-BB9-B-C22-CAD893-C8-E.jpg" alt="Old School Wojtek" class="partner-logo">
                         </a>
                         <h4>Old School Wojtek</h4>
                         <p>Partner strategiczny</p>
@@ -2422,9 +2331,7 @@
                     
                     <div class="partner-card">
                         <a href="https://klaudia-3hjx.vercel.app" target="_blank" class="partner-link">
-                            <img src="https://i.ibb.co/99S1K3JX/Messenger-creation-FCFB3-CFD-3-BEF-4-D84-90-A8-F6687-B85-EA08.jpg" 
-                                 alt="Klaudia" 
-                                 class="partner-logo">
+                            <img src="https://i.ibb.co/99S1K3JX/Messenger-creation-FCFB3-CFD-3-BEF-4-D84-90-A8-F6687-B85-EA08.jpg" alt="Klaudia" class="partner-logo">
                         </a>
                         <h4>Klaudia</h4>
                         <p>Partner kreatywny</p>
@@ -2432,9 +2339,7 @@
                     
                     <div class="partner-card">
                         <a href="https://rafa-five-phi.vercel.app" target="_blank" class="partner-link">
-                            <img src="https://i.ibb.co/LDmgftTK/Messenger-creation-34-C98-E94-CF4-A-45-BC-A903-4785-C05-DC7-F2.jpg" 
-                                 alt="Rafał" 
-                                 class="partner-logo">
+                            <img src="https://i.ibb.co/LDmgftTK/Messenger-creation-34-C98-E94-CF4-A-45-BC-A903-4785-C05-DC7-F2.jpg" alt="Rafał" class="partner-logo">
                         </a>
                         <h4>Rafał</h4>
                         <p>Partner rozwojowy</p>
@@ -2442,9 +2347,7 @@
 
                     <div class="partner-card">
                         <a href="https://www.pkt.pl/firma/firma-budowlana-filipex-riman-pisyrakiewicz-9515570" target="_blank" class="partner-link">
-                            <img src="https://i.ibb.co/Fb7bp4rJ/Messenger-creation-64952-AE2-821-C-4-CB0-817-B-2-D516-E67-B84-C.jpg" 
-                                 alt="Filipex Riman" 
-                                 class="partner-logo">
+                            <img src="https://i.ibb.co/Fb7bp4rJ/Messenger-creation-64952-AE2-821-C-4-CB0-817-B-2-D516-E67-B84-C.jpg" alt="Filipex Riman" class="partner-logo">
                         </a>
                         <h4>Filipex Riman</h4>
                         <p>Partner budowlany</p>
@@ -2514,8 +2417,7 @@
                 <button onclick="toggleCart()" class="text-2xl">&times;</button>
             </div>
             
-            <div id="cartItems" class="mb-6">
-            </div>
+            <div id="cartItems" class="mb-6"></div>
             
             <div class="cart-total">
                 <div class="flex justify-between text-xl font-bold">
@@ -2555,15 +2457,9 @@
             </div>
             
             <div class="footer-ads">
-                <div class="footer-ad">
-                    <p>Reklama 1</p>
-                </div>
-                <div class="footer-ad">
-                    <p>Reklama 2</p>
-                </div>
-                <div class="footer-ad">
-                    <p>Reklama 3</p>
-                </div>
+                <div class="footer-ad"><p>Reklama 1</p></div>
+                <div class="footer-ad"><p>Reklama 2</p></div>
+                <div class="footer-ad"><p>Reklama 3</p></div>
             </div>
             
             <div class="mt-6">
@@ -2572,946 +2468,1309 @@
             </div>
         </footer>
 
-        <script src="/assets/js/site-security.js"></script>
-        
-        <!-- Oryginalny kod konfiguratora (przeniesiony w całości) -->
-        <section id="studio" class="configurator-section">
-          <div class="top-row"><h1 class="top-title">AdelbertusShop - Premium Konfigurator</h1><p class="subtle">Brutalist streetwear design studio</p></div>
-          <div class="configurator">
-            <div class="panel" style="grid-row: span 2;">
-              <div class="panel-header">Design Tools</div>
-              <div class="panel-body">
-                <div class="section"><h3>Product color</h3><div id="colorSwatches" class="tool-grid"></div></div>
-                <div class="section"><h3>Tekst</h3>
-                  <div class="field-row"><input id="liveText" type="text" placeholder="Wpisz tekst..."/></div>
-                  <div class="field-row"><select id="fontFamily"></select></div>
-                  <div class="field-row"><label style="width:100%">Rozmiar: <span id="fontSizeLabel">36</span>px</label><input id="fontSize" type="range" min="12" max="120" value="36"/></div>
-                  <div class="field-row"><input id="textColor" type="color" value="#ffffff"/><div class="toggle-group" id="presetTextColors"></div></div>
-                  <div class="field-row"><div class="toggle" id="boldBtn">B</div><div class="toggle" id="italicBtn">I</div><div class="toggle" id="underlineBtn">U</div></div>
-                  <div class="field-row"><button class="btn primary" id="addTextBtn">ADD TEXT</button></div>
-                </div>
-                <div class="section"><h3>Image Upload</h3>
-                  <div id="dropZone" style="border:1px dashed #555; border-radius:8px; padding:12px; text-align:center; color:#ccc;">Przeciągnij obraz lub kliknij</div>
-                  <div class="field-row" style="margin-top:8px;"><button class="btn" id="addImageBtn">ADD IMAGE</button></div>
-                </div>
-                <div class="section"><h3>Warstwy</h3><div class="layer-controls" id="layerControlPanel"><div class="field-row"><span id="selectedLayerName">Brak wybranej warstwy</span></div>
-                  <div class="editor-grid"><div><label>X</label><input id="layerX" type="number" /></div><div><label>Y</label><input id="layerY" type="number" /></div><div><label>Rotacja</label><input id="layerRotation" type="range" min="0" max="360" /></div><div><label>Skala</label><input id="layerScale" type="range" min="50" max="300" /></div><div style="grid-column: span 2;"><label>Opacity</label><input id="layerOpacity" type="range" min="0" max="100" /></div>
-                  </div>
-                  <div class="field-row"><button class="btn btn-small" id="bringForward">↗</button><button class="btn btn-small" id="sendBackward">↙</button><button class="btn btn-small" id="toFront">⤴</button><button class="btn btn-small" id="toBack">⤵</button></div>
-                  <div class="field-row"><button class="btn btn-small" id="duplicateLayer">Kopiuj</button><button class="btn btn-small" id="deleteLayer">Usuń</button></div>
-                </div></div>
-                <div>
-                  <h3>Lista warstw</h3>
-                  <ul id="layersList" class="layers-list"></ul>
-                </div>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-header">Product Selector + Canvas</div>
-              <div class="panel-body">
-                <div class="product-row">
-                  <div class="product-card active" data-product="hoodie"><h4>Bluza</h4><p>170 zł</p></div>
-                  <div class="product-card" data-product="tshirt"><h4>Koszulka</h4><p>80 zł</p></div>
-                  <div class="product-card" data-product="cap"><h4>Czapka</h4><p>99 zł</p></div>
-                </div>
-                <div class="canvas-wrap">
-                  <div class="canvas-top"><div id="activeName">Bluza</div><div><button class="btn btn-small" id="gridToggle">Pokaż siatkę</button> <span id="zoomLabel">Zoom 100%</span></div></div>
-                  <canvas id="studioCanvas" width="500" height="560"></canvas>
-                  <div class="field-row"><label class="help">Przeciągnij, skaluj, obracaj, kliknij warstwę aby edytować</label></div>
-                </div>
-              </div>
-            </div>
-            <div class="panel" style="grid-row: span 2;">
-              <div class="panel-header">Order Options</div>
-              <div class="panel-body">
-                <div class="section"><h3>Kolor produktu do druku</h3><div id="orderColorGrid" class="tool-grid"></div><div id="orderColorSelected" class="field-row"></div><div class="mini-silhouette" id="orderPreview"></div></div>
-                <div class="section"><h3>Rozmiar</h3><div class="size-grid" id="sizeGrid"></div><div class="field-row"><button class="btn btn-small" id="sizeGuideBtn">Size guide</button></div><div id="sizeGuide" class="help" style="display:none;">XS 50/67, S 52/69, M 54/71, L 57/74, XL 60/76, XXL 63/78, 2XL 66/80</div></div>
-                <div class="section"><h3>Ilość</h3><div class="field-row"><button class="btn btn-small" id="qtyMinus">−</button><input id="qtyInput" type="number" min="1" max="99" value="1" style="width:60px; text-align:center;"/><button class="btn btn-small" id="qtyPlus">+</button></div><div id="bulkHint" class="help"></div></div>
-                <div class="section"><h3>Cena</h3><div class="field-row"><div style="font-size:1.9rem; font-weight:800; color:#e8ff00;" id="priceTag">170 zł</div></div><div id="priceBreakdown" class="help"></div></div>
-                <div class="field-row"><button class="btn primary" id="exportPng">⬇ EKSPORTUJ PNG</button><button class="btn primary" id="addToCartBtn">🛒 DODAJ DO KOSZYKA</button></div>
-                <div class="order-summary"><h3 style="margin:0 0 8px;font-size:1rem;">Podsumowanie</h3>
-                  <div class="summary-row"><span>Produkt</span><strong id="sumProduct">Bluza</strong></div>
-                  <div class="summary-row"><span>Kolor produktu</span><span id="sumColor">Czarny</span></div>
-                  <div class="summary-row"><span>Rozmiar</span><span id="sumSize">L</span></div>
-                  <div class="summary-row"><span>Ilość</span><span id="sumQty">1</span></div>
-                  <div class="summary-row"><span>Cena</span><strong id="sumTotal">170 zł</strong></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <!-- Oryginalny skrypt konfiguratora (przeniesiony w całości) -->
         <script>
-        const state = {
-          product: 'hoodie',
-          canvasColor: '#ffffff',
-          orderColor: { hex: '#000000', name: 'Czarny' },
-          orderSize: 'L',
-          orderQty: 1,
-          zoom: 1,
-          showGrid: false,
-          layers: [],
-          selectedId: null,
-          dragState: null,
-          resizeState: null,
-          rotateState: null,
-          nextId: 1,
-        };
-
-        const canvas = document.getElementById('studioCanvas');
-        const ctx = canvas.getContext('2d');
-        const rect = canvas.getBoundingClientRect();
-        const productMap = {
-          hoodie: { name: 'Bluza', price: 170, path: 'M80 30 Q55 40 35 70 L35 220 Q30 235 35 250 L35 350 Q35 365 47 370 L110 375 Q125 370 135 357 L147 280 Q155 260 172 240 Q195 220 220 220 L220 70 Q195 40 170 30 Z' },
-          tshirt: { name: 'Koszulka', price: 80, path: 'M80 40 Q60 20 40 40 L40 90 Q35 110 40 130 L40 250 Q40 260 48 266 L70 278 Q80 282 90 276 L110 250 Q120 258 130 266 L150 276 Q160 282 170 278 L190 266 Q198 260 200 250 L200 130 Q205 110 200 90 L200 40 Q180 20 160 40 Z' },
-          cap: { name: 'Czapka', price: 99, path: 'M50 120 Q30 80 50 50 Q90 20 140 35 Q180 45 220 80 Q250 110 240 140 Q220 170 170 175 L106 180 Q80 184 60 170 Q45 155 50 120 Z' }
-        };
-
-        const canvasState = {
-          w: canvas.width,
-          h: canvas.height,
-          offsetX: canvas.offsetLeft,
-          offsetY: canvas.offsetTop,
-        };
-
-        function createSwatches() {
-          const parent = document.getElementById('colorSwatches');
-          const colors = ['#ffffff','#0a0a0a','#1a1a2e','#c0392b','#27ae60','#f39c12','#8e44ad','#7f8c8d','#e8c5a0','#2c3e50','#e74c3c','#16a085','#d35400','#2980b9','#8b0000','#228b22','#4b0082','#808000'];
-          parent.innerHTML='';
-          colors.forEach(c=>{ const b=document.createElement('button'); b.className='swatch'; b.style.background=c; b.title=c; b.dataset.color=c; b.onclick=()=>{state.canvasColor=c; render(); markActiveSwatch();}; parent.appendChild(b);});
-        }
-        function markActiveSwatch(){ document.querySelectorAll('#colorSwatches .swatch').forEach(s=>{s.classList.toggle('active', s.dataset.color===state.canvasColor);}); }
-
-        function createOrderSwatches() {
-          const parent=document.getElementById('orderColorGrid');
-          const ordered=[
-            {hex:'#000000',name:'Czarny'},{hex:'#ffffff',name:'Biały'},{hex:'#800020',name:'Bordowy'},{hex:'#3f3f3f',name:'Grafitowy'},{hex:'#1e3f6b',name:'Granat'},{hex:'#8a8a8a',name:'Szary'},{hex:'#2d5c45',name:'Butelkowa zieleń'},{hex:'#8d935f',name:'Khaki'},{hex:'#f4c8d1',name:'Jasny róż'},{hex:'#e8c5a0',name:'Beż'}
-          ];
-          ordered.forEach(c=>{ const b=document.createElement('button'); b.className='swatch'; b.style.background=c.hex; b.title=c.name; b.style.width='46px'; b.style.height='46px'; b.onclick=()=>{state.orderColor=c; updateOrderSummary(); renderOrderPreview(); markOrderActive();}; parent.appendChild(b);});
-        }
-        function markOrderActive(){ document.querySelectorAll('#orderColorGrid .swatch').forEach(s=>{ s.classList.toggle('active', s.style.backgroundColor===rgbFromHex(state.orderColor.hex)); });}
-        function rgbFromHex(h){ const c=h.replace('#',''); const r=parseInt(c.substring(0,2),16),g=parseInt(c.substring(2,4),16),b=parseInt(c.substring(4,6),16); return `rgb(${r}, ${g}, ${b})`; }
-
-        function createFontOptions(){ const fonts=['Bebas Neue','Impact','Georgia','Courier New','Verdana','Arial Black','Comic Sans MS','Palatino','Trebuchet MS','Futura','DM Sans','Space Mono']; const sel=document.getElementById('fontFamily'); fonts.forEach(f=>{ const o=document.createElement('option'); o.value=f; o.textContent=f; sel.appendChild(o); }); sel.value='Bebas Neue'; }
-
-        function init() {
-          createSwatches(); createOrderSwatches(); createFontOptions(); updateOrderSummary(); renderOrderPreview(); setupEvents(); render();
-        }
-
-        function setupEvents() {
-          document.querySelectorAll('.product-card').forEach(c=>{ c.addEventListener('click', ()=>{ document.querySelectorAll('.product-card').forEach(x=>x.classList.remove('active')); c.classList.add('active'); state.product=c.dataset.product; document.getElementById('activeName').textContent=productMap[state.product].name; render(); updateOrderSummary(); updatePrice(); }); });
-          document.getElementById('gridToggle').onclick = ()=>{ state.showGrid = !state.showGrid; document.getElementById('gridToggle').textContent = state.showGrid ? 'Ukryj siatkę' : 'Pokaż siatkę'; render(); };
-          document.getElementById('liveText').addEventListener('input', ()=>{ if(!state.selectedId){ return;} const l=findLayer(state.selectedId); if(l && l.type==='text'){ l.text = event.target.value; render(); updateLayerUI(); }});
-          document.getElementById('fontFamily').addEventListener('change', ()=>{ const l=findLayer(state.selectedId); if(l && l.type==='text'){ l.font = event.target.value; render(); updateLayerUI(); }});
-          document.getElementById('fontSize').addEventListener('input', ()=>{ const v=Number(event.target.value); document.getElementById('fontSizeLabel').textContent=v; const l=findLayer(state.selectedId); if(l && l.type==='text'){ l.fontSize=v; render(); updateLayerUI(); }});
-          document.getElementById('textColor').addEventListener('input', ()=>{ const l=findLayer(state.selectedId); if(l && l.type==='text'){ l.fontColor=event.target.value; render(); updateLayerUI(); }});
-          document.getElementById('addTextBtn').addEventListener('click', ()=>{ const txt=document.getElementById('liveText').value.trim()||'Tekst'; addTextLayer(txt); });
-          ['boldBtn','italicBtn','underlineBtn'].forEach(id=>{document.getElementById(id).addEventListener('click', e=>{ e.target.classList.toggle('active'); const l=findLayer(state.selectedId); if(l && l.type==='text'){ if(id==='boldBtn') l.bold=!l.bold; if(id==='italicBtn') l.italic=!l.italic; if(id==='underlineBtn') l.underline=!l.underline; render(); updateLayerUI(); } });});
-          const presets=['#ffffff','#000000','#e8ff00','#ff2a2a','#4bd74b','#4b8bff','#c55eff','#ffd84d']; const presetDiv=document.getElementById('presetTextColors'); presets.forEach(c=>{ const b=document.createElement('button'); b.className='swatch'; b.style.background=c; b.style.width='28px'; b.style.height='28px'; b.addEventListener('click', ()=>{ document.getElementById('textColor').value=c; const l=findLayer(state.selectedId); if(l && l.type==='text'){ l.fontColor=c; render(); updateLayerUI(); } }); presetDiv.appendChild(b); });
-          const dropZone=document.getElementById('dropZone'); dropZone.addEventListener('dragover', e=>{e.preventDefault(); dropZone.style.borderColor='#e8ff00';});
-          dropZone.addEventListener('dragleave', ()=>{dropZone.style.borderColor='#555';});
-          dropZone.addEventListener('drop', e=>{e.preventDefault(); dropZone.style.borderColor='#555'; const f=e.dataTransfer.files[0]; if(f) handleFileUpload(f);});
-          dropZone.addEventListener('click', ()=>{ const inp=document.createElement('input'); inp.type='file'; inp.accept='image/png,image/jpeg,image/svg+xml,image/webp'; inp.onchange = ()=>{ if(inp.files[0]) handleFileUpload(inp.files[0]);}; inp.click();});
-          document.getElementById('addImageBtn').addEventListener('click', ()=>{ const inp=document.createElement('input'); inp.type='file'; inp.accept='image/png,image/jpeg,image/svg+xml,image/webp'; inp.onchange=()=>{ if(inp.files[0]) handleFileUpload(inp.files[0]);}; inp.click();});
-
-          document.getElementById('bringForward').addEventListener('click', () => reorderSelected(1));
-          document.getElementById('sendBackward').addEventListener('click', () => reorderSelected(-1));
-          document.getElementById('toFront').addEventListener('click', () => reorderSelected(999));
-          document.getElementById('toBack').addEventListener('click', () => reorderSelected(-999));
-          document.getElementById('duplicateLayer').addEventListener('click', duplicateSelected);
-          document.getElementById('deleteLayer').addEventListener('click', ()=>{ if(confirm('Usuń warstwę?')) removeSelected(); });
-
-          ['layerX','layerY','layerRotation','layerScale','layerOpacity'].forEach(id=>{document.getElementById(id).addEventListener('input', ()=>{ if(!state.selectedId) return; const l=findLayer(state.selectedId); if(!l) return; if(id==='layerX') l.x=Number(event.target.value); if(id==='layerY') l.y=Number(event.target.value); if(id==='layerRotation') l.rotation=Number(event.target.value); if(id==='layerScale'){ const v=Number(event.target.value)/100; l.scaleX=v; l.scaleY=v; } if(id==='layerOpacity') l.opacity=Number(event.target.value)/100; render(); updateLayerUI(); });});
-
-          document.getElementById('sizeGrid').addEventListener('click', e=>{ if(e.target.classList.contains('size-btn')){ state.orderSize=e.target.textContent; updateSizeButtons(); updateOrderSummary(); }});
-          document.getElementById('sizeGuideBtn').addEventListener('click', ()=>{ const g=document.getElementById('sizeGuide'); g.style.display=g.style.display==='none'?'block':'none'; });
-          document.getElementById('qtyMinus').addEventListener('click', ()=>{ const inp=document.getElementById('qtyInput'); inp.value=Math.max(1, Number(inp.value)-1); state.orderQty=Number(inp.value); updateOrderSummary(); updatePrice(); });
-          document.getElementById('qtyPlus').addEventListener('click', ()=>{ const inp=document.getElementById('qtyInput'); inp.value=Math.min(99, Number(inp.value)+1); state.orderQty=Number(inp.value); updateOrderSummary(); updatePrice(); });
-          document.getElementById('qtyInput').addEventListener('input', ()=>{ let v=Math.max(1, Math.min(99, Number(event.target.value)||1)); event.target.value=v; state.orderQty=v; updateOrderSummary(); updatePrice(); });
-
-          document.getElementById('exportPng').addEventListener('click', ()=>{ const data=canvas.toDataURL('image/png',1); const a=document.createElement('a'); a.href=data; a.download=`adelbertus-projekt-${Date.now()}.png`; a.click(); });
-          document.getElementById('addToCartBtn').addEventListener('click', ()=>{ addToCart(); });
-
-          canvas.addEventListener('mousedown', onMouseDown);
-          window.addEventListener('mousemove', onMouseMove);
-          window.addEventListener('mouseup', onMouseUp);
-          canvas.addEventListener('wheel', e=>{ e.preventDefault(); const delta=e.deltaY>0?-0.05:0.05; state.zoom=Math.min(2,Math.max(0.5,state.zoom+delta)); document.getElementById('zoomLabel').textContent=`Zoom ${Math.round(state.zoom*100)}%`; render(); });
-        }
-
-        function addTextLayer(text) {
-          const layer={ id: state.nextId++, type:'text', name:`Text ${state.nextId-1}`, x: 250, y:280, width:200, height:60, rotation:0, scaleX:1, scaleY:1, opacity:1, visible:true, locked:false, flipH:false, flipV:false, text, font:document.getElementById('fontFamily').value, fontSize:Number(document.getElementById('fontSize').value), fontColor:document.getElementById('textColor').value, bold:false, italic:false, underline:false, align:'center', letterSpacing:0, shadow:false, shadowColor:'#000000', shadowBlur:0 };
-          state.layers.push(layer); selectLayer(layer.id); render(); updateLayersPanel(); }
-
-        function handleFileUpload(file) {
-          const reader = new FileReader();
-          reader.onload = () => {
-            const img = new Image();
-            img.onload = () => {
-              const scale = Math.min(200 / Math.max(img.width, img.height), 1);
-              const w = img.width * scale;
-              const h = img.height * scale;
-              const layer={ id: state.nextId++, type:'image', name:`Image ${state.nextId-1}`, x:250, y:280, width:w, height:h, rotation:0, scaleX:1, scaleY:1, opacity:1, visible:true, locked:false, flipH:false, flipV:false, img, }
-              state.layers.push(layer); selectLayer(layer.id); render(); updateLayersPanel();
+            // ============================================================
+            // DANE PRODUKTÓW DO MODALU SKLEPU
+            // ============================================================
+            const SHOP_PRODUCTS = {
+                koszulka: [
+                    { name:'Koszulka "Portret"', price:80, images:['https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg','https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg','https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Rock"', price:80, images:['https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Maska ice"', price:80, images:['https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Zakazany Produkt"', price:80, images:['https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Rzymianin"', price:80, images:['https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Symbol PI"', price:80, images:['https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Ufaj Zanim"', price:80, images:['https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "kod QR"', price:80, images:['https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "DJ KooL"', price:80, images:['https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Puzel', price:80, images:['https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Wybrany', price:80, images:['https://i.ibb.co/JFMF5VFz/file-00000000465c620a87ec4dbf4bd0ce30.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Game Over"', price:80, images:['https://i.ibb.co/JFwsTR50/1765139504481.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Master"', price:80, images:['https://i.ibb.co/pvfCCw30/1765139433826.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Mix Tape"', price:80, images:['https://i.ibb.co/0VmWzt4t/1765139223781.png'], colors:['#000','#fff','#FF4500'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Bóg OldSchoolu"', price:80, images:['https://i.ibb.co/9kqmxvjC/1765139285646.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Koszulka "Step Outside"', price:80, images:['https://i.ibb.co/TM5Y3K2k/Screenshot-20251126-225355-Chrome-2.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                ],
+                bluza: [
+                    { name:'Bluza "Urban"', price:170, images:['https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Rock"', price:170, images:['https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Street"', price:170, images:['https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Premium"', price:170, images:['https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Comfort"', price:170, images:['https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Style"', price:170, images:['https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Fashion"', price:170, images:['https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Postać"', price:170, images:['https://i.ibb.co/4nvSL5MZ/Screenshot-20251206-174259-Chrome-2.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Street Protest"', price:170, images:['https://i.ibb.co/yH14sh7/1765058892064.png'], colors:['#000','#800000','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "System"', price:170, images:['https://i.ibb.co/BHdWxR2K/1765059602383.png'], colors:['#000','#002b36','#800080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Old School"', price:170, images:['https://i.ibb.co/27Xx6Gvg/1765059124080.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Game Over"', price:170, images:['https://i.ibb.co/KcSxZtKs/1765058809631.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Jestem"', price:170, images:['https://i.ibb.co/PZfXBw4r/1765059013678.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Samotność"', price:170, images:['https://i.ibb.co/CpLNV2xF/1765280750258-1.jpg'], colors:['#000','#808080','#002b36'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Maska"', price:170, images:['https://i.ibb.co/VWKjcRYJ/1765280808416-1.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Wojownik"', price:170, images:['https://i.ibb.co/0RCYxJ9x/1765281063951-1.jpg'], colors:['#000','#808080','#800000'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Kiss"', price:170, images:['https://i.ibb.co/7dyWTbWt/1765281231206-1.jpg'], colors:['#000','#fff','#C41E3A'], sizes:['S','M','L','XL','XXL'] },
+                    { name:'Bluza "Kontrolowany"', price:170, images:['https://i.ibb.co/hxkHhmGz/1765137452776.png'], colors:['#000','#808080','#800000'], sizes:['S','M','L','XL','XXL'] },
+                ],
+                czapka: [
+                    { name:'Czapka "Classic"', price:99, images:['https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Sport"', price:99, images:['https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Adelbertus"', price:90, images:['https://i.ibb.co/FLQYNBnj/Screenshot-2025-08-24-13-01-48.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Adelbertus" Zimowa', price:90, images:['https://i.ibb.co/Pv6HCvQk/Screenshot-2025-08-24-12-44-15.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Symbol Pi"', price:90, images:['https://i.ibb.co/MyCYBwj3/Screenshot-2025-08-24-13-16-08.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Street"', price:99, images:['https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
+                    { name:'Czapka "Premium"', price:99, images:['https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
+                ]
             };
-            img.src = reader.result;
-          };
-          reader.readAsDataURL(file);
-        }
 
-        function findLayer(id){ return state.layers.find(l=>l.id===id); }
-        function selectLayer(id){ state.selectedId=id; updateLayerUI(); render(); }
-        function deselect(){ state.selectedId=null; updateLayerUI(); render(); }
+            // Stan dla modalii
+            let _catCurrent = null;
+            let _catPage = 0;
+            const CAT_PAGE_SIZE = 9;
+            let _prodCurrent = null;
 
-        function updateLayerUI() {
-          const selected = findLayer(state.selectedId);
-          const name = selected ? selected.name : 'Brak wybranej warstwy';
-          document.getElementById('selectedLayerName').textContent = name;
-          if(selected){ document.getElementById('layerX').value = Math.round(selected.x); document.getElementById('layerY').value = Math.round(selected.y); document.getElementById('layerRotation').value = selected.rotation; document.getElementById('layerScale').value = Math.round(selected.scaleX*100); document.getElementById('layerOpacity').value = Math.round(selected.opacity*100); }
-          updateLayersPanel();
-        }
+            // Funkcje dla modalii kategorii
+            function openCategoryModal(cat) {
+                _catCurrent = cat;
+                _catPage = 0;
+                const titles = { koszulka:'Koszulki', bluza:'Bluzy', czapka:'Czapki' };
+                document.getElementById('catModalTitle').textContent = titles[cat];
+                renderCatPage();
+                document.getElementById('shopCatModal').classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
 
-        function updateLayersPanel(){ const el=document.getElementById('layersList'); el.innerHTML=''; [...state.layers].reverse().forEach(layer=>{ const li=document.createElement('li'); li.className='layer-item'+(state.selectedId===layer.id?' active':''); li.innerHTML=`<div class="thumb"></div><div style="flex:1">${layer.name}</div><div>${layer.visible?'<i class="fa fa-eye"></i>':'<i class="fa fa-eye-slash"></i>'}</div>`;
-            li.onclick=()=>{ selectLayer(layer.id); };
-            el.appendChild(li);
-          }); }
+            function renderCatPage() {
+                const products = SHOP_PRODUCTS[_catCurrent];
+                const total = products.length;
+                const totalPages = Math.ceil(total / CAT_PAGE_SIZE);
+                const start = _catPage * CAT_PAGE_SIZE;
+                const slice = products.slice(start, start + CAT_PAGE_SIZE);
 
-        function reorderSelected(dir){ const i=state.layers.findIndex(l=>l.id===state.selectedId); if(i<0) return; const item=state.layers.splice(i,1)[0]; if(dir>0){ state.layers.splice(Math.min(state.layers.length, i+1),0,item);} else { state.layers.splice(Math.max(0, i-1),0,item);} if(dir===999) state.layers.push(item); if(dir===-999) state.layers.unshift(item); render(); updateLayersPanel(); }
-        function duplicateSelected(){ const l=findLayer(state.selectedId); if(!l) return; const copy={...l,id:state.nextId++,name:l.name+' copy',x:l.x+15,y:l.y+15}; if(l.type==='image') copy.img=l.img; state.layers.push(copy); selectLayer(copy.id); updateLayersPanel(); render(); }
-        function removeSelected(){ const i=state.layers.findIndex(l=>l.id===state.selectedId); if(i>=0){ state.layers.splice(i,1); state.selectedId=null; updateLayerUI(); render(); updateLayersPanel(); }}
+                document.getElementById('catPageInfo').textContent = `Strona ${_catPage + 1} z ${totalPages} (${total} produktów)`;
+                document.getElementById('catPrevBtn').disabled = _catPage === 0;
+                document.getElementById('catNextBtn').disabled = _catPage >= totalPages - 1;
 
-        function getTransformedBounds(layer){ const w=layer.width*layer.scaleX; const h=layer.height*layer.scaleY; return { x: layer.x - w/2, y: layer.y - h/2, w, h } }
+                const grid = document.getElementById('catModalGrid');
+                grid.innerHTML = '';
+                slice.forEach((prod, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'smodal-prod-card';
+                    card.innerHTML = `
+                        <img src="${prod.images[0]}" alt="${prod.name}" loading="lazy">
+                        <div class="smodal-prod-card-info">
+                            <div class="smodal-prod-card-name">${prod.name}</div>
+                            <div class="smodal-prod-card-price">${prod.price} zł</div>
+                        </div>`;
+                    card.addEventListener('click', () => openProductModal(_catCurrent, start + idx));
+                    grid.appendChild(card);
+                });
+            }
 
-        function render() {
-          ctx.clearRect(0,0,canvas.width,canvas.height);
-          ctx.fillStyle='#111'; ctx.fillRect(0,0,canvas.width,canvas.height);
-          if(state.showGrid){ ctx.save(); ctx.strokeStyle='rgba(255,255,255,.08)'; ctx.lineWidth=1; for(let x=0;x<canvas.width;x+=50){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,canvas.height); ctx.stroke();} for(let y=0;y<canvas.height;y+=50){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(canvas.width,y); ctx.stroke();} ctx.restore(); }
+            function catChangePage(dir) {
+                const products = SHOP_PRODUCTS[_catCurrent];
+                const totalPages = Math.ceil(products.length / CAT_PAGE_SIZE);
+                _catPage = Math.max(0, Math.min(totalPages - 1, _catPage + dir));
+                renderCatPage();
+            }
 
-          // draw product silhouette
-          ctx.save(); ctx.translate(0,0); ctx.beginPath(); const pathStr=productMap[state.product].path; const path=new Path2D(pathStr); ctx.fillStyle=state.canvasColor; ctx.shadowColor='rgba(0,0,0,0.4)'; ctx.shadowBlur=20; ctx.shadowOffsetY=10; ctx.translate(130,80); ctx.scale(1.6,1.6); ctx.fill(path); ctx.restore();
+            function closeCategoryModal() {
+                document.getElementById('shopCatModal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
 
-          for(const layer of state.layers){ if(!layer.visible) continue; ctx.save(); ctx.globalAlpha=layer.opacity; const x=layer.x; const y=layer.y; ctx.translate(x,y); ctx.rotate(layer.rotation*Math.PI/180); ctx.scale(layer.flipH?-1:1, layer.flipV?-1:1); ctx.scale(layer.scaleX, layer.scaleY);
-              if(layer.type==='text'){
-                const fontParts=[];
-                if(layer.italic) fontParts.push('italic');
-                if(layer.bold) fontParts.push('bold');
-                fontParts.push(`${layer.fontSize}px`);
-                fontParts.push(layer.font);
-                ctx.font = fontParts.join(' ');
-                ctx.fillStyle = layer.fontColor;
-                ctx.textAlign = layer.align;
-                ctx.textBaseline='middle';
-                if(layer.shadow){ ctx.shadowColor=layer.shadowColor; ctx.shadowBlur=layer.shadowBlur; }
-                const alignX = layer.align==='left'? -layer.width/2 : layer.align==='right'? layer.width/2 : 0;
-                ctx.fillText(layer.text, alignX, 0);
-                if(layer.underline){ const w=ctx.measureText(layer.text).width; let x0=alignX; if(layer.align==='center') x0 -= w/2; if(layer.align==='right') x0 -= w; ctx.strokeStyle=layer.fontColor; ctx.lineWidth=2; ctx.beginPath(); ctx.moveTo(x0, 10); ctx.lineTo(x0+w,10); ctx.stroke(); }
-              } else if(layer.type==='image'){ const w=layer.width; const h=layer.height; ctx.drawImage(layer.img, -w/2, -h/2, w, h); }
-            ctx.restore(); }
+            function closeCatModal(e) {
+                if (e.target === document.getElementById('shopCatModal')) closeCategoryModal();
+            }
 
-          if(state.selectedId){ const selected=findLayer(state.selectedId); if(selected){ const {x,y}=selected; const w=selected.width*selected.scaleX; const h=selected.height*selected.scaleY; ctx.save(); ctx.translate(x,y); ctx.rotate(selected.rotation*Math.PI/180); ctx.strokeStyle='#e8ff00'; ctx.setLineDash([6,4]); ctx.lineWidth=2; ctx.strokeRect(-w/2,-h/2,w,h);
-              const handles=[[-w/2,-h/2],[0,-h/2],[w/2,-h/2],[-w/2,0],[w/2,0],[-w/2,h/2],[0,h/2],[w/2,h/2]];
-              ctx.setLineDash([]);
-              handles.forEach(([hx,hy])=>{ ctx.fillStyle='#d4af37'; ctx.fillRect(hx-5,hy-5,10,10); });
-              ctx.beginPath(); ctx.strokeStyle='#e8ff00'; ctx.moveTo(0,-h/2); ctx.lineTo(0,-h/2-30); ctx.stroke(); ctx.beginPath(); ctx.fillStyle='#e8ff00'; ctx.arc(0,-h/2-40,8,0,Math.PI*2); ctx.fill(); 
-              ctx.restore(); }
-          }
-          updatePrice(); updateOrderSummary();
-        }
+            // Funkcje dla modalii produktu
+            function openProductModal(cat, idx) {
+                const prod = SHOP_PRODUCTS[cat][idx];
+                _prodCurrent = { ...prod };
+                _prodCurrent._selectedColor = prod.colors[0];
+                _prodCurrent._selectedSize = prod.sizes[0];
 
-        function pointInLayer(x,y,layer){ const dx=x-layer.x; const dy=y-layer.y; const angle=-layer.rotation*Math.PI/180; const rx = dx*Math.cos(angle)-dy*Math.sin(angle); const ry = dx*Math.sin(angle)+dy*Math.cos(angle); const w=layer.width*layer.scaleX; const h=layer.height*layer.scaleY; return rx>=-w/2 && rx<=w/2 && ry>=-h/2 && ry<=h/2; }
+                document.getElementById('sprodTitle').textContent = prod.name;
+                document.getElementById('sprodPrice').textContent = prod.price + ' zł';
+                document.getElementById('sprodMainImg').src = prod.images[0];
+                document.getElementById('sprodQty').value = 1;
 
-        function onMouseDown(e){ const r=canvas.getBoundingClientRect(); const x=(e.clientX-r.left); const y=(e.clientY-r.top); let found=null; for(let i=state.layers.length-1;i>=0;i--){ const l=state.layers[i]; if(!l.visible||l.locked) continue; if(pointInLayer(x,y,l)){ found=l; break; }} if(found){ selectLayer(found.id); state.dragState={layerId:found.id, offsetX:x-found.x, offsetY:y-found.y}; canvas.style.cursor='grabbing'; } else { deselect(); }}
-        function onMouseMove(e){ if(!state.dragState) return; const r=canvas.getBoundingClientRect(); const x=(e.clientX-r.left); const y=(e.clientY-r.top); const l=findLayer(state.dragState.layerId); if(l){ l.x = x - state.dragState.offsetX; l.y = y - state.dragState.offsetY; render(); updateLayerUI(); }}
-        function onMouseUp(){ state.dragState=null; canvas.style.cursor='grab'; }
+                const thumbsEl = document.getElementById('sprodThumbs');
+                thumbsEl.innerHTML = '';
+                prod.images.forEach((src, i) => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = prod.name;
+                    if (i === 0) img.classList.add('active');
+                    img.addEventListener('click', () => {
+                        document.getElementById('sprodMainImg').src = src;
+                        thumbsEl.querySelectorAll('img').forEach(t => t.classList.remove('active'));
+                        img.classList.add('active');
+                    });
+                    thumbsEl.appendChild(img);
+                });
 
-        function updateOrderSummary(){ document.getElementById('sumProduct').textContent = productMap[state.product].name; document.getElementById('sumColor').innerHTML=`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${state.orderColor.hex};margin-right:6px;"></span>${state.orderColor.name}`; document.getElementById('sumSize').textContent = state.orderSize; document.getElementById('sumQty').textContent = state.orderQty; document.getElementById('sumTotal').textContent = formatPrice(calcTotal()); document.getElementById('orderColorSelected').innerHTML=`<div style="width:28px;height:28px;border-radius:6px;background:${state.orderColor.hex};border:1px solid #444;"></div><span style="margin-left:8px;">${state.orderColor.name}</span>`; updatePrice(); }
-        function renderOrderPreview(){ const mini=document.getElementById('orderPreview'); mini.innerHTML=''; const c=document.createElement('canvas'); c.width=72; c.height=72; const cc=c.getContext('2d'); cc.fillStyle=state.orderColor.hex; cc.fillRect(0,0,72,72); cc.fillStyle='#222'; cc.beginPath(); if(state.product==='hoodie'){ cc.moveTo(10,20); cc.quadraticCurveTo(20,8,35,10); cc.quadraticCurveTo(50,12,62,20); cc.lineTo(62,52); cc.quadraticCurveTo(50,64,35,63); cc.quadraticCurveTo(20,62,10,52); cc.closePath(); } else if(state.product==='tshirt'){ cc.moveTo(10,18); cc.lineTo(62,18); cc.lineTo(62,52); cc.lineTo(10,52); cc.closePath(); } else { cc.moveTo(8,38); cc.quadraticCurveTo(32,10,64,30); cc.quadraticCurveTo(58,50,24,54); cc.closePath(); }
-          cc.fill(); mini.appendChild(c); }
-        function updateSizeButtons(){ document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active', b.textContent===state.orderSize)); }
-        function updatePrice(){ const unit=productMap[state.product].price; const qty=state.orderQty; let total=unit*qty; const breakdown=document.getElementById('priceBreakdown'); if(qty>=3){ const discounted=Math.round(total*0.9); breakdown.innerHTML=`<span style="text-decoration:line-through;">${unit}×${qty}=${total} zł</span> <span style="color:#4ead4e;">${discounted} zł (-10%)</span>`; total=discounted; } else { breakdown.textContent=`${unit}×${qty}=${total} zł`; } document.getElementById('priceTag').textContent = `${total} zł`; document.getElementById('sumTotal').textContent = `${total} zł`; }
-        function formatPrice(v){ return `${v} zł`; }
-        function calcTotal(){ const unit=productMap[state.product].price; let total=unit*state.orderQty; if(state.orderQty>=3) total=Math.round(total*0.9); return total; }
+                const colorsEl = document.getElementById('sprodColors');
+                colorsEl.innerHTML = '';
+                const colorNames = { '#000':'Czarny','#fff':'Biały','#ffffff':'Biały','#800020':'Bordowy','#36454F':'Grafitowy','#808080':'Szary','#002b36':'Granatowy','#800080':'Fioletowy','#800000':'Bordowy','#FF4500':'Pomarańczowy','#C41E3A':'Czerwony' };
+                prod.colors.forEach(c => {
+                    const dot = document.createElement('div');
+                    dot.className = 'sprod-color-dot' + (c === prod.colors[0] ? ' active' : '');
+                    dot.style.background = c;
+                    if (c === '#fff' || c === '#ffffff') dot.style.border = '2px solid #ddd';
+                    dot.title = colorNames[c] || c;
+                    dot.addEventListener('click', () => {
+                        colorsEl.querySelectorAll('.sprod-color-dot').forEach(d => d.classList.remove('active'));
+                        dot.classList.add('active');
+                        _prodCurrent._selectedColor = c;
+                    });
+                    colorsEl.appendChild(dot);
+                });
 
-        function addToCart(){ const img=canvas.toDataURL('image/png'); const payload={product:productMap[state.product].name, price:calcTotal(), image:img, size:state.orderSize, color:state.orderColor.name}; console.log('addToCart',payload); alert('Dodano do koszyka!'); }
+                const sizesEl = document.getElementById('sprodSizes');
+                sizesEl.innerHTML = '';
+                prod.sizes.forEach(s => {
+                    const btn = document.createElement('button');
+                    btn.className = 'sprod-size-btn' + (s === prod.sizes[0] ? ' active' : '');
+                    btn.textContent = s;
+                    btn.addEventListener('click', () => {
+                        sizesEl.querySelectorAll('.sprod-size-btn').forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        _prodCurrent._selectedSize = s;
+                    });
+                    sizesEl.appendChild(btn);
+                });
 
-        init();
-        </script>
+                document.getElementById('shopProdModal').classList.add('open');
+            }
 
-    <script>
-        // ============================================================
-        // DANE PRODUKTÓW DO MODALU SKLEPU (od Claude'a)
-        // ============================================================
-        const SHOP_PRODUCTS = {
-          koszulka: [
-            { name:'Koszulka "Portret"', price:80, images:['https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg','https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg','https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Rock"', price:80, images:['https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Maska ice"', price:80, images:['https://i.ibb.co/1fWw0hhY/Screenshot-20250714-002113-Files-by-Google-2.jpg','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Zakazany Produkt"', price:80, images:['https://i.ibb.co/7tJ0Xdj0/file-00000000fd5861f78cb774cd7808e871.png','https://i.ibb.co/Z6x5MTH6/Screenshot-20250714-002343-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Rzymianin"', price:80, images:['https://i.ibb.co/Kj7jpDKj/file-0000000014a861f4bd0cd14065b487dc.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Symbol PI"', price:80, images:['https://i.ibb.co/JFcZBZQx/Resizer-17510539315581.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Ufaj Zanim"', price:80, images:['https://i.ibb.co/wZgwDc26/Messenger-creation-2528-E953-6-E45-4661-A646-E12970-E90-CC0-1.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "kod QR"', price:80, images:['https://i.ibb.co/C5L9XQZL/Messenger-creation-01-A6-CAA5-4033-4-C60-A136-560204-FF72-A0.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "DJ KooL"', price:80, images:['https://i.ibb.co/j9Js8VDs/file-00000000c71c6246b9d78afc2a6c0a39.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Puzel', price:80, images:['https://i.ibb.co/DDdbtm1R/file-00000000985c6243ba1d82431c2ead9f-2.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Wybrany', price:80, images:['https://i.ibb.co/JFMF5VFz/file-00000000465c620a87ec4dbf4bd0ce30.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Game Over"', price:80, images:['https://i.ibb.co/JFwsTR50/1765139504481.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Master"', price:80, images:['https://i.ibb.co/pvfCCw30/1765139433826.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Mix Tape"', price:80, images:['https://i.ibb.co/0VmWzt4t/1765139223781.png'], colors:['#000','#fff','#FF4500'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Bóg OldSchoolu"', price:80, images:['https://i.ibb.co/9kqmxvjC/1765139285646.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Koszulka "Step Outside"', price:80, images:['https://i.ibb.co/TM5Y3K2k/Screenshot-20251126-225355-Chrome-2.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-          ],
-          bluza: [
-            { name:'Bluza "Urban"', price:170, images:['https://i.ibb.co/kgrCffk4/Screenshot-20250714-002247-Files-by-Google-2.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Rock"', price:170, images:['https://i.ibb.co/fzDrpppx/Screenshot-2025-09-05-17-19-30.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Street"', price:170, images:['https://i.ibb.co/fVgHHVhb/Messenger-creation-E0864653-904-F-476-C-8839-8809-D0610996.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Premium"', price:170, images:['https://i.ibb.co/N2t3thBF/Messenger-creation-C3-B74628-A8-E4-4293-B46-D-754-D2-C97-F8-CC.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Comfort"', price:170, images:['https://i.ibb.co/hFcpQxP8/Messenger-creation-8-EAC032-B-3-F98-42-C0-B8-C5-6-ED87-AEFC4-F1.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Style"', price:170, images:['https://i.ibb.co/fYpmmnwf/file-00000000f8a86246ac7ca2f0cc1f55c3.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Fashion"', price:170, images:['https://i.ibb.co/nMqH7CXH/Messenger-creation-9-EE42-DE8-FCD2-4964-ABED-62-C3-A4-A75657.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Postać"', price:170, images:['https://i.ibb.co/4nvSL5MZ/Screenshot-20251206-174259-Chrome-2.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Street Protest"', price:170, images:['https://i.ibb.co/yH14sh7/1765058892064.png'], colors:['#000','#800000','#36454F'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "System"', price:170, images:['https://i.ibb.co/BHdWxR2K/1765059602383.png'], colors:['#000','#002b36','#800080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Old School"', price:170, images:['https://i.ibb.co/27Xx6Gvg/1765059124080.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Game Over"', price:170, images:['https://i.ibb.co/KcSxZtKs/1765058809631.png'], colors:['#000','#fff','#800000'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Jestem"', price:170, images:['https://i.ibb.co/PZfXBw4r/1765059013678.png'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Samotność"', price:170, images:['https://i.ibb.co/CpLNV2xF/1765280750258-1.jpg'], colors:['#000','#808080','#002b36'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Maska"', price:170, images:['https://i.ibb.co/VWKjcRYJ/1765280808416-1.jpg'], colors:['#000','#fff','#808080'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Wojownik"', price:170, images:['https://i.ibb.co/0RCYxJ9x/1765281063951-1.jpg'], colors:['#000','#808080','#800000'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Kiss"', price:170, images:['https://i.ibb.co/7dyWTbWt/1765281231206-1.jpg'], colors:['#000','#fff','#C41E3A'], sizes:['S','M','L','XL','XXL'] },
-            { name:'Bluza "Kontrolowany"', price:170, images:['https://i.ibb.co/hxkHhmGz/1765137452776.png'], colors:['#000','#808080','#800000'], sizes:['S','M','L','XL','XXL'] },
-          ],
-          czapka: [
-            { name:'Czapka "Classic"', price:99, images:['https://i.ibb.co/7tmM2QRP/file-000000004d38620a9f9d0d8d43926ba0.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Sport"', price:99, images:['https://i.ibb.co/WNYfpVSv/Messenger-creation-BA0-DA340-47-E5-44-EB-BE4-B-B502-F85536-FC.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Adelbertus"', price:90, images:['https://i.ibb.co/FLQYNBnj/Screenshot-2025-08-24-13-01-48.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Adelbertus" Zimowa', price:90, images:['https://i.ibb.co/Pv6HCvQk/Screenshot-2025-08-24-12-44-15.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Symbol Pi"', price:90, images:['https://i.ibb.co/MyCYBwj3/Screenshot-2025-08-24-13-16-08.png'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Street"', price:99, images:['https://i.ibb.co/qYnKKPjJ/Messenger-creation-86-A81650-FAB1-4-DF9-B75-E-5-EB295822-CBD.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL'] },
-            { name:'Czapka "Premium"', price:99, images:['https://i.ibb.co/35PSSHJj/Screenshot-20250608-161603-Chat-GPT-3.jpg'], colors:['#000','#fff','#800020','#36454F'], sizes:['S','M','L','XL','XXL'] },
-          ]
-        };
+            function sprodQtyChange(dir) {
+                const input = document.getElementById('sprodQty');
+                const val = Math.max(1, Math.min(99, parseInt(input.value) + dir));
+                input.value = val;
+            }
 
-        /* ============================================================
-           STAN MODALU (od Claude'a)
-           ============================================================ */
-        let _catCurrent = null;
-        let _catPage = 0;
-        const CAT_PAGE_SIZE = 9;
-        let _prodCurrent = null;
+            function sprodAddToCart() {
+                if (!_prodCurrent) return;
+                const qty = parseInt(document.getElementById('sprodQty').value) || 1;
+                const colorNames = { '#000':'Czarny','#fff':'Biały','#ffffff':'Biały','#800020':'Bordowy','#36454F':'Grafitowy','#808080':'Szary','#002b36':'Granatowy','#800080':'Fioletowy','#800000':'Bordowy','#FF4500':'Pomarańczowy','#C41E3A':'Czerwony' };
+                const colorName = colorNames[_prodCurrent._selectedColor] || _prodCurrent._selectedColor;
+                for (let i = 0; i < qty; i++) {
+                    addToCart(_prodCurrent.name, _prodCurrent.price, _prodCurrent.images[0], _prodCurrent._selectedSize, colorName);
+                }
+                showCartPopup();
+                closeProductModal();
+                closeCategoryModal();
+            }
 
-        /* ============================================================
-           MODAL KATEGORII
-           ============================================================ */
-        function openCategoryModal(cat) {
-          _catCurrent = cat;
-          _catPage = 0;
-          const titles = { koszulka:'Koszulki', bluza:'Bluzy', czapka:'Czapki' };
-          document.getElementById('catModalTitle').textContent = titles[cat];
-          renderCatPage();
-          document.getElementById('shopCatModal').classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
+            function closeProductModal() {
+                document.getElementById('shopProdModal').classList.remove('open');
+                document.body.style.overflow = '';
+            }
 
-        function renderCatPage() {
-          const products = SHOP_PRODUCTS[_catCurrent];
-          const total = products.length;
-          const totalPages = Math.ceil(total / CAT_PAGE_SIZE);
-          const start = _catPage * CAT_PAGE_SIZE;
-          const slice = products.slice(start, start + CAT_PAGE_SIZE);
+            function closeProdModal(e) {
+                if (e.target === document.getElementById('shopProdModal')) closeProductModal();
+            }
 
-          document.getElementById('catPageInfo').textContent =
-            `Strona ${_catPage + 1} z ${totalPages} (${total} produktów)`;
-          document.getElementById('catPrevBtn').disabled = _catPage === 0;
-          document.getElementById('catNextBtn').disabled = _catPage >= totalPages - 1;
+            // Obsługa koszyka
+            let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
 
-          const grid = document.getElementById('catModalGrid');
-          grid.innerHTML = '';
-          slice.forEach((prod, idx) => {
-            const card = document.createElement('div');
-            card.className = 'smodal-prod-card';
-            card.innerHTML = `
-              <img src="${prod.images[0]}" alt="${prod.name}" loading="lazy">
-              <div class="smodal-prod-card-info">
-                <div class="smodal-prod-card-name">${prod.name}</div>
-                <div class="smodal-prod-card-price">${prod.price} zł</div>
-              </div>`;
-            card.addEventListener('click', () => openProductModal(_catCurrent, start + idx));
-            grid.appendChild(card);
-          });
-        }
+            function addToCart(name, price, image = null, size = null, color = null) {
+                const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
+                
+                const existingIndex = cart.findIndex(item => 
+                    item.name === cleanName && 
+                    item.size === size && 
+                    item.color === color
+                );
+                
+                if (existingIndex >= 0) {
+                    cart[existingIndex].quantity++;
+                    cart[existingIndex].price = price;
+                } else {
+                    cart.push({
+                        name: cleanName,
+                        price: price,
+                        quantity: 1,
+                        image: image,
+                        size: size,
+                        color: color,
+                        id: Date.now() + Math.random()
+                    });
+                }
+                
+                updateCart();
+                showNotification('✅ Produkt dodany do koszyka');
+            }
 
-        function catChangePage(dir) {
-          const products = SHOP_PRODUCTS[_catCurrent];
-          const totalPages = Math.ceil(products.length / CAT_PAGE_SIZE);
-          _catPage = Math.max(0, Math.min(totalPages - 1, _catPage + dir));
-          renderCatPage();
-        }
-
-        function closeCategoryModal() {
-          document.getElementById('shopCatModal').classList.remove('open');
-          document.body.style.overflow = '';
-        }
-
-        function closeCatModal(e) {
-          if (e.target === document.getElementById('shopCatModal')) closeCategoryModal();
-        }
-
-        /* ============================================================
-           MODAL PRODUKTU
-           ============================================================ */
-        function openProductModal(cat, idx) {
-          const prod = SHOP_PRODUCTS[cat][idx];
-          _prodCurrent = { ...prod };
-          _prodCurrent._selectedColor = prod.colors[0];
-          _prodCurrent._selectedSize = prod.sizes[0];
-
-          document.getElementById('sprodTitle').textContent = prod.name;
-          document.getElementById('sprodPrice').textContent = prod.price + ' zł';
-          document.getElementById('sprodMainImg').src = prod.images[0];
-          document.getElementById('sprodQty').value = 1;
-
-          // Miniaturki
-          const thumbsEl = document.getElementById('sprodThumbs');
-          thumbsEl.innerHTML = '';
-          prod.images.forEach((src, i) => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = prod.name;
-            if (i === 0) img.classList.add('active');
-            img.addEventListener('click', () => {
-              document.getElementById('sprodMainImg').src = src;
-              thumbsEl.querySelectorAll('img').forEach(t => t.classList.remove('active'));
-              img.classList.add('active');
-            });
-            thumbsEl.appendChild(img);
-          });
-
-          // Kolory
-          const colorsEl = document.getElementById('sprodColors');
-          colorsEl.innerHTML = '';
-          const colorNames = { '#000':'Czarny','#fff':'Biały','#ffffff':'Biały','#800020':'Bordowy','#36454F':'Grafitowy','#808080':'Szary','#002b36':'Granatowy','#800080':'Fioletowy','#800000':'Bordowy','#FF4500':'Pomarańczowy','#C41E3A':'Czerwony' };
-          prod.colors.forEach(c => {
-            const dot = document.createElement('div');
-            dot.className = 'sprod-color-dot' + (c === prod.colors[0] ? ' active' : '');
-            dot.style.background = c;
-            if (c === '#fff' || c === '#ffffff') dot.style.border = '2px solid #ddd';
-            dot.title = colorNames[c] || c;
-            dot.addEventListener('click', () => {
-              colorsEl.querySelectorAll('.sprod-color-dot').forEach(d => d.classList.remove('active'));
-              dot.classList.add('active');
-              _prodCurrent._selectedColor = c;
-            });
-            colorsEl.appendChild(dot);
-          });
-
-          // Rozmiary
-          const sizesEl = document.getElementById('sprodSizes');
-          sizesEl.innerHTML = '';
-          prod.sizes.forEach(s => {
-            const btn = document.createElement('button');
-            btn.className = 'sprod-size-btn' + (s === prod.sizes[0] ? ' active' : '');
-            btn.textContent = s;
-            btn.addEventListener('click', () => {
-              sizesEl.querySelectorAll('.sprod-size-btn').forEach(b => b.classList.remove('active'));
-              btn.classList.add('active');
-              _prodCurrent._selectedSize = s;
-            });
-            sizesEl.appendChild(btn);
-          });
-
-          document.getElementById('shopProdModal').classList.add('open');
-        }
-
-        function sprodQtyChange(dir) {
-          const input = document.getElementById('sprodQty');
-          const val = Math.max(1, Math.min(99, parseInt(input.value) + dir));
-          input.value = val;
-        }
-
-        function sprodAddToCart() {
-          if (!_prodCurrent) return;
-          const qty = parseInt(document.getElementById('sprodQty').value) || 1;
-          const colorNames = { '#000':'Czarny','#fff':'Biały','#ffffff':'Biały','#800020':'Bordowy','#36454F':'Grafitowy','#808080':'Szary','#002b36':'Granatowy','#800080':'Fioletowy','#800000':'Bordowy','#FF4500':'Pomarańczowy','#C41E3A':'Czerwony' };
-          const colorName = colorNames[_prodCurrent._selectedColor] || _prodCurrent._selectedColor;
-          for (let i = 0; i < qty; i++) {
-            addToCart(_prodCurrent.name, _prodCurrent.price, _prodCurrent.images[0], _prodCurrent._selectedSize, colorName);
-          }
-          showCartPopup();
-          closeProductModal();
-          closeCategoryModal();
-        }
-
-        function closeProductModal() {
-          document.getElementById('shopProdModal').classList.remove('open');
-          document.body.style.overflow = '';
-        }
-
-        function closeProdModal(e) {
-          if (e.target === document.getElementById('shopProdModal')) closeProductModal();
-        }
-
-        // ESC zamyka modaly
-        document.addEventListener('keydown', e => {
-          if (e.key === 'Escape') {
-            closeProductModal();
-            closeCategoryModal();
-          }
-        });
-
-        // ========== ISTNIEJĄCY JS SKLEPU (koszyk, konfigurator itd.) ==========
-        let cart = JSON.parse(localStorage.getItem('adelbertus_cart')) || [];
-
-        document.addEventListener('DOMContentLoaded', function() {
-            initNavigation();
-            initProductOptions();
-            initCart();
-            initCookieConsent();
-            initChatbot();
-            initImageZoom();
-            initProductGalleries();
-            initForum();
-            initCharitySection();
-        });
-
-        function initNavigation() {
-            const navButtons = document.querySelectorAll('.nav-btn');
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    if (this.hasAttribute('data-section')) {
-                        e.preventDefault();
+            function updateCart() {
+                const cartCount = document.getElementById('cartCount');
+                const cartItems = document.getElementById('cartItems');
+                const cartTotal = document.getElementById('cartTotal');
+                
+                cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+                
+                cartItems.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
+                    cartTotal.textContent = '0 zł';
+                    document.getElementById('paypal-container').innerHTML = '';
+                } else {
+                    let total = 0;
+                    
+                    cart.forEach((item, index) => {
+                        total += item.price * item.quantity;
                         
-                        navButtons.forEach(btn => btn.classList.remove('active'));
-                        this.classList.add('active');
+                        const cartItem = document.createElement('div');
+                        cartItem.className = 'cart-item';
+                        cartItem.innerHTML = `
+                            ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
+                            <div class="flex-1">
+                                <div class="font-bold">${item.name}</div>
+                                <div>${item.price.toFixed(2)} zł × ${item.quantity}</div>
+                                ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
+                                ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                            </div>
+                            <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                        `;
                         
-                        const sectionId = this.getAttribute('data-section');
-                        showSection(sectionId);
+                        cartItems.appendChild(cartItem);
+                    });
+                    
+                    cartTotal.textContent = `${total.toFixed(2)} zł`;
+                    renderPayPalButton();
+                }
+                
+                localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
+            }
+
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCart();
+            }
+
+            function renderPayPalButton() {
+                const container = document.getElementById('paypal-container');
+                container.innerHTML = '';
+                
+                if (cart.length === 0) return;
+                
+                if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
+                    paypal.HostedButtons({
+                        hostedButtonId: "L4639S4363CZE",
+                    }).render("#paypal-container");
+                }
+            }
+
+            function showCartPopup() {
+                const popup = document.getElementById('cartPopup');
+                popup.style.display = 'block';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+                }, 5000);
+            }
+
+            function hideCartPopup() {
+                document.getElementById('cartPopup').style.display = 'none';
+            }
+
+            function toggleCart() {
+                document.getElementById('cartPanel').classList.toggle('open');
+            }
+
+            function goToCheckout() {
+                toggleCart();
+                hideCartPopup();
+            }
+
+            function sendOrderEmail() {
+                let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
+                
+                cart.forEach((item, index) => {
+                    emailBody += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
+                    if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
+                    if (item.color) emailBody += ` (Kolor: ${item.color})`;
+                    emailBody += '\n';
+                });
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
+                emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
+                emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
+                
+                window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
+            }
+
+            function sendOrderWhatsApp() {
+                let message = 'Zamówienie z AdelbertusShop:%0A%0A';
+                
+                cart.forEach((item, index) => {
+                    message += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
+                    if (item.size) message += ` (Rozmiar: ${item.size})`;
+                    if (item.color) message += ` (Kolor: ${item.color})`;
+                    message += '%0A';
+                });
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
+                message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
+                message += `Proszę o potwierdzenie zamówienia.`;
+                
+                window.open(`https://wa.me/48604296360?text=${message}`);
+            }
+
+            // Funkcje konfiguratora
+            const state = {
+                product: 'hoodie',
+                canvasColor: '#ffffff',
+                orderColor: { hex: '#000000', name: 'Czarny' },
+                orderSize: 'L',
+                orderQty: 1,
+                zoom: 1,
+                showGrid: false,
+                layers: [],
+                selectedId: null,
+                dragState: null,
+                resizeState: null,
+                rotateState: null,
+                nextId: 1,
+            };
+
+            const canvas = document.getElementById('studioCanvas');
+            const ctx = canvas.getContext('2d');
+            const productMap = {
+                hoodie: { name: 'Bluza', price: 170, path: 'M80 30 Q55 40 35 70 L35 220 Q30 235 35 250 L35 350 Q35 365 47 370 L110 375 Q125 370 135 357 L147 280 Q155 260 172 240 Q195 220 220 220 L220 70 Q195 40 170 30 Z' },
+                tshirt: { name: 'Koszulka', price: 80, path: 'M80 40 Q60 20 40 40 L40 90 Q35 110 40 130 L40 250 Q40 260 48 266 L70 278 Q80 282 90 276 L110 250 Q120 258 130 266 L150 276 Q160 282 170 278 L190 266 Q198 260 200 250 L200 130 Q205 110 200 90 L200 40 Q180 20 160 40 Z' },
+                cap: { name: 'Czapka', price: 99, path: 'M50 120 Q30 80 50 50 Q90 20 140 35 Q180 45 220 80 Q250 110 240 140 Q220 170 170 175 L106 180 Q80 184 60 170 Q45 155 50 120 Z' }
+            };
+
+            function createSwatches() {
+                const parent = document.getElementById('colorSwatches');
+                const colors = ['#ffffff','#0a0a0a','#1a1a2e','#c0392b','#27ae60','#f39c12','#8e44ad','#7f8c8d','#e8c5a0','#2c3e50','#e74c3c','#16a085','#d35400','#2980b9','#8b0000','#228b22','#4b0082','#808000'];
+                parent.innerHTML='';
+                colors.forEach(c=>{ 
+                    const b=document.createElement('button'); 
+                    b.className='swatch'; 
+                    b.style.background=c; 
+                    b.title=c; 
+                    b.dataset.color=c; 
+                    b.onclick=()=>{state.canvasColor=c; render(); markActiveSwatch();}; 
+                    parent.appendChild(b);
+                });
+            }
+
+            function markActiveSwatch() { 
+                document.querySelectorAll('#colorSwatches .swatch').forEach(s=>{s.classList.toggle('active', s.dataset.color===state.canvasColor);}); 
+            }
+
+            function createOrderSwatches() {
+                const parent=document.getElementById('orderColorGrid');
+                const ordered=[
+                    {hex:'#000000',name:'Czarny'},{hex:'#ffffff',name:'Biały'},{hex:'#800020',name:'Bordowy'},{hex:'#3f3f3f',name:'Grafitowy'},{hex:'#1e3f6b',name:'Granat'},{hex:'#8a8a8a',name:'Szary'},{hex:'#2d5c45',name:'Butelkowa zieleń'},{hex:'#8d935f',name:'Khaki'},{hex:'#f4c8d1',name:'Jasny róż'},{hex:'#e8c5a0',name:'Beż'}
+                ];
+                ordered.forEach(c=>{ 
+                    const b=document.createElement('button'); 
+                    b.className='swatch'; 
+                    b.style.background=c.hex; 
+                    b.title=c.name; 
+                    b.style.width='46px'; 
+                    b.style.height='46px'; 
+                    b.onclick=()=>{state.orderColor=c; updateOrderSummary(); renderOrderPreview(); markOrderActive();}; 
+                    parent.appendChild(b);
+                });
+            }
+
+            function markOrderActive() { 
+                document.querySelectorAll('#orderColorGrid .swatch').forEach(s=>{ 
+                    s.classList.toggle('active', s.style.backgroundColor===rgbFromHex(state.orderColor.hex)); 
+                });
+            }
+
+            function rgbFromHex(h) { 
+                const c=h.replace('#',''); 
+                const r=parseInt(c.substring(0,2),16), g=parseInt(c.substring(2,4),16), b=parseInt(c.substring(4,6),16); 
+                return `rgb(${r}, ${g}, ${b})`; 
+            }
+
+            function createFontOptions() { 
+                const fonts=['Bebas Neue','Impact','Georgia','Courier New','Verdana','Arial Black','Comic Sans MS','Palatino','Trebuchet MS','Futura','DM Sans','Space Mono']; 
+                const sel=document.getElementById('fontFamily'); 
+                fonts.forEach(f=>{ const o=document.createElement('option'); o.value=f; o.textContent=f; sel.appendChild(o); }); 
+                sel.value='Bebas Neue'; 
+            }
+
+            function setupEvents() {
+                document.querySelectorAll('.product-card').forEach(c=>{ 
+                    c.addEventListener('click', ()=>{ 
+                        document.querySelectorAll('.product-card').forEach(x=>x.classList.remove('active')); 
+                        c.classList.add('active'); 
+                        state.product=c.dataset.product; 
+                        document.getElementById('activeName').textContent=productMap[state.product].name; 
+                        render(); 
+                        updateOrderSummary(); 
+                        updatePrice(); 
+                    }); 
+                });
+                
+                document.getElementById('gridToggle').onclick = ()=>{ 
+                    state.showGrid = !state.showGrid; 
+                    document.getElementById('gridToggle').textContent = state.showGrid ? 'Ukryj siatkę' : 'Pokaż siatkę'; 
+                    render(); 
+                };
+                
+                document.getElementById('liveText').addEventListener('input', ()=>{ 
+                    if(!state.selectedId){ return;} 
+                    const l=findLayer(state.selectedId); 
+                    if(l && l.type==='text'){ l.text = event.target.value; render(); updateLayerUI(); }
+                });
+                
+                document.getElementById('fontFamily').addEventListener('change', ()=>{ 
+                    const l=findLayer(state.selectedId); 
+                    if(l && l.type==='text'){ l.font = event.target.value; render(); updateLayerUI(); }
+                });
+                
+                document.getElementById('fontSize').addEventListener('input', ()=>{ 
+                    const v=Number(event.target.value); 
+                    document.getElementById('fontSizeLabel').textContent=v; 
+                    const l=findLayer(state.selectedId); 
+                    if(l && l.type==='text'){ l.fontSize=v; render(); updateLayerUI(); }
+                });
+                
+                document.getElementById('textColor').addEventListener('input', ()=>{ 
+                    const l=findLayer(state.selectedId); 
+                    if(l && l.type==='text'){ l.fontColor=event.target.value; render(); updateLayerUI(); }
+                });
+                
+                document.getElementById('addTextBtn').addEventListener('click', ()=>{ 
+                    const txt=document.getElementById('liveText').value.trim()||'Tekst'; 
+                    addTextLayer(txt); 
+                });
+                
+                ['boldBtn','italicBtn','underlineBtn'].forEach(id=>{
+                    document.getElementById(id).addEventListener('click', e=>{ 
+                        e.target.classList.toggle('active'); 
+                        const l=findLayer(state.selectedId); 
+                        if(l && l.type==='text'){ 
+                            if(id==='boldBtn') l.bold=!l.bold; 
+                            if(id==='italicBtn') l.italic=!l.italic; 
+                            if(id==='underlineBtn') l.underline=!l.underline; 
+                            render(); 
+                            updateLayerUI(); 
+                        } 
+                    });
+                });
+                
+                const presets=['#ffffff','#000000','#e8ff00','#ff2a2a','#4bd74b','#4b8bff','#c55eff','#ffd84d']; 
+                const presetDiv=document.getElementById('presetTextColors'); 
+                presets.forEach(c=>{ 
+                    const b=document.createElement('button'); 
+                    b.className='swatch'; 
+                    b.style.background=c; 
+                    b.style.width='28px'; 
+                    b.style.height='28px'; 
+                    b.addEventListener('click', ()=>{ 
+                        document.getElementById('textColor').value=c; 
+                        const l=findLayer(state.selectedId); 
+                        if(l && l.type==='text'){ l.fontColor=c; render(); updateLayerUI(); } 
+                    }); 
+                    presetDiv.appendChild(b); 
+                });
+                
+                const dropZone=document.getElementById('dropZone'); 
+                dropZone.addEventListener('dragover', e=>{e.preventDefault(); dropZone.style.borderColor='#e8ff00';});
+                dropZone.addEventListener('dragleave', ()=>{dropZone.style.borderColor='#555';});
+                dropZone.addEventListener('drop', e=>{e.preventDefault(); dropZone.style.borderColor='#555'; const f=e.dataTransfer.files[0]; if(f) handleFileUpload(f);});
+                dropZone.addEventListener('click', ()=>{ 
+                    const inp=document.createElement('input'); 
+                    inp.type='file'; 
+                    inp.accept='image/png,image/jpeg,image/svg+xml,image/webp'; 
+                    inp.onchange = ()=>{ if(inp.files[0]) handleFileUpload(inp.files[0]);}; 
+                    inp.click();
+                });
+                
+                document.getElementById('addImageBtn').addEventListener('click', ()=>{ 
+                    const inp=document.createElement('input'); 
+                    inp.type='file'; 
+                    inp.accept='image/png,image/jpeg,image/svg+xml,image/webp'; 
+                    inp.onchange=()=>{ if(inp.files[0]) handleFileUpload(inp.files[0]);}; 
+                    inp.click();
+                });
+
+                document.getElementById('bringForward').addEventListener('click', () => reorderSelected(1));
+                document.getElementById('sendBackward').addEventListener('click', () => reorderSelected(-1));
+                document.getElementById('toFront').addEventListener('click', () => reorderSelected(999));
+                document.getElementById('toBack').addEventListener('click', () => reorderSelected(-999));
+                document.getElementById('duplicateLayer').addEventListener('click', duplicateSelected);
+                document.getElementById('deleteLayer').addEventListener('click', ()=>{ if(confirm('Usuń warstwę?')) removeSelected(); });
+
+                ['layerX','layerY','layerRotation','layerScale','layerOpacity'].forEach(id=>{
+                    document.getElementById(id).addEventListener('input', ()=>{ 
+                        if(!state.selectedId) return; 
+                        const l=findLayer(state.selectedId); 
+                        if(!l) return; 
+                        if(id==='layerX') l.x=Number(event.target.value); 
+                        if(id==='layerY') l.y=Number(event.target.value); 
+                        if(id==='layerRotation') l.rotation=Number(event.target.value); 
+                        if(id==='layerScale'){ const v=Number(event.target.value)/100; l.scaleX=v; l.scaleY=v; } 
+                        if(id==='layerOpacity') l.opacity=Number(event.target.value)/100; 
+                        render(); 
+                        updateLayerUI(); 
+                    });
+                });
+
+                document.getElementById('sizeGrid').addEventListener('click', e=>{ 
+                    if(e.target.classList.contains('size-btn')){ 
+                        state.orderSize=e.target.textContent; 
+                        updateSizeButtons(); 
+                        updateOrderSummary(); 
                     }
                 });
-            });
-            
-            document.getElementById('cartIcon').addEventListener('click', toggleCart);
-        }
+                
+                document.getElementById('sizeGuideBtn').addEventListener('click', ()=>{ 
+                    const g=document.getElementById('sizeGuide'); 
+                    g.style.display=g.style.display==='none'?'block':'none'; 
+                });
+                
+                document.getElementById('qtyMinus').addEventListener('click', ()=>{ 
+                    const inp=document.getElementById('qtyInput'); 
+                    inp.value=Math.max(1, Number(inp.value)-1); 
+                    state.orderQty=Number(inp.value); 
+                    updateOrderSummary(); 
+                    updatePrice(); 
+                });
+                
+                document.getElementById('qtyPlus').addEventListener('click', ()=>{ 
+                    const inp=document.getElementById('qtyInput'); 
+                    inp.value=Math.min(99, Number(inp.value)+1); 
+                    state.orderQty=Number(inp.value); 
+                    updateOrderSummary(); 
+                    updatePrice(); 
+                });
+                
+                document.getElementById('qtyInput').addEventListener('input', ()=>{ 
+                    let v=Math.max(1, Math.min(99, Number(event.target.value)||1)); 
+                    event.target.value=v; 
+                    state.orderQty=v; 
+                    updateOrderSummary(); 
+                    updatePrice(); 
+                });
 
-        function showSection(sectionId) {
-            document.querySelectorAll('section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            document.getElementById(sectionId).classList.add('active');
-            
-            if (window.innerWidth <= 768) {
-                const navContainer = document.getElementById('navContainer');
-                if (navContainer) navContainer.classList.remove('show');
+                document.getElementById('exportPng').addEventListener('click', ()=>{ 
+                    const data=canvas.toDataURL('image/png',1); 
+                    const a=document.createElement('a'); 
+                    a.href=data; 
+                    a.download=`adelbertus-projekt-${Date.now()}.png`; 
+                    a.click(); 
+                });
+                
+                // Podpięcie przycisku "DODAJ DO KOSZYKA" z konfiguratora do systemu koszyka
+                document.getElementById('addToCartBtn').addEventListener('click', ()=>{ 
+                    const productName = productMap[state.product].name;
+                    const price = calcTotal();
+                    const canvasData = canvas.toDataURL('image/png');
+                    const size = state.orderSize;
+                    const colorName = state.orderColor.name;
+                    
+                    // Dodajemy produkt do koszyka
+                    addToCart(productName + ' (Konfigurator)', price, canvasData, size, colorName);
+                    
+                    // Opcjonalnie pokazujemy komunikat
+                    showNotification('✅ Projekt dodany do koszyka');
+                });
+
+                canvas.addEventListener('mousedown', onMouseDown);
+                window.addEventListener('mousemove', onMouseMove);
+                window.addEventListener('mouseup', onMouseUp);
+                canvas.addEventListener('wheel', e=>{ 
+                    e.preventDefault(); 
+                    const delta=e.deltaY>0?-0.05:0.05; 
+                    state.zoom=Math.min(2,Math.max(0.5,state.zoom+delta)); 
+                    document.getElementById('zoomLabel').textContent=`Zoom ${Math.round(state.zoom*100)}%`; 
+                    render(); 
+                });
             }
-        }
 
-        function toggleMobileMenu() {
-            const navContainer = document.getElementById('navContainer');
-            if (navContainer) navContainer.classList.toggle('show');
-        }
+            function addTextLayer(text) {
+                const layer={ 
+                    id: state.nextId++, 
+                    type:'text', 
+                    name:`Text ${state.nextId-1}`, 
+                    x: 250, 
+                    y:280, 
+                    width:200, 
+                    height:60, 
+                    rotation:0, 
+                    scaleX:1, 
+                    scaleY:1, 
+                    opacity:1, 
+                    visible:true, 
+                    locked:false, 
+                    flipH:false, 
+                    flipV:false, 
+                    text, 
+                    font:document.getElementById('fontFamily').value, 
+                    fontSize:Number(document.getElementById('fontSize').value), 
+                    fontColor:document.getElementById('textColor').value, 
+                    bold:false, 
+                    italic:false, 
+                    underline:false, 
+                    align:'center', 
+                    letterSpacing:0, 
+                    shadow:false, 
+                    shadowColor:'#000000', 
+                    shadowBlur:0 
+                };
+                state.layers.push(layer); 
+                selectLayer(layer.id); 
+                render(); 
+                updateLayersPanel(); 
+            }
 
-        function initProductOptions() {
-            document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('color-option')) {
-                    const options = e.target.closest('.color-options');
-                    options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-                
-                if (e.target.classList.contains('size-option')) {
-                    const options = e.target.closest('.size-options');
-                    options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
-                    e.target.classList.add('selected');
-                }
-                
-                if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
-                    e.preventDefault();
-                    const productCard = e.target.closest('.product-card');
-                    const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
-                    
-                    let price = 0;
-                    
-                    const priceElement = productCard.querySelector('.product-price');
-                    if (priceElement) {
-                        const priceText = priceElement.textContent;
-                        const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
-                        if (priceMatch) {
-                            price = parseFloat(priceMatch[1].replace(',', '.'));
+            function handleFileUpload(file) {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const scale = Math.min(200 / Math.max(img.width, img.height), 1);
+                        const w = img.width * scale;
+                        const h = img.height * scale;
+                        const layer={ 
+                            id: state.nextId++, 
+                            type:'image', 
+                            name:`Image ${state.nextId-1}`, 
+                            x:250, 
+                            y:280, 
+                            width:w, 
+                            height:h, 
+                            rotation:0, 
+                            scaleX:1, 
+                            scaleY:1, 
+                            opacity:1, 
+                            visible:true, 
+                            locked:false, 
+                            flipH:false, 
+                            flipV:false, 
+                            img, 
                         }
-                    } else {
-                        const altPriceElement = productCard.querySelector('.price');
-                        if (altPriceElement) {
-                            const priceText = altPriceElement.textContent;
+                        state.layers.push(layer); 
+                        selectLayer(layer.id); 
+                        render(); 
+                        updateLayersPanel();
+                    };
+                    img.src = reader.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function findLayer(id) { return state.layers.find(l=>l.id===id); }
+            
+            function selectLayer(id) { state.selectedId=id; updateLayerUI(); render(); }
+            
+            function deselect() { state.selectedId=null; updateLayerUI(); render(); }
+
+            function updateLayerUI() {
+                const selected = findLayer(state.selectedId);
+                const name = selected ? selected.name : 'Brak wybranej warstwy';
+                document.getElementById('selectedLayerName').textContent = name;
+                if(selected){ 
+                    document.getElementById('layerX').value = Math.round(selected.x); 
+                    document.getElementById('layerY').value = Math.round(selected.y); 
+                    document.getElementById('layerRotation').value = selected.rotation; 
+                    document.getElementById('layerScale').value = Math.round(selected.scaleX*100); 
+                    document.getElementById('layerOpacity').value = Math.round(selected.opacity*100); 
+                }
+                updateLayersPanel();
+            }
+
+            function updateLayersPanel() { 
+                const el=document.getElementById('layersList'); 
+                el.innerHTML=''; 
+                [...state.layers].reverse().forEach(layer=>{ 
+                    const li=document.createElement('li'); 
+                    li.className='layer-item'+(state.selectedId===layer.id?' active':''); 
+                    li.innerHTML=`<div class="thumb"></div><div style="flex:1">${layer.name}</div><div>${layer.visible?'<i class="fa fa-eye"></i>':'<i class="fa fa-eye-slash"></i>'}</div>`;
+                    li.onclick=()=>{ selectLayer(layer.id); };
+                    el.appendChild(li);
+                }); 
+            }
+
+            function reorderSelected(dir) { 
+                const i=state.layers.findIndex(l=>l.id===state.selectedId); 
+                if(i<0) return; 
+                const item=state.layers.splice(i,1)[0]; 
+                if(dir>0){ state.layers.splice(Math.min(state.layers.length, i+1),0,item);} 
+                else { state.layers.splice(Math.max(0, i-1),0,item);} 
+                if(dir===999) state.layers.push(item); 
+                if(dir===-999) state.layers.unshift(item); 
+                render(); 
+                updateLayersPanel(); 
+            }
+            
+            function duplicateSelected() { 
+                const l=findLayer(state.selectedId); 
+                if(!l) return; 
+                const copy={...l,id:state.nextId++,name:l.name+' copy',x:l.x+15,y:l.y+15}; 
+                if(l.type==='image') copy.img=l.img; 
+                state.layers.push(copy); 
+                selectLayer(copy.id); 
+                updateLayersPanel(); 
+                render(); 
+            }
+            
+            function removeSelected() { 
+                const i=state.layers.findIndex(l=>l.id===state.selectedId); 
+                if(i>=0){ 
+                    state.layers.splice(i,1); 
+                    state.selectedId=null; 
+                    updateLayerUI(); 
+                    render(); 
+                    updateLayersPanel(); 
+                }
+            }
+
+            function render() {
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.fillStyle='#111'; 
+                ctx.fillRect(0,0,canvas.width,canvas.height);
+                
+                if(state.showGrid){ 
+                    ctx.save(); 
+                    ctx.strokeStyle='rgba(255,255,255,.08)'; 
+                    ctx.lineWidth=1; 
+                    for(let x=0;x<canvas.width;x+=50){ 
+                        ctx.beginPath(); 
+                        ctx.moveTo(x,0); 
+                        ctx.lineTo(x,canvas.height); 
+                        ctx.stroke();
+                    } 
+                    for(let y=0;y<canvas.height;y+=50){ 
+                        ctx.beginPath(); 
+                        ctx.moveTo(0,y); 
+                        ctx.lineTo(canvas.width,y); 
+                        ctx.stroke();
+                    } 
+                    ctx.restore(); 
+                }
+
+                ctx.save(); 
+                ctx.translate(0,0); 
+                ctx.beginPath(); 
+                const pathStr=productMap[state.product].path; 
+                const path=new Path2D(pathStr); 
+                ctx.fillStyle=state.canvasColor; 
+                ctx.shadowColor='rgba(0,0,0,0.4)'; 
+                ctx.shadowBlur=20; 
+                ctx.shadowOffsetY=10; 
+                ctx.translate(130,80); 
+                ctx.scale(1.6,1.6); 
+                ctx.fill(path); 
+                ctx.restore();
+
+                for(const layer of state.layers){ 
+                    if(!layer.visible) continue; 
+                    ctx.save(); 
+                    ctx.globalAlpha=layer.opacity; 
+                    const x=layer.x; 
+                    const y=layer.y; 
+                    ctx.translate(x,y); 
+                    ctx.rotate(layer.rotation*Math.PI/180); 
+                    ctx.scale(layer.flipH?-1:1, layer.flipV?-1:1); 
+                    ctx.scale(layer.scaleX, layer.scaleY);
+                    
+                    if(layer.type==='text'){
+                        const fontParts=[];
+                        if(layer.italic) fontParts.push('italic');
+                        if(layer.bold) fontParts.push('bold');
+                        fontParts.push(`${layer.fontSize}px`);
+                        fontParts.push(layer.font);
+                        ctx.font = fontParts.join(' ');
+                        ctx.fillStyle = layer.fontColor;
+                        ctx.textAlign = layer.align;
+                        ctx.textBaseline='middle';
+                        if(layer.shadow){ ctx.shadowColor=layer.shadowColor; ctx.shadowBlur=layer.shadowBlur; }
+                        const alignX = layer.align==='left'? -layer.width/2 : layer.align==='right'? layer.width/2 : 0;
+                        ctx.fillText(layer.text, alignX, 0);
+                        if(layer.underline){ 
+                            const w=ctx.measureText(layer.text).width; 
+                            let x0=alignX; 
+                            if(layer.align==='center') x0 -= w/2; 
+                            if(layer.align==='right') x0 -= w; 
+                            ctx.strokeStyle=layer.fontColor; 
+                            ctx.lineWidth=2; 
+                            ctx.beginPath(); 
+                            ctx.moveTo(x0, 10); 
+                            ctx.lineTo(x0+w,10); 
+                            ctx.stroke(); 
+                        }
+                    } else if(layer.type==='image'){ 
+                        const w=layer.width; 
+                        const h=layer.height; 
+                        ctx.drawImage(layer.img, -w/2, -h/2, w, h); 
+                    }
+                    ctx.restore(); 
+                }
+
+                if(state.selectedId){ 
+                    const selected=findLayer(state.selectedId); 
+                    if(selected){ 
+                        const {x,y}=selected; 
+                        const w=selected.width*selected.scaleX; 
+                        const h=selected.height*selected.scaleY; 
+                        ctx.save(); 
+                        ctx.translate(x,y); 
+                        ctx.rotate(selected.rotation*Math.PI/180); 
+                        ctx.strokeStyle='#e8ff00'; 
+                        ctx.setLineDash([6,4]); 
+                        ctx.lineWidth=2; 
+                        ctx.strokeRect(-w/2,-h/2,w,h);
+                        
+                        const handles=[[-w/2,-h/2],[0,-h/2],[w/2,-h/2],[-w/2,0],[w/2,0],[-w/2,h/2],[0,h/2],[w/2,h/2]];
+                        ctx.setLineDash([]);
+                        handles.forEach(([hx,hy])=>{ 
+                            ctx.fillStyle='#d4af37'; 
+                            ctx.fillRect(hx-5,hy-5,10,10); 
+                        });
+                        ctx.beginPath(); 
+                        ctx.strokeStyle='#e8ff00'; 
+                        ctx.moveTo(0,-h/2); 
+                        ctx.lineTo(0,-h/2-30); 
+                        ctx.stroke(); 
+                        ctx.beginPath(); 
+                        ctx.fillStyle='#e8ff00'; 
+                        ctx.arc(0,-h/2-40,8,0,Math.PI*2); 
+                        ctx.fill(); 
+                        ctx.restore(); 
+                    }
+                }
+                updatePrice(); 
+                updateOrderSummary();
+            }
+
+            function pointInLayer(x,y,layer) { 
+                const dx=x-layer.x; 
+                const dy=y-layer.y; 
+                const angle=-layer.rotation*Math.PI/180; 
+                const rx = dx*Math.cos(angle)-dy*Math.sin(angle); 
+                const ry = dx*Math.sin(angle)+dy*Math.cos(angle); 
+                const w=layer.width*layer.scaleX; 
+                const h=layer.height*layer.scaleY; 
+                return rx>=-w/2 && rx<=w/2 && ry>=-h/2 && ry<=h/2; 
+            }
+
+            function onMouseDown(e) { 
+                const r=canvas.getBoundingClientRect(); 
+                const x=(e.clientX-r.left); 
+                const y=(e.clientY-r.top); 
+                let found=null; 
+                for(let i=state.layers.length-1;i>=0;i--){ 
+                    const l=state.layers[i]; 
+                    if(!l.visible||l.locked) continue; 
+                    if(pointInLayer(x,y,l)){ 
+                        found=l; 
+                        break; 
+                    }
+                } 
+                if(found){ 
+                    selectLayer(found.id); 
+                    state.dragState={layerId:found.id, offsetX:x-found.x, offsetY:y-found.y}; 
+                    canvas.style.cursor='grabbing'; 
+                } else { 
+                    deselect(); 
+                }
+            }
+            
+            function onMouseMove(e) { 
+                if(!state.dragState) return; 
+                const r=canvas.getBoundingClientRect(); 
+                const x=(e.clientX-r.left); 
+                const y=(e.clientY-r.top); 
+                const l=findLayer(state.dragState.layerId); 
+                if(l){ 
+                    l.x = x - state.dragState.offsetX; 
+                    l.y = y - state.dragState.offsetY; 
+                    render(); 
+                    updateLayerUI(); 
+                }
+            }
+            
+            function onMouseUp() { 
+                state.dragState=null; 
+                canvas.style.cursor='grab'; 
+            }
+
+            function updateOrderSummary() { 
+                document.getElementById('sumProduct').textContent = productMap[state.product].name; 
+                document.getElementById('sumColor').innerHTML=`<span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:${state.orderColor.hex};margin-right:6px;"></span>${state.orderColor.name}`; 
+                document.getElementById('sumSize').textContent = state.orderSize; 
+                document.getElementById('sumQty').textContent = state.orderQty; 
+                document.getElementById('sumTotal').textContent = formatPrice(calcTotal()); 
+                document.getElementById('orderColorSelected').innerHTML=`<div style="width:28px;height:28px;border-radius:6px;background:${state.orderColor.hex};border:1px solid #444;"></div><span style="margin-left:8px;">${state.orderColor.name}</span>`; 
+                updatePrice(); 
+            }
+            
+            function renderOrderPreview() { 
+                const mini=document.getElementById('orderPreview'); 
+                mini.innerHTML=''; 
+                const c=document.createElement('canvas'); 
+                c.width=72; 
+                c.height=72; 
+                const cc=c.getContext('2d'); 
+                cc.fillStyle=state.orderColor.hex; 
+                cc.fillRect(0,0,72,72); 
+                cc.fillStyle='#222'; 
+                cc.beginPath(); 
+                if(state.product==='hoodie'){ 
+                    cc.moveTo(10,20); 
+                    cc.quadraticCurveTo(20,8,35,10); 
+                    cc.quadraticCurveTo(50,12,62,20); 
+                    cc.lineTo(62,52); 
+                    cc.quadraticCurveTo(50,64,35,63); 
+                    cc.quadraticCurveTo(20,62,10,52); 
+                    cc.closePath(); 
+                } else if(state.product==='tshirt'){ 
+                    cc.moveTo(10,18); 
+                    cc.lineTo(62,18); 
+                    cc.lineTo(62,52); 
+                    cc.lineTo(10,52); 
+                    cc.closePath(); 
+                } else { 
+                    cc.moveTo(8,38); 
+                    cc.quadraticCurveTo(32,10,64,30); 
+                    cc.quadraticCurveTo(58,50,24,54); 
+                    cc.closePath(); 
+                }
+                cc.fill(); 
+                mini.appendChild(c); 
+            }
+            
+            function updateSizeButtons() { 
+                document.querySelectorAll('.size-btn').forEach(b=>b.classList.toggle('active', b.textContent===state.orderSize)); 
+            }
+            
+            function updatePrice() { 
+                const unit=productMap[state.product].price; 
+                const qty=state.orderQty; 
+                let total=unit*qty; 
+                const breakdown=document.getElementById('priceBreakdown'); 
+                if(qty>=3){ 
+                    const discounted=Math.round(total*0.9); 
+                    breakdown.innerHTML=`<span style="text-decoration:line-through;">${unit}×${qty}=${total} zł</span> <span style="color:#4ead4e;">${discounted} zł (-10%)</span>`; 
+                    total=discounted; 
+                } else { 
+                    breakdown.textContent=`${unit}×${qty}=${total} zł`; 
+                } 
+                document.getElementById('priceTag').textContent = `${total} zł`; 
+                document.getElementById('sumTotal').textContent = `${total} zł`; 
+            }
+            
+            function formatPrice(v) { return `${v} zł`; }
+            
+            function calcTotal() { 
+                const unit=productMap[state.product].price; 
+                let total=unit*state.orderQty; 
+                if(state.orderQty>=3) total=Math.round(total*0.9); 
+                return total; 
+            }
+
+            // Funkcje pomocnicze
+            function showNotification(message) {
+                const notification = document.createElement('div');
+                notification.textContent = message;
+                notification.style.position = 'fixed';
+                notification.style.bottom = '20px';
+                notification.style.left = '50%';
+                notification.style.transform = 'translateX(-50%)';
+                notification.style.backgroundColor = '#d4af37';
+                notification.style.color = 'black';
+                notification.style.padding = '12px 24px';
+                notification.style.borderRadius = '30px';
+                notification.style.zIndex = '1000';
+                notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
+                notification.style.fontWeight = 'bold';
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+
+            function toggleChatbot() {
+                const chatbotWindow = document.getElementById('chatbotWindow');
+                chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
+            }
+
+            function openImageZoom(src) {
+                const overlay = document.getElementById('imageZoomOverlay');
+                const zoomedImg = document.getElementById('zoomedImage');
+                zoomedImg.src = src;
+                overlay.style.display = 'flex';
+            }
+
+            function closeImageZoom() {
+                document.getElementById('imageZoomOverlay').style.display = 'none';
+            }
+
+            function changeProductImage(thumb, productCard) {
+                const mainImage = productCard.querySelector('.product-image');
+                const galleryThumbs = productCard.querySelectorAll('.gallery-thumb');
+                
+                galleryThumbs.forEach(thumb => thumb.classList.remove('active'));
+                thumb.classList.add('active');
+                
+                mainImage.src = thumb.src;
+            }
+
+            function acceptCookies() {
+                localStorage.setItem('cookies_accepted', 'true');
+                document.getElementById('cookieConsent').style.display = 'none';
+            }
+
+            function initCookieConsent() {
+                if (!localStorage.getItem('cookies_accepted')) {
+                    document.getElementById('cookieConsent').style.display = 'block';
+                }
+            }
+
+            function toggleMobileMenu() {
+                const navContainer = document.getElementById('navContainer');
+                if (navContainer) navContainer.classList.toggle('show');
+            }
+
+            function showSection(sectionId) {
+                document.querySelectorAll('section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                document.getElementById(sectionId).classList.add('active');
+                
+                if (window.innerWidth <= 768) {
+                    const navContainer = document.getElementById('navContainer');
+                    if (navContainer) navContainer.classList.remove('show');
+                }
+            }
+
+            function initNavigation() {
+                const navButtons = document.querySelectorAll('.nav-btn');
+                
+                navButtons.forEach(button => {
+                    button.addEventListener('click', function(e) {
+                        if (this.hasAttribute('data-section')) {
+                            e.preventDefault();
+                            
+                            navButtons.forEach(btn => btn.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            const sectionId = this.getAttribute('data-section');
+                            showSection(sectionId);
+                        }
+                    });
+                });
+                
+                document.getElementById('cartIcon').addEventListener('click', toggleCart);
+            }
+
+            function initProductOptions() {
+                document.addEventListener('click', function(e) {
+                    if (e.target.classList.contains('color-option')) {
+                        const options = e.target.closest('.color-options');
+                        options.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                        e.target.classList.add('selected');
+                    }
+                    
+                    if (e.target.classList.contains('size-option')) {
+                        const options = e.target.closest('.size-options');
+                        options.querySelectorAll('.size-option').forEach(opt => opt.classList.remove('selected'));
+                        e.target.classList.add('selected');
+                    }
+                    
+                    if (e.target.classList.contains('add-to-cart-btn') || e.target.classList.contains('add-to-cart-btn-enhanced')) {
+                        e.preventDefault();
+                        const productCard = e.target.closest('.product-card');
+                        const name = e.target.getAttribute('data-name') || 'Produkt bez nazwy';
+                        
+                        let price = 0;
+                        
+                        const priceElement = productCard.querySelector('.product-price');
+                        if (priceElement) {
+                            const priceText = priceElement.textContent;
                             const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
                             if (priceMatch) {
                                 price = parseFloat(priceMatch[1].replace(',', '.'));
                             }
                         } else {
-                            const buttonPrice = e.target.getAttribute('data-price');
-                            if (buttonPrice) {
-                                price = parseFloat(buttonPrice);
+                            const altPriceElement = productCard.querySelector('.price');
+                            if (altPriceElement) {
+                                const priceText = altPriceElement.textContent;
+                                const priceMatch = priceText.match(/(\d+[\.,]?\d*)/);
+                                if (priceMatch) {
+                                    price = parseFloat(priceMatch[1].replace(',', '.'));
+                                }
+                            } else {
+                                const buttonPrice = e.target.getAttribute('data-price');
+                                if (buttonPrice) {
+                                    price = parseFloat(buttonPrice);
+                                }
                             }
                         }
+                        
+                        const image = e.target.getAttribute('data-image');
+                        
+                        const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
+                        const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
+                        
+                        const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
+                        const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
+                        
+                        if (price === 0 || isNaN(price)) {
+                            price = 80;
+                        }
+                        
+                        addToCart(name, price, image, size, color);
+                        showCartPopup();
                     }
-                    
-                    const image = e.target.getAttribute('data-image');
-                    
-                    const selectedColorOption = productCard.querySelector('.color-options .color-option.selected');
-                    const selectedSizeOption = productCard.querySelector('.size-options .size-option.selected');
-                    
-                    const color = selectedColorOption ? selectedColorOption.getAttribute('data-color') : 'Nie wybrano';
-                    const size = selectedSizeOption ? selectedSizeOption.getAttribute('data-size') : 'Nie wybrano';
-                    
-                    if (price === 0 || isNaN(price)) {
-                        price = 80;
-                    }
-                    
-                    addToCart(name, price, image, size, color);
-                    showCartPopup();
-                }
-            });
-        }
-
-        function addToCart(name, price, image = null, size = null, color = null) {
-            const cleanName = name.replace(/\s*\([^)]*\)/g, '').trim();
-            
-            const existingIndex = cart.findIndex(item => 
-                item.name === cleanName && 
-                item.size === size && 
-                item.color === color
-            );
-            
-            if (existingIndex >= 0) {
-                cart[existingIndex].quantity++;
-                cart[existingIndex].price = price;
-            } else {
-                cart.push({
-                    name: cleanName,
-                    price: price,
-                    quantity: 1,
-                    image: image,
-                    size: size,
-                    color: color,
-                    id: Date.now() + Math.random()
                 });
             }
-            
-            updateCart();
-            showNotification('✅ Produkt dodany do koszyka');
-        }
 
-        function updateCart() {
-            const cartCount = document.getElementById('cartCount');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
-            cartItems.innerHTML = '';
-            
-            if (cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-center text-gray-500">Twój koszyk jest pusty</p>';
-                cartTotal.textContent = '0 zł';
-                document.getElementById('paypal-container').innerHTML = '';
-            } else {
-                let total = 0;
+            function initImageZoom() {
+                const images = document.querySelectorAll('img[loading="lazy"]');
+                images.forEach(img => {
+                    img.addEventListener('load', function() {
+                        this.classList.add('loaded');
+                    });
+                });
+            }
+
+            function initCharitySection() {
+                const donors = [
+                    {name: "Anna K.", amount: 50},
+                    {name: "Marek Z.", amount: 100},
+                    {name: "👑 Sekretny Darczyńca", amount: 250},
+                    {name: "Natalia P.", amount: 75},
+                    {name: "Bartek L.", amount: 30}
+                ];
                 
-                cart.forEach((item, index) => {
-                    total += item.price * item.quantity;
+                let donorIndex = 0;
+                setInterval(() => {
+                    const list = document.getElementById('donorsList');
+                    if (list) {
+                        const li = document.createElement('li');
+                        li.className = 'donor-entry';
+                        li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
+                        list.prepend(li);
+                        donorIndex = (donorIndex + 1) % donors.length;
+                    }
+                }, 4000);
+            }
+
+            // Inicjalizacja
+            document.addEventListener('DOMContentLoaded', function() {
+                initNavigation();
+                initProductOptions();
+                updateCart();
+                initCookieConsent();
+                initImageZoom();
+                initCharitySection();
+                
+                // Inicjalizacja konfiguratora
+                createSwatches();
+                createOrderSwatches();
+                createFontOptions();
+                updateOrderSummary();
+                renderOrderPreview();
+                setupEvents();
+                render();
+                
+                // Opinie rotujące
+                const allReviews = [
+                    { name: "Anna K.", text: "Koszulki są niesamowite! Jakość wykonania i oryginalny design - polecam każdemu!", stars: 5 },
+                    { name: "Marek W.", text: "Zamówienie dotarło błyskawicznie, a bluza jest jeszcze lepsza niż na zdjęciach. Na pewno wrócę!", stars: 5 },
+                    { name: "Katarzyna M.", text: "Uwielbiam styl vintage, a Adelbertus robi to perfekcyjnie. Moja nowa ulubiona marka.", stars: 5 },
+                    { name: "Tomasz L.", text: "Świetny kontakt ze sklepem, a produkt zgodny z opisem. Polecam!", stars: 5 }
+                ];
+                
+                const reviewContainer = document.getElementById('rotating-reviews');
+                
+                function displayReviews(index) {
+                    const reviewsToShow = [];
+                    for (let i = 0; i < 4; i++) {
+                        reviewsToShow.push(allReviews[(index + i) % allReviews.length]);
+                    }
                     
-                    const cartItem = document.createElement('div');
-                    cartItem.className = 'cart-item';
-                    cartItem.innerHTML = `
-                        ${item.image ? `<img src="${item.image}" class="cart-item-image">` : ''}
-                        <div class="flex-1">
-                            <div class="font-bold">${item.name}</div>
-                            <div>${item.price.toFixed(2)} zł × ${item.quantity}</div>
-                            ${item.size ? `<div class="text-sm">Rozmiar: ${item.size}</div>` : ''}
-                            ${item.color ? `<div class="text-sm">Kolor: ${item.color}</div>` : ''}
+                    reviewContainer.innerHTML = reviewsToShow.map(review => `
+                        <div class="review" style="background: white; border-radius: 10px; padding: 1.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                            <div class="review-header" style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #d4af37, #b8941f); display: flex; align-items: center; justify-content: center; margin-right: 1rem; font-weight: bold; color: black;">${review.name.charAt(0)}</div>
+                                <div>
+                                    <div style="font-weight: bold;">${review.name}</div>
+                                    <div class="review-stars" style="color: #d4af37;">${'⭐'.repeat(review.stars)}</div>
+                                </div>
+                            </div>
+                            <p style="font-style: italic;">"${review.text}"</p>
                         </div>
-                        <button onclick="removeFromCart(${index})" class="text-red-500"><i class="fas fa-trash"></i></button>
-                    `;
-                    
-                    cartItems.appendChild(cartItem);
-                });
-                
-                cartTotal.textContent = `${total.toFixed(2)} zł`;
-                renderPayPalButton();
-            }
-            
-            localStorage.setItem('adelbertus_cart', JSON.stringify(cart));
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCart();
-        }
-
-        function toggleCart() {
-            document.getElementById('cartPanel').classList.toggle('open');
-        }
-
-        function renderPayPalButton() {
-            const container = document.getElementById('paypal-container');
-            container.innerHTML = '';
-            
-            if (cart.length === 0) return;
-            
-            if (typeof paypal !== 'undefined' && paypal.HostedButtons) {
-                paypal.HostedButtons({
-                    hostedButtonId: "L4639S4363CZE",
-                }).render("#paypal-container");
-            }
-        }
-
-        function showCartPopup() {
-            const popup = document.getElementById('cartPopup');
-            popup.style.display = 'block';
-            setTimeout(() => {
-                popup.style.display = 'none';
-            }, 5000);
-        }
-
-        function hideCartPopup() {
-            document.getElementById('cartPopup').style.display = 'none';
-        }
-
-        function goToCheckout() {
-            toggleCart();
-            hideCartPopup();
-        }
-
-        function sendOrderEmail() {
-            let emailBody = 'Zamówienie z AdelbertusShop:\n\n';
-            
-            cart.forEach((item, index) => {
-                emailBody += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
-                if (item.size) emailBody += ` (Rozmiar: ${item.size})`;
-                if (item.color) emailBody += ` (Kolor: ${item.color})`;
-                emailBody += '\n';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            emailBody += `\nSUMA: ${total.toFixed(2)} zł\n\n`;
-            emailBody += `Data: ${new Date().toLocaleString('pl-PL')}\n\n`;
-            emailBody += `Proszę o potwierdzenie zamówienia i podanie terminu realizacji.`;
-            
-            window.open(`mailto:mielniczukgrzegosz74@gmail.com?subject=Zamówienie z AdelbertusShop&body=${encodeURIComponent(emailBody)}`);
-        }
-
-        function sendOrderWhatsApp() {
-            let message = 'Zamówienie z AdelbertusShop:%0A%0A';
-            
-            cart.forEach((item, index) => {
-                message += `${index + 1}. ${item.name} - ${item.price.toFixed(2)} zł × ${item.quantity}`;
-                if (item.size) message += ` (Rozmiar: ${item.size})`;
-                if (item.color) message += ` (Kolor: ${item.color})`;
-                message += '%0A';
-            });
-            
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            message += `%0ASUMA: ${total.toFixed(2)} zł%0A%0A`;
-            message += `Data: ${new Date().toLocaleString('pl-PL')}%0A%0A`;
-            message += `Proszę o potwierdzenie zamówienia.`;
-            
-            window.open(`https://wa.me/48604296360?text=${message}`);
-        }
-
-        function initImageZoom() {
-            const images = document.querySelectorAll('img[loading="lazy"]');
-            images.forEach(img => {
-                img.addEventListener('load', function() {
-                    this.classList.add('loaded');
-                });
-            });
-        }
-
-        function openImageZoom(src) {
-            const overlay = document.getElementById('imageZoomOverlay');
-            const zoomedImg = document.getElementById('zoomedImage');
-            zoomedImg.src = src;
-            overlay.style.display = 'flex';
-        }
-
-        function closeImageZoom() {
-            document.getElementById('imageZoomOverlay').style.display = 'none';
-        }
-
-        function changeProductImage(thumb, productCard) {
-            const mainImage = productCard.querySelector('.product-image');
-            const galleryThumbs = productCard.querySelectorAll('.gallery-thumb');
-            
-            galleryThumbs.forEach(thumb => thumb.classList.remove('active'));
-            thumb.classList.add('active');
-            
-            mainImage.src = thumb.src;
-        }
-
-        function initChatbot() {
-        }
-
-        function toggleChatbot() {
-            const chatbotWindow = document.getElementById('chatbotWindow');
-            chatbotWindow.style.display = chatbotWindow.style.display === 'flex' ? 'none' : 'flex';
-        }
-
-        function initForum() {
-            const forumForm = document.getElementById('forumForm');
-            if (forumForm) {
-                forumForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    const user = document.getElementById('forumUser').value.trim();
-                    const message = document.getElementById('forumMessage').value.trim();
-                    
-                    if (user && message) {
-                        addForumPost(user, message);
-                        forumForm.reset();
-                    }
-                });
-            }
-        }
-
-        function addForumPost(user, message) {
-            const postsContainer = document.getElementById('forumPosts');
-            const postDiv = document.createElement('div');
-            postDiv.className = 'p-4 bg-gray-50 rounded-lg shadow-sm';
-            postDiv.innerHTML = `
-                <p class="font-bold">${user}</p>
-                <p>${message}</p>
-                <p class="text-sm text-gray-500 mt-2">${new Date().toLocaleString('pl-PL')}</p>
-            `;
-            postsContainer.prepend(postDiv);
-        }
-
-        function initCharitySection() {
-            const donors = [
-                {name: "Anna K.", amount: 50},
-                {name: "Marek Z.", amount: 100},
-                {name: "👑 Sekretny Darczyńca", amount: 250},
-                {name: "Natalia P.", amount: 75},
-                {name: "Bartek L.", amount: 30}
-            ];
-            
-            let donorIndex = 0;
-            setInterval(() => {
-                const list = document.getElementById('donorsList');
-                if (list) {
-                    const li = document.createElement('li');
-                    li.className = 'donor-entry';
-                    li.textContent = `${donors[donorIndex].name} – ${donors[donorIndex].amount} zł`;
-                    list.prepend(li);
-                    donorIndex = (donorIndex + 1) % donors.length;
+                    `).join('');
                 }
-            }, 4000);
-        }
+                
+                const lastRotationKey = 'adelbertus_reviews_last_rotation';
+                const lastRotation = localStorage.getItem(lastRotationKey);
+                const now = Date.now();
+                const twoDaysMs = 2 * 24 * 60 * 60 * 1000;
+                
+                let currentIndex = parseInt(localStorage.getItem('adelbertus_reviews_index')) || 0;
+                
+                if (!lastRotation || now - parseInt(lastRotation) > twoDaysMs) {
+                    currentIndex = (currentIndex + 1) % allReviews.length;
+                    localStorage.setItem('adelbertus_reviews_index', currentIndex);
+                    localStorage.setItem(lastRotationKey, now);
+                }
+                
+                displayReviews(currentIndex);
+                
+                setInterval(() => {
+                    const now = Date.now();
+                    const lastRotation = localStorage.getItem(lastRotationKey);
+                    if (now - parseInt(lastRotation) > twoDaysMs) {
+                        let currentIndex = parseInt(localStorage.getItem('adelbertus_reviews_index')) || 0;
+                        currentIndex = (currentIndex + 1) % allReviews.length;
+                        localStorage.setItem('adelbertus_reviews_index', currentIndex);
+                        localStorage.setItem(lastRotationKey, now);
+                        displayReviews(currentIndex);
+                    }
+                }, 3600000);
+            });
 
-        function initCookieConsent() {
-            if (!localStorage.getItem('cookies_accepted')) {
-                document.getElementById('cookieConsent').style.display = 'block';
-            }
-        }
+            // Obsługa klawisza ESC dla modalii
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape') {
+                    closeProductModal();
+                    closeCategoryModal();
+                }
+            });
 
-        function acceptCookies() {
-            localStorage.setItem('cookies_accepted', 'true');
-            document.getElementById('cookieConsent').style.display = 'none';
-        }
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.left = '50%';
-            notification.style.transform = 'translateX(-50%)';
-            notification.style.backgroundColor = '#d4af37';
-            notification.style.color = 'black';
-            notification.style.padding = '12px 24px';
-            notification.style.borderRadius = '30px';
-            notification.style.zIndex = '1000';
-            notification.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.2)';
-            notification.style.fontWeight = 'bold';
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
-
-        function initCart() {
-            updateCart();
-        }
-
-        function initProductGalleries() {
-        }
-
-        window.addToCart = addToCart;
-        window.removeFromCart = removeFromCart;
-        window.toggleCart = toggleCart;
-        window.toggleMobileMenu = toggleMobileMenu;
-        window.sendOrderEmail = sendOrderEmail;
-        window.sendOrderWhatsApp = sendOrderWhatsApp;
-        window.acceptCookies = acceptCookies;
-        window.toggleChatbot = toggleChatbot;
-        window.openImageZoom = openImageZoom;
-        window.closeImageZoom = closeImageZoom;
-        window.changeProductImage = changeProductImage;
-        window.hideCartPopup = hideCartPopup;
-        window.goToCheckout = goToCheckout;
-        window.openCategoryModal = openCategoryModal;
-        window.closeCategoryModal = closeCategoryModal;
-        window.closeCatModal = closeCatModal;
-        window.catChangePage = catChangePage;
-        window.openProductModal = openProductModal;
-        window.closeProductModal = closeProductModal;
-        window.closeProdModal = closeProdModal;
-        window.sprodQtyChange = sprodQtyChange;
-        window.sprodAddToCart = sprodAddToCart;
-    </script>
-
-    <style>
-        .neon-glow {
-          color: #fff;
-          text-shadow:
-            0 0 5px #a855f7,
-            0 0 10px #a855f7,
-            0 0 20px #9333ea,
-            0 0 40px #9333ea;
-          animation: neonPulse 2s infinite alternate;
-        }
-
-        @keyframes neonPulse {
-          from { text-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #9333ea; }
-          to   { text-shadow: 0 0 10px #a855f7, 0 0 20px #a855f7, 0 0 40px #9333ea; }
-        }
-
-        .typing {
-          border-right: 2px solid #ffd700;
-          white-space: nowrap;
-          overflow: hidden;
-        }
-
-        .donor-entry {
-          opacity: 0;
-          transform: translateY(10px);
-          animation: fadeInUp 1s forwards;
-        }
-
-        @keyframes fadeInUp {
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .product-image[data-src] {
-          opacity: 0;
-          transition: opacity 0.3s ease;
-        }
-
-        .product-image.loaded {
-          opacity: 1;
-        }
-    </style>
-
-    </body>
-    </html>
-
+            // Eksport funkcji do globalnego scope
+            window.addToCart = addToCart;
+            window.removeFromCart = removeFromCart;
+            window.toggleCart = toggleCart;
+            window.toggleMobileMenu = toggleMobileMenu;
+            window.sendOrderEmail = sendOrderEmail;
+            window.sendOrderWhatsApp = sendOrderWhatsApp;
+            window.acceptCookies = acceptCookies;
+            window.toggleChatbot = toggleChatbot;
+            window.openImageZoom = openImageZoom;
+            window.closeImageZoom = closeImageZoom;
+            window.changeProductImage = changeProductImage;
+            window.hideCartPopup = hideCartPopup;
+            window.goToCheckout = goToCheckout;
+            window.openCategoryModal = openCategoryModal;
+            window.closeCategoryModal = closeCategoryModal;
+            window.closeCatModal = closeCatModal;
+            window.catChangePage = catChangePage;
+            window.openProductModal = openProductModal;
+            window.closeProductModal = closeProductModal;
+            window.closeProdModal = closeProdModal;
+            window.sprodQtyChange = sprodQtyChange;
+            window.sprodAddToCart = sprodAddToCart;
+        </script>
+    </main>
+</body>
+</html>
